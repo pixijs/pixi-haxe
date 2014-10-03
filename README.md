@@ -1,7 +1,7 @@
 haxe-pixi
 =========
 
-Extern of pixijs for Haxe
+Extern of pixi.js for Haxe
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
