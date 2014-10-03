@@ -1,4 +1,4 @@
-package phaser.pixi.loaders;
+package pixi.loaders;
 
 @:native("PIXI.ImageLoader")
 extern class ImageLoader {

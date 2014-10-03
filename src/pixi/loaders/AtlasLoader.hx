@@ -1,4 +1,4 @@
-package phaser.pixi.loaders;
+package pixi.loaders;
 
 @:native("PIXI.AtlasLoader")
 extern class AtlasLoader extends phaser.pixi.utils.EventTarget {

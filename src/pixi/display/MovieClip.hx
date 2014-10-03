@@ -44,7 +44,7 @@ extern class MovieClip extends Sprite {
 	 * @method gotoAndStop
 	 * @param frameNumber {Number} frame index to stop at
 	*/
-	public function gotoAndStop(frameNumber:Int):Void;
+	public function gotoAndStop(frameNumber:Float):Void;
 
 	/**
 	 * Goes to a specific frame and begins playing the MovieClip
@@ -52,15 +52,7 @@ extern class MovieClip extends Sprite {
 	 * @method gotoAndPlay
 	 * @param frameNumber {Number} frame index to start at
 	*/
-	public function gotoAndPlay(frameNumber:Int):Void;
-
-	/*
-	 * Updates the object transform for rendering
-	 *
-	 * @method updateTransform
-	 * @private
-	*/
-	public function updateTransform():Void;
+	public function gotoAndPlay(frameNumber:Float):Void;
 
 	public static function fromFrames(frames:Array<Int>):Dynamic;
 

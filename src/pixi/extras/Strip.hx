@@ -1,8 +1,20 @@
-package phaser.pixi.extras;
+package pixi.extras;
 
 @:native("PIXI.Strip")
-extern class Strip extends phaser.pixi.display.DisplayObjectContainer {
-	
+extern class Strip extends pixi.display.DisplayObjectContainer {
+
+	/**
+ 	 * 
+	 * @class Strip
+	 * @extends DisplayObjectContainer
+	 * @constructor
+	 * @param texture {Texture} The texture to use
+	 * @param width {Number} the width 
+	 * @param height {Number} the height
+	 * 
+	*/
+	public function new(texture:Dynamic):Void;
+
 	/**
 	 * The texture of the strip
 	 */

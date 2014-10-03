@@ -1,4 +1,4 @@
-package phaser.pixi.loaders;
+package pixi.loaders;
 
 @:native("PIXI.AssetLoader")
 extern class AssetLoader {
@@ -9,22 +9,44 @@ extern class AssetLoader {
 	 * easily through PIXI.Texture.fromImage() and PIXI.Sprite.fromImage()
 	 * When all items have been loaded this class will dispatch a 'onLoaded' event
 	 * As each individual item is loaded this class will dispatch a 'onProgress' event
-	 */
-	function new (assetURLs:Dynamic, Boolean:Dynamic);
+	 *
+	 * @class AssetLoader
+	 * @constructor
+	 * @uses EventTarget
+	 * @param {Array<String>} assetURLs an array of image/sprite sheet urls that you would like loaded
+	 *      supported. Supported image formats include 'jpeg', 'jpg', 'png', 'gif'. Supported
+	 *      sprite sheet data formats only include 'JSON' at this time. Supported bitmap font
+	 *      data formats include 'xml' and 'fnt'.
+	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+	*/
+	function new(assetURLs:Dynamic, ?crossorigin:Bool);
 	
 	/**
 	 * The array of asset URLs that are going to be loaded
-	 */
-	var assetURLs:Dynamic;
+	*/
+	public var assetURLs:Dynamic;
 	
 	/**
 	 * Whether the requests should be treated as cross origin
-	 */
-	var crossorigin:Bool;
+	*/
+	public var crossorigin:Bool;
 	
 	/**
 	 * Maps file extension to loader types
-	 */
-	var loadersByType:Dynamic;
+	*/
+	public var loadersByType:Dynamic;
+
+	public var loadCount:Int;
+
+	public var onProgress:Dynamic;
+
+	public var onComplete:Dynamic;
+
+	/**
+	 * Starts loading the assets sequentially
+	 *
+	 * @method load
+	*/
+	public function load():Void;
 	
 }

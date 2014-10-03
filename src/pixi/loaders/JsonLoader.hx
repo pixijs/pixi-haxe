@@ -1,4 +1,4 @@
-package phaser.pixi.loaders;
+package pixi.loaders;
 
 @:native("PIXI.JsonLoader")
 extern class JsonLoader {
