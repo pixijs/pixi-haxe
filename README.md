@@ -3,7 +3,7 @@ haxe-pixi
 
 Extern of pixijs for Haxe
 
-![pixi.js logo](http://www.goodboydigital.com/pixijs/logo_small.png)
+![haxe logo](http://haxe.org/img/haxe-logo-horizontal-on-dark.png) ![pixi.js logo](http://www.goodboydigital.com/pixijs/logo_small.png)
 
 The aim of this project is to provide extern classes of Pixi for Haxe.
 
