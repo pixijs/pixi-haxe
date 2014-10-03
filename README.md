@@ -9,7 +9,7 @@ The aim of this project is to provide extern classes of Pixi for Haxe.
 
 ### Demos ###
 
-Coming soon.
+https://github.com/adireddy/haxe-pixi-demos
 
 ### Usage ###
 
