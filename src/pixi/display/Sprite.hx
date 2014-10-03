@@ -19,20 +19,27 @@ extern class Sprite extends DisplayObjectContainer {
 	public function new(texture:Dynamic):Void;
 
 	/**
-	 * The width of the sprite, setting this will actually modify the scale to achieve the value set
-	 *
-	 * @property width
-	 * @type Number
+	 * The anchor sets the origin point of the texture.
+	 * The default is 0,0 this means the texture's origin is the top left
+	 * Setting than anchor to 0.5,0.5 means the textures origin is centred
+	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
 	*/
-	public var width:Float;
-
+	public var anchor:Dynamic;
+	
 	/**
-	 * The height of the sprite, setting this will actually modify the scale to achieve the value set
-	 *
-	 * @property height
-	 * @type Number
+	 * The texture that the sprite is using
 	*/
-	public var height:Float;
+	public var texture:Dynamic;
+	
+	/**
+	 * The tint applied to the sprite. This is a hex value
+	 */
+	public var tint:Float;
+	
+	/**
+	 * The blend mode to be applied to the sprite
+	*/
+	public var blendMode:Float;
 
 	/**
 	 * Sets the texture of the sprite
@@ -58,7 +65,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param matrix {Matrix} the transformation matrix of the sprite
 	 * @return {Rectangle} the framing rectangle
 	 */
-	public function getBounds(matrix:Dynamic):Dynamic;
+	public override function getBounds(matrix:Dynamic):Dynamic;
 
 	/**
 	 *
