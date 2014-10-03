@@ -22,6 +22,16 @@ extern class DisplayObject {
 	public var interactive:Bool;
 
 	/**
+	 * [Deprecated] Indicates if the sprite will have touch and mouse interactivity. It is false by default
+	 * Instead of using this function you can now simply set the interactive property to true or false
+	 *
+	 * @method setInteractive
+	 * @param interactive {Boolean}
+	 * @deprecated Simply set the `interactive` property directly
+	*/
+	public function setInteractive(interactive:Bool):Void;
+
+	/**
 	 * [read-only] Indicates if the sprite is globaly visible.
 	 *
 	 * @property worldVisible
@@ -183,4 +193,12 @@ extern class DisplayObject {
 	public function generateTexture(renderer:Dynamic):Void;
 
 	public function updateCache():Void;
+
+	public var click:Dynamic;
+	public var tap:Dynamic;
+	public var mousedown:Dynamic;
+	public var mouseout:Dynamic;
+	public var mouseover:Dynamic;
+	public var mouseup:Dynamic;
+	public var mouseupoutside:Dynamic;
 }

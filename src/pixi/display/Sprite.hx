@@ -83,9 +83,9 @@ extern class Sprite extends DisplayObjectContainer {
 	 * A short hand way of creating a movieclip from an array of image ids
 	 *
 	 * @static
-	 * @method fromFrames
-	 * @param frames {Array} the array of image ids the movieclip will use as its texture frames
+	 * @method fromImage
+	 * @param imageId {String}
 	*/
-	public static function fromImage(imageId:String, crossorigin:Dynamic, scaleMode:Dynamic):Dynamic;
+	public static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Dynamic):Dynamic;
 
 }

@@ -53,5 +53,5 @@ extern class Stage extends DisplayObjectContainer {
 	 * @method getMousePosition
 	 * @return {Point} The point containing the coords of the global InteractionData position.
 	*/
-	public function getMousePosition():Dynamic;
+	public function getMousePosition():pixi.core.Point;
 }

@@ -1,9 +1,7 @@
 package pixi.primitives;
 
-import pixi.Gr;
-
 @:native("PIXI.Graphics")
-extern class Graphics {
+extern class Graphics extends pixi.display.DisplayObjectContainer {
 
 	/**
 	 * The Graphics class contains a set of methods that you can use to create primitive shapes and lines.
@@ -24,7 +22,7 @@ extern class Graphics {
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
 	*/
-	public function lineStyle(lineWidth:Float, color:Float, alpha:Float):Void;
+	public function lineStyle(lineWidth:Float, ?color:Float, ?alpha:Float):Void;
 
 	/**
 	 * Moves the current drawing position to (x, y).
@@ -44,19 +42,6 @@ extern class Graphics {
 	 * @param y {Number} the Y coordinate to draw to
 	*/
 	public function lineTo(x:Float, y:Float):Void;
-
-	/**
-	 * Calculate the points for a quadratic bezier curve.
-	 * Based on : https://stackoverflow.com/questions/785097/how-do-i-implement-a-bezier-curve-in-c
-	 *
-	 * @method quadraticCurveTo
-	 * @param  {number}   cpX   Control point x
-	 * @param  {number}   cpY   Control point y
-	 * @param  {number}   toX   Destination point x
-	 * @param  {number}   toY   Destination point y
-	 * @return {PIXI.Graphics}
-	*/
-	public function quadraticCurveTo(cpX:Float, cpY:Float, toX:Float, toY:Float):Graphics;
 
 	/**
 	 * Calculate the points for a bezier curve.
@@ -85,7 +70,7 @@ extern class Graphics {
 	 * @param  {number}   radius    The radius of the arc
 	 * @return {PIXI.Graphics}
 	*/
-	public function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius):Graphics;
+	public function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
 
 	
 	/**
@@ -116,7 +101,7 @@ extern class Graphics {
 	 * @param color {Number} the color of the fill
 	 * @param alpha {Number} the alpha of the fill
 	*/
-	public function beginFill(color:Float, alpha:Float):Void;
+	public function beginFill(color:Float, ?alpha:Float):Void;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
@@ -175,23 +160,6 @@ extern class Graphics {
 	public function clear():Void;
 
 	/**
-	 * Useful function that returns a texture of the graphics object that can then be used to create sprites
-	 * This can be quite useful if your geometry is complicated and needs to be reused multiple times.
-	 *
-	 * @method generateTexture
-	 * @return {Texture} a texture of the graphics object
-	*/
-	public function generateTexture():Dynamic;
-
-	/**
-	 * Retrieves the bounds of the graphic shape as a rectangle object
-	 *
-	 * @method getBounds
-	 * @return {Rectangle} the rectangular bounding area
-	*/
-	public function getBounds(matrix:Dynamic):pixi.core.Rectangle;
-
-	/**
 	 * Update the bounds of the object
 	 *
 	 * @method updateBounds
@@ -199,4 +167,59 @@ extern class Graphics {
 	public function updateBounds():Void;
 
 	public function destroyCachedSprite():Void;
+
+	/**
+	 * The alpha of the fill of this graphics object
+	*/
+	public var fillAlpha:Float;
+	
+	/**
+	 * The width of any lines drawn
+	*/
+	public var lineWidth:Float;
+	
+	/**
+	 * The color of any lines drawn
+	*/
+	public var lineColor:String;
+	
+	/**
+	 * Graphics data
+	*/
+	public var graphicsData:Array<Dynamic>;
+	
+	/**
+	 * The tint applied to the graphic shape. This is a hex value
+	*/
+	public var tint:Float;
+	
+	/**
+	 * The blend mode to be applied to the graphic shape
+	*/
+	public var blendMode:Float;
+	
+	/**
+	 * Current path
+	*/
+	public var currentPath:Dynamic;
+	
+	/**
+	 * Array containing some WebGL-related properties used by the WebGL renderer
+	*/
+	public var webGL:Array<Dynamic>;
+	
+	/**
+	 * Whether this shape is being used as a mask
+	*/
+	public var isMask:Dynamic;
+	
+	/**
+	 * the bounds' padding used for bounds calculation
+	*/
+	public var boundsPadding:Float;
+	
+	/**
+	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
+	*/
+	public var dirty:Dynamic;
 }

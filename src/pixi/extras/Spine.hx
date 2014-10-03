@@ -1,7 +1,7 @@
 package pixi.extras;
 
-@:native("spine")
-extern class Spine {
+@:native("PIXI.Spine")
+extern class Spine extends pixi.display.DisplayObjectContainer {
 
 	/**
 	 * A class that enables the you to import and run your spine animations in pixi.
@@ -16,4 +16,9 @@ extern class Spine {
 	public function new(url:String):Void;
 
 	public function createSprite(slot:Dynamic, descriptor:Dynamic):pixi.display.Sprite;
+
+	public var spineData:Dynamic;
+	public var skeleton:Dynamic;
+	public var stateData:Dynamic;
+	public var state:Dynamic;
 }

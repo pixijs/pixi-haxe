@@ -15,53 +15,53 @@ extern class Texture {
 	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
 	 * @param frame {Rectangle} The rectangle frame of the texture to show
 	*/
-	function new (BaseTexture:Dynamic, Rectangle:Dynamic);
+	public function new (BaseTexture:Dynamic, Rectangle:Dynamic):Void;
 	
 	/**
 	 * Does this Texture have any frame data assigned to it?
-	 */
-	var noFrame:Bool;
+	*/
+	public var noFrame:Bool;
 	
 	/**
 	 * The base texture that this texture uses.
-	 */
-	var baseTexture:Dynamic;
+	*/
+	public var baseTexture:Dynamic;
 	
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
-	 */
-	var frame:Dynamic;
+	*/
+	public var frame:Dynamic;
 	
 	/**
 	 * The trim point
-	 */
-	var trim:Dynamic;
+	*/
+	public var trim:Dynamic;
 	
 	/**
 	 * This will let the renderer know if the texture is valid. If its not then it cannot be rendered.
-	 */
-	var valid:Bool;
+	*/
+	public var valid:Bool;
 	
 	/**
 	 * The WebGL UV data cache.
-	 */
-	var uvs:Dynamic;
+	*/
+	public var uvs:Dynamic;
 	
 	/**
 	 * The width of the Texture in pixels.
-	 */
-	var width:Float;
+	*/
+	public var width:Float;
 	
 	/**
 	 * The height of the Texture in pixels.
-	 */
-	var height:Float;
+	*/
+	public var height:Float;
 	
 	/**
 	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
-	 */
-	var crop:Dynamic;
+	*/
+	public var crop:Dynamic;
 
 	/**
 	 * Specifies the region of the baseTexture that this texture will use.
@@ -124,7 +124,7 @@ extern class Texture {
 	 * @method removeTextureFromCache
 	 * @param id {String} the id of the texture to be removed
 	 * @return {Texture} the texture that was removed
-	 */
+	*/
 	public static function removeTextureFromCache(id:String):Dynamic;
 	
 }
