@@ -13,7 +13,7 @@ extern class Strip extends pixi.display.DisplayObjectContainer {
 	 * @param height {Number} the height
 	 * 
 	*/
-	public function new(texture:Dynamic):Void;
+	function new(texture:Dynamic):Void;
 
 	/**
 	 * The texture of the strip

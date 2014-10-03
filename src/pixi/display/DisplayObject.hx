@@ -10,7 +10,7 @@ extern class DisplayObject {
 	 * @class DisplayObject
 	 * @constructor
 	*/
-	public function new(x:Float, y:Float, radius:Float):Void;
+	function new(x:Float, y:Float, radius:Float):Void;
 
 	/**
 	 * Indicates if the sprite will have touch and mouse interactivity. It is false by default
@@ -19,7 +19,7 @@ extern class DisplayObject {
 	 * @type Boolean
 	 * @default false
 	*/
-	public var interactive:Bool;
+	var interactive:Bool;
 
 	/**
 	 * [Deprecated] Indicates if the sprite will have touch and mouse interactivity. It is false by default
@@ -29,7 +29,7 @@ extern class DisplayObject {
 	 * @param interactive {Boolean}
 	 * @deprecated Simply set the `interactive` property directly
 	*/
-	public function setInteractive(interactive:Bool):Void;
+	function setInteractive(interactive:Bool):Void;
 
 	/**
 	 * [read-only] Indicates if the sprite is globaly visible.
@@ -37,7 +37,7 @@ extern class DisplayObject {
 	 * @property worldVisible
 	 * @type Boolean
 	*/
-	public var worldVisible:Bool;
+	var worldVisible:Bool;
 
 	/**
 	 * Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
@@ -47,7 +47,7 @@ extern class DisplayObject {
 	 * @property mask
 	 * @type Graphics
 	*/
-	public var mask:Dynamic;
+	var mask:Dynamic;
 
 	/**
 	 * Sets the filters for the displayObject.
@@ -56,7 +56,7 @@ extern class DisplayObject {
 	 * @property filters
 	 * @type Array An array of filters
 	*/
-	public var filters:Dynamic;
+	var filters:Dynamic;
 
 	/**
 	 * Set weather or not a the display objects is cached as a bitmap.
@@ -65,114 +65,114 @@ extern class DisplayObject {
 	 * @property cacheAsBitmap
 	 * @type Boolean
 	*/
-	public var cacheAsBitmap:Bool;
+	var cacheAsBitmap:Bool;
 
 	/**
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	*/
-	public var position:Dynamic;
+	var position:Dynamic;
 	
 	/**
 	 * The scale factor of the object.
 	*/
-	public var scale:Dynamic;
+	var scale:Dynamic;
 	
 	/**
 	 * The pivot point of the displayObject that it rotates around
 	*/
-	public var pivot:Dynamic;
+	var pivot:Dynamic;
 	
 	/**
 	 * The rotation of the object in radians.
 	*/
-	public var rotation:Float;
+	var rotation:Float;
 	
 	/**
 	 * The opacity of the object.
 	*/
-	public var alpha:Float;
+	var alpha:Float;
 	
 	/**
 	 * The visibility of the object.
 	*/
-	public var visible:Bool;
+	var visible:Bool;
 	
 	/**
 	 * This is the defined area that will pick up mouse / touch events. It is null by default.
 	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
 	*/
-	public var hitArea:Dynamic;
+	var hitArea:Dynamic;
 	
 	/**
 	 * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
 	*/
-	public var buttonMode:Bool;
+	var buttonMode:Bool;
 	
 	/**
 	 * Can this object be rendered
 	*/
-	public var renderable:Bool;
+	var renderable:Bool;
 	
 	/**
 	 * [read-only] The display object container that contains this display object.
 	*/
-	public var parent:Dynamic;
+	var parent:Dynamic;
 	
 	/**
 	 * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
 	*/
-	public var stage:Dynamic;
+	var stage:Dynamic;
 	
 	/**
 	 * [read-only] The multiplied alpha of the displayObject
 	*/
-	public var worldAlpha:Float;
+	var worldAlpha:Float;
 	
 	/**
 	 * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
 	*/
-	public var defaultCursor:String;
+	var defaultCursor:String;
 	
 	/**
 	 * [read-only] Current transform of the object based on world (parent) factors
 	*/
-	public var worldTransform:Dynamic;
+	var worldTransform:Dynamic;
 	
 	/**
 	 * [NYI] Unknown
 	*/
-	public var color:Dynamic;
+	var color:Dynamic;
 	
 	/**
 	 * [NYI] Holds whether or not this object is dynamic, for rendering optimization
 	*/
-	public var a0:Bool;
+	var a0:Bool;
 	
 	/**
 	 * The area the filter is applied to like the hitArea this is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	*/
-	public var filterArea:Dynamic;
+	var filterArea:Dynamic;
 	
 	/**
 	 * The original, cached bounds of the object
 	*/
-	public var bounds:Dynamic;
+	var bounds:Dynamic;
 	
 	/**
 	 * The most up-to-date bounds of the object
 	*/
-	public var currentBounds:Dynamic;
+	var currentBounds:Dynamic;
 	
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
 	*/
-	public var x:Float;
+	var x:Float;
 	
 	/**
 	 * The position of the displayObject on the y axis relative to the local coordinates of the parent.
 	*/
-	public var y:Float;
+	var y:Float;
 
 	/*
 	 * Updates the object transform for rendering
@@ -180,7 +180,7 @@ extern class DisplayObject {
 	 * @method updateTransform
 	 * @private
 	*/
-	public function getBounds(matrix:Dynamic):pixi.core.Rectangle;
+	function getBounds(matrix:Dynamic):pixi.core.Rectangle;
 
 	/**
 	 * Sets the object's stage reference, the stage this object is connected to
@@ -188,17 +188,17 @@ extern class DisplayObject {
 	 * @method setStageReference
 	 * @param stage {Stage} the stage that the object will have as its current stage reference
 	*/
-	public function setStageReference(stage:Dynamic):Void;
+	function setStageReference(stage:Dynamic):Void;
 
-	public function generateTexture(renderer:Dynamic):Void;
+	function generateTexture(renderer:Dynamic):Void;
 
-	public function updateCache():Void;
+	function updateCache():Void;
 
-	public var click:Dynamic;
-	public var tap:Dynamic;
-	public var mousedown:Dynamic;
-	public var mouseout:Dynamic;
-	public var mouseover:Dynamic;
-	public var mouseup:Dynamic;
-	public var mouseupoutside:Dynamic;
+	var click:Dynamic;
+	var tap:Dynamic;
+	var mousedown:Dynamic;
+	var mouseout:Dynamic;
+	var mouseover:Dynamic;
+	var mouseup:Dynamic;
+	var mouseupoutside:Dynamic;
 }

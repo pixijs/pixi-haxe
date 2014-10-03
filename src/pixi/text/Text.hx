@@ -25,7 +25,7 @@ extern class Text {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	*/
-	public function new(text:String, style:Dynamic):Void;
+	function new(text:String, style:Dynamic):Void;
 
 	/**
 	 * The width of the text, setting this will actually modify the scale to achieve the value set
@@ -33,7 +33,7 @@ extern class Text {
 	 * @property width
 	 * @type Number
 	*/
-	public var width:Float;
+	var width:Float;
 
 	/**
 	 * The height of the text, setting this will actually modify the scale to achieve the value set
@@ -41,7 +41,7 @@ extern class Text {
 	 * @property height
 	 * @type Number
 	*/
-	public var height:Float;
+	var height:Float;
 
 	/**
 	 * Set the style of the text
@@ -60,7 +60,7 @@ extern class Text {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	*/
-	public function setStyle(style:Dynamic):Void;
+	function setStyle(style:Dynamic):Void;
 
 	/**
 	 * Set the copy for the text object. To split a line you can use '\n'
@@ -68,7 +68,7 @@ extern class Text {
 	 * @method setText
 	 * @param {String} text The copy that you would like the text to display
 	*/
-	public function setText(text:String):Void;
+	function setText(text:String):Void;
 
 	/**
 	 * Destroys this text object
@@ -76,5 +76,5 @@ extern class Text {
 	 * @method destroy
 	 * @param destroyBaseTexture {Boolean} whether to destroy the base texture as well
 	*/
-	public function destroy(?destroyBaseTexture:Bool):Void;
+	function destroy(?destroyBaseTexture:Bool):Void;
 }

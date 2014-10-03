@@ -15,53 +15,53 @@ extern class Texture {
 	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
 	 * @param frame {Rectangle} The rectangle frame of the texture to show
 	*/
-	public function new (BaseTexture:Dynamic, Rectangle:Dynamic):Void;
+	function new (BaseTexture:Dynamic, Rectangle:Dynamic):Void;
 	
 	/**
 	 * Does this Texture have any frame data assigned to it?
 	*/
-	public var noFrame:Bool;
+	var noFrame:Bool;
 	
 	/**
 	 * The base texture that this texture uses.
 	*/
-	public var baseTexture:Dynamic;
+	var baseTexture:Dynamic;
 	
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
 	*/
-	public var frame:Dynamic;
+	var frame:Dynamic;
 	
 	/**
 	 * The trim point
 	*/
-	public var trim:Dynamic;
+	var trim:Dynamic;
 	
 	/**
 	 * This will let the renderer know if the texture is valid. If its not then it cannot be rendered.
 	*/
-	public var valid:Bool;
+	var valid:Bool;
 	
 	/**
 	 * The WebGL UV data cache.
 	*/
-	public var uvs:Dynamic;
+	var uvs:Dynamic;
 	
 	/**
 	 * The width of the Texture in pixels.
 	*/
-	public var width:Float;
+	var width:Float;
 	
 	/**
 	 * The height of the Texture in pixels.
 	*/
-	public var height:Float;
+	var height:Float;
 	
 	/**
 	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
 	*/
-	public var crop:Dynamic;
+	var crop:Dynamic;
 
 	/**
 	 * Specifies the region of the baseTexture that this texture will use.
@@ -69,7 +69,7 @@ extern class Texture {
 	 * @method setFrame
 	 * @param frame {Rectangle} The frame of the texture to set it to
 	*/
-	public static function setFrame(frameId:Dynamic):Void;
+	static function setFrame(frameId:Dynamic):Void;
 
 	/**
 	 * Helper function that returns a texture based on a frame id
@@ -80,7 +80,7 @@ extern class Texture {
 	 * @param frameId {String} The frame id of the texture
 	 * @return Texture
 	*/
-	public static function fromFrame(frameId:String):Dynamic;
+	static function fromFrame(frameId:String):Dynamic;
 
 	/**
 	 * Helper function that returns a texture based on an image url
@@ -93,7 +93,7 @@ extern class Texture {
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	*/
-	public static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Int):Dynamic;
+	static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Int):Dynamic;
 
 	/**
 	 * Helper function that returns a texture based on a canvas element
@@ -105,7 +105,7 @@ extern class Texture {
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	*/
-	public static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Dynamic;
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Dynamic;
 
 	/**
 	 * Adds a texture to the textureCache.
@@ -115,7 +115,7 @@ extern class Texture {
 	 * @param texture {Texture}
 	 * @param id {String} the id that the texture will be stored against.
 	*/
-	public static function addTextureToCache(texture:Dynamic, id:String):Void;
+	static function addTextureToCache(texture:Dynamic, id:String):Void;
 
 	/**
 	 * Remove a texture from the textureCache.
@@ -125,6 +125,6 @@ extern class Texture {
 	 * @param id {String} the id of the texture to be removed
 	 * @return {Texture} the texture that was removed
 	*/
-	public static function removeTextureFromCache(id:String):Dynamic;
+	static function removeTextureFromCache(id:String):Dynamic;
 	
 }

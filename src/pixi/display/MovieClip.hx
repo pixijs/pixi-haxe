@@ -11,7 +11,7 @@ extern class MovieClip extends Sprite {
 	 * @constructor
 	 * @param textures {Array<Texture>} an array of {Texture} objects that make up the animation
 	*/
-	public function new(textures:Array<Dynamic>):Void;
+	function new(textures:Array<Dynamic>):Void;
 
 	/**
 	 * [read-only] totalFrames is the total number of frames in the MovieClip. This is the same as number of textures
@@ -22,21 +22,21 @@ extern class MovieClip extends Sprite {
 	 * @default 0
 	 * @readOnly
 	*/
-	public var totalFrames:Int;
+	var totalFrames:Int;
 
 	/**
 	 * Stops the MovieClip
 	 *
 	 * @method stop
 	*/
-	public function stop():Void;
+	function stop():Void;
 
 	/**
 	 * Plays the MovieClip
 	 *
 	 * @method play
 	*/
-	public function play():Void;
+	function play():Void;
 
 	/**
 	 * Stops the MovieClip and goes to a specific frame
@@ -44,7 +44,7 @@ extern class MovieClip extends Sprite {
 	 * @method gotoAndStop
 	 * @param frameNumber {Number} frame index to stop at
 	*/
-	public function gotoAndStop(frameNumber:Float):Void;
+	function gotoAndStop(frameNumber:Float):Void;
 
 	/**
 	 * Goes to a specific frame and begins playing the MovieClip
@@ -52,10 +52,10 @@ extern class MovieClip extends Sprite {
 	 * @method gotoAndPlay
 	 * @param frameNumber {Number} frame index to start at
 	*/
-	public function gotoAndPlay(frameNumber:Float):Void;
+	function gotoAndPlay(frameNumber:Float):Void;
 
-	public static function fromFrames(frames:Array<Int>):Dynamic;
+	static function fromFrames(frames:Array<Int>):Dynamic;
 
-	public static function fromImages(images:Array<Int>):Dynamic;
+	static function fromImages(images:Array<Int>):Dynamic;
 
 }

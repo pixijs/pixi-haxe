@@ -11,7 +11,7 @@ extern class Rope extends pixi.extras.Strip {
 	 * @param points {Array}
 	 * 
 	*/
-	public function new(texture:Dynamic, points:Array<Dynamic>):Void;
+	function new(texture:Dynamic, points:Array<Dynamic>):Void;
 
 	/*
 	 * Sets the texture that the Rope will use 
@@ -19,13 +19,13 @@ extern class Rope extends pixi.extras.Strip {
 	 * @method setTexture
 	 * @param texture {Texture} the texture that will be used
 	*/
-	public function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Dynamic):Void;
 
 	/*
 	 * Refreshes 
 	 *
 	 * @method refresh
 	*/
-	public function refresh():Void;
+	function refresh():Void;
 
 }

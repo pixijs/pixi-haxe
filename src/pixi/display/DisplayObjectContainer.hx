@@ -11,7 +11,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @extends DisplayObject
 	 * @constructor
 	*/
-	public function new():Void;
+	function new():Void;
 
 	/**
 	 * The width of the displayObjectContainer, setting this will actually modify the scale to achieve the value set
@@ -19,7 +19,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @property width
 	 * @type Number
 	*/
-	public var width:Float;
+	var width:Float;
 
 	/**
 	 * The height of the displayObjectContainer, setting this will actually modify the scale to achieve the value set
@@ -27,7 +27,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @property height
 	 * @type Number
 	*/
-	public var height:Float;
+	var height:Float;
 
 	/**
 	 * Adds a child to the container.
@@ -35,7 +35,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method addChild
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	*/
-	public function addChild(child:Dynamic):Void;
+	function addChild(child:Dynamic):Void;
 
 	/**
 	 * Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
@@ -44,7 +44,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Number} The index to place the child in
 	*/
-	public function addChildAt(child:Dynamic, index:Int):Void;
+	function addChildAt(child:Dynamic, index:Int):Void;
 
 	/**
 	 * [NYI] Swaps the depth of 2 displayObjects
@@ -54,7 +54,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param child2 {DisplayObject}
 	 * @private
 	*/
-	public function swapChildren(child1:Dynamic, child2:Dynamic):Void;
+	function swapChildren(child1:Dynamic, child2:Dynamic):Void;
 
 	/**
 	 * Returns the child at the specified index
@@ -62,7 +62,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method getChildAt
 	 * @param index {Number} The index to get the child from
 	*/
-	public function getChildAt(index:Int):Dynamic;
+	function getChildAt(index:Int):Dynamic;
 
 	/**
 	 * Removes a child from the container.
@@ -70,7 +70,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method removeChild
 	 * @param child {DisplayObject} The DisplayObject to remove
 	*/
-	public function removeChild(child:Dynamic):Void;
+	function removeChild(child:Dynamic):Void;
 
 	/**
 	 * Removes a child from the specified index position in the child list of the container.
@@ -78,7 +78,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method removeChildAt
 	 * @param index {Number} The index to get the child from
 	*/
-	public function removeChildAt(index:Int):Dynamic;
+	function removeChildAt(index:Int):Dynamic;
 
 	/**
 	 * Removes all child instances from the child list of the container.
@@ -87,7 +87,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param beginIndex {Number} The beginning position. Predefined value is 0.
 	 * @param endIndex {Number} The ending position. Predefined value is children's array length.
 	*/
-	public function removeChildren(beginIndex:Int, endIndex:Int):Void;
+	function removeChildren(beginIndex:Int, endIndex:Int):Void;
 
 	/*
 	 * Updates the container's childrens transform for rendering
@@ -95,7 +95,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method updateTransform
 	 * @private
 	*/
-	public function updateTransform():Void;
+	function updateTransform():Void;
 
 	/**
 	 * Retrieves the bounds of the displayObjectContainer as a rectangle object
@@ -103,9 +103,9 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method getBounds
 	 * @return {Rectangle} the rectangular bounding area
 	*/
-	public override function getBounds(matrix:Dynamic):Dynamic;
+	override function getBounds(matrix:Dynamic):Dynamic;
 
-	public function getLocalBounds():Void;
+	function getLocalBounds():Void;
 
 	/**
 	 * Sets the container's stage reference, the stage this object is connected to
@@ -113,12 +113,12 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method setStageReference
 	 * @param stage {Stage} the stage that the container will have as its current stage reference
 	*/
-	public override function setStageReference(stage:Dynamic):Void;
+	override function setStageReference(stage:Dynamic):Void;
 
 	/**
 	 * removes the current stage reference of the container
 	 *
 	 * @method removeStageReference
 	*/
-	public function removeStageReference():Void;
+	function removeStageReference():Void;
 }

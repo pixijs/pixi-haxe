@@ -12,7 +12,7 @@ extern class Circle {
 	 * @param y {Number} The Y coordinate of the center of this circle
 	 * @param radius {Number} The radius of the circle
 	*/
-	public function new(x:Float, y:Float, radius:Float):Void;
+	function new(x:Float, y:Float, radius:Float):Void;
 
 	/**
 	 * Creates a clone of this Circle instance
@@ -20,7 +20,7 @@ extern class Circle {
 	 * @method clone
 	 * @return {Circle} a copy of the circle
 	*/
-	public function clone():Circle;
+	function clone():Circle;
 
 	/**
 	 * Checks whether the x, and y coordinates passed to this function are contained within this circle
@@ -30,7 +30,7 @@ extern class Circle {
 	 * @param y {Number} The Y coordinate of the point to test
 	 * @return {Boolean} Whether the x/y coordinates are within this polygon
 	*/
-	public function contains(x:Float, y:Float):Bool;
+	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * Returns the framing rectangle of the circle as a PIXI.Rectangle object
@@ -38,5 +38,5 @@ extern class Circle {
 	 * @method getBounds
 	 * @return {Rectangle} the framing rectangle
 	*/
-	public function getBounds():Rectangle;
+	function getBounds():Rectangle;
 }

@@ -24,29 +24,29 @@ extern class AssetLoader {
 	/**
 	 * The array of asset URLs that are going to be loaded
 	*/
-	public var assetURLs:Dynamic;
+	var assetURLs:Dynamic;
 	
 	/**
 	 * Whether the requests should be treated as cross origin
 	*/
-	public var crossorigin:Bool;
+	var crossorigin:Bool;
 	
 	/**
 	 * Maps file extension to loader types
 	*/
-	public var loadersByType:Dynamic;
+	var loadersByType:Dynamic;
 
-	public var loadCount:Int;
+	var loadCount:Int;
 
-	public var onProgress:Dynamic;
+	var onProgress:Dynamic;
 
-	public var onComplete:Dynamic;
+	var onComplete:Dynamic;
 
 	/**
 	 * Starts loading the assets sequentially
 	 *
 	 * @method load
 	*/
-	public function load():Void;
+	function load():Void;
 	
 }

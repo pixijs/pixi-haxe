@@ -17,7 +17,7 @@ extern class BitmapText extends pixi.display.DisplayObjectContainer {
 	 * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
 	*/
-	public function new(text:String, style:Dynamic):Void;
+	function new(text:String, style:Dynamic):Void;
 
 	/**
 	 * Set the style of the text
@@ -36,7 +36,7 @@ extern class BitmapText extends pixi.display.DisplayObjectContainer {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	*/
-	public function setStyle(style:Dynamic):Void;
+	function setStyle(style:Dynamic):Void;
 
 	/**
 	 * Set the copy for the text object. To split a line you can use '\n'
@@ -44,5 +44,5 @@ extern class BitmapText extends pixi.display.DisplayObjectContainer {
 	 * @method setText
 	 * @param {String} text The copy that you would like the text to display
 	*/
-	public function setText(text:String):Void;
+	function setText(text:String):Void;
 }

@@ -13,26 +13,26 @@ extern class TilingSprite extends pixi.display.Sprite {
 	 * @param width {Number}  the width of the tiling sprite
 	 * @param height {Number} the height of the tiling sprite
 	*/
-	public function new(texture:Dynamic, width:Float, height:Float):Void;
+	function new(texture:Dynamic, width:Float, height:Float):Void;
 	
 	/**
 	 * The scaling of the image that is being tiled
 	 */
-	public var tileScale:Dynamic;
+	var tileScale:Dynamic;
 	
 	/**
 	 * A point that represents the scale of the texture object
 	 */
-	public var tileScaleOffset:Dynamic;
+	var tileScaleOffset:Dynamic;
 	
 	/**
 	 * The offset position of the image that is being tiled
 	 */
-	public var tilePosition:Dynamic;
+	var tilePosition:Dynamic;
 
-	public var tint:Dynamic;
+	var tint:Dynamic;
 
-	public var blendMode:Dynamic;
+	var blendMode:Dynamic;
 
 	/*
 	 * Sets the texture
@@ -40,6 +40,6 @@ extern class TilingSprite extends pixi.display.Sprite {
 	 * @method setTexture
 	 * @param texture {Texture} the texture that will be used
 	*/
-	public function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Dynamic):Void;
 	
 }

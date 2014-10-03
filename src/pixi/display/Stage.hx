@@ -19,7 +19,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * Here is how to add a sprite to the stage : 
 	 * stage.addChild(sprite);
 	*/
-	public function new(backgroundColor:Dynamic):Void;
+	function new(backgroundColor:Dynamic):Void;
 
 	/**
 	 * Sets another DOM element which can receive mouse/touch interactions instead of the default Canvas element.
@@ -28,7 +28,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * @method setInteractionDelegate
 	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events
 	*/
-	public function setInteractionDelegate(domElement:Dynamic):Void;
+	function setInteractionDelegate(domElement:Dynamic):Void;
 
 	/*
 	 * Updates the object transform for rendering
@@ -36,7 +36,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * @method updateTransform
 	 * @private
 	*/
-	public override function updateTransform():Void;
+	override function updateTransform():Void;
 
 	/**
 	 * Sets the background color for the stage
@@ -45,7 +45,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * @param backgroundColor {Number} the color of the background, easiest way to pass this in is in hex format
 	 *      like: 0xFFFFFF for white
 	*/
-	public function setBackgroundColor(backgroundColor:Dynamic):Void;
+	function setBackgroundColor(backgroundColor:Dynamic):Void;
 
 	/**
 	 * This will return the point containing global coords of the mouse.
@@ -53,5 +53,5 @@ extern class Stage extends DisplayObjectContainer {
 	 * @method getMousePosition
 	 * @return {Point} The point containing the coords of the global InteractionData position.
 	*/
-	public function getMousePosition():pixi.core.Point;
+	function getMousePosition():pixi.core.Point;
 }

@@ -13,7 +13,7 @@ extern class Rectangle {
 	 * @param width {Number} The overall width of this rectangle
 	 * @param height {Number} The overall height of this rectangle
 	*/
-	public function new(x:Float, y:Float, width:Float, height:Float):Void;
+	function new(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
 	 * Creates a clone of this Rectangle instance
@@ -21,7 +21,7 @@ extern class Rectangle {
 	 * @method clone
 	 * @return {Rectangle} a copy of the rectangle
 	*/
-	public function clone():Rectangle;
+	function clone():Rectangle;
 
 	/**
 	 * Checks whether the x and y coordinates passed to this function are contained within this Rectangle
@@ -31,5 +31,5 @@ extern class Rectangle {
 	 * @param y {Number} The Y coordinate of the point to test
 	 * @return {Boolean} Whether the x/y coords are within this Rectangle
 	*/
-	public function contains(x:Float, y:Float):Bool;
+	function contains(x:Float, y:Float):Bool;
 }

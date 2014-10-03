@@ -16,7 +16,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created
 	*/
-	public function new(texture:Dynamic):Void;
+	function new(texture:Dynamic):Void;
 
 	/**
 	 * The anchor sets the origin point of the texture.
@@ -24,22 +24,22 @@ extern class Sprite extends DisplayObjectContainer {
 	 * Setting than anchor to 0.5,0.5 means the textures origin is centred
 	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
 	*/
-	public var anchor:Dynamic;
+	var anchor:Dynamic;
 	
 	/**
 	 * The texture that the sprite is using
 	*/
-	public var texture:Dynamic;
+	var texture:Dynamic;
 	
 	/**
 	 * The tint applied to the sprite. This is a hex value
 	 */
-	public var tint:Float;
+	var tint:Float;
 	
 	/**
 	 * The blend mode to be applied to the sprite
 	*/
-	public var blendMode:Float;
+	var blendMode:Float;
 
 	/**
 	 * Sets the texture of the sprite
@@ -47,7 +47,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @method setTexture
 	 * @param texture {Texture} The PIXI texture that is displayed by the sprite
 	*/
-	public function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Dynamic):Void;
 
 	/**
 	 * When the texture is updated, this event will fire to update the scale and frame
@@ -56,7 +56,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param event
 	 * @private
 	*/
-	public function onTextureUpdate():Void;
+	function onTextureUpdate():Void;
 
 	/**
 	 * Returns the framing rectangle of the sprite as a PIXI.Rectangle object
@@ -65,7 +65,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param matrix {Matrix} the transformation matrix of the sprite
 	 * @return {Rectangle} the framing rectangle
 	 */
-	public override function getBounds(matrix:Dynamic):Dynamic;
+	override function getBounds(matrix:Dynamic):Dynamic;
 
 	/**
 	 *
@@ -77,7 +77,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param frameId {String} The frame Id of the texture in the cache
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the frameId
 	*/
-	public static function fromFrame(frameId:String):Dynamic;
+	static function fromFrame(frameId:String):Dynamic;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of image ids
@@ -86,6 +86,6 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @method fromImage
 	 * @param imageId {String}
 	*/
-	public static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Dynamic):Dynamic;
+	static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Dynamic):Dynamic;
 
 }

@@ -16,7 +16,7 @@ extern class Detector {
 	 * @param [antialias=false] {Boolean} sets antialias (only applicable in webGL chrome at the moment)
 	 *
 	*/
-	public static function autoDetectRenderer(width:Int, height:Int, ?view:Dynamic, ?transparent:Bool, ?antialias:Bool):Dynamic;
+	static function autoDetectRenderer(width:Int, height:Int, ?view:Dynamic, ?transparent:Bool, ?antialias:Bool):Dynamic;
 
 	/**
 	 * This helper function will automatically detect which renderer you should be using.
@@ -32,5 +32,5 @@ extern class Detector {
 	 * @param [antialias=false] {Boolean} sets antialias (only applicable in webGL chrome at the moment)
 	 *
 	*/
-	public static function autoDetectRecommendedRenderer(width:Int, height:Int, ?view:Dynamic, ?transparent:Bool, ?antialias:Bool):Dynamic;
+	static function autoDetectRecommendedRenderer(width:Int, height:Int, ?view:Dynamic, ?transparent:Bool, ?antialias:Bool):Dynamic;
 }

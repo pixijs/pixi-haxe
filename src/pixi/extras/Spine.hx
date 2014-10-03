@@ -13,12 +13,12 @@ extern class Spine extends pixi.display.DisplayObjectContainer {
 	 * @constructor
 	 * @param url {String} The url of the spine anim file to be used
 	*/
-	public function new(url:String):Void;
+	function new(url:String):Void;
 
-	public function createSprite(slot:Dynamic, descriptor:Dynamic):pixi.display.Sprite;
+	function createSprite(slot:Dynamic, descriptor:Dynamic):pixi.display.Sprite;
 
-	public var spineData:Dynamic;
-	public var skeleton:Dynamic;
-	public var stateData:Dynamic;
-	public var state:Dynamic;
+	var spineData:Dynamic;
+	var skeleton:Dynamic;
+	var stateData:Dynamic;
+	var state:Dynamic;
 }

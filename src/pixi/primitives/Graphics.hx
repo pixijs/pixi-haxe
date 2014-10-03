@@ -12,7 +12,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	*/
-	public function new():Void;
+	function new():Void;
 
 	/**
 	 * Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
@@ -22,7 +22,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
 	*/
-	public function lineStyle(lineWidth:Float, ?color:Float, ?alpha:Float):Void;
+	function lineStyle(lineWidth:Float, ?color:Float, ?alpha:Float):Void;
 
 	/**
 	 * Moves the current drawing position to (x, y).
@@ -31,7 +31,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param x {Number} the X coordinate to move to
 	 * @param y {Number} the Y coordinate to move to
 	*/
-	public function moveTo(x:Float, y:Float):Void;
+	function moveTo(x:Float, y:Float):Void;
 
 	/**
 	 * Draws a line using the current line style from the current drawing position to (x, y);
@@ -41,7 +41,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param x {Number} the X coordinate to draw to
 	 * @param y {Number} the Y coordinate to draw to
 	*/
-	public function lineTo(x:Float, y:Float):Void;
+	function lineTo(x:Float, y:Float):Void;
 
 	/**
 	 * Calculate the points for a bezier curve.
@@ -55,7 +55,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   toY    Destination point y
 	 * @return {PIXI.Graphics}
 	*/
-	public function bezierCurveTo(cpX:Float, cpY:Float, cpX2:Float, cpY2:Float, toX:Float, toY:Float):Graphics;
+	function bezierCurveTo(cpX:Float, cpY:Float, cpX2:Float, cpY2:Float, toX:Float, toY:Float):Graphics;
 
 	/*
 	 * the arcTo() method creates an arc/curve between two tangents on the canvas.
@@ -70,7 +70,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   radius    The radius of the arc
 	 * @return {PIXI.Graphics}
 	*/
-	public function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
+	function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
 
 	
 	/**
@@ -85,13 +85,13 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {PIXI.Graphics}
 	*/
-	public function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
+	function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
 
 	/**
 	 * @method drawPath
 	 * @param path {Number}
 	*/
-	public function drawPath(path:Dynamic):Void;
+	function drawPath(path:Dynamic):Void;
 
 	/**
 	 * Specifies a simple one-color fill that subsequent calls to other Graphics methods
@@ -101,14 +101,14 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param color {Number} the color of the fill
 	 * @param alpha {Number} the alpha of the fill
 	*/
-	public function beginFill(color:Float, ?alpha:Float):Void;
+	function beginFill(color:Float, ?alpha:Float):Void;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
 	 *
 	 * @method endFill
 	*/
-	public function endFill():Void;
+	function endFill():Void;
 
 	/**
 	 * @method drawRect
@@ -118,7 +118,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param width {Number} The width of the rectangle
 	 * @param height {Number} The height of the rectangle
 	*/
-	public function drawRect(x:Float, y:Float, width:Float, height:Float):Void;
+	function drawRect(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
 	 * @method drawRoundedRect
@@ -129,7 +129,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param height {Number} The height of the rectangle
 	 * @param radius {Number} Radius of the rectangle corners
 	*/
-	public function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
+	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
 
 	/**
 	 * Draws a circle.
@@ -139,7 +139,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param y {Number} The Y coordinate of the center of the circle
 	 * @param radius {Number} The radius of the circle
 	*/
-	public function drawCircle(x:Float, y:Float, radius:Float):Void;
+	function drawCircle(x:Float, y:Float, radius:Float):Void;
 
 	/**
 	 * Draws an ellipse.
@@ -150,76 +150,76 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param width {Number} The half width of the ellipse
 	 * @param height {Number} The half height of the ellipse
 	*/
-	public function drawEllipse(x:Float, y:Float, width:Float, height:Float):Void;
+	function drawEllipse(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 	 *
 	 * @method clear
 	*/
-	public function clear():Void;
+	function clear():Void;
 
 	/**
 	 * Update the bounds of the object
 	 *
 	 * @method updateBounds
 	*/
-	public function updateBounds():Void;
+	function updateBounds():Void;
 
-	public function destroyCachedSprite():Void;
+	function destroyCachedSprite():Void;
 
 	/**
 	 * The alpha of the fill of this graphics object
 	*/
-	public var fillAlpha:Float;
+	var fillAlpha:Float;
 	
 	/**
 	 * The width of any lines drawn
 	*/
-	public var lineWidth:Float;
+	var lineWidth:Float;
 	
 	/**
 	 * The color of any lines drawn
 	*/
-	public var lineColor:String;
+	var lineColor:String;
 	
 	/**
 	 * Graphics data
 	*/
-	public var graphicsData:Array<Dynamic>;
+	var graphicsData:Array<Dynamic>;
 	
 	/**
 	 * The tint applied to the graphic shape. This is a hex value
 	*/
-	public var tint:Float;
+	var tint:Float;
 	
 	/**
 	 * The blend mode to be applied to the graphic shape
 	*/
-	public var blendMode:Float;
+	var blendMode:Float;
 	
 	/**
 	 * Current path
 	*/
-	public var currentPath:Dynamic;
+	var currentPath:Dynamic;
 	
 	/**
 	 * Array containing some WebGL-related properties used by the WebGL renderer
 	*/
-	public var webGL:Array<Dynamic>;
+	var webGL:Array<Dynamic>;
 	
 	/**
 	 * Whether this shape is being used as a mask
 	*/
-	public var isMask:Dynamic;
+	var isMask:Dynamic;
 	
 	/**
 	 * the bounds' padding used for bounds calculation
 	*/
-	public var boundsPadding:Float;
+	var boundsPadding:Float;
 	
 	/**
 	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
 	*/
-	public var dirty:Dynamic;
+	var dirty:Dynamic;
 }

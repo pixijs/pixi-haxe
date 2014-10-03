@@ -13,15 +13,15 @@ extern class Matrix {
 	 * @class Matrix
 	 * @constructor
 	*/
-	public function new():Void;
-
+	function new():Void;
+	
 	/**
 	 * Creates a pixi matrix object based on the array given as a parameter
 	 *
 	 * @method fromArray
 	 * @param array {Array} The array that the matrix will be filled with
 	*/
-	public function fromArray(array:Array<Dynamic>):Void;
+	function fromArray(array:Array<Dynamic>):Void;
 
 	/**
 	 * Creates an array from the current Matrix object
@@ -30,7 +30,7 @@ extern class Matrix {
 	 * @param transpose {Boolean} Whether we need to transpose the matrix or not
 	 * @return {Array} the newly created array which contains the matrix
 	*/
-	public function toArray(transpose:Bool):Array<Dynamic>;
+	function toArray(transpose:Bool):Array<Dynamic>;
 
 	/**
 	 * Returns the framing rectangle of the circle as a PIXI.Rectangle object
@@ -38,5 +38,5 @@ extern class Matrix {
 	 * @method getBounds
 	 * @return {Rectangle} the framing rectangle
 	*/
-	public function getBounds():Rectangle;
+	function getBounds():Rectangle;
 }

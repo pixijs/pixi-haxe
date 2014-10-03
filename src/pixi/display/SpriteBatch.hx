@@ -23,7 +23,7 @@ extern class SpriteBatch {
 	 * @constructor
 	 * @param texture {Texture}
 	*/
-	public function new(texture:Dynamic):Void;
+	function new(texture:Dynamic):Void;
 
 	/*
 	 * Initialises the spriteBatch
@@ -31,7 +31,7 @@ extern class SpriteBatch {
 	 * @method initWebGL
 	 * @param gl {WebGLContext} the current WebGL drawing context
 	*/
-	public function initWebGL(gl:Dynamic):Void;
+	function initWebGL(gl:Dynamic):Void;
 
 	/*
 	 * Updates the object transform for rendering
@@ -39,6 +39,6 @@ extern class SpriteBatch {
 	 * @method updateTransform
 	 * @private
 	*/
-	public function updateTransform():Void;
+	function updateTransform():Void;
 
 }
