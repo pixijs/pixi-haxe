@@ -76,5 +76,5 @@ extern class Text {
 	 * @method destroy
 	 * @param destroyBaseTexture {Boolean} whether to destroy the base texture as well
 	*/
-	public function destroy():Void;
+	public function destroy(?destroyBaseTexture:Bool):Void;
 }
