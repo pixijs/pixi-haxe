@@ -31,16 +31,16 @@ class Main {
     private var _stage:Stage;
 
 	public function new() {
-		_stage = new Stage(0x66FF99);
-        _renderer = Detector.autoDetectRenderer(400, 300);
+		_stage = new Stage(0x00FF00);
+        _renderer = Detector.autoDetectRenderer(800, 600);
         Browser.document.body.appendChild(_renderer.view);
         
         var texture = Texture.fromImage("bunny.png");
         _bunny = new Sprite(texture);
-        _bunny.anchor.x = 0.5;
-        _bunny.anchor.y = 0.5;
-        _bunny.position.x = 200;
-        _bunny.position.y = 150;
+        _bunny.anchor.x = _bunny.anchor.y = 0.5;
+        _bunny.position.x = 400;
+        _bunny.position.y = 300;
+        _bunny.scale.x = _bunny.scale.y = 2;
         
         _stage.addChild(_bunny);
         
