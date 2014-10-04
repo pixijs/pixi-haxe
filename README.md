@@ -7,7 +7,9 @@ The aim of this project is to provide extern classes of Pixi for Haxe.
 
 ### Installation ###
 
+```haxe
 haxelib install pixijs
+```
 
 Note: Some extern classes may have issues or missing methods/variables. Report them by creating new issues.
 
