@@ -10,12 +10,11 @@ The aim of this project is to provide extern classes of Pixi for Haxe.
 ```haxe
 haxelib install pixijs
 ```
-
-Note: Some extern classes may have issues or missing methods/variables. Report them by creating new issues in GitHub.
+<i>Please note that all the extern classes were not tested, so report any issues found by creating new issues in GitHub.</i>
 
 ### Demos ###
 
-https://github.com/adireddy/haxe-pixi-demos
+Examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
 
 ### Usage ###
 
