@@ -1,7 +1,7 @@
 package pixi.text;
 
 @:native("PIXI.Text")
-extern class Text {
+extern class Text extends pixi.display.Sprite {
 
 	/**
 	 * A Text Object will create a line(s) of text. To split a line you can use '\n' 
@@ -24,24 +24,8 @@ extern class Text {
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
-	*/
+	 */
 	function new(text:String, style:Dynamic):Void;
-
-	/**
-	 * The width of the text, setting this will actually modify the scale to achieve the value set
-	 *
-	 * @property width
-	 * @type Number
-	*/
-	var width:Float;
-
-	/**
-	 * The height of the text, setting this will actually modify the scale to achieve the value set
-	 *
-	 * @property height
-	 * @type Number
-	*/
-	var height:Float;
 
 	/**
 	 * Set the style of the text
@@ -59,7 +43,7 @@ extern class Text {
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
-	*/
+	 */
 	function setStyle(style:Dynamic):Void;
 
 	/**
@@ -67,7 +51,7 @@ extern class Text {
 	 *
 	 * @method setText
 	 * @param {String} text The copy that you would like the text to display
-	*/
+	 */
 	function setText(text:String):Void;
 
 	/**
@@ -75,6 +59,16 @@ extern class Text {
 	 *
 	 * @method destroy
 	 * @param destroyBaseTexture {Boolean} whether to destroy the base texture as well
-	*/
+	 */
 	function destroy(?destroyBaseTexture:Bool):Void;
+
+	/**
+	 * The canvas element that everything is drawn to
+	 */
+	var canvas:Dynamic;
+
+	/**
+	 * The canvas 2d context that everything is drawn with
+	 */
+	var context:Dynamic;
 }

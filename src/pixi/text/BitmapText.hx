@@ -45,4 +45,22 @@ extern class BitmapText extends pixi.display.DisplayObjectContainer {
 	 * @param {String} text The copy that you would like the text to display
 	*/
 	function setText(text:String):Void;
+
+	/**
+     * [read-only] The width of the overall text, different from fontSize,
+     * which is defined in the style object
+     *
+     * @property textWidth
+     * @type Number
+     */
+    var textWidth:Float;
+
+    /**
+     * [read-only] The height of the overall text, different from fontSize,
+     * which is defined in the style object
+     *
+     * @property textHeight
+     * @type Number
+     */
+    var textHeight:Float;
 }

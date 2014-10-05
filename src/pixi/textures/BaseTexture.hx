@@ -4,14 +4,15 @@ package pixi.textures;
 extern class BaseTexture {
 	
 	/**
-	 * @author Mat Groves <a href='http://matgroves.com/'>http://matgroves.com/</a> @Doormat23
-	 */
-	var BaseTextureCache:Dynamic;
-	
-	/**
 	 * A texture stores the information that represents an image. All textures have a base texture
+	 *
+	 * @class BaseTexture
+	 * @uses EventTarget
+	 * @constructor
+	 * @param source {String} the source object (image or canvas)
+	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 */
-	function new (String:Dynamic, Number:Dynamic);
+	function new (source:String, scaleMode:Float);
 	
 	/**
 	 * [read-only] The width of the base texture set when the image has loaded
@@ -39,8 +40,42 @@ extern class BaseTexture {
 	var source:Dynamic;
 	
 	/**
-	 * Controls if RGB channels should be premultiplied by Alpha  (WebGL only)
+	 * Destroys this base texture
+	 *
+	 * @method destroy
 	 */
-	var a0:Bool;
-	
+	function destroy():Void;
+
+	/**
+	 * Changes the source image of the texture
+	 *
+	 * @method updateSourceImage
+	 * @param newSrc {String} the path of the image
+	 */
+	function updateSourceImage(newSrc:String):Void
+
+	/**
+	 * Helper function that returns a base texture based on an image url
+	 * If the image is not in the base texture cache it will be created and loaded
+	 *
+	 * @static
+	 * @method fromImage
+	 * @param imageUrl {String} The image url of the texture
+	 * @param crossorigin {Boolean} 
+	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @return BaseTexture
+	 */
+	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Float):BaseTexture;
+
+	/**
+	 * Helper function that returns a base texture based on a canvas element
+	 * If the image is not in the base texture cache it will be created and loaded
+	 *
+	 * @static
+	 * @method fromCanvas
+	 * @param canvas {Canvas} The canvas element source of the texture
+	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @return BaseTexture
+	 */
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):BaseTexture;
 }

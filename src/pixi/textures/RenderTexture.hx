@@ -31,8 +31,8 @@ extern class RenderTexture extends pixi.textures.Texture {
 	 * @param width {Number} The width of the render texture
 	 * @param height {Number} The height of the render texture
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
-	*/
-	function new (width:Float, height:Float, ?scaleMode:Float):Void;
+	 */
+	function new (width:Float, height:Float, ?renderer:Dynamic, ?scaleMode:Float);
 
 	/**
 	 * Resize the RenderTexture.
@@ -41,18 +41,18 @@ extern class RenderTexture extends pixi.textures.Texture {
 	 * @param width {Number} The width to resize to.
 	 * @param height {Number} The height to resize to.
 	 * @param updateBase {Boolean} Should the baseTexture.width and height values be resized as well?
-	*/
-	function resize(width:Float, height:Float, updateBase:Bool):Void;
+	 */
+	function resize(width:Float, height:Float, ?updateBase:Bool):Void;
 
 	/**
 	 * Clears the RenderTexture.
 	 *
 	 * @method clear
-	*/
+	 */
 	function clear():Void;
 
 	/**
 	 * render
-	*/
+	 */
 	var render:Dynamic;
 }

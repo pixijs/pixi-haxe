@@ -47,6 +47,5 @@ extern class AssetLoader {
 	 *
 	 * @method load
 	*/
-	function load():Void;
-	
+	function load():Void;	
 }
