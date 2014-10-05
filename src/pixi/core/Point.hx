@@ -10,7 +10,7 @@ extern class Point {
 	 * @constructor
 	 * @param x {Number} position of the point on the x axis
 	 * @param y {Number} position of the point on the y axis
-	*/
+	 */
 	function new(x:Float, y:Float):Void;
 
 	/**
@@ -18,7 +18,7 @@ extern class Point {
 	 *
 	 * @method clone
 	 * @return {Point} a copy of the point
-	*/
+	 */
 	function clone():Point;
 
 	/**
@@ -28,6 +28,20 @@ extern class Point {
 	 * @method set
 	 * @param [x=0] {Number} position of the point on the x axis
 	 * @param [y=0] {Number} position of the point on the y axis
-	*/
+	 */
 	function set(x:Float, y:Float):Void;
+
+	/**
+     * @property x
+     * @type Number
+     * @default 0
+     */
+    var x:Float;
+
+    /**
+     * @property y
+     * @type Number
+     * @default 0
+     */
+    var y:Float;
 }

@@ -12,7 +12,7 @@ extern class Matrix {
 	 *
 	 * @class Matrix
 	 * @constructor
-	*/
+	 */
 	function new():Void;
 	
 	/**
@@ -20,7 +20,7 @@ extern class Matrix {
 	 *
 	 * @method fromArray
 	 * @param array {Array} The array that the matrix will be filled with
-	*/
+	 */
 	function fromArray(array:Array<Dynamic>):Void;
 
 	/**
@@ -29,14 +29,6 @@ extern class Matrix {
 	 * @method toArray
 	 * @param transpose {Boolean} Whether we need to transpose the matrix or not
 	 * @return {Array} the newly created array which contains the matrix
-	*/
+	 */
 	function toArray(transpose:Bool):Array<Dynamic>;
-
-	/**
-	 * Returns the framing rectangle of the circle as a PIXI.Rectangle object
-	 * 
-	 * @method getBounds
-	 * @return {Rectangle} the framing rectangle
-	*/
-	function getBounds():Rectangle;
 }

@@ -8,7 +8,7 @@ extern class InteractionManager {
 	 * if its interactive parameter is set to true
 	 * This manager also supports multitouch.
 	 */
-	function new (Stage:Dynamic);
+	function new (stage:Dynamic);
 	
 	/**
 	 * a reference to the stage

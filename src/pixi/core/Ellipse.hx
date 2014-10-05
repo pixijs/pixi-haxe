@@ -40,4 +40,32 @@ extern class Ellipse {
 	 * @return {Rectangle} the framing rectangle
 	*/
 	function getBounds():Rectangle;
+
+	/**
+     * @property x
+     * @type Number
+     * @default 0
+     */
+    var x:Float;
+
+    /**
+     * @property y
+     * @type Number
+     * @default 0
+     */
+    var y:Float;
+
+    /**
+     * @property width
+     * @type Number
+     * @default 0
+     */
+    var width:Float;
+
+    /**
+     * @property height
+     * @type Number
+     * @default 0
+     */
+    var height:Float;
 }

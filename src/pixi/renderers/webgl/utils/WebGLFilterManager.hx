@@ -5,7 +5,10 @@ extern class WebGLFilterManager {
 	
 	/**
 	 * @class WebGLFilterManager
+	 * @constructor
+	 * @param gl {WebGLContext} the current WebGL drawing context
+	 * @param transparent {Boolean} Whether or not the drawing context should be transparent
 	 */
-	function new (WebGLContext:Dynamic, Boolean:Dynamic);
+	function new (gl:Dynamic, transparent:Bool);
 	
 }

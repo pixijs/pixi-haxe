@@ -6,6 +6,6 @@ extern class WebGLStencilManager {
 	/**
 	 * @class WebGLStencilManager
 	 */
-	function new (WebGLContext:Dynamic);
+	function new (gl:Dynamic);
 	
 }

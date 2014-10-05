@@ -11,15 +11,15 @@ extern class Polygon {
 	 *      all the points of the polygon e.g. `new PIXI.Polygon(new PIXI.Point(), new PIXI.Point(), ...)`, or the
 	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
 	 *      Numbers.
-	*/
-	function new(points:Dynamic):Void;
+	 */
+	function new(points:Array<Dynamic>):Void;
 
 	/**
 	 * Creates a clone of this polygon
 	 *
 	 * @method clone
 	 * @return {Polygon} a copy of the polygon
-	*/
+	 */
 	function clone():Polygon;
 
 	/**
@@ -29,6 +29,6 @@ extern class Polygon {
 	 * @param x {Number} The X coordinate of the point to test
 	 * @param y {Number} The Y coordinate of the point to test
 	 * @return {Boolean} Whether the x/y coordinates are within this polygon
-	*/
+	 */
 	function contains(x:Float, y:Float):Bool;
 }

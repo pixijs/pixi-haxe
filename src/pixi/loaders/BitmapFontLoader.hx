@@ -5,11 +5,17 @@ extern class BitmapFontLoader {
 	
 	/**
 	 * The xml loader is used to load in XML bitmap font data ('xml' or 'fnt')
-	 * To generate the data you can use <a href='http://www.angelcode.com/products/bmfont/'>http://www.angelcode.com/products/bmfont/</a>
+	 * To generate the data you can use http://www.angelcode.com/products/bmfont/
 	 * This loader will also load the image file as the data.
 	 * When loaded this class will dispatch a 'loaded' event
+	 *
+	 * @class BitmapFontLoader
+	 * @uses EventTarget
+	 * @constructor
+	 * @param url {String} The url of the sprite sheet JSON file
+	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
-	function new (String:Dynamic, Boolean:Dynamic);
+	function new (url:String, ?crossorigin:Bool);
 	
 	/**
 	 * The url of the bitmap font data
@@ -25,5 +31,11 @@ extern class BitmapFontLoader {
 	 * [read-only] The base url of the bitmap font data
 	 */
 	var baseUrl:String;
-	
+
+	/**
+	 * Loads the XML font data
+	 *
+	 * @method load
+	 */
+	function load():Void;	
 }

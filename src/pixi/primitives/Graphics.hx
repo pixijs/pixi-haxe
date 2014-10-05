@@ -11,7 +11,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @class Graphics
 	 * @extends DisplayObjectContainer
 	 * @constructor
-	*/
+	 */
 	function new():Void;
 
 	/**
@@ -21,7 +21,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param lineWidth {Number} width of the line to draw, will update the object's stored style
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
-	*/
+	 */
 	function lineStyle(lineWidth:Float, ?color:Float, ?alpha:Float):Void;
 
 	/**
@@ -30,7 +30,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @method moveTo
 	 * @param x {Number} the X coordinate to move to
 	 * @param y {Number} the Y coordinate to move to
-	*/
+	 */
 	function moveTo(x:Float, y:Float):Void;
 
 	/**
@@ -40,7 +40,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @method lineTo
 	 * @param x {Number} the X coordinate to draw to
 	 * @param y {Number} the Y coordinate to draw to
-	*/
+	 */
 	function lineTo(x:Float, y:Float):Void;
 
 	/**
@@ -54,7 +54,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   toX    Destination point x
 	 * @param  {number}   toY    Destination point y
 	 * @return {PIXI.Graphics}
-	*/
+	 */
 	function bezierCurveTo(cpX:Float, cpY:Float, cpX2:Float, cpY2:Float, toX:Float, toY:Float):Graphics;
 
 	/*
@@ -69,7 +69,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   y2        The y-coordinate of the end of the arc
 	 * @param  {number}   radius    The radius of the arc
 	 * @return {PIXI.Graphics}
-	*/
+	 */
 	function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
 
 	
@@ -84,13 +84,13 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param  {number}   endAngle          The ending angle, in radians
 	 * @param  {number}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {PIXI.Graphics}
-	*/
+	 */
 	function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
 
 	/**
 	 * @method drawPath
 	 * @param path {Number}
-	*/
+	 */
 	function drawPath(path:Dynamic):Void;
 
 	/**
@@ -100,14 +100,14 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @method beginFill
 	 * @param color {Number} the color of the fill
 	 * @param alpha {Number} the alpha of the fill
-	*/
+	 */
 	function beginFill(color:Float, ?alpha:Float):Void;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
 	 *
 	 * @method endFill
-	*/
+	 */
 	function endFill():Void;
 
 	/**
@@ -117,7 +117,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param y {Number} The Y coord of the top-left of the rectangle
 	 * @param width {Number} The width of the rectangle
 	 * @param height {Number} The height of the rectangle
-	*/
+	 */
 	function drawRect(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
@@ -128,7 +128,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param width {Number} The width of the rectangle
 	 * @param height {Number} The height of the rectangle
 	 * @param radius {Number} Radius of the rectangle corners
-	*/
+	 */
 	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
 
 	/**
@@ -138,7 +138,7 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param x {Number} The X coordinate of the center of the circle
 	 * @param y {Number} The Y coordinate of the center of the circle
 	 * @param radius {Number} The radius of the circle
-	*/
+	 */
 	function drawCircle(x:Float, y:Float, radius:Float):Void;
 
 	/**
@@ -149,77 +149,77 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param y {Number} The Y coordinate of the center of the ellipse
 	 * @param width {Number} The half width of the ellipse
 	 * @param height {Number} The half height of the ellipse
-	*/
+	 */
 	function drawEllipse(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 	 *
 	 * @method clear
-	*/
+	 */
 	function clear():Void;
 
 	/**
 	 * Update the bounds of the object
 	 *
 	 * @method updateBounds
-	*/
+	 */
 	function updateBounds():Void;
 
 	function destroyCachedSprite():Void;
 
 	/**
 	 * The alpha of the fill of this graphics object
-	*/
+	 */
 	var fillAlpha:Float;
 	
 	/**
 	 * The width of any lines drawn
-	*/
+	 */
 	var lineWidth:Float;
 	
 	/**
 	 * The color of any lines drawn
-	*/
+	 */
 	var lineColor:String;
 	
 	/**
 	 * Graphics data
-	*/
+	 */
 	var graphicsData:Array<Dynamic>;
 	
 	/**
 	 * The tint applied to the graphic shape. This is a hex value
-	*/
+	 */
 	var tint:Float;
 	
 	/**
 	 * The blend mode to be applied to the graphic shape
-	*/
+	 */
 	var blendMode:Float;
 	
 	/**
 	 * Current path
-	*/
+	 */
 	var currentPath:Dynamic;
 	
 	/**
 	 * Array containing some WebGL-related properties used by the WebGL renderer
-	*/
+	 */
 	var webGL:Array<Dynamic>;
 	
 	/**
 	 * Whether this shape is being used as a mask
-	*/
+	 */
 	var isMask:Dynamic;
 	
 	/**
 	 * the bounds' padding used for bounds calculation
-	*/
+	 */
 	var boundsPadding:Float;
 	
 	/**
 	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
-	*/
+	 */
 	var dirty:Dynamic;
 }

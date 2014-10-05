@@ -6,6 +6,6 @@ extern class WebGLMaskManager {
 	/**
 	 * @class WebGLMaskManager
 	 */
-	function new (WebGLContext:Dynamic);
+	function new (gl:Dynamic);
 	
 }

@@ -11,7 +11,7 @@ extern class Circle {
 	 * @param x {Number} The X coordinate of the center of this circle
 	 * @param y {Number} The Y coordinate of the center of this circle
 	 * @param radius {Number} The radius of the circle
-	*/
+	 */
 	function new(x:Float, y:Float, radius:Float):Void;
 
 	/**
@@ -19,7 +19,7 @@ extern class Circle {
 	 *
 	 * @method clone
 	 * @return {Circle} a copy of the circle
-	*/
+	 */
 	function clone():Circle;
 
 	/**
@@ -29,7 +29,7 @@ extern class Circle {
 	 * @param x {Number} The X coordinate of the point to test
 	 * @param y {Number} The Y coordinate of the point to test
 	 * @return {Boolean} Whether the x/y coordinates are within this polygon
-	*/
+	 */
 	function contains(x:Float, y:Float):Bool;
 
 	/**
@@ -37,6 +37,27 @@ extern class Circle {
 	 * 
 	 * @method getBounds
 	 * @return {Rectangle} the framing rectangle
-	*/
+	 */
 	function getBounds():Rectangle;
+
+	/**
+     * @property x
+     * @type Number
+     * @default 0
+     */
+    var x:Float;
+
+    /**
+     * @property y
+     * @type Number
+     * @default 0
+     */
+    var y:Float;
+
+    /**
+     * @property radius
+     * @type Number
+     * @default 0
+     */
+    var radius:Float;
 }

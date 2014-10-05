@@ -5,27 +5,43 @@ extern class PrimitiveShader {
 	
 	/**
 	 * @class PrimitiveShader
+	 * @constructor
+	 * @param gl {WebGLContext} the current WebGL drawing context
 	 */
-	function new (WebGLContext:Dynamic);
+	function new (gl:Dynamic);
 	
 	/**
-	 * @property gl
-	 */
+     * @property gl
+     * @type WebGLContext
+     */
 	var gl:Dynamic;
 	
 	/**
-	 * The WebGL program.
-	 */
+     * @property {any} program - The WebGL program.
+     */
 	var program:Dynamic;
 	
 	/**
-	 * @property fragmentSrc
-	 */
-	var fragmentSrc:Dynamic;
+     * @property {array} fragmentSrc - The fragment shader.
+     */
+	var fragmentSrc:Array<Dynamic>;
 	
 	/**
-	 * @property vertexSrc
+     * @property {array} vertexSrc - The vertex shader
+     */
+	var vertexSrc:Array<Dynamic>;
+
+	/**
+	 * Initialises the shader
+	 * @method init
+	 *
 	 */
-	var vertexSrc:Dynamic;
-	
+	function init():Void;
+
+	/**
+	 * Destroys the shader
+	 * @method destroy
+	 *
+	 */
+	function destroy():Void;	
 }

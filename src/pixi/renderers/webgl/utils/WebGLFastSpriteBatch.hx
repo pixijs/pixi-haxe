@@ -1,10 +1,10 @@
 package phaser.pixi.renderers.webgl.utils;
 
-@:native("PIXI.WebGLSpriteBatch")
-extern class WebGLSpriteBatch {
+@:native("PIXI.WebGLFastSpriteBatch")
+extern class WebGLFastSpriteBatch {
 	
 	/**
-	 * @class WebGLSpriteBatch
+	 * @class WebGLFastSpriteBatch
 	 */
 	function new (gl:Dynamic);
 	

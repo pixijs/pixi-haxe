@@ -6,6 +6,6 @@ extern class WebGLShaderManager {
 	/**
 	 * @class WebGLShaderManager
 	 */
-	function new (WebGLContext:Dynamic);
+	function new (gl:Dynamic);
 	
 }
