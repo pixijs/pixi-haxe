@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.SpriteSheetLoader")
-extern class SpriteSheetLoader {
+extern class SpriteSheetLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * The sprite sheet loader is used to load in JSON sprite sheet data

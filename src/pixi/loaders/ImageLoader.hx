@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.ImageLoader")
-extern class ImageLoader {
+extern class ImageLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * The image loader class is responsible for loading images file formats ('jpeg', 'jpg', 'png' and 'gif')

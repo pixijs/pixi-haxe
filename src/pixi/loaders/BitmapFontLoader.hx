@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.BitmapFontLoader")
-extern class BitmapFontLoader {
+extern class BitmapFontLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * The xml loader is used to load in XML bitmap font data ('xml' or 'fnt')

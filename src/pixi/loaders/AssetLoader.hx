@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.AssetLoader")
-extern class AssetLoader {
+extern class AssetLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * A Class that loads a bunch of images / sprite sheet / bitmap font files. Once the

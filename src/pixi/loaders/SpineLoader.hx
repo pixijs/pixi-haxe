@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.SpineLoader")
-extern class SpineLoader {
+extern class SpineLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * The Spine loader is used to load in JSON spine data

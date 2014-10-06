@@ -1,7 +1,7 @@
 package pixi.loaders;
 
 @:native("PIXI.AtlasLoader")
-extern class AtlasLoader extends phaser.pixi.utils.EventTarget {
+extern class AtlasLoader extends pixi.utils.EventTarget {
 	
 	/**
 	 * The atlas file loader is used to load in Atlas data and parse it
