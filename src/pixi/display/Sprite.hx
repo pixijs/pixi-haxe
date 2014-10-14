@@ -1,5 +1,6 @@
 package pixi.display;
 
+import pixi.core.Point;
 @:native("PIXI.Sprite")
 extern class Sprite extends DisplayObjectContainer {
 
@@ -24,7 +25,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * Setting than anchor to 0.5,0.5 means the textures origin is centred
 	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
 	*/
-	var anchor:Dynamic;
+	var anchor:Point;
 	
 	/**
 	 * The texture that the sprite is using

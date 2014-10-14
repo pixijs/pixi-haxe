@@ -1,5 +1,6 @@
 package pixi.display;
 
+import pixi.core.Point;
 @:native("PIXI.DisplayObject")
 extern class DisplayObject {
 
@@ -70,17 +71,17 @@ extern class DisplayObject {
 	/**
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	*/
-	var position:Dynamic;
+	var position:Point;
 	
 	/**
 	 * The scale factor of the object.
 	*/
-	var scale:Dynamic;
+	var scale:Point;
 	
 	/**
 	 * The pivot point of the displayObject that it rotates around
 	*/
-	var pivot:Dynamic;
+	var pivot:Point;
 	
 	/**
 	 * The rotation of the object in radians.
@@ -200,5 +201,10 @@ extern class DisplayObject {
 	var mouseout:Dynamic;
 	var mouseover:Dynamic;
 	var mouseup:Dynamic;
+    var mousemove:Dynamic;
 	var mouseupoutside:Dynamic;
+    var touchstart:Dynamic;
+    var touchmove:Dynamic;
+    var touchend:Dynamic;
+    var touchendoutside:Dynamic;
 }
