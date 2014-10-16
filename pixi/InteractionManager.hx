@@ -1,4 +1,4 @@
-package phaser.pixi;
+package pixi;
 
 @:native("PIXI.InteractionManager")
 extern class InteractionManager {

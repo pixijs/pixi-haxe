@@ -1,4 +1,4 @@
-package phaser.pixi;
+package pixi;
 
 @:native("PIXI.InteractionData")
 extern class InteractionData {
