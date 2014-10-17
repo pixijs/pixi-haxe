@@ -3,7 +3,7 @@ haxe-pixi
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-The aim of this project is to provide fully working extern classes of Pixi for Haxe.
+Extern classes of Pixi - v1.6.1 for Haxe - 2D webGL renderer with canvas fallback.
 
 ### Installation ###
 
