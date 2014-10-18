@@ -1,5 +1,6 @@
 package pixi.display;
 
+import pixi.textures.Texture;
 import pixi.core.Point;
 @:native("PIXI.Sprite")
 extern class Sprite extends DisplayObjectContainer {
@@ -30,7 +31,7 @@ extern class Sprite extends DisplayObjectContainer {
 	/**
 	 * The texture that the sprite is using
 	*/
-	var texture:Dynamic;
+	var texture:Texture;
 	
 	/**
 	 * The tint applied to the sprite. This is a hex value
@@ -48,7 +49,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @method setTexture
 	 * @param texture {Texture} The PIXI texture that is displayed by the sprite
 	*/
-	function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Texture):Void;
 
 	/**
 	 * When the texture is updated, this event will fire to update the scale and frame

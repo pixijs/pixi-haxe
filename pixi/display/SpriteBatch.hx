@@ -1,7 +1,7 @@
 package pixi.display;
 
 @:native("PIXI.SpriteBatch")
-extern class SpriteBatch {
+extern class SpriteBatch extends DisplayObjectContainer {
 
 	/**
 	 * The SpriteBatch class is a really fast version of the DisplayObjectContainer 
@@ -23,7 +23,7 @@ extern class SpriteBatch {
 	 * @constructor
 	 * @param texture {Texture}
 	*/
-	function new(texture:Dynamic):Void;
+	function new(?texture:Dynamic):Void;
 
 	/*
 	 * Initialises the spriteBatch
@@ -32,13 +32,5 @@ extern class SpriteBatch {
 	 * @param gl {WebGLContext} the current WebGL drawing context
 	*/
 	function initWebGL(gl:Dynamic):Void;
-
-	/*
-	 * Updates the object transform for rendering
-	 *
-	 * @method updateTransform
-	 * @private
-	*/
-	function updateTransform():Void;
 
 }
