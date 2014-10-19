@@ -25,7 +25,7 @@ extern class Text extends pixi.display.Sprite {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	 */
-	function new(text:String, style:Dynamic):Void;
+	function new(text:String, ?style:Dynamic):Void;
 
 	/**
 	 * Set the style of the text
