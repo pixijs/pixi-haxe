@@ -14,7 +14,15 @@ haxelib install pixijs
 
 ### Demos ###
 
-Examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
+* [Basics](http://www.arm.rocks/haxe-pixi-demos/basics.html)
+* [Graphics](http://www.arm.rocks/haxe-pixi-demos/graphics.html)
+* [Movieclip](http://www.arm.rocks/haxe-pixi-demos/movieclip.html)
+* [Spritesheet](http://www.arm.rocks/haxe-pixi-demos/spritesheet.html)
+* [Snake](http://www.arm.rocks/haxe-pixi-demos/snake.html)
+* [Spine](http://www.arm.rocks/haxe-pixi-demos/spine.html)
+* [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
+
+Source code of the abovr examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
 
 ### Usage ###
 
