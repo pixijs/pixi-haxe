@@ -1,4 +1,4 @@
-package phaser.pixi.renderers.canvas;
+package pixi.renderers.canvas;
 
 @:native("PIXI.CanvasGraphics")
 extern class CanvasGraphics {

@@ -1,4 +1,4 @@
-package phaser.pixi.filters;
+package pixi.filters;
 
 @:native("PIXI.DisplacementFilter")
 extern class DisplacementFilter {

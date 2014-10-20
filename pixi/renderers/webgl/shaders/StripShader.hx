@@ -1,4 +1,4 @@
-package phaser.pixi.renderers.webgl.shaders;
+package pixi.renderers.webgl.shaders;
 
 @:native("PIXI.StripShader")
 extern class StripShader {

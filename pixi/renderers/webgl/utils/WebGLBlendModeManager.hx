@@ -1,4 +1,4 @@
-package phaser.pixi.renderers.webgl.utils;
+package pixi.renderers.webgl.utils;
 
 @:native("PIXI.WebGLBlendModeManager")
 extern class WebGLBlendModeManager {

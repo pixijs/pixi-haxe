@@ -74,5 +74,4 @@ extern class Pixi {
     };
 
     static function sayHello(type:Dynamic):Void;
-	
 }

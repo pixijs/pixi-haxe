@@ -1,4 +1,4 @@
-package phaser.pixi.renderers.webgl;
+package pixi.renderers.webgl;
 
 @:native("PIXI.WebGLRenderer")
 extern class WebGLRenderer {

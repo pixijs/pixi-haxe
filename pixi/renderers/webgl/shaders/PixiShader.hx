@@ -1,4 +1,4 @@
-package phaser.pixi.renderers.webgl.shaders;
+package pixi.renderers.webgl.shaders;
 
 @:native("PIXI.PixiShader")
 extern class PixiShader {
