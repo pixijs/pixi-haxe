@@ -73,5 +73,10 @@ extern class Pixi {
         NEAREST:Int
     };
 
+    static var TextureCache:Array<Dynamic>;
+    static var FrameCache:Array<Dynamic>;
+
+    static var TextureCacheIdGenerator:Int;
+
     static function sayHello(type:Dynamic):Void;
 }
