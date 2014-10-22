@@ -1,5 +1,7 @@
 package pixi.display;
 
+import pixi.display.DisplayObject;
+
 @:native("PIXI.DisplayObjectContainer")
 extern class DisplayObjectContainer extends DisplayObject {
 
@@ -28,6 +30,15 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @type Number
 	*/
 	var height:Float;
+
+    /**
+     * [read-only] The array of children of this container.
+     *
+     * @property children
+     * @type Array<DisplayObject>
+     * @readOnly
+     */
+    var children :Array<DisplayObject>;
 
 	/**
 	 * Adds a child to the container.
