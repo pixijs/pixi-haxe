@@ -52,7 +52,7 @@ extern class BaseTexture {
 	 * @method updateSourceImage
 	 * @param newSrc {String} the path of the image
 	 */
-	function updateSourceImage(newSrc:String):Void
+	function updateSourceImage(newSrc:String):Void;
 
 	/**
 	 * Helper function that returns a base texture based on an image url
