@@ -1,5 +1,8 @@
 package pixi.extras;
 
+import pixi.core.Point;
+import pixi.textures.Texture;
+
 @:native("PIXI.TilingSprite")
 extern class TilingSprite extends pixi.display.Sprite {
 
@@ -13,26 +16,26 @@ extern class TilingSprite extends pixi.display.Sprite {
 	 * @param width {Number}  the width of the tiling sprite
 	 * @param height {Number} the height of the tiling sprite
 	*/
-	function new(texture:Dynamic, width:Float, height:Float):Void;
+	function new(texture:Texture, width:Float, height:Float):Void;
 	
 	/**
 	 * The scaling of the image that is being tiled
 	 */
-	var tileScale:Dynamic;
+	var tileScale:Point;
 	
 	/**
 	 * A point that represents the scale of the texture object
 	 */
-	var tileScaleOffset:Dynamic;
+	var tileScaleOffset:Point;
 	
 	/**
 	 * The offset position of the image that is being tiled
 	 */
-	var tilePosition:Dynamic;
+	var tilePosition:Point;
 
-	var tint:Dynamic;
+	var tint:Int;
 
-	var blendMode:Dynamic;
+	var blendMode:Int;
 
 	/*
 	 * Sets the texture
@@ -40,6 +43,6 @@ extern class TilingSprite extends pixi.display.Sprite {
 	 * @method setTexture
 	 * @param texture {Texture} the texture that will be used
 	*/
-	function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Texture):Void;
 	
 }
