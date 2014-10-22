@@ -14,7 +14,14 @@ extern class Matrix {
 	 * @constructor
 	 */
 	function new():Void;
-	
+
+    var a :Float;
+    var b :Float;
+    var c :Float;
+    var d :Float;
+    var tx :Float;
+    var ty :Float;
+
 	/**
 	 * Creates a pixi matrix object based on the array given as a parameter
 	 *
