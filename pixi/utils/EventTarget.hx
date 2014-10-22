@@ -8,6 +8,8 @@ extern class EventTarget {
 	 */
 	var listeners:Dynamic;
 	
+     function new():Void;
+
 	/**
      * Adds a listener for a specific event
      *
