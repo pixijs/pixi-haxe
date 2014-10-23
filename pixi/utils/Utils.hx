@@ -20,13 +20,6 @@ extern class Utils {
 	static function rgb2hex(rgb:Array<Float>):Float;
 
 	/**
-	 * A wrapper for ajax requests to be handled cross browser
-	 *
-	 * @method AjaxRequest
-	*/
-	static function AjaxRequest():Dynamic;
-
-	/**
 	 * Checks whether the Canvas BlendModes are supported by the current browser
 	 *
 	 * @method canUseNewCanvasBlendModes
@@ -43,4 +36,24 @@ extern class Utils {
 	 * @return {Number} the closest number that is a power of two
 	*/
 	static function getNextPowerOfTwo(hex:Float):Float;
+}
+
+/**
+ * A wrapper for ajax requests to be handled cross browser
+ *
+ * @method AjaxRequest
+*/
+@:native("PIXI.AjaxRequest")
+extern class AjaxRequest {
+
+	var overrideMimeType :String->Void;
+	var responseXML :Dynamic;
+	var responseText :String;
+	var status :Int;
+	var readyState :Int;
+	var onreadystatechange :Void->Void;
+
+	function new():Void;
+	function open(method :String, url :String, value :Bool):Void;
+	function send(data :Dynamic) :Void;
 }
