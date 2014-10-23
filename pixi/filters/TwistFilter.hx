@@ -3,6 +3,8 @@ package pixi.filters;
 @:native("PIXI.TwistFilter")
 extern class TwistFilter {
 	
+	function new():Void;
+	
 	/**
 	 * This point describes the the offset of the twist
 	 */

@@ -2,6 +2,7 @@ package pixi.textures;
 
 import pixi.core.Point;
 import pixi.core.Rectangle;
+import pixi.textures.BaseTexture;
 
 @:native("PIXI.Texture")
 extern class Texture {
@@ -18,7 +19,7 @@ extern class Texture {
      * @param [crop] {Rectangle} The area of original texture
      * @param [trim] {Rectangle} Trimmed texture rectangle
      */
-	function new(baseTexture:BaseTexture, frame:Rectangle, crop:Rectangle, trim:Rectangle);
+	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle);
 	
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -28,7 +29,7 @@ extern class Texture {
 	/**
 	 * The base texture that this texture uses.
 	 */
-	var baseTexture:Texture;
+	var baseTexture:BaseTexture;
 	
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
@@ -65,6 +66,14 @@ extern class Texture {
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
 	 */
 	var crop:Dynamic;
+
+	/**
+	 * Destroys this texture
+	 *
+	 * @method destroy
+	 * @param destroyBase {Boolean} Whether to destroy the base texture as well
+	 */
+	function destroy(?destroyBase :Bool):Void;
 
 	/**
 	 * Specifies the region of the baseTexture that this texture will use.
