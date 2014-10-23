@@ -3,6 +3,8 @@ package pixi.filters;
 @:native("PIXI.InvertFilter")
 extern class InvertFilter {
 	
+	function new():Void;
+	
 	/**
 	 * The strength of the invert. 1 will fully invert the colors, 0 will make the object its normal color
 	 */

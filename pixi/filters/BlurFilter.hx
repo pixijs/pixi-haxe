@@ -3,6 +3,8 @@ package pixi.filters;
 @:native("PIXI.BlurFilter")
 extern class BlurFilter {
 	
+	function new():Void;
+
 	/**
 	 * Sets the strength of both the blurX and blurY properties simultaneously
 	 */

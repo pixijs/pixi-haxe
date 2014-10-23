@@ -3,6 +3,8 @@ package pixi.filters;
 @:native("PIXI.DisplacementFilter")
 extern class DisplacementFilter {
 	
+	function new():Void;
+	
 	/**
 	 * The texture used for the displacemtent map * must be power of 2 texture at the moment
 	 */
