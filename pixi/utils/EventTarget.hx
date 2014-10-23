@@ -36,7 +36,7 @@ extern class EventTarget {
 	 * @param eventName {String} The name of the event.
 	 * @return Boolean
 	 */
-    function emit(eventName:String):Bool;
+    function emit(eventName :String, ?data :Dynamic):Bool;
 	
 	/**
      * Removes the specified listener that was assigned to the specified event type
