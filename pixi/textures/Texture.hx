@@ -34,12 +34,12 @@ extern class Texture {
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
 	 */
-	var frame:Dynamic;
+	var frame:Rectangle;
 	
 	/**
 	 * The trim point
 	 */
-	var trim:Point;
+	var trim:Rectangle;
 	
 	/**
 	 * This will let the renderer know if the texture is valid. If its not then it cannot be rendered.
@@ -65,7 +65,7 @@ extern class Texture {
 	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
 	 */
-	var crop:Dynamic;
+	var crop:Rectangle;
 
 	/**
 	 * Destroys this texture
