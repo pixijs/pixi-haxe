@@ -24,7 +24,7 @@ haxelib install pixijs
 * [Spine](http://www.arm.rocks/haxe-pixi-demos/spine.html)
 * [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
 
-Source code of the abovr examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
+Source code of the above examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
 
 ### Usage ###
 
