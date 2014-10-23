@@ -3,7 +3,7 @@
   "license": "MIT",
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v2 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
-  "contributors": ["adireddy", "volkipp"],
+  "contributors": ["adireddy"],
   "releasenote": "bug fixes related to pixijs v2 release",
   "version": "0.2.1",
   "url": "https://github.com/adireddy/haxe-pixi",
