@@ -2,19 +2,22 @@ package pixi.renderers.canvas;
 
 @:native("PIXI.CanvasRenderer")
 extern class CanvasRenderer {
-	
-	/**
-	 * the CanvasRenderer draws the stage and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
-	 * Dont forget to add the view to your DOM or you will not see anything :)
-	 *
-	 * @class CanvasRenderer
-	 * @constructor
-	 * @param width=800 {Number} the width of the canvas view
-	 * @param height=600 {Number} the height of the canvas view
-	 * @param [view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [transparent=false] {Boolean} the transparency of the render view, default false
-	 */
-	function new (?width:Float, ?height:Float, ?view:Dynamic, ?transparent:Bool);
+
+    /**
+     * The CanvasRenderer draws the Stage and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
+     * Don't forget to add the CanvasRenderer.view to your DOM or you will not see anything :)
+     *
+     * @class CanvasRenderer
+     * @constructor
+     * @param [width=800] {Number} the width of the canvas view
+     * @param [height=600] {Number} the height of the canvas view
+     * @param [options] {Object} The optional renderer parameters
+     * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
+     * @param [options.transparent=false] {Boolean} If the render view is transparent, default false
+     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+     * @param [options.clearBeforeRender=true] {Boolean} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+     */
+	function new (width:Float, height:Float, ?options:Dynamic);
 	
 	/**
      * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.

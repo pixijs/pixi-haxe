@@ -1,5 +1,8 @@
 package pixi.extras;
 
+import pixi.core.Point;
+import pixi.textures.Texture;
+
 @:native("PIXI.Rope")
 extern class Rope extends pixi.extras.Strip {
 
@@ -11,7 +14,7 @@ extern class Rope extends pixi.extras.Strip {
 	 * @param points {Array}
 	 * 
 	*/
-	function new(texture:Dynamic, points:Array<Dynamic>):Void;
+	function new(texture:Texture, points:Array<Point>):Void;
 
 	/*
 	 * Sets the texture that the Rope will use 
@@ -19,7 +22,7 @@ extern class Rope extends pixi.extras.Strip {
 	 * @method setTexture
 	 * @param texture {Texture} the texture that will be used
 	*/
-	function setTexture(texture:Dynamic):Void;
+	function setTexture(texture:Texture):Void;
 
 	/*
 	 * Refreshes 

@@ -1,5 +1,6 @@
 package pixi.extras;
 
+import pixi.textures.Texture;
 @:native("PIXI.Strip")
 extern class Strip extends pixi.display.DisplayObjectContainer {
 
@@ -13,12 +14,12 @@ extern class Strip extends pixi.display.DisplayObjectContainer {
 	 * @param height {Number} the height
 	 * 
 	*/
-	function new(texture:Dynamic):Void;
+	function new(texture:Texture):Void;
 
 	/**
 	 * The texture of the strip
 	 */
-	var texture:Dynamic;
+	var texture:Texture;
 	
 	/**
 	 * Whether the strip is dirty or not
@@ -29,5 +30,4 @@ extern class Strip extends pixi.display.DisplayObjectContainer {
 	 * if you need a padding, not yet implemented
 	 */
 	var padding:Float;
-	
 }

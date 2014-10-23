@@ -15,7 +15,7 @@ extern class Spine extends pixi.display.DisplayObjectContainer {
 	*/
 	function new(url:String):Void;
 
-	function createSprite(slot:Dynamic, descriptor:Dynamic):pixi.display.Sprite;
+	function createSprite(slot:Dynamic, descriptor:String):pixi.display.Sprite;
 
 	var spineData:Dynamic;
 	var skeleton:Dynamic;

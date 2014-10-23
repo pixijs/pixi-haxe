@@ -19,7 +19,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * Here is how to add a sprite to the stage : 
 	 * stage.addChild(sprite);
 	*/
-	function new(backgroundColor:Dynamic):Void;
+	function new(backgroundColor:Int):Void;
 
 	/**
 	 * Sets another DOM element which can receive mouse/touch interactions instead of the default Canvas element.
@@ -45,7 +45,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * @param backgroundColor {Number} the color of the background, easiest way to pass this in is in hex format
 	 *      like: 0xFFFFFF for white
 	*/
-	function setBackgroundColor(backgroundColor:Dynamic):Void;
+	function setBackgroundColor(backgroundColor:Int):Void;
 
 	/**
 	 * This will return the point containing global coords of the mouse.

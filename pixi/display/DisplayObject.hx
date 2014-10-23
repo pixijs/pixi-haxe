@@ -1,5 +1,6 @@
 package pixi.display;
 
+import pixi.primitives.Graphics;
 import pixi.core.Point;
 @:native("PIXI.DisplayObject")
 extern class DisplayObject {
@@ -48,7 +49,7 @@ extern class DisplayObject {
 	 * @property mask
 	 * @type Graphics
 	*/
-	var mask:Dynamic;
+	var mask:Graphics;
 
 	/**
 	 * Sets the filters for the displayObject.
@@ -57,7 +58,7 @@ extern class DisplayObject {
 	 * @property filters
 	 * @type Array An array of filters
 	*/
-	var filters:Dynamic;
+	var filters:Array<Dynamic>;
 
 	/**
 	 * Set weather or not a the display objects is cached as a bitmap.
@@ -117,12 +118,12 @@ extern class DisplayObject {
 	/**
 	 * [read-only] The display object container that contains this display object.
 	*/
-	var parent:Dynamic;
+	var parent:DisplayObjectContainer;
 	
 	/**
 	 * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
 	*/
-	var stage:Dynamic;
+	var stage:Stage;
 	
 	/**
 	 * [read-only] The multiplied alpha of the displayObject
@@ -133,16 +134,6 @@ extern class DisplayObject {
 	 * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
 	*/
 	var defaultCursor:String;
-	
-	/**
-	 * [read-only] Current transform of the object based on world (parent) factors
-	*/
-	var worldTransform:Dynamic;
-	
-	/**
-	 * [NYI] Unknown
-	*/
-	var color:Dynamic;
 	
 	/**
 	 * [NYI] Holds whether or not this object is dynamic, for rendering optimization
@@ -189,7 +180,7 @@ extern class DisplayObject {
 	 * @method setStageReference
 	 * @param stage {Stage} the stage that the object will have as its current stage reference
 	*/
-	function setStageReference(stage:Dynamic):Void;
+	function setStageReference(stage:Stage):Void;
 
 	function generateTexture(renderer:Dynamic):Void;
 

@@ -19,6 +19,7 @@ extern class EventTarget {
      */
 	function addEventListener(type:String, listener:Dynamic):Void;
 	function on(type:String, listener:Dynamic):Void;
+    function once(type:String, listener:Dynamic):Void;
 	
 	/**
      * Fires the event, ie pretends that the event has happened
@@ -27,7 +28,15 @@ extern class EventTarget {
      * @param event {Event} the event object
      */
     function dispatchEvent(event:Dynamic):Void;
-	function emit(event:Dynamic):Void;
+
+    /**
+	 * Emit an event to all registered event listeners.
+	 *
+	 * @method emit
+	 * @param eventName {String} The name of the event.
+	 * @return Boolean
+	 */
+    function emit(eventName:String):Bool;
 	
 	/**
      * Removes the specified listener that was assigned to the specified event type
@@ -39,11 +48,13 @@ extern class EventTarget {
 	function removeEventListener(type:String, listener:Dynamic):Void;
 	function off(type:String, listener:Dynamic):Void;
 
+    function mixin(object:Dynamic):Void;
+
 	/**
      * Removes all the listeners that were active for the specified event type
      *
      * @method removeAllEventListeners
-     * @param type {string} A string representing the event type which will have all its listeners removed
+     * @param eventName {string} A string representing the event type which will have all its listeners removed
      */
-	function removeAllEventListeners(type:String):Void;
+	function removeAllEventListeners(eventName:String):Void;
 }

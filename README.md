@@ -3,7 +3,9 @@ haxe-pixi
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-Extern classes of Pixi - v1.6.1 for Haxe - 2D webGL renderer with canvas fallback.
+Extern classes of Pixi - v2 for Haxe - 2D webGL renderer with canvas fallback.
+
+If you are looking for Pixi - v1.6.1 externs, you can get it from https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3
 
 ### Installation ###
 
@@ -22,7 +24,7 @@ haxelib install pixijs
 * [Spine](http://www.arm.rocks/haxe-pixi-demos/spine.html)
 * [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
 
-Source code of the abovr examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
+Source code of the above examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
 
 ### Usage ###
 
