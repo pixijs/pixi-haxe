@@ -1,7 +1,9 @@
 package pixi.textures;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.BaseTexture")
-extern class BaseTexture {
+extern class BaseTexture extends EventTarget {
 	
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture
@@ -12,8 +14,16 @@ extern class BaseTexture {
 	 * @param source {String} the source object (image or canvas)
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 */
-	function new (source:String, scaleMode:Float);
-	
+	function new(source:String, scaleMode:Float);
+
+    /**
+     * The Resolution of the texture.
+     *
+     * @property resolution
+     * @type Number
+     */
+    var resolution:Float;
+
 	/**
 	 * [read-only] The width of the base texture set when the image has loaded
 	 */
@@ -27,7 +37,7 @@ extern class BaseTexture {
 	/**
 	 * The scale mode to apply when scaling this texture
 	 */
-	var scaleMode:Dynamic;
+	var scaleMode:Float;
 	
 	/**
 	 * [read-only] Describes if the base texture has loaded or not
@@ -38,6 +48,10 @@ extern class BaseTexture {
 	 * The source that is loaded to create the texture
 	 */
 	var source:Dynamic;
+
+    var imageUrl:String;
+
+    var premultipliedAlpha:Bool;
 	
 	/**
 	 * Destroys this base texture
@@ -45,6 +59,13 @@ extern class BaseTexture {
 	 * @method destroy
 	 */
 	function destroy():Void;
+
+    /**
+	 * Sets all glTextures to be dirty.
+	 *
+	 * @method dirty
+	 */
+    function dirty():Void;
 
 	/**
 	 * Changes the source image of the texture

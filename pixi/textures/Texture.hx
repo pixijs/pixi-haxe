@@ -1,19 +1,24 @@
 package pixi.textures;
 
+import pixi.core.Point;
+import pixi.core.Rectangle;
+
 @:native("PIXI.Texture")
 extern class Texture {
-	
-	/**
-	 * A texture stores the information that represents an image or part of an image. It cannot be added
-	 * to the display list directly. To do this use PIXI.Sprite. If no frame is provided then the whole image is used
-	 *
-	 * @class Texture
-	 * @uses EventTarget
-	 * @constructor
-	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
-	 * @param frame {Rectangle} The rectangle frame of the texture to show
-	 */
-	function new (baseTexture:Dynamic, frame:Dynamic);
+
+    /**
+     * A texture stores the information that represents an image or part of an image. It cannot be added
+     * to the display list directly. Instead use it as the texture for a PIXI.Sprite. If no frame is provided then the whole image is used.
+     *
+     * @class Texture
+     * @uses EventTarget
+     * @constructor
+     * @param baseTexture {BaseTexture} The base texture source to create the texture from
+     * @param frame {Rectangle} The rectangle frame of the texture to show
+     * @param [crop] {Rectangle} The area of original texture
+     * @param [trim] {Rectangle} Trimmed texture rectangle
+     */
+	function new(baseTexture:BaseTexture, frame:Rectangle, crop:Rectangle, trim:Rectangle);
 	
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -23,7 +28,7 @@ extern class Texture {
 	/**
 	 * The base texture that this texture uses.
 	 */
-	var baseTexture:Dynamic;
+	var baseTexture:Texture;
 	
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
@@ -33,7 +38,7 @@ extern class Texture {
 	/**
 	 * The trim point
 	 */
-	var trim:Dynamic;
+	var trim:Point;
 	
 	/**
 	 * This will let the renderer know if the texture is valid. If its not then it cannot be rendered.
@@ -67,7 +72,7 @@ extern class Texture {
 	 * @method setFrame
 	 * @param frame {Rectangle} The frame of the texture to set it to
 	 */
-	static function setFrame(frameId:Dynamic):Void;
+	static function setFrame(frame:Rectangle):Void;
 
 	/**
 	 * Helper function that returns a texture based on a frame id
@@ -91,7 +96,7 @@ extern class Texture {
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Int):Texture;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Float):Texture;
 
 	/**
 	 * Helper function that returns a texture based on a canvas element
@@ -103,7 +108,7 @@ extern class Texture {
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Texture;
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):Texture;
 
 	/**
 	 * Adds a texture to the textureCache.
@@ -113,7 +118,7 @@ extern class Texture {
 	 * @param texture {Texture}
 	 * @param id {String} the id that the texture will be stored against.
 	 */
-	static function addTextureToCache(texture:Dynamic, id:String):Void;
+	static function addTextureToCache(texture:Texture, id:String):Void;
 
 	/**
 	 * Remove a texture from the textureCache.
