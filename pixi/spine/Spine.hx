@@ -1,4 +1,4 @@
-package pixi.extras;
+package pixi.spine;
 
 @:native("PIXI.Spine")
 extern class Spine extends pixi.display.DisplayObjectContainer {

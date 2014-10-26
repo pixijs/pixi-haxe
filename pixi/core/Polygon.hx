@@ -12,7 +12,7 @@ extern class Polygon {
 	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
 	 *      Numbers.
 	 */
-	function new(points:Array<Dynamic>):Void;
+	function new(points:Array<Point>):Void;
 
 	/**
 	 * Creates a clone of this polygon

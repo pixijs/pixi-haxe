@@ -1,7 +1,10 @@
 package pixi.display;
 
+import pixi.core.Matrix;
+import pixi.core.Rectangle;
 import pixi.primitives.Graphics;
 import pixi.core.Point;
+
 @:native("PIXI.DisplayObject")
 extern class DisplayObject {
 
@@ -103,7 +106,7 @@ extern class DisplayObject {
 	 * This is the defined area that will pick up mouse / touch events. It is null by default.
 	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
 	*/
-	var hitArea:Dynamic;
+	var hitArea:Rectangle;
 	
 	/**
 	 * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
@@ -144,17 +147,17 @@ extern class DisplayObject {
 	 * The area the filter is applied to like the hitArea this is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	*/
-	var filterArea:Dynamic;
+	var filterArea:Rectangle;
 	
 	/**
 	 * The original, cached bounds of the object
 	*/
-	var bounds:Dynamic;
+	var bounds:Rectangle;
 	
 	/**
 	 * The most up-to-date bounds of the object
 	*/
-	var currentBounds:Dynamic;
+	var currentBounds:Rectangle;
 	
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
@@ -166,13 +169,14 @@ extern class DisplayObject {
 	*/
 	var y:Float;
 
-	/*
-	 * Updates the object transform for rendering
-	 *
-	 * @method updateTransform
-	 * @private
-	*/
-	function getBounds(matrix:Dynamic):pixi.core.Rectangle;
+    /**
+     * Retrieves the bounds of the displayObject as a rectangle object
+     *
+     * @method getBounds
+     * @param matrix {Matrix}
+     * @return {Rectangle} the rectangular bounding area
+     */
+	function getBounds(matrix:Matrix):Rectangle;
 
 	/**
 	 * Sets the object's stage reference, the stage this object is connected to
@@ -186,16 +190,16 @@ extern class DisplayObject {
 
 	function updateCache():Void;
 
-	var click:Dynamic;
-	var tap:Dynamic;
-	var mousedown:Dynamic;
-	var mouseout:Dynamic;
-	var mouseover:Dynamic;
-	var mouseup:Dynamic;
-    var mousemove:Dynamic;
-	var mouseupoutside:Dynamic;
-    var touchstart:Dynamic;
-    var touchmove:Dynamic;
-    var touchend:Dynamic;
-    var touchendoutside:Dynamic;
+	var click:InteractionData -> Void;
+	var tap:InteractionData -> Void;
+	var mousedown:InteractionData -> Void;
+	var mouseout:InteractionData -> Void;
+	var mouseover:InteractionData -> Void;
+	var mouseup:InteractionData -> Void;
+    var mousemove:InteractionData -> Void;
+	var mouseupoutside:InteractionData -> Void;
+    var touchstart:InteractionData -> Void;
+    var touchmove:InteractionData -> Void;
+    var touchend:InteractionData -> Void;
+    var touchendoutside:InteractionData -> Void;
 }

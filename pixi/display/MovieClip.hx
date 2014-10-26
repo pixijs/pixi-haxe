@@ -1,5 +1,7 @@
 package pixi.display;
 
+import pixi.textures.Texture;
+
 @:native("PIXI.MovieClip")
 extern class MovieClip extends Sprite {
 
@@ -11,7 +13,7 @@ extern class MovieClip extends Sprite {
 	 * @constructor
 	 * @param textures {Array<Texture>} an array of {Texture} objects that make up the animation
 	*/
-	function new(textures:Array<Dynamic>):Void;
+	function new(textures:Array<Texture>):Void;
 
 	/**
 	 * [read-only] totalFrames is the total number of frames in the MovieClip. This is the same as number of textures

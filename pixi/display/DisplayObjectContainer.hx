@@ -1,5 +1,7 @@
 package pixi.display;
 
+import pixi.core.Rectangle;
+import pixi.core.Matrix;
 import pixi.display.DisplayObject;
 
 @:native("PIXI.DisplayObjectContainer")
@@ -38,7 +40,7 @@ extern class DisplayObjectContainer extends DisplayObject {
      * @type Array<DisplayObject>
      * @readOnly
      */
-    var children :Array<DisplayObject>;
+    var children:Array<DisplayObject>;
 
 	/**
 	 * Adds a child to the container.
@@ -46,7 +48,8 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method addChild
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	*/
-	function addChild(child:Dynamic):Void;
+    @:overload(function (child:Dynamic):Void {})
+	function addChild(child:DisplayObject):Void;
 
 	/**
 	 * Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
@@ -55,7 +58,8 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Number} The index to place the child in
 	*/
-	function addChildAt(child:Dynamic, index:Int):Void;
+    @:overload(function (child:Dynamic, index:Int):Void {})
+	function addChildAt(child:DisplayObject, index:Int):Void;
 
 	/**
 	 * [NYI] Swaps the depth of 2 displayObjects
@@ -65,7 +69,10 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param child2 {DisplayObject}
 	 * @private
 	*/
-	function swapChildren(child1:Dynamic, child2:Dynamic):Void;
+    @:overload(function (child1:Dynamic, child2:DisplayObject):Void {})
+    @:overload(function (child1:Dynamic, child2:Dynamic):Void {})
+    @:overload(function (child1:DisplayObject, child2:Dynamic):Void {})
+	function swapChildren(child1:DisplayObject, child2:DisplayObject):Void;
 
 	/**
 	 * Returns the child at the specified index
@@ -73,7 +80,8 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method getChildAt
 	 * @param index {Number} The index to get the child from
 	*/
-	function getChildAt(index:Int):Dynamic;
+    @:overload(function (index:Int):Dynamic {})
+	function getChildAt(index:Int):DisplayObject;
 
 	/**
 	 * Removes a child from the container.
@@ -81,7 +89,8 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method removeChild
 	 * @param child {DisplayObject} The DisplayObject to remove
 	*/
-	function removeChild(child:Dynamic):Void;
+    @:overload(function (child:Dynamic):Void {})
+	function removeChild(child:DisplayObject):Void;
 
 	/**
 	 * Removes a child from the specified index position in the child list of the container.
@@ -89,7 +98,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method removeChildAt
 	 * @param index {Number} The index to get the child from
 	*/
-	function removeChildAt(index:Int):Dynamic;
+	function removeChildAt(index:Int):Void;
 
 	/**
 	 * Removes all child instances from the child list of the container.
@@ -114,7 +123,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method getBounds
 	 * @return {Rectangle} the rectangular bounding area
 	*/
-	override function getBounds(matrix:Dynamic):Dynamic;
+	override function getBounds(matrix:Matrix):Rectangle;
 
 	function getLocalBounds():Void;
 
@@ -124,7 +133,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method setStageReference
 	 * @param stage {Stage} the stage that the container will have as its current stage reference
 	*/
-	override function setStageReference(stage:Dynamic):Void;
+	override function setStageReference(stage:Stage):Void;
 
 	/**
 	 * removes the current stage reference of the container

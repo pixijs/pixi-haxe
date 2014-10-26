@@ -1,5 +1,11 @@
 package pixi.renderers.webgl;
 
+import js.html.CanvasElement;
+import pixi.textures.Texture;
+import pixi.core.Point;
+import pixi.display.DisplayObject;
+import pixi.display.Stage;
+
 @:native("PIXI.WebGLRenderer")
 extern class WebGLRenderer {
 
@@ -20,7 +26,7 @@ extern class WebGLRenderer {
      * @param [options.preserveDrawingBuffer=false] {Boolean} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
      * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
      */
-	function new(width:Float, height:Float, ?options:Dynamic);
+	function new(width:Float, height:Float, ?options:RenderingOptions);
 	
 	/**
      * Whether the render view is transparent
@@ -62,7 +68,7 @@ extern class WebGLRenderer {
      * @property view
      * @type HTMLCanvasElement
      */
-	var view:Dynamic;
+	var view:CanvasElement;
 
 	/**
 	 * Renders the stage to its webGL view
@@ -70,7 +76,17 @@ extern class WebGLRenderer {
 	 * @method render
 	 * @param stage {Stage} the Stage element to be rendered
 	 */
-	function render(stage:Dynamic):Void;
+	function render(stage:Stage):Void;
+
+    /**
+     * Renders a Display Object.
+     *
+     * @method renderDisplayObject
+     * @param displayObject {DisplayObject} The DisplayObject to render
+     * @param projection {Point} The projection
+     * @param buffer {Array} a standard WebGL buffer
+     */
+    function renderDisplayObject(displayObject:DisplayObject, projection:Point, buffer:Array<Dynamic>):Void;
 
 	/**
 	 * resizes the webGL view to the specified width and height
@@ -81,10 +97,25 @@ extern class WebGLRenderer {
 	 */
 	function resize(width:Float, height:Float):Void;
 
+    /**
+     * Updates and Creates a WebGL texture for the renderers context.
+     *
+     * @method updateTexture
+     * @param texture {Texture} the texture to update
+     */
+    function updateTexture(texture:Texture):Texture;
+
 	/**
 	 * Removes everything from the renderer (event listeners, spritebatch, etc...)
 	 *
 	 * @method destroy
 	 */
 	function destroy():Void;
+
+    /**
+     * Maps Pixi blend modes to WebGL blend modes.
+     *
+     * @method mapBlendModes
+     */
+    function mapBlendModes():Void;
 }

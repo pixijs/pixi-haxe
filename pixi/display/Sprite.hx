@@ -1,7 +1,10 @@
 package pixi.display;
 
+import pixi.core.Matrix;
+import pixi.core.Rectangle;
 import pixi.textures.Texture;
 import pixi.core.Point;
+
 @:native("PIXI.Sprite")
 extern class Sprite extends DisplayObjectContainer {
 
@@ -18,7 +21,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created
 	*/
-	function new(texture:Dynamic):Void;
+	function new(texture:Texture):Void;
 
 	/**
 	 * The anchor sets the origin point of the texture.
@@ -67,7 +70,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param matrix {Matrix} the transformation matrix of the sprite
 	 * @return {Rectangle} the framing rectangle
 	 */
-	override function getBounds(matrix:Dynamic):Dynamic;
+	override function getBounds(matrix:Matrix):Rectangle;
 
 	/**
 	 *
@@ -79,7 +82,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param frameId {String} The frame Id of the texture in the cache
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the frameId
 	*/
-	static function fromFrame(frameId:String):Dynamic;
+	static function fromFrame(frameId:String):Sprite;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of image ids
@@ -88,6 +91,6 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @method fromImage
 	 * @param imageId {String}
 	*/
-	static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Dynamic):Dynamic;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Float):Sprite;
 
 }
