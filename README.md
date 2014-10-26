@@ -49,12 +49,11 @@ class Main {
         _renderer = Detector.autoDetectRenderer(800, 600);
         Browser.document.body.appendChild(_renderer.view);
         
-        var texture:Texture = Texture.fromImage("bunny.png");
-        _bunny = new Sprite(texture);
-        _bunny.anchor.x = _bunny.anchor.y = 0.5;
+        _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+        _bunny.anchor.set(0.5, 0.5);
+        _bunny.scale.set(2, 2);
         _bunny.position.x = 400;
         _bunny.position.y = 300;
-        _bunny.scale.x = _bunny.scale.y = 2;
         
         _stage.addChild(_bunny);
         
