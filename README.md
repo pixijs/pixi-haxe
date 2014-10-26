@@ -32,7 +32,6 @@ Source code of the above examples ported to haxe can be found at https://github.
 
 package ;
 
-import pixi.Pixi;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.Texture;
@@ -50,7 +49,7 @@ class Main {
         _renderer = Detector.autoDetectRenderer(800, 600);
         Browser.document.body.appendChild(_renderer.view);
         
-        var texture = Texture.fromImage("bunny.png");
+        var texture:Texture = Texture.fromImage("bunny.png");
         _bunny = new Sprite(texture);
         _bunny.anchor.x = _bunny.anchor.y = 0.5;
         _bunny.position.x = 400;
