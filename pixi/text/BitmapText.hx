@@ -60,8 +60,8 @@ class BitmapTextStyle {
     public var font:String;
     public var align:String = "left";
 
-    public function new(?font:String, ?fill:String) {
+    public function new(?font:String, ?align:String) {
         if (font != null) this.font = font;
-        if (fill != null) this.fill = fill;
+        if (align != null) this.align = align;
     }
 }
