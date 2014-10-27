@@ -1,6 +1,6 @@
 {
   "name": "pixijs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Externs of pixi.js v2 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "keywords": ["js","haxe","pixi","extern","web"],
   "author": {
-    "name": "Adi Mora",
+    "name": "Adi Reddy Mora",
     "email": "adiinteractive@gmail.com"
   },
   "dependencies": {
