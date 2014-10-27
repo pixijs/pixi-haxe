@@ -7,10 +7,10 @@ class RenderingOptions {
     public static var transparent:Bool = false;
     public static var resolution:Float = 1;
 
-    //canvas
+    //canvas specific
     public static var clearBeforeRender:Bool = true;
 
-    //webgl
+    //webgl specific
     public static var antialias:Bool = false;
     public static var preserveDrawingBuffer:Bool = false;
 }

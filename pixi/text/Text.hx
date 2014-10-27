@@ -1,5 +1,8 @@
 package pixi.text;
 
+import js.html.CanvasRenderingContext2D;
+import js.html.CanvasElement;
+
 @:native("PIXI.Text")
 extern class Text extends pixi.display.Sprite {
 
@@ -25,7 +28,7 @@ extern class Text extends pixi.display.Sprite {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	 */
-	function new(text:String, ?style:Dynamic):Void;
+	function new(text:String, ?style:TextStyle):Void;
 
 	/**
 	 * Set the style of the text
@@ -44,7 +47,7 @@ extern class Text extends pixi.display.Sprite {
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
 	 */
-	function setStyle(style:Dynamic):Void;
+	function setStyle(style:TextStyle):Void;
 
 	/**
 	 * Set the copy for the text object. To split a line you can use '\n'
@@ -65,10 +68,26 @@ extern class Text extends pixi.display.Sprite {
 	/**
 	 * The canvas element that everything is drawn to
 	 */
-	var canvas:Dynamic;
+	var canvas:CanvasElement;
 
 	/**
 	 * The canvas 2d context that everything is drawn with
 	 */
-	var context:Dynamic;
+	var context:CanvasRenderingContext2D;
+}
+
+class TextStyle {
+    public var font:String = "bold 20px Arial";
+    public var fill:String = "#000000";
+    public var align:String = "left";
+    public var stroke:String;
+    public var strokeThickness:Float = 0;
+    public var wordWrap:Bool = false;
+    public var wordWrapWidth:Float = 100;
+    public var dropShadow:Bool = false;
+    public var dropShadowColor:String = "#000000";
+    public var dropShadowAngle:Float = Math.PI / 4;
+    public var dropShadowDistance:Float = 5;
+
+    public function new(){}
 }
