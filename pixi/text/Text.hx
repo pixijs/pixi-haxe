@@ -89,5 +89,17 @@ class TextStyle {
     public var dropShadowAngle:Float = Math.PI / 4;
     public var dropShadowDistance:Float = 5;
 
-    public function new(){}
+    public function new(?font:String, ?fill:String, ?align:String, ?stroke:String, ?strokeThickness:Float, ?wordWrap:Bool, ?wordWrapWidth:Float, ?dropShadow:Bool, ?dropShadowColor:String, ?dropShadowAngle:Float, ?dropShadowDistance:Float) {
+        if (font != null) this.font = font;
+        if (fill != null) this.fill = fill;
+        if (align != null) this.align = align;
+        if (stroke != null) this.stroke = stroke;
+        if (strokeThickness != null) this.strokeThickness = strokeThickness;
+        if (wordWrap != null) this.wordWrap = wordWrap;
+        if (wordWrapWidth != null) this.wordWrapWidth = wordWrapWidth;
+        if (dropShadow != null) this.dropShadow = dropShadow;
+        if (dropShadowColor != null) this.dropShadowColor = dropShadowColor;
+        if (dropShadowAngle != null) this.dropShadowAngle = dropShadowAngle;
+        if (dropShadowDistance != null) this.dropShadowDistance = dropShadowDistance;
+    }
 }

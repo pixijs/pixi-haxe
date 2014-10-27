@@ -19,12 +19,12 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	 *      data formats include 'xml' and 'fnt'.
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	*/
-	function new(assetURLs:Dynamic, ?crossorigin:Bool);
+	function new(assetURLs:Array<String>, ?crossorigin:Bool);
 	
 	/**
 	 * The array of asset URLs that are going to be loaded
 	*/
-	var assetURLs:Dynamic;
+	var assetURLs:Array<String>;
 	
 	/**
 	 * Whether the requests should be treated as cross origin
@@ -36,16 +36,28 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	*/
 	var loadersByType:Dynamic;
 
-	var loadCount:Int;
+    /**
+	 * Fired when an item has loaded
+	*/
+	var onProgress:AssetLoader -> Void;
 
-	var onProgress:Dynamic;
-
-	var onComplete:Dynamic;
+    /**
+	 * Fired when all the assets have loaded
+	*/
+	var onComplete:Void -> Void;
 
 	/**
 	 * Starts loading the assets sequentially
 	 *
 	 * @method load
 	*/
-	function load():Void;	
+	function load():Void;
+
+    /**
+     * Given a filename, returns its extension.
+     *
+     * @method _getDataType
+     * @param str {String} the name of the asset
+     */
+    function _getDataType(str:String):String;
 }
