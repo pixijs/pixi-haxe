@@ -1,5 +1,6 @@
 package pixi.renderers.webgl;
 
+import pixi.utils.Detector.RenderingOptions;
 import js.html.CanvasElement;
 import pixi.textures.Texture;
 import pixi.core.Point;

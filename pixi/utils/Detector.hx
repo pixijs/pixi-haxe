@@ -1,7 +1,9 @@
 package pixi.utils;
 
+import js.html.Element;
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.renderers.canvas.CanvasRenderer;
+
 @:native("PIXI")
 extern class Detector {
 
@@ -22,8 +24,8 @@ extern class Detector {
      * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
      *
      */
-    @:overload(function(width:Float, height:Float, ?options:Dynamic):CanvasRenderer {})
-	static function autoDetectRenderer(width:Float, height:Float, ?options:Dynamic):WebGLRenderer;
+    @:overload(function(width:Float, height:Float, ?options:RenderingOptions):CanvasRenderer {})
+	static function autoDetectRenderer(width:Float, height:Float, ?options:RenderingOptions):WebGLRenderer;
 
     /**
      * This helper function will automatically detect which renderer you should be using.
@@ -44,6 +46,25 @@ extern class Detector {
      * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
      *
      */
-    @:overload(function(width:Float, height:Float, ?options:Dynamic):CanvasRenderer {})
-	static function autoDetectRecommendedRenderer(width:Int, height:Int, ?options:Dynamic):WebGLRenderer;
+    @:overload(function(width:Float, height:Float, ?options:RenderingOptions):WebGLRenderer {})
+	static function autoDetectRecommendedRenderer(width:Int, height:Int, ?options:RenderingOptions):CanvasRenderer;
+}
+
+class RenderingOptions {
+	public var view:Element;
+	public var transparent:Bool = false;
+	public var resolution:Float = 1;
+
+	//canvas specific
+	public var clearBeforeRender:Bool = true;
+
+	//webgl specific
+	public var antialias:Bool = false;
+	public var preserveDrawingBuffer:Bool = false;
+
+	public function new(?view:Element, ?resolution:Float, ?transparent:Bool) {
+		if (view != null) this.view = view;
+		if (resolution != null) this.resolution = resolution;
+		if (transparent != null) this.transparent = transparent;
+	}
 }
