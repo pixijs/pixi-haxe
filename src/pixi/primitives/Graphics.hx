@@ -1,7 +1,21 @@
 package pixi.primitives;
 
+import pixi.display.DisplayObjectContainer;
+import pixi.core.Polygon;
+import pixi.core.Ellipse;
+import pixi.core.Circle;
+import pixi.core.Rectangle;
+import pixi.core.Matrix;
+import pixi.textures.Texture;
+
 @:native("PIXI.Graphics")
-extern class Graphics extends pixi.display.DisplayObjectContainer {
+extern class Graphics extends DisplayObjectContainer {
+
+	static var POLY:Int;
+	static var RECT:Int;
+	static var CIRC:Int;
+	static var ELIP:Int;
+	static var RREC:Int;
 
 	/**
 	 * The Graphics class contains a set of methods that you can use to create primitive shapes and lines.
@@ -13,6 +27,20 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @constructor
 	 */
 	function new():Void;
+
+	/**
+	 * The arc method creates an arc/curve (used to create circles, or parts of circles).
+	 *
+	 * @method arc
+	 * @param cx {Number} The x-coordinate of the center of the circle
+	 * @param cy {Number} The y-coordinate of the center of the circle
+	 * @param radius {Number} The radius of the circle
+	 * @param startAngle {Number} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+	 * @param endAngle {Number} The ending angle, in radians
+	 * @param anticlockwise {Boolean} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @return {Graphics}
+	 */
+	function arc(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Graphics;
 
 	/**
 	 * Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
@@ -100,15 +128,17 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @method beginFill
 	 * @param color {Number} the color of the fill
 	 * @param alpha {Number} the alpha of the fill
+	 * @return {Graphics}
 	 */
-	function beginFill(color:Float, ?alpha:Float):Void;
+	function beginFill(color:Float, ?alpha:Float):Graphics;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
 	 *
 	 * @method endFill
+	 * @return {Graphics}
 	 */
-	function endFill():Void;
+	function endFill():Graphics;
 
 	/**
 	 * @method drawRect
@@ -117,8 +147,9 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param y {Number} The Y coord of the top-left of the rectangle
 	 * @param width {Number} The width of the rectangle
 	 * @param height {Number} The height of the rectangle
+	 * @return {Graphics}
 	 */
-	function drawRect(x:Float, y:Float, width:Float, height:Float):Void;
+	function drawRect(x:Float, y:Float, width:Float, height:Float):Graphics;
 
 	/**
 	 * @method drawRoundedRect
@@ -128,8 +159,9 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param width {Number} The width of the rectangle
 	 * @param height {Number} The height of the rectangle
 	 * @param radius {Number} Radius of the rectangle corners
+	 * @return {Graphics}
 	 */
-	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
+	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Graphics;
 
 	/**
 	 * Draws a circle.
@@ -138,8 +170,9 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param x {Number} The X coordinate of the center of the circle
 	 * @param y {Number} The Y coordinate of the center of the circle
 	 * @param radius {Number} The radius of the circle
+	 * @return {Graphics}
 	 */
-	function drawCircle(x:Float, y:Float, radius:Float):Void;
+	function drawCircle(x:Float, y:Float, radius:Float):Graphics;
 
 	/**
 	 * Draws an ellipse.
@@ -149,15 +182,40 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * @param y {Number} The Y coordinate of the center of the ellipse
 	 * @param width {Number} The half width of the ellipse
 	 * @param height {Number} The half height of the ellipse
+	 * @return {Graphics}
 	 */
-	function drawEllipse(x:Float, y:Float, width:Float, height:Float):Void;
+	function drawEllipse(x:Float, y:Float, width:Float, height:Float):Graphics;
+
+	/**
+	 * Draws a polygon using the given path.
+	 *
+	 * @method drawPolygon
+	 * @param path {Array} The path data used to construct the polygon.
+	 * @return {Graphics}
+	 */
+	function drawPolygon(path:Array<Dynamic>):Graphics;
 
 	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 	 *
 	 * @method clear
+	 * @return {Graphics}
 	 */
-	function clear():Void;
+	function clear():Graphics;
+
+	/**
+	 * Updates texture size based on canvas size
+	 *
+	 * @method updateCachedSpriteTexture
+	 */
+	function updateCachedSpriteTexture():Void;
+
+	/**
+	 * Destroys a previous cached sprite.
+	 *
+	 * @method destroyCachedSprite
+	 */
+	function destroyCachedSprite():Void;
 
 	/**
 	 * Update the bounds of the object
@@ -166,7 +224,17 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 */
 	function updateBounds():Void;
 
-	function destroyCachedSprite():Void;
+	/**
+	 * Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
+	 *
+	 * @method drawShape
+	 * @param {Circle|Rectangle|Ellipse|Line|Polygon} shape The Shape object to draw.
+	 * @return {GraphicsData} The generated GraphicsData object.
+	 */
+	@:overload(function(shape:Rectangle):GraphicsData {})
+	@:overload(function(shape:Ellipse):GraphicsData {})
+	@:overload(function(shape:Polygon):GraphicsData {})
+	function drawShape(shape:Circle):GraphicsData;
 
 	/**
 	 * The alpha of the fill of this graphics object
@@ -222,4 +290,19 @@ extern class Graphics extends pixi.display.DisplayObjectContainer {
 	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
 	 */
 	var dirty:Dynamic;
+}
+
+@:native("PIXI.GraphicsData")
+extern class GraphicsData {
+
+	var lineWidth:Float;
+	var lineColor:String;
+	var lineAlpha:Float;
+	var fillColor:String;
+	var fillAlpha:Float;
+	var fill:String;
+	var shape:Dynamic;
+	var type:Int;
+
+	function new(lineWidth:Float, lineColor:String, lineAlpha:Float, fillColor:String, fillAlpha:Float, fill:String, shape:Dynamic);
 }

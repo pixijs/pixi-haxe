@@ -80,7 +80,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method getChildAt
 	 * @param index {Number} The index to get the child from
 	*/
-    @:overload(function (index:Int):Dynamic {})
+    @:overload(function(index:Int):Dynamic {})
 	function getChildAt(index:Int):DisplayObject;
 
 	/**

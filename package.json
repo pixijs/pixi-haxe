@@ -1,12 +1,18 @@
 {
   "name": "pixijs",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Externs of pixi.js v2 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "repository": {
     "type": "git",
     "url": "https://github.com/adireddy/haxe-pixi"
   },
-  "keywords": ["js","haxe","pixi","extern","web"],
+  "keywords": [
+    "js",
+    "haxe",
+    "pixi",
+    "extern",
+    "web"
+  ],
   "author": {
     "name": "Adi Reddy Mora",
     "email": "adiinteractive@gmail.com"
@@ -18,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-exec": "^0.4.6",
     "grunt-shell": "^1.1.1",
     "grunt-zip": "^0.16.0"
   }
