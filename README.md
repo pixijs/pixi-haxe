@@ -23,6 +23,8 @@ haxelib install pixijs
 * [Snake](http://www.arm.rocks/haxe-pixi-demos/snake.html)
 * [Spine](http://www.arm.rocks/haxe-pixi-demos/spine.html)
 * [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
+* [Pixi Dude](http://www.arm.rocks/haxe-pixi-demos/pixidude.html)
+* [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
 
 Source code of the above examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
 
