@@ -36,13 +36,6 @@ extern class ImageLoader extends pixi.utils.EventTarget {
 	function load():Void;
 
 	/**
-	 * Loads image or takes it from cache
-	 *
-	 * @method load
-	 */
-	function load():Void;
-
-	/**
 	 * Loads image and split it to uniform sized frames
 	 *
 	 * @method loadFramedSpriteSheet
