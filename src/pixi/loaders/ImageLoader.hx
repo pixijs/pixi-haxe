@@ -1,5 +1,6 @@
 package pixi.loaders;
 
+import pixi.textures.Texture;
 @:native("PIXI.ImageLoader")
 extern class ImageLoader extends pixi.utils.EventTarget {
 	
@@ -19,18 +20,35 @@ extern class ImageLoader extends pixi.utils.EventTarget {
 	/**
 	 * The texture being loaded
 	 */
-	var texture:Dynamic;
+	var texture:Texture;
 	
 	/**
 	 * if the image is loaded with loadFramedSpriteSheet
 	 * frames will contain the sprite sheet frames
 	 */
-	var frames:Dynamic;
+	var frames:Array<Dynamic>;
 
 	/**
-	 * Loads the image
+	 * Loads image or takes it from cache
 	 *
 	 * @method load
 	 */
 	function load():Void;
+
+	/**
+	 * Loads image or takes it from cache
+	 *
+	 * @method load
+	 */
+	function load():Void;
+
+	/**
+	 * Loads image and split it to uniform sized frames
+	 *
+	 * @method loadFramedSpriteSheet
+	 * @param frameWidth {Number} width of each frame
+	 * @param frameHeight {Number} height of each frame
+	 * @param textureName {String} if given, the frames will be cached in <textureName>-<ord> format
+	 */
+	function loadFramedSpriteSheet(frameWidth:Float, frameHeight:Float, textureName:String):Void;
 }
