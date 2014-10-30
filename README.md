@@ -3,7 +3,7 @@ haxe-pixi
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-Extern classes of Pixi - v2 for Haxe - 2D webGL renderer with canvas fallback.
+Externs of pixi.js - v2 for Haxe - 2D webGL renderer with canvas fallback.
 
 If you are looking for Pixi - v1.6.1 externs, you can get it from https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3
 
