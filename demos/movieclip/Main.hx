@@ -1,4 +1,4 @@
-package demos.movieclip;
+package
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.MovieClip;
@@ -54,6 +54,7 @@ class Main {
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
 
 			explosion.gotoAndPlay(Math.random() * 27);
+			explosion.animationSpeed = 0.8;
 
 			_stage.addChild(explosion);
 		}
