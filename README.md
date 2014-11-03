@@ -1,4 +1,4 @@
-haxe-pixi (https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master)
+haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master)
 =========
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
