@@ -12,7 +12,13 @@ If you are looking for pixi.js (v1.6.1) externs, you can get them from https://g
 ```haxe
 haxelib install pixijs
 ```
-<i>Please note that all the extern classes were not tested, so report any issues found.</i>
+
+Issues
+======
+
+Found any bug? Please create an issue on GitHub.
+
+https://github.com/adireddy/haxe-pixi/issues
 
 ### Demos ###
 
