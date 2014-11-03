@@ -1,0 +1,53 @@
+#integrate files to classpath
+-cp demos
+-cp src
+-main demos.basics.Main
+-js demos/_output/hx-pixi-basics.js
+
+--next
+-cp demos
+-cp src
+-main demos.bitmaptext.Main
+-js demos/_output/hx-pixi-bitmaptext.js
+
+--next
+-cp demos
+-cp src
+-main demos.graphics.Main
+-js demos/_output/hx-pixi-graphics.js
+
+--next
+-cp demos
+-cp src
+-main demos.movieclip.Main
+-js demos/_output/hx-pixi-movieclip.js
+
+--next
+-cp demos
+-cp src
+-main demos.pixidude.Main
+-js demos/_output/hx-pixi-pixidude.js
+
+--next
+-cp demos
+-cp src
+-main demos.rendertexture.Main
+-js demos/_output/hx-pixi-rendertexture.js
+
+--next
+-cp demos
+-cp src
+-main demos.snake.Main
+-js demos/_output/hx-pixi-snake.js
+
+--next
+-cp demos
+-cp src
+-main demos.spine.Main
+-js demos/_output/hx-pixi-spine.js
+
+--next
+-cp demos
+-cp src
+-main demos.spritesheet.Main
+-js demos/_output/hx-pixi-spritesheet.js

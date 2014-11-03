@@ -7,6 +7,12 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
+        haxe: {
+            project: {
+                hxml: "build.hxml"
+            }
+        },
+
         shell: {
             makeDir: {
                 command: 'mkdir pixi'
@@ -25,8 +31,9 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks("grunt-haxe");
     grunt.loadNpmTasks("grunt-zip");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-exec");
-    grunt.registerTask("default", ["shell", "zip", "exec"]);
+    grunt.registerTask("default", ["haxe", "shell", "zip", "exec"]);
 };
