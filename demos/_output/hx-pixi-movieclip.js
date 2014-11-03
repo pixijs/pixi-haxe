@@ -40,6 +40,7 @@ demos.movieclip.Main.prototype = {
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
 			explosion.gotoAndPlay(Math.random() * 27);
+			explosion.animationSpeed = 0.8;
 			this._stage.addChild(explosion);
 		}
 		window.requestAnimationFrame($bind(this,this.animate));
