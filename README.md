@@ -31,7 +31,7 @@ https://github.com/adireddy/haxe-pixi/issues
 * [Pixi Dude](http://www.arm.rocks/haxe-pixi-demos/pixidude.html)
 * [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
 
-Source code of the above examples ported to haxe can be found at https://github.com/adireddy/haxe-pixi-demos
+Look at the demos folder for the source code of above examples ported from pixi.js.
 
 ### Usage ###
 
