@@ -1,8 +1,10 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
 import pixi.textures.Texture;
+
 @:native("PIXI.ImageLoader")
-extern class ImageLoader extends pixi.utils.EventTarget {
+extern class ImageLoader extends EventTarget {
 	
 	/**
 	 * The image loader class is responsible for loading images file formats ('jpeg', 'jpg', 'png' and 'gif')
@@ -15,7 +17,7 @@ extern class ImageLoader extends pixi.utils.EventTarget {
 	 * @param url {String} The url of the image
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
-	function new (url:String, ?crossorigin:Bool);
+	function new(url:String, ?crossorigin:Bool);
 	
 	/**
 	 * The texture being loaded
@@ -26,7 +28,7 @@ extern class ImageLoader extends pixi.utils.EventTarget {
 	 * if the image is loaded with loadFramedSpriteSheet
 	 * frames will contain the sprite sheet frames
 	 */
-	var frames:Array<Dynamic>;
+	var frames:Array<Texture>;
 
 	/**
 	 * Loads image or takes it from cache

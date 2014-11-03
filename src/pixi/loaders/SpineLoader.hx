@@ -1,7 +1,9 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.SpineLoader")
-extern class SpineLoader extends pixi.utils.EventTarget {
+extern class SpineLoader extends EventTarget {
 	
 	/**
 	 * The Spine loader is used to load in JSON spine data
@@ -17,7 +19,7 @@ extern class SpineLoader extends pixi.utils.EventTarget {
 	 * @param url {String} The url of the JSON file
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
-	function new (url:String, ?crossorigin:Bool);
+	function new(url:String, ?crossorigin:Bool);
 	
 	/**
 	 * The url of the bitmap font data

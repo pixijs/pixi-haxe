@@ -1,10 +1,11 @@
 package pixi.extras;
 
+import pixi.display.Sprite;
 import pixi.core.Point;
 import pixi.textures.Texture;
 
 @:native("PIXI.TilingSprite")
-extern class TilingSprite extends pixi.display.Sprite {
+extern class TilingSprite extends Sprite {
 
 	/**
 	 * A tiling sprite is a fast way of rendering a tiling image
@@ -33,16 +34,19 @@ extern class TilingSprite extends pixi.display.Sprite {
 	 */
 	var tilePosition:Point;
 
-	var tint:Int;
+	/**
+	 * The height of the tiling sprite
+	 */
+	var height:Float;
 
-	var blendMode:Int;
+	/**
+	 * The width of the sprite, setting this will actually modify the scale to achieve the value set
+	 */
+	var width:Float;
 
 	/*
-	 * Sets the texture
-	 *
-	 * @method setTexture
-	 * @param texture {Texture} the texture that will be used
+	 * @method generateTilingTexture
+	 * @param forcePowerOfTwo {Boolean} Whether we want to force the texture to be a power of two
 	*/
-	function setTexture(texture:Texture):Void;
-	
+	function generateTilingTexture(forcePowerOfTwo:Bool):Void;
 }

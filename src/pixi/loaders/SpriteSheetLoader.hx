@@ -1,7 +1,10 @@
 package pixi.loaders;
 
+import pixi.textures.Texture;
+import pixi.utils.EventTarget;
+
 @:native("PIXI.SpriteSheetLoader")
-extern class SpriteSheetLoader extends pixi.utils.EventTarget {
+extern class SpriteSheetLoader extends EventTarget {
 
     /**
      * The sprite sheet loader is used to load in JSON sprite sheet data
@@ -18,7 +21,7 @@ extern class SpriteSheetLoader extends pixi.utils.EventTarget {
      * @param url {String} The url of the sprite sheet JSON file
      * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
      */
-	function new (url:String, ?crossorigin:Bool);
+	function new(url:String, ?crossorigin:Bool);
 	
 	/**
 	 * The url of the bitmap font data
@@ -38,7 +41,7 @@ extern class SpriteSheetLoader extends pixi.utils.EventTarget {
 	/**
 	 * The texture being loaded
 	 */
-	var texture:Dynamic;
+	var texture:Texture;
 	
 	/**
 	 * The frames of the sprite sheet

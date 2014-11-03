@@ -1,7 +1,10 @@
 package pixi.loaders;
 
+import pixi.textures.Texture;
+import pixi.utils.EventTarget;
+
 @:native("PIXI.BitmapFontLoader")
-extern class BitmapFontLoader extends pixi.utils.EventTarget {
+extern class BitmapFontLoader extends EventTarget {
 	
 	/**
 	 * The xml loader is used to load in XML bitmap font data ('xml' or 'fnt')
@@ -15,8 +18,8 @@ extern class BitmapFontLoader extends pixi.utils.EventTarget {
 	 * @param url {String} The url of the sprite sheet JSON file
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
-	function new (url:String, ?crossorigin:Bool);
-	
+	function new(url:String, ?crossorigin:Bool);
+
 	/**
 	 * The url of the bitmap font data
 	 */
@@ -31,6 +34,11 @@ extern class BitmapFontLoader extends pixi.utils.EventTarget {
 	 * [read-only] The base url of the bitmap font data
 	 */
 	var baseUrl:String;
+
+	/**
+	 * [read-only] The texture of the bitmap font
+	 */
+	var texture:Texture;
 
 	/**
 	 * Loads the XML font data

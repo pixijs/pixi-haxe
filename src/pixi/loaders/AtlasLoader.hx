@@ -1,7 +1,9 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.AtlasLoader")
-extern class AtlasLoader extends pixi.utils.EventTarget {
+extern class AtlasLoader extends EventTarget {
 	
 	/**
 	 * The atlas file loader is used to load in Atlas data and parse it

@@ -1,8 +1,10 @@
 package pixi.extras;
 
+import pixi.display.DisplayObjectContainer;
 import pixi.textures.Texture;
+
 @:native("PIXI.Strip")
-extern class Strip extends pixi.display.DisplayObjectContainer {
+extern class Strip extends DisplayObjectContainer {
 
 	/**
  	 * 

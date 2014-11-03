@@ -1,7 +1,9 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.JsonLoader")
-extern class JsonLoader extends pixi.utils.EventTarget {
+extern class JsonLoader extends EventTarget {
 	
 	/**
 	 * The json file loader is used to load in JSON data and parse it
@@ -14,7 +16,7 @@ extern class JsonLoader extends pixi.utils.EventTarget {
 	 * @param url {String} The url of the JSON file
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
-	function new (url:String, ?crossorigin:Bool);
+	function new(url:String, ?crossorigin:Bool);
 	
 	/**
 	 * The url of the bitmap font data
@@ -40,6 +42,8 @@ extern class JsonLoader extends pixi.utils.EventTarget {
 	 * Parsed json response
 	 */
 	var json:Dynamic;
+
+	var ajaxRequest:Dynamic;
 
 	/**
 	 * Loads the JSON data
