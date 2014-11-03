@@ -50,7 +50,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
 	 */
-	function lineStyle(lineWidth:Float, ?color:Float, ?alpha:Float):Void;
+	function lineStyle(lineWidth:Float, ?color:UInt, ?alpha:Float):Void;
 
 	/**
 	 * Moves the current drawing position to (x, y).
@@ -130,7 +130,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param alpha {Number} the alpha of the fill
 	 * @return {Graphics}
 	 */
-	function beginFill(color:Float, ?alpha:Float):Graphics;
+	function beginFill(color:UInt, ?alpha:Float):Graphics;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.

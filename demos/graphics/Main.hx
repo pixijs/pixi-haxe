@@ -73,7 +73,7 @@ class Main {
 	}
 
 	function _onStageClick(data:InteractionData) {
-		_graphics.lineStyle(Math.random() * 30, Math.random() * 0xFFFFFF, 1);
+		_graphics.lineStyle(Math.random() * 30, Std.int(Math.random() * 0xFFFFFF), 1);
 		_graphics.moveTo(Math.random() * 620, Math.random() * 380);
 		_graphics.lineTo(Math.random() * 620, Math.random() * 380);
 	}
@@ -84,8 +84,8 @@ class Main {
 		_count += 0.1;
 
 		_thing.clear();
-		_thing.lineStyle(30, 0xff0000, 1);
-		_thing.beginFill(0xffFF00, 0.5);
+		_thing.lineStyle(30, 0xFF0000, 1);
+		_thing.beginFill(0xFF0000, 0.5);
 
 		_thing.moveTo(-120 + Math.sin(_count) * 20, -100 + Math.cos(_count) * 20);
 		_thing.lineTo(120 + Math.cos(_count) * 20, -100 + Math.sin(_count) * 20);

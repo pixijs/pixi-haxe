@@ -202,4 +202,7 @@ extern class DisplayObject {
     var touchmove:InteractionData -> Void;
     var touchend:InteractionData -> Void;
     var touchendoutside:InteractionData -> Void;
+	var rightclick:InteractionData -> Void;
+	var rightdown:InteractionData -> Void;
+	var rightup:InteractionData -> Void;
 }

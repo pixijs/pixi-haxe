@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v2 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "added missing movieclip properties like animationSpeed, loop, etc",
-  "version": "0.2.5",
+  "releasenote": "minor bug fixes in Stage and Graphics classes",
+  "version": "0.2.6",
   "url": "https://github.com/adireddy/haxe-pixi",
   "dependencies": {
 

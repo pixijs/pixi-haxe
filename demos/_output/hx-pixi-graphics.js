@@ -1,4 +1,8 @@
 (function () { "use strict";
+var Std = function() { };
+Std["int"] = function(x) {
+	return x | 0;
+};
 var demos = {};
 demos.graphics = {};
 demos.graphics.Main = function() {
@@ -49,7 +53,7 @@ demos.graphics.Main.main = function() {
 };
 demos.graphics.Main.prototype = {
 	_onStageClick: function(data) {
-		this._graphics.lineStyle(Math.random() * 30,Math.random() * 16777215,1);
+		this._graphics.lineStyle(Math.random() * 30,Std["int"](Math.random() * 16777215),1);
 		this._graphics.moveTo(Math.random() * 620,Math.random() * 380);
 		this._graphics.lineTo(Math.random() * 620,Math.random() * 380);
 	}
@@ -58,7 +62,7 @@ demos.graphics.Main.prototype = {
 		this._count += 0.1;
 		this._thing.clear();
 		this._thing.lineStyle(30,16711680,1);
-		this._thing.beginFill(16776960,0.5);
+		this._thing.beginFill(16711680,0.5);
 		this._thing.moveTo(-120 + Math.sin(this._count) * 20,-100 + Math.cos(this._count) * 20);
 		this._thing.lineTo(120 + Math.cos(this._count) * 20,-100 + Math.sin(this._count) * 20);
 		this._thing.lineTo(120 + Math.sin(this._count) * 20,100 + Math.cos(this._count) * 20);
