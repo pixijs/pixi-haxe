@@ -50,7 +50,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
 	 */
-	function lineStyle(lineWidth:Float, ?color:UInt, ?alpha:Float):Void;
+	function lineStyle(lineWidth:Float, ?color:UInt, ?alpha:Float):Graphics;
 
 	/**
 	 * Moves the current drawing position to (x, y).
@@ -59,7 +59,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param x {Number} the X coordinate to move to
 	 * @param y {Number} the Y coordinate to move to
 	 */
-	function moveTo(x:Float, y:Float):Void;
+	function moveTo(x:Float, y:Float):Graphics;
 
 	/**
 	 * Draws a line using the current line style from the current drawing position to (x, y);
@@ -69,7 +69,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param x {Number} the X coordinate to draw to
 	 * @param y {Number} the Y coordinate to draw to
 	 */
-	function lineTo(x:Float, y:Float):Void;
+	function lineTo(x:Float, y:Float):Graphics;
 
 	/**
 	 * Calculate the points for a bezier curve.
