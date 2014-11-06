@@ -109,6 +109,24 @@ extern class DisplayObjectContainer extends DisplayObject {
 	*/
 	function removeChildren(beginIndex:Int, endIndex:Int):Void;
 
+	/**
+	 * Changes the position of an existing child in the display object container
+	 *
+	 * @method setChildIndex
+	 * @param child {DisplayObject} The child DisplayObject instance for which you want to change the index number
+	 * @param index {Number} The resulting index number for the child display object
+	 */
+	function setChildIndex(child:DisplayObject, index:Int):Void;
+
+	/**
+	 * Returns the index position of a child DisplayObject instance
+	 *
+	 * @method getChildIndex
+	 * @param child {DisplayObject} The DisplayObject instance to identify
+	 * @return {Number} The index position of the child display object to identify
+	 */
+	function getChildIndex(child:DisplayObject):Int;
+
 	/*
 	 * Updates the container's childrens transform for rendering
 	 *
