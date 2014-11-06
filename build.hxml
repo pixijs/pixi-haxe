@@ -1,4 +1,3 @@
-#integrate files to classpath
 -cp demos
 -cp src
 -main demos.basics.Main
