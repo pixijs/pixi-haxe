@@ -15,6 +15,7 @@ class Main {
 
 	public function new() {
 		_stage = new Stage(0x00FF00);
+
 		_renderer = Detector.autoDetectRenderer(800, 600);
 		Browser.document.body.appendChild(_renderer.view);
 
