@@ -53,7 +53,14 @@ class Main {
 
 	public function new() {
 		_stage = new Stage(0x00FF00);
-        _renderer = Detector.autoDetectRenderer(800, 600);
+		
+		// Rendering options usage sample
+		var options:RenderingOptions = new RenderingOptions();
+		options.antialias = true;
+		options.resolution = 1;
+		options.transparent = true;
+		
+        _renderer = Detector.autoDetectRenderer(800, 600, options);
         Browser.document.body.appendChild(_renderer.view);
         
         _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
