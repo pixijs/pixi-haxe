@@ -1,6 +1,5 @@
 package pixi.textures;
 
-import pixi.core.Point;
 import pixi.core.Rectangle;
 import pixi.textures.BaseTexture;
 
@@ -73,7 +72,7 @@ extern class Texture {
 	 * @method destroy
 	 * @param destroyBase {Boolean} Whether to destroy the base texture as well
 	 */
-	function destroy(?destroyBase :Bool):Void;
+	function destroy(?destroyBase:Bool):Void;
 
 	/**
 	 * Specifies the region of the baseTexture that this texture will use.

@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v2 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "added missing setChildIndex and getChildIndex methods to DisplayObjectContainer",
-  "version": "0.3.0",
+  "releasenote": "added experimental video",
+  "version": "0.3.1",
   "url": "https://github.com/adireddy/haxe-pixi",
   "dependencies": {
 

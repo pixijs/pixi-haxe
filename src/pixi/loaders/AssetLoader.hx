@@ -25,6 +25,11 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	 * The array of asset URLs that are going to be loaded
 	*/
 	var assetURLs:Array<String>;
+
+	/**
+	 * loadCount
+	*/
+	var loadCount:Int;
 	
 	/**
 	 * Whether the requests should be treated as cross origin

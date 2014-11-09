@@ -1,5 +1,6 @@
 package pixi.display;
 
+import pixi.textures.VideoTexture;
 import pixi.core.Matrix;
 import pixi.core.Rectangle;
 import pixi.textures.Texture;
@@ -21,6 +22,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created
 	*/
+	@:overload(function(texture:VideoTexture):Void {})
 	function new(texture:Texture):Void;
 
 	/**
