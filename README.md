@@ -1,4 +1,4 @@
-haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master)
+haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/adireddy/haxe-pixi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 =========
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
@@ -87,7 +87,3 @@ class Main {
 ```
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/adireddy/haxe-pixi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
