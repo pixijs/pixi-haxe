@@ -13,10 +13,9 @@ demos.spritesheet.Main = function() {
 	this._aliens = [];
 	this._alienFrames = ["eggHead.png","flowerTop.png","helmlok.png","skully.png"];
 	this._alienContainer = new PIXI.DisplayObjectContainer();
-	this._alienContainer.position.x = 400;
-	this._alienContainer.position.y = 300;
+	this._alienContainer.x = 400;
+	this._alienContainer.y = 300;
 	this._stage.addChild(this._alienContainer);
-	window.requestAnimationFrame($bind(this,this.animate));
 };
 demos.spritesheet.Main.main = function() {
 	new demos.spritesheet.Main();
@@ -31,8 +30,7 @@ demos.spritesheet.Main.prototype = {
 			alien.rotation += 0.1;
 		}
 		this._count += 0.01;
-		this._alienContainer.scale.x = Math.sin(this._count);
-		this._alienContainer.scale.y = Math.sin(this._count);
+		this._alienContainer.scale.set(Math.sin(this._count),Math.sin(this._count));
 		this._alienContainer.rotation += 0.01;
 		this._renderer.render(this._stage);
 	}
@@ -42,8 +40,8 @@ demos.spritesheet.Main.prototype = {
 			var i = _g++;
 			var frameName = this._alienFrames[i % 4];
 			var alien = PIXI.Sprite.fromFrame(frameName);
-			alien.position.x = Math.random() * 800 - 400;
-			alien.position.y = Math.random() * 600 - 300;
+			alien.x = Math.random() * 800 - 400;
+			alien.y = Math.random() * 600 - 300;
 			alien.anchor.set(0.5,0.5);
 			this._aliens.push(alien);
 			this._alienContainer.addChild(alien);

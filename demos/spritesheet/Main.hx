@@ -35,12 +35,10 @@ class Main {
         _alienFrames = ["eggHead.png", "flowerTop.png", "helmlok.png", "skully.png"];
 
         _alienContainer = new DisplayObjectContainer();
-        _alienContainer.position.x = 400;
-        _alienContainer.position.y = 300;
+        _alienContainer.x = 400;
+        _alienContainer.y = 300;
 
         _stage.addChild(_alienContainer);
-
-        Browser.window.requestAnimationFrame(cast animate);
     }
 
     function animate() {
@@ -51,9 +49,7 @@ class Main {
         }
 
         _count += 0.01;
-        _alienContainer.scale.x = Math.sin(_count);
-        _alienContainer.scale.y = Math.sin(_count);
-
+        _alienContainer.scale.set(Math.sin(_count), Math.sin(_count));
         _alienContainer.rotation += 0.01;
         _renderer.render(_stage);
     }
@@ -62,8 +58,8 @@ class Main {
         for (i in 0...100) {
             var frameName:String = _alienFrames[i % 4];
             var alien = Sprite.fromFrame(frameName);
-            alien.position.x = Math.random() * 800 - 400;
-            alien.position.y = Math.random() * 600 - 300;
+            alien.x = Math.random() * 800 - 400;
+            alien.y = Math.random() * 600 - 300;
             alien.anchor.set(0.5, 0.5);
             _aliens.push(alien);
             _alienContainer.addChild(alien);
