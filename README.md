@@ -87,3 +87,5 @@ class Main {
 ```
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+
+[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
