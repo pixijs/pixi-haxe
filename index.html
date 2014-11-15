@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Haxe-pixi by adireddy</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Haxe-pixi</h1>
+        <h2>Externs of pixi.js for Haxe</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/adireddy/haxe-pixi/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/adireddy/haxe-pixi/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/adireddy/haxe-pixi" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="haxe-pixi--" class="anchor" href="#haxe-pixi--" aria-hidden="true"><span class="octicon octicon-link"></span></a>haxe-pixi <img src="https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master" alt="Build Status"> <a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/adireddy/haxe-pixi/trend.png" alt="Bitdeli Badge"></a>
+</h1>
+
+<p><img src="https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png" alt="haxe pixi logo"></p>
+
+<p>Externs of pixi.js (v2.1.0) for Haxe - 2D webGL renderer with canvas fallback.</p>
+
+<p>If you are looking for pixi.js (v1.6.1) externs, you can get them from <a href="https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3">https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3</a></p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<div class="highlight highlight-haxe"><pre>haxelib install pixijs</pre></div>
+
+<h3>
+<a id="issues" class="anchor" href="#issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issues</h3>
+
+<p>Found any bug? Please create an issue on GitHub.</p>
+
+<p><a href="https://github.com/adireddy/haxe-pixi/issues">https://github.com/adireddy/haxe-pixi/issues</a></p>
+
+<h3>
+<a id="demos" class="anchor" href="#demos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos</h3>
+
+<ul>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/basics.html">Basics</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/graphics.html">Graphics</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/movieclip.html">Movieclip</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/spritesheet.html">Spritesheet</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/snake.html">Snake</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/spine.html">Spine</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/rendertexture.html">Render Texture</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/pixidude.html">Pixi Dude</a></li>
+<li><a href="http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html">Bitmap Text</a></li>
+</ul>
+
+<p>Look at the demos folder for the source code of above examples ported from pixi.js.</p>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-haxe"><pre>
+<span class="pl-s">package</span> ;
+
+<span class="pl-s">import</span> pixi.display.<span class="pl-entc">Sprite</span>;
+<span class="pl-s">import</span> pixi.display.<span class="pl-entc">Stage</span>;
+<span class="pl-s">import</span> pixi.textures.<span class="pl-entc">Texture</span>;
+<span class="pl-s">import</span> pixi.utils.<span class="pl-entc">Detector</span>;
+<span class="pl-s">import</span> js.<span class="pl-entc">Browser</span>;
+
+<span class="pl-s">class</span> <span class="pl-entc">Main</span> {
+
+    <span class="pl-k">var</span> _bunny:<span class="pl-entc">Sprite</span>;
+    <span class="pl-k">var</span> _renderer:<span class="pl-sc">Dynamic</span>;
+    <span class="pl-k">var</span> _stage:<span class="pl-entc">Stage</span>;
+
+    <span class="pl-s">public</span> <span class="pl-k">function</span> <span class="pl-enf">new</span>() {
+        _stage <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">Stage</span>(<span class="pl-cn">0x00FF00</span>);
+
+        <span class="pl-c"><span class="pl-pdc">//</span> Rendering options usage sample</span>
+        <span class="pl-k">var</span> options <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">RenderingOptions</span>();
+        options.antialias <span class="pl-ko">=</span> <span class="pl-c1">true</span>;
+        options.resolution <span class="pl-ko">=</span> <span class="pl-cn">1</span>;
+        options.transparent <span class="pl-ko">=</span> <span class="pl-c1">true</span>;
+
+        _renderer <span class="pl-ko">=</span> <span class="pl-entc">Detector</span>.autoDetectRenderer(<span class="pl-cn">800</span>, <span class="pl-cn">600</span>, options);
+        <span class="pl-entc">Browser</span>.document.body.appendChild(_renderer.view);
+
+        _bunny <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">Sprite</span>(<span class="pl-sc">Texture</span>.fromImage(<span class="pl-s1"><span class="pl-pds">"</span>assets/basics/bunny.png<span class="pl-pds">"</span></span>));
+        _bunny.anchor.set(<span class="pl-cn">0.5</span>, <span class="pl-cn">0.5</span>);
+        _bunny.scale.set(<span class="pl-cn">2</span>, <span class="pl-cn">2</span>);
+        _bunny.position.x <span class="pl-ko">=</span> <span class="pl-cn">400</span>;
+        _bunny.position.y <span class="pl-ko">=</span> <span class="pl-cn">300</span>;
+
+        _stage.addChild(_bunny);
+
+        <span class="pl-entc">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
+    }
+
+    <span class="pl-k">function</span> <span class="pl-enf">animate</span>() {
+        <span class="pl-entc">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
+        _bunny.rotation <span class="pl-ko">+</span><span class="pl-ko">=</span> <span class="pl-cn">0.1</span>;  
+        _renderer.render(_stage);
+    }
+
+    <span class="pl-s">static</span> <span class="pl-k">function</span> <span class="pl-enf">main</span>() {
+        <span class="pl-k">new</span> <span class="pl-s">Main</span>();
+    }
+}</pre></div>
+
+<p>This content is released under the <a href="http://opensource.org/licenses/MIT">MIT</a> License.</p>
+
+<p><a href="https://github.com/GoodBoyDigital/pixi.js">pixi.js</a> is made by <a href="http://www.goodboydigital.com/">goodboy</a> and licensed under the <a href="http://opensource.org/licenses/MIT">MIT</a> License.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
