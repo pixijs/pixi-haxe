@@ -9,27 +9,27 @@ module.exports = function (grunt) {
             }
         },
 
-        shell: {
+        /*shell: {
             makeDir: {
                 command: 'mkdir pixi'
             },
             copy_src: {
                 command: "cp -r src/pixi/** pixi/"
             }
-        },
+        },*/
 
         zip: {
             "pixi.zip": ["pixi/**", "haxelib.json"]
-        },
-
-        exec: {
-            command: "rm -rf pixi"
         }
+
+        /*exec: {
+            command: "rm -rf pixi"
+        }*/
     });
 
     grunt.loadNpmTasks("grunt-haxe");
     grunt.loadNpmTasks("grunt-zip");
-    grunt.loadNpmTasks("grunt-shell");
-    grunt.loadNpmTasks("grunt-exec");
-    grunt.registerTask("default", ["haxe", "shell", "zip", "exec"]);
+    //grunt.loadNpmTasks("grunt-shell");
+    //grunt.loadNpmTasks("grunt-exec");
+    grunt.registerTask("default", ["haxe", "zip"]);
 };
