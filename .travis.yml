@@ -12,6 +12,5 @@ before_install:
     - mkdir -p ~/.haxe/lib
     - echo ~/.haxe/lib | haxelib setup
 
-
 script:
     - haxe build.hxml
