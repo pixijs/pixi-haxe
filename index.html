@@ -28,7 +28,7 @@
       </header>
       <section>
         <h1>
-<a id="haxe-pixi-" class="anchor" href="#haxe-pixi-" aria-hidden="true"><span class="octicon octicon-link"></span></a>haxe-pixi <img src="https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master" alt="Build Status">
+<a id="haxe-pixi--" class="anchor" href="#haxe-pixi--" aria-hidden="true"><span class="octicon octicon-link"></span></a>haxe-pixi <img src="https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master" alt="Build Status"> <a href="http://gruntjs.com/"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a>
 </h1>
 
 <p><img src="https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png" alt="haxe pixi logo"></p>
@@ -70,51 +70,51 @@
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
 
 <div class="highlight highlight-haxe"><pre>
-<span class="pl-s">package</span> ;
+<span class="pl-st">package</span><span class="pl-en"> </span>;
 
-<span class="pl-s">import</span> pixi.display.<span class="pl-entc">Sprite</span>;
-<span class="pl-s">import</span> pixi.display.<span class="pl-entc">Stage</span>;
-<span class="pl-s">import</span> pixi.textures.<span class="pl-entc">Texture</span>;
-<span class="pl-s">import</span> pixi.utils.<span class="pl-entc">Detector</span>;
-<span class="pl-s">import</span> js.<span class="pl-entc">Browser</span>;
+<span class="pl-st">import</span> <span class="pl-en">pixi.display.</span><span class="pl-en">Sprite</span>;
+<span class="pl-st">import</span> <span class="pl-en">pixi.display.</span><span class="pl-en">Stage</span>;
+<span class="pl-st">import</span> <span class="pl-en">pixi.textures.</span><span class="pl-en">Texture</span>;
+<span class="pl-st">import</span> <span class="pl-en">pixi.utils.</span><span class="pl-en">Detector</span>;
+<span class="pl-st">import</span> <span class="pl-en">js.</span><span class="pl-en">Browser</span>;
 
-<span class="pl-s">class</span> <span class="pl-entc">Main</span> {
+<span class="pl-st">class</span> <span class="pl-en">Main</span> {
 
-    <span class="pl-k">var</span> _bunny:<span class="pl-entc">Sprite</span>;
-    <span class="pl-k">var</span> _renderer:<span class="pl-sc">Dynamic</span>;
-    <span class="pl-k">var</span> _stage:<span class="pl-entc">Stage</span>;
+    <span class="pl-k">var</span> _bunny:<span class="pl-en">Sprite</span>;
+    <span class="pl-k">var</span> _renderer:<span class="pl-s3">Dynamic</span>;
+    <span class="pl-k">var</span> _stage:<span class="pl-en">Stage</span>;
 
-    <span class="pl-s">public</span> <span class="pl-k">function</span> <span class="pl-enf">new</span>() {
-        _stage <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">Stage</span>(<span class="pl-cn">0x00FF00</span>);
+    <span class="pl-s">public</span> <span class="pl-k">function</span> <span class="pl-en">new</span>() {
+        _stage <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">Stage</span>(<span class="pl-c1">0x00FF00</span>);
 
-        <span class="pl-c"><span class="pl-pdc">//</span> Rendering options usage sample</span>
-        <span class="pl-k">var</span> options <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">RenderingOptions</span>();
-        options.antialias <span class="pl-ko">=</span> <span class="pl-c1">true</span>;
-        options.resolution <span class="pl-ko">=</span> <span class="pl-cn">1</span>;
-        options.transparent <span class="pl-ko">=</span> <span class="pl-c1">true</span>;
+        <span class="pl-c">// Rendering options usage sample</span>
+        <span class="pl-k">var</span> options <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">RenderingOptions</span>();
+        options.antialias <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+        options.resolution <span class="pl-k">=</span> <span class="pl-c1">1</span>;
+        options.transparent <span class="pl-k">=</span> <span class="pl-c1">true</span>;
 
-        _renderer <span class="pl-ko">=</span> <span class="pl-entc">Detector</span>.autoDetectRenderer(<span class="pl-cn">800</span>, <span class="pl-cn">600</span>, options);
-        <span class="pl-entc">Browser</span>.document.body.appendChild(_renderer.view);
+        _renderer <span class="pl-k">=</span> <span class="pl-en">Detector</span>.autoDetectRenderer(<span class="pl-c1">800</span>, <span class="pl-c1">600</span>, options);
+        <span class="pl-en">Browser</span>.document.body.appendChild(_renderer.view);
 
-        _bunny <span class="pl-ko">=</span> <span class="pl-k">new</span> <span class="pl-s">Sprite</span>(<span class="pl-sc">Texture</span>.fromImage(<span class="pl-s1"><span class="pl-pds">"</span>assets/basics/bunny.png<span class="pl-pds">"</span></span>));
-        _bunny.anchor.set(<span class="pl-cn">0.5</span>, <span class="pl-cn">0.5</span>);
-        _bunny.scale.set(<span class="pl-cn">2</span>, <span class="pl-cn">2</span>);
-        _bunny.position.x <span class="pl-ko">=</span> <span class="pl-cn">400</span>;
-        _bunny.position.y <span class="pl-ko">=</span> <span class="pl-cn">300</span>;
+        _bunny <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">Sprite</span>(<span class="pl-s3">Texture</span>.fromImage(<span class="pl-s1"><span class="pl-pds">"</span>assets/basics/bunny.png<span class="pl-pds">"</span></span>));
+        _bunny.anchor.set(<span class="pl-c1">0.5</span>, <span class="pl-c1">0.5</span>);
+        _bunny.scale.set(<span class="pl-c1">2</span>, <span class="pl-c1">2</span>);
+        _bunny.position.x <span class="pl-k">=</span> <span class="pl-c1">400</span>;
+        _bunny.position.y <span class="pl-k">=</span> <span class="pl-c1">300</span>;
 
         _stage.addChild(_bunny);
 
-        <span class="pl-entc">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
+        <span class="pl-en">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
     }
 
-    <span class="pl-k">function</span> <span class="pl-enf">animate</span>() {
-        <span class="pl-entc">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
-        _bunny.rotation <span class="pl-ko">+</span><span class="pl-ko">=</span> <span class="pl-cn">0.1</span>;  
+    <span class="pl-k">function</span> <span class="pl-en">animate</span>() {
+        <span class="pl-en">Browser</span>.window.requestAnimationFrame(<span class="pl-k">cast</span> animate);
+        _bunny.rotation <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-c1">0.1</span>;  
         _renderer.render(_stage);
     }
 
-    <span class="pl-s">static</span> <span class="pl-k">function</span> <span class="pl-enf">main</span>() {
-        <span class="pl-k">new</span> <span class="pl-s">Main</span>();
+    <span class="pl-s">static</span> <span class="pl-k">function</span> <span class="pl-en">main</span>() {
+        <span class="pl-k">new</span> <span class="pl-st">Main</span>();
     }
 }</pre></div>
 
