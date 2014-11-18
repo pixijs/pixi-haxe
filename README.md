@@ -1,4 +1,4 @@
-haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/adireddy/haxe-pixi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
