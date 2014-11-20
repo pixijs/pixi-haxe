@@ -1,7 +1,10 @@
 package pixi.spine;
 
+import pixi.display.Sprite;
+import pixi.display.DisplayObjectContainer;
+
 @:native("PIXI.Spine")
-extern class Spine extends pixi.display.DisplayObjectContainer {
+extern class Spine extends DisplayObjectContainer {
 
 	/**
 	 * A class that enables the you to import and run your spine animations in pixi.
@@ -15,10 +18,16 @@ extern class Spine extends pixi.display.DisplayObjectContainer {
 	*/
 	function new(url:String):Void;
 
-	function createSprite(slot:Dynamic, descriptor:String):pixi.display.Sprite;
+	function createSprite(slot:Dynamic, descriptor:Descriptor):Sprite;
 
-	var spineData:Dynamic;
-	var skeleton:Dynamic;
-	var stateData:Dynamic;
-	var state:Dynamic;
+	var spineData:SkeletonData;
+	var skeleton:Skeleton;
+	var stateData:AnimationStateData;
+	var state:AnimationState;
+}
+
+typedef Descriptor = {
+	var name:String;
+	var scale:Float;
+	var rotation:Float;
 }

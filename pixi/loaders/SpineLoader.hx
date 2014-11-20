@@ -4,7 +4,7 @@ import pixi.utils.EventTarget;
 
 @:native("PIXI.SpineLoader")
 extern class SpineLoader extends EventTarget {
-	
+
 	/**
 	 * The Spine loader is used to load in JSON spine data
 	 * To generate the data you need to use http://esotericsoftware.com/ and export in the "JSON" format
@@ -13,24 +13,24 @@ extern class SpineLoader extends EventTarget {
 	 * You will need to generate a sprite sheet to accompany the spine data
 	 * When loaded this class will dispatch a "loaded" event
 	 *
-	 * @class Spine
+	 * @class SpineLoader
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the JSON file
 	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
 	 */
 	function new(url:String, ?crossorigin:Bool);
-	
+
 	/**
-	 * The url of the bitmap font data
+	 * The url of the JSON file
 	 */
 	var url:String;
-	
+
 	/**
 	 * Whether the requests should be treated as cross origin
 	 */
 	var crossorigin:Bool;
-	
+
 	/**
 	 * [read-only] Whether the data has loaded yet
 	 */
