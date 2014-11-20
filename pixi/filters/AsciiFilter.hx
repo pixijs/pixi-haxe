@@ -1,8 +1,15 @@
 package pixi.filters;
 
 @:native("PIXI.AsciiFilter")
-extern class AsciiFilter {
-	
+extern class AsciiFilter extends AbstractFilter {
+
+	/**
+	 * An ASCII filter.
+	 *
+	 * @class AsciiFilter
+	 * @extends AbstractFilter
+	 * @constructor
+	 */
 	function new():Void;
 
 	/**

@@ -1,23 +1,43 @@
 package pixi.filters;
 
+import pixi.core.Point;
+import pixi.textures.Texture;
+
 @:native("PIXI.NormalMapFilter")
-extern class NormalMapFilter {
-	
-	function new():Void;
-	
+extern class NormalMapFilter extends AbstractFilter {
+
 	/**
-	 * The texture used for the displacemtent map * must be power of 2 texture at the moment
+	 * The NormalMapFilter class uses the pixel values from the specified texture (called the displacement map) to perform a displacement of an object.
+	 * You can use this filter to apply all manor of crazy warping effects
+	 * Currently the r property of the texture is used offset the x and the g property of the texture is used to offset the y.
+	 *
+	 * @class NormalMapFilter
+	 * @extends AbstractFilter
+	 * @constructor
+	 * @param texture {Texture} The texture used for the displacement map * must be power of 2 texture at the moment
 	 */
-	var map:Dynamic;
-	
+	function new(texture:Texture):Void;
+
+	/**
+	 * The texture used for the displacemtent map * must be power of 2 texture.
+	 */
+	var map:Texture;
+
 	/**
 	 * The multiplier used to scale the displacement result from the map calculation.
 	 */
-	var scale:Dynamic;
-	
+	var scale:Point;
+
 	/**
 	 * The offset used to move the displacement map.
 	 */
-	var offset:Dynamic;
-	
+	var offset:Point;
+
+	/**
+	 * Sets the map dimensions uniforms when the texture becomes available.
+	 *
+	 * @method onTextureLoaded
+	 */
+	function onTextureLoaded():Void;
+
 }
