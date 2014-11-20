@@ -9,7 +9,7 @@ import pixi.core.Point;
 extern class DisplayObject {
 
 	/**
-	 * The base class for all objects that are rendered on the screen. 
+	 * The base class for all objects that are rendered on the screen.
 	 * This is an abstract class and should not be used on its own rather it should be extended.
 	 *
 	 * @class DisplayObject
@@ -76,94 +76,94 @@ extern class DisplayObject {
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	*/
 	var position:Point;
-	
+
 	/**
 	 * The scale factor of the object.
 	*/
 	var scale:Point;
-	
+
 	/**
 	 * The pivot point of the displayObject that it rotates around
 	*/
 	var pivot:Point;
-	
+
 	/**
 	 * The rotation of the object in radians.
 	*/
 	var rotation:Float;
-	
+
 	/**
 	 * The opacity of the object.
 	*/
 	var alpha:Float;
-	
+
 	/**
 	 * The visibility of the object.
 	*/
 	var visible:Bool;
-	
+
 	/**
 	 * This is the defined area that will pick up mouse / touch events. It is null by default.
 	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
 	*/
-	var hitArea:Rectangle;
-	
+	var hitArea:Dynamic;
+
 	/**
 	 * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
 	*/
 	var buttonMode:Bool;
-	
+
 	/**
 	 * Can this object be rendered
 	*/
 	var renderable:Bool;
-	
+
 	/**
 	 * [read-only] The display object container that contains this display object.
 	*/
 	var parent:DisplayObjectContainer;
-	
+
 	/**
 	 * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
 	*/
 	var stage:Stage;
-	
+
 	/**
 	 * [read-only] The multiplied alpha of the displayObject
 	*/
 	var worldAlpha:Float;
-	
+
 	/**
 	 * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
 	*/
 	var defaultCursor:String;
-	
+
 	/**
 	 * [NYI] Holds whether or not this object is dynamic, for rendering optimization
 	*/
 	var a0:Bool;
-	
+
 	/**
 	 * The area the filter is applied to like the hitArea this is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	*/
 	var filterArea:Rectangle;
-	
+
 	/**
 	 * The original, cached bounds of the object
 	*/
 	var bounds:Rectangle;
-	
+
 	/**
 	 * The most up-to-date bounds of the object
 	*/
 	var currentBounds:Rectangle;
-	
+
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
 	*/
 	var x:Float;
-	
+
 	/**
 	 * The position of the displayObject on the y axis relative to the local coordinates of the parent.
 	*/
