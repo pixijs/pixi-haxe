@@ -30,6 +30,8 @@ https://github.com/adireddy/haxe-pixi/issues
 * [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
 * [Pixi Dude](http://www.arm.rocks/haxe-pixi-demos/pixidude.html)
 * [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
+* [Tiling Sprite](http://www.arm.rocks/haxe-pixi-demos/tiling.html)
+* [Blur (Depth of Field)](http://www.arm.rocks/haxe-pixi-demos/blur.html)
 
 Look at the demos folder for the source code of above examples ported from pixi.js.
 
