@@ -2,7 +2,7 @@ package pixi.renderers.webgl.utils;
 
 @:native("PIXI.FilterTexture")
 extern class FilterTexture {
-	
+
 	/**
 	 * @class FilterTexture
 	 * @constructor
@@ -11,13 +11,31 @@ extern class FilterTexture {
 	 * @param height {Number} the vertical range of the filter
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	*/
-	function new (gl:Dynamic, width:Float, height:Float, ?scaleMode:Float);
-	
+	function ne(gl:Dynamic, width:Float, height:Float, ?scaleMode:Float);
+
 	/**
      * @property gl
      * @type WebGLContext
      */
 	var gl:Dynamic;
+
+	/**
+     * @property frameBuffer
+     * @type Any
+     */
+	var frameBuffer:Dynamic;
+
+	/**
+     * @property texture
+     * @type Any
+     */
+	var texture:Dynamic;
+
+	/**
+     * @property scaleMode
+     * @type Number
+     */
+	var scaleMode:Float;
 
 	/**
 	 * Clears the filter texture

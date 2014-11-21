@@ -2,7 +2,7 @@ package pixi.utils;
 
 @:native("PIXI.Utils")
 extern class Utils {
-	
+
 	/**
 	 * Converts a hex color number to an [R, G, B] array
 	 *
@@ -46,14 +46,14 @@ extern class Utils {
 @:native("PIXI.AjaxRequest")
 extern class AjaxRequest {
 
-	var overrideMimeType :String->Void;
-	var responseXML :Dynamic;
-	var responseText :String;
-	var status :Int;
-	var readyState :Int;
-	var onreadystatechange :Void->Void;
+	var overrideMimeType:String -> Void;
+	var responseXML:Dynamic;
+	var responseText:String;
+	var status:Int;
+	var readyState:Int;
+	var onreadystatechange:Void -> Void;
 
 	function new():Void;
-	function open(method :String, url :String, value :Bool):Void;
-	function send(data :Dynamic) :Void;
+	function open(method:String, url:String, value:Bool):Void;
+	function send(data:Dynamic):Void;
 }

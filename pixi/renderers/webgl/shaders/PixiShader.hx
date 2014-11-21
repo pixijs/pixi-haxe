@@ -2,30 +2,30 @@ package pixi.renderers.webgl.shaders;
 
 @:native("PIXI.PixiShader")
 extern class PixiShader {
-	
+
 	/**
 	 * @class PixiShader
 	 * @constructor
 	 * @param gl {WebGLContext} the current WebGL drawing context
 	 */
-	function new (gl:Dynamic);
-	
+	function new(gl:Dynamic);
+
 	/**
      * @property gl
      * @type WebGLContext
      */
 	var gl:Dynamic;
-	
+
 	/**
      * @property {any} program - The WebGL program.
      */
 	var program:Dynamic;
-	
+
 	/**
      * @property {array} fragmentSrc - The fragment shader.
      */
 	var fragmentSrc:Array<Dynamic>;
-	
+
 	/**
      * @property {number} textureCount - A local texture counter for multi-texture shaders.
      */

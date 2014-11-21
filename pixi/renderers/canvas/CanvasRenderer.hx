@@ -23,8 +23,8 @@ extern class CanvasRenderer {
      * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
      * @param [options.clearBeforeRender=true] {Boolean} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      */
-	function new (width:Float, height:Float, ?options:RenderingOptions);
-	
+	function new(width:Float, height:Float, ?options:RenderingOptions);
+
 	/**
      * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      * If the Stage is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
@@ -36,7 +36,7 @@ extern class CanvasRenderer {
      * @default
      */
 	var clearBeforeRender:Bool;
-	
+
 	/**
      * Whether the render view is transparent
      *
@@ -44,7 +44,7 @@ extern class CanvasRenderer {
      * @type Boolean
      */
 	var transparent:Bool;
-	
+
 	/**
      * The width of the canvas view
      *
@@ -53,7 +53,7 @@ extern class CanvasRenderer {
      * @default 800
      */
 	var width:Float;
-	
+
 	/**
      * The height of the canvas view
      *
@@ -62,7 +62,7 @@ extern class CanvasRenderer {
      * @default 600
      */
 	var height:Float;
-	
+
 	/**
      * The canvas element that everything is drawn to
      *
@@ -70,21 +70,21 @@ extern class CanvasRenderer {
      * @type HTMLCanvasElement
      */
 	var view:CanvasElement;
-	
+
 	/**
      * The canvas 2d context that everything is drawn with
      * @property context
      * @type HTMLCanvasElement 2d Context
      */
 	var context:CanvasRenderingContext2D;
-	
+
 	/**
      * Instance of a PIXI.CanvasMaskManager, handles masking when using the canvas renderer
      * @property maskManager
      * @type CanvasMaskManager
      */
 	var maskManager:CanvasMaskManager;
-	
+
 	/**
      * The render session is just a bunch of parameter used for rendering
      * @property renderSession
