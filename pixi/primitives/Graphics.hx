@@ -87,7 +87,7 @@ extern class Graphics extends DisplayObjectContainer {
 
 	/*
 	 * the arcTo() method creates an arc/curve between two tangents on the canvas.
-	 * 
+	 *
 	 * "borrowed" from https://code.google.com/p/fxcanvas/ - thanks google!
 	 *
 	 * @method arcTo
@@ -100,7 +100,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 */
 	function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
 
-	
+
 	/**
 	 * The arc() method creates an arc/curve (used to create circles, or parts of circles).
 	 *
@@ -114,12 +114,6 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @return {PIXI.Graphics}
 	 */
 	function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
-
-	/**
-	 * @method drawPath
-	 * @param path {Number}
-	 */
-	function drawPath(path:Dynamic):Void;
 
 	/**
 	 * Specifies a simple one-color fill that subsequent calls to other Graphics methods
@@ -240,52 +234,52 @@ extern class Graphics extends DisplayObjectContainer {
 	 * The alpha of the fill of this graphics object
 	 */
 	var fillAlpha:Float;
-	
+
 	/**
 	 * The width of any lines drawn
 	 */
 	var lineWidth:Float;
-	
+
 	/**
 	 * The color of any lines drawn
 	 */
 	var lineColor:String;
-	
+
 	/**
 	 * Graphics data
 	 */
 	var graphicsData:Array<Dynamic>;
-	
+
 	/**
 	 * The tint applied to the graphic shape. This is a hex value
 	 */
 	var tint:Float;
-	
+
 	/**
 	 * The blend mode to be applied to the graphic shape
 	 */
 	var blendMode:Float;
-	
+
 	/**
 	 * Current path
 	 */
 	var currentPath:Dynamic;
-	
+
 	/**
 	 * Array containing some WebGL-related properties used by the WebGL renderer
 	 */
 	var webGL:Array<Dynamic>;
-	
+
 	/**
 	 * Whether this shape is being used as a mask
 	 */
 	var isMask:Dynamic;
-	
+
 	/**
 	 * the bounds' padding used for bounds calculation
 	 */
 	var boundsPadding:Float;
-	
+
 	/**
 	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
 	 */

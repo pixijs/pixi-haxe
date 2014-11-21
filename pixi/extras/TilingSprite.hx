@@ -18,31 +18,21 @@ extern class TilingSprite extends Sprite {
 	 * @param height {Number} the height of the tiling sprite
 	*/
 	function new(texture:Texture, width:Float, height:Float):Void;
-	
+
 	/**
 	 * The scaling of the image that is being tiled
 	 */
 	var tileScale:Point;
-	
+
 	/**
 	 * A point that represents the scale of the texture object
 	 */
 	var tileScaleOffset:Point;
-	
+
 	/**
 	 * The offset position of the image that is being tiled
 	 */
 	var tilePosition:Point;
-
-	/**
-	 * The height of the tiling sprite
-	 */
-	var height:Float;
-
-	/**
-	 * The width of the sprite, setting this will actually modify the scale to achieve the value set
-	 */
-	var width:Float;
 
 	/*
 	 * @method generateTilingTexture

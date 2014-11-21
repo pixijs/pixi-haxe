@@ -50,3 +50,25 @@
 -cp src
 -main demos.spritesheet.Main
 -js demos/_output/hx-pixi-spritesheet.js
+
+--next
+-cp demos
+-cp src
+-main demos.tilingsprite.Main
+-js demos/_output/hx-pixi-tilingsprite.js
+
+--next
+-cp demos
+-cp src
+-main demos.blur.Main
+-js demos/_output/hx-pixi-blur.js
+
+--next
+-cp demos
+-cp src
+-main demos.drawing.Main
+-js demos/_output/hx-pixi-drawing.js
+
+-D source-map-content
+-debug
+-dce full
