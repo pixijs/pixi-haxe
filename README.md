@@ -3,7 +3,7 @@ haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=ma
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-Externs of pixi.js (v2.1.0) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of pixi.js (v2.1.1) for Haxe - 2D webGL renderer with canvas fallback.
 
 If you are looking for pixi.js (v1.6.1) externs, you can get them from https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3
 
@@ -30,6 +30,8 @@ https://github.com/adireddy/haxe-pixi/issues
 * [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
 * [Pixi Dude](http://www.arm.rocks/haxe-pixi-demos/pixidude.html)
 * [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
+* [Tiling Sprite](http://www.arm.rocks/haxe-pixi-demos/tiling.html)
+* [Blur (Depth of Field)](http://www.arm.rocks/haxe-pixi-demos/blur.html)
 
 Look at the demos folder for the source code of above examples ported from pixi.js.
 
@@ -86,6 +88,6 @@ class Main {
 }
 ```
 
-This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+This content is released under the [MIT](http://opensource.org/licenses/MIT) License. [![Analytics](https://ga-beacon.appspot.com/UA-31531781-2/haxe-pixi/)](https://github.com/igrigorik/ga-beacon)
 
 [pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
