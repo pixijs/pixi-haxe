@@ -62,3 +62,13 @@
 -cp src
 -main demos.blur.Main
 -js demos/_output/hx-pixi-blur.js
+
+--next
+-cp demos
+-cp src
+-main demos.colourmatrix.Main
+-js demos/_output/hx-pixi-colourmatrix.js
+
+-D source-map-content
+-debug
+-dce full

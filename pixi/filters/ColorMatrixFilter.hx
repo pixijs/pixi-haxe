@@ -17,6 +17,6 @@ extern class ColorMatrixFilter extends AbstractFilter {
 	/**
 	 * Sets the matrix of the color matrix filter
 	 */
-	var matrix:Array<Int>;
+	var matrix:Array<Float>;
 
 }
