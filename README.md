@@ -32,6 +32,7 @@ https://github.com/adireddy/haxe-pixi/issues
 * [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
 * [Tiling Sprite](http://www.arm.rocks/haxe-pixi-demos/tiling.html)
 * [Blur (Depth of Field)](http://www.arm.rocks/haxe-pixi-demos/blur.html)
+* [Colour Matrix](http://www.arm.rocks/haxe-pixi-demos/colourmatrix.html)
 
 Look at the demos folder for the source code of above examples ported from pixi.js.
 
