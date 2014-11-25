@@ -58,7 +58,7 @@ class Main {
 		_stage = new Stage(0x00FF00);
 		
 		// Rendering options usage sample
-		var options = new RenderingOptions();
+		var options:RenderingOptions = {};
 		options.antialias = true;
 		options.resolution = 1;
 		options.transparent = true;
