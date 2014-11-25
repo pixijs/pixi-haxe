@@ -1,6 +1,5 @@
 package demos.colourmatrix;
 
-import pixi.text.TextStyle;
 import pixi.text.Text;
 import pixi.InteractionData;
 import pixi.display.DisplayObjectContainer;
@@ -78,7 +77,7 @@ class Main {
 
 		_stage.click = _stage.tap = _onClick;
 
-		var style = new TextStyle("bold 12pt Arial", "#FFFFFF");
+		var style:TextStyle = {font: "bold 12pt Arial", fill: "#FFFFFF"};
 		var help = new Text("Click to turn filters on / off.", style);
 		_stage.addChild(help);
 

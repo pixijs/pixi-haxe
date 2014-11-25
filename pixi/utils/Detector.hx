@@ -50,21 +50,15 @@ extern class Detector {
 	static function autoDetectRecommendedRenderer(width:Int, height:Int, ?options:RenderingOptions):CanvasRenderer;
 }
 
-class RenderingOptions {
-	public var view:Element;
-	public var transparent:Bool = false;
-	public var resolution:Float = 1;
+typedef RenderingOptions = {
+	@:optional var view:Element;
+	@:optional var transparent:Bool;
+	@:optional var resolution:Float;
 
 	//canvas specific
-	public var clearBeforeRender:Bool = true;
+	@:optional var clearBeforeRender:Bool;
 
 	//webgl specific
-	public var antialias:Bool = false;
-	public var preserveDrawingBuffer:Bool = false;
-
-	public function new(?view:Element, ?resolution:Float, ?transparent:Bool) {
-		if (view != null) this.view = view;
-		if (resolution != null) this.resolution = resolution;
-		if (transparent != null) this.transparent = transparent;
-	}
+	@:optional var antialias:Bool;
+	@:optional var preserveDrawingBuffer:Bool;
 }

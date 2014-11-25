@@ -7,7 +7,7 @@ import js.html.CanvasElement;
 extern class Text extends pixi.display.Sprite {
 
 	/**
-	 * A Text Object will create a line(s) of text. To split a line you can use '\n' 
+	 * A Text Object will create a line(s) of text. To split a line you can use '\n'
 	 * or add a wordWrap property set to true and and wordWrapWidth property with a value
 	 * in the style object
 	 *
@@ -74,4 +74,18 @@ extern class Text extends pixi.display.Sprite {
 	 * The canvas 2d context that everything is drawn with
 	 */
 	var context:CanvasRenderingContext2D;
+}
+
+typedef TextStyle = {
+	@:optional var font:String;
+	@:optional var fill:String;
+	@:optional var align:String;
+	@:optional var stroke:String;
+	@:optional var strokeThickness:Float;
+	@:optional var wordWrap:Bool;
+	@:optional var wordWrapWidth:Float;
+	@:optional var dropShadow:Bool;
+	@:optional var dropShadowColor:String;
+	@:optional var dropShadowAngle:Float;
+	@:optional var dropShadowDistance:Float;
 }

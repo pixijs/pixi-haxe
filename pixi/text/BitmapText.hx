@@ -1,7 +1,9 @@
 package pixi.text;
 
+import pixi.display.DisplayObjectContainer;
+
 @:native("PIXI.BitmapText")
-extern class BitmapText extends pixi.display.DisplayObjectContainer {
+extern class BitmapText extends DisplayObjectContainer {
 
 	/**
 	 * A Text Object will create a line(s) of text using bitmap font. To split a line you can use '\n', '\r' or '\r\n'
@@ -56,12 +58,7 @@ extern class BitmapText extends pixi.display.DisplayObjectContainer {
     var textHeight:Float;
 }
 
-class BitmapTextStyle {
-    public var font:String;
-    public var align:String = "left";
-
-    public function new(?font:String, ?align:String) {
-        if (font != null) this.font = font;
-        if (align != null) this.align = align;
-    }
+typedef BitmapTextStyle = {
+	@:optional var font:String;
+	@:optional var align:String;
 }

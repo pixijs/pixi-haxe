@@ -25,18 +25,6 @@ demos.tilingsprite.Main.prototype = {
 		this._renderer.render(this._stage);
 	}
 };
-var pixi = {};
-pixi.utils = {};
-pixi.utils.RenderingOptions = function(view,resolution,transparent) {
-	this.preserveDrawingBuffer = false;
-	this.antialias = false;
-	this.clearBeforeRender = true;
-	this.resolution = 1;
-	this.transparent = false;
-	if(view != null) this.view = view;
-	if(resolution != null) this.resolution = resolution;
-	if(transparent != null) this.transparent = transparent;
-};
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 Math.NaN = Number.NaN;

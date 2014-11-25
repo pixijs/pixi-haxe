@@ -32,7 +32,7 @@ demos.colourmatrix.Main = function() {
 	this._switchy = false;
 	this._stage.filters = [this._filter];
 	this._stage.click = this._stage.tap = $bind(this,this._onClick);
-	var style = new pixi.text.TextStyle("bold 12pt Arial","#FFFFFF");
+	var style = { font : "bold 12pt Arial", fill : "#FFFFFF"};
 	var help = new PIXI.Text("Click to turn filters on / off.",style);
 	this._stage.addChild(help);
 	window.requestAnimationFrame($bind(this,this.animate));
@@ -65,33 +65,6 @@ demos.colourmatrix.Main.prototype = {
 		this._renderer.render(this._stage);
 	}
 };
-var pixi = {};
-pixi.text = {};
-pixi.text.TextStyle = function(font,fill,align,stroke,strokeThickness,wordWrap,wordWrapWidth,dropShadow,dropShadowColor,dropShadowAngle,dropShadowDistance) {
-	this.dropShadowDistance = 5;
-	this.dropShadowAngle = Math.PI / 4;
-	this.dropShadowColor = "#000000";
-	this.dropShadow = false;
-	this.wordWrapWidth = 100;
-	this.wordWrap = false;
-	this.strokeThickness = 0;
-	this.align = "left";
-	this.fill = "#000000";
-	this.font = "bold 20px Arial";
-	if(font != null) this.font = font;
-	if(fill != null) this.fill = fill;
-	if(align != null) this.align = align;
-	if(stroke != null) this.stroke = stroke;
-	if(strokeThickness != null) this.strokeThickness = strokeThickness;
-	if(wordWrap != null) this.wordWrap = wordWrap;
-	if(wordWrapWidth != null) this.wordWrapWidth = wordWrapWidth;
-	if(dropShadow != null) this.dropShadow = dropShadow;
-	if(dropShadowColor != null) this.dropShadowColor = dropShadowColor;
-	if(dropShadowAngle != null) this.dropShadowAngle = dropShadowAngle;
-	if(dropShadowDistance != null) this.dropShadowDistance = dropShadowDistance;
-};
-pixi.utils = {};
-pixi.utils.RenderingOptions = function() { };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 Math.NaN = Number.NaN;

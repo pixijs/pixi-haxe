@@ -34,7 +34,7 @@ class Main {
 	}
 
 	function onAssetsLoaded() {
-		var bitmapFontText = new BitmapText("bitmap fonts are\n now supported!", new BitmapTextStyle("60px Desyrel", "left"));
+		var bitmapFontText = new BitmapText("bitmap fonts are\n now supported!", {font: "60px Desyrel"});
 		bitmapFontText.position.x = 400 - bitmapFontText.width / 2;
 		bitmapFontText.position.y = 300 - bitmapFontText.height / 2;
 		_stage.addChild(bitmapFontText);
