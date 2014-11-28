@@ -45,7 +45,7 @@ extern class WebGLFastSpriteBatch {
      * @property indices
      * @type Uint16Array
      */
-	var indices:Array<UInt>;
+	var indices:Array<Int>;
 
 	/**
      * @property vertexBuffer

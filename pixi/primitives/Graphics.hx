@@ -5,8 +5,6 @@ import pixi.core.Polygon;
 import pixi.core.Ellipse;
 import pixi.core.Circle;
 import pixi.core.Rectangle;
-import pixi.core.Matrix;
-import pixi.textures.Texture;
 
 @:native("PIXI.Graphics")
 extern class Graphics extends DisplayObjectContainer {
@@ -50,7 +48,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param color {Number} color of the line to draw, will update the object's stored style
 	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
 	 */
-	function lineStyle(lineWidth:Float, ?color:UInt, ?alpha:Float):Graphics;
+	function lineStyle(lineWidth:Float, ?color:Int, ?alpha:Float):Graphics;
 
 	/**
 	 * Moves the current drawing position to (x, y).
@@ -124,7 +122,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param alpha {Number} the alpha of the fill
 	 * @return {Graphics}
 	 */
-	function beginFill(color:UInt, ?alpha:Float):Graphics;
+	function beginFill(color:Int, ?alpha:Float):Graphics;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
