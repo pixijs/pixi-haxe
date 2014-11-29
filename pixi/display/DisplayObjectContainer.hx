@@ -107,7 +107,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param beginIndex {Number} The beginning position. Predefined value is 0.
 	 * @param endIndex {Number} The ending position. Predefined value is children's array length.
 	*/
-	function removeChildren(beginIndex:Int, endIndex:Int):Void;
+	function removeChildren(?beginIndex:Int, ?endIndex:Int):Void;
 
 	/**
 	 * Changes the position of an existing child in the display object container
