@@ -12,7 +12,7 @@ extern class MovieClip extends Sprite {
 	 * @extends Sprite
 	 * @constructor
 	 * @param textures {Array<Texture>} an array of {Texture} objects that make up the animation
-	*/
+	 */
 	function new(textures:Array<Texture>):Void;
 
 	/**
@@ -68,7 +68,7 @@ extern class MovieClip extends Sprite {
 	 * @type Number
 	 * @default 0
 	 * @readOnly
-	*/
+	 */
 	var totalFrames:Int;
 
 	/**
@@ -90,7 +90,7 @@ extern class MovieClip extends Sprite {
 	 * Plays the MovieClip
 	 *
 	 * @method play
-	*/
+	 */
 	function play():Void;
 
 	/**
@@ -98,7 +98,7 @@ extern class MovieClip extends Sprite {
 	 *
 	 * @method gotoAndStop
 	 * @param frameNumber {Number} frame index to stop at
-	*/
+	 */
 	function gotoAndStop(frameNumber:Float):Void;
 
 	/**
@@ -106,7 +106,7 @@ extern class MovieClip extends Sprite {
 	 *
 	 * @method gotoAndPlay
 	 * @param frameNumber {Number} frame index to start at
-	*/
+	 */
 	function gotoAndPlay(frameNumber:Float):Void;
 
 	/**

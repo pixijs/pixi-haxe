@@ -2,13 +2,13 @@ package pixi.utils;
 
 @:native("PIXI.EventTarget")
 extern class EventTarget {
-	
+
 	/**
 	 * Holds all the listeners
 	 */
 	var listeners:Dynamic;
-	
-     function new():Void;
+
+    function new():Void;
 
 	/**
      * Adds a listener for a specific event
@@ -20,7 +20,7 @@ extern class EventTarget {
 	function addEventListener(type:String, listener:Dynamic):Void;
 	function on(type:String, listener:Dynamic):Void;
     function once(type:String, listener:Dynamic):Void;
-	
+
 	/**
      * Fires the event, ie pretends that the event has happened
      *
@@ -37,7 +37,7 @@ extern class EventTarget {
 	 * @return Boolean
 	 */
     function emit(eventName :String, ?data :Dynamic):Bool;
-	
+
 	/**
      * Removes the specified listener that was assigned to the specified event type
      *

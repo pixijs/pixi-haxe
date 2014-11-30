@@ -95,10 +95,10 @@ class Main {
 		_renderTexture2 = temp;
 
 		_bunnyContainer.rotation -= 0.01;
-		_renderTexture1.render(_stage, true);
+		_renderTexture1.render(_stage, null, true);
 		_outputSprite.setTexture(_renderTexture1);
 		_outputSprite.scale.x = _outputSprite.scale.y = 1 + Math.sin(_count1) * 0.2;
-		_renderTexture2.render(_stage, false);
+		_renderTexture2.render(_stage, null, false);
 		_renderer.render(_stage);
 	}
 

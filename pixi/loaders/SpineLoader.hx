@@ -17,7 +17,7 @@ extern class SpineLoader extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the JSON file
-	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
 	 */
 	function new(url:String, ?crossorigin:Bool);
 

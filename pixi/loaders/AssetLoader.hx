@@ -2,7 +2,7 @@ package pixi.loaders;
 
 @:native("PIXI.AssetLoader")
 extern class AssetLoader extends pixi.utils.EventTarget {
-	
+
 	/**
 	 * A Class that loads a bunch of images / sprite sheet / bitmap font files. Once the
 	 * assets have been loaded they are added to the PIXI Texture cache and can be accessed
@@ -17,10 +17,10 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	 *      supported. Supported image formats include 'jpeg', 'jpg', 'png', 'gif'. Supported
 	 *      sprite sheet data formats only include 'JSON' at this time. Supported bitmap font
 	 *      data formats include 'xml' and 'fnt'.
-	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
 	*/
 	function new(assetURLs:Array<String>, ?crossorigin:Bool);
-	
+
 	/**
 	 * The array of asset URLs that are going to be loaded
 	*/
@@ -30,12 +30,12 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	 * loadCount
 	*/
 	var loadCount:Int;
-	
+
 	/**
 	 * Whether the requests should be treated as cross origin
 	*/
 	var crossorigin:Bool;
-	
+
 	/**
 	 * Maps file extension to loader types
 	*/

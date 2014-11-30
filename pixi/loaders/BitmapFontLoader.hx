@@ -5,7 +5,7 @@ import pixi.utils.EventTarget;
 
 @:native("PIXI.BitmapFontLoader")
 extern class BitmapFontLoader extends EventTarget {
-	
+
 	/**
 	 * The xml loader is used to load in XML bitmap font data ('xml' or 'fnt')
 	 * To generate the data you can use http://www.angelcode.com/products/bmfont/
@@ -16,7 +16,7 @@ extern class BitmapFontLoader extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the sprite sheet JSON file
-	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
 	 */
 	function new(url:String, ?crossorigin:Bool);
 
@@ -24,12 +24,12 @@ extern class BitmapFontLoader extends EventTarget {
 	 * The url of the bitmap font data
 	 */
 	var url:String;
-	
+
 	/**
 	 * Whether the requests should be treated as cross origin
 	 */
 	var crossorigin:Bool;
-	
+
 	/**
 	 * [read-only] The base url of the bitmap font data
 	 */
@@ -45,5 +45,5 @@ extern class BitmapFontLoader extends EventTarget {
 	 *
 	 * @method load
 	 */
-	function load():Void;	
+	function load():Void;
 }

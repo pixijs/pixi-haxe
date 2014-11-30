@@ -31,7 +31,7 @@ extern class DisplayObject {
 	 * Instead of using this function you can now simply set the interactive property to true or false
 	 *
 	 * @method setInteractive
-	 * @param interactive {Boolean}
+	 * @param interactive {Bool}
 	 * @deprecated Simply set the `interactive` property directly
 	*/
 	function setInteractive(interactive:Bool):Void;

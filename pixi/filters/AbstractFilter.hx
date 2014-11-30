@@ -10,7 +10,7 @@ extern class AbstractFilter {
 	 * @constructor
 	 * @param fragmentSrc
 	 * @param uniforms
-	*/
+	 */
 	function new(fragmentSrc:Array<String>, uniforms:Dynamic);
 
 	/**

@@ -21,9 +21,9 @@ extern class Text extends pixi.display.Sprite {
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
 	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
 	 * @param [style.strokeThickness=0] {Number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Boolean} Indicates if word wrap should be used
+	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
 	 * @param [style.wordWrapWidth=100] {Number} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.dropShadow=false] {Boolean} Set a drop shadow for the text
+	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
@@ -40,9 +40,9 @@ extern class Text extends pixi.display.Sprite {
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
 	 * @param [style.stroke='black'] {String} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
 	 * @param [style.strokeThickness=0] {Number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Boolean} Indicates if word wrap should be used
+	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
 	 * @param [style.wordWrapWidth=100] {Number} The width at which text will wrap
-	 * @param [style.dropShadow=false] {Boolean} Set a drop shadow for the text
+	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
@@ -61,7 +61,7 @@ extern class Text extends pixi.display.Sprite {
 	 * Destroys this text object
 	 *
 	 * @method destroy
-	 * @param destroyBaseTexture {Boolean} whether to destroy the base texture as well
+	 * @param destroyBaseTexture {Bool} whether to destroy the base texture as well
 	 */
 	function destroy(?destroyBaseTexture:Bool):Void;
 

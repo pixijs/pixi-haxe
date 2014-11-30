@@ -1,10 +1,11 @@
 package pixi.textures;
 
+import js.html.CanvasElement;
 import pixi.utils.EventTarget;
 
 @:native("PIXI.BaseTexture")
 extern class BaseTexture extends EventTarget {
-	
+
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture
 	 *
@@ -12,7 +13,7 @@ extern class BaseTexture extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param source {String} the source object (image or canvas)
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
 	 */
 	function new(source:String, scaleMode:Float);
 
@@ -20,7 +21,7 @@ extern class BaseTexture extends EventTarget {
      * The Resolution of the texture.
      *
      * @property resolution
-     * @type Number
+     * @type Float
      */
     var resolution:Float;
 
@@ -28,22 +29,22 @@ extern class BaseTexture extends EventTarget {
 	 * [read-only] The width of the base texture set when the image has loaded
 	 */
 	var width:Float;
-	
+
 	/**
 	 * [read-only] The height of the base texture set when the image has loaded
 	 */
 	var height:Float;
-	
+
 	/**
 	 * The scale mode to apply when scaling this texture
 	 */
 	var scaleMode:Float;
-	
+
 	/**
 	 * [read-only] Describes if the base texture has loaded or not
 	 */
 	var hasLoaded:Bool;
-	
+
 	/**
 	 * The source that is loaded to create the texture
 	 */
@@ -52,7 +53,7 @@ extern class BaseTexture extends EventTarget {
     var imageUrl:String;
 
     var premultipliedAlpha:Bool;
-	
+
 	/**
 	 * Destroys this base texture
 	 *
@@ -82,8 +83,8 @@ extern class BaseTexture extends EventTarget {
 	 * @static
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
-	 * @param crossorigin {Boolean} 
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param crossorigin {Bool}
+	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
 	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Float):BaseTexture;
@@ -95,8 +96,8 @@ extern class BaseTexture extends EventTarget {
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):BaseTexture;
+	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Float):BaseTexture;
 }

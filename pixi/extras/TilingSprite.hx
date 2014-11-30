@@ -36,7 +36,7 @@ extern class TilingSprite extends Sprite {
 
 	/*
 	 * @method generateTilingTexture
-	 * @param forcePowerOfTwo {Boolean} Whether we want to force the texture to be a power of two
+	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two
 	*/
 	function generateTilingTexture(forcePowerOfTwo:Bool):Void;
 }

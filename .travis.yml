@@ -13,4 +13,4 @@ before_install:
     - echo ~/.haxe/lib | haxelib setup
 
 script:
-    - haxe build.hxml
+    - haxe demos.hxml

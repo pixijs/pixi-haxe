@@ -4,7 +4,7 @@ import pixi.utils.EventTarget;
 
 @:native("PIXI.AtlasLoader")
 extern class AtlasLoader extends EventTarget {
-	
+
 	/**
 	 * The atlas file loader is used to load in Atlas data and parse it
 	 * When loaded this class will dispatch a 'loaded' event
@@ -13,7 +13,7 @@ extern class AtlasLoader extends EventTarget {
 	 * @extends EventTarget
 	 * @constructor
 	 * @param {String} url the url of the JSON file
-	 * @param {Boolean} crossorigin
+	 * @param {Bool} crossorigin
 	 */
 	function new (url:String, ?crossorigin:Bool);
 
@@ -21,12 +21,12 @@ extern class AtlasLoader extends EventTarget {
 	 * The url
 	 */
 	var url:String;
-	
+
 	/**
 	 * Whether the requests should be treated as cross origin
 	 */
 	var crossorigin:Bool;
-	
+
 	/**
 	 * [read-only] The base url
 	 */

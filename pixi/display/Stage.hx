@@ -11,14 +11,14 @@ extern class Stage extends DisplayObjectContainer {
 	 * @constructor
 	 * @param backgroundColor {Number} the background color of the stage, you have to pass this in is in hex format
 	 *      like: 0xFFFFFF for white
-	 * 
-	 * Creating a stage is a mandatory process when you use Pixi, which is as simple as this : 
+	 *
+	 * Creating a stage is a mandatory process when you use Pixi, which is as simple as this :
 	 * var stage = new PIXI.Stage(0xFFFFFF);
 	 * where the parameter given is the background colour of the stage, in hex
 	 * you will use this stage instance to add your sprites to it and therefore to the renderer
-	 * Here is how to add a sprite to the stage : 
+	 * Here is how to add a sprite to the stage :
 	 * stage.addChild(sprite);
-	*/
+	 */
 	function new(backgroundColor:Int):Void;
 
 	/**
@@ -27,7 +27,7 @@ extern class Stage extends DisplayObjectContainer {
 	 *
 	 * @method setInteractionDelegate
 	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events
-	*/
+	 */
 	function setInteractionDelegate(domElement:Dynamic):Void;
 
 	/*
@@ -35,7 +35,7 @@ extern class Stage extends DisplayObjectContainer {
 	 *
 	 * @method updateTransform
 	 * @private
-	*/
+	 */
 	override function updateTransform():Void;
 
 	/**
@@ -44,7 +44,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * @method setBackgroundColor
 	 * @param backgroundColor {Number} the color of the background, easiest way to pass this in is in hex format
 	 *      like: 0xFFFFFF for white
-	*/
+	 */
 	function setBackgroundColor(backgroundColor:Int):Void;
 
 	/**
@@ -52,6 +52,6 @@ extern class Stage extends DisplayObjectContainer {
 	 *
 	 * @method getMousePosition
 	 * @return {Point} The point containing the coords of the global InteractionData position.
-	*/
+	 */
 	function getMousePosition():pixi.core.Point;
 }

@@ -59,10 +59,10 @@ demos.rendertexture.Main.prototype = {
 		this._renderTexture1 = this._renderTexture2;
 		this._renderTexture2 = temp;
 		this._bunnyContainer.rotation -= 0.01;
-		this._renderTexture1.render(this._stage,true);
+		this._renderTexture1.render(this._stage,null,true);
 		this._outputSprite.setTexture(this._renderTexture1);
 		this._outputSprite.scale.x = this._outputSprite.scale.y = 1 + Math.sin(this._count1) * 0.2;
-		this._renderTexture2.render(this._stage,false);
+		this._renderTexture2.render(this._stage,null,false);
 		this._renderer.render(this._stage);
 	}
 };

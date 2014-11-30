@@ -19,9 +19,9 @@ extern class CanvasRenderer {
      * @param [height=600] {Number} the height of the canvas view
      * @param [options] {Object} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Boolean} If the render view is transparent, default false
+     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
      * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
-     * @param [options.clearBeforeRender=true] {Boolean} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+     * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      */
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
@@ -113,7 +113,7 @@ extern class CanvasRenderer {
      * Removes everything from the renderer and optionally removes the Canvas DOM element.
      *
      * @method destroy
-     * @param [removeView=true] {boolean} Removes the Canvas element from the DOM.
+     * @param [removeView=true] {Bool} Removes the Canvas element from the DOM.
      */
     function destroy(?removeView:Bool = true):Void;
 }

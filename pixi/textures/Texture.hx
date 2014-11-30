@@ -19,47 +19,47 @@ extern class Texture {
      * @param [trim] {Rectangle} Trimmed texture rectangle
      */
 	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle);
-	
+
 	/**
 	 * Does this Texture have any frame data assigned to it?
 	 */
 	var noFrame:Bool;
-	
+
 	/**
 	 * The base texture that this texture uses.
 	 */
 	var baseTexture:BaseTexture;
-	
+
 	/**
 	 * The frame specifies the region of the base texture that this texture uses
 	 */
 	var frame:Rectangle;
-	
+
 	/**
 	 * The trim point
 	 */
 	var trim:Rectangle;
-	
+
 	/**
 	 * This will let the renderer know if the texture is valid. If its not then it cannot be rendered.
 	 */
 	var valid:Bool;
-	
+
 	/**
 	 * The WebGL UV data cache.
 	 */
 	var uvs:Dynamic;
-	
+
 	/**
 	 * The width of the Texture in pixels.
 	 */
 	var width:Float;
-	
+
 	/**
 	 * The height of the Texture in pixels.
 	 */
 	var height:Float;
-	
+
 	/**
 	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
@@ -70,7 +70,7 @@ extern class Texture {
 	 * Destroys this texture
 	 *
 	 * @method destroy
-	 * @param destroyBase {Boolean} Whether to destroy the base texture as well
+	 * @param destroyBase {Bool} Whether to destroy the base texture as well
 	 */
 	function destroy(?destroyBase:Bool):Void;
 
@@ -100,8 +100,8 @@ extern class Texture {
 	 * @static
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
-	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
+	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
 	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Float):Texture;
@@ -113,7 +113,7 @@ extern class Texture {
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
 	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):Texture;

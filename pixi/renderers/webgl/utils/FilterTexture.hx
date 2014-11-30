@@ -11,7 +11,7 @@ extern class FilterTexture {
 	 * @param height {Number} the vertical range of the filter
 	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
 	*/
-	function ne(gl:Dynamic, width:Float, height:Float, ?scaleMode:Float);
+	function new(gl:Dynamic, width:Float, height:Float, ?scaleMode:Float);
 
 	/**
      * @property gl

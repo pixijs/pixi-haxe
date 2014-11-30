@@ -1,7 +1,14 @@
 package pixi.textures;
 
+import pixi.core.Matrix;
+import pixi.display.DisplayObject;
+import js.html.Image;
+import js.html.CanvasElement;
+import pixi.renderers.canvas.CanvasRenderer;
+import pixi.renderers.webgl.WebGLRenderer;
+
 @:native("PIXI.RenderTexture")
-extern class RenderTexture extends pixi.textures.Texture {
+extern class RenderTexture extends Texture {
 
     /**
      * A RenderTexture is a special texture that allows any Pixi display object to be rendered to it.
@@ -27,21 +34,32 @@ extern class RenderTexture extends pixi.textures.Texture {
      * @class RenderTexture
      * @extends Texture
      * @constructor
-     * @param width {Number} The width of the render texture
-     * @param height {Number} The height of the render texture
+     * @param width {Float} The width of the render texture
+     * @param height {Float} The height of the render texture
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
-     * @param resolution {Number} The resolution of the texture being generated
+     * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+     * @param resolution {Float} The resolution of the texture being generated
      */
-	function new(?width:Float, ?height:Float, ?renderer:Dynamic, ?scaleMode:Float, ?resolution:Float);
+	@:overload(function(?width:Float, ?height:Float, ?renderer:CanvasRenderer, ?scaleMode:Float, ?resolution:Float):Void {})
+	function new(?width:Float, ?height:Float, ?renderer:WebGLRenderer, ?scaleMode:Float, ?resolution:Float);
+
+	/**
+	 * This function will draw the display object to the texture.
+	 *
+	 * @method renderWebGL/renderCanvas
+	 * @param displayObject {DisplayObject} The display object to render this texture on
+	 * @param [matrix] {Matrix} Optional matrix to apply to the display object before rendering.
+	 * @param [clear] {Bool} If true the texture will be cleared before the displayObject is drawn
+	 */
+	var render:DisplayObject -> Matrix -> Bool -> Void;
 
 	/**
 	 * Resize the RenderTexture.
 	 *
 	 * @method resize
-	 * @param width {Number} The width to resize to.
-	 * @param height {Number} The height to resize to.
-	 * @param updateBase {Boolean} Should the baseTexture.width and height values be resized as well?
+	 * @param width {Float} The width to resize to.
+	 * @param height {Float} The height to resize to.
+	 * @param updateBase {Bool} Should the baseTexture.width and height values be resized as well?
 	 */
 	function resize(width:Float, height:Float, ?updateBase:Bool):Void;
 
@@ -53,7 +71,42 @@ extern class RenderTexture extends pixi.textures.Texture {
 	function clear():Void;
 
 	/**
-	 * render
+	 * Will return a a base64 encoded string of this texture. It works by calling RenderTexture.getCanvas and then running toDataURL on that.
+	 *
+	 * @method getBase64
+	 * @return {String} A base64 encoded string of the texture.
 	 */
-	var render:Dynamic;
+	function getBase64():String;
+
+	/**
+	 * Creates a Canvas element, renders this RenderTexture to it and then returns it.
+	 *
+	 * @method getCanvas
+	 * @return {CanvasElement} A Canvas element with the texture rendered on.
+	 */
+	function getCanvas():CanvasElement;
+
+	/**
+	 * Will return a HTML Image of the texture
+	 *
+	 * @method getImage
+	 * @return {HTMLImage}
+	 */
+	function getImage():Image;
+
+	/**
+     * The renderer this RenderTexture uses. A RenderTexture can only belong to one renderer at the moment if its webGL.
+     *
+     * @property renderer
+     * @type CanvasRenderer|WebGLRenderer
+     */
+	var renderer:Dynamic;
+
+	/**
+     * The Resolution of the texture.
+     *
+     * @property resolution
+     * @type Number
+     */
+	var resolution:Float;
 }

@@ -12,6 +12,7 @@ extern class Polygon {
 	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
 	 *      Numbers.
 	 */
+	@:overload(function(points:Array<Float>):Void {})
 	function new(points:Array<Point>):Void;
 
 	/**
@@ -26,9 +27,9 @@ extern class Polygon {
 	 * Checks whether the x and y coordinates passed to this function are contained within this polygon
 	 *
 	 * @method contains
-	 * @param x {Number} The X coordinate of the point to test
-	 * @param y {Number} The Y coordinate of the point to test
-	 * @return {Boolean} Whether the x/y coordinates are within this polygon
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Bool} Whether the x/y coordinates are within this polygon
 	 */
 	function contains(x:Float, y:Float):Bool;
 }
