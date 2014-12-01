@@ -5,6 +5,8 @@ import pixi.core.Rectangle;
 import pixi.primitives.Graphics;
 import pixi.core.Point;
 import pixi.textures.Texture;
+import pixi.renderers.canvas.CanvasRenderer;
+import pixi.renderers.webgl.WebGLRenderer;
 
 @:native("PIXI.DisplayObject")
 extern class DisplayObject {
@@ -197,7 +199,8 @@ extern class DisplayObject {
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
      * @return {Texture} a texture of the graphics object
      */
-	function generateTexture(resolution:Float, scaleMode:Int, renderer:Dynamic):Texture;
+    @:overload(function(resolution:Float, scaleMode:Int, renderer:CanvasRenderer):Texture{})
+	function generateTexture(resolution:Float, scaleMode:Int, renderer:WebGLRenderer):Texture;
 
 	function updateCache():Void;
 
