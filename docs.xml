@@ -18586,10 +18586,38 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method setStageReference
 	 * @param stage {Stage} the stage that the object will have as its current stage reference</haxe_doc>
 		</setStageReference>
-		<generateTexture public="1" set="method"><f a="renderer">
-	<d/>
-	<x path="Void"/>
-</f></generateTexture>
+		<generateTexture public="1" set="method">
+			<f a="resolution:scaleMode:?renderer">
+				<x path="Float"/>
+				<x path="Int"/>
+				<c path="pixi.renderers.webgl.WebGLRenderer"/>
+				<c path="pixi.textures.Texture"/>
+			</f>
+			<haxe_doc>* Useful function that returns a texture of the displayObject object that can then be used to create sprites
+     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+     *
+     * @method generateTexture
+     * @param resolution {Number} The resolution of the texture being generated
+     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+     * @return {Texture} a texture of the graphics object</haxe_doc>
+			<overloads><generateTexture public="1" set="method">
+	<f a="resolution:scaleMode:?renderer">
+		<x path="Float"/>
+		<x path="Int"/>
+		<c path="pixi.renderers.canvas.CanvasRenderer"/>
+		<c path="pixi.textures.Texture"/>
+	</f>
+	<haxe_doc>* Useful function that returns a texture of the displayObject object that can then be used to create sprites
+     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+     *
+     * @method generateTexture
+     * @param resolution {Number} The resolution of the texture being generated
+     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+     * @return {Texture} a texture of the graphics object</haxe_doc>
+</generateTexture></overloads>
+		</generateTexture>
 		<updateCache public="1" set="method"><f a=""><x path="Void"/></f></updateCache>
 		<click public="1"><f a="">
 	<c path="pixi.InteractionData"/>
