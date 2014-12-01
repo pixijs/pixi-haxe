@@ -24,6 +24,8 @@ https://github.com/adireddy/haxe-pixi/issues
 
 ### Demos ###
 
+Ported from pixi.js
+
 * [Basics](http://www.arm.rocks/haxe-pixi-demos/basics.html)
 * [Graphics](http://www.arm.rocks/haxe-pixi-demos/graphics.html)
 * [Movieclip](http://www.arm.rocks/haxe-pixi-demos/movieclip.html)
@@ -37,7 +39,11 @@ https://github.com/adireddy/haxe-pixi/issues
 * [Blur (Depth of Field)](http://www.arm.rocks/haxe-pixi-demos/blur.html)
 * [Colour Matrix](http://www.arm.rocks/haxe-pixi-demos/colourmatrix.html)
 
-Look at the demos folder for the source code of above examples ported from pixi.js.
+New Demos
+
+* [Nape Physics](http://www.arm.rocks/haxe-pixi-demos/nape.html)
+
+Look at the demos folder for the source code of above examples.
 
 ### Usage ###
 
