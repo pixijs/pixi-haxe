@@ -16,8 +16,8 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param texture {Texture} The texture for this sprite
-	 * 
-	 * A sprite can be created directly from an image like this : 
+	 *
+	 * A sprite can be created directly from an image like this :
 	 * var sprite = new PIXI.Sprite.fromImage('assets/image.png');
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created
@@ -32,17 +32,17 @@ extern class Sprite extends DisplayObjectContainer {
 	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
 	*/
 	var anchor:Point;
-	
+
 	/**
 	 * The texture that the sprite is using
 	*/
 	var texture:Texture;
-	
+
 	/**
 	 * The tint applied to the sprite. This is a hex value
 	 */
 	var tint:Float;
-	
+
 	/**
 	 * The blend mode to be applied to the sprite
 	*/
@@ -92,7 +92,10 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @static
 	 * @method fromImage
 	 * @param imageId {String}
+	 * @param [crossorigin] {Bool}
+	 * @param [scaleMode] {Int}
+	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the imageId
 	*/
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Float):Sprite;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Sprite;
 
 }

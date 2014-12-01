@@ -13,9 +13,9 @@ extern class BaseTexture extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param source {String} the source object (image or canvas)
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 */
-	function new(source:String, scaleMode:Float);
+	function new(source:String, scaleMode:Int);
 
     /**
      * The Resolution of the texture.
@@ -84,10 +84,10 @@ extern class BaseTexture extends EventTarget {
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
 	 * @param crossorigin {Bool}
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
-	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Float):BaseTexture;
+	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
 
 	/**
 	 * Helper function that returns a base texture based on a canvas element
@@ -96,8 +96,8 @@ extern class BaseTexture extends EventTarget {
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
-	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Float):BaseTexture;
+	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
 }

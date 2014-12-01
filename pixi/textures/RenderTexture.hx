@@ -37,11 +37,11 @@ extern class RenderTexture extends Texture {
      * @param width {Float} The width of the render texture
      * @param height {Float} The height of the render texture
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-     * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
      * @param resolution {Float} The resolution of the texture being generated
      */
-	@:overload(function(?width:Float, ?height:Float, ?renderer:CanvasRenderer, ?scaleMode:Float, ?resolution:Float):Void {})
-	function new(?width:Float, ?height:Float, ?renderer:WebGLRenderer, ?scaleMode:Float, ?resolution:Float);
+	@:overload(function(?width:Float, ?height:Float, ?renderer:CanvasRenderer, ?scaleMode:Int, ?resolution:Float):Void {})
+	function new(?width:Float, ?height:Float, ?renderer:WebGLRenderer, ?scaleMode:Int, ?resolution:Float);
 
 	/**
 	 * This function will draw the display object to the texture.

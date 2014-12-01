@@ -18932,14 +18932,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="imageId:?crossorigin:?scaleMode">
 				<c path="String"/>
 				<x path="Bool"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.display.Sprite"/>
 			</f>
 			<haxe_doc>* A short hand way of creating a movieclip from an array of image ids
 	 *
 	 * @static
 	 * @method fromImage
-	 * @param imageId {String}</haxe_doc>
+	 * @param imageId {String}
+	 * @param [crossorigin] {Bool}
+	 * @param [scaleMode] {Int}
+	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the imageId</haxe_doc>
 		</fromImage>
 		<anchor public="1">
 			<c path="pixi.core.Point"/>
@@ -19000,8 +19003,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param texture {Texture} The texture for this sprite
-	 * 
-	 * A sprite can be created directly from an image like this : 
+	 *
+	 * A sprite can be created directly from an image like this :
 	 * var sprite = new PIXI.Sprite.fromImage('assets/image.png');
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created</haxe_doc>
@@ -19016,8 +19019,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param texture {Texture} The texture for this sprite
-	 * 
-	 * A sprite can be created directly from an image like this : 
+	 *
+	 * A sprite can be created directly from an image like this :
 	 * var sprite = new PIXI.Sprite.fromImage('assets/image.png');
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created</haxe_doc>
@@ -21531,15 +21534,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<d/>
 				<x path="Float"/>
 				<x path="Float"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* @class FilterTexture
 	 * @constructor
 	 * @param gl {WebGLContext} the current WebGL drawing context
-	 * @param width {Number} the horizontal range of the filter
-	 * @param height {Number} the vertical range of the filter
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts</haxe_doc>
+	 * @param width {Float} the horizontal range of the filter
+	 * @param height {Float} the vertical range of the filter
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.FilterTexture"</e></m></meta>
 	</class>
@@ -22545,7 +22548,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="imageUrl:?crossorigin:?scaleMode">
 				<c path="String"/>
 				<x path="Bool"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.BaseTexture"/>
 			</f>
 			<haxe_doc>* Helper function that returns a base texture based on an image url
@@ -22555,13 +22558,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
 	 * @param crossorigin {Bool}
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture</haxe_doc>
 		</fromImage>
 		<fromCanvas public="1" set="method" static="1">
 			<f a="canvas:?scaleMode">
 				<c path="js.html.CanvasElement"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.BaseTexture"/>
 			</f>
 			<haxe_doc>* Helper function that returns a base texture based on a canvas element
@@ -22570,7 +22573,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture</haxe_doc>
 		</fromCanvas>
 		<resolution public="1">
@@ -22627,7 +22630,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<new public="1" set="method">
 			<f a="source:scaleMode">
 				<c path="String"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* A texture stores the information that represents an image. All textures have a base texture
@@ -22636,7 +22639,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param source {String} the source object (image or canvas)
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts</haxe_doc>
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
@@ -22668,7 +22671,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="imageId:?crossorigin:?scaleMode">
 				<c path="String"/>
 				<x path="Bool"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.Texture"/>
 			</f>
 			<haxe_doc>* Helper function that returns a texture based on an image url
@@ -22678,13 +22681,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
 	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return Texture</haxe_doc>
 		</fromImage>
 		<fromCanvas public="1" set="method" static="1">
 			<f a="canvas:?scaleMode">
 				<d/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.Texture"/>
 			</f>
 			<haxe_doc>* Helper function that returns a texture based on a canvas element
@@ -22693,7 +22696,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return Texture</haxe_doc>
 		</fromCanvas>
 		<addTextureToCache public="1" set="method" static="1">
@@ -22865,7 +22868,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Float"/>
 				<c path="pixi.renderers.webgl.WebGLRenderer"/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
@@ -22895,14 +22898,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @param width {Float} The width of the render texture
      * @param height {Float} The height of the render texture
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-     * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
      * @param resolution {Float} The resolution of the texture being generated</haxe_doc>
 			<overloads><new public="1" set="method">
 	<f a="?width:?height:?renderer:?scaleMode:?resolution">
 		<x path="Float"/>
 		<x path="Float"/>
 		<c path="pixi.renderers.canvas.CanvasRenderer"/>
-		<x path="Float"/>
+		<x path="Int"/>
 		<x path="Float"/>
 		<x path="Void"/>
 	</f>
@@ -22932,7 +22935,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @param width {Float} The width of the render texture
      * @param height {Float} The height of the render texture
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-     * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
      * @param resolution {Float} The resolution of the texture being generated</haxe_doc>
 </new></overloads>
 		</new>
@@ -22943,7 +22946,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<baseTextureFromVideo public="1" set="method" static="1">
 			<f a="video:scaleMode">
 				<d/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.VideoTexture"/>
 			</f>
 			<haxe_doc>* Mimic Pixi BaseTexture.from.... method.
@@ -22954,7 +22957,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<textureFromVideo public="1" set="method" static="1">
 			<f a="video:scaleMode">
 				<d/>
-				<x path="Float"/>
+				<x path="Int"/>
 				<c path="pixi.textures.Texture"/>
 			</f>
 			<haxe_doc>* Mimic PIXI Texture.from... method.
@@ -22964,7 +22967,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</textureFromVideo>
 		<fromUrl public="1" set="method" static="1"><f a="videoSrc:?scaleMode">
 	<c path="String"/>
-	<x path="Float"/>
+	<x path="Int"/>
 	<c path="pixi.textures.VideoTexture"/>
 </f></fromUrl>
 		<onPlayStart public="1"><f a=""><x path="Void"/></f></onPlayStart>
@@ -22972,7 +22975,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<onCanPlay public="1"><f a=""><x path="Void"/></f></onCanPlay>
 		<new public="1" set="method"><f a="source:scaleMode">
 	<c path="String"/>
-	<x path="Float"/>
+	<x path="Int"/>
 	<x path="Void"/>
 </f></new>
 		<meta><m n=":native"><e>"PIXI.VideoTexture"</e></m></meta>

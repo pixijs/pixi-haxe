@@ -7,11 +7,11 @@ extern class FilterTexture {
 	 * @class FilterTexture
 	 * @constructor
 	 * @param gl {WebGLContext} the current WebGL drawing context
-	 * @param width {Number} the horizontal range of the filter
-	 * @param height {Number} the vertical range of the filter
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param width {Float} the horizontal range of the filter
+	 * @param height {Float} the vertical range of the filter
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	*/
-	function new(gl:Dynamic, width:Float, height:Float, ?scaleMode:Float);
+	function new(gl:Dynamic, width:Float, height:Float, ?scaleMode:Int);
 
 	/**
      * @property gl

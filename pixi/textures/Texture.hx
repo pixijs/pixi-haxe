@@ -101,10 +101,10 @@ extern class Texture {
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
 	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Float):Texture;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Texture;
 
 	/**
 	 * Helper function that returns a texture based on a canvas element
@@ -113,10 +113,10 @@ extern class Texture {
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Float} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return Texture
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):Texture;
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Texture;
 
 	/**
 	 * Adds a texture to the textureCache.
