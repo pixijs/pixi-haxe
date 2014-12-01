@@ -17,62 +17,110 @@ extern class InteractionManager {
 	function new(stage:Stage);
 
 	/**
-	 * a reference to the stage
-	 */
+     * A reference to the stage
+     *
+     * @property stage
+     * @type Stage
+     */
 	var stage:Stage;
 
-    /**
-     * @property resolution
-     * @type Number
-     */
-    var resolution:Float;
-
 	/**
-	 * the mouse data
-	 */
+     * The mouse data
+     *
+     * @property mouse
+     * @type InteractionData
+     */
 	var mouse:InteractionData;
 
 	/**
-	 * an object that stores current touches (InteractionData) by id reference
-	 */
-	var touchs:Dynamic;
+     * An object that stores current touches (InteractionData) by id reference
+     *
+     * @property touches
+     * @type Object
+     */
+	var touches:Dynamic;
 
 	/**
-	 * @property mouseoverEnabled
-	 */
+     * @property mouseoverEnabled
+     * @type Boolean
+     * @default true
+     */
 	var mouseoverEnabled:Bool;
 
 	/**
-	 * tiny little interactiveData pool !
-	 */
+     * Tiny little interactiveData pool !
+     *
+     * @property pool
+     * @type Array
+     */
 	var pool:Array<Dynamic>;
 
 	/**
-	 * An array containing all the iterative items from the our interactive tree
-	 */
-	var interactiveItems:Array<Dynamic>;
+     * @property onMouseMove
+     * @type Function
+     */
+	var onMouseMove:InteractionData -> Void;
 
 	/**
-	 * The css style of the cursor that is being used
-	 */
-	var currentCursorStyle:String;
+     * @property onMouseDown
+     * @type Function
+     */
+    var onMouseDown:InteractionData -> Void;
 
 	/**
-	 * Is set to true when the mouse is moved out of the canvas
-	 */
-	var mouseOut:Bool;
+     * @property onMouseOut
+     * @type Function
+     */
+    var onMouseOut:InteractionData -> Void;
 
-    /**
+	/**
+     * @property onMouseUp
+     * @type Function
+     */
+    var onMouseUp:InteractionData -> Void;
+
+	/**
+     * @property onTouchStart
+     * @type Function
+     */
+    var onTouchStart:InteractionData -> Void;
+
+	/**
+     * @property onTouchEnd
+     * @type Function
+     */
+    var onTouchEnd:InteractionData -> Void;
+
+	/**
+     * @property onTouchMove
+     * @type Function
+     */
+    var onTouchMove:InteractionData -> Void;
+
+	/**
      * @property last
      * @type Number
      */
-    var last:Float;
+	var last:Float;
 
-    var mousedown:InteractionData -> Void;
-    var mouseout:InteractionData -> Void;
-    var mouseup:InteractionData -> Void;
-    var mousemove:InteractionData -> Void;
-    var touchstart:InteractionData -> Void;
-    var touchmove:InteractionData -> Void;
-    var touchend:InteractionData -> Void;
+	/**
+     * The css style of the cursor that is being used
+     * @property currentCursorStyle
+     * @type String
+     */
+	var currentCursorStyle:String;
+
+	/**
+     * Is set to true when the mouse is moved out of the canvas
+     * @property mouseOut
+     * @type Boolean
+     * @default false
+     */
+	var mouseOut:Bool;
+
+	/**
+     * @property resolution
+     * @type Number
+     */
+	var resolution:Float;
 }

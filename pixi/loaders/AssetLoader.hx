@@ -1,7 +1,9 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.AssetLoader")
-extern class AssetLoader extends pixi.utils.EventTarget {
+extern class AssetLoader extends EventTarget {
 
 	/**
 	 * A Class that loads a bunch of images / sprite sheet / bitmap font files. Once the
@@ -22,32 +24,45 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	function new(assetURLs:Array<String>, ?crossorigin:Bool);
 
 	/**
-	 * The array of asset URLs that are going to be loaded
-	*/
+     * The array of asset URLs that are going to be loaded
+     *
+     * @property assetURLs
+     * @type Array<String>
+     */
 	var assetURLs:Array<String>;
 
 	/**
-	 * loadCount
+	 * @property loadCount
+	 * @type Int
 	*/
 	var loadCount:Int;
 
 	/**
-	 * Whether the requests should be treated as cross origin
-	*/
+     * Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean
+     */
 	var crossorigin:Bool;
 
 	/**
 	 * Maps file extension to loader types
+	 * @property loadersByType
+	 * @type Dynamic
 	*/
 	var loadersByType:Dynamic;
 
     /**
-	 * Fired when an item has loaded
+	 * Fired when an item finishes loading
+	 * @property onProgress
+	 * @type Function
 	*/
 	var onProgress:AssetLoader -> Void;
 
     /**
-	 * Fired when all the assets have loaded
+	 * Fired when all the assets are loaded
+	 * @property onComplete
+	 * @type Function
 	*/
 	var onComplete:Void -> Void;
 

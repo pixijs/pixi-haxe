@@ -15,9 +15,7 @@ extern class BitmapText extends DisplayObjectContainer {
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param text {String} The copy that you would like the text to display
-	 * @param style {Object} The style parameters
-	 * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param style {BitmapTextStyle} The style parameters
 	*/
 	function new(text:String, style:BitmapTextStyle):Void;
 
@@ -27,7 +25,7 @@ extern class BitmapText extends DisplayObjectContainer {
      * [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single lines of text
      *
      * @method setStyle
-     * @param style {Object} The style parameters, contained as properties of an object
+     * @param style {BitmapTextStyle} The style parameters, contained as properties of an object
      */
 	function setStyle(style:BitmapTextStyle):Void;
 
@@ -44,7 +42,7 @@ extern class BitmapText extends DisplayObjectContainer {
      * which is defined in the style object
      *
      * @property textWidth
-     * @type Number
+     * @type Float
      */
     var textWidth:Float;
 
@@ -53,11 +51,16 @@ extern class BitmapText extends DisplayObjectContainer {
      * which is defined in the style object
      *
      * @property textHeight
-     * @type Number
+     * @type Float
      */
     var textHeight:Float;
 }
 
+/**
+ * The style parameters
+ * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
+ * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+*/
 typedef BitmapTextStyle = {
 	@:optional var font:String;
 	@:optional var align:String;

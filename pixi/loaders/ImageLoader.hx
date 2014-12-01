@@ -20,14 +20,21 @@ extern class ImageLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-	 * The texture being loaded
-	 */
+     * The texture being loaded
+     *
+     * @property texture
+     * @type Texture
+     */
 	var texture:Texture;
 
 	/**
-	 * if the image is loaded with loadFramedSpriteSheet
-	 * frames will contain the sprite sheet frames
-	 */
+     * if the image is loaded with loadFramedSpriteSheet
+     * frames will contain the sprite sheet frames
+     *
+     * @property frames
+     * @type Array
+     * @readOnly
+     */
 	var frames:Array<Texture>;
 
 	/**
@@ -41,9 +48,9 @@ extern class ImageLoader extends EventTarget {
 	 * Loads image and split it to uniform sized frames
 	 *
 	 * @method loadFramedSpriteSheet
-	 * @param frameWidth {Number} width of each frame
-	 * @param frameHeight {Number} height of each frame
+	 * @param frameWidth {Float} width of each frame
+	 * @param frameHeight {Float} height of each frame
 	 * @param textureName {String} if given, the frames will be cached in <textureName>-<ord> format
 	 */
-	function loadFramedSpriteSheet(frameWidth:Float, frameHeight:Float, textureName:String):Void;
+	function loadFramedSpriteSheet(frameWidth:Float, frameHeight:Float, ?textureName:String):Void;
 }

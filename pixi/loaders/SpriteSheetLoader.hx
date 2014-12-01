@@ -24,28 +24,44 @@ extern class SpriteSheetLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-	 * The url of the bitmap font data
-	 */
+     * The url of the atlas data
+     *
+     * @property url
+     * @type String
+     */
 	var url:String;
 
 	/**
-	 * Whether the requests should be treated as cross origin
-	 */
+     * Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean
+     */
 	var crossorigin:Bool;
 
 	/**
-	 * [read-only] The base url of the bitmap font data
-	 */
+     * [read-only] The base url of the bitmap font data
+     *
+     * @property baseUrl
+     * @type String
+     * @readOnly
+     */
 	var baseUrl:String;
 
 	/**
-	 * The texture being loaded
-	 */
+     * The texture being loaded
+     *
+     * @property texture
+     * @type Texture
+     */
 	var texture:Texture;
 
 	/**
-	 * The frames of the sprite sheet
-	 */
+     * The frames of the sprite sheet
+     *
+     * @property frames
+     * @type Object
+     */
 	var frames:Dynamic;
 
     /**

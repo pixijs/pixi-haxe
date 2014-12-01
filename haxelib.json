@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v2.1.1 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "minor bug fixes",
-  "version": "2.1.5",
+  "releasenote": "minor bug fixes and code cleanup",
+  "version": "2.1.6",
   "url": "https://github.com/adireddy/haxe-pixi",
   "dependencies": {
 

@@ -2,18 +2,24 @@ package pixi;
 
 @:native("PIXI")
 extern class Pixi {
-	
+
+	/*
+	*
+	* This file contains a lot of pixi consts which are used across the rendering engine
+	* @class Pixi
+	*/
+
 	static var WEBGL_RENDERER:Int;
 	static var CANVAS_RENDERER:Int;
 	static var WEBGL:Int;
 	static var HEADLESS:Int;
-	
+
 	static var NONE:Int;
 	static var LEFT:Int;
 	static var RIGHT:Int;
 	static var UP:Int;
 	static var DOWN:Int;
-	
+
 	static var SPRITE:Int;
 	static var BUTTON:Int;
 	static var IMAGE:Int;
@@ -66,7 +72,7 @@ extern class Pixi {
         COLOR:Int,
         LUMINOSITY:Int
     };
-	
+
 	static var scaleModes: {
         DEFAULT:Int,
         LINEAR:Int,

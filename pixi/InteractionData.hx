@@ -9,22 +9,34 @@ extern class InteractionData {
 
 	/**
 	 * Holds all information related to an Interaction event
+	 *
+	 * @class InteractionData
+	 * @constructor
 	 */
 	function new();
 
 	/**
-	 * This point stores the global coords of where the touch/mouse event happened
-	 */
+     * This point stores the global coords of where the touch/mouse event happened
+     *
+     * @property global
+     * @type Point
+     */
 	var global:Point;
 
 	/**
-	 * The target Sprite that was interacted with
-	 */
+     * The target Sprite that was interacted with
+     *
+     * @property target
+     * @type Sprite
+     */
 	var target:Sprite;
 
 	/**
-	 * When passed to an event handler, this will be the original DOM Event that was captured
-	 */
+     * When passed to an event handler, this will be the original DOM Event that was captured
+     *
+     * @property originalEvent
+     * @type Event
+     */
 	var originalEvent:Dynamic;
 
     /**

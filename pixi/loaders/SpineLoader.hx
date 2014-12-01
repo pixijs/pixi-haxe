@@ -22,18 +22,28 @@ extern class SpineLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-	 * The url of the JSON file
-	 */
+     * The url of the json file
+     *
+     * @property url
+     * @type String
+     */
 	var url:String;
 
 	/**
-	 * Whether the requests should be treated as cross origin
-	 */
+     * Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean
+     */
 	var crossorigin:Bool;
 
 	/**
-	 * [read-only] Whether the data has loaded yet
-	 */
+     * [read-only] Whether the data has loaded yet
+     *
+     * @property loaded
+     * @type Boolean
+     * @readOnly
+     */
 	var loaded:Bool;
 
 	/**

@@ -13420,38 +13420,27 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<class path="pixi.Epsy" params="" file="pixi/Epsy.hx" extern="1">
-		<lastTimestamp public="1"><c path="Date"/></lastTimestamp>
-		<emitters public="1"><c path="Array"><d/></c></emitters>
-		<particleRenderer public="1"><c path="pixi.epsy.PixiRenderer"/></particleRenderer>
-		<createEmitter public="1" set="method"><f a="config:x:y">
-	<d/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<c path="pixi.epsy.Emitter"/>
-</f></createEmitter>
-		<loadSystem public="1" set="method"><f a="config:x:y">
-	<d/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Void"/>
-</f></loadSystem>
-		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":native"><e>"PIXI.EPSY"</e></m></meta>
-	</class>
 	<class path="pixi.InteractionData" params="" file="pixi/InteractionData.hx" extern="1">
 		<global public="1">
 			<c path="pixi.core.Point"/>
-			<haxe_doc>* This point stores the global coords of where the touch/mouse event happened</haxe_doc>
+			<haxe_doc>* This point stores the global coords of where the touch/mouse event happened
+     *
+     * @property global
+     * @type Point</haxe_doc>
 		</global>
 		<target public="1">
 			<c path="pixi.display.Sprite"/>
-			<haxe_doc>* The target Sprite that was interacted with</haxe_doc>
+			<haxe_doc>* The target Sprite that was interacted with
+     *
+     * @property target
+     * @type Sprite</haxe_doc>
 		</target>
 		<originalEvent public="1">
 			<d/>
-			<haxe_doc>* When passed to an event handler, this will be the original DOM Event that was captured</haxe_doc>
+			<haxe_doc>* When passed to an event handler, this will be the original DOM Event that was captured
+     *
+     * @property originalEvent
+     * @type Event</haxe_doc>
 		</originalEvent>
 		<getLocalPosition public="1" set="method">
 			<f a="displayObject:?point">
@@ -13468,81 +13457,127 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</getLocalPosition>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Holds all information related to an Interaction event</haxe_doc>
+			<haxe_doc>* Holds all information related to an Interaction event
+	 *
+	 * @class InteractionData
+	 * @constructor</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.InteractionData"</e></m></meta>
 	</class>
 	<class path="pixi.InteractionManager" params="" file="pixi/InteractionManager.hx" extern="1">
 		<stage public="1">
 			<c path="pixi.display.Stage"/>
-			<haxe_doc>* a reference to the stage</haxe_doc>
+			<haxe_doc>* A reference to the stage
+     *
+     * @property stage
+     * @type Stage</haxe_doc>
 		</stage>
-		<resolution public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property resolution
-     * @type Number</haxe_doc>
-		</resolution>
 		<mouse public="1">
 			<c path="pixi.InteractionData"/>
-			<haxe_doc>* the mouse data</haxe_doc>
+			<haxe_doc>* The mouse data
+     *
+     * @property mouse
+     * @type InteractionData</haxe_doc>
 		</mouse>
-		<touchs public="1">
+		<touches public="1">
 			<d/>
-			<haxe_doc>* an object that stores current touches (InteractionData) by id reference</haxe_doc>
-		</touchs>
+			<haxe_doc>* An object that stores current touches (InteractionData) by id reference
+     *
+     * @property touches
+     * @type Object</haxe_doc>
+		</touches>
 		<mouseoverEnabled public="1">
 			<x path="Bool"/>
-			<haxe_doc>* @property mouseoverEnabled</haxe_doc>
+			<haxe_doc>* @property mouseoverEnabled
+     * @type Boolean
+     * @default true</haxe_doc>
 		</mouseoverEnabled>
 		<pool public="1">
 			<c path="Array"><d/></c>
-			<haxe_doc>* tiny little interactiveData pool !</haxe_doc>
+			<haxe_doc>* Tiny little interactiveData pool !
+     *
+     * @property pool
+     * @type Array</haxe_doc>
 		</pool>
-		<interactiveItems public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* An array containing all the iterative items from the our interactive tree</haxe_doc>
-		</interactiveItems>
-		<currentCursorStyle public="1">
-			<c path="String"/>
-			<haxe_doc>* The css style of the cursor that is being used</haxe_doc>
-		</currentCursorStyle>
-		<mouseOut public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Is set to true when the mouse is moved out of the canvas</haxe_doc>
-		</mouseOut>
+		<onMouseMove public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onMouseMove
+     * @type Function</haxe_doc>
+		</onMouseMove>
+		<onMouseDown public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onMouseDown
+     * @type Function</haxe_doc>
+		</onMouseDown>
+		<onMouseOut public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onMouseOut
+     * @type Function</haxe_doc>
+		</onMouseOut>
+		<onMouseUp public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onMouseUp
+     * @type Function</haxe_doc>
+		</onMouseUp>
+		<onTouchStart public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onTouchStart
+     * @type Function</haxe_doc>
+		</onTouchStart>
+		<onTouchEnd public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onTouchEnd
+     * @type Function</haxe_doc>
+		</onTouchEnd>
+		<onTouchMove public="1">
+			<f a="">
+				<c path="pixi.InteractionData"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property onTouchMove
+     * @type Function</haxe_doc>
+		</onTouchMove>
 		<last public="1">
 			<x path="Float"/>
 			<haxe_doc>* @property last
      * @type Number</haxe_doc>
 		</last>
-		<mousedown public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></mousedown>
-		<mouseout public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></mouseout>
-		<mouseup public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></mouseup>
-		<mousemove public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></mousemove>
-		<touchstart public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></touchstart>
-		<touchmove public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></touchmove>
-		<touchend public="1"><f a="">
-	<c path="pixi.InteractionData"/>
-	<x path="Void"/>
-</f></touchend>
+		<currentCursorStyle public="1">
+			<c path="String"/>
+			<haxe_doc>* The css style of the cursor that is being used
+     * @property currentCursorStyle
+     * @type String</haxe_doc>
+		</currentCursorStyle>
+		<mouseOut public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Is set to true when the mouse is moved out of the canvas
+     * @property mouseOut
+     * @type Boolean
+     * @default false</haxe_doc>
+		</mouseOut>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property resolution
+     * @type Number</haxe_doc>
+		</resolution>
 		<new public="1" set="method">
 			<f a="stage">
 				<c path="pixi.display.Stage"/>
@@ -15566,42 +15601,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.TwistFilter"</e></m></meta>
 	</class>
 	<class path="pixi.utils.EventTarget" params="" file="pixi/utils/EventTarget.hx" extern="1">
-		<listeners public="1">
-			<d/>
-			<haxe_doc>* Holds all the listeners</haxe_doc>
-		</listeners>
-		<addEventListener public="1" set="method">
-			<f a="type:listener">
+		<listeners public="1" set="method">
+			<f a="eventName">
 				<c path="String"/>
-				<d/>
-				<x path="Void"/>
+				<c path="Array"><d/></c>
 			</f>
-			<haxe_doc>* Adds a listener for a specific event
-     *
-     * @method addEventListener
-     * @param type {string} A string representing the event type to listen for.
-     * @param listener {function} The callback function that will be fired when the event occurs</haxe_doc>
-		</addEventListener>
-		<on public="1" set="method"><f a="type:listener">
-	<c path="String"/>
-	<d/>
-	<x path="Void"/>
-</f></on>
-		<once public="1" set="method"><f a="type:listener">
-	<c path="String"/>
-	<d/>
-	<x path="Void"/>
-</f></once>
-		<dispatchEvent public="1" set="method">
-			<f a="event">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Fires the event, ie pretends that the event has happened
-     *
-     * @method dispatchEvent
-     * @param event {Event} the event object</haxe_doc>
-		</dispatchEvent>
+			<haxe_doc><![CDATA[* Return a list of assigned event listeners.
+	 *
+	 * @method listeners
+	 * @param eventName {String} The events that should be listed.
+	 * @returns {Array<Dynamic>} An array of listener functions]]></haxe_doc>
+		</listeners>
 		<emit public="1" set="method">
 			<f a="eventName:?data">
 				<c path="String"/>
@@ -15611,71 +15621,129 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Emit an event to all registered event listeners.
 	 *
 	 * @method emit
+	 * @alias dispatchEvent
 	 * @param eventName {String} The name of the event.
-	 * @return Boolean</haxe_doc>
+	 * @returns {Bool} Indication if we've emitted an event.</haxe_doc>
 		</emit>
-		<removeEventListener public="1" set="method">
-			<f a="type:listener">
+		<dispatchEvent public="1" set="method"><f a="eventName:?data">
+	<c path="String"/>
+	<d/>
+	<x path="Bool"/>
+</f></dispatchEvent>
+		<on public="1" set="method">
+			<f a="eventName:callback">
 				<c path="String"/>
 				<d/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Removes the specified listener that was assigned to the specified event type
-     *
-     * @method removeEventListener
-     * @param type {string} A string representing the event type which will have its listener removed
-     * @param listener {function} The callback function that was be fired when the event occured</haxe_doc>
-		</removeEventListener>
-		<off public="1" set="method"><f a="type:listener">
+			<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @method on
+	 * @alias addEventListener
+	 * @param eventName {String} Name of the event.
+	 * @param callback {Functon} Callback function.</haxe_doc>
+		</on>
+		<addEventListener public="1" set="method"><f a="eventName:fn">
 	<c path="String"/>
 	<d/>
 	<x path="Void"/>
-</f></off>
-		<mixin public="1" set="method"><f a="object">
+</f></addEventListener>
+		<once public="1" set="method">
+			<f a="eventName:callback">
+				<c path="String"/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @method once
+	 * @param eventName {String} Name of the event.
+	 * @param callback {Function} Callback function.</haxe_doc>
+		</once>
+		<off public="1" set="method">
+			<f a="eventName:callback">
+				<c path="String"/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove event listeners.
+	 *
+	 * @method off
+	 * @alias removeEventListener
+	 * @param eventName {String} The event we want to remove.
+	 * @param callback {Function} The listener that we need to find.</haxe_doc>
+		</off>
+		<removeEventListener public="1" set="method"><f a="eventName:callback">
+	<c path="String"/>
 	<d/>
 	<x path="Void"/>
-</f></mixin>
+</f></removeEventListener>
 		<removeAllEventListeners public="1" set="method">
 			<f a="eventName">
 				<c path="String"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Removes all the listeners that were active for the specified event type
-     *
-     * @method removeAllEventListeners
-     * @param eventName {string} A string representing the event type which will have all its listeners removed</haxe_doc>
+			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
+	 *
+	 * @method removeAllListeners
+	 * @param eventName {String} The event you want to remove all listeners for.</haxe_doc>
 		</removeAllEventListeners>
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Mixins event emitter functionality to a class
+	 *
+	 * @class EventTarget
+	 * @example
+	 *      function MyEmitter() {}
+	 *
+	 *      PIXI.EventTarget.mixin(MyEmitter.prototype);
+	 *
+	 *      var em = new MyEmitter();
+	 *      em.emit('eventName', 'some data', 'some more data', {}, null, ...);</haxe_doc>
+		</new>
 		<meta><m n=":native"><e>"PIXI.EventTarget"</e></m></meta>
 	</class>
 	<class path="pixi.loaders.AssetLoader" params="" file="pixi/loaders/AssetLoader.hx" extern="1">
 		<extends path="pixi.utils.EventTarget"/>
 		<assetURLs public="1">
 			<c path="Array"><c path="String"/></c>
-			<haxe_doc>* The array of asset URLs that are going to be loaded</haxe_doc>
+			<haxe_doc><![CDATA[* The array of asset URLs that are going to be loaded
+     *
+     * @property assetURLs
+     * @type Array<String>]]></haxe_doc>
 		</assetURLs>
 		<loadCount public="1">
 			<x path="Int"/>
-			<haxe_doc>* loadCount</haxe_doc>
+			<haxe_doc>* @property loadCount
+	 * @type Int</haxe_doc>
 		</loadCount>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<loadersByType public="1">
 			<d/>
-			<haxe_doc>* Maps file extension to loader types</haxe_doc>
+			<haxe_doc>* Maps file extension to loader types
+	 * @property loadersByType
+	 * @type Dynamic</haxe_doc>
 		</loadersByType>
 		<onProgress public="1">
 			<f a="">
 				<c path="pixi.loaders.AssetLoader"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Fired when an item has loaded</haxe_doc>
+			<haxe_doc>* Fired when an item finishes loading
+	 * @property onProgress
+	 * @type Function</haxe_doc>
 		</onProgress>
 		<onComplete public="1">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Fired when all the assets have loaded</haxe_doc>
+			<haxe_doc>* Fired when all the assets are loaded
+	 * @property onComplete
+	 * @type Function</haxe_doc>
 		</onComplete>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -15720,23 +15788,41 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<url public="1">
 			<c path="String"/>
-			<haxe_doc>* The url</haxe_doc>
+			<haxe_doc>* The url of the json file
+     *
+     * @property url
+     * @type String</haxe_doc>
 		</url>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<baseUrl public="1">
 			<c path="String"/>
-			<haxe_doc>* [read-only] The base url</haxe_doc>
+			<haxe_doc>* [read-only] The base url of json file
+     *
+     * @property baseUrl
+     * @type String
+     * @readOnly</haxe_doc>
 		</baseUrl>
 		<loaded public="1">
 			<x path="Bool"/>
-			<haxe_doc>* [read-only] Whether the data has loaded yet</haxe_doc>
+			<haxe_doc>* [read-only] Whether the data has loaded yet
+     *
+     * @property loaded
+     * @type Boolean
+     * @readOnly</haxe_doc>
 		</loaded>
+		<json public="1">
+			<d/>
+			<haxe_doc>* Parsed json response</haxe_doc>
+		</json>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Loads the JSON data
+			<haxe_doc>* Starts loading the JSON file
 	 *
 	 * @method load</haxe_doc>
 		</load>
@@ -15761,19 +15847,32 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<url public="1">
 			<c path="String"/>
-			<haxe_doc>* The url of the bitmap font data</haxe_doc>
+			<haxe_doc>* The url of the bitmap font data
+     *
+     * @property url
+     * @type String</haxe_doc>
 		</url>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<baseUrl public="1">
 			<c path="String"/>
-			<haxe_doc>* [read-only] The base url of the bitmap font data</haxe_doc>
+			<haxe_doc>* [read-only] The base url of the bitmap font data
+     *
+     * @property baseUrl
+     * @type String
+     * @readOnly</haxe_doc>
 		</baseUrl>
 		<texture public="1">
 			<c path="pixi.textures.Texture"/>
-			<haxe_doc>* [read-only] The texture of the bitmap font</haxe_doc>
+			<haxe_doc>* [read-only] The texture of the bitmap font
+     *
+     * @property texture
+     * @type Texture</haxe_doc>
 		</texture>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -15804,12 +15903,19 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<texture public="1">
 			<c path="pixi.textures.Texture"/>
-			<haxe_doc>* The texture being loaded</haxe_doc>
+			<haxe_doc>* The texture being loaded
+     *
+     * @property texture
+     * @type Texture</haxe_doc>
 		</texture>
 		<frames public="1">
 			<c path="Array"><c path="pixi.textures.Texture"/></c>
 			<haxe_doc>* if the image is loaded with loadFramedSpriteSheet
-	 * frames will contain the sprite sheet frames</haxe_doc>
+     * frames will contain the sprite sheet frames
+     *
+     * @property frames
+     * @type Array
+     * @readOnly</haxe_doc>
 		</frames>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -15818,7 +15924,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method load</haxe_doc>
 		</load>
 		<loadFramedSpriteSheet public="1" set="method">
-			<f a="frameWidth:frameHeight:textureName">
+			<f a="frameWidth:frameHeight:?textureName">
 				<x path="Float"/>
 				<x path="Float"/>
 				<c path="String"/>
@@ -15827,8 +15933,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc><![CDATA[* Loads image and split it to uniform sized frames
 	 *
 	 * @method loadFramedSpriteSheet
-	 * @param frameWidth {Number} width of each frame
-	 * @param frameHeight {Number} height of each frame
+	 * @param frameWidth {Float} width of each frame
+	 * @param frameHeight {Float} height of each frame
 	 * @param textureName {String} if given, the frames will be cached in <textureName>-<ord> format]]></haxe_doc>
 		</loadFramedSpriteSheet>
 		<new public="1" set="method">
@@ -15853,25 +15959,42 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<url public="1">
 			<c path="String"/>
-			<haxe_doc>* The url of the bitmap font data</haxe_doc>
+			<haxe_doc>* The url of the json file
+     *
+     * @property url
+     * @type String</haxe_doc>
 		</url>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<baseUrl public="1">
 			<c path="String"/>
-			<haxe_doc>* [read-only] The base url of the bitmap font data</haxe_doc>
+			<haxe_doc>* [read-only] The base url of the json file
+     *
+     * @property baseUrl
+     * @type String
+     * @readOnly</haxe_doc>
 		</baseUrl>
 		<loaded public="1">
 			<x path="Bool"/>
-			<haxe_doc>* [read-only] Whether the data has loaded yet</haxe_doc>
+			<haxe_doc>* [read-only] Whether the data has loaded yet
+     *
+     * @property loaded
+     * @type Boolean
+     * @readOnly</haxe_doc>
 		</loaded>
 		<json public="1">
 			<d/>
 			<haxe_doc>* Parsed json response</haxe_doc>
 		</json>
-		<ajaxRequest public="1"><d/></ajaxRequest>
+		<ajaxRequest public="1">
+			<d/>
+			<haxe_doc>* XDomainRequest for cross origin</haxe_doc>
+		</ajaxRequest>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Loads the JSON data
@@ -15900,15 +16023,25 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<url public="1">
 			<c path="String"/>
-			<haxe_doc>* The url of the JSON file</haxe_doc>
+			<haxe_doc>* The url of the json file
+     *
+     * @property url
+     * @type String</haxe_doc>
 		</url>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<loaded public="1">
 			<x path="Bool"/>
-			<haxe_doc>* [read-only] Whether the data has loaded yet</haxe_doc>
+			<haxe_doc>* [read-only] Whether the data has loaded yet
+     *
+     * @property loaded
+     * @type Boolean
+     * @readOnly</haxe_doc>
 		</loaded>
 		<load public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -15941,23 +16074,39 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.utils.EventTarget"/>
 		<url public="1">
 			<c path="String"/>
-			<haxe_doc>* The url of the bitmap font data</haxe_doc>
+			<haxe_doc>* The url of the atlas data
+     *
+     * @property url
+     * @type String</haxe_doc>
 		</url>
 		<crossorigin public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the requests should be treated as cross origin</haxe_doc>
+			<haxe_doc>* Whether the requests should be treated as cross origin
+     *
+     * @property crossorigin
+     * @type Boolean</haxe_doc>
 		</crossorigin>
 		<baseUrl public="1">
 			<c path="String"/>
-			<haxe_doc>* [read-only] The base url of the bitmap font data</haxe_doc>
+			<haxe_doc>* [read-only] The base url of the bitmap font data
+     *
+     * @property baseUrl
+     * @type String
+     * @readOnly</haxe_doc>
 		</baseUrl>
 		<texture public="1">
 			<c path="pixi.textures.Texture"/>
-			<haxe_doc>* The texture being loaded</haxe_doc>
+			<haxe_doc>* The texture being loaded
+     *
+     * @property texture
+     * @type Texture</haxe_doc>
 		</texture>
 		<frames public="1">
 			<d/>
-			<haxe_doc>* The frames of the sprite sheet</haxe_doc>
+			<haxe_doc>* The frames of the sprite sheet
+     *
+     * @property frames
+     * @type Object</haxe_doc>
 		</frames>
 		<json public="1">
 			<d/>
@@ -17876,7 +18025,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single lines of text
      *
      * @method setStyle
-     * @param style {Object} The style parameters, contained as properties of an object</haxe_doc>
+     * @param style {BitmapTextStyle} The style parameters, contained as properties of an object</haxe_doc>
 		</setStyle>
 		<setText public="1" set="method">
 			<f a="text">
@@ -17894,7 +18043,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * which is defined in the style object
      *
      * @property textWidth
-     * @type Number</haxe_doc>
+     * @type Float</haxe_doc>
 		</textWidth>
 		<textHeight public="1">
 			<x path="Float"/>
@@ -17902,7 +18051,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * which is defined in the style object
      *
      * @property textHeight
-     * @type Number</haxe_doc>
+     * @type Float</haxe_doc>
 		</textHeight>
 		<new public="1" set="method">
 			<f a="text:style">
@@ -17919,22 +18068,25 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param text {String} The copy that you would like the text to display
-	 * @param style {Object} The style parameters
-	 * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
+	 * @param style {BitmapTextStyle} The style parameters</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BitmapText"</e></m></meta>
 	</class>
-	<typedef path="pixi.text.BitmapTextStyle" params="" file="pixi/text/BitmapText.hx" module="pixi.text.BitmapText"><a>
-	<font>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</font>
-	<align>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</align>
-</a></typedef>
+	<typedef path="pixi.text.BitmapTextStyle" params="" file="pixi/text/BitmapText.hx" module="pixi.text.BitmapText">
+		<a>
+			<font>
+				<c path="String"/>
+				<meta><m n=":optional"/></meta>
+			</font>
+			<align>
+				<c path="String"/>
+				<meta><m n=":optional"/></meta>
+			</align>
+		</a>
+		<haxe_doc>* The style parameters
+ * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
+ * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
+	</typedef>
 	<class path="pixi.text.Text" params="" file="pixi/text/Text.hx" extern="1">
 		<extends path="pixi.display.Sprite"/>
 		<setStyle public="1" set="method">
@@ -17945,14 +18097,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Set the style of the text
 	 *
 	 * @method setStyle
-	 * @param [style] {Object} The style parameters
-	 * @param [style.font='bold 20pt Arial'] {String} The style and size of the font
-	 * @param [style.fill='black'] {Object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
+	 * @param [style] {TextStyle} The style parameters
+	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
+	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke='black'] {String} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g ''#FCFF00'
+	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
 	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Number} The width at which text will wrap
+	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
 	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
@@ -17980,11 +18132,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</destroy>
 		<canvas public="1">
 			<c path="js.html.CanvasElement"/>
-			<haxe_doc>* The canvas element that everything is drawn to</haxe_doc>
+			<haxe_doc>* The canvas element that everything is drawn to
+	 * @property canvas
+	 * @type CanvasElement</haxe_doc>
 		</canvas>
 		<context public="1">
 			<c path="js.html.CanvasRenderingContext2D"/>
-			<haxe_doc>* The canvas 2d context that everything is drawn with</haxe_doc>
+			<haxe_doc>* The canvas 2d context that everything is drawn with
+	 * @property context
+	 * @type CanvasRenderingContext2D</haxe_doc>
 		</context>
 		<new public="1" set="method">
 			<f a="text:?style">
@@ -18000,14 +18156,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends Sprite
 	 * @constructor
 	 * @param text {String} The copy that you would like the text to display
-	 * @param [style] {Object} The style parameters
+	 * @param [style] {TextStyle} The style parameters
 	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
+	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g ''#FCFF00'
+	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
 	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Number} The width at which text will wrap, it needs wordWrap to be set to true
+	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
 	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
 	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
@@ -18512,16 +18668,16 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * the browser then this function will return a canvas renderer
      * @class autoDetectRenderer
      * @static
-     * @param width=800 {Number} the width of the renderers view
-     * @param height=600 {Number} the height of the renderers view
+     * @param width=800 {Float} the width of the renderers view
+     * @param height=600 {Float} the height of the renderers view
      *
-     * @param [options] {Object} The optional renderer parameters
+     * @param [options] {RenderingOptions} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
-     *</haxe_doc>
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+ 	* @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+     * @return CanvasRenderer|WebGLRenderer</haxe_doc>
 			<overloads><autoDetectRenderer public="1" set="method">
 	<f a="width:height:?options">
 		<x path="Float"/>
@@ -18534,22 +18690,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * the browser then this function will return a canvas renderer
      * @class autoDetectRenderer
      * @static
-     * @param width=800 {Number} the width of the renderers view
-     * @param height=600 {Number} the height of the renderers view
+     * @param width=800 {Float} the width of the renderers view
+     * @param height=600 {Float} the height of the renderers view
      *
-     * @param [options] {Object} The optional renderer parameters
+     * @param [options] {RenderingOptions} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
-     *</haxe_doc>
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+ 	* @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+     * @return CanvasRenderer|WebGLRenderer</haxe_doc>
 </autoDetectRenderer></overloads>
 		</autoDetectRenderer>
 		<autoDetectRecommendedRenderer public="1" set="method" static="1">
 			<f a="width:height:?options">
-				<x path="Int"/>
-				<x path="Int"/>
+				<x path="Float"/>
+				<x path="Float"/>
 				<t path="pixi.utils.RenderingOptions"/>
 				<c path="pixi.renderers.canvas.CanvasRenderer"/>
 			</f>
@@ -18563,12 +18719,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
      *
-     * @param [options] {Object} The optional renderer parameters
+     * @param [options] {RenderingOptions} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+     * @return CanvasRenderer|WebGLRenderer
      *</haxe_doc>
 			<overloads><autoDetectRecommendedRenderer public="1" set="method">
 	<f a="width:height:?options">
@@ -18587,12 +18744,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
      *
-     * @param [options] {Object} The optional renderer parameters
+     * @param [options] {RenderingOptions} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+     * @return CanvasRenderer|WebGLRenderer
      *</haxe_doc>
 </autoDetectRecommendedRenderer></overloads>
 		</autoDetectRecommendedRenderer>
@@ -18618,23 +18776,86 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<clearBeforeRender>
 		<x path="Bool"/>
 		<meta><m n=":optional"/></meta>
+		<haxe_doc>* canvas specific</haxe_doc>
 	</clearBeforeRender>
 	<antialias>
 		<x path="Bool"/>
 		<meta><m n=":optional"/></meta>
+		<haxe_doc>* webgl specific</haxe_doc>
 	</antialias>
 </a></typedef>
+	<class path="pixi.utils.Event" params="" file="pixi/utils/Event.hx" extern="1">
+		<stopPropagation public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the propagation of events up the scene graph (prevents bubbling).
+	 *
+	 * @method stopPropagation</haxe_doc>
+		</stopPropagation>
+		<stopImmediatePropagation public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the propagation of events to sibling listeners (no longer calls any listeners).
+	 *
+	 * @method stopImmediatePropagation</haxe_doc>
+		</stopImmediatePropagation>
+		<new public="1" set="method">
+			<f a="target:name:?data">
+				<d/>
+				<c path="String"/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Creates an homogenous object for tracking events so users can know what to expect.
+	 *
+	 * @class Event
+	 * @extends Object
+	 * @constructor
+	 * @param target {Object} The target object that the event is called on
+	 * @param name {String} The string name of the event that was triggered
+	 * @param data {Object} Arbitrary event data to pass along</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Event"</e></m></meta>
+	</class>
 	<class path="pixi.utils.Polyk" params="" file="pixi/utils/Polyk.hx" extern="1"><meta><m n=":native"><e>"PolyK"</e></m></meta></class>
 	<class path="pixi.utils.Stats" params="" file="pixi/utils/Stats.hx" extern="1">
-		<domElement public="1" set="null"><c path="js.html.DivElement"/></domElement>
-		<begin public="1" set="method"><f a=""><x path="Void"/></f></begin>
-		<end public="1" set="method"><f a=""><x path="Void"/></f></end>
-		<update public="1" set="method"><f a=""><x path="Void"/></f></update>
-		<setMode public="1" set="method"><f a="value">
-	<x path="Int"/>
-	<x path="Void"/>
-</f></setMode>
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<domElement public="1" set="null">
+			<c path="js.html.DivElement"/>
+			<haxe_doc>* Stats DOM element
+     * @property domElement
+     * @type DivElement</haxe_doc>
+		</domElement>
+		<begin public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Begin stats
+	 *
+	 * @method begin</haxe_doc>
+		</begin>
+		<end public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* End stats
+	 *
+	 * @method end</haxe_doc>
+		</end>
+		<update public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Update stats
+	 *
+	 * @method update</haxe_doc>
+		</update>
+		<setMode public="1" set="method">
+			<f a="value">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the display mode.
+	 *
+	 * @method setMode
+	 * @param value {Int} 0: fps, 1: ms</haxe_doc>
+		</setMode>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* https://github.com/mrdoob/stats.js/ (JS stats)
+	 * https://github.com/luizbills/stats.js.hx (Original Haxe Externs</haxe_doc>
+		</new>
 		<meta><m n=":native"><e>"Stats"</e></m></meta>
 	</class>
 	<class path="pixi.utils.Utils" params="" file="pixi/utils/Utils.hx" extern="1">

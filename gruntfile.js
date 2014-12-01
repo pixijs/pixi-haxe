@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         },
 
         exec: {
-            docs: "haxelib run chxdoc -o docs -f docs.xml " +
+            docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/haxe-pixi -f docs.xml " +
                 " --deny=demos.*,js.*,haxe.*,/ " +
                 "--title='Externs of pixi.js for Haxe' " +
                 "--subtitle='<a href='http://adireddy.github.io/haxe-pixi' target='_blank'>haxe-pixi</a>'"
