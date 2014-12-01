@@ -2,73 +2,92 @@
 -cp src
 -main demos.basics.Main
 -js demos/_output/hx-pixi-basics.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.bitmaptext.Main
 -js demos/_output/hx-pixi-bitmaptext.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.graphics.Main
 -js demos/_output/hx-pixi-graphics.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.movieclip.Main
 -js demos/_output/hx-pixi-movieclip.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.pixidude.Main
 -js demos/_output/hx-pixi-pixidude.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.rendertexture.Main
 -js demos/_output/hx-pixi-rendertexture.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.snake.Main
 -js demos/_output/hx-pixi-snake.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.spine.Main
 -js demos/_output/hx-pixi-spine.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.spritesheet.Main
 -js demos/_output/hx-pixi-spritesheet.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.tilingsprite.Main
 -js demos/_output/hx-pixi-tilingsprite.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.blur.Main
 -js demos/_output/hx-pixi-blur.js
+-dce full
 
 --next
 -cp demos
 -cp src
 -main demos.colourmatrix.Main
 -js demos/_output/hx-pixi-colourmatrix.js
-
--D source-map-content
--debug
 -dce full
+
+--next
+-cp demos
+-cp src
+-main demos.nape.Main
+-js demos/_output/hx-pixi-nape.js
+-dce full
+-lib nape
+
+#-D source-map-content
+#-debug

@@ -78,5 +78,3 @@ Math.isNaN = function(i1) {
 };
 demos.colourmatrix.Main.main();
 })();
-
-//# sourceMappingURL=hx-pixi-colourmatrix.js.map
