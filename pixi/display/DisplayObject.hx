@@ -199,8 +199,8 @@ extern class DisplayObject {
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
      * @return {Texture} a texture of the graphics object
      */
-    @:overload(function(resolution:Float, scaleMode:Int, renderer:CanvasRenderer):Texture{})
-	function generateTexture(resolution:Float, scaleMode:Int, renderer:WebGLRenderer):Texture;
+    @:overload(function(resolution:Float, scaleMode:Int, ?renderer:CanvasRenderer):Texture{})
+	function generateTexture(resolution:Float, scaleMode:Int, ?renderer:WebGLRenderer):Texture;
 
 	function updateCache():Void;
 
