@@ -4,6 +4,7 @@ import pixi.core.Matrix;
 import pixi.core.Rectangle;
 import pixi.primitives.Graphics;
 import pixi.core.Point;
+import pixi.textures.Texture;
 
 @:native("PIXI.DisplayObject")
 extern class DisplayObject {
@@ -186,7 +187,17 @@ extern class DisplayObject {
 	*/
 	function setStageReference(stage:Stage):Void;
 
-	function generateTexture(renderer:Dynamic):Void;
+    /**
+     * Useful function that returns a texture of the displayObject object that can then be used to create sprites
+     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+     *
+     * @method generateTexture
+     * @param resolution {Number} The resolution of the texture being generated
+     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+     * @return {Texture} a texture of the graphics object
+     */
+	function generateTexture(resolution:Int, scaleMode:Int, renderer:Dynamic):Texture;
 
 	function updateCache():Void;
 
