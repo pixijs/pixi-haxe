@@ -24,22 +24,22 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 Ported from pixi.js
 
-* [Basics](http://www.arm.rocks/haxe-pixi-demos/basics.html)
-* [Graphics](http://www.arm.rocks/haxe-pixi-demos/graphics.html)
-* [Movieclip](http://www.arm.rocks/haxe-pixi-demos/movieclip.html)
-* [Spritesheet](http://www.arm.rocks/haxe-pixi-demos/spritesheet.html)
-* [Snake](http://www.arm.rocks/haxe-pixi-demos/snake.html)
-* [Spine](http://www.arm.rocks/haxe-pixi-demos/spine.html)
-* [Render Texture](http://www.arm.rocks/haxe-pixi-demos/rendertexture.html)
-* [Pixi Dude](http://www.arm.rocks/haxe-pixi-demos/pixidude.html)
-* [Bitmap Text](http://www.arm.rocks/haxe-pixi-demos/bitmaptext.html)
-* [Tiling Sprite](http://www.arm.rocks/haxe-pixi-demos/tiling.html)
-* [Blur (Depth of Field)](http://www.arm.rocks/haxe-pixi-demos/blur.html)
-* [Colour Matrix](http://www.arm.rocks/haxe-pixi-demos/colourmatrix.html)
+* [Basics](http://adireddy.github.io/demos/haxe-pixi/basics.html)
+* [Graphics](http://adireddy.github.io/demos/haxe-pixi/graphics.html)
+* [Movieclip](http://adireddy.github.io/demos/haxe-pixi/movieclip.html)
+* [Spritesheet](http://adireddy.github.io/demos/haxe-pixi/spritesheet.html)
+* [Snake](http://adireddy.github.io/demos/haxe-pixi/snake.html)
+* [Spine](http://adireddy.github.io/demos/haxe-pixi/spine.html)
+* [Render Texture](http://adireddy.github.io/demos/haxe-pixi/rendertexture.html)
+* [Pixi Dude](http://adireddy.github.io/demos/haxe-pixi/pixidude.html)
+* [Bitmap Text](http://adireddy.github.io/demos/haxe-pixi/bitmaptext.html)
+* [Tiling Sprite](http://adireddy.github.io/demos/haxe-pixi/tiling.html)
+* [Blur (Depth of Field)](http://adireddy.github.io/demos/haxe-pixi/blur.html)
+* [Colour Matrix](http://adireddy.github.io/demos/haxe-pixi/colourmatrix.html)
 
 New Demos
 
-* [Nape Physics](http://www.arm.rocks/haxe-pixi-demos/nape.html)
+* [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
 
 Look at the demos folder for the source code of above examples.
 
