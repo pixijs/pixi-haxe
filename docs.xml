@@ -19287,56 +19287,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Stage"</e></m></meta>
 	</class>
-	<class path="pixi.epsy.Emitter" params="" file="pixi/epsy/Emitter.hx" extern="1">
-		<id public="1"><x path="Float"/></id>
-		<container public="1"><d/></container>
-		<settings public="1"><d/></settings>
-		<_baseSystem public="1"><d/></_baseSystem>
-		<_totalParticles public="1"><x path="Int"/></_totalParticles>
-		<emissionRate public="1"><x path="Int"/></emissionRate>
-		<allOrNone public="1"><x path="Bool"/></allOrNone>
-		<aFactor public="1"><d/></aFactor>
-		<xFactor public="1"><d/></xFactor>
-		<active public="1"><x path="Bool"/></active>
-		<duration public="1"><x path="Float"/></duration>
-		<cycles public="1"><d/></cycles>
-		<border public="1"><d/></border>
-		<recyclable public="1"><c path="Array"><d/></c></recyclable>
-		<zIndex public="1"><x path="Int"/></zIndex>
-		<xEquation public="1"><c path="String"/></xEquation>
-		<yEquation public="1"><c path="String"/></yEquation>
-		<posTransform public="1"><d/></posTransform>
-		<particles public="1"><d/></particles>
-		<totalParticles public="1"><x path="Int"/></totalParticles>
-		<load public="1" set="method"><f a="config">
-	<d/>
-	<x path="Void"/>
-</f></load>
-		<save public="1" set="method"><f a=""><d/></f></save>
-		<restart public="1" set="method"><f a=""><x path="Void"/></f></restart>
-		<reset public="1" set="method"><f a=""><x path="Void"/></f></reset>
-		<kill public="1" set="method"><f a=""><x path="Void"/></f></kill>
-		<update public="1" set="method"><f a="delta">
-	<x path="Float"/>
-	<x path="Void"/>
-</f></update>
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":native"><e>"PIXI.Emitter"</e></m></meta>
-	</class>
-	<class path="pixi.epsy.PixiRenderer" params="" file="pixi/epsy/PixiRenderer.hx" extern="1">
-		<render public="1" set="method"><f a="emitter">
-	<c path="pixi.epsy.Emitter"/>
-	<x path="Void"/>
-</f></render>
-		<hideAllParticles public="1" set="method"><f a="emitter">
-	<c path="pixi.epsy.Emitter"/>
-	<x path="Void"/>
-</f></hideAllParticles>
-		<sort public="1" set="method"><f a=""><x path="Void"/></f></sort>
-		<reset public="1" set="method"><f a=""><x path="Void"/></f></reset>
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":native"><e>"PIXI.PixiRenderer"</e></m></meta>
-	</class>
 	<class path="pixi.extras.Strip" params="" file="pixi/extras/Strip.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<texture public="1">
