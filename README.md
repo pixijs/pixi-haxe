@@ -5,7 +5,7 @@ haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=ma
 
 Externs of pixi.js (v2.1.1) for Haxe - 2D webGL renderer with canvas fallback.
 
-If you are looking for pixi.js (v1.6.1) externs, you can get them from https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3
+If you are looking for pixi.js (v1.6.1) externs, you can download them from [here](https://github.com/adireddy/haxe-pixi/releases/tag/v1.6.1-e0.1.3).
 
 ### Installation ###
 
@@ -18,9 +18,7 @@ Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
 
 ### Issues ###
 
-Found any bug? Please create an issue on GitHub.
-
-https://github.com/adireddy/haxe-pixi/issues
+Found any bug? Please create an [issue](https://github.com/adireddy/haxe-pixi/issues) on GitHub.
 
 ### Demos ###
 
