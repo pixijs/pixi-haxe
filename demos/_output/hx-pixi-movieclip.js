@@ -1,4 +1,8 @@
 (function () { "use strict";
+var Std = function() { };
+Std.random = function(x) {
+	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
+};
 var demos = {};
 demos.movieclip = {};
 demos.movieclip.Main = function() {
@@ -39,7 +43,7 @@ demos.movieclip.Main.prototype = {
 			explosion.anchor.y = 0.5;
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
-			explosion.gotoAndPlay(Math.random() * 27);
+			explosion.gotoAndPlay(Std.random(27));
 			explosion.animationSpeed = 0.8;
 			this._stage.addChild(explosion);
 		}

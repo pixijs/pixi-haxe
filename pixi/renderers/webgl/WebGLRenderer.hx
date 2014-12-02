@@ -18,14 +18,14 @@ extern class WebGLRenderer {
      *
      * @class WebGLRenderer
      * @constructor
-     * @param [width=0] {Number} the width of the canvas view
-     * @param [height=0] {Number} the height of the canvas view
+     * @param [width=0] {Float} the width of the canvas view
+     * @param [height=0] {Float} the height of the canvas view
      * @param [options] {Object} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
      * @param [options.transparent=false] {Bool} If the render view is transparent, default false
      * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
      * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
      */
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
@@ -33,7 +33,7 @@ extern class WebGLRenderer {
      * Whether the render view is transparent
      *
      * @property transparent
-     * @type Boolean
+     * @type Bool
      */
 	var transparent:Bool;
 
@@ -41,7 +41,7 @@ extern class WebGLRenderer {
      * The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
      *
      * @property preserveDrawingBuffer
-     * @type Boolean
+     * @type Bool
      */
 	var preserveDrawingBuffer:Bool;
 
@@ -49,7 +49,7 @@ extern class WebGLRenderer {
      * The width of the canvas view
      *
      * @property width
-     * @type Number
+     * @type Float
      * @default 800
      */
 	var width:Float;
@@ -58,7 +58,7 @@ extern class WebGLRenderer {
      * The height of the canvas view
      *
      * @property height
-     * @type Number
+     * @type Float
      * @default 600
      */
 	var height:Float;
@@ -93,8 +93,8 @@ extern class WebGLRenderer {
 	 * resizes the webGL view to the specified width and height
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the webGL view
-	 * @param height {Number} the new height of the webGL view
+	 * @param width {Float} the new width of the webGL view
+	 * @param height {Float} the new height of the webGL view
 	 */
 	function resize(width:Float, height:Float):Void;
 

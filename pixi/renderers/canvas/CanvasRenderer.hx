@@ -15,12 +15,12 @@ extern class CanvasRenderer {
      *
      * @class CanvasRenderer
      * @constructor
-     * @param [width=800] {Number} the width of the canvas view
-     * @param [height=600] {Number} the height of the canvas view
+     * @param [width=800] {Float} the width of the canvas view
+     * @param [height=600] {Float} the height of the canvas view
      * @param [options] {Object} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
      * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
      * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      */
 	function new(width:Float, height:Float, ?options:RenderingOptions);
@@ -32,7 +32,7 @@ extern class CanvasRenderer {
      * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
      *
      * @property clearBeforeRender
-     * @type Boolean
+     * @type Bool
      * @default
      */
 	var clearBeforeRender:Bool;
@@ -41,7 +41,7 @@ extern class CanvasRenderer {
      * Whether the render view is transparent
      *
      * @property transparent
-     * @type Boolean
+     * @type Bool
      */
 	var transparent:Bool;
 
@@ -49,7 +49,7 @@ extern class CanvasRenderer {
      * The width of the canvas view
      *
      * @property width
-     * @type Number
+     * @type Float
      * @default 800
      */
 	var width:Float;
@@ -58,7 +58,7 @@ extern class CanvasRenderer {
      * The height of the canvas view
      *
      * @property height
-     * @type Number
+     * @type Float
      * @default 600
      */
 	var height:Float;
@@ -104,8 +104,8 @@ extern class CanvasRenderer {
 	 * Resizes the canvas view to the specified width and height
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the canvas view
-	 * @param height {Number} the new height of the canvas view
+	 * @param width {Float} the new width of the canvas view
+	 * @param height {Float} the new height of the canvas view
 	 */
 	function resize(width:Float, height:Float):Void;
 

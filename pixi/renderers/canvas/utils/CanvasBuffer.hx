@@ -11,8 +11,8 @@ extern class CanvasBuffer {
 	 *
 	 * @class CanvasBuffer
 	 * @constructor
-	 * @param width {Number} the width for the newly created canvas
-	 * @param height {Number} the height for the newly created canvas
+	 * @param width {Float} the width for the newly created canvas
+	 * @param height {Float} the height for the newly created canvas
 	 */
 	function new(width:Float, height:Float);
 
@@ -20,8 +20,8 @@ extern class CanvasBuffer {
 	 * Resizes the canvas to the specified width and height.
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the canvas
-	 * @param height {Number} the new height of the canvas
+	 * @param width {Float} the new width of the canvas
+	 * @param height {Float} the new height of the canvas
 	 */
 	function resize(width:Float, height:Float):Void;
 
@@ -29,7 +29,7 @@ extern class CanvasBuffer {
      * The width of the Canvas in pixels.
      *
      * @property width
-     * @type Number
+     * @type Float
      */
 	var width:Float;
 
@@ -37,7 +37,7 @@ extern class CanvasBuffer {
      * The height of the Canvas in pixels.
      *
      * @property height
-     * @type Number
+     * @type Float
      */
 	var height:Float;
 

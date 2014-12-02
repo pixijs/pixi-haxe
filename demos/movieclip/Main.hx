@@ -37,7 +37,7 @@ class Main {
 		var explosionTextures = [];
 
 		var texture:Texture;
-		for (i in 0...26) {
+		for (i in 0 ... 26) {
 			texture = Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
 			explosionTextures.push(texture);
 		}
@@ -53,7 +53,7 @@ class Main {
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
 
-			explosion.gotoAndPlay(Math.random() * 27);
+			explosion.gotoAndPlay(Std.random(27));
 			explosion.animationSpeed = 0.8;
 
 			_stage.addChild(explosion);

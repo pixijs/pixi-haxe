@@ -19,7 +19,7 @@ extern class MovieClip extends Sprite {
      * The speed that the MovieClip will play at. Higher is faster, lower is slower
      *
      * @property animationSpeed
-     * @type Number
+     * @type Float
      * @default 1
      */
 	var animationSpeed:Float;
@@ -28,7 +28,7 @@ extern class MovieClip extends Sprite {
      * Whether or not the movie clip repeats after playing.
      *
      * @property loop
-     * @type Boolean
+     * @type Bool
      * @default true
      */
 	var loop:Bool;
@@ -45,7 +45,7 @@ extern class MovieClip extends Sprite {
      * [read-only] The MovieClips current frame index (this may not have to be a whole number)
      *
      * @property currentFrame
-     * @type Number
+     * @type Int
      * @default 0
      * @readOnly
      */
@@ -55,7 +55,7 @@ extern class MovieClip extends Sprite {
      * [read-only] Indicates if the MovieClip is currently playing
      *
      * @property playing
-     * @type Boolean
+     * @type Bool
      * @readOnly
      */
 	var playing:Bool;
@@ -65,7 +65,7 @@ extern class MovieClip extends Sprite {
 	 * assigned to the MovieClip.
 	 *
 	 * @property totalFrames
-	 * @type Number
+	 * @type Int
 	 * @default 0
 	 * @readOnly
 	 */
@@ -97,24 +97,24 @@ extern class MovieClip extends Sprite {
 	 * Stops the MovieClip and goes to a specific frame
 	 *
 	 * @method gotoAndStop
-	 * @param frameNumber {Number} frame index to stop at
+	 * @param frameNumber {Int} frame index to stop at
 	 */
-	function gotoAndStop(frameNumber:Float):Void;
+	function gotoAndStop(frameNumber:Int):Void;
 
 	/**
 	 * Goes to a specific frame and begins playing the MovieClip
 	 *
 	 * @method gotoAndPlay
-	 * @param frameNumber {Number} frame index to start at
+	 * @param frameNumber {Int} frame index to start at
 	 */
-	function gotoAndPlay(frameNumber:Float):Void;
+	function gotoAndPlay(frameNumber:Int):Void;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of frame ids
 	 *
 	 * @static
 	 * @method fromFrames
-	 * @param frames {Array} the array of frames ids the movieclip will use as its texture frames
+	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames
 	 */
 	static function fromFrames(frames:Array<String>):MovieClip;
 
@@ -123,7 +123,7 @@ extern class MovieClip extends Sprite {
 	 *
 	 * @static
 	 * @method fromImages
-	 * @param frames {Array} the array of image ids the movieclip will use as its texture frames
+	 * @param frames {Array<String>} the array of image ids the movieclip will use as its texture frames
 	 */
 	static function fromImages(images:Array<String>):MovieClip;
 }

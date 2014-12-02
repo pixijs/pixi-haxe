@@ -18435,157 +18435,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.Rectangle"</e></m></meta>
 	</class>
 	<class path="pixi.display.DisplayObject" params="" file="pixi/display/DisplayObject.hx" extern="1">
-		<interactive public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Indicates if the sprite will have touch and mouse interactivity. It is false by default
-	 *
-	 * @property interactive
-	 * @type Boolean
-	 * @default false</haxe_doc>
-		</interactive>
-		<setInteractive public="1" set="method">
-			<f a="interactive">
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* [Deprecated] Indicates if the sprite will have touch and mouse interactivity. It is false by default
-	 * Instead of using this function you can now simply set the interactive property to true or false
-	 *
-	 * @method setInteractive
-	 * @param interactive {Bool}
-	 * @deprecated Simply set the `interactive` property directly</haxe_doc>
-		</setInteractive>
-		<worldVisible public="1">
-			<x path="Bool"/>
-			<haxe_doc>* [read-only] Indicates if the sprite is globaly visible.
-	 *
-	 * @property worldVisible
-	 * @type Boolean</haxe_doc>
-		</worldVisible>
-		<mask public="1">
-			<c path="pixi.primitives.Graphics"/>
-			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
-	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
-	 * To remove a mask, set this property to null.
-	 *
-	 * @property mask
-	 * @type Graphics</haxe_doc>
-		</mask>
-		<filters public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* Sets the filters for the displayObject.
-	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
-	 * To remove filters simply set this property to 'null'
-	 * @property filters
-	 * @type Array An array of filters</haxe_doc>
-		</filters>
-		<cacheAsBitmap public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Set weather or not a the display objects is cached as a bitmap.
-	 * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects
-	 * To remove filters simply set this property to 'null'
-	 * @property cacheAsBitmap
-	 * @type Boolean</haxe_doc>
-		</cacheAsBitmap>
-		<position public="1">
-			<c path="pixi.core.Point"/>
-			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.</haxe_doc>
-		</position>
-		<scale public="1">
-			<c path="pixi.core.Point"/>
-			<haxe_doc>* The scale factor of the object.</haxe_doc>
-		</scale>
-		<pivot public="1">
-			<c path="pixi.core.Point"/>
-			<haxe_doc>* The pivot point of the displayObject that it rotates around</haxe_doc>
-		</pivot>
-		<rotation public="1">
-			<x path="Float"/>
-			<haxe_doc>* The rotation of the object in radians.</haxe_doc>
-		</rotation>
-		<alpha public="1">
-			<x path="Float"/>
-			<haxe_doc>* The opacity of the object.</haxe_doc>
-		</alpha>
-		<visible public="1">
-			<x path="Bool"/>
-			<haxe_doc>* The visibility of the object.</haxe_doc>
-		</visible>
-		<hitArea public="1">
-			<d/>
-			<haxe_doc>* This is the defined area that will pick up mouse / touch events. It is null by default.
-	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)</haxe_doc>
-		</hitArea>
-		<buttonMode public="1">
-			<x path="Bool"/>
-			<haxe_doc>* This is used to indicate if the displayObject should display a mouse hand cursor on rollover</haxe_doc>
-		</buttonMode>
-		<renderable public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Can this object be rendered</haxe_doc>
-		</renderable>
-		<parent public="1">
-			<c path="pixi.display.DisplayObjectContainer"/>
-			<haxe_doc>* [read-only] The display object container that contains this display object.</haxe_doc>
-		</parent>
-		<stage public="1">
-			<c path="pixi.display.Stage"/>
-			<haxe_doc>* [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.</haxe_doc>
-		</stage>
-		<worldAlpha public="1">
-			<x path="Float"/>
-			<haxe_doc>* [read-only] The multiplied alpha of the displayObject</haxe_doc>
-		</worldAlpha>
-		<defaultCursor public="1">
-			<c path="String"/>
-			<haxe_doc>* This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true</haxe_doc>
-		</defaultCursor>
-		<a0 public="1">
-			<x path="Bool"/>
-			<haxe_doc>* [NYI] Holds whether or not this object is dynamic, for rendering optimization</haxe_doc>
-		</a0>
-		<filterArea public="1">
-			<c path="pixi.core.Rectangle"/>
-			<haxe_doc>* The area the filter is applied to like the hitArea this is used as more of an optimisation
-	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle</haxe_doc>
-		</filterArea>
-		<bounds public="1">
-			<c path="pixi.core.Rectangle"/>
-			<haxe_doc>* The original, cached bounds of the object</haxe_doc>
-		</bounds>
-		<currentBounds public="1">
-			<c path="pixi.core.Rectangle"/>
-			<haxe_doc>* The most up-to-date bounds of the object</haxe_doc>
-		</currentBounds>
-		<x public="1">
-			<x path="Float"/>
-			<haxe_doc>* The position of the displayObject on the x axis relative to the local coordinates of the parent.</haxe_doc>
-		</x>
-		<y public="1">
-			<x path="Float"/>
-			<haxe_doc>* The position of the displayObject on the y axis relative to the local coordinates of the parent.</haxe_doc>
-		</y>
-		<getBounds public="1" set="method">
-			<f a="matrix">
-				<c path="pixi.core.Matrix"/>
-				<c path="pixi.core.Rectangle"/>
-			</f>
-			<haxe_doc>* Retrieves the bounds of the displayObject as a rectangle object
-     *
-     * @method getBounds
-     * @param matrix {Matrix}
-     * @return {Rectangle} the rectangular bounding area</haxe_doc>
-		</getBounds>
-		<setStageReference public="1" set="method">
-			<f a="stage">
-				<c path="pixi.display.Stage"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the object's stage reference, the stage this object is connected to
-	 *
-	 * @method setStageReference
-	 * @param stage {Stage} the stage that the object will have as its current stage reference</haxe_doc>
-		</setStageReference>
 		<generateTexture public="1" set="method">
 			<f a="resolution:scaleMode:?renderer">
 				<x path="Float"/>
@@ -18597,8 +18446,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
      *
      * @method generateTexture
-     * @param resolution {Number} The resolution of the texture being generated
-     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+     * @param resolution {Float} The resolution of the texture being generated
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
      * @return {Texture} a texture of the graphics object</haxe_doc>
 			<overloads><generateTexture public="1" set="method">
@@ -18612,13 +18461,227 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
      *
      * @method generateTexture
-     * @param resolution {Number} The resolution of the texture being generated
-     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+     * @param resolution {Float} The resolution of the texture being generated
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
      * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
      * @return {Texture} a texture of the graphics object</haxe_doc>
 </generateTexture></overloads>
 		</generateTexture>
-		<updateCache public="1" set="method"><f a=""><x path="Void"/></f></updateCache>
+		<getBounds public="1" set="method">
+			<f a="matrix">
+				<c path="pixi.core.Matrix"/>
+				<c path="pixi.core.Rectangle"/>
+			</f>
+			<haxe_doc>* Retrieves the bounds of the displayObject as a rectangle object
+     *
+     * @method getBounds
+     * @param matrix {Matrix}
+     * @return {Rectangle} the rectangular bounding area</haxe_doc>
+		</getBounds>
+		<getLocalBounds public="1" set="method">
+			<f a=""><c path="pixi.core.Rectangle"/></f>
+			<haxe_doc>* Retrieves the local bounds of the displayObject as a rectangle object
+	 *
+	 * @method getLocalBounds
+	 * @return {Rectangle} the rectangular bounding area</haxe_doc>
+		</getLocalBounds>
+		<setStageReference public="1" set="method">
+			<f a="stage">
+				<c path="pixi.display.Stage"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the object's stage reference, the stage this object is connected to
+	 *
+	 * @method setStageReference
+	 * @param stage {Stage} the stage that the object will have as its current stage reference</haxe_doc>
+		</setStageReference>
+		<toGlobal public="1" set="method">
+			<f a="position">
+				<c path="pixi.core.Point"/>
+				<c path="pixi.core.Point"/>
+			</f>
+			<haxe_doc>* Calculates the global position of the display object
+	 *
+	 * @method toGlobal
+	 * @param position {Point} The world origin to calculate from
+	 * @return {Point} A point object representing the position of this object</haxe_doc>
+		</toGlobal>
+		<toLocal public="1" set="method">
+			<f a="position:?frm">
+				<c path="pixi.core.Point"/>
+				<c path="pixi.display.DisplayObject"/>
+				<c path="pixi.core.Point"/>
+			</f>
+			<haxe_doc>* Calculates the local position of the display object relative to another point
+	 *
+	 * @method toLocal
+	 * @param position {Point} The world origin to calculate from
+	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @return {Point} A point object representing the position of this object</haxe_doc>
+		</toLocal>
+		<updateCache public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Generates and updates the cached sprite for this object.
+	 *
+	 * @method updateCache</haxe_doc>
+		</updateCache>
+		<alpha public="1">
+			<x path="Float"/>
+			<haxe_doc>* The opacity of the object.
+     *
+     * @property alpha
+     * @type Float</haxe_doc>
+		</alpha>
+		<buttonMode public="1">
+			<x path="Bool"/>
+			<haxe_doc>* This is used to indicate if the displayObject should display a mouse hand cursor on rollover
+     *
+     * @property buttonMode
+     * @type Bool</haxe_doc>
+		</buttonMode>
+		<cacheAsBitmap public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Set weather or not a the display objects is cached as a bitmap.
+	 * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects
+	 * To remove filters simply set this property to 'null'
+	 * @property cacheAsBitmap
+	 * @type Bool</haxe_doc>
+		</cacheAsBitmap>
+		<defaultCursor public="1">
+			<c path="String"/>
+			<haxe_doc>* This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
+     *
+     * @property defaultCursor
+     * @type String</haxe_doc>
+		</defaultCursor>
+		<filterArea public="1">
+			<c path="pixi.core.Rectangle"/>
+			<haxe_doc>* The area the filter is applied to like the hitArea this is used as more of an optimisation
+     * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
+     *
+     * @property filterArea
+     * @type Rectangle</haxe_doc>
+		</filterArea>
+		<filters public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* Sets the filters for the displayObject.
+	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
+	 * To remove filters simply set this property to 'null'
+	 * @property filters
+	 * @type Array An array of filters</haxe_doc>
+		</filters>
+		<hitArea public="1">
+			<d/>
+			<haxe_doc>* This is the defined area that will pick up mouse / touch events. It is null by default.
+     * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
+     *
+     * @property hitArea
+     * @type Rectangle|Circle|Ellipse|Polygon</haxe_doc>
+		</hitArea>
+		<interactive public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Indicates if the sprite will have touch and mouse interactivity. It is false by default
+	 *
+	 * @property interactive
+	 * @type Bool
+	 * @default false</haxe_doc>
+		</interactive>
+		<mask public="1">
+			<c path="pixi.primitives.Graphics"/>
+			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
+	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
+	 * To remove a mask, set this property to null.
+	 *
+	 * @property mask
+	 * @type Graphics</haxe_doc>
+		</mask>
+		<parent public="1">
+			<c path="pixi.display.DisplayObjectContainer"/>
+			<haxe_doc>* [read-only] The display object container that contains this display object.
+     *
+     * @property parent
+     * @type DisplayObjectContainer
+     * @readOnly</haxe_doc>
+		</parent>
+		<pivot public="1">
+			<c path="pixi.core.Point"/>
+			<haxe_doc>* The pivot point of the displayObject that it rotates around
+     *
+     * @property pivot
+     * @type Point</haxe_doc>
+		</pivot>
+		<position public="1">
+			<c path="pixi.core.Point"/>
+			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
+     *
+     * @property position
+     * @type Point</haxe_doc>
+		</position>
+		<renderable public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Can this object be rendered
+     *
+     * @property renderable
+     * @type Bool</haxe_doc>
+		</renderable>
+		<rotation public="1">
+			<x path="Float"/>
+			<haxe_doc>* The rotation of the object in radians.
+     *
+     * @property rotation
+     * @type Float</haxe_doc>
+		</rotation>
+		<scale public="1">
+			<c path="pixi.core.Point"/>
+			<haxe_doc>* The scale factor of the object.
+     *
+     * @property scale
+     * @type Point</haxe_doc>
+		</scale>
+		<stage public="1">
+			<c path="pixi.display.Stage"/>
+			<haxe_doc>* [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
+     *
+     * @property stage
+     * @type Stage
+     * @readOnly</haxe_doc>
+		</stage>
+		<visible public="1">
+			<x path="Bool"/>
+			<haxe_doc>* The visibility of the object.
+     *
+     * @property visible
+     * @type Bool</haxe_doc>
+		</visible>
+		<worldAlpha public="1">
+			<x path="Float"/>
+			<haxe_doc>* [read-only] The multiplied alpha of the displayObject
+     *
+     * @property worldAlpha
+     * @type Float
+     * @readOnly</haxe_doc>
+		</worldAlpha>
+		<worldVisible public="1">
+			<x path="Bool"/>
+			<haxe_doc>* [read-only] Indicates if the sprite is globaly visible.
+	 *
+	 * @property worldVisible
+	 * @type Bool</haxe_doc>
+		</worldVisible>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* The position of the displayObject on the x axis relative to the local coordinates of the parent.
+	 *
+	 * @property x
+	 * @type Float</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* The position of the displayObject on the y axis relative to the local coordinates of the parent.
+	 *
+	 * @property y
+	 * @type Float</haxe_doc>
+		</y>
 		<click public="1"><f a="">
 	<c path="pixi.InteractionData"/>
 	<x path="Void"/>
@@ -18680,12 +18743,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<x path="Void"/>
 </f></rightup>
 		<new public="1" set="method">
-			<f a="x:y:radius">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
+			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
 	 * This is an abstract class and should not be used on its own rather it should be extended.
 	 *
@@ -18701,14 +18759,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The width of the displayObjectContainer, setting this will actually modify the scale to achieve the value set
 	 *
 	 * @property width
-	 * @type Number</haxe_doc>
+	 * @type Float</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the displayObjectContainer, setting this will actually modify the scale to achieve the value set
 	 *
 	 * @property height
-	 * @type Number</haxe_doc>
+	 * @type Float</haxe_doc>
 		</height>
 		<children public="1">
 			<c path="Array"><c path="pixi.display.DisplayObject"/></c>
@@ -18748,7 +18806,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method addChildAt
 	 * @param child {DisplayObject} The child to add
-	 * @param index {Number} The index to place the child in</haxe_doc>
+	 * @param index {Int} The index to place the child in</haxe_doc>
 			<overloads><addChildAt public="1" set="method">
 	<f a="child:index">
 		<d/>
@@ -18759,7 +18817,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method addChildAt
 	 * @param child {DisplayObject} The child to add
-	 * @param index {Number} The index to place the child in</haxe_doc>
+	 * @param index {Int} The index to place the child in</haxe_doc>
 </addChildAt></overloads>
 		</addChildAt>
 		<swapChildren public="1" set="method">
@@ -18768,12 +18826,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="pixi.display.DisplayObject"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* [NYI] Swaps the depth of 2 displayObjects
+			<haxe_doc>* Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child1 {DisplayObject}
-	 * @param child2 {DisplayObject}
-	 * @private</haxe_doc>
+	 * @param child {DisplayObject}
+	 * @param child2 {DisplayObject}</haxe_doc>
 			<overloads>
 				<swapChildren public="1" set="method">
 					<f a="child1:child2">
@@ -18781,12 +18838,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 						<c path="pixi.display.DisplayObject"/>
 						<x path="Void"/>
 					</f>
-					<haxe_doc>* [NYI] Swaps the depth of 2 displayObjects
+					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child1 {DisplayObject}
-	 * @param child2 {DisplayObject}
-	 * @private</haxe_doc>
+	 * @param child {DisplayObject}
+	 * @param child2 {DisplayObject}</haxe_doc>
 				</swapChildren>
 				<swapChildren public="1" set="method">
 					<f a="child1:child2">
@@ -18794,12 +18850,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 						<d/>
 						<x path="Void"/>
 					</f>
-					<haxe_doc>* [NYI] Swaps the depth of 2 displayObjects
+					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child1 {DisplayObject}
-	 * @param child2 {DisplayObject}
-	 * @private</haxe_doc>
+	 * @param child {DisplayObject}
+	 * @param child2 {DisplayObject}</haxe_doc>
 				</swapChildren>
 				<swapChildren public="1" set="method">
 					<f a="child1:child2">
@@ -18807,12 +18862,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 						<d/>
 						<x path="Void"/>
 					</f>
-					<haxe_doc>* [NYI] Swaps the depth of 2 displayObjects
+					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child1 {DisplayObject}
-	 * @param child2 {DisplayObject}
-	 * @private</haxe_doc>
+	 * @param child {DisplayObject}
+	 * @param child2 {DisplayObject}</haxe_doc>
 				</swapChildren>
 			</overloads>
 		</swapChildren>
@@ -18824,7 +18878,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Returns the child at the specified index
 	 *
 	 * @method getChildAt
-	 * @param index {Number} The index to get the child from</haxe_doc>
+	 * @param index {Int} The index to get the child from</haxe_doc>
 			<overloads><getChildAt public="1" set="method">
 	<f a="index">
 		<x path="Int"/>
@@ -18833,7 +18887,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<haxe_doc>* Returns the child at the specified index
 	 *
 	 * @method getChildAt
-	 * @param index {Number} The index to get the child from</haxe_doc>
+	 * @param index {Int} The index to get the child from</haxe_doc>
 </getChildAt></overloads>
 		</getChildAt>
 		<removeChild public="1" set="method">
@@ -18864,7 +18918,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Removes a child from the specified index position in the child list of the container.
 	 *
 	 * @method removeChildAt
-	 * @param index {Number} The index to get the child from</haxe_doc>
+	 * @param index {Int} The index to get the child from</haxe_doc>
 		</removeChildAt>
 		<removeChildren public="1" set="method">
 			<f a="?beginIndex:?endIndex">
@@ -18875,8 +18929,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Removes all child instances from the child list of the container.
 	 *
 	 * @method removeChildren
-	 * @param beginIndex {Number} The beginning position. Predefined value is 0.
-	 * @param endIndex {Number} The ending position. Predefined value is children's array length.</haxe_doc>
+	 * @param beginIndex {Int} The beginning position. Predefined value is 0.
+	 * @param endIndex {Int} The ending position. Predefined value is children's array length.</haxe_doc>
 		</removeChildren>
 		<setChildIndex public="1" set="method">
 			<f a="child:index">
@@ -18888,7 +18942,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method setChildIndex
 	 * @param child {DisplayObject} The child DisplayObject instance for which you want to change the index number
-	 * @param index {Number} The resulting index number for the child display object</haxe_doc>
+	 * @param index {Int} The resulting index number for the child display object</haxe_doc>
 		</setChildIndex>
 		<getChildIndex public="1" set="method">
 			<f a="child">
@@ -18899,33 +18953,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method getChildIndex
 	 * @param child {DisplayObject} The DisplayObject instance to identify
-	 * @return {Number} The index position of the child display object to identify</haxe_doc>
+	 * @return {Int} The index position of the child display object to identify</haxe_doc>
 		</getChildIndex>
-		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
-		<getBounds public="1" set="method" override="1">
-			<f a="matrix">
-				<c path="pixi.core.Matrix"/>
-				<c path="pixi.core.Rectangle"/>
-			</f>
-			<haxe_doc>* Retrieves the bounds of the displayObjectContainer as a rectangle object
-	 *
-	 * @method getBounds
-	 * @return {Rectangle} the rectangular bounding area</haxe_doc>
-		</getBounds>
-		<getLocalBounds public="1" set="method"><f a=""><x path="Void"/></f></getLocalBounds>
-		<setStageReference public="1" set="method" override="1">
-			<f a="stage">
-				<c path="pixi.display.Stage"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the container's stage reference, the stage this object is connected to
-	 *
-	 * @method setStageReference
-	 * @param stage {Stage} the stage that the container will have as its current stage reference</haxe_doc>
-		</setStageReference>
 		<removeStageReference public="1" set="method">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* removes the current stage reference of the container
+			<haxe_doc>* Removes the current stage reference from the container and all of its children.
 	 *
 	 * @method removeStageReference</haxe_doc>
 		</removeStageReference>
@@ -18975,22 +19007,44 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<anchor public="1">
 			<c path="pixi.core.Point"/>
 			<haxe_doc>* The anchor sets the origin point of the texture.
-	 * The default is 0,0 this means the texture's origin is the top left
-	 * Setting than anchor to 0.5,0.5 means the textures origin is centred
-	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner</haxe_doc>
+     * The default is 0,0 this means the texture's origin is the top left
+     * Setting than anchor to 0.5,0.5 means the textures origin is centered
+     * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
+     *
+     * @property anchor
+     * @type Point</haxe_doc>
 		</anchor>
 		<texture public="1">
 			<c path="pixi.textures.Texture"/>
-			<haxe_doc>* The texture that the sprite is using</haxe_doc>
+			<haxe_doc>* The texture that the sprite is using
+     *
+     * @property texture
+     * @type Texture</haxe_doc>
 		</texture>
 		<tint public="1">
-			<x path="Float"/>
-			<haxe_doc>* The tint applied to the sprite. This is a hex value</haxe_doc>
+			<x path="Int"/>
+			<haxe_doc>* The tint applied to the sprite. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+     *
+     * @property tint
+     * @type Int
+     * @default 0xFFFFFF</haxe_doc>
 		</tint>
 		<blendMode public="1">
-			<x path="Float"/>
-			<haxe_doc>* The blend mode to be applied to the sprite</haxe_doc>
+			<x path="Int"/>
+			<haxe_doc>* The blend mode to be applied to the sprite. Set to PIXI.blendModes.NORMAL to remove any blend mode.
+     *
+     * @property blendMode
+     * @type Int
+     * @default PIXI.blendModes.NORMAL;</haxe_doc>
 		</blendMode>
+		<shader public="1">
+			<c path="pixi.filters.AbstractFilter"/>
+			<haxe_doc>* The shader that will be used to render the texture to the stage. Set to null to remove a current shader.
+     *
+     * @property shader
+     * @type PIXI.AbstractFilter
+     * @default null</haxe_doc>
+		</shader>
 		<setTexture public="1" set="method">
 			<f a="texture">
 				<c path="pixi.textures.Texture"/>
@@ -19001,25 +19055,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method setTexture
 	 * @param texture {Texture} The PIXI texture that is displayed by the sprite</haxe_doc>
 		</setTexture>
-		<onTextureUpdate public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* When the texture is updated, this event will fire to update the scale and frame
-	 *
-	 * @method onTextureUpdate
-	 * @param event
-	 * @private</haxe_doc>
-		</onTextureUpdate>
-		<getBounds public="1" set="method" override="1">
-			<f a="matrix">
-				<c path="pixi.core.Matrix"/>
-				<c path="pixi.core.Rectangle"/>
-			</f>
-			<haxe_doc>* Returns the framing rectangle of the sprite as a PIXI.Rectangle object
-	 *
-	 * @method getBounds
-	 * @param matrix {Matrix} the transformation matrix of the sprite
-	 * @return {Rectangle} the framing rectangle</haxe_doc>
-		</getBounds>
 		<new public="1" set="method">
 			<f a="texture">
 				<c path="pixi.textures.Texture"/>
@@ -19063,29 +19098,29 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="Array"><c path="String"/></c>
 				<c path="pixi.display.MovieClip"/>
 			</f>
-			<haxe_doc>* A short hand way of creating a movieclip from an array of frame ids
+			<haxe_doc><![CDATA[* A short hand way of creating a movieclip from an array of frame ids
 	 *
 	 * @static
 	 * @method fromFrames
-	 * @param frames {Array} the array of frames ids the movieclip will use as its texture frames</haxe_doc>
+	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames]]></haxe_doc>
 		</fromFrames>
 		<fromImages public="1" set="method" static="1">
 			<f a="images">
 				<c path="Array"><c path="String"/></c>
 				<c path="pixi.display.MovieClip"/>
 			</f>
-			<haxe_doc>* A short hand way of creating a movieclip from an array of image ids
+			<haxe_doc><![CDATA[* A short hand way of creating a movieclip from an array of image ids
 	 *
 	 * @static
 	 * @method fromImages
-	 * @param frames {Array} the array of image ids the movieclip will use as its texture frames</haxe_doc>
+	 * @param frames {Array<String>} the array of image ids the movieclip will use as its texture frames]]></haxe_doc>
 		</fromImages>
 		<animationSpeed public="1">
 			<x path="Float"/>
 			<haxe_doc>* The speed that the MovieClip will play at. Higher is faster, lower is slower
      *
      * @property animationSpeed
-     * @type Number
+     * @type Float
      * @default 1</haxe_doc>
 		</animationSpeed>
 		<loop public="1">
@@ -19093,7 +19128,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Whether or not the movie clip repeats after playing.
      *
      * @property loop
-     * @type Boolean
+     * @type Bool
      * @default true</haxe_doc>
 		</loop>
 		<onComplete public="1">
@@ -19108,7 +19143,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* [read-only] The MovieClips current frame index (this may not have to be a whole number)
      *
      * @property currentFrame
-     * @type Number
+     * @type Int
      * @default 0
      * @readOnly</haxe_doc>
 		</currentFrame>
@@ -19117,7 +19152,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* [read-only] Indicates if the MovieClip is currently playing
      *
      * @property playing
-     * @type Boolean
+     * @type Bool
      * @readOnly</haxe_doc>
 		</playing>
 		<totalFrames public="1">
@@ -19126,7 +19161,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * assigned to the MovieClip.
 	 *
 	 * @property totalFrames
-	 * @type Number
+	 * @type Int
 	 * @default 0
 	 * @readOnly</haxe_doc>
 		</totalFrames>
@@ -19151,23 +19186,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</play>
 		<gotoAndStop public="1" set="method">
 			<f a="frameNumber">
-				<x path="Float"/>
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Stops the MovieClip and goes to a specific frame
 	 *
 	 * @method gotoAndStop
-	 * @param frameNumber {Number} frame index to stop at</haxe_doc>
+	 * @param frameNumber {Int} frame index to stop at</haxe_doc>
 		</gotoAndStop>
 		<gotoAndPlay public="1" set="method">
 			<f a="frameNumber">
-				<x path="Float"/>
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Goes to a specific frame and begins playing the MovieClip
 	 *
 	 * @method gotoAndPlay
-	 * @param frameNumber {Number} frame index to start at</haxe_doc>
+	 * @param frameNumber {Int} frame index to start at</haxe_doc>
 		</gotoAndPlay>
 		<new public="1" set="method">
 			<f a="textures">
@@ -19185,10 +19220,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.display.SpriteBatch" params="" file="pixi/display/SpriteBatch.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
-		<initWebGL public="1" set="method"><f a="gl">
-	<d/>
-	<x path="Void"/>
-</f></initWebGL>
 		<new public="1" set="method">
 			<f a="?texture">
 				<c path="pixi.textures.Texture"/>
@@ -19205,18 +19236,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.display.Stage" params="" file="pixi/display/Stage.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
-		<setInteractionDelegate public="1" set="method">
-			<f a="domElement">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets another DOM element which can receive mouse/touch interactions instead of the default Canvas element.
-	 * This is useful for when you have other DOM elements on top of the Canvas element.
+		<getMousePosition public="1" set="method">
+			<f a=""><c path="pixi.core.Point"/></f>
+			<haxe_doc>* This will return the point containing global coords of the mouse.
 	 *
-	 * @method setInteractionDelegate
-	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events</haxe_doc>
-		</setInteractionDelegate>
-		<updateTransform public="1" set="method" override="1"><f a=""><x path="Void"/></f></updateTransform>
+	 * @method getMousePosition
+	 * @return {Point} The point containing the coords of the global InteractionData position.</haxe_doc>
+		</getMousePosition>
 		<setBackgroundColor public="1" set="method">
 			<f a="backgroundColor">
 				<x path="Int"/>
@@ -19225,16 +19251,20 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Sets the background color for the stage
 	 *
 	 * @method setBackgroundColor
-	 * @param backgroundColor {Number} the color of the background, easiest way to pass this in is in hex format
+	 * @param backgroundColor {Int} the color of the background, easiest way to pass this in is in hex format
 	 *      like: 0xFFFFFF for white</haxe_doc>
 		</setBackgroundColor>
-		<getMousePosition public="1" set="method">
-			<f a=""><c path="pixi.core.Point"/></f>
-			<haxe_doc>* This will return the point containing global coords of the mouse.
+		<setInteractionDelegate public="1" set="method">
+			<f a="domElement">
+				<c path="js.html.Element"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets another DOM element which can receive mouse/touch interactions instead of the default Canvas element.
+	 * This is useful for when you have other DOM elements on top of the Canvas element.
 	 *
-	 * @method getMousePosition
-	 * @return {Point} The point containing the coords of the global InteractionData position.</haxe_doc>
-		</getMousePosition>
+	 * @method setInteractionDelegate
+	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events</haxe_doc>
+		</setInteractionDelegate>
 		<new public="1" set="method">
 			<f a="backgroundColor">
 				<x path="Int"/>
@@ -19245,7 +19275,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class Stage
 	 * @extends DisplayObjectContainer
 	 * @constructor
-	 * @param backgroundColor {Number} the background color of the stage, you have to pass this in is in hex format
+	 * @param backgroundColor {Int} the background color of the stage, you have to pass this in is in hex format
 	 *      like: 0xFFFFFF for white
 	 *
 	 * Creating a stage is a mandatory process when you use Pixi, which is as simple as this :
@@ -20513,11 +20543,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The arc method creates an arc/curve (used to create circles, or parts of circles).
 	 *
 	 * @method arc
-	 * @param cx {Number} The x-coordinate of the center of the circle
-	 * @param cy {Number} The y-coordinate of the center of the circle
-	 * @param radius {Number} The radius of the circle
-	 * @param startAngle {Number} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
-	 * @param endAngle {Number} The ending angle, in radians
+	 * @param cx {Float} The x-coordinate of the center of the circle
+	 * @param cy {Float} The y-coordinate of the center of the circle
+	 * @param radius {Float} The radius of the circle
+	 * @param startAngle {Float} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+	 * @param endAngle {Float} The ending angle, in radians
 	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}</haxe_doc>
 		</arc>
@@ -20531,9 +20561,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
 	 *
 	 * @method lineStyle
-	 * @param lineWidth {Number} width of the line to draw, will update the object's stored style
-	 * @param color {Number} color of the line to draw, will update the object's stored style
-	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style</haxe_doc>
+	 * @param lineWidth {Float} width of the line to draw, will update the object's stored style
+	 * @param color {Int} color of the line to draw, will update the object's stored style
+	 * @param alpha {Float} alpha of the line to draw, will update the object's stored style</haxe_doc>
 		</lineStyle>
 		<moveTo public="1" set="method">
 			<f a="x:y">
@@ -20544,8 +20574,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Moves the current drawing position to (x, y).
 	 *
 	 * @method moveTo
-	 * @param x {Number} the X coordinate to move to
-	 * @param y {Number} the Y coordinate to move to</haxe_doc>
+	 * @param x {Float} the X coordinate to move to
+	 * @param y {Float} the Y coordinate to move to</haxe_doc>
 		</moveTo>
 		<lineTo public="1" set="method">
 			<f a="x:y">
@@ -20557,8 +20587,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * the current drawing position is then set to (x, y).
 	 *
 	 * @method lineTo
-	 * @param x {Number} the X coordinate to draw to
-	 * @param y {Number} the Y coordinate to draw to</haxe_doc>
+	 * @param x {Float} the X coordinate to draw to
+	 * @param y {Float} the Y coordinate to draw to</haxe_doc>
 		</lineTo>
 		<bezierCurveTo public="1" set="method">
 			<f a="cpX:cpY:cpX2:cpY2:toX:toY">
@@ -20573,22 +20603,35 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Calculate the points for a bezier curve.
 	 *
 	 * @method bezierCurveTo
-	 * @param  {number}   cpX    Control point x
-	 * @param  {number}   cpY    Control point y
-	 * @param  {number}   cpX2   Second Control point x
-	 * @param  {number}   cpY2   Second Control point y
-	 * @param  {number}   toX    Destination point x
-	 * @param  {number}   toY    Destination point y
-	 * @return {PIXI.Graphics}</haxe_doc>
+	 * @param  {Float}   cpX    Control point x
+	 * @param  {Float}   cpY    Control point y
+	 * @param  {Float}   cpX2   Second Control point x
+	 * @param  {Float}   cpY2   Second Control point y
+	 * @param  {Float}   toX    Destination point x
+	 * @param  {Float}   toY    Destination point y
+	 * @return {Graphics}</haxe_doc>
 		</bezierCurveTo>
-		<arcTo public="1" set="method"><f a="x1:y1:x2:y2:radius">
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<c path="pixi.primitives.Graphics"/>
-</f></arcTo>
+		<arcTo public="1" set="method">
+			<f a="x1:y1:x2:y2:radius">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="pixi.primitives.Graphics"/>
+			</f>
+			<haxe_doc>* the arcTo() method creates an arc/curve between two tangents on the canvas.
+	 *
+	 * "borrowed" from https://code.google.com/p/fxcanvas/ - thanks google!
+	 *
+	 * @method arcTo
+	 * @param  {Float}   x1        The x-coordinate of the beginning of the arc
+	 * @param  {Float}   y1        The y-coordinate of the beginning of the arc
+	 * @param  {Float}   x2        The x-coordinate of the end of the arc
+	 * @param  {Float}   y2        The y-coordinate of the end of the arc
+	 * @param  {Float}   radius    The radius of the arc
+	 * @return {Graphics}</haxe_doc>
+		</arcTo>
 		<quadraticCurveTo public="1" set="method">
 			<f a="cx:cy:radius:startAngle:endAngle:?anticlockwise">
 				<x path="Float"/>
@@ -20602,13 +20645,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The arc() method creates an arc/curve (used to create circles, or parts of circles).
 	 *
 	 * @method arc
-	 * @param  {number}   cx                The x-coordinate of the center of the circle
-	 * @param  {number}   cy                The y-coordinate of the center of the circle
-	 * @param  {number}   radius            The radius of the circle
-	 * @param  {number}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
-	 * @param  {number}   endAngle          The ending angle, in radians
-	 * @param  {number}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
-	 * @return {PIXI.Graphics}</haxe_doc>
+	 * @param  {Float}   cx                The x-coordinate of the center of the circle
+	 * @param  {Float}   cy                The y-coordinate of the center of the circle
+	 * @param  {Float}   radius            The radius of the circle
+	 * @param  {Float}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+	 * @param  {Float}   endAngle          The ending angle, in radians
+	 * @param  {Float}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @return {Graphics}</haxe_doc>
 		</quadraticCurveTo>
 		<beginFill public="1" set="method">
 			<f a="color:?alpha">
@@ -20620,8 +20663,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * (such as lineTo() or drawCircle()) use when drawing.
 	 *
 	 * @method beginFill
-	 * @param color {Number} the color of the fill
-	 * @param alpha {Number} the alpha of the fill
+	 * @param color {Int} the color of the fill
+	 * @param alpha {Float} the alpha of the fill
 	 * @return {Graphics}</haxe_doc>
 		</beginFill>
 		<endFill public="1" set="method">
@@ -20641,10 +20684,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc>* @method drawRect
 	 *
-	 * @param x {Number} The X coord of the top-left of the rectangle
-	 * @param y {Number} The Y coord of the top-left of the rectangle
-	 * @param width {Number} The width of the rectangle
-	 * @param height {Number} The height of the rectangle
+	 * @param x {Float} The X coord of the top-left of the rectangle
+	 * @param y {Float} The Y coord of the top-left of the rectangle
+	 * @param width {Float} The width of the rectangle
+	 * @param height {Float} The height of the rectangle
 	 * @return {Graphics}</haxe_doc>
 		</drawRect>
 		<drawRoundedRect public="1" set="method">
@@ -20658,11 +20701,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc>* @method drawRoundedRect
 	 *
-	 * @param x {Number} The X coord of the top-left of the rectangle
-	 * @param y {Number} The Y coord of the top-left of the rectangle
-	 * @param width {Number} The width of the rectangle
-	 * @param height {Number} The height of the rectangle
-	 * @param radius {Number} Radius of the rectangle corners
+	 * @param x {Float} The X coord of the top-left of the rectangle
+	 * @param y {Float} The Y coord of the top-left of the rectangle
+	 * @param width {Float} The width of the rectangle
+	 * @param height {Float} The height of the rectangle
+	 * @param radius {Float} Radius of the rectangle corners
 	 * @return {Graphics}</haxe_doc>
 		</drawRoundedRect>
 		<drawCircle public="1" set="method">
@@ -20675,9 +20718,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Draws a circle.
 	 *
 	 * @method drawCircle
-	 * @param x {Number} The X coordinate of the center of the circle
-	 * @param y {Number} The Y coordinate of the center of the circle
-	 * @param radius {Number} The radius of the circle
+	 * @param x {Float} The X coordinate of the center of the circle
+	 * @param y {Float} The Y coordinate of the center of the circle
+	 * @param radius {Float} The radius of the circle
 	 * @return {Graphics}</haxe_doc>
 		</drawCircle>
 		<drawEllipse public="1" set="method">
@@ -20691,15 +20734,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Draws an ellipse.
 	 *
 	 * @method drawEllipse
-	 * @param x {Number} The X coordinate of the center of the ellipse
-	 * @param y {Number} The Y coordinate of the center of the ellipse
-	 * @param width {Number} The half width of the ellipse
-	 * @param height {Number} The half height of the ellipse
+	 * @param x {Float} The X coordinate of the center of the ellipse
+	 * @param y {Float} The Y coordinate of the center of the ellipse
+	 * @param width {Float} The half width of the ellipse
+	 * @param height {Float} The half height of the ellipse
 	 * @return {Graphics}</haxe_doc>
 		</drawEllipse>
 		<drawPolygon public="1" set="method">
 			<f a="path">
-				<c path="Array"><d/></c>
+				<c path="Array"><x path="Float"/></c>
 				<c path="pixi.primitives.Graphics"/>
 			</f>
 			<haxe_doc>* Draws a polygon using the given path.
@@ -20884,7 +20927,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
      *
      * @property clearBeforeRender
-     * @type Boolean
+     * @type Bool
      * @default</haxe_doc>
 		</clearBeforeRender>
 		<transparent public="1">
@@ -20892,14 +20935,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Whether the render view is transparent
      *
      * @property transparent
-     * @type Boolean</haxe_doc>
+     * @type Bool</haxe_doc>
 		</transparent>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the canvas view
      *
      * @property width
-     * @type Number
+     * @type Float
      * @default 800</haxe_doc>
 		</width>
 		<height public="1">
@@ -20907,7 +20950,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The height of the canvas view
      *
      * @property height
-     * @type Number
+     * @type Float
      * @default 600</haxe_doc>
 		</height>
 		<view public="1">
@@ -20954,8 +20997,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Resizes the canvas view to the specified width and height
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the canvas view
-	 * @param height {Number} the new height of the canvas view</haxe_doc>
+	 * @param width {Float} the new width of the canvas view
+	 * @param height {Float} the new height of the canvas view</haxe_doc>
 		</resize>
 		<destroy public="1" set="method">
 			<f a="?removeView">
@@ -20979,12 +21022,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      *
      * @class CanvasRenderer
      * @constructor
-     * @param [width=800] {Number} the width of the canvas view
-     * @param [height=600] {Number} the height of the canvas view
+     * @param [width=800] {Float} the width of the canvas view
+     * @param [height=600] {Float} the height of the canvas view
      * @param [options] {Object} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
      * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2
+     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
      * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.CanvasRenderer"</e></m></meta>
@@ -20999,22 +21042,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Resizes the canvas to the specified width and height.
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the canvas
-	 * @param height {Number} the new height of the canvas</haxe_doc>
+	 * @param width {Float} the new width of the canvas
+	 * @param height {Float} the new height of the canvas</haxe_doc>
 		</resize>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the Canvas in pixels.
      *
      * @property width
-     * @type Number</haxe_doc>
+     * @type Float</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the Canvas in pixels.
      *
      * @property height
-     * @type Number</haxe_doc>
+     * @type Float</haxe_doc>
 		</height>
 		<canvas public="1">
 			<c path="js.html.CanvasElement"/>
@@ -21040,8 +21083,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @class CanvasBuffer
 	 * @constructor
-	 * @param width {Number} the width for the newly created canvas
-	 * @param height {Number} the height for the newly created canvas</haxe_doc>
+	 * @param width {Float} the width for the newly created canvas
+	 * @param height {Float} the height for the newly created canvas</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.CanvasBuffer"</e></m></meta>
 	</class>
@@ -21096,49 +21139,49 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<d/>
 			</f>
-			<haxe_doc>* Basically this method just needs a sprite and a color and tints the sprite 
+			<haxe_doc>* Basically this method just needs a sprite and a color and tints the sprite
 	 * with the given color
-	 * 
-	 * @method getTintedTexture 
+	 *
+	 * @method getTintedTexture
 	 * @param sprite {Sprite} the sprite to tint
-	 * @param color {Number} the color to use to tint the sprite with</haxe_doc>
+	 * @param color {Float} the color to use to tint the sprite with</haxe_doc>
 		</getTintedTexture>
 		<tintWithMultiply public="1" set="method" static="1">
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
-				<x path="Float"/>
-				<d/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture using the "multiply" operation
 	 * @method tintWithMultiply
-	 * @param texture {texture} the texture to tint
-	 * @param color {Number} the color to use to tint the sprite with
+	 * @param texture {Texture} the texture to tint
+	 * @param color {Int} the color to use to tint the sprite with
 	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
 		</tintWithMultiply>
 		<tintWithOverlay public="1" set="method" static="1">
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
-				<x path="Float"/>
-				<d/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture using the "overlay" operation
 	 * @method tintWithOverlay
-	 * @param texture {texture} the texture to tint
-	 * @param color {Number} the color to use to tint the sprite with
+	 * @param texture {Texture} the texture to tint
+	 * @param color {Int} the color to use to tint the sprite with
 	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
 		</tintWithOverlay>
 		<tintPerPixel public="1" set="method" static="1">
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
-				<x path="Float"/>
-				<d/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture pixel per pixel
 	 * @method tintPerPixel
-	 * @param texture {texture} the texture to tint
+	 * @param texture {Texture} the texture to tint
 	 * @param color {Number} the color to use to tint the sprite with
 	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
 		</tintPerPixel>
@@ -21149,7 +21192,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc>* Rounds the specified color according to the PIXI.CanvasTinter.cacheStepsPerColorChannel
 	 * @method roundColor
-	 * @param color {number} the color to round, should be a hex color</haxe_doc>
+	 * @param color {Float} the color to round, should be a hex color</haxe_doc>
 		</roundColor>
 		<meta><m n=":native"><e>"PIXI.CanvasTinter"</e></m></meta>
 	</class>
@@ -21159,21 +21202,21 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Whether the render view is transparent
      *
      * @property transparent
-     * @type Boolean</haxe_doc>
+     * @type Bool</haxe_doc>
 		</transparent>
 		<preserveDrawingBuffer public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
      *
      * @property preserveDrawingBuffer
-     * @type Boolean</haxe_doc>
+     * @type Bool</haxe_doc>
 		</preserveDrawingBuffer>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the canvas view
      *
      * @property width
-     * @type Number
+     * @type Float
      * @default 800</haxe_doc>
 		</width>
 		<height public="1">
@@ -21181,7 +21224,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The height of the canvas view
      *
      * @property height
-     * @type Number
+     * @type Float
      * @default 600</haxe_doc>
 		</height>
 		<view public="1">
@@ -21224,8 +21267,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* resizes the webGL view to the specified width and height
 	 *
 	 * @method resize
-	 * @param width {Number} the new width of the webGL view
-	 * @param height {Number} the new height of the webGL view</haxe_doc>
+	 * @param width {Float} the new width of the webGL view
+	 * @param height {Float} the new height of the webGL view</haxe_doc>
 		</resize>
 		<updateTexture public="1" set="method">
 			<f a="texture">
@@ -21263,14 +21306,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      *
      * @class WebGLRenderer
      * @constructor
-     * @param [width=0] {Number} the width of the canvas view
-     * @param [height=0] {Number} the height of the canvas view
+     * @param [width=0] {Float} the width of the canvas view
+     * @param [height=0] {Float} the height of the canvas view
      * @param [options] {Object} The optional renderer parameters
      * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
      * @param [options.transparent=false] {Bool} If the render view is transparent, default false
      * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
      * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Number} the resolution of the renderer retina would be 2</haxe_doc>
+     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.WebGLRenderer"</e></m></meta>
 	</class>

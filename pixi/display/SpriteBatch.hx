@@ -14,12 +14,4 @@ extern class SpriteBatch extends DisplayObjectContainer {
 	 * @param texture {Texture}
 	 */
 	function new(?texture:Texture):Void;
-
-	/*
-	 * Initialises the spriteBatch
-	 *
-	 * @method initWebGL
-	 * @param gl {WebGLContext} the current WebGL drawing context
-	 */
-	function initWebGL(gl:Dynamic):Void;
 }

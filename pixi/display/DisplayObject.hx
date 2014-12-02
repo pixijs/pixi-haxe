@@ -18,34 +18,140 @@ extern class DisplayObject {
 	 * @class DisplayObject
 	 * @constructor
 	*/
-	function new(x:Float, y:Float, radius:Float):Void;
+	function new():Void;
+
+	/**
+     * Useful function that returns a texture of the displayObject object that can then be used to create sprites
+     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+     *
+     * @method generateTexture
+     * @param resolution {Float} The resolution of the texture being generated
+     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
+     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+     * @return {Texture} a texture of the graphics object
+     */
+	@:overload(function(resolution:Float, scaleMode:Int, ?renderer:CanvasRenderer):Texture{})
+	function generateTexture(resolution:Float, scaleMode:Int, ?renderer:WebGLRenderer):Texture;
+
+	/**
+     * Retrieves the bounds of the displayObject as a rectangle object
+     *
+     * @method getBounds
+     * @param matrix {Matrix}
+     * @return {Rectangle} the rectangular bounding area
+     */
+	function getBounds(matrix:Matrix):Rectangle;
+
+	/**
+	 * Retrieves the local bounds of the displayObject as a rectangle object
+	 *
+	 * @method getLocalBounds
+	 * @return {Rectangle} the rectangular bounding area
+	 */
+	function getLocalBounds():Rectangle;
+
+	/**
+	 * Sets the object's stage reference, the stage this object is connected to
+	 *
+	 * @method setStageReference
+	 * @param stage {Stage} the stage that the object will have as its current stage reference
+	*/
+	function setStageReference(stage:Stage):Void;
+
+	/**
+	 * Calculates the global position of the display object
+	 *
+	 * @method toGlobal
+	 * @param position {Point} The world origin to calculate from
+	 * @return {Point} A point object representing the position of this object
+	 */
+	function toGlobal(position:Point):Point;
+
+	/**
+	 * Calculates the local position of the display object relative to another point
+	 *
+	 * @method toLocal
+	 * @param position {Point} The world origin to calculate from
+	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @return {Point} A point object representing the position of this object
+	 */
+	function toLocal(position:Point, ?frm:DisplayObject):Point;
+
+	/**
+	 * Generates and updates the cached sprite for this object.
+	 *
+	 * @method updateCache
+	 */
+	function updateCache():Void;
+
+	/**
+     * The opacity of the object.
+     *
+     * @property alpha
+     * @type Float
+     */
+	var alpha:Float;
+
+	/**
+     * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
+     *
+     * @property buttonMode
+     * @type Bool
+     */
+	var buttonMode:Bool;
+
+	/**
+	 * Set weather or not a the display objects is cached as a bitmap.
+	 * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects
+	 * To remove filters simply set this property to 'null'
+	 * @property cacheAsBitmap
+	 * @type Bool
+	*/
+	var cacheAsBitmap:Bool;
+
+	/**
+     * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
+     *
+     * @property defaultCursor
+     * @type String
+    */
+	var defaultCursor:String;
+
+	/**
+     * The area the filter is applied to like the hitArea this is used as more of an optimisation
+     * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
+     *
+     * @property filterArea
+     * @type Rectangle
+     */
+	var filterArea:Rectangle;
+
+	/**
+	 * Sets the filters for the displayObject.
+	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
+	 * To remove filters simply set this property to 'null'
+	 * @property filters
+	 * @type Array An array of filters
+	*/
+	var filters:Array<Dynamic>;
+
+	/**
+     * This is the defined area that will pick up mouse / touch events. It is null by default.
+     * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
+     *
+     * @property hitArea
+     * @type Rectangle|Circle|Ellipse|Polygon
+     */
+	var hitArea:Dynamic;
 
 	/**
 	 * Indicates if the sprite will have touch and mouse interactivity. It is false by default
 	 *
 	 * @property interactive
-	 * @type Boolean
+	 * @type Bool
 	 * @default false
-	*/
+	 */
 	var interactive:Bool;
-
-	/**
-	 * [Deprecated] Indicates if the sprite will have touch and mouse interactivity. It is false by default
-	 * Instead of using this function you can now simply set the interactive property to true or false
-	 *
-	 * @method setInteractive
-	 * @param interactive {Bool}
-	 * @deprecated Simply set the `interactive` property directly
-	*/
-	function setInteractive(interactive:Bool):Void;
-
-	/**
-	 * [read-only] Indicates if the sprite is globaly visible.
-	 *
-	 * @property worldVisible
-	 * @type Boolean
-	*/
-	var worldVisible:Bool;
 
 	/**
 	 * Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
@@ -58,151 +164,103 @@ extern class DisplayObject {
 	var mask:Graphics;
 
 	/**
-	 * Sets the filters for the displayObject.
-	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
-	 * To remove filters simply set this property to 'null'
-	 * @property filters
-	 * @type Array An array of filters
-	*/
-	var filters:Array<Dynamic>;
-
-	/**
-	 * Set weather or not a the display objects is cached as a bitmap.
-	 * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects
-	 * To remove filters simply set this property to 'null'
-	 * @property cacheAsBitmap
-	 * @type Boolean
-	*/
-	var cacheAsBitmap:Bool;
-
-	/**
-	 * The coordinate of the object relative to the local coordinates of the parent.
-	*/
-	var position:Point;
-
-	/**
-	 * The scale factor of the object.
-	*/
-	var scale:Point;
-
-	/**
-	 * The pivot point of the displayObject that it rotates around
-	*/
-	var pivot:Point;
-
-	/**
-	 * The rotation of the object in radians.
-	*/
-	var rotation:Float;
-
-	/**
-	 * The opacity of the object.
-	*/
-	var alpha:Float;
-
-	/**
-	 * The visibility of the object.
-	*/
-	var visible:Bool;
-
-	/**
-	 * This is the defined area that will pick up mouse / touch events. It is null by default.
-	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
-	*/
-	var hitArea:Dynamic;
-
-	/**
-	 * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
-	*/
-	var buttonMode:Bool;
-
-	/**
-	 * Can this object be rendered
-	*/
-	var renderable:Bool;
-
-	/**
-	 * [read-only] The display object container that contains this display object.
-	*/
+     * [read-only] The display object container that contains this display object.
+     *
+     * @property parent
+     * @type DisplayObjectContainer
+     * @readOnly
+     */
 	var parent:DisplayObjectContainer;
 
 	/**
-	 * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
-	*/
+     * The pivot point of the displayObject that it rotates around
+     *
+     * @property pivot
+     * @type Point
+     */
+	var pivot:Point;
+
+	/**
+     * The coordinate of the object relative to the local coordinates of the parent.
+     *
+     * @property position
+     * @type Point
+     */
+	var position:Point;
+
+	/**
+     * Can this object be rendered
+     *
+     * @property renderable
+     * @type Bool
+     */
+	var renderable:Bool;
+
+	/**
+     * The rotation of the object in radians.
+     *
+     * @property rotation
+     * @type Float
+     */
+	var rotation:Float;
+
+	/**
+     * The scale factor of the object.
+     *
+     * @property scale
+     * @type Point
+     */
+	var scale:Point;
+
+	/**
+     * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
+     *
+     * @property stage
+     * @type Stage
+     * @readOnly
+     */
 	var stage:Stage;
 
 	/**
-	 * [read-only] The multiplied alpha of the displayObject
-	*/
+     * The visibility of the object.
+     *
+     * @property visible
+     * @type Bool
+     */
+	var visible:Bool;
+
+	/**
+     * [read-only] The multiplied alpha of the displayObject
+     *
+     * @property worldAlpha
+     * @type Float
+     * @readOnly
+     */
 	var worldAlpha:Float;
 
 	/**
-	 * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
+	 * [read-only] Indicates if the sprite is globaly visible.
+	 *
+	 * @property worldVisible
+	 * @type Bool
 	*/
-	var defaultCursor:String;
-
-	/**
-	 * [NYI] Holds whether or not this object is dynamic, for rendering optimization
-	*/
-	var a0:Bool;
-
-	/**
-	 * The area the filter is applied to like the hitArea this is used as more of an optimisation
-	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
-	*/
-	var filterArea:Rectangle;
-
-	/**
-	 * The original, cached bounds of the object
-	*/
-	var bounds:Rectangle;
-
-	/**
-	 * The most up-to-date bounds of the object
-	*/
-	var currentBounds:Rectangle;
+	var worldVisible:Bool;
 
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
-	*/
+	 *
+	 * @property x
+	 * @type Float
+	 */
 	var x:Float;
 
 	/**
 	 * The position of the displayObject on the y axis relative to the local coordinates of the parent.
-	*/
-	var y:Float;
-
-    /**
-     * Retrieves the bounds of the displayObject as a rectangle object
-     *
-     * @method getBounds
-     * @param matrix {Matrix}
-     * @return {Rectangle} the rectangular bounding area
-     */
-	function getBounds(matrix:Matrix):Rectangle;
-
-	/**
-	 * Sets the object's stage reference, the stage this object is connected to
 	 *
-	 * @method setStageReference
-	 * @param stage {Stage} the stage that the object will have as its current stage reference
-	*/
-	function setStageReference(stage:Stage):Void;
-
-    /**
-     * Useful function that returns a texture of the displayObject object that can then be used to create sprites
-     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-     *
-     * @method generateTexture
-     * @param resolution {Number} The resolution of the texture being generated
-     * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
-     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-     * @return {Texture} a texture of the graphics object
-     */
-    @:overload(function(resolution:Float, scaleMode:Int, ?renderer:CanvasRenderer):Texture{})
-	function generateTexture(resolution:Float, scaleMode:Int, ?renderer:WebGLRenderer):Texture;
-
-	function updateCache():Void;
+	 * @property y
+	 * @type Float
+	 */
+	var y:Float;
 
 	var click:InteractionData -> Void;
 	var tap:InteractionData -> Void;

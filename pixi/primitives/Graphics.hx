@@ -30,11 +30,11 @@ extern class Graphics extends DisplayObjectContainer {
 	 * The arc method creates an arc/curve (used to create circles, or parts of circles).
 	 *
 	 * @method arc
-	 * @param cx {Number} The x-coordinate of the center of the circle
-	 * @param cy {Number} The y-coordinate of the center of the circle
-	 * @param radius {Number} The radius of the circle
-	 * @param startAngle {Number} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
-	 * @param endAngle {Number} The ending angle, in radians
+	 * @param cx {Float} The x-coordinate of the center of the circle
+	 * @param cy {Float} The y-coordinate of the center of the circle
+	 * @param radius {Float} The radius of the circle
+	 * @param startAngle {Float} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+	 * @param endAngle {Float} The ending angle, in radians
 	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}
 	 */
@@ -44,9 +44,9 @@ extern class Graphics extends DisplayObjectContainer {
 	 * Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
 	 *
 	 * @method lineStyle
-	 * @param lineWidth {Number} width of the line to draw, will update the object's stored style
-	 * @param color {Number} color of the line to draw, will update the object's stored style
-	 * @param alpha {Number} alpha of the line to draw, will update the object's stored style
+	 * @param lineWidth {Float} width of the line to draw, will update the object's stored style
+	 * @param color {Int} color of the line to draw, will update the object's stored style
+	 * @param alpha {Float} alpha of the line to draw, will update the object's stored style
 	 */
 	function lineStyle(lineWidth:Float, ?color:Int, ?alpha:Float):Graphics;
 
@@ -54,8 +54,8 @@ extern class Graphics extends DisplayObjectContainer {
 	 * Moves the current drawing position to (x, y).
 	 *
 	 * @method moveTo
-	 * @param x {Number} the X coordinate to move to
-	 * @param y {Number} the Y coordinate to move to
+	 * @param x {Float} the X coordinate to move to
+	 * @param y {Float} the Y coordinate to move to
 	 */
 	function moveTo(x:Float, y:Float):Graphics;
 
@@ -64,8 +64,8 @@ extern class Graphics extends DisplayObjectContainer {
 	 * the current drawing position is then set to (x, y).
 	 *
 	 * @method lineTo
-	 * @param x {Number} the X coordinate to draw to
-	 * @param y {Number} the Y coordinate to draw to
+	 * @param x {Float} the X coordinate to draw to
+	 * @param y {Float} the Y coordinate to draw to
 	 */
 	function lineTo(x:Float, y:Float):Graphics;
 
@@ -73,28 +73,28 @@ extern class Graphics extends DisplayObjectContainer {
 	 * Calculate the points for a bezier curve.
 	 *
 	 * @method bezierCurveTo
-	 * @param  {number}   cpX    Control point x
-	 * @param  {number}   cpY    Control point y
-	 * @param  {number}   cpX2   Second Control point x
-	 * @param  {number}   cpY2   Second Control point y
-	 * @param  {number}   toX    Destination point x
-	 * @param  {number}   toY    Destination point y
-	 * @return {PIXI.Graphics}
+	 * @param  {Float}   cpX    Control point x
+	 * @param  {Float}   cpY    Control point y
+	 * @param  {Float}   cpX2   Second Control point x
+	 * @param  {Float}   cpY2   Second Control point y
+	 * @param  {Float}   toX    Destination point x
+	 * @param  {Float}   toY    Destination point y
+	 * @return {Graphics}
 	 */
 	function bezierCurveTo(cpX:Float, cpY:Float, cpX2:Float, cpY2:Float, toX:Float, toY:Float):Graphics;
 
-	/*
+	/**
 	 * the arcTo() method creates an arc/curve between two tangents on the canvas.
 	 *
 	 * "borrowed" from https://code.google.com/p/fxcanvas/ - thanks google!
 	 *
 	 * @method arcTo
-	 * @param  {number}   x1        The x-coordinate of the beginning of the arc
-	 * @param  {number}   y1        The y-coordinate of the beginning of the arc
-	 * @param  {number}   x2        The x-coordinate of the end of the arc
-	 * @param  {number}   y2        The y-coordinate of the end of the arc
-	 * @param  {number}   radius    The radius of the arc
-	 * @return {PIXI.Graphics}
+	 * @param  {Float}   x1        The x-coordinate of the beginning of the arc
+	 * @param  {Float}   y1        The y-coordinate of the beginning of the arc
+	 * @param  {Float}   x2        The x-coordinate of the end of the arc
+	 * @param  {Float}   y2        The y-coordinate of the end of the arc
+	 * @param  {Float}   radius    The radius of the arc
+	 * @return {Graphics}
 	 */
 	function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
 
@@ -103,13 +103,13 @@ extern class Graphics extends DisplayObjectContainer {
 	 * The arc() method creates an arc/curve (used to create circles, or parts of circles).
 	 *
 	 * @method arc
-	 * @param  {number}   cx                The x-coordinate of the center of the circle
-	 * @param  {number}   cy                The y-coordinate of the center of the circle
-	 * @param  {number}   radius            The radius of the circle
-	 * @param  {number}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
-	 * @param  {number}   endAngle          The ending angle, in radians
-	 * @param  {number}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
-	 * @return {PIXI.Graphics}
+	 * @param  {Float}   cx                The x-coordinate of the center of the circle
+	 * @param  {Float}   cy                The y-coordinate of the center of the circle
+	 * @param  {Float}   radius            The radius of the circle
+	 * @param  {Float}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+	 * @param  {Float}   endAngle          The ending angle, in radians
+	 * @param  {Float}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @return {Graphics}
 	 */
 	function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
 
@@ -118,8 +118,8 @@ extern class Graphics extends DisplayObjectContainer {
 	 * (such as lineTo() or drawCircle()) use when drawing.
 	 *
 	 * @method beginFill
-	 * @param color {Number} the color of the fill
-	 * @param alpha {Number} the alpha of the fill
+	 * @param color {Int} the color of the fill
+	 * @param alpha {Float} the alpha of the fill
 	 * @return {Graphics}
 	 */
 	function beginFill(color:Int, ?alpha:Float):Graphics;
@@ -135,10 +135,10 @@ extern class Graphics extends DisplayObjectContainer {
 	/**
 	 * @method drawRect
 	 *
-	 * @param x {Number} The X coord of the top-left of the rectangle
-	 * @param y {Number} The Y coord of the top-left of the rectangle
-	 * @param width {Number} The width of the rectangle
-	 * @param height {Number} The height of the rectangle
+	 * @param x {Float} The X coord of the top-left of the rectangle
+	 * @param y {Float} The Y coord of the top-left of the rectangle
+	 * @param width {Float} The width of the rectangle
+	 * @param height {Float} The height of the rectangle
 	 * @return {Graphics}
 	 */
 	function drawRect(x:Float, y:Float, width:Float, height:Float):Graphics;
@@ -146,11 +146,11 @@ extern class Graphics extends DisplayObjectContainer {
 	/**
 	 * @method drawRoundedRect
 	 *
-	 * @param x {Number} The X coord of the top-left of the rectangle
-	 * @param y {Number} The Y coord of the top-left of the rectangle
-	 * @param width {Number} The width of the rectangle
-	 * @param height {Number} The height of the rectangle
-	 * @param radius {Number} Radius of the rectangle corners
+	 * @param x {Float} The X coord of the top-left of the rectangle
+	 * @param y {Float} The Y coord of the top-left of the rectangle
+	 * @param width {Float} The width of the rectangle
+	 * @param height {Float} The height of the rectangle
+	 * @param radius {Float} Radius of the rectangle corners
 	 * @return {Graphics}
 	 */
 	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Graphics;
@@ -159,9 +159,9 @@ extern class Graphics extends DisplayObjectContainer {
 	 * Draws a circle.
 	 *
 	 * @method drawCircle
-	 * @param x {Number} The X coordinate of the center of the circle
-	 * @param y {Number} The Y coordinate of the center of the circle
-	 * @param radius {Number} The radius of the circle
+	 * @param x {Float} The X coordinate of the center of the circle
+	 * @param y {Float} The Y coordinate of the center of the circle
+	 * @param radius {Float} The radius of the circle
 	 * @return {Graphics}
 	 */
 	function drawCircle(x:Float, y:Float, radius:Float):Graphics;
@@ -170,10 +170,10 @@ extern class Graphics extends DisplayObjectContainer {
 	 * Draws an ellipse.
 	 *
 	 * @method drawEllipse
-	 * @param x {Number} The X coordinate of the center of the ellipse
-	 * @param y {Number} The Y coordinate of the center of the ellipse
-	 * @param width {Number} The half width of the ellipse
-	 * @param height {Number} The half height of the ellipse
+	 * @param x {Float} The X coordinate of the center of the ellipse
+	 * @param y {Float} The Y coordinate of the center of the ellipse
+	 * @param width {Float} The half width of the ellipse
+	 * @param height {Float} The half height of the ellipse
 	 * @return {Graphics}
 	 */
 	function drawEllipse(x:Float, y:Float, width:Float, height:Float):Graphics;
@@ -185,7 +185,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param path {Array} The path data used to construct the polygon.
 	 * @return {Graphics}
 	 */
-	function drawPolygon(path:Array<Dynamic>):Graphics;
+	function drawPolygon(path:Array<Float>):Graphics;
 
 	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
