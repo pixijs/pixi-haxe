@@ -18,7 +18,7 @@ Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
 
 ### Issues ###
 
-Found any bug? Please create an [issue](https://github.com/adireddy/haxe-pixi/issues) on GitHub.
+Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
 
 ### Demos ###
 
