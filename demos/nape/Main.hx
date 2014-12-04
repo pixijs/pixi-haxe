@@ -1,12 +1,12 @@
 package demos.nape;
 
+import haxe.Timer;
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.Texture;
 import pixi.utils.Detector;
 import js.Browser;
-import haxe.Timer;
 
 import nape.geom.Vec2;
 import nape.phys.Body;
@@ -27,7 +27,7 @@ class Main {
 	var _pballs:Array<Body>;
 
 	public function new() {
-		_stage = new Stage(0x003366);
+		_stage = new Stage(0x00FFFF);
 
 		_renderer = Detector.autoDetectRenderer(800, 600);
 		Browser.document.body.appendChild(_renderer.view);
@@ -35,7 +35,7 @@ class Main {
 		_balls = [];
 		_pballs = [];
 		_setUpPhysics();
-		var timer:Timer = new Timer(500);
+		var timer:Timer = new Timer(1000);
 		timer.run = _addBall;
 
 		Browser.window.requestAnimationFrame(cast animate);
@@ -44,8 +44,6 @@ class Main {
 	function _setUpPhysics() {
 		var gravity = Vec2.weak(0, 600);
 		_space = new Space(gravity);
-		var w = 800;
-		var h = 600;
 
 		_floor = new Body(BodyType.STATIC);
 		_floor.setShapeMaterials(Material.wood());
@@ -75,7 +73,7 @@ class Main {
 
 		_space.step(1 / 60);
 
-		for (i in 0 ... _pballs.length) {
+		for(i in 0 ... _pballs.length) {
 			_balls[i].position.x = _pballs[i].position.x;
 			_balls[i].position.y = _pballs[i].position.y;
 			_balls[i].rotation = _pballs[i].rotation;

@@ -615,7 +615,7 @@
 	<class path="ArrayAccess" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represent the type of the elements stored.</haxe_doc></class>
 	<class path="demos.nape.Main" params="" file="demos/nape/Main.hx">
-		<main set="method" line="87" static="1">
+		<main set="method" line="85" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
@@ -626,8 +626,8 @@
 		<_balls><c path="Array"><c path="pixi.display.Sprite"/></c></_balls>
 		<_pballs><c path="Array"><c path="nape.phys.Body"/></c></_pballs>
 		<_setUpPhysics set="method" line="44"><f a=""><x path="Void"/></f></_setUpPhysics>
-		<_addBall set="method" line="56"><f a=""><x path="Void"/></f></_addBall>
-		<animate set="method" line="73"><f a=""><x path="Void"/></f></animate>
+		<_addBall set="method" line="54"><f a=""><x path="Void"/></f></_addBall>
+		<animate set="method" line="71"><f a=""><x path="Void"/></f></animate>
 		<new public="1" set="method" line="29"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
@@ -19291,29 +19291,34 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<texture public="1">
 			<c path="pixi.textures.Texture"/>
-			<haxe_doc>* The texture of the strip</haxe_doc>
+			<haxe_doc>* The texture of the strip
+     *
+     * @property texture
+     * @type Texture</haxe_doc>
 		</texture>
 		<dirty public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Whether the strip is dirty or not</haxe_doc>
+			<haxe_doc>* Whether the strip is dirty or not
+     *
+     * @property dirty
+     * @type Bool</haxe_doc>
 		</dirty>
 		<padding public="1">
 			<x path="Float"/>
-			<haxe_doc>* if you need a padding, not yet implemented</haxe_doc>
+			<haxe_doc>* if you need a padding, not yet implemented
+     *
+     * @property padding
+     * @type Float</haxe_doc>
 		</padding>
 		<new public="1" set="method">
 			<f a="texture">
 				<c path="pixi.textures.Texture"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* 
-	 * @class Strip
+			<haxe_doc>* @class Strip
 	 * @extends DisplayObjectContainer
 	 * @constructor
-	 * @param texture {Texture} The texture to use
-	 * @param width {Number} the width 
-	 * @param height {Number} the height
-	 *</haxe_doc>
+	 * @param texture {Texture} The texture to use</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Strip"</e></m></meta>
 	</class>
@@ -19325,12 +19330,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="Array"><c path="pixi.core.Point"/></c>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* 
-	 * @class Rope
+			<haxe_doc><![CDATA[* @class Rope
 	 * @constructor
 	 * @param texture {Texture} The texture to use
-	 * @param points {Array}
-	 *</haxe_doc>
+	 * @param points {Array<Point>}]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Rope"</e></m></meta>
 	</class>
@@ -19338,20 +19341,35 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<extends path="pixi.display.Sprite"/>
 		<tileScale public="1">
 			<c path="pixi.core.Point"/>
-			<haxe_doc>* The scaling of the image that is being tiled</haxe_doc>
+			<haxe_doc>* The scaling of the image that is being tiled
+     *
+     * @property tileScale
+     * @type Point</haxe_doc>
 		</tileScale>
 		<tileScaleOffset public="1">
 			<c path="pixi.core.Point"/>
-			<haxe_doc>* A point that represents the scale of the texture object</haxe_doc>
+			<haxe_doc>* A point that represents the scale of the texture object
+     *
+     * @property tileScaleOffset
+     * @type Point</haxe_doc>
 		</tileScaleOffset>
 		<tilePosition public="1">
 			<c path="pixi.core.Point"/>
-			<haxe_doc>* The offset position of the image that is being tiled</haxe_doc>
+			<haxe_doc>* The offset position of the image that is being tiled
+     *
+     * @property tilePosition
+     * @type Point</haxe_doc>
 		</tilePosition>
-		<generateTilingTexture public="1" set="method"><f a="forcePowerOfTwo">
-	<x path="Bool"/>
-	<x path="Void"/>
-</f></generateTilingTexture>
+		<generateTilingTexture public="1" set="method">
+			<f a="forcePowerOfTwo">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*
+	* @method generateTilingTexture
+	*
+	* @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two</haxe_doc>
+		</generateTilingTexture>
 		<new public="1" set="method">
 			<f a="texture:width:height">
 				<c path="pixi.textures.Texture"/>
@@ -19365,8 +19383,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends Sprite
 	 * @constructor
 	 * @param texture {Texture} the texture of the tiling sprite
-	 * @param width {Number}  the width of the tiling sprite
-	 * @param height {Number} the height of the tiling sprite</haxe_doc>
+	 * @param width {Float}  the width of the tiling sprite
+	 * @param height {Float} the height of the tiling sprite</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.TilingSprite"</e></m></meta>
 	</class>
