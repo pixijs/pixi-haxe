@@ -20,7 +20,7 @@ extern class Event {
 	 *
 	 * @method stopPropagation
 	 */
-    function stopPropagation():Void;
+	function stopPropagation():Void;
 
 	/**
 	 * Stops the propagation of events to sibling listeners (no longer calls any listeners).

@@ -20,21 +20,21 @@ extern class ImageLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-     * The texture being loaded
-     *
-     * @property texture
-     * @type Texture
-     */
+	 * The texture being loaded
+	 *
+	 * @property texture
+	 * @type Texture
+	 */
 	var texture:Texture;
 
 	/**
-     * if the image is loaded with loadFramedSpriteSheet
-     * frames will contain the sprite sheet frames
-     *
-     * @property frames
-     * @type Array
-     * @readOnly
-     */
+	 * if the image is loaded with loadFramedSpriteSheet
+	 * frames will contain the sprite sheet frames
+	 *
+	 * @property frames
+	 * @type Array
+	 * @readOnly
+	 */
 	var frames:Array<Texture>;
 
 	/**

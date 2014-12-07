@@ -14,27 +14,27 @@ extern class FilterTexture {
 	function new(gl:Dynamic, width:Float, height:Float, ?scaleMode:Int);
 
 	/**
-     * @property gl
-     * @type WebGLContext
-     */
+	 * @property gl
+	 * @type WebGLContext
+	 */
 	var gl:Dynamic;
 
 	/**
-     * @property frameBuffer
-     * @type Any
-     */
+	 * @property frameBuffer
+	 * @type Any
+	 */
 	var frameBuffer:Dynamic;
 
 	/**
-     * @property texture
-     * @type Any
-     */
+	 * @property texture
+	 * @type Any
+	 */
 	var texture:Dynamic;
 
 	/**
-     * @property scaleMode
-     * @type Number
-     */
+	 * @property scaleMode
+	 * @type Number
+	 */
 	var scaleMode:Float;
 
 	/**

@@ -6,18 +6,18 @@ import pixi.textures.BaseTexture;
 @:native("PIXI.Texture")
 extern class Texture {
 
-    /**
-     * A texture stores the information that represents an image or part of an image. It cannot be added
-     * to the display list directly. Instead use it as the texture for a PIXI.Sprite. If no frame is provided then the whole image is used.
-     *
-     * @class Texture
-     * @uses EventTarget
-     * @constructor
-     * @param baseTexture {BaseTexture} The base texture source to create the texture from
-     * @param frame {Rectangle} The rectangle frame of the texture to show
-     * @param [crop] {Rectangle} The area of original texture
-     * @param [trim] {Rectangle} Trimmed texture rectangle
-     */
+	/**
+	 * A texture stores the information that represents an image or part of an image. It cannot be added
+	 * to the display list directly. Instead use it as the texture for a PIXI.Sprite. If no frame is provided then the whole image is used.
+	 *
+	 * @class Texture
+	 * @uses EventTarget
+	 * @constructor
+	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
+	 * @param frame {Rectangle} The rectangle frame of the texture to show
+	 * @param [crop] {Rectangle} The area of original texture
+	 * @param [trim] {Rectangle} Trimmed texture rectangle
+	 */
 	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle);
 
 	/**

@@ -19,37 +19,37 @@ extern class JsonLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-     * The url of the json file
-     *
-     * @property url
-     * @type String
-     */
+	 * The url of the json file
+	 *
+	 * @property url
+	 * @type String
+	 */
 	var url:String;
 
 	/**
-     * Whether the requests should be treated as cross origin
-     *
-     * @property crossorigin
-     * @type Boolean
-     */
+	 * Whether the requests should be treated as cross origin
+	 *
+	 * @property crossorigin
+	 * @type Boolean
+	 */
 	var crossorigin:Bool;
 
 	/**
-     * [read-only] The base url of the json file
-     *
-     * @property baseUrl
-     * @type String
-     * @readOnly
-     */
+	 * [read-only] The base url of the json file
+	 *
+	 * @property baseUrl
+	 * @type String
+	 * @readOnly
+	 */
 	var baseUrl:String;
 
 	/**
-     * [read-only] Whether the data has loaded yet
-     *
-     * @property loaded
-     * @type Boolean
-     * @readOnly
-     */
+	 * [read-only] Whether the data has loaded yet
+	 *
+	 * @property loaded
+	 * @type Boolean
+	 * @readOnly
+	 */
 	var loaded:Bool;
 
 	/**

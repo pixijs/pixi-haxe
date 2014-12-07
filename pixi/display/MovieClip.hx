@@ -16,48 +16,48 @@ extern class MovieClip extends Sprite {
 	function new(textures:Array<Texture>):Void;
 
 	/**
-     * The speed that the MovieClip will play at. Higher is faster, lower is slower
-     *
-     * @property animationSpeed
-     * @type Float
-     * @default 1
-     */
+	 * The speed that the MovieClip will play at. Higher is faster, lower is slower
+	 *
+	 * @property animationSpeed
+	 * @type Float
+	 * @default 1
+	 */
 	var animationSpeed:Float;
 
 	/**
-     * Whether or not the movie clip repeats after playing.
-     *
-     * @property loop
-     * @type Bool
-     * @default true
-     */
+	 * Whether or not the movie clip repeats after playing.
+	 *
+	 * @property loop
+	 * @type Bool
+	 * @default true
+	 */
 	var loop:Bool;
 
 	/**
-     * Function to call when a MovieClip finishes playing
-     *
-     * @property onComplete
-     * @type Function
-     */
+	 * Function to call when a MovieClip finishes playing
+	 *
+	 * @property onComplete
+	 * @type Function
+	 */
 	var onComplete:Void -> Void;
 
 	/**
-     * [read-only] The MovieClips current frame index (this may not have to be a whole number)
-     *
-     * @property currentFrame
-     * @type Int
-     * @default 0
-     * @readOnly
-     */
+	 * [read-only] The MovieClips current frame index (this may not have to be a whole number)
+	 *
+	 * @property currentFrame
+	 * @type Int
+	 * @default 0
+	 * @readOnly
+	 */
 	var currentFrame:Int;
 
 	/**
-     * [read-only] Indicates if the MovieClip is currently playing
-     *
-     * @property playing
-     * @type Bool
-     * @readOnly
-     */
+	 * [read-only] Indicates if the MovieClip is currently playing
+	 *
+	 * @property playing
+	 * @type Bool
+	 * @readOnly
+	 */
 	var playing:Bool;
 
 	/**
@@ -72,11 +72,11 @@ extern class MovieClip extends Sprite {
 	var totalFrames:Int;
 
 	/**
-     * The array of textures that make up the animation
-     *
-     * @property textures
-     * @type Array
-     */
+	 * The array of textures that make up the animation
+	 *
+	 * @property textures
+	 * @type Array
+	 */
 	var textures:Array<Texture>;
 
 	/**

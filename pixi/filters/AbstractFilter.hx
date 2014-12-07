@@ -21,14 +21,14 @@ extern class AbstractFilter {
 	function syncUniforms():Void;
 
 	/**
-    * @property dirty
-    * @type Boolean
-    */
+	* @property dirty
+	* @type Boolean
+	*/
 	var dirty:Bool;
 
 	/**
-    * @property padding
-    * @type Number
-    */
+	* @property padding
+	* @type Number
+	*/
 	var padding:Float;
 }

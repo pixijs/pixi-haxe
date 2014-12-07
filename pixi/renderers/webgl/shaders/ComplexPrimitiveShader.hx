@@ -11,26 +11,26 @@ extern class ComplexPrimitiveShader {
 	function new(gl:Dynamic);
 
 	/**
-     * @property gl
-     * @type WebGLContext
-     */
+	 * @property gl
+	 * @type WebGLContext
+	 */
 	var gl:Dynamic;
 
 	/**
-    * @property {any} program - The WebGL program.
-    */
+	* @property {any} program - The WebGL program.
+	*/
 	var program:Dynamic;
 
 	/**
-     * @property fragmentSrc
-     * @type Array
-     */
+	 * @property fragmentSrc
+	 * @type Array
+	 */
 	var fragmentSrc:Dynamic;
 
 	/**
-     * @property vertexSrc
-     * @type Array
-     */
+	 * @property vertexSrc
+	 * @type Array
+	 */
 	var vertexSrc:Dynamic;
 
 	/**

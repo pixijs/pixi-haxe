@@ -6,10 +6,10 @@ import js.html.DivElement;
 extern class Stats {
 
 	/**
-     * Stats DOM element
-     * @property domElement
-     * @type DivElement
-     */
+	 * Stats DOM element
+	 * @property domElement
+	 * @type DivElement
+	 */
 	var domElement(default, null):DivElement;
 
 	/**

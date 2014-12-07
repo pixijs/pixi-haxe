@@ -34,7 +34,7 @@ extern class EventTarget {
 	 * @param eventName {String} The name of the event.
 	 * @returns {Bool} Indication if we've emitted an event.
 	 */
-    function emit(eventName:String, ?data:Dynamic):Bool;
+	function emit(eventName:String, ?data:Dynamic):Bool;
 	function dispatchEvent(eventName:String, ?data:Dynamic):Bool;
 
 	/**

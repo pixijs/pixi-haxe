@@ -11,29 +11,29 @@ extern class PixiFastShader {
 	function new(gl:Dynamic);
 
 	/**
-     * @property gl
-     * @type WebGLContext
-     */
+	 * @property gl
+	 * @type WebGLContext
+	 */
 	var gl:Dynamic;
 
 	/**
-     * @property {any} program - The WebGL program.
-     */
+	 * @property {any} program - The WebGL program.
+	 */
 	var program:Dynamic;
 
 	/**
-     * @property {array} fragmentSrc - The fragment shader.
-     */
+	 * @property {array} fragmentSrc - The fragment shader.
+	 */
 	var fragmentSrc:Array<Dynamic>;
 
 	/**
-     * @property {array} vertexSrc - The vertex shader
-     */
+	 * @property {array} vertexSrc - The vertex shader
+	 */
 	var vertexSrc:Array<Dynamic>;
 
 	/**
-     * @property {number} textureCount - A local texture counter for multi-texture shaders.
-     */
+	 * @property {number} textureCount - A local texture counter for multi-texture shaders.
+	 */
 	var textureCount:Float;
 
 	/**

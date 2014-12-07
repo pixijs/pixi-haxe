@@ -7,12 +7,10 @@ import pixi.textures.Texture;
 extern class Rope extends Strip {
 
 	/**
-	 * 
 	 * @class Rope
 	 * @constructor
 	 * @param texture {Texture} The texture to use
-	 * @param points {Array}
-	 * 
+	 * @param points {Array<Point>}
 	*/
-	function new(texture:Texture, points:Array<Point>):Void;
+	function new(texture:Texture, points:Array<Point>);
 }

@@ -41,23 +41,23 @@ extern class Circle {
 	function getBounds():Rectangle;
 
 	/**
-     * @property x
-     * @type Float
-     * @default 0
-     */
-    var x:Float;
+	 * @property x
+	 * @type Float
+	 * @default 0
+	 */
+	var x:Float;
 
-    /**
-     * @property y
-     * @type Float
-     * @default 0
-     */
-    var y:Float;
+	/**
+	 * @property y
+	 * @type Float
+	 * @default 0
+	 */
+	var y:Float;
 
-    /**
-     * @property radius
-     * @type Float
-     * @default 0
-     */
-    var radius:Float;
+	/**
+	 * @property radius
+	 * @type Float
+	 * @default 0
+	 */
+	var radius:Float;
 }

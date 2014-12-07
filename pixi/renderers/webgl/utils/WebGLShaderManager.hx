@@ -9,27 +9,27 @@ extern class WebGLShaderManager {
 	function new();
 
 	/**
-     * @property maxAttibs
-     * @type Number
-     */
+	 * @property maxAttibs
+	 * @type Number
+	 */
 	var maxAttibs:Int;
 
 	/**
-     * @property attribState
-     * @type Array
-     */
+	 * @property attribState
+	 * @type Array
+	 */
 	var attribState:Array<Bool>;
 
 	/**
-     * @property tempAttribState
-     * @type Array
-     */
+	 * @property tempAttribState
+	 * @type Array
+	 */
 	var tempAttribState:Array<Bool>;
 
 	/**
-     * @property stack
-     * @type Array
-     */
+	 * @property stack
+	 * @type Array
+	 */
 	var stack:Array<Dynamic>;
 
 	/**

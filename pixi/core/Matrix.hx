@@ -16,46 +16,46 @@ extern class Matrix {
 	function new():Void;
 
 	/**
-     * @property a
-     * @type Int
-     * @default 1
-     */
-    var a:Float;
+	 * @property a
+	 * @type Int
+	 * @default 1
+	 */
+	var a:Float;
 
 	/**
-     * @property b
-     * @type Int
-     * @default 0
-     */
-    var b:Float;
+	 * @property b
+	 * @type Int
+	 * @default 0
+	 */
+	var b:Float;
 
 	/**
-     * @property c
-     * @type Int
-     * @default 0
-     */
-    var c:Float;
+	 * @property c
+	 * @type Int
+	 * @default 0
+	 */
+	var c:Float;
 
 	/**
-     * @property d
-     * @type Number
-     * @default 1
-     */
-    var d:Float;
+	 * @property d
+	 * @type Number
+	 * @default 1
+	 */
+	var d:Float;
 
 	/**
-     * @property tx
-     * @type Number
-     * @default 0
-     */
-    var tx:Float;
+	 * @property tx
+	 * @type Number
+	 * @default 0
+	 */
+	var tx:Float;
 
 	/**
-     * @property ty
-     * @type Number
-     * @default 0
-     */
-    var ty:Float;
+	 * @property ty
+	 * @type Number
+	 * @default 0
+	 */
+	var ty:Float;
 
 	/**
 	 * Creates a pixi matrix object based on the array given as a parameter

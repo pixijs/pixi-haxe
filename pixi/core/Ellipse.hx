@@ -42,30 +42,30 @@ extern class Ellipse {
 	function getBounds():Rectangle;
 
 	/**
-     * @property x
-     * @type Float
-     * @default 0
-     */
-    var x:Float;
+	 * @property x
+	 * @type Float
+	 * @default 0
+	 */
+	var x:Float;
 
-    /**
-     * @property y
-     * @type Float
-     * @default 0
-     */
-    var y:Float;
+	/**
+	 * @property y
+	 * @type Float
+	 * @default 0
+	 */
+	var y:Float;
 
-    /**
-     * @property width
-     * @type Float
-     * @default 0
-     */
-    var width:Float;
+	/**
+	 * @property width
+	 * @type Float
+	 * @default 0
+	 */
+	var width:Float;
 
-    /**
-     * @property height
-     * @type Float
-     * @default 0
-     */
-    var height:Float;
+	/**
+	 * @property height
+	 * @type Float
+	 * @default 0
+	 */
+	var height:Float;
 }

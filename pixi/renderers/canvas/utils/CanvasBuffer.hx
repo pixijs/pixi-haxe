@@ -26,34 +26,34 @@ extern class CanvasBuffer {
 	function resize(width:Float, height:Float):Void;
 
 	/**
-     * The width of the Canvas in pixels.
-     *
-     * @property width
-     * @type Float
-     */
+	 * The width of the Canvas in pixels.
+	 *
+	 * @property width
+	 * @type Float
+	 */
 	var width:Float;
 
 	/**
-     * The height of the Canvas in pixels.
-     *
-     * @property height
-     * @type Float
-     */
+	 * The height of the Canvas in pixels.
+	 *
+	 * @property height
+	 * @type Float
+	 */
 	var height:Float;
 
 	/**
-     * The Canvas object that belongs to this CanvasBuffer.
-     *
-     * @property canvas
-     * @type HTMLCanvasElement
-     */
+	 * The Canvas object that belongs to this CanvasBuffer.
+	 *
+	 * @property canvas
+	 * @type HTMLCanvasElement
+	 */
 	var canvas:CanvasElement;
 
 	/**
-     * A CanvasRenderingContext2D object representing a two-dimensional rendering context.
-     *
-     * @property context
-     * @type CanvasRenderingContext2D
-     */
+	 * A CanvasRenderingContext2D object representing a two-dimensional rendering context.
+	 *
+	 * @property context
+	 * @type CanvasRenderingContext2D
+	 */
 	var context:CanvasRenderingContext2D;
 }

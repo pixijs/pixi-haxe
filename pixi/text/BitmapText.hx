@@ -19,14 +19,14 @@ extern class BitmapText extends DisplayObjectContainer {
 	*/
 	function new(text:String, style:BitmapTextStyle):Void;
 
-    /**
-     * Set the style of the text
-     * style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
-     * [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single lines of text
-     *
-     * @method setStyle
-     * @param style {BitmapTextStyle} The style parameters, contained as properties of an object
-     */
+	/**
+	 * Set the style of the text
+	 * style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
+	 * [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single lines of text
+	 *
+	 * @method setStyle
+	 * @param style {BitmapTextStyle} The style parameters, contained as properties of an object
+	 */
 	function setStyle(style:BitmapTextStyle):Void;
 
 	/**
@@ -38,22 +38,22 @@ extern class BitmapText extends DisplayObjectContainer {
 	function setText(text:String):Void;
 
 	/**
-     * [read-only] The width of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @property textWidth
-     * @type Float
-     */
-    var textWidth:Float;
+	 * [read-only] The width of the overall text, different from fontSize,
+	 * which is defined in the style object
+	 *
+	 * @property textWidth
+	 * @type Float
+	 */
+	var textWidth:Float;
 
-    /**
-     * [read-only] The height of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @property textHeight
-     * @type Float
-     */
-    var textHeight:Float;
+	/**
+	 * [read-only] The height of the overall text, different from fontSize,
+	 * which is defined in the style object
+	 *
+	 * @property textHeight
+	 * @type Float
+	 */
+	var textHeight:Float;
 }
 
 /**

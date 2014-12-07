@@ -24,11 +24,11 @@ extern class AssetLoader extends EventTarget {
 	function new(assetURLs:Array<String>, ?crossorigin:Bool);
 
 	/**
-     * The array of asset URLs that are going to be loaded
-     *
-     * @property assetURLs
-     * @type Array<String>
-     */
+	 * The array of asset URLs that are going to be loaded
+	 *
+	 * @property assetURLs
+	 * @type Array<String>
+	 */
 	var assetURLs:Array<String>;
 
 	/**
@@ -38,11 +38,11 @@ extern class AssetLoader extends EventTarget {
 	var loadCount:Int;
 
 	/**
-     * Whether the requests should be treated as cross origin
-     *
-     * @property crossorigin
-     * @type Boolean
-     */
+	 * Whether the requests should be treated as cross origin
+	 *
+	 * @property crossorigin
+	 * @type Boolean
+	 */
 	var crossorigin:Bool;
 
 	/**
@@ -52,14 +52,14 @@ extern class AssetLoader extends EventTarget {
 	*/
 	var loadersByType:Dynamic;
 
-    /**
+	/**
 	 * Fired when an item finishes loading
 	 * @property onProgress
 	 * @type Function
 	*/
 	var onProgress:AssetLoader -> Void;
 
-    /**
+	/**
 	 * Fired when all the assets are loaded
 	 * @property onComplete
 	 * @type Function
@@ -73,11 +73,11 @@ extern class AssetLoader extends EventTarget {
 	*/
 	function load():Void;
 
-    /**
-     * Given a filename, returns its extension.
-     *
-     * @method _getDataType
-     * @param str {String} the name of the asset
-     */
-    function _getDataType(str:String):String;
+	/**
+	 * Given a filename, returns its extension.
+	 *
+	 * @method _getDataType
+	 * @param str {String} the name of the asset
+	 */
+	function _getDataType(str:String):String;
 }

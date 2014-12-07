@@ -14,97 +14,97 @@ extern class WebGLFastSpriteBatch {
 	function new();
 
 	/**
-     * @property vertSize
-     * @type Number
-     */
+	 * @property vertSize
+	 * @type Number
+	 */
 	var vertSize:Int;
 
 	/**
-     * @property maxSize
-     * @type Number
-     */
+	 * @property maxSize
+	 * @type Number
+	 */
 	var maxSize:Float;//Math.pow(2, 16) /  this.vertSize;
 
 	/**
-     * @property size
-     * @type Number
-     */
+	 * @property size
+	 * @type Number
+	 */
 	var size:Float;
 
 	/**
-    * Holds the vertices
-    *
-    * @property vertices
-    * @type Float32Array
-    */
+	* Holds the vertices
+	*
+	* @property vertices
+	* @type Float32Array
+	*/
 	var vertices:Array<Float>;
 
 	/**
-     * Holds the indices
-     *
-     * @property indices
-     * @type Uint16Array
-     */
+	 * Holds the indices
+	 *
+	 * @property indices
+	 * @type Uint16Array
+	 */
 	var indices:Array<Int>;
 
 	/**
-     * @property vertexBuffer
-     * @type Object
-     */
+	 * @property vertexBuffer
+	 * @type Object
+	 */
 	var vertexBuffer:Dynamic;
 
 	/**
-     * @property indexBuffer
-     * @type Object
-     */
+	 * @property indexBuffer
+	 * @type Object
+	 */
 	var indexBuffer:Dynamic;
 
 	/**
-     * @property lastIndexCount
-     * @type Number
-     */
+	 * @property lastIndexCount
+	 * @type Number
+	 */
 	var lastIndexCount:Int;
 
 	/**
-     * @property drawing
-     * @type Boolean
-     */
+	 * @property drawing
+	 * @type Boolean
+	 */
 	var drawing:Bool;
 
 	/**
-     * @property currentBatchSize
-     * @type Number
-     */
+	 * @property currentBatchSize
+	 * @type Number
+	 */
 	var currentBatchSize:Float;
 
 	/**
-     * @property currentBaseTexture
-     * @type BaseTexture
-     */
+	 * @property currentBaseTexture
+	 * @type BaseTexture
+	 */
 	var currentBaseTexture:BaseTexture;
 
 	/**
-     * @property currentBlendMode
-     * @type Number
-     */
+	 * @property currentBlendMode
+	 * @type Number
+	 */
 	var currentBlendMode:Int;
 
 	/**
-     * @property renderSession
-     * @type Object
-     */
+	 * @property renderSession
+	 * @type Object
+	 */
 	var renderSession:Dynamic;
 
 	/**
-     * @property shader
-     * @type Object
-     */
+	 * @property shader
+	 * @type Object
+	 */
 	var shader:Dynamic;
 
 	/**
-     * @property matrix
-     * @type Matrix
-     */
+	 * @property matrix
+	 * @type Matrix
+	 */
 	var matrix:Matrix;
 
 	/**

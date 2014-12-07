@@ -17,13 +17,13 @@ extern class BaseTexture extends EventTarget {
 	 */
 	function new(source:String, scaleMode:Int);
 
-    /**
-     * The Resolution of the texture.
-     *
-     * @property resolution
-     * @type Float
-     */
-    var resolution:Float;
+	/**
+	 * The Resolution of the texture.
+	 *
+	 * @property resolution
+	 * @type Float
+	 */
+	var resolution:Float;
 
 	/**
 	 * [read-only] The width of the base texture set when the image has loaded
@@ -50,9 +50,9 @@ extern class BaseTexture extends EventTarget {
 	 */
 	var source:Dynamic;
 
-    var imageUrl:String;
+	var imageUrl:String;
 
-    var premultipliedAlpha:Bool;
+	var premultipliedAlpha:Bool;
 
 	/**
 	 * Destroys this base texture
@@ -61,12 +61,12 @@ extern class BaseTexture extends EventTarget {
 	 */
 	function destroy():Void;
 
-    /**
+	/**
 	 * Sets all glTextures to be dirty.
 	 *
 	 * @method dirty
 	 */
-    function dirty():Void;
+	function dirty():Void;
 
 	/**
 	 * Changes the source image of the texture

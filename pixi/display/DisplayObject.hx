@@ -21,25 +21,25 @@ extern class DisplayObject {
 	function new():Void;
 
 	/**
-     * Useful function that returns a texture of the displayObject object that can then be used to create sprites
-     * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-     *
-     * @method generateTexture
-     * @param resolution {Float} The resolution of the texture being generated
-     * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-     * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-     * @return {Texture} a texture of the graphics object
-     */
+	 * Useful function that returns a texture of the displayObject object that can then be used to create sprites
+	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+	 *
+	 * @method generateTexture
+	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
+	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @return {Texture} a texture of the graphics object
+	 */
 	@:overload(function(resolution:Float, scaleMode:Int, ?renderer:CanvasRenderer):Texture{})
 	function generateTexture(resolution:Float, scaleMode:Int, ?renderer:WebGLRenderer):Texture;
 
 	/**
-     * Retrieves the bounds of the displayObject as a rectangle object
-     *
-     * @method getBounds
-     * @param matrix {Matrix}
-     * @return {Rectangle} the rectangular bounding area
-     */
+	 * Retrieves the bounds of the displayObject as a rectangle object
+	 *
+	 * @method getBounds
+	 * @param matrix {Matrix}
+	 * @return {Rectangle} the rectangular bounding area
+	 */
 	function getBounds(matrix:Matrix):Rectangle;
 
 	/**
@@ -85,19 +85,19 @@ extern class DisplayObject {
 	function updateCache():Void;
 
 	/**
-     * The opacity of the object.
-     *
-     * @property alpha
-     * @type Float
-     */
+	 * The opacity of the object.
+	 *
+	 * @property alpha
+	 * @type Float
+	 */
 	var alpha:Float;
 
 	/**
-     * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
-     *
-     * @property buttonMode
-     * @type Bool
-     */
+	 * This is used to indicate if the displayObject should display a mouse hand cursor on rollover
+	 *
+	 * @property buttonMode
+	 * @type Bool
+	 */
 	var buttonMode:Bool;
 
 	/**
@@ -110,20 +110,20 @@ extern class DisplayObject {
 	var cacheAsBitmap:Bool;
 
 	/**
-     * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
-     *
-     * @property defaultCursor
-     * @type String
-    */
+	 * This is the cursor that will be used when the mouse is over this object. To enable this the element must have interaction = true and buttonMode = true
+	 *
+	 * @property defaultCursor
+	 * @type String
+	*/
 	var defaultCursor:String;
 
 	/**
-     * The area the filter is applied to like the hitArea this is used as more of an optimisation
-     * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
-     *
-     * @property filterArea
-     * @type Rectangle
-     */
+	 * The area the filter is applied to like the hitArea this is used as more of an optimisation
+	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
+	 *
+	 * @property filterArea
+	 * @type Rectangle
+	 */
 	var filterArea:Rectangle;
 
 	/**
@@ -136,12 +136,12 @@ extern class DisplayObject {
 	var filters:Array<Dynamic>;
 
 	/**
-     * This is the defined area that will pick up mouse / touch events. It is null by default.
-     * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
-     *
-     * @property hitArea
-     * @type Rectangle|Circle|Ellipse|Polygon
-     */
+	 * This is the defined area that will pick up mouse / touch events. It is null by default.
+	 * Setting it is a neat way of optimising the hitTest function that the interactionManager will use (as it will not need to hit test all the children)
+	 *
+	 * @property hitArea
+	 * @type Rectangle|Circle|Ellipse|Polygon
+	 */
 	var hitArea:Dynamic;
 
 	/**
@@ -164,78 +164,78 @@ extern class DisplayObject {
 	var mask:Graphics;
 
 	/**
-     * [read-only] The display object container that contains this display object.
-     *
-     * @property parent
-     * @type DisplayObjectContainer
-     * @readOnly
-     */
+	 * [read-only] The display object container that contains this display object.
+	 *
+	 * @property parent
+	 * @type DisplayObjectContainer
+	 * @readOnly
+	 */
 	var parent:DisplayObjectContainer;
 
 	/**
-     * The pivot point of the displayObject that it rotates around
-     *
-     * @property pivot
-     * @type Point
-     */
+	 * The pivot point of the displayObject that it rotates around
+	 *
+	 * @property pivot
+	 * @type Point
+	 */
 	var pivot:Point;
 
 	/**
-     * The coordinate of the object relative to the local coordinates of the parent.
-     *
-     * @property position
-     * @type Point
-     */
+	 * The coordinate of the object relative to the local coordinates of the parent.
+	 *
+	 * @property position
+	 * @type Point
+	 */
 	var position:Point;
 
 	/**
-     * Can this object be rendered
-     *
-     * @property renderable
-     * @type Bool
-     */
+	 * Can this object be rendered
+	 *
+	 * @property renderable
+	 * @type Bool
+	 */
 	var renderable:Bool;
 
 	/**
-     * The rotation of the object in radians.
-     *
-     * @property rotation
-     * @type Float
-     */
+	 * The rotation of the object in radians.
+	 *
+	 * @property rotation
+	 * @type Float
+	 */
 	var rotation:Float;
 
 	/**
-     * The scale factor of the object.
-     *
-     * @property scale
-     * @type Point
-     */
+	 * The scale factor of the object.
+	 *
+	 * @property scale
+	 * @type Point
+	 */
 	var scale:Point;
 
 	/**
-     * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
-     *
-     * @property stage
-     * @type Stage
-     * @readOnly
-     */
+	 * [read-only] The stage the display object is connected to, or undefined if it is not connected to the stage.
+	 *
+	 * @property stage
+	 * @type Stage
+	 * @readOnly
+	 */
 	var stage:Stage;
 
 	/**
-     * The visibility of the object.
-     *
-     * @property visible
-     * @type Bool
-     */
+	 * The visibility of the object.
+	 *
+	 * @property visible
+	 * @type Bool
+	 */
 	var visible:Bool;
 
 	/**
-     * [read-only] The multiplied alpha of the displayObject
-     *
-     * @property worldAlpha
-     * @type Float
-     * @readOnly
-     */
+	 * [read-only] The multiplied alpha of the displayObject
+	 *
+	 * @property worldAlpha
+	 * @type Float
+	 * @readOnly
+	 */
 	var worldAlpha:Float;
 
 	/**
@@ -262,19 +262,121 @@ extern class DisplayObject {
 	 */
 	var y:Float;
 
-	var click:InteractionData -> Void;
-	var tap:InteractionData -> Void;
-	var mousedown:InteractionData -> Void;
-	var mouseout:InteractionData -> Void;
+	/**
+	 * A callback that is used when the users mouse rolls over the displayObject
+	 * @method mouseover
+	 * @param interactionData {InteractionData}
+	 */
 	var mouseover:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the users mouse leaves the displayObject
+	 * @method mouseout
+	 * @param interactionData {InteractionData}
+	 */
+	var mouseout:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the users clicks on the displayObject with their mouse's left button
+	 * @method click
+	 * @param interactionData {InteractionData}
+	 */
+	var click:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user clicks the mouse's left button down over the sprite
+	 * @method mousedown
+	 * @param interactionData {InteractionData}
+	 */
+	var mousedown:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases the mouse's left button that was over the displayObject
+	 * for this callback to be fired, the mouse's left button must have been pressed down over the displayObject
+	 * @method mouseup
+	 * @param interactionData {InteractionData}
+	 */
 	var mouseup:InteractionData -> Void;
-    var mousemove:InteractionData -> Void;
+
+	/**
+	 * Is called when mouse is moved across the renderer element
+	 * @method mousemove
+	 * @param interactionData {InteractionData}
+	 */
+	var mousemove:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases the mouse's left button that was over the displayObject but is no longer over the displayObject
+	 * for this callback to be fired, the mouse's left button must have been pressed down over the displayObject
+	 * @method mouseupoutside
+	 * @param interactionData {InteractionData}
+	 */
 	var mouseupoutside:InteractionData -> Void;
-    var touchstart:InteractionData -> Void;
-    var touchmove:InteractionData -> Void;
-    var touchend:InteractionData -> Void;
-    var touchendoutside:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the users clicks on the displayObject with their mouse's right button
+	 * @method rightclick
+	 * @param interactionData {InteractionData}
+	 */
 	var rightclick:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user clicks the mouse's right button down over the sprite
+	 * @method rightdown
+	 * @param interactionData {InteractionData}
+	 */
 	var rightdown:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases the mouse's right button that was over the displayObject
+	 * for this callback to be fired the mouse's right button must have been pressed down over the displayObject
+	 * @method rightup
+	 * @param interactionData {InteractionData}
+	 */
 	var rightup:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases the mouse's right button that was over the displayObject but is no longer over the displayObject
+	 * for this callback to be fired, the mouse's right button must have been pressed down over the displayObject
+	 * @method rightupoutside
+	 * @param interactionData {InteractionData}
+	 */
+	var rightupoutside:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the users taps on the sprite with their finger
+	 * basically a touch version of click
+	 * @method tap
+	 * @param interactionData {InteractionData}
+	 */
+	var tap:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user touches over the displayObject
+	 * @method touchstart
+	 * @param interactionData {InteractionData}
+	 */
+	var touchstart:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases a touch over the displayObject
+	 * @method touchend
+	 * @param interactionData {InteractionData}
+	 */
+	var touchend:InteractionData -> Void;
+
+	/**
+	 * A callback that is used when the user releases the touch that was over the displayObject
+	 * for this callback to be fired, The touch must have started over the sprite
+	 * @method touchendoutside
+	 * @param interactionData {InteractionData}
+	 */
+	var touchendoutside:InteractionData -> Void;
+
+	/**
+	 * Is called when a touch is moved across the renderer element
+	 * @method touchmove
+	 * @param interactionData {InteractionData}
+	 */
+	var touchmove:InteractionData -> Void;
 }

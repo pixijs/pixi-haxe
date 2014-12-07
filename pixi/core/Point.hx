@@ -32,16 +32,16 @@ extern class Point {
 	function set(x:Float, y:Float):Void;
 
 	/**
-     * @property x
-     * @type Float
-     * @default 0
-     */
-    var x:Float;
+	 * @property x
+	 * @type Float
+	 * @default 0
+	 */
+	var x:Float;
 
-    /**
-     * @property y
-     * @type Float
-     * @default 0
-     */
-    var y:Float;
+	/**
+	 * @property y
+	 * @type Float
+	 * @default 0
+	 */
+	var y:Float;
 }

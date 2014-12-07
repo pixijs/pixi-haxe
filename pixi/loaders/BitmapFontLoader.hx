@@ -21,36 +21,36 @@ extern class BitmapFontLoader extends EventTarget {
 	function new(url:String, ?crossorigin:Bool);
 
 	/**
-     * The url of the bitmap font data
-     *
-     * @property url
-     * @type String
-     */
+	 * The url of the bitmap font data
+	 *
+	 * @property url
+	 * @type String
+	 */
 	var url:String;
 
 	/**
-     * Whether the requests should be treated as cross origin
-     *
-     * @property crossorigin
-     * @type Boolean
-     */
+	 * Whether the requests should be treated as cross origin
+	 *
+	 * @property crossorigin
+	 * @type Boolean
+	 */
 	var crossorigin:Bool;
 
 	/**
-     * [read-only] The base url of the bitmap font data
-     *
-     * @property baseUrl
-     * @type String
-     * @readOnly
-     */
+	 * [read-only] The base url of the bitmap font data
+	 *
+	 * @property baseUrl
+	 * @type String
+	 * @readOnly
+	 */
 	var baseUrl:String;
 
 	/**
-     * [read-only] The texture of the bitmap font
-     *
-     * @property texture
-     * @type Texture
-     */
+	 * [read-only] The texture of the bitmap font
+	 *
+	 * @property texture
+	 * @type Texture
+	 */
 	var texture:Texture;
 
 	/**
