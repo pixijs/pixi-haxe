@@ -75,8 +75,7 @@ class Main {
         _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
         _bunny.anchor.set(0.5, 0.5);
         _bunny.scale.set(2, 2);
-        _bunny.position.x = 400;
-        _bunny.position.y = 300;
+        _bunny.position.set(400, 300);
         
         _stage.addChild(_bunny);
         
