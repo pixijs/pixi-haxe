@@ -13,7 +13,7 @@ haxelib install pixijs
 ### API Documentation ###
 
 Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
-[YUIDoc API](http://adireddy.github.io/docs/haxe-pixi/yui/) similar to pixi.js also available.
+[YUIDoc API](http://adireddy.github.io/docs/haxe-pixi/yui/) similar to [pixi.js docs](http://www.goodboydigital.com/pixijs/docs/) also available.
 
 ### Issues ###
 
