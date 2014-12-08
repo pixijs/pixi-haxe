@@ -27,26 +27,36 @@ extern class BaseTexture extends EventTarget {
 
 	/**
 	 * [read-only] The width of the base texture set when the image has loaded
+	 * @property width
+	 * @type Float
 	 */
 	var width:Float;
 
 	/**
 	 * [read-only] The height of the base texture set when the image has loaded
+	 * @property height
+	 * @type Float
 	 */
 	var height:Float;
 
 	/**
 	 * The scale mode to apply when scaling this texture
+	 * @property scaleMode
+	 * @type Float
 	 */
 	var scaleMode:Float;
 
 	/**
 	 * [read-only] Describes if the base texture has loaded or not
+	 * @property hasLoaded
+	 * @type Bool
 	 */
 	var hasLoaded:Bool;
 
 	/**
 	 * The source that is loaded to create the texture
+	 * @property source
+	 * @type Dynamic
 	 */
 	var source:Dynamic;
 

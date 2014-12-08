@@ -35,7 +35,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param radius {Float} The radius of the circle
 	 * @param startAngle {Float} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
 	 * @param endAngle {Float} The ending angle, in radians
-	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @param [anticlockwise] {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}
 	 */
 	function arc(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Graphics;
@@ -46,7 +46,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @method lineStyle
 	 * @param lineWidth {Float} width of the line to draw, will update the object's stored style
 	 * @param color {Int} color of the line to draw, will update the object's stored style
-	 * @param alpha {Float} alpha of the line to draw, will update the object's stored style
+	 * @param alpha {Float} [alpha] of the line to draw, will update the object's stored style
 	 */
 	function lineStyle(lineWidth:Float, ?color:Int, ?alpha:Float):Graphics;
 
@@ -108,7 +108,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @param  {Float}   radius            The radius of the circle
 	 * @param  {Float}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
 	 * @param  {Float}   endAngle          The ending angle, in radians
-	 * @param  {Float}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @param  {Float}   [anticlockwise]     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}
 	 */
 	function quadraticCurveTo(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Float):Graphics;
@@ -119,7 +119,7 @@ extern class Graphics extends DisplayObjectContainer {
 	 *
 	 * @method beginFill
 	 * @param color {Int} the color of the fill
-	 * @param alpha {Float} the alpha of the fill
+	 * @param [alpha] {Float} the alpha of the fill
 	 * @return {Graphics}
 	 */
 	function beginFill(color:Int, ?alpha:Float):Graphics;

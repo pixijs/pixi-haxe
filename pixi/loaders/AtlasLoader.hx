@@ -12,8 +12,8 @@ extern class AtlasLoader extends EventTarget {
 	 * @class AtlasLoader
 	 * @extends EventTarget
 	 * @constructor
-	 * @param {String} url the url of the JSON file
-	 * @param {Bool} crossorigin
+	 * @param url {String} the url of the JSON file
+	 * @param [crossorigin] {Bool}
 	 */
 	function new(url:String, ?crossorigin:Bool);
 

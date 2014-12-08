@@ -34,11 +34,11 @@ extern class RenderTexture extends Texture {
 	 * @class RenderTexture
 	 * @extends Texture
 	 * @constructor
-	 * @param width {Float} The width of the render texture
-	 * @param height {Float} The height of the render texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param [width] {Float} The width of the render texture
+	 * @param [height] {Float} The height of the render texture
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
+	 * @param [scaleMode] {Int} Should be one of the PIXI.scaleMode consts
+	 * @param [resolution] {Float} The resolution of the texture being generated
 	 */
 	@:overload(function(?width:Float, ?height:Float, ?renderer:CanvasRenderer, ?scaleMode:Int, ?resolution:Float):Void {})
 	function new(?width:Float, ?height:Float, ?renderer:WebGLRenderer, ?scaleMode:Int, ?resolution:Float);
@@ -59,7 +59,7 @@ extern class RenderTexture extends Texture {
 	 * @method resize
 	 * @param width {Float} The width to resize to.
 	 * @param height {Float} The height to resize to.
-	 * @param updateBase {Bool} Should the baseTexture.width and height values be resized as well?
+	 * @param [updateBase] {Bool} Should the baseTexture.width and height values be resized as well?
 	 */
 	function resize(width:Float, height:Float, ?updateBase:Bool):Void;
 

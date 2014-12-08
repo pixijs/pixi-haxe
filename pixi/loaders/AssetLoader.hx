@@ -19,7 +19,7 @@ extern class AssetLoader extends EventTarget {
 	 *      supported. Supported image formats include 'jpeg', 'jpg', 'png', 'gif'. Supported
 	 *      sprite sheet data formats only include 'JSON' at this time. Supported bitmap font
 	 *      data formats include 'xml' and 'fnt'.
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin
 	*/
 	function new(assetURLs:Array<String>, ?crossorigin:Bool);
 

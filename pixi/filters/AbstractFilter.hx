@@ -9,7 +9,7 @@ extern class AbstractFilter {
 	 * @class AbstractFilter
 	 * @constructor
 	 * @param [fragmentSrc] {Array<String>}
-	 * @param uniforms {Dynamic}
+	 * @param [uniforms] {Dynamic}
 	 */
 	function new(?fragmentSrc:Array<String>, ?uniforms:Dynamic);
 

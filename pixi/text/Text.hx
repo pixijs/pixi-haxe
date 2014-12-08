@@ -35,7 +35,7 @@ extern class Text extends Sprite {
 	 * Set the style of the text
 	 *
 	 * @method setStyle
-	 * @param [style] {TextStyle} The style parameters
+	 * @param style {TextStyle} The style parameters
 	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
 	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
@@ -62,7 +62,7 @@ extern class Text extends Sprite {
 	 * Destroys this text object
 	 *
 	 * @method destroy
-	 * @param destroyBaseTexture {Bool} whether to destroy the base texture as well
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well
 	 */
 	function destroy(?destroyBaseTexture:Bool):Void;
 

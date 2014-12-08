@@ -11,7 +11,7 @@ extern class Event {
 	 * @constructor
 	 * @param target {Object} The target object that the event is called on
 	 * @param name {String} The string name of the event that was triggered
-	 * @param data {Object} Arbitrary event data to pass along
+	 * @param [data] {Object} Arbitrary event data to pass along
 	 */
 	function new(target:Dynamic, name:String, ?data:Dynamic);
 

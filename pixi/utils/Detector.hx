@@ -8,14 +8,17 @@ import pixi.renderers.canvas.CanvasRenderer;
 extern class Detector {
 
 	/**
+	 * @class Detector
+	 */
+
+	/**
 	 * This helper function will automatically detect which renderer you should be using.
 	 * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
 	 * the browser then this function will return a canvas renderer
-	 * @class autoDetectRenderer
 	 * @static
+	 * @method autoDetectRenderer
 	 * @param width=800 {Float} the width of the renderers view
 	 * @param height=600 {Float} the height of the renderers view
-	 *
 	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
 	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
@@ -33,11 +36,10 @@ extern class Detector {
 	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
 	 * This function will likely change and update as webGL performance improves on these devices.
 	 *
-	 * @class autoDetectRecommendedRenderer
 	 * @static
+	 * @method autoDetectRecommendedRenderer
 	 * @param width=800 {Float} the width of the renderers view
 	 * @param height=600 {Float} the height of the renderers view
-	 *
 	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
 	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
@@ -45,7 +47,6 @@ extern class Detector {
 	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
 	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
 	 * @return CanvasRenderer|WebGLRenderer
-	 *
 	 */
 	@:overload(function(width:Float, height:Float, ?options:RenderingOptions):WebGLRenderer {})
 	static function autoDetectRecommendedRenderer(width:Float, height:Float, ?options:RenderingOptions):CanvasRenderer;

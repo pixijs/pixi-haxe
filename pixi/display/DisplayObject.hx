@@ -27,7 +27,7 @@ extern class DisplayObject {
 	 * @method generateTexture
 	 * @param resolution {Float} The resolution of the texture being generated
 	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
 	 * @return {Texture} a texture of the graphics object
 	 */
 	@:overload(function(resolution:Float, scaleMode:Int, ?renderer:CanvasRenderer):Texture{})

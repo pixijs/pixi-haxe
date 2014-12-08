@@ -14,7 +14,7 @@ extern class Texture {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
-	 * @param frame {Rectangle} The rectangle frame of the texture to show
+	 * @param [frame] {Rectangle} The rectangle frame of the texture to show
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 */

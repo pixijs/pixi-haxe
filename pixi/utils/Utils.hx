@@ -8,6 +8,7 @@ extern class Utils {
 	 *
 	 * @method hex2rgb
 	 * @param hex {Float}
+	 * @return Array<Float>
 	*/
 	static function hex2rgb(hex:Float):Array<Float>;
 
@@ -16,6 +17,7 @@ extern class Utils {
 	 *
 	 * @method rgb2hex
 	 * @param rgb {Array}
+	 * @return Float
 	*/
 	static function rgb2hex(rgb:Array<Float>):Float;
 

@@ -32,6 +32,7 @@ extern class EventTarget {
 	 * @method emit
 	 * @alias dispatchEvent
 	 * @param eventName {String} The name of the event.
+	 * @param data {Dynamic}
 	 * @returns {Bool} Indication if we've emitted an event.
 	 */
 	function emit(eventName:String, ?data:Dynamic):Bool;
@@ -46,7 +47,7 @@ extern class EventTarget {
 	 * @param callback {Functon} Callback function.
 	 */
 	function on(eventName:String, callback:Dynamic):Void;
-	function addEventListener(eventName:String, fn:Dynamic):Void;
+	function addEventListener(eventName:String, callback:Dynamic):Void;
 
 	/**
 	 * Add an EventListener that's only called once.

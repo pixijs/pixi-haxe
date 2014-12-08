@@ -11,7 +11,7 @@ extern class SpriteBatch extends DisplayObjectContainer {
 	 *
 	 * @class SpriteBatch
 	 * @constructor
-	 * @param texture {Texture}
+	 * @param [texture] {Texture}
 	 */
 	function new(?texture:Texture):Void;
 }

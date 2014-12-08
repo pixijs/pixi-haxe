@@ -19,7 +19,7 @@ extern class SpriteSheetLoader extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the sprite sheet JSON file
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin
 	 */
 	function new(url:String, ?crossorigin:Bool);
 
