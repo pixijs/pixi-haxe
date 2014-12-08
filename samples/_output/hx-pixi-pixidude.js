@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.pixidude = {};
-demos.pixidude.Main = function() {
+var samples = {};
+samples.pixidude = {};
+samples.pixidude.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	this._renderer.view.style.display = "block";
@@ -15,10 +15,10 @@ demos.pixidude.Main = function() {
 	this._postition = 0;
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.pixidude.Main.main = function() {
-	new demos.pixidude.Main();
+samples.pixidude.Main.main = function() {
+	new samples.pixidude.Main();
 };
-demos.pixidude.Main.prototype = {
+samples.pixidude.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		this._renderer.render(this._stage);
@@ -51,5 +51,5 @@ demos.pixidude.Main.prototype = {
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-demos.pixidude.Main.main();
+samples.pixidude.Main.main();
 })();

@@ -1,4 +1,4 @@
-package demos.pixidude;
+package samples.pixidude;
 
 import pixi.InteractionData;
 import pixi.renderers.webgl.WebGLRenderer;

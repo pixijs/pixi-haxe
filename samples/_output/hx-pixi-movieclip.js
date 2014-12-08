@@ -3,9 +3,9 @@ var Std = function() { };
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
-var demos = {};
-demos.movieclip = {};
-demos.movieclip.Main = function() {
+var samples = {};
+samples.movieclip = {};
+samples.movieclip.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	window.document.body.appendChild(this._renderer.view);
@@ -15,10 +15,10 @@ demos.movieclip.Main = function() {
 	this._loader.load();
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.movieclip.Main.main = function() {
-	new demos.movieclip.Main();
+samples.movieclip.Main.main = function() {
+	new samples.movieclip.Main();
 };
-demos.movieclip.Main.prototype = {
+samples.movieclip.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		this._renderer.render(this._stage);
@@ -61,5 +61,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.movieclip.Main.main();
+samples.movieclip.Main.main();
 })();

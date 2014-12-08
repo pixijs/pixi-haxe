@@ -1,4 +1,4 @@
-package demos.rendertexture;
+package samples.rendertexture;
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.Pixi;

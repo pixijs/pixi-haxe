@@ -1,4 +1,4 @@
-package demos.tilingsprite;
+package samples.tilingsprite;
 
 import pixi.extras.TilingSprite;
 import pixi.renderers.webgl.WebGLRenderer;

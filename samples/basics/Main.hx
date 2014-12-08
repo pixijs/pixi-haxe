@@ -1,4 +1,4 @@
-package demos.basics;
+package samples.basics;
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;

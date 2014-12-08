@@ -614,23 +614,6 @@
 	</typedef>
 	<class path="ArrayAccess" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represent the type of the elements stored.</haxe_doc></class>
-	<class path="demos.nape.Main" params="" file="demos/nape/Main.hx">
-		<main set="method" line="85" static="1">
-			<f a=""><x path="Void"/></f>
-			<meta><m n=":keep"/></meta>
-		</main>
-		<_renderer><c path="pixi.renderers.webgl.WebGLRenderer"/></_renderer>
-		<_stage><c path="pixi.display.Stage"/></_stage>
-		<_floor><c path="nape.phys.Body"/></_floor>
-		<_space><c path="nape.space.Space"/></_space>
-		<_balls><c path="Array"><c path="pixi.display.Sprite"/></c></_balls>
-		<_pballs><c path="Array"><c path="nape.phys.Body"/></c></_pballs>
-		<_setUpPhysics set="method" line="44"><f a=""><x path="Void"/></f></_setUpPhysics>
-		<_addBall set="method" line="54"><f a=""><x path="Void"/></f></_addBall>
-		<animate set="method" line="71"><f a=""><x path="Void"/></f></animate>
-		<new public="1" set="method" line="29"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":keep"/></meta>
-	</class>
 	<class path="haxe.EnumTools" params="" file="/usr/lib/haxe/std/haxe/EnumTools.hx" extern="1">
 		<getName public="1" params="T" get="inline" set="null" line="41" static="1">
 			<f a="e">
@@ -18448,7 +18431,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method generateTexture
 	 * @param resolution {Float} The resolution of the texture being generated
 	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
 	 * @return {Texture} a texture of the graphics object</haxe_doc>
 			<overloads><generateTexture public="1" set="method">
 	<f a="resolution:scaleMode:?renderer">
@@ -18463,7 +18446,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method generateTexture
 	 * @param resolution {Float} The resolution of the texture being generated
 	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
 	 * @return {Texture} a texture of the graphics object</haxe_doc>
 </generateTexture></overloads>
 		</generateTexture>
@@ -19320,7 +19303,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @class SpriteBatch
 	 * @constructor
-	 * @param texture {Texture}</haxe_doc>
+	 * @param [texture] {Texture}</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpriteBatch"</e></m></meta>
 	</class>
@@ -19530,7 +19513,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class AbstractFilter
 	 * @constructor
 	 * @param [fragmentSrc] {Array<String>}
-	 * @param uniforms {Dynamic}]]></haxe_doc>
+	 * @param [uniforms] {Dynamic}]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.AbstractFilter"</e></m></meta>
 	</class>
@@ -20088,6 +20071,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method emit
 	 * @alias dispatchEvent
 	 * @param eventName {String} The name of the event.
+	 * @param data {Dynamic}
 	 * @returns {Bool} Indication if we've emitted an event.</haxe_doc>
 		</emit>
 		<dispatchEvent public="1" set="method"><f a="eventName:?data">
@@ -20108,7 +20092,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param eventName {String} Name of the event.
 	 * @param callback {Functon} Callback function.</haxe_doc>
 		</on>
-		<addEventListener public="1" set="method"><f a="eventName:fn">
+		<addEventListener public="1" set="method"><f a="eventName:callback">
 	<c path="String"/>
 	<d/>
 	<x path="Void"/>
@@ -20245,7 +20229,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *      supported. Supported image formats include 'jpeg', 'jpg', 'png', 'gif'. Supported
 	 *      sprite sheet data formats only include 'JSON' at this time. Supported bitmap font
 	 *      data formats include 'xml' and 'fnt'.
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin]]></haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.AssetLoader"</e></m></meta>
 	</class>
@@ -20303,8 +20287,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class AtlasLoader
 	 * @extends EventTarget
 	 * @constructor
-	 * @param {String} url the url of the JSON file
-	 * @param {Bool} crossorigin</haxe_doc>
+	 * @param url {String} the url of the JSON file
+	 * @param [crossorigin] {Bool}</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.AtlasLoader"</e></m></meta>
 	</class>
@@ -20360,7 +20344,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the sprite sheet JSON file
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BitmapFontLoader"</e></m></meta>
 	</class>
@@ -20416,7 +20400,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the image
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.ImageLoader"</e></m></meta>
 	</class>
@@ -20480,7 +20464,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the JSON file
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.JsonLoader"</e></m></meta>
 	</class>
@@ -20531,7 +20515,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the JSON file
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpineLoader"</e></m></meta>
 	</class>
@@ -20601,7 +20585,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param url {String} The url of the sprite sheet JSON file
-	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpriteSheetLoader"</e></m></meta>
 	</class>
@@ -20630,7 +20614,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param radius {Float} The radius of the circle
 	 * @param startAngle {Float} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
 	 * @param endAngle {Float} The ending angle, in radians
-	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @param [anticlockwise] {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}</haxe_doc>
 		</arc>
 		<lineStyle public="1" set="method">
@@ -20645,7 +20629,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method lineStyle
 	 * @param lineWidth {Float} width of the line to draw, will update the object's stored style
 	 * @param color {Int} color of the line to draw, will update the object's stored style
-	 * @param alpha {Float} alpha of the line to draw, will update the object's stored style</haxe_doc>
+	 * @param alpha {Float} [alpha] of the line to draw, will update the object's stored style</haxe_doc>
 		</lineStyle>
 		<moveTo public="1" set="method">
 			<f a="x:y">
@@ -20732,7 +20716,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param  {Float}   radius            The radius of the circle
 	 * @param  {Float}   startAngle        The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
 	 * @param  {Float}   endAngle          The ending angle, in radians
-	 * @param  {Float}   anticlockwise     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
+	 * @param  {Float}   [anticlockwise]     Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 * @return {Graphics}</haxe_doc>
 		</quadraticCurveTo>
 		<beginFill public="1" set="method">
@@ -20746,7 +20730,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method beginFill
 	 * @param color {Int} the color of the fill
-	 * @param alpha {Float} the alpha of the fill
+	 * @param [alpha] {Float} the alpha of the fill
 	 * @return {Graphics}</haxe_doc>
 		</beginFill>
 		<endFill public="1" set="method">
@@ -22575,7 +22559,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Set the style of the text
 	 *
 	 * @method setStyle
-	 * @param [style] {TextStyle} The style parameters
+	 * @param style {TextStyle} The style parameters
 	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
 	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
 	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
@@ -22606,7 +22590,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Destroys this text object
 	 *
 	 * @method destroy
-	 * @param destroyBaseTexture {Bool} whether to destroy the base texture as well</haxe_doc>
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well</haxe_doc>
 		</destroy>
 		<canvas public="1">
 			<c path="js.html.CanvasElement"/>
@@ -22738,23 +22722,33 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</resolution>
 		<width public="1">
 			<x path="Float"/>
-			<haxe_doc>* [read-only] The width of the base texture set when the image has loaded</haxe_doc>
+			<haxe_doc>* [read-only] The width of the base texture set when the image has loaded
+	 * @property width
+	 * @type Float</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
-			<haxe_doc>* [read-only] The height of the base texture set when the image has loaded</haxe_doc>
+			<haxe_doc>* [read-only] The height of the base texture set when the image has loaded
+	 * @property height
+	 * @type Float</haxe_doc>
 		</height>
 		<scaleMode public="1">
 			<x path="Float"/>
-			<haxe_doc>* The scale mode to apply when scaling this texture</haxe_doc>
+			<haxe_doc>* The scale mode to apply when scaling this texture
+	 * @property scaleMode
+	 * @type Float</haxe_doc>
 		</scaleMode>
 		<hasLoaded public="1">
 			<x path="Bool"/>
-			<haxe_doc>* [read-only] Describes if the base texture has loaded or not</haxe_doc>
+			<haxe_doc>* [read-only] Describes if the base texture has loaded or not
+	 * @property hasLoaded
+	 * @type Bool</haxe_doc>
 		</hasLoaded>
 		<source public="1">
 			<d/>
-			<haxe_doc>* The source that is loaded to create the texture</haxe_doc>
+			<haxe_doc>* The source that is loaded to create the texture
+	 * @property source
+	 * @type Dynamic</haxe_doc>
 		</source>
 		<imageUrl public="1"><c path="String"/></imageUrl>
 		<premultipliedAlpha public="1"><x path="Bool"/></premultipliedAlpha>
@@ -22939,7 +22933,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @uses EventTarget
 	 * @constructor
 	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
-	 * @param frame {Rectangle} The rectangle frame of the texture to show
+	 * @param [frame] {Rectangle} The rectangle frame of the texture to show
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle</haxe_doc>
 		</new>
@@ -22973,7 +22967,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method resize
 	 * @param width {Float} The width to resize to.
 	 * @param height {Float} The height to resize to.
-	 * @param updateBase {Bool} Should the baseTexture.width and height values be resized as well?</haxe_doc>
+	 * @param [updateBase] {Bool} Should the baseTexture.width and height values be resized as well?</haxe_doc>
 		</resize>
 		<clear public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -23048,11 +23042,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class RenderTexture
 	 * @extends Texture
 	 * @constructor
-	 * @param width {Float} The width of the render texture
-	 * @param height {Float} The height of the render texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param resolution {Float} The resolution of the texture being generated</haxe_doc>
+	 * @param [width] {Float} The width of the render texture
+	 * @param [height] {Float} The height of the render texture
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
+	 * @param [scaleMode] {Int} Should be one of the PIXI.scaleMode consts
+	 * @param [resolution] {Float} The resolution of the texture being generated</haxe_doc>
 			<overloads><new public="1" set="method">
 	<f a="?width:?height:?renderer:?scaleMode:?resolution">
 		<x path="Float"/>
@@ -23085,11 +23079,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class RenderTexture
 	 * @extends Texture
 	 * @constructor
-	 * @param width {Float} The width of the render texture
-	 * @param height {Float} The height of the render texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
-	 * @param resolution {Float} The resolution of the texture being generated</haxe_doc>
+	 * @param [width] {Float} The width of the render texture
+	 * @param [height] {Float} The height of the render texture
+	 * @param [renderer] {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
+	 * @param [scaleMode] {Int} Should be one of the PIXI.scaleMode consts
+	 * @param [resolution] {Float} The resolution of the texture being generated</haxe_doc>
 </new></overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.RenderTexture"</e></m></meta>
@@ -23141,21 +23135,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<t path="pixi.utils.RenderingOptions"/>
 				<c path="pixi.renderers.webgl.WebGLRenderer"/>
 			</f>
-			<haxe_doc>* This helper function will automatically detect which renderer you should be using.
-	 * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
-	 * the browser then this function will return a canvas renderer
-	 * @class autoDetectRenderer
-	 * @static
-	 * @param width=800 {Float} the width of the renderers view
-	 * @param height=600 {Float} the height of the renderers view
-	 *
-	 * @param [options] {RenderingOptions} The optional renderer parameters
-	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-	* @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 * @return CanvasRenderer|WebGLRenderer</haxe_doc>
+			<haxe_doc>* @class Detector</haxe_doc>
 			<overloads><autoDetectRenderer public="1" set="method">
 	<f a="width:height:?options">
 		<x path="Float"/>
@@ -23163,21 +23143,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<t path="pixi.utils.RenderingOptions"/>
 		<c path="pixi.renderers.canvas.CanvasRenderer"/>
 	</f>
-	<haxe_doc>* This helper function will automatically detect which renderer you should be using.
-	 * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
-	 * the browser then this function will return a canvas renderer
-	 * @class autoDetectRenderer
-	 * @static
-	 * @param width=800 {Float} the width of the renderers view
-	 * @param height=600 {Float} the height of the renderers view
-	 *
-	 * @param [options] {RenderingOptions} The optional renderer parameters
-	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
-	* @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 * @return CanvasRenderer|WebGLRenderer</haxe_doc>
+	<haxe_doc>* @class Detector</haxe_doc>
 </autoDetectRenderer></overloads>
 		</autoDetectRenderer>
 		<autoDetectRecommendedRenderer public="1" set="method" static="1">
@@ -23192,19 +23158,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
 	 * This function will likely change and update as webGL performance improves on these devices.
 	 *
-	 * @class autoDetectRecommendedRenderer
 	 * @static
+	 * @method autoDetectRecommendedRenderer
 	 * @param width=800 {Float} the width of the renderers view
 	 * @param height=600 {Float} the height of the renderers view
-	 *
 	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
 	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
 	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
 	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
 	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 * @return CanvasRenderer|WebGLRenderer
-	 *</haxe_doc>
+	 * @return CanvasRenderer|WebGLRenderer</haxe_doc>
 			<overloads><autoDetectRecommendedRenderer public="1" set="method">
 	<f a="width:height:?options">
 		<x path="Float"/>
@@ -23217,19 +23181,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
 	 * This function will likely change and update as webGL performance improves on these devices.
 	 *
-	 * @class autoDetectRecommendedRenderer
 	 * @static
+	 * @method autoDetectRecommendedRenderer
 	 * @param width=800 {Float} the width of the renderers view
 	 * @param height=600 {Float} the height of the renderers view
-	 *
 	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
 	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
 	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
 	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
 	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 * @return CanvasRenderer|WebGLRenderer
-	 *</haxe_doc>
+	 * @return CanvasRenderer|WebGLRenderer</haxe_doc>
 </autoDetectRecommendedRenderer></overloads>
 		</autoDetectRecommendedRenderer>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
@@ -23289,7 +23251,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @constructor
 	 * @param target {Object} The target object that the event is called on
 	 * @param name {String} The string name of the event that was triggered
-	 * @param data {Object} Arbitrary event data to pass along</haxe_doc>
+	 * @param [data] {Object} Arbitrary event data to pass along</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Event"</e></m></meta>
 	</class>
@@ -23342,10 +23304,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<c path="Array"><x path="Float"/></c>
 			</f>
-			<haxe_doc>* Converts a hex color number to an [R, G, B] array
+			<haxe_doc><![CDATA[* Converts a hex color number to an [R, G, B] array
 	 *
 	 * @method hex2rgb
-	 * @param hex {Float}</haxe_doc>
+	 * @param hex {Float}
+	 * @return Array<Float>]]></haxe_doc>
 		</hex2rgb>
 		<rgb2hex public="1" set="method" static="1">
 			<f a="rgb">
@@ -23355,7 +23318,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Converts a color as an [R, G, B] array to a hex number
 	 *
 	 * @method rgb2hex
-	 * @param rgb {Array}</haxe_doc>
+	 * @param rgb {Array}
+	 * @return Float</haxe_doc>
 		</rgb2hex>
 		<canUseNewCanvasBlendModes public="1" set="method" static="1">
 			<f a=""><x path="Bool"/></f>
@@ -23403,6 +23367,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
  *
  * @method AjaxRequest</haxe_doc>
 		<meta><m n=":native"><e>"PIXI.AjaxRequest"</e></m></meta>
+	</class>
+	<class path="samples.nape.Main" params="" file="samples/nape/Main.hx">
+		<main set="method" line="85" static="1">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":keep"/></meta>
+		</main>
+		<_renderer><c path="pixi.renderers.webgl.WebGLRenderer"/></_renderer>
+		<_stage><c path="pixi.display.Stage"/></_stage>
+		<_floor><c path="nape.phys.Body"/></_floor>
+		<_space><c path="nape.space.Space"/></_space>
+		<_balls><c path="Array"><c path="pixi.display.Sprite"/></c></_balls>
+		<_pballs><c path="Array"><c path="nape.phys.Body"/></c></_pballs>
+		<_setUpPhysics set="method" line="44"><f a=""><x path="Void"/></f></_setUpPhysics>
+		<_addBall set="method" line="54"><f a=""><x path="Void"/></f></_addBall>
+		<animate set="method" line="71"><f a=""><x path="Void"/></f></animate>
+		<new public="1" set="method" line="29"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":keep"/></meta>
 	</class>
 	<class path="zpp_nape.ZPP_ID" params="" file="/haxelib/nape/2,0,16/zpp_nape/ID.hx" module="zpp_nape.ID">
 		<_Interactor public="1" line="180" static="1"><x path="Int"/></_Interactor>

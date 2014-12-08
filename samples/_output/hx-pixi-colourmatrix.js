@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.colourmatrix = {};
-demos.colourmatrix.Main = function() {
+var samples = {};
+samples.colourmatrix = {};
+samples.colourmatrix.Main = function() {
 	this._stage = new PIXI.Stage(13158);
 	this._stage.interactive = true;
 	this._renderer = PIXI.autoDetectRenderer(window.innerWidth,window.innerHeight);
@@ -37,10 +37,10 @@ demos.colourmatrix.Main = function() {
 	this._stage.addChild(help);
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.colourmatrix.Main.main = function() {
-	new demos.colourmatrix.Main();
+samples.colourmatrix.Main.main = function() {
+	new samples.colourmatrix.Main();
 };
-demos.colourmatrix.Main.prototype = {
+samples.colourmatrix.Main.prototype = {
 	_onClick: function(data) {
 		this._switchy = !this._switchy;
 		if(!this._switchy) this._stage.filters = [this._filter]; else this._stage.filters = null;
@@ -76,5 +76,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.colourmatrix.Main.main();
+samples.colourmatrix.Main.main();
 })();

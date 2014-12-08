@@ -1,4 +1,4 @@
-package demos.blur;
+package samples.blur;
 
 import js.Browser;
 import pixi.filters.BlurFilter;

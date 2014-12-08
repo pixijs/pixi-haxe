@@ -14,95 +14,6 @@ Std.string = function(s) {
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
-var demos = {};
-demos.nape = {};
-demos.nape.Main = function() {
-	this._stage = new PIXI.Stage(65535);
-	this._renderer = PIXI.autoDetectRenderer(800,600);
-	window.document.body.appendChild(this._renderer.view);
-	this._balls = [];
-	this._pballs = [];
-	this._setUpPhysics();
-	var timer = new haxe.Timer(1000);
-	timer.run = $bind(this,this._addBall);
-	window.requestAnimationFrame($bind(this,this.animate));
-};
-demos.nape.Main.__name__ = true;
-demos.nape.Main.main = function() {
-	new demos.nape.Main();
-};
-demos.nape.Main.prototype = {
-	_setUpPhysics: function() {
-		var gravity = nape.geom.Vec2.get(0,600,true);
-		this._space = new nape.space.Space(gravity);
-		this._floor = new nape.phys.Body((function($this) {
-			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
-			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
-			return $r;
-		}(this)));
-		this._floor.setShapeMaterials(nape.phys.Material.wood());
-		this._floor.zpp_inner.wrap_shapes.add(new nape.shape.Polygon(nape.shape.Polygon.rect(0,595,800,1)));
-		this._floor.set_space(this._space);
-	}
-	,_addBall: function() {
-		var ball = new PIXI.Sprite(PIXI.Texture.fromImage("assets/nape/ball.png"));
-		ball.anchor.set(0.5,0.5);
-		this._balls.push(ball);
-		this._stage.addChild(ball);
-		var pball = new nape.phys.Body((function($this) {
-			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
-			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
-			return $r;
-		}(this)));
-		pball.zpp_inner.wrap_shapes.add(new nape.shape.Circle(10));
-		((function($this) {
-			var $r;
-			if(pball.zpp_inner.wrap_pos == null) pball.zpp_inner.setupPosition();
-			$r = pball.zpp_inner.wrap_pos;
-			return $r;
-		}(this))).setxy(Std.random(800),0);
-		if(pball.zpp_inner.world) throw "Error: Space::world is immutable";
-		if(pball.zpp_inner.angvel != 0) {
-			if(pball.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) throw "Error: A static object cannot be given a velocity";
-			pball.zpp_inner.angvel = 0;
-			pball.zpp_inner.wake();
-		}
-		pball.zpp_inner.angvel;
-		pball.zpp_inner.immutable_midstep("Body::" + "true");
-		if(!pball.zpp_inner.norotate != true) {
-			pball.zpp_inner.norotate = false;
-			pball.zpp_inner.invalidate_inertia();
-		}
-		!pball.zpp_inner.norotate;
-		pball.setShapeMaterials(nape.phys.Material.rubber());
-		pball.set_space(this._space);
-		this._pballs.push(pball);
-	}
-	,animate: function() {
-		window.requestAnimationFrame($bind(this,this.animate));
-		this._space.step(0.0166666666666666664);
-		var _g1 = 0;
-		var _g = this._pballs.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			this._balls[i].position.x = this._pballs[i].get_position().get_x();
-			this._balls[i].position.y = this._pballs[i].get_position().get_y();
-			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
-		}
-		this._renderer.render(this._stage);
-	}
-	,__class__: demos.nape.Main
-};
 var haxe = {};
 haxe.Timer = function(time_ms) {
 	var me = this;
@@ -3453,6 +3364,95 @@ nape.space.Space.prototype = {
 		this.zpp_inner.step(deltaTime,velocityIterations,positionIterations);
 	}
 	,__class__: nape.space.Space
+};
+var samples = {};
+samples.nape = {};
+samples.nape.Main = function() {
+	this._stage = new PIXI.Stage(65535);
+	this._renderer = PIXI.autoDetectRenderer(800,600);
+	window.document.body.appendChild(this._renderer.view);
+	this._balls = [];
+	this._pballs = [];
+	this._setUpPhysics();
+	var timer = new haxe.Timer(1000);
+	timer.run = $bind(this,this._addBall);
+	window.requestAnimationFrame($bind(this,this.animate));
+};
+samples.nape.Main.__name__ = true;
+samples.nape.Main.main = function() {
+	new samples.nape.Main();
+};
+samples.nape.Main.prototype = {
+	_setUpPhysics: function() {
+		var gravity = nape.geom.Vec2.get(0,600,true);
+		this._space = new nape.space.Space(gravity);
+		this._floor = new nape.phys.Body((function($this) {
+			var $r;
+			if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
+				zpp_nape.util.ZPP_Flags.internal = true;
+				zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
+				zpp_nape.util.ZPP_Flags.internal = false;
+			}
+			$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
+			return $r;
+		}(this)));
+		this._floor.setShapeMaterials(nape.phys.Material.wood());
+		this._floor.zpp_inner.wrap_shapes.add(new nape.shape.Polygon(nape.shape.Polygon.rect(0,595,800,1)));
+		this._floor.set_space(this._space);
+	}
+	,_addBall: function() {
+		var ball = new PIXI.Sprite(PIXI.Texture.fromImage("assets/nape/ball.png"));
+		ball.anchor.set(0.5,0.5);
+		this._balls.push(ball);
+		this._stage.addChild(ball);
+		var pball = new nape.phys.Body((function($this) {
+			var $r;
+			if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
+				zpp_nape.util.ZPP_Flags.internal = true;
+				zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
+				zpp_nape.util.ZPP_Flags.internal = false;
+			}
+			$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+			return $r;
+		}(this)));
+		pball.zpp_inner.wrap_shapes.add(new nape.shape.Circle(10));
+		((function($this) {
+			var $r;
+			if(pball.zpp_inner.wrap_pos == null) pball.zpp_inner.setupPosition();
+			$r = pball.zpp_inner.wrap_pos;
+			return $r;
+		}(this))).setxy(Std.random(800),0);
+		if(pball.zpp_inner.world) throw "Error: Space::world is immutable";
+		if(pball.zpp_inner.angvel != 0) {
+			if(pball.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) throw "Error: A static object cannot be given a velocity";
+			pball.zpp_inner.angvel = 0;
+			pball.zpp_inner.wake();
+		}
+		pball.zpp_inner.angvel;
+		pball.zpp_inner.immutable_midstep("Body::" + "true");
+		if(!pball.zpp_inner.norotate != true) {
+			pball.zpp_inner.norotate = false;
+			pball.zpp_inner.invalidate_inertia();
+		}
+		!pball.zpp_inner.norotate;
+		pball.setShapeMaterials(nape.phys.Material.rubber());
+		pball.set_space(this._space);
+		this._pballs.push(pball);
+	}
+	,animate: function() {
+		window.requestAnimationFrame($bind(this,this.animate));
+		this._space.step(0.0166666666666666664);
+		var _g1 = 0;
+		var _g = this._pballs.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this._balls[i].position.x = this._pballs[i].get_position().get_x();
+			this._balls[i].position.y = this._pballs[i].get_position().get_y();
+			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
+		}
+		this._renderer.render(this._stage);
+	}
+	,__class__: samples.nape.Main
 };
 var zpp_nape = {};
 zpp_nape.ZPP_ID = function() { };
@@ -18078,5 +18078,5 @@ zpp_nape.util.ZPP_ShapeList.internal = false;
 zpp_nape.util.ZPP_InteractionGroupList.internal = false;
 zpp_nape.util.ZPP_ArbiterList.internal = false;
 zpp_nape.util.ZPP_ContactList.internal = false;
-demos.nape.Main.main();
+samples.nape.Main.main();
 })();

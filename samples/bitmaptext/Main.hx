@@ -1,4 +1,4 @@
-package demos.bitmaptext;
+package samples.bitmaptext;
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Stage;

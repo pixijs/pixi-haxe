@@ -1,4 +1,4 @@
-package demos.spine;
+package samples.spine;
 
 import pixi.InteractionData;
 import pixi.renderers.webgl.WebGLRenderer;

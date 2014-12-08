@@ -1,4 +1,4 @@
-package demos.snake;
+package samples.snake;
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Stage;

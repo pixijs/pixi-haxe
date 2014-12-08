@@ -3,9 +3,9 @@ var Std = function() { };
 Std["int"] = function(x) {
 	return x | 0;
 };
-var demos = {};
-demos.graphics = {};
-demos.graphics.Main = function() {
+var samples = {};
+samples.graphics = {};
+samples.graphics.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._stage.interactive = true;
 	this._renderer = PIXI.autoDetectRenderer(620,380);
@@ -48,10 +48,10 @@ demos.graphics.Main = function() {
 	this._stage.click = this._stage.tap = $bind(this,this._onStageClick);
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.graphics.Main.main = function() {
-	new demos.graphics.Main();
+samples.graphics.Main.main = function() {
+	new samples.graphics.Main();
 };
-demos.graphics.Main.prototype = {
+samples.graphics.Main.prototype = {
 	_onStageClick: function(data) {
 		this._graphics.lineStyle(Math.random() * 30,Std["int"](Math.random() * 16777215),1);
 		this._graphics.moveTo(Math.random() * 620,Math.random() * 380);
@@ -83,5 +83,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.graphics.Main.main();
+samples.graphics.Main.main();
 })();

@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.spritesheet = {};
-demos.spritesheet.Main = function() {
+var samples = {};
+samples.spritesheet = {};
+samples.spritesheet.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	window.document.body.appendChild(this._renderer.view);
@@ -17,10 +17,10 @@ demos.spritesheet.Main = function() {
 	this._alienContainer.y = 300;
 	this._stage.addChild(this._alienContainer);
 };
-demos.spritesheet.Main.main = function() {
-	new demos.spritesheet.Main();
+samples.spritesheet.Main.main = function() {
+	new samples.spritesheet.Main();
 };
-demos.spritesheet.Main.prototype = {
+samples.spritesheet.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		var _g = 0;
@@ -60,5 +60,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.spritesheet.Main.main();
+samples.spritesheet.Main.main();
 })();

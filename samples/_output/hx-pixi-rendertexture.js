@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.rendertexture = {};
-demos.rendertexture.Main = function() {
+var samples = {};
+samples.rendertexture = {};
+samples.rendertexture.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	this._renderer.view.style.width = window.innerWidth + "px";
@@ -40,10 +40,10 @@ demos.rendertexture.Main = function() {
 	this._count2 = 0;
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.rendertexture.Main.main = function() {
-	new demos.rendertexture.Main();
+samples.rendertexture.Main.main = function() {
+	new samples.rendertexture.Main();
 };
-demos.rendertexture.Main.prototype = {
+samples.rendertexture.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		var _g1 = 0;
@@ -77,5 +77,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.rendertexture.Main.main();
+samples.rendertexture.Main.main();
 })();

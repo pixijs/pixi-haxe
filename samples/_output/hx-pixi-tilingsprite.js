@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.tilingsprite = {};
-demos.tilingsprite.Main = function() {
+var samples = {};
+samples.tilingsprite = {};
+samples.tilingsprite.Main = function() {
 	this._stage = new PIXI.Stage(9946478);
 	this._renderer = PIXI.autoDetectRenderer(window.innerWidth,window.innerHeight);
 	window.document.body.appendChild(this._renderer.view);
@@ -11,10 +11,10 @@ demos.tilingsprite.Main = function() {
 	this._count = 0;
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.tilingsprite.Main.main = function() {
-	new demos.tilingsprite.Main();
+samples.tilingsprite.Main.main = function() {
+	new samples.tilingsprite.Main();
 };
-demos.tilingsprite.Main.prototype = {
+samples.tilingsprite.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		this._count += 0.005;
@@ -36,5 +36,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.tilingsprite.Main.main();
+samples.tilingsprite.Main.main();
 })();

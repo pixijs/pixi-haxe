@@ -1,4 +1,4 @@
-package demos.movieclip;
+package samples.movieclip;
 
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.MovieClip;

@@ -1,91 +1,91 @@
--cp demos
+-cp samples
 -cp src
--main demos.basics.Main
--js demos/_output/hx-pixi-basics.js
+-main samples.basics.Main
+-js samples/_output/hx-pixi-basics.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.bitmaptext.Main
--js demos/_output/hx-pixi-bitmaptext.js
+-main samples.bitmaptext.Main
+-js samples/_output/hx-pixi-bitmaptext.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.graphics.Main
--js demos/_output/hx-pixi-graphics.js
+-main samples.graphics.Main
+-js samples/_output/hx-pixi-graphics.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.movieclip.Main
--js demos/_output/hx-pixi-movieclip.js
+-main samples.movieclip.Main
+-js samples/_output/hx-pixi-movieclip.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.pixidude.Main
--js demos/_output/hx-pixi-pixidude.js
+-main samples.pixidude.Main
+-js samples/_output/hx-pixi-pixidude.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.rendertexture.Main
--js demos/_output/hx-pixi-rendertexture.js
+-main samples.rendertexture.Main
+-js samples/_output/hx-pixi-rendertexture.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.snake.Main
--js demos/_output/hx-pixi-snake.js
+-main samples.snake.Main
+-js samples/_output/hx-pixi-snake.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.spine.Main
--js demos/_output/hx-pixi-spine.js
+-main samples.spine.Main
+-js samples/_output/hx-pixi-spine.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.spritesheet.Main
--js demos/_output/hx-pixi-spritesheet.js
+-main samples.spritesheet.Main
+-js samples/_output/hx-pixi-spritesheet.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.tilingsprite.Main
--js demos/_output/hx-pixi-tilingsprite.js
+-main samples.tilingsprite.Main
+-js samples/_output/hx-pixi-tilingsprite.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.blur.Main
--js demos/_output/hx-pixi-blur.js
+-main samples.blur.Main
+-js samples/_output/hx-pixi-blur.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.colourmatrix.Main
--js demos/_output/hx-pixi-colourmatrix.js
+-main samples.colourmatrix.Main
+-js samples/_output/hx-pixi-colourmatrix.js
 -dce full
 
 --next
--cp demos
+-cp samples
 -cp src
--main demos.nape.Main
--js demos/_output/hx-pixi-nape.js
+-main samples.nape.Main
+-js samples/_output/hx-pixi-nape.js
 -dce full
 -lib nape
 

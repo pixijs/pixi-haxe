@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.bitmaptext = {};
-demos.bitmaptext.Main = function() {
+var samples = {};
+samples.bitmaptext = {};
+samples.bitmaptext.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	this._renderer.view.style.display = "block";
@@ -12,10 +12,10 @@ demos.bitmaptext.Main = function() {
 	this._loader.load();
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.bitmaptext.Main.main = function() {
-	new demos.bitmaptext.Main();
+samples.bitmaptext.Main.main = function() {
+	new samples.bitmaptext.Main();
 };
-demos.bitmaptext.Main.prototype = {
+samples.bitmaptext.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		this._renderer.render(this._stage);
@@ -29,5 +29,5 @@ demos.bitmaptext.Main.prototype = {
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-demos.bitmaptext.Main.main();
+samples.bitmaptext.Main.main();
 })();

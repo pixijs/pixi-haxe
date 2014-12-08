@@ -1,7 +1,7 @@
 (function () { "use strict";
-var demos = {};
-demos.snake = {};
-demos.snake.Main = function() {
+var samples = {};
+samples.snake = {};
+samples.snake.Main = function() {
 	this._stage = new PIXI.Stage(65280);
 	this._renderer = PIXI.autoDetectRenderer(window.innerWidth,window.innerHeight);
 	window.document.body.appendChild(this._renderer.view);
@@ -24,10 +24,10 @@ demos.snake.Main = function() {
 	snakeContainer.addChild(strip);
 	window.requestAnimationFrame($bind(this,this.animate));
 };
-demos.snake.Main.main = function() {
-	new demos.snake.Main();
+samples.snake.Main.main = function() {
+	new samples.snake.Main();
 };
-demos.snake.Main.prototype = {
+samples.snake.Main.prototype = {
 	animate: function() {
 		window.requestAnimationFrame($bind(this,this.animate));
 		this._count += 0.1;
@@ -53,5 +53,5 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-demos.snake.Main.main();
+samples.snake.Main.main();
 })();

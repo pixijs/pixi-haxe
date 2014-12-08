@@ -1,4 +1,4 @@
-package demos.nape;
+package samples.nape;
 
 import haxe.Timer;
 import pixi.renderers.webgl.WebGLRenderer;

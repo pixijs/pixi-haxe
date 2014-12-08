@@ -1,4 +1,4 @@
-package demos.colourmatrix;
+package samples.colourmatrix;
 
 import pixi.text.Text;
 import pixi.InteractionData;
