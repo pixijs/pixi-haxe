@@ -19488,25 +19488,49 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<dirty public="1">
 			<x path="Bool"/>
 			<haxe_doc>* @property dirty
-	* @type Boolean</haxe_doc>
+	* @type Bool</haxe_doc>
 		</dirty>
 		<padding public="1">
 			<x path="Float"/>
 			<haxe_doc>* @property padding
-	* @type Number</haxe_doc>
+	* @type Float</haxe_doc>
 		</padding>
+		<passes public="1">
+			<c path="Array"><c path="pixi.filters.AbstractFilter"/></c>
+			<haxe_doc><![CDATA[* An array of passes - some filters contain a few steps this array simply stores the steps in a liniear fashion.
+	* For example the blur filter has two passes blurX and blurY.
+	* @property passes
+	* @type Array<AbstractFilter> an array of filter objects]]></haxe_doc>
+		</passes>
+		<shaders public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @property shaders
+	* @type Array an array of shaders</haxe_doc>
+		</shaders>
+		<uniforms public="1">
+			<d/>
+			<haxe_doc>* @property uniforms
+	* @type object
+	* @private</haxe_doc>
+		</uniforms>
+		<fragmentSrc public="1">
+			<c path="Array"><c path="String"/></c>
+			<haxe_doc>* @property fragmentSrc
+	* @type Array
+	* @private</haxe_doc>
+		</fragmentSrc>
 		<new public="1" set="method">
-			<f a="fragmentSrc:uniforms">
+			<f a="?fragmentSrc:?uniforms">
 				<c path="Array"><c path="String"/></c>
 				<d/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* This is the base class for creating a pixi.js filter. Currently only webGL supports filters.
+			<haxe_doc><![CDATA[* This is the base class for creating a pixi.js filter. Currently only webGL supports filters.
 	 * If you want to make a custom filter this should be your base class.
 	 * @class AbstractFilter
 	 * @constructor
-	 * @param fragmentSrc
-	 * @param uniforms</haxe_doc>
+	 * @param [fragmentSrc] {Array<String>}
+	 * @param uniforms {Dynamic}]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.AbstractFilter"</e></m></meta>
 	</class>
