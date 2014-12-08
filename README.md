@@ -40,7 +40,7 @@ New Demos
 
 * [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
 
-Look at the demos folder for the source code of above examples.
+Look at the `samples` folder for the source code of above examples.
 
 ### Usage ###
 
