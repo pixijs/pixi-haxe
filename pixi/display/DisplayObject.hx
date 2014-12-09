@@ -37,10 +37,10 @@ extern class DisplayObject {
 	 * Retrieves the bounds of the displayObject as a rectangle object
 	 *
 	 * @method getBounds
-	 * @param matrix {Matrix}
+	 * @param [matrix] {Matrix}
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getBounds(matrix:Matrix):Rectangle;
+	function getBounds(?matrix:Matrix):Rectangle;
 
 	/**
 	 * Retrieves the local bounds of the displayObject as a rectangle object
