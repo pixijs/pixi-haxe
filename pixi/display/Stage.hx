@@ -46,7 +46,7 @@ extern class Stage extends DisplayObjectContainer {
 	 * This is useful for when you have other DOM elements on top of the Canvas element.
 	 *
 	 * @method setInteractionDelegate
-	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events
+	 * @param domElement {Element} This new domElement which will receive mouse/touch events
 	 */
 	function setInteractionDelegate(domElement:Element):Void;
 }

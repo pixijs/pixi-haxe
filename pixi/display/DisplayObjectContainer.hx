@@ -46,7 +46,6 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method addChild
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	*/
-	@:overload(function (child:Dynamic):Void {})
 	function addChild(child:DisplayObject):Void;
 
 	/**
@@ -56,19 +55,15 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Int} The index to place the child in
 	*/
-	@:overload(function (child:Dynamic, index:Int):Void {})
 	function addChildAt(child:DisplayObject, index:Int):Void;
 
 	/**
 	 * Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child {DisplayObject}
+	 * @param child1 {DisplayObject}
 	 * @param child2 {DisplayObject}
 	 */
-	@:overload(function (child1:Dynamic, child2:DisplayObject):Void {})
-	@:overload(function (child1:Dynamic, child2:Dynamic):Void {})
-	@:overload(function (child1:DisplayObject, child2:Dynamic):Void {})
 	function swapChildren(child1:DisplayObject, child2:DisplayObject):Void;
 
 	/**
@@ -76,8 +71,8 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 *
 	 * @method getChildAt
 	 * @param index {Int} The index to get the child from
+	 * @return {DisplayObject}
 	*/
-	@:overload(function(index:Int):Dynamic {})
 	function getChildAt(index:Int):DisplayObject;
 
 	/**
@@ -86,7 +81,6 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 * @method removeChild
 	 * @param child {DisplayObject} The DisplayObject to remove
 	*/
-	@:overload(function (child:Dynamic):Void {})
 	function removeChild(child:DisplayObject):Void;
 
 	/**
@@ -102,7 +96,7 @@ extern class DisplayObjectContainer extends DisplayObject {
 	 *
 	 * @method removeChildren
 	 * @param beginIndex {Int} The beginning position. Predefined value is 0.
-	 * @param endIndex {Int} The ending position. Predefined value is children's array length.
+	 * @param [endIndex] {Int} The ending position. Predefined value is children's array length.
 	*/
 	function removeChildren(?beginIndex:Int, ?endIndex:Int):Void;
 

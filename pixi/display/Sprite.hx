@@ -2,8 +2,6 @@ package pixi.display;
 
 import pixi.filters.AbstractFilter;
 import pixi.textures.VideoTexture;
-import pixi.core.Matrix;
-import pixi.core.Rectangle;
 import pixi.textures.Texture;
 import pixi.core.Point;
 

@@ -18858,16 +18858,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method addChild
 	 * @param child {DisplayObject} The DisplayObject to add to the container</haxe_doc>
-			<overloads><addChild public="1" set="method">
-	<f a="child">
-		<d/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* Adds a child to the container.
-	 *
-	 * @method addChild
-	 * @param child {DisplayObject} The DisplayObject to add to the container</haxe_doc>
-</addChild></overloads>
 		</addChild>
 		<addChildAt public="1" set="method">
 			<f a="child:index">
@@ -18880,18 +18870,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method addChildAt
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Int} The index to place the child in</haxe_doc>
-			<overloads><addChildAt public="1" set="method">
-	<f a="child:index">
-		<d/>
-		<x path="Int"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
-	 *
-	 * @method addChildAt
-	 * @param child {DisplayObject} The child to add
-	 * @param index {Int} The index to place the child in</haxe_doc>
-</addChildAt></overloads>
 		</addChildAt>
 		<swapChildren public="1" set="method">
 			<f a="child1:child2">
@@ -18902,46 +18880,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Swaps the position of 2 Display Objects within this container.
 	 *
 	 * @method swapChildren
-	 * @param child {DisplayObject}
+	 * @param child1 {DisplayObject}
 	 * @param child2 {DisplayObject}</haxe_doc>
-			<overloads>
-				<swapChildren public="1" set="method">
-					<f a="child1:child2">
-						<d/>
-						<c path="pixi.display.DisplayObject"/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
-	 *
-	 * @method swapChildren
-	 * @param child {DisplayObject}
-	 * @param child2 {DisplayObject}</haxe_doc>
-				</swapChildren>
-				<swapChildren public="1" set="method">
-					<f a="child1:child2">
-						<d/>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
-	 *
-	 * @method swapChildren
-	 * @param child {DisplayObject}
-	 * @param child2 {DisplayObject}</haxe_doc>
-				</swapChildren>
-				<swapChildren public="1" set="method">
-					<f a="child1:child2">
-						<c path="pixi.display.DisplayObject"/>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Swaps the position of 2 Display Objects within this container.
-	 *
-	 * @method swapChildren
-	 * @param child {DisplayObject}
-	 * @param child2 {DisplayObject}</haxe_doc>
-				</swapChildren>
-			</overloads>
 		</swapChildren>
 		<getChildAt public="1" set="method">
 			<f a="index">
@@ -18951,17 +18891,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Returns the child at the specified index
 	 *
 	 * @method getChildAt
-	 * @param index {Int} The index to get the child from</haxe_doc>
-			<overloads><getChildAt public="1" set="method">
-	<f a="index">
-		<x path="Int"/>
-		<d/>
-	</f>
-	<haxe_doc>* Returns the child at the specified index
-	 *
-	 * @method getChildAt
-	 * @param index {Int} The index to get the child from</haxe_doc>
-</getChildAt></overloads>
+	 * @param index {Int} The index to get the child from
+	 * @return {DisplayObject}</haxe_doc>
 		</getChildAt>
 		<removeChild public="1" set="method">
 			<f a="child">
@@ -18972,16 +18903,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method removeChild
 	 * @param child {DisplayObject} The DisplayObject to remove</haxe_doc>
-			<overloads><removeChild public="1" set="method">
-	<f a="child">
-		<d/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* Removes a child from the container.
-	 *
-	 * @method removeChild
-	 * @param child {DisplayObject} The DisplayObject to remove</haxe_doc>
-</removeChild></overloads>
 		</removeChild>
 		<removeChildAt public="1" set="method">
 			<f a="index">
@@ -19003,7 +18924,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method removeChildren
 	 * @param beginIndex {Int} The beginning position. Predefined value is 0.
-	 * @param endIndex {Int} The ending position. Predefined value is children's array length.</haxe_doc>
+	 * @param [endIndex] {Int} The ending position. Predefined value is children's array length.</haxe_doc>
 		</removeChildren>
 		<setChildIndex public="1" set="method">
 			<f a="child:index">

@@ -72,7 +72,7 @@ extern class DisplayObject {
 	 *
 	 * @method toLocal
 	 * @param position {Point} The world origin to calculate from
-	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @param [frm] {DisplayObject} The DisplayObject to calculate the global position from
 	 * @return {Point} A point object representing the position of this object
 	 */
 	function toLocal(position:Point, ?frm:DisplayObject):Point;
