@@ -172,7 +172,7 @@ extern class DisplayObject {
 	 * @method updateTransform
 	 * @private
 	*/
-	function getBounds(matrix:Dynamic):pixi.core.Rectangle;
+	function getBounds(?matrix:Dynamic):pixi.core.Rectangle;
 
 	/**
 	 * Sets the object's stage reference, the stage this object is connected to
