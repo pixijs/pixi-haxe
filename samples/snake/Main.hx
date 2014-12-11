@@ -1,6 +1,6 @@
 package samples.snake;
 
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.IRenderer;
 import pixi.display.Stage;
 import pixi.textures.Texture;
 import pixi.utils.Detector;
@@ -11,7 +11,7 @@ import js.Browser;
 
 class Main {
 
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	var _count:Float;

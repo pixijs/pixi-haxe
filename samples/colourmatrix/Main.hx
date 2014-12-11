@@ -1,11 +1,10 @@
 package samples.colourmatrix;
 
+import pixi.renderers.IRenderer;
 import pixi.text.Text;
 import pixi.InteractionData;
 import pixi.display.DisplayObjectContainer;
 import pixi.filters.ColorMatrixFilter;
-import js.Browser;
-import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.utils.Detector;
@@ -25,7 +24,7 @@ class Main {
 
 	var _count:Float;
 	var _switchy:Bool;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	public function new() {

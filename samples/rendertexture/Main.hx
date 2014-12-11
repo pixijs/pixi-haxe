@@ -1,7 +1,6 @@
 package samples.rendertexture;
 
-import pixi.renderers.webgl.WebGLRenderer;
-import pixi.Pixi;
+import pixi.renderers.IRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.RenderTexture;
@@ -13,7 +12,7 @@ import js.Browser;
 class Main {
 
 	var _outputSprite:Sprite;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	var _bunnyContainer:DisplayObjectContainer;

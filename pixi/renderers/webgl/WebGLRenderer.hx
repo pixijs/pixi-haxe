@@ -1,5 +1,12 @@
 package pixi.renderers.webgl;
 
+import pixi.renderers.webgl.utils.WebGLSpriteBatch;
+import pixi.renderers.webgl.utils.WebGLMaskManager;
+import pixi.renderers.webgl.utils.WebGLFilterManager;
+import pixi.renderers.webgl.utils.WebGLStencilManager;
+import pixi.renderers.webgl.utils.WebGLBlendModeManager;
+import pixi.renderers.webgl.utils.WebGLShaderManager;
+import pixi.utils.Event;
 import pixi.utils.Detector.RenderingOptions;
 import js.html.CanvasElement;
 import pixi.textures.Texture;
@@ -8,7 +15,7 @@ import pixi.display.DisplayObject;
 import pixi.display.Stage;
 
 @:native("PIXI.WebGLRenderer")
-extern class WebGLRenderer {
+extern class WebGLRenderer  implements IRenderer {
 
 	/**
 	 * The WebGLRenderer draws the stage and all its content onto a webGL enabled canvas. This renderer
@@ -30,6 +37,21 @@ extern class WebGLRenderer {
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
 	/**
+     * @property type
+     * @type Int
+     */
+	var type:Int;
+
+	/**
+     * The resolution of the renderer
+     *
+     * @property resolution
+     * @type Float
+     * @default 1
+     */
+	var resolution:Float;
+
+	/**
 	 * Whether the render view is transparent
 	 *
 	 * @property transparent
@@ -44,6 +66,18 @@ extern class WebGLRenderer {
 	 * @type Bool
 	 */
 	var preserveDrawingBuffer:Bool;
+
+	/**
+     * This sets if the WebGLRenderer will clear the context texture or not before the new render pass. If true:
+     * If the Stage is NOT transparent, Pixi will clear to alpha (0, 0, 0, 0).
+     * If the Stage is transparent, Pixi will clear to the target Stage's background color.
+     * Disable this by setting this to false. For example: if your game has a canvas filling background image, you often don't need this set.
+     *
+     * @property clearBeforeRender
+     * @type Bool
+     * @default
+     */
+	var clearBeforeRender:Bool;
 
 	/**
 	 * The width of the canvas view
@@ -70,6 +104,84 @@ extern class WebGLRenderer {
 	 * @type HTMLCanvasElement
 	 */
 	var view:CanvasElement;
+
+	/**
+     * @property contextLostBound
+     * @type Function
+     */
+	var contextLostBound:Event -> Void;
+
+	/**
+     * @property contextRestoredBound
+     * @type Function
+     */
+	var contextRestoredBound:Event -> Void;
+
+	/**
+     * @property projection
+     * @type Point
+     */
+	var projection:Point;
+
+	/**
+     * @property offset
+     * @type Point
+     */
+	var offset:Point;
+
+	/**
+     * Deals with managing the shader programs and their attribs
+     * @property shaderManager
+     * @type WebGLShaderManager
+     */
+	var shaderManager:WebGLShaderManager;
+
+	/**
+     * Manages the rendering of sprites
+     * @property spriteBatch
+     * @type WebGLSpriteBatch
+     */
+	var spriteBatch:WebGLSpriteBatch;
+
+	/**
+     * Manages the masks using the stencil buffer
+     * @property maskManager
+     * @type WebGLMaskManager
+     */
+	var maskManager:WebGLMaskManager;
+
+	/**
+     * Manages the filters
+     * @property filterManager
+     * @type WebGLFilterManager
+     */
+	var filterManager:WebGLFilterManager;
+
+	/**
+     * Manages the stencil buffer
+     * @property stencilManager
+     * @type WebGLStencilManager
+     */
+	var stencilManager:WebGLStencilManager;
+
+	/**
+     * Manages the blendModes
+     * @property blendModeManager
+     * @type WebGLBlendModeManager
+     */
+	var blendModeManager:WebGLBlendModeManager;
+
+	/**
+     * TODO remove
+     * @property renderSession
+     * @type Dynamic
+     */
+	var renderSession:Dynamic;
+
+	/**
+	* @method initContext
+	*/
+	function initContext():Void;
 
 	/**
 	 * Renders the stage to its webGL view

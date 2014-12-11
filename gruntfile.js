@@ -16,11 +16,11 @@ module.exports = function (grunt) {
         exec: {
             docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/haxe-pixi -f docs.xml " +
                 " --showTodoTags=false " +
-                " --deny=demos.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
+                " --deny=demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
                 "--title='Externs of pixi.js for Haxe' " +
                 "--subtitle='<a href='http://adireddy.github.io/haxe-pixi' target='_blank'>haxe-pixi</a>'",
             yuidocs: "yuidoc -e .hx .",
-            copy: "cp -R demos/_output/** ../adireddy.github.io/demos/haxe-pixi/"
+            copy: "cp -R samples/_output/** ../adireddy.github.io/demos/haxe-pixi/"
         }
     });
 

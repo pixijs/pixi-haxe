@@ -3,6 +3,9 @@ var Std = function() { };
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
+var pixi = {};
+pixi.renderers = {};
+pixi.renderers.IRenderer = function() { };
 var samples = {};
 samples.movieclip = {};
 samples.movieclip.Main = function() {

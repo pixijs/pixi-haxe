@@ -1,12 +1,12 @@
 package samples.nape;
 
-import haxe.Timer;
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.IRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.Texture;
 import pixi.utils.Detector;
 import js.Browser;
+import haxe.Timer;
 
 import nape.geom.Vec2;
 import nape.phys.Body;
@@ -18,7 +18,7 @@ import nape.phys.Material;
 
 class Main {
 
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	var _floor:Body;

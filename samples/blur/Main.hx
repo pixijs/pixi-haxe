@@ -1,8 +1,7 @@
 package samples.blur;
 
-import js.Browser;
+import pixi.renderers.IRenderer;
 import pixi.filters.BlurFilter;
-import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.utils.Detector;
@@ -18,7 +17,7 @@ class Main {
 	var _blurFilter2:BlurFilter;
 
 	var _count:Float;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	public function new() {

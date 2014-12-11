@@ -3,6 +3,9 @@ var Std = function() { };
 Std["int"] = function(x) {
 	return x | 0;
 };
+var pixi = {};
+pixi.renderers = {};
+pixi.renderers.IRenderer = function() { };
 var samples = {};
 samples.graphics = {};
 samples.graphics.Main = function() {

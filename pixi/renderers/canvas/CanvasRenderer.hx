@@ -7,7 +7,7 @@ import pixi.display.Stage;
 import pixi.renderers.canvas.utils.CanvasMaskManager;
 
 @:native("PIXI.CanvasRenderer")
-extern class CanvasRenderer {
+extern class CanvasRenderer implements IRenderer {
 
 	/**
 	 * The CanvasRenderer draws the Stage and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
@@ -24,6 +24,21 @@ extern class CanvasRenderer {
 	 * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
 	 */
 	function new(width:Float, height:Float, ?options:RenderingOptions);
+
+	/**
+     * @property type
+     * @type Int
+     */
+	var type:Int;
+
+	/**
+     * The resolution of the canvas
+     *
+     * @property resolution
+     * @type Float
+     * @default 1
+     */
+	var resolution:Float;
 
 	/**
 	 * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
@@ -67,16 +82,24 @@ extern class CanvasRenderer {
 	 * The canvas element that everything is drawn to
 	 *
 	 * @property view
-	 * @type HTMLCanvasElement
+	 * @type CanvasElement
 	 */
 	var view:CanvasElement;
 
 	/**
 	 * The canvas 2d context that everything is drawn with
 	 * @property context
-	 * @type HTMLCanvasElement 2d Context
+	 * @type CanvasRenderingContext2D 2d Context
 	 */
 	var context:CanvasRenderingContext2D;
+
+	/**
+     * Boolean flag controlling canvas refresh.
+     *
+     * @property refresh
+     * @type Bool
+     */
+	var refresh:Bool;
 
 	/**
 	 * Instance of a PIXI.CanvasMaskManager, handles masking when using the canvas renderer
@@ -88,7 +111,7 @@ extern class CanvasRenderer {
 	/**
 	 * The render session is just a bunch of parameter used for rendering
 	 * @property renderSession
-	 * @type Object
+	 * @type Dynamic
 	 */
 	var renderSession:Dynamic;
 
@@ -108,12 +131,4 @@ extern class CanvasRenderer {
 	 * @param height {Float} the new height of the canvas view
 	 */
 	function resize(width:Float, height:Float):Void;
-
-	/**
-	 * Removes everything from the renderer and optionally removes the Canvas DOM element.
-	 *
-	 * @method destroy
-	 * @param [removeView=true] {Bool} Removes the Canvas element from the DOM.
-	 */
-	function destroy(?removeView:Bool = true):Void;
 }

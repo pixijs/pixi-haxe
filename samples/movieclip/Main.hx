@@ -1,6 +1,6 @@
 package samples.movieclip;
 
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.IRenderer;
 import pixi.display.MovieClip;
 import pixi.display.Stage;
 import pixi.textures.Texture;
@@ -11,7 +11,7 @@ import js.Browser;
 class Main {
 
 	var _loader:AssetLoader;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	public function new() {

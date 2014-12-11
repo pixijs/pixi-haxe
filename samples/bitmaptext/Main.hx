@@ -1,6 +1,6 @@
 package samples.bitmaptext;
 
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.IRenderer;
 import pixi.display.Stage;
 import pixi.utils.Detector;
 import pixi.loaders.AssetLoader;
@@ -10,7 +10,7 @@ import js.Browser;
 class Main {
 
 	var _loader:AssetLoader;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	public function new() {

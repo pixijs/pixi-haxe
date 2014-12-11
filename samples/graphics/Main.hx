@@ -1,7 +1,7 @@
 package samples.graphics;
 
+import pixi.renderers.IRenderer;
 import pixi.InteractionData;
-import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Stage;
 import pixi.primitives.Graphics;
 import pixi.utils.Detector;
@@ -9,7 +9,7 @@ import js.Browser;
 
 class Main {
 
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	var _graphics:Graphics;

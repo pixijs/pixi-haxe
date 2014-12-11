@@ -1,6 +1,6 @@
 package samples.basics;
 
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.IRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.Texture;
@@ -10,7 +10,7 @@ import js.Browser;
 class Main {
 
 	var _bunny:Sprite;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	public function new() {

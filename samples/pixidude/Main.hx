@@ -1,7 +1,7 @@
 package samples.pixidude;
 
+import pixi.renderers.IRenderer;
 import pixi.InteractionData;
-import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.spine.Spine;
@@ -12,7 +12,7 @@ import js.Browser;
 class Main {
 
 	var _loader:AssetLoader;
-	var _renderer:WebGLRenderer;
+	var _renderer:IRenderer;
 	var _stage:Stage;
 
 	var _pixie:Spine;

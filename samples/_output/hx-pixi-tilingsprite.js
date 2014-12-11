@@ -1,4 +1,7 @@
 (function () { "use strict";
+var pixi = {};
+pixi.renderers = {};
+pixi.renderers.IRenderer = function() { };
 var samples = {};
 samples.tilingsprite = {};
 samples.tilingsprite.Main = function() {

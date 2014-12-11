@@ -18451,14 +18451,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </generateTexture></overloads>
 		</generateTexture>
 		<getBounds public="1" set="method">
-			<f a="matrix">
+			<f a="?matrix">
 				<c path="pixi.core.Matrix"/>
 				<c path="pixi.core.Rectangle"/>
 			</f>
 			<haxe_doc>* Retrieves the bounds of the displayObject as a rectangle object
 	 *
 	 * @method getBounds
-	 * @param matrix {Matrix}
+	 * @param [matrix] {Matrix}
 	 * @return {Rectangle} the rectangular bounding area</haxe_doc>
 		</getBounds>
 		<getLocalBounds public="1" set="method">
@@ -18499,7 +18499,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method toLocal
 	 * @param position {Point} The world origin to calculate from
-	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @param [frm] {DisplayObject} The DisplayObject to calculate the global position from
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toLocal>
 		<updateCache public="1" set="method">
@@ -19096,7 +19096,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @static
 	 * @method fromFrames
-	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames]]></haxe_doc>
+	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames
+	 * @return {MovieClip} returns the created MovieClip]]></haxe_doc>
 		</fromFrames>
 		<fromImages public="1" set="method" static="1">
 			<f a="images">
@@ -19107,7 +19108,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @static
 	 * @method fromImages
-	 * @param frames {Array<String>} the array of image ids the movieclip will use as its texture frames]]></haxe_doc>
+	 * @param frames {Array<String>} the array of image ids the movieclip will use as its texture frames
+	 * @return {MovieClip} returns the created MovieClip]]></haxe_doc>
 		</fromImages>
 		<animationSpeed public="1">
 			<x path="Float"/>
@@ -19257,7 +19259,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * This is useful for when you have other DOM elements on top of the Canvas element.
 	 *
 	 * @method setInteractionDelegate
-	 * @param domElement {DOMElement} This new domElement which will receive mouse/touch events</haxe_doc>
+	 * @param domElement {Element} This new domElement which will receive mouse/touch events</haxe_doc>
 		</setInteractionDelegate>
 		<new public="1" set="method">
 			<f a="backgroundColor">
@@ -20886,6 +20888,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></new>
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
+	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1">
+		<view public="1"><c path="js.html.CanvasElement"/></view>
+		<render public="1" set="method"><f a="stage">
+	<c path="pixi.display.Stage"/>
+	<x path="Void"/>
+</f></render>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="pixi.renderers.canvas.CanvasGraphics" params="" file="pixi/renderers/canvas/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.primitives.Graphics"/>
@@ -20906,6 +20916,20 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.CanvasGraphics"</e></m></meta>
 	</class>
 	<class path="pixi.renderers.canvas.CanvasRenderer" params="" file="pixi/renderers/canvas/CanvasRenderer.hx" extern="1">
+		<implements path="pixi.renderers.IRenderer"/>
+		<type public="1">
+			<x path="Int"/>
+			<haxe_doc>* @property type
+     * @type Int</haxe_doc>
+		</type>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of the canvas
+     *
+     * @property resolution
+     * @type Float
+     * @default 1</haxe_doc>
+		</resolution>
 		<clearBeforeRender public="1">
 			<x path="Bool"/>
 			<haxe_doc>* This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
@@ -20945,14 +20969,21 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The canvas element that everything is drawn to
 	 *
 	 * @property view
-	 * @type HTMLCanvasElement</haxe_doc>
+	 * @type CanvasElement</haxe_doc>
 		</view>
 		<context public="1">
 			<c path="js.html.CanvasRenderingContext2D"/>
 			<haxe_doc>* The canvas 2d context that everything is drawn with
 	 * @property context
-	 * @type HTMLCanvasElement 2d Context</haxe_doc>
+	 * @type CanvasRenderingContext2D 2d Context</haxe_doc>
 		</context>
+		<refresh public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Boolean flag controlling canvas refresh.
+     *
+     * @property refresh
+     * @type Bool</haxe_doc>
+		</refresh>
 		<maskManager public="1">
 			<c path="pixi.renderers.canvas.utils.CanvasMaskManager"/>
 			<haxe_doc>* Instance of a PIXI.CanvasMaskManager, handles masking when using the canvas renderer
@@ -20963,7 +20994,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<d/>
 			<haxe_doc>* The render session is just a bunch of parameter used for rendering
 	 * @property renderSession
-	 * @type Object</haxe_doc>
+	 * @type Dynamic</haxe_doc>
 		</renderSession>
 		<render public="1" set="method">
 			<f a="stage">
@@ -20987,16 +21018,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param width {Float} the new width of the canvas view
 	 * @param height {Float} the new height of the canvas view</haxe_doc>
 		</resize>
-		<destroy public="1" set="method">
-			<f a="?removeView">
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Removes everything from the renderer and optionally removes the Canvas DOM element.
-	 *
-	 * @method destroy
-	 * @param [removeView=true] {Bool} Removes the Canvas element from the DOM.</haxe_doc>
-		</destroy>
 		<new public="1" set="method">
 			<f a="width:height:?options">
 				<x path="Float"/>
@@ -21184,6 +21205,20 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.CanvasTinter"</e></m></meta>
 	</class>
 	<class path="pixi.renderers.webgl.WebGLRenderer" params="" file="pixi/renderers/webgl/WebGLRenderer.hx" extern="1">
+		<implements path="pixi.renderers.IRenderer"/>
+		<type public="1">
+			<x path="Int"/>
+			<haxe_doc>* @property type
+     * @type Int</haxe_doc>
+		</type>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of the renderer
+     *
+     * @property resolution
+     * @type Float
+     * @default 1</haxe_doc>
+		</resolution>
 		<transparent public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether the render view is transparent
@@ -21198,6 +21233,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @property preserveDrawingBuffer
 	 * @type Bool</haxe_doc>
 		</preserveDrawingBuffer>
+		<clearBeforeRender public="1">
+			<x path="Bool"/>
+			<haxe_doc>* This sets if the WebGLRenderer will clear the context texture or not before the new render pass. If true:
+     * If the Stage is NOT transparent, Pixi will clear to alpha (0, 0, 0, 0).
+     * If the Stage is transparent, Pixi will clear to the target Stage's background color.
+     * Disable this by setting this to false. For example: if your game has a canvas filling background image, you often don't need this set.
+     *
+     * @property clearBeforeRender
+     * @type Bool
+     * @default</haxe_doc>
+		</clearBeforeRender>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the canvas view
@@ -21221,6 +21267,78 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @property view
 	 * @type HTMLCanvasElement</haxe_doc>
 		</view>
+		<contextLostBound public="1">
+			<f a="">
+				<c path="pixi.utils.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property contextLostBound
+     * @type Function</haxe_doc>
+		</contextLostBound>
+		<contextRestoredBound public="1">
+			<f a="">
+				<c path="pixi.utils.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @property contextRestoredBound
+     * @type Function</haxe_doc>
+		</contextRestoredBound>
+		<projection public="1">
+			<c path="pixi.core.Point"/>
+			<haxe_doc>* @property projection
+     * @type Point</haxe_doc>
+		</projection>
+		<offset public="1">
+			<c path="pixi.core.Point"/>
+			<haxe_doc>* @property offset
+     * @type Point</haxe_doc>
+		</offset>
+		<shaderManager public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLShaderManager"/>
+			<haxe_doc>* Deals with managing the shader programs and their attribs
+     * @property shaderManager
+     * @type WebGLShaderManager</haxe_doc>
+		</shaderManager>
+		<spriteBatch public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLSpriteBatch"/>
+			<haxe_doc>* Manages the rendering of sprites
+     * @property spriteBatch
+     * @type WebGLSpriteBatch</haxe_doc>
+		</spriteBatch>
+		<maskManager public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLMaskManager"/>
+			<haxe_doc>* Manages the masks using the stencil buffer
+     * @property maskManager
+     * @type WebGLMaskManager</haxe_doc>
+		</maskManager>
+		<filterManager public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLFilterManager"/>
+			<haxe_doc>* Manages the filters
+     * @property filterManager
+     * @type WebGLFilterManager</haxe_doc>
+		</filterManager>
+		<stencilManager public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLStencilManager"/>
+			<haxe_doc>* Manages the stencil buffer
+     * @property stencilManager
+     * @type WebGLStencilManager</haxe_doc>
+		</stencilManager>
+		<blendModeManager public="1">
+			<c path="pixi.renderers.webgl.utils.WebGLBlendModeManager"/>
+			<haxe_doc>* Manages the blendModes
+     * @property blendModeManager
+     * @type WebGLBlendModeManager</haxe_doc>
+		</blendModeManager>
+		<renderSession public="1">
+			<d/>
+			<haxe_doc>* TODO remove
+     * @property renderSession
+     * @type Dynamic</haxe_doc>
+		</renderSession>
+		<initContext public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* @method initContext</haxe_doc>
+		</initContext>
 		<render public="1" set="method">
 			<f a="stage">
 				<c path="pixi.display.Stage"/>
@@ -23294,7 +23412,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_renderer><c path="pixi.renderers.webgl.WebGLRenderer"/></_renderer>
+		<_renderer><c path="pixi.renderers.IRenderer"/></_renderer>
 		<_stage><c path="pixi.display.Stage"/></_stage>
 		<_floor><c path="nape.phys.Body"/></_floor>
 		<_space><c path="nape.space.Space"/></_space>
