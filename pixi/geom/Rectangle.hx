@@ -1,4 +1,4 @@
-package pixi.core;
+package pixi.geom;
 
 @:native("PIXI.Rectangle")
 extern class Rectangle {

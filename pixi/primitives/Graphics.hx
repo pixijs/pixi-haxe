@@ -1,10 +1,10 @@
 package pixi.primitives;
 
 import pixi.display.DisplayObjectContainer;
-import pixi.core.Polygon;
-import pixi.core.Ellipse;
-import pixi.core.Circle;
-import pixi.core.Rectangle;
+import pixi.geom.Polygon;
+import pixi.geom.Ellipse;
+import pixi.geom.Circle;
+import pixi.geom.Rectangle;
 
 @:native("PIXI.Graphics")
 extern class Graphics extends DisplayObjectContainer {
@@ -97,7 +97,6 @@ extern class Graphics extends DisplayObjectContainer {
 	 * @return {Graphics}
 	 */
 	function arcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Graphics;
-
 
 	/**
 	 * The arc() method creates an arc/curve (used to create circles, or parts of circles).
@@ -229,64 +228,67 @@ extern class Graphics extends DisplayObjectContainer {
 	function drawShape(shape:Circle):GraphicsData;
 
 	/**
-	 * The alpha of the fill of this graphics object
-	 */
+     * The alpha value used when filling the Graphics object.
+     *
+     * @property fillAlpha
+     * @type Float
+     */
 	var fillAlpha:Float;
 
 	/**
-	 * The width of any lines drawn
-	 */
+     * The width (thickness) of any lines drawn.
+     *
+     * @property lineWidth
+     * @type Float
+     */
 	var lineWidth:Float;
 
 	/**
-	 * The color of any lines drawn
-	 */
+     * The color of any lines drawn.
+     *
+     * @property lineColor
+     * @type String
+     * @default 0
+     */
 	var lineColor:String;
 
 	/**
-	 * Graphics data
-	 */
-	var graphicsData:Array<Dynamic>;
+     * The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
+     *
+     * @property tint
+     * @type Int
+     * @default 0xFFFFFF
+     */
+	var tint:Int;
 
 	/**
-	 * The tint applied to the graphic shape. This is a hex value
-	 */
-	var tint:Float;
+     * The blend mode to be applied to the graphic shape. Apply a value of PIXI.blendModes.NORMAL to reset the blend mode.
+     *
+     * @property blendMode
+     * @type Int
+     * @default PIXI.blendModes.NORMAL;
+     */
+	var blendMode:Int;
 
 	/**
-	 * The blend mode to be applied to the graphic shape
-	 */
-	var blendMode:Float;
+     * Whether this shape is being used as a mask.
+     *
+     * @property isMask
+     * @type Bool
+     */
+	var isMask:Bool;
 
 	/**
-	 * Current path
-	 */
-	var currentPath:Dynamic;
-
-	/**
-	 * Array containing some WebGL-related properties used by the WebGL renderer
-	 */
-	var webGL:Array<Dynamic>;
-
-	/**
-	 * Whether this shape is being used as a mask
-	 */
-	var isMask:Dynamic;
-
-	/**
-	 * the bounds' padding used for bounds calculation
-	 */
+     * The bounds' padding used for bounds calculation.
+     *
+     * @property boundsPadding
+     * @type Float
+     */
 	var boundsPadding:Float;
-
-	/**
-	 * Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated
-	 */
-	var dirty:Dynamic;
 }
 
 @:native("PIXI.GraphicsData")
 extern class GraphicsData {
-
 	var lineWidth:Float;
 	var lineColor:String;
 	var lineAlpha:Float;

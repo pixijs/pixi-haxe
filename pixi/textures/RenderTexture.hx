@@ -1,6 +1,6 @@
 package pixi.textures;
 
-import pixi.core.Matrix;
+import pixi.geom.Matrix;
 import pixi.display.DisplayObject;
 import js.html.Image;
 import js.html.CanvasElement;

@@ -1,6 +1,6 @@
 package pixi.textures;
 
-import pixi.core.Rectangle;
+import pixi.geom.Rectangle;
 import pixi.textures.BaseTexture;
 
 @:native("PIXI.Texture")

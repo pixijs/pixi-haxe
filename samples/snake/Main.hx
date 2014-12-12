@@ -4,7 +4,7 @@ import pixi.renderers.IRenderer;
 import pixi.display.Stage;
 import pixi.textures.Texture;
 import pixi.utils.Detector;
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.extras.Rope;
 import pixi.display.DisplayObjectContainer;
 import js.Browser;

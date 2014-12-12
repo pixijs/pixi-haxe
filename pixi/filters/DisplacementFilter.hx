@@ -1,6 +1,6 @@
 package pixi.filters;
 
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.textures.Texture;
 
 @:native("PIXI.DisplacementFilter")

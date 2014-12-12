@@ -10,7 +10,7 @@ import pixi.utils.Event;
 import pixi.utils.Detector.RenderingOptions;
 import js.html.CanvasElement;
 import pixi.textures.Texture;
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.display.DisplayObject;
 import pixi.display.Stage;
 

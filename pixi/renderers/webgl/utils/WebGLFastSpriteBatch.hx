@@ -2,7 +2,7 @@ package pixi.renderers.webgl.utils;
 
 import pixi.display.Sprite;
 import pixi.renderers.webgl.utils.WebGLSpriteBatch;
-import pixi.core.Matrix;
+import pixi.geom.Matrix;
 import pixi.textures.BaseTexture;
 
 @:native("PIXI.WebGLFastSpriteBatch")

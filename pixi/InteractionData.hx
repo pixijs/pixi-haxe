@@ -2,7 +2,7 @@ package pixi;
 
 import pixi.display.Sprite;
 import pixi.display.DisplayObject;
-import pixi.core.Point;
+import pixi.geom.Point;
 
 @:native("PIXI.InteractionData")
 extern class InteractionData {

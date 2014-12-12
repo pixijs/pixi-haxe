@@ -1,4 +1,4 @@
-package pixi.core;
+package pixi.geom;
 
 @:native("PIXI.Polygon")
 extern class Polygon {
@@ -32,4 +32,12 @@ extern class Polygon {
 	 * @return {Bool} Whether the x/y coordinates are within this polygon
 	 */
 	function contains(x:Float, y:Float):Bool;
+
+	/**
+     * An array of the points of this polygon
+     * @property points
+     * @type Array<Point>
+     *
+     */
+	var points:Array<Point>;
 }

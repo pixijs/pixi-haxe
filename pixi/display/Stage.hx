@@ -1,7 +1,7 @@
 package pixi.display;
 
 import js.html.Element;
-import pixi.core.Point;
+import pixi.geom.Point;
 
 @:native("PIXI.Stage")
 extern class Stage extends DisplayObjectContainer {

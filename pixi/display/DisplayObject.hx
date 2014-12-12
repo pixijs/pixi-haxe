@@ -1,9 +1,9 @@
 package pixi.display;
 
-import pixi.core.Matrix;
-import pixi.core.Rectangle;
+import pixi.geom.Matrix;
+import pixi.geom.Rectangle;
 import pixi.primitives.Graphics;
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.textures.Texture;
 import pixi.renderers.canvas.CanvasRenderer;
 import pixi.renderers.webgl.WebGLRenderer;

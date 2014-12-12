@@ -37,4 +37,21 @@ extern class Strip extends DisplayObjectContainer {
 	 * @type Float
 	 */
 	var padding:Float;
+
+	/**
+     * The blend mode to be applied to the sprite. Set to PIXI.blendModes.NORMAL to remove any blend mode.
+     *
+     * @property blendMode
+     * @type Int
+     * @default PIXI.blendModes.NORMAL;
+     */
+	var blendMode:Int;
+
+	/**
+     * Triangles in canvas mode are automatically antialiased, use this value to force triangles to overlap a bit with each other.
+     *
+     * @property canvasPadding
+     * @type Float
+     */
+	var canvasPadding:Float;
 }

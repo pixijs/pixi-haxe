@@ -1,7 +1,7 @@
 package pixi.extras;
 
 import pixi.display.Sprite;
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.textures.Texture;
 
 @:native("PIXI.TilingSprite")

@@ -38,6 +38,15 @@ extern class Utils {
 	 * @return {Float} the closest number that is a power of two
 	*/
 	static function getNextPowerOfTwo(hex:Float):Float;
+
+	/**
+	 * checks if the given width and height make a power of two texture
+	 * @method isPowerOfTwo
+	 * @param width {Float}
+	 * @param height {Float}
+	 * @return {Bool}
+	 */
+	static function isPowerOfTwo(width:Float, height:Float):Bool;
 }
 
 /**

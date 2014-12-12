@@ -1,6 +1,6 @@
 package pixi.filters;
 
-import pixi.core.Point;
+import pixi.geom.Point;
 
 @:native("PIXI.TwistFilter")
 extern class TwistFilter extends AbstractFilter {

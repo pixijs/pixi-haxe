@@ -17727,7 +17727,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.InteractionData" params="" file="pixi/InteractionData.hx" extern="1">
 		<global public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* This point stores the global coords of where the touch/mouse event happened
 	 *
 	 * @property global
@@ -17750,8 +17750,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<getLocalPosition public="1" set="method">
 			<f a="displayObject:?point">
 				<c path="pixi.display.DisplayObject"/>
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
 			</f>
 			<haxe_doc>* This will return the local coordinates of the specified displayObject for this InteractionData
 	 *
@@ -17969,454 +17969,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></sayHello>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
-	<class path="pixi.core.Circle" params="" file="pixi/core/Circle.hx" extern="1">
-		<clone public="1" set="method">
-			<f a=""><c path="pixi.core.Circle"/></f>
-			<haxe_doc>* Creates a clone of this Circle instance
-	 *
-	 * @method clone
-	 * @return {Circle} a copy of the circle</haxe_doc>
-		</clone>
-		<contains public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Checks whether the x, and y coordinates passed to this function are contained within this circle
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
-		</contains>
-		<getBounds public="1" set="method">
-			<f a=""><c path="pixi.core.Rectangle"/></f>
-			<haxe_doc>* Returns the framing rectangle of the circle as a PIXI.Rectangle object
-	 *
-	 * @method getBounds
-	 * @return {Rectangle} the framing rectangle</haxe_doc>
-		</getBounds>
-		<x public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property x
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</x>
-		<y public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property y
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</y>
-		<radius public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property radius
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</radius>
-		<new public="1" set="method">
-			<f a="x:y:radius">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* The Circle object can be used to specify a hit area for displayObjects
-	 *
-	 * @class Circle
-	 * @constructor
-	 * @param x {Float} The X coordinate of the center of this circle
-	 * @param y {Float} The Y coordinate of the center of this circle
-	 * @param radius {Float} The radius of the circle</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Circle"</e></m></meta>
-	</class>
-	<class path="pixi.core.Ellipse" params="" file="pixi/core/Ellipse.hx" extern="1">
-		<clone public="1" set="method">
-			<f a=""><c path="pixi.core.Ellipse"/></f>
-			<haxe_doc>* Creates a clone of this Ellipse instance
-	 *
-	 * @method clone
-	 * @return {Ellipse} a copy of the ellipse</haxe_doc>
-		</clone>
-		<contains public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this ellipse
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coords are within this ellipse</haxe_doc>
-		</contains>
-		<getBounds public="1" set="method">
-			<f a=""><c path="pixi.core.Rectangle"/></f>
-			<haxe_doc>* Returns the framing rectangle of the circle as a PIXI.Rectangle object
-	 *
-	 * @method getBounds
-	 * @return {Rectangle} the framing rectangle</haxe_doc>
-		</getBounds>
-		<x public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property x
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</x>
-		<y public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property y
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</y>
-		<width public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property width
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</width>
-		<height public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property height
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</height>
-		<new public="1" set="method">
-			<f a="x:y:width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* The Ellipse object can be used to specify a hit area for displayObjects
-	 *
-	 * @class Ellipse
-	 * @constructor
-	 * @param x {Float} The X coordinate of the center of the ellipse
-	 * @param y {Float} The Y coordinate of the center of the ellipse
-	 * @param width {Float} The half width of this ellipse
-	 * @param height {Float} The half height of this ellipse</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Ellipse"</e></m></meta>
-	</class>
-	<class path="pixi.core.Matrix" params="" file="pixi/core/Matrix.hx" extern="1">
-		<a public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property a
-	 * @type Int
-	 * @default 1</haxe_doc>
-		</a>
-		<b public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property b
-	 * @type Int
-	 * @default 0</haxe_doc>
-		</b>
-		<c public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property c
-	 * @type Int
-	 * @default 0</haxe_doc>
-		</c>
-		<d public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property d
-	 * @type Number
-	 * @default 1</haxe_doc>
-		</d>
-		<tx public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property tx
-	 * @type Number
-	 * @default 0</haxe_doc>
-		</tx>
-		<ty public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property ty
-	 * @type Number
-	 * @default 0</haxe_doc>
-		</ty>
-		<fromArray public="1" set="method">
-			<f a="array">
-				<c path="Array"><x path="Float"/></c>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Creates a pixi matrix object based on the array given as a parameter
-	 *
-	 * @method fromArray
-	 * @param array {Array} The array that the matrix will be filled with</haxe_doc>
-		</fromArray>
-		<toArray public="1" set="method">
-			<f a="transpose">
-				<x path="Bool"/>
-				<c path="Array"><x path="Float"/></c>
-			</f>
-			<haxe_doc>* Creates an array from the current Matrix object
-	 *
-	 * @method toArray
-	 * @param transpose {Bool} Whether we need to transpose the matrix or not
-	 * @return {Array} the newly created array which contains the matrix</haxe_doc>
-		</toArray>
-		<apply public="1" set="method">
-			<f a="pos:?newPos">
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
-			</f>
-			<haxe_doc>* Get a new position with the current transformation applied.
-	 * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
-	 *
-	 * @method apply
-	 * @param pos {Point} The origin
-	 * @param [newPos] {Point} The point that the new position is assigned to (allowed to be same as input)
-	 * @return {Point} The new point, transformed through this matrix</haxe_doc>
-		</apply>
-		<applyInverse public="1" set="method">
-			<f a="pos:?newPos">
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
-			</f>
-			<haxe_doc>* Get a new position with the inverse of the current transformation applied.
-	 * Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
-	 *
-	 * @method applyInverse
-	 * @param pos {Point} The origin
-	 * @param [newPos] {Point} The point that the new position is assigned to (allowed to be same as input)
-	 * @return {Point} The new point, inverse-transformed through this matrix</haxe_doc>
-		</applyInverse>
-		<translate public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<c path="pixi.core.Matrix"/>
-			</f>
-			<haxe_doc>* Translates the matrix on the x and y.
-	 *
-	 * @method translate
-	 * @param {Float} x
-	 * @param {Float} y
-	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
-		</translate>
-		<scale public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<c path="pixi.core.Matrix"/>
-			</f>
-			<haxe_doc>* Applies a scale transformation to the matrix.
-	 *
-	 * @method scale
-	 * @param {Float} x The amount to scale horizontally
-	 * @param {Float} y The amount to scale vertically
-	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
-		</scale>
-		<rotate public="1" set="method">
-			<f a="angle">
-				<x path="Float"/>
-				<c path="pixi.core.Matrix"/>
-			</f>
-			<haxe_doc>* Applies a rotation transformation to the matrix.
-	 * @method rotate
-	 * @param {Float} angle The angle in radians.
-	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
-		</rotate>
-		<append public="1" set="method">
-			<f a="matrix">
-				<c path="pixi.core.Matrix"/>
-				<c path="pixi.core.Matrix"/>
-			</f>
-			<haxe_doc>* Appends the given Matrix to this Matrix.
-	 *
-	 * @method append
-	 * @param {Matrix} matrix
-	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
-		</append>
-		<identity public="1" set="method">
-			<f a=""><c path="pixi.core.Matrix"/></f>
-			<haxe_doc>* Resets this Matix to an identity (default) matrix.
-	 *
-	 * @method identity
-	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
-		</identity>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* The Matrix class is now an object, which makes it a lot faster,
-	 * here is a representation of it :
-	 * | a | b | tx|
-	 * | c | d | ty|
-	 * | 0 | 0 | 1 |
-	 *
-	 * @class Matrix
-	 * @constructor</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Matrix"</e></m></meta>
-	</class>
-	<class path="pixi.core.Point" params="" file="pixi/core/Point.hx" extern="1">
-		<clone public="1" set="method">
-			<f a=""><c path="pixi.core.Point"/></f>
-			<haxe_doc>* Creates a clone of this point
-	 *
-	 * @method clone
-	 * @return {Point} a copy of the point</haxe_doc>
-		</clone>
-		<set public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the point to a new x and y position.
-	 * If y is ommited, both x and y will be set to x.
-	 *
-	 * @method set
-	 * @param [x=0] {Float} position of the point on the x axis
-	 * @param [y=0] {Float} position of the point on the y axis</haxe_doc>
-		</set>
-		<x public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property x
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</x>
-		<y public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property y
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</y>
-		<new public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis.
-	 *
-	 * @class Point
-	 * @constructor
-	 * @param x {Float} position of the point on the x axis
-	 * @param y {Float} position of the point on the y axis</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Point"</e></m></meta>
-	</class>
-	<class path="pixi.core.Polygon" params="" file="pixi/core/Polygon.hx" extern="1">
-		<clone public="1" set="method">
-			<f a=""><c path="pixi.core.Polygon"/></f>
-			<haxe_doc>* Creates a clone of this polygon
-	 *
-	 * @method clone
-	 * @return {Polygon} a copy of the polygon</haxe_doc>
-		</clone>
-		<contains public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this polygon
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
-		</contains>
-		<new public="1" set="method">
-			<f a="points">
-				<c path="Array"><c path="pixi.core.Point"/></c>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[* @class Polygon
-	 * @constructor
-	 * @param points* {Array<Point>|Array<Number>|Point...|Number...} This can be an array of Points that form the polygon,
-	 *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
-	 *      all the points of the polygon e.g. `new PIXI.Polygon(new PIXI.Point(), new PIXI.Point(), ...)`, or the
-	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
-	 *      Numbers.]]></haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="points">
-		<c path="Array"><x path="Float"/></c>
-		<x path="Void"/>
-	</f>
-	<haxe_doc><![CDATA[* @class Polygon
-	 * @constructor
-	 * @param points* {Array<Point>|Array<Number>|Point...|Number...} This can be an array of Points that form the polygon,
-	 *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
-	 *      all the points of the polygon e.g. `new PIXI.Polygon(new PIXI.Point(), new PIXI.Point(), ...)`, or the
-	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
-	 *      Numbers.]]></haxe_doc>
-</new></overloads>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Polygon"</e></m></meta>
-	</class>
-	<class path="pixi.core.Rectangle" params="" file="pixi/core/Rectangle.hx" extern="1">
-		<clone public="1" set="method">
-			<f a=""><c path="pixi.core.Rectangle"/></f>
-			<haxe_doc>* Creates a clone of this Rectangle instance
-	 *
-	 * @method clone
-	 * @return {Rectangle} a copy of the rectangle</haxe_doc>
-		</clone>
-		<contains public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this Rectangle
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coords are within this Rectangle</haxe_doc>
-		</contains>
-		<x public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property x
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</x>
-		<y public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property y
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</y>
-		<width public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property width
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</width>
-		<height public="1">
-			<x path="Float"/>
-			<haxe_doc>* @property height
-	 * @type Float
-	 * @default 0</haxe_doc>
-		</height>
-		<new public="1" set="method">
-			<f a="x:y:width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* the Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its width and its height.
-	 *
-	 * @class Rectangle
-	 * @constructor
-	 * @param x {Float} The X coord of the upper-left corner of the rectangle
-	 * @param y {Float} The Y coord of the upper-left corner of the rectangle
-	 * @param width {Float} The overall width of this rectangle
-	 * @param height {Float} The overall height of this rectangle</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Rectangle"</e></m></meta>
-	</class>
 	<class path="pixi.display.DisplayObject" params="" file="pixi/display/DisplayObject.hx" extern="1">
 		<generateTexture public="1" set="method">
 			<f a="resolution:scaleMode:?renderer">
@@ -18452,8 +18004,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</generateTexture>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
-				<c path="pixi.core.Matrix"/>
-				<c path="pixi.core.Rectangle"/>
+				<c path="pixi.geom.Matrix"/>
+				<c path="pixi.geom.Rectangle"/>
 			</f>
 			<haxe_doc>* Retrieves the bounds of the displayObject as a rectangle object
 	 *
@@ -18462,7 +18014,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Rectangle} the rectangular bounding area</haxe_doc>
 		</getBounds>
 		<getLocalBounds public="1" set="method">
-			<f a=""><c path="pixi.core.Rectangle"/></f>
+			<f a=""><c path="pixi.geom.Rectangle"/></f>
 			<haxe_doc>* Retrieves the local bounds of the displayObject as a rectangle object
 	 *
 	 * @method getLocalBounds
@@ -18480,8 +18032,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</setStageReference>
 		<toGlobal public="1" set="method">
 			<f a="position">
-				<c path="pixi.core.Point"/>
-				<c path="pixi.core.Point"/>
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
 			</f>
 			<haxe_doc>* Calculates the global position of the display object
 	 *
@@ -18491,9 +18043,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</toGlobal>
 		<toLocal public="1" set="method">
 			<f a="position:?frm">
-				<c path="pixi.core.Point"/>
+				<c path="pixi.geom.Point"/>
 				<c path="pixi.display.DisplayObject"/>
-				<c path="pixi.core.Point"/>
+				<c path="pixi.geom.Point"/>
 			</f>
 			<haxe_doc>* Calculates the local position of the display object relative to another point
 	 *
@@ -18538,7 +18090,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @type String</haxe_doc>
 		</defaultCursor>
 		<filterArea public="1">
-			<c path="pixi.core.Rectangle"/>
+			<c path="pixi.geom.Rectangle"/>
 			<haxe_doc>* The area the filter is applied to like the hitArea this is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	 *
@@ -18587,14 +18139,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @readOnly</haxe_doc>
 		</parent>
 		<pivot public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The pivot point of the displayObject that it rotates around
 	 *
 	 * @property pivot
 	 * @type Point</haxe_doc>
 		</pivot>
 		<position public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
 	 *
 	 * @property position
@@ -18615,7 +18167,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @type Float</haxe_doc>
 		</rotation>
 		<scale public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The scale factor of the object.
 	 *
 	 * @property scale
@@ -18999,7 +18551,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the imageId</haxe_doc>
 		</fromImage>
 		<anchor public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The anchor sets the origin point of the texture.
 	 * The default is 0,0 this means the texture's origin is the top left
 	 * Setting than anchor to 0.5,0.5 means the textures origin is centered
@@ -19233,7 +18785,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.display.Stage" params="" file="pixi/display/Stage.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<getMousePosition public="1" set="method">
-			<f a=""><c path="pixi.core.Point"/></f>
+			<f a=""><c path="pixi.geom.Point"/></f>
 			<haxe_doc>* This will return the point containing global coords of the mouse.
 	 *
 	 * @method getMousePosition
@@ -19306,6 +18858,21 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @property padding
 	 * @type Float</haxe_doc>
 		</padding>
+		<blendMode public="1">
+			<x path="Int"/>
+			<haxe_doc>* The blend mode to be applied to the sprite. Set to PIXI.blendModes.NORMAL to remove any blend mode.
+     *
+     * @property blendMode
+     * @type Int
+     * @default PIXI.blendModes.NORMAL;</haxe_doc>
+		</blendMode>
+		<canvasPadding public="1">
+			<x path="Float"/>
+			<haxe_doc>* Triangles in canvas mode are automatically antialiased, use this value to force triangles to overlap a bit with each other.
+     *
+     * @property canvasPadding
+     * @type Float</haxe_doc>
+		</canvasPadding>
 		<new public="1" set="method">
 			<f a="texture">
 				<c path="pixi.textures.Texture"/>
@@ -19320,37 +18887,45 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.extras.Rope" params="" file="pixi/extras/Rope.hx" extern="1">
 		<extends path="pixi.extras.Strip"/>
+		<refresh public="1" set="method"><f a=""><x path="Void"/></f></refresh>
+		<setTexture public="1" set="method"><f a="texture">
+	<c path="pixi.textures.Texture"/>
+	<x path="Void"/>
+</f></setTexture>
 		<new public="1" set="method">
 			<f a="texture:points">
 				<c path="pixi.textures.Texture"/>
-				<c path="Array"><c path="pixi.core.Point"/></c>
+				<c path="Array"><c path="pixi.geom.Point"/></c>
 				<x path="Void"/>
 			</f>
-			<haxe_doc><![CDATA[* @class Rope
+			<haxe_doc><![CDATA[*
+	 * @class Rope
 	 * @constructor
-	 * @param texture {Texture} The texture to use
-	 * @param points {Array<Point>}]]></haxe_doc>
+	 * @extends Strip
+	 * @param {Texture} texture - The texture to use on the rope.
+	 * @param {Array<Point>} points.
+	 *]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Rope"</e></m></meta>
 	</class>
 	<class path="pixi.extras.TilingSprite" params="" file="pixi/extras/TilingSprite.hx" extern="1">
 		<extends path="pixi.display.Sprite"/>
 		<tileScale public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The scaling of the image that is being tiled
 	 *
 	 * @property tileScale
 	 * @type Point</haxe_doc>
 		</tileScale>
 		<tileScaleOffset public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* A point that represents the scale of the texture object
 	 *
 	 * @property tileScaleOffset
 	 * @type Point</haxe_doc>
 		</tileScaleOffset>
 		<tilePosition public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The offset position of the image that is being tiled
 	 *
 	 * @property tilePosition
@@ -19635,11 +19210,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The texture used for the displacemtent map * must be power of 2 texture at the moment</haxe_doc>
 		</map>
 		<scale public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The multiplier used to scale the displacement result from the map calculation.</haxe_doc>
 		</scale>
 		<offset public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The offset used to move the displacement map.</haxe_doc>
 		</offset>
 		<onTextureLoaded public="1" set="method">
@@ -19759,11 +19334,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The texture used for the displacemtent map * must be power of 2 texture.</haxe_doc>
 		</map>
 		<scale public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The multiplier used to scale the displacement result from the map calculation.</haxe_doc>
 		</scale>
 		<offset public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* The offset used to move the displacement map.</haxe_doc>
 		</offset>
 		<onTextureLoaded public="1" set="method">
@@ -19791,7 +19366,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.filters.PixelateFilter" params="" file="pixi/filters/PixelateFilter.hx" extern="1">
 		<extends path="pixi.filters.AbstractFilter"/>
 		<size public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* This a point that describes the size of the blocs. x is the width of the block and y is the the height.</haxe_doc>
 		</size>
 		<new public="1" set="method">
@@ -19950,7 +19525,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.filters.TwistFilter" params="" file="pixi/filters/TwistFilter.hx" extern="1">
 		<extends path="pixi.filters.AbstractFilter"/>
 		<offset public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* This point describes the the offset of the twist.</haxe_doc>
 		</offset>
 		<angle public="1">
@@ -19970,6 +19545,533 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @constructor</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.TwistFilter"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Circle" params="" file="pixi/geom/Circle.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.Circle"/></f>
+			<haxe_doc>* Creates a clone of this Circle instance
+	 *
+	 * @method clone
+	 * @return {Circle} a copy of the circle</haxe_doc>
+		</clone>
+		<contains public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Checks whether the x, and y coordinates passed to this function are contained within this circle
+	 *
+	 * @method contains
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
+		</contains>
+		<getBounds public="1" set="method">
+			<f a=""><c path="pixi.geom.Rectangle"/></f>
+			<haxe_doc>* Returns the framing rectangle of the circle as a PIXI.Rectangle object
+	 *
+	 * @method getBounds
+	 * @return {Rectangle} the framing rectangle</haxe_doc>
+		</getBounds>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property x
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property y
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</y>
+		<radius public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property radius
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</radius>
+		<new public="1" set="method">
+			<f a="x:y:radius">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Circle object can be used to specify a hit area for displayObjects
+	 *
+	 * @class Circle
+	 * @constructor
+	 * @param x {Float} The X coordinate of the center of this circle
+	 * @param y {Float} The Y coordinate of the center of this circle
+	 * @param radius {Float} The radius of the circle</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Circle"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Ellipse" params="" file="pixi/geom/Ellipse.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.Ellipse"/></f>
+			<haxe_doc>* Creates a clone of this Ellipse instance
+	 *
+	 * @method clone
+	 * @return {Ellipse} a copy of the ellipse</haxe_doc>
+		</clone>
+		<contains public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this ellipse
+	 *
+	 * @method contains
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Bool} Whether the x/y coords are within this ellipse</haxe_doc>
+		</contains>
+		<getBounds public="1" set="method">
+			<f a=""><c path="pixi.geom.Rectangle"/></f>
+			<haxe_doc>* Returns the framing rectangle of the circle as a PIXI.Rectangle object
+	 *
+	 * @method getBounds
+	 * @return {Rectangle} the framing rectangle</haxe_doc>
+		</getBounds>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property x
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property y
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</y>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property width
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property height
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</height>
+		<new public="1" set="method">
+			<f a="x:y:width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Ellipse object can be used to specify a hit area for displayObjects
+	 *
+	 * @class Ellipse
+	 * @constructor
+	 * @param x {Float} The X coordinate of the center of the ellipse
+	 * @param y {Float} The Y coordinate of the center of the ellipse
+	 * @param width {Float} The half width of this ellipse
+	 * @param height {Float} The half height of this ellipse</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Ellipse"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Matrix" params="" file="pixi/geom/Matrix.hx" extern="1">
+		<a public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property a
+	 * @type Int
+	 * @default 1</haxe_doc>
+		</a>
+		<b public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property b
+	 * @type Int
+	 * @default 0</haxe_doc>
+		</b>
+		<c public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property c
+	 * @type Int
+	 * @default 0</haxe_doc>
+		</c>
+		<d public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property d
+	 * @type Number
+	 * @default 1</haxe_doc>
+		</d>
+		<tx public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property tx
+	 * @type Number
+	 * @default 0</haxe_doc>
+		</tx>
+		<ty public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property ty
+	 * @type Number
+	 * @default 0</haxe_doc>
+		</ty>
+		<fromArray public="1" set="method">
+			<f a="array">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Creates a pixi matrix object based on the array given as a parameter
+	 *
+	 * @method fromArray
+	 * @param array {Array} The array that the matrix will be filled with</haxe_doc>
+		</fromArray>
+		<toArray public="1" set="method">
+			<f a="transpose">
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>* Creates an array from the current Matrix object
+	 *
+	 * @method toArray
+	 * @param transpose {Bool} Whether we need to transpose the matrix or not
+	 * @return {Array} the newly created array which contains the matrix</haxe_doc>
+		</toArray>
+		<apply public="1" set="method">
+			<f a="pos:?newPos">
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
+			</f>
+			<haxe_doc>* Get a new position with the current transformation applied.
+	 * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+	 *
+	 * @method apply
+	 * @param pos {Point} The origin
+	 * @param [newPos] {Point} The point that the new position is assigned to (allowed to be same as input)
+	 * @return {Point} The new point, transformed through this matrix</haxe_doc>
+		</apply>
+		<applyInverse public="1" set="method">
+			<f a="pos:?newPos">
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
+				<c path="pixi.geom.Point"/>
+			</f>
+			<haxe_doc>* Get a new position with the inverse of the current transformation applied.
+	 * Can be used to go from the world coordinate space to a child's coordinate space. (e.g. input)
+	 *
+	 * @method applyInverse
+	 * @param pos {Point} The origin
+	 * @param [newPos] {Point} The point that the new position is assigned to (allowed to be same as input)
+	 * @return {Point} The new point, inverse-transformed through this matrix</haxe_doc>
+		</applyInverse>
+		<translate public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="pixi.geom.Matrix"/>
+			</f>
+			<haxe_doc>* Translates the matrix on the x and y.
+	 *
+	 * @method translate
+	 * @param {Float} x
+	 * @param {Float} y
+	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
+		</translate>
+		<scale public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="pixi.geom.Matrix"/>
+			</f>
+			<haxe_doc>* Applies a scale transformation to the matrix.
+	 *
+	 * @method scale
+	 * @param {Float} x The amount to scale horizontally
+	 * @param {Float} y The amount to scale vertically
+	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
+		</scale>
+		<rotate public="1" set="method">
+			<f a="angle">
+				<x path="Float"/>
+				<c path="pixi.geom.Matrix"/>
+			</f>
+			<haxe_doc>* Applies a rotation transformation to the matrix.
+	 * @method rotate
+	 * @param {Float} angle The angle in radians.
+	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
+		</rotate>
+		<append public="1" set="method">
+			<f a="matrix">
+				<c path="pixi.geom.Matrix"/>
+				<c path="pixi.geom.Matrix"/>
+			</f>
+			<haxe_doc>* Appends the given Matrix to this Matrix.
+	 *
+	 * @method append
+	 * @param {Matrix} matrix
+	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
+		</append>
+		<identity public="1" set="method">
+			<f a=""><c path="pixi.geom.Matrix"/></f>
+			<haxe_doc>* Resets this Matix to an identity (default) matrix.
+	 *
+	 * @method identity
+	 * @return {Matrix} This matrix. Good for chaining method calls.</haxe_doc>
+		</identity>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* The Matrix class is now an object, which makes it a lot faster,
+	 * here is a representation of it :
+	 * | a | b | tx|
+	 * | c | d | ty|
+	 * | 0 | 0 | 1 |
+	 *
+	 * @class Matrix
+	 * @constructor</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Matrix"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Point" params="" file="pixi/geom/Point.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.Point"/></f>
+			<haxe_doc>* Creates a clone of this point
+	 *
+	 * @method clone
+	 * @return {Point} a copy of the point</haxe_doc>
+		</clone>
+		<set public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the point to a new x and y position.
+	 * If y is ommited, both x and y will be set to x.
+	 *
+	 * @method set
+	 * @param [x=0] {Float} position of the point on the x axis
+	 * @param [y=0] {Float} position of the point on the y axis</haxe_doc>
+		</set>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property x
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property y
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</y>
+		<new public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Point object represents a location in a two-dimensional coordinate system, where x represents the horizontal axis and y represents the vertical axis.
+	 *
+	 * @class Point
+	 * @constructor
+	 * @param x {Float} position of the point on the x axis
+	 * @param y {Float} position of the point on the y axis</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Point"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Polygon" params="" file="pixi/geom/Polygon.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.Polygon"/></f>
+			<haxe_doc>* Creates a clone of this polygon
+	 *
+	 * @method clone
+	 * @return {Polygon} a copy of the polygon</haxe_doc>
+		</clone>
+		<contains public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this polygon
+	 *
+	 * @method contains
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
+		</contains>
+		<points public="1">
+			<c path="Array"><c path="pixi.geom.Point"/></c>
+			<haxe_doc><![CDATA[* An array of the points of this polygon
+     * @property points
+     * @type Array<Point>
+     *]]></haxe_doc>
+		</points>
+		<new public="1" set="method">
+			<f a="points">
+				<c path="Array"><c path="pixi.geom.Point"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* @class Polygon
+	 * @constructor
+	 * @param points* {Array<Point>|Array<Number>|Point...|Number...} This can be an array of Points that form the polygon,
+	 *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
+	 *      all the points of the polygon e.g. `new PIXI.Polygon(new PIXI.Point(), new PIXI.Point(), ...)`, or the
+	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
+	 *      Numbers.]]></haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="points">
+		<c path="Array"><x path="Float"/></c>
+		<x path="Void"/>
+	</f>
+	<haxe_doc><![CDATA[* @class Polygon
+	 * @constructor
+	 * @param points* {Array<Point>|Array<Number>|Point...|Number...} This can be an array of Points that form the polygon,
+	 *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
+	 *      all the points of the polygon e.g. `new PIXI.Polygon(new PIXI.Point(), new PIXI.Point(), ...)`, or the
+	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
+	 *      Numbers.]]></haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Polygon"</e></m></meta>
+	</class>
+	<class path="pixi.geom.Rectangle" params="" file="pixi/geom/Rectangle.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.Rectangle"/></f>
+			<haxe_doc>* Creates a clone of this Rectangle instance
+	 *
+	 * @method clone
+	 * @return {Rectangle} a copy of the rectangle</haxe_doc>
+		</clone>
+		<contains public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this Rectangle
+	 *
+	 * @method contains
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Bool} Whether the x/y coords are within this Rectangle</haxe_doc>
+		</contains>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property x
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property y
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</y>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property width
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property height
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</height>
+		<new public="1" set="method">
+			<f a="x:y:width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* the Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its width and its height.
+	 *
+	 * @class Rectangle
+	 * @constructor
+	 * @param x {Float} The X coord of the upper-left corner of the rectangle
+	 * @param y {Float} The Y coord of the upper-left corner of the rectangle
+	 * @param width {Float} The overall width of this rectangle
+	 * @param height {Float} The overall height of this rectangle</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Rectangle"</e></m></meta>
+	</class>
+	<class path="pixi.geom.RoundedRectangle" params="" file="pixi/geom/RoundedRectangle.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.geom.RoundedRectangle"/></f>
+			<haxe_doc>* Creates a clone of this Rounded Rectangle
+	 *
+	 * @method clone
+	 * @return {RoundedRectangle} a copy of the rounded rectangle</haxe_doc>
+		</clone>
+		<contains public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Checks whether the x and y coordinates given are contained within this Rounded Rectangle
+	 *
+	 * @method contains
+	 * @param x {Float} The X coordinate of the point to test
+	 * @param y {Float} The Y coordinate of the point to test
+	 * @return {Boolean} Whether the x/y coordinates are within this Rounded Rectangle</haxe_doc>
+		</contains>
+		<x public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property x
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</x>
+		<y public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property y
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</y>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property width
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property height
+	 * @type Float
+	 * @default 0</haxe_doc>
+		</height>
+		<radius public="1">
+			<x path="Float"/>
+			<haxe_doc>* @property radius
+     * @type Float
+     * @default 20</haxe_doc>
+		</radius>
+		<new public="1" set="method">
+			<f a="x:y:width:height:radius">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Rounded Rectangle object is an area defined by its position and has nice rounded corners, as indicated by its top-left corner point (x, y) and by its width and its height.
+	 *
+	 * @class RoundedRectangle
+	 * @constructor
+	 * @param x {Number} The X coordinate of the upper-left corner of the rounded rectangle
+	 * @param y {Number} The Y coordinate of the upper-left corner of the rounded rectangle
+	 * @param width {Number} The overall width of this rounded rectangle
+	 * @param height {Number} The overall height of this rounded rectangle
+	 * @param radius {Number} The overall radius of this corners of this rounded rectangle</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
 	<class path="pixi.utils.EventTarget" params="" file="pixi/utils/EventTarget.hx" extern="1">
 		<listeners public="1" set="method">
@@ -20512,6 +20614,180 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpriteSheetLoader"</e></m></meta>
 	</class>
+	<class path="pixi.plugins.input.InputObject" params="" file="pixi/plugins/input/InputObject.hx" extern="1">
+		<extends path="pixi.display.Sprite"/>
+		<new public="1" set="method"><f a="?index">
+	<x path="Int"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.InputObject"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.input.Button" params="" file="pixi/plugins/input/Button.hx" extern="1">
+		<extends path="pixi.plugins.input.InputObject"/>
+		<new public="1" set="method"><f a="?data">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.Button"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.input.Input" params="" file="pixi/plugins/input/Input.hx" extern="1">
+		<extends path="pixi.plugins.input.InputObject"/>
+		<value public="1"><c path="String"/></value>
+		<new public="1" set="method"><f a="?options">
+	<t path="pixi.plugins.input.Options"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.Input"</e></m></meta>
+	</class>
+	<typedef path="pixi.plugins.input.Options" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<width>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</width>
+	<value>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</value>
+	<valign>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</valign>
+	<type>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</type>
+	<text>
+		<t path="pixi.plugins.input.InputTextStyle"/>
+		<meta><m n=":optional"/></meta>
+	</text>
+	<selectionColor>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</selectionColor>
+	<readonly>
+		<x path="Bool"/>
+		<meta><m n=":optional"/></meta>
+	</readonly>
+	<placeholderColor>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</placeholderColor>
+	<placeholder>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</placeholder>
+	<padding>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</padding>
+	<outline>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</outline>
+	<onsubmit>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onsubmit>
+	<onmouseup>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onmouseup>
+	<onmousedown>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onmousedown>
+	<onkeyup>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onkeyup>
+	<onkeydown>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onkeydown>
+	<onfocus>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onfocus>
+	<onblur>
+		<f a=""><x path="Void"/></f>
+		<meta><m n=":optional"/></meta>
+	</onblur>
+	<maxlength>
+		<x path="Bool"/>
+		<meta><m n=":optional"/></meta>
+	</maxlength>
+	<innerShadow>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</innerShadow>
+	<height>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</height>
+	<boxShadow>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</boxShadow>
+	<borderWidth>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</borderWidth>
+	<borderRadius>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</borderRadius>
+	<borderColor>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</borderColor>
+	<backgroundImage>
+		<d/>
+		<meta><m n=":optional"/></meta>
+	</backgroundImage>
+	<backgroundGradient>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</backgroundGradient>
+	<backgroundColor>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</backgroundColor>
+	<align>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</align>
+</a></typedef>
+	<typedef path="pixi.plugins.input.InputTextStyle" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<strokeThickness>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</strokeThickness>
+	<stroke>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</stroke>
+	<font>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</font>
+	<fill>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</fill>
+	<align>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</align>
+</a></typedef>
+	<class path="pixi.plugins.input.Select" params="" file="pixi/plugins/input/Select.hx" extern="1">
+		<extends path="pixi.plugins.input.InputObject"/>
+		<value public="1"><d/></value>
+		<new public="1" set="method"><f a="?data">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.Select"</e></m></meta>
+	</class>
 	<class path="pixi.primitives.Graphics" params="" file="pixi/primitives/Graphics.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<POLY public="1" static="1"><x path="Int"/></POLY>
@@ -20767,7 +21043,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</updateBounds>
 		<drawShape public="1" set="method">
 			<f a="shape">
-				<c path="pixi.core.Circle"/>
+				<c path="pixi.geom.Circle"/>
 				<c path="pixi.primitives.GraphicsData"/>
 			</f>
 			<haxe_doc>* Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
@@ -20778,7 +21054,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<overloads>
 				<drawShape public="1" set="method">
 					<f a="shape">
-						<c path="pixi.core.Rectangle"/>
+						<c path="pixi.geom.Rectangle"/>
 						<c path="pixi.primitives.GraphicsData"/>
 					</f>
 					<haxe_doc>* Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
@@ -20789,7 +21065,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				</drawShape>
 				<drawShape public="1" set="method">
 					<f a="shape">
-						<c path="pixi.core.Ellipse"/>
+						<c path="pixi.geom.Ellipse"/>
 						<c path="pixi.primitives.GraphicsData"/>
 					</f>
 					<haxe_doc>* Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
@@ -20800,7 +21076,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				</drawShape>
 				<drawShape public="1" set="method">
 					<f a="shape">
-						<c path="pixi.core.Polygon"/>
+						<c path="pixi.geom.Polygon"/>
 						<c path="pixi.primitives.GraphicsData"/>
 					</f>
 					<haxe_doc>* Draws the given shape to this Graphics object. Can be any of Circle, Rectangle, Ellipse, Line or Polygon.
@@ -20813,48 +21089,56 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</drawShape>
 		<fillAlpha public="1">
 			<x path="Float"/>
-			<haxe_doc>* The alpha of the fill of this graphics object</haxe_doc>
+			<haxe_doc>* The alpha value used when filling the Graphics object.
+     *
+     * @property fillAlpha
+     * @type Float</haxe_doc>
 		</fillAlpha>
 		<lineWidth public="1">
 			<x path="Float"/>
-			<haxe_doc>* The width of any lines drawn</haxe_doc>
+			<haxe_doc>* The width (thickness) of any lines drawn.
+     *
+     * @property lineWidth
+     * @type Float</haxe_doc>
 		</lineWidth>
 		<lineColor public="1">
 			<c path="String"/>
-			<haxe_doc>* The color of any lines drawn</haxe_doc>
+			<haxe_doc>* The color of any lines drawn.
+     *
+     * @property lineColor
+     * @type String
+     * @default 0</haxe_doc>
 		</lineColor>
-		<graphicsData public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* Graphics data</haxe_doc>
-		</graphicsData>
 		<tint public="1">
-			<x path="Float"/>
-			<haxe_doc>* The tint applied to the graphic shape. This is a hex value</haxe_doc>
+			<x path="Int"/>
+			<haxe_doc>* The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
+     *
+     * @property tint
+     * @type Int
+     * @default 0xFFFFFF</haxe_doc>
 		</tint>
 		<blendMode public="1">
-			<x path="Float"/>
-			<haxe_doc>* The blend mode to be applied to the graphic shape</haxe_doc>
+			<x path="Int"/>
+			<haxe_doc>* The blend mode to be applied to the graphic shape. Apply a value of PIXI.blendModes.NORMAL to reset the blend mode.
+     *
+     * @property blendMode
+     * @type Int
+     * @default PIXI.blendModes.NORMAL;</haxe_doc>
 		</blendMode>
-		<currentPath public="1">
-			<d/>
-			<haxe_doc>* Current path</haxe_doc>
-		</currentPath>
-		<webGL public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* Array containing some WebGL-related properties used by the WebGL renderer</haxe_doc>
-		</webGL>
 		<isMask public="1">
-			<d/>
-			<haxe_doc>* Whether this shape is being used as a mask</haxe_doc>
+			<x path="Bool"/>
+			<haxe_doc>* Whether this shape is being used as a mask.
+     *
+     * @property isMask
+     * @type Bool</haxe_doc>
 		</isMask>
 		<boundsPadding public="1">
 			<x path="Float"/>
-			<haxe_doc>* the bounds' padding used for bounds calculation</haxe_doc>
+			<haxe_doc>* The bounds' padding used for bounds calculation.
+     *
+     * @property boundsPadding
+     * @type Float</haxe_doc>
 		</boundsPadding>
-		<dirty public="1">
-			<d/>
-			<haxe_doc>* Used to detect if the graphics object has changed if this is set to true then the graphics object will be recalculated</haxe_doc>
-		</dirty>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The Graphics class contains a set of methods that you can use to create primitive shapes and lines.
@@ -21284,12 +21568,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @type Function</haxe_doc>
 		</contextRestoredBound>
 		<projection public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* @property projection
      * @type Point</haxe_doc>
 		</projection>
 		<offset public="1">
-			<c path="pixi.core.Point"/>
+			<c path="pixi.geom.Point"/>
 			<haxe_doc>* @property offset
      * @type Point</haxe_doc>
 		</offset>
@@ -21352,7 +21636,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<renderDisplayObject public="1" set="method">
 			<f a="displayObject:projection:buffer">
 				<c path="pixi.display.DisplayObject"/>
-				<c path="pixi.core.Point"/>
+				<c path="pixi.geom.Point"/>
 				<c path="Array"><d/></c>
 				<x path="Void"/>
 			</f>
@@ -21832,7 +22116,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @type Object</haxe_doc>
 		</shader>
 		<matrix public="1">
-			<c path="pixi.core.Matrix"/>
+			<c path="pixi.geom.Matrix"/>
 			<haxe_doc>* @property matrix
 	 * @type Matrix</haxe_doc>
 		</matrix>
@@ -22832,7 +23116,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.textures.Texture" params="" file="pixi/textures/Texture.hx" extern="1">
 		<setFrame public="1" set="method" static="1">
 			<f a="frame">
-				<c path="pixi.core.Rectangle"/>
+				<c path="pixi.geom.Rectangle"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Specifies the region of the baseTexture that this texture will use.
@@ -22919,11 +23203,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The base texture that this texture uses.</haxe_doc>
 		</baseTexture>
 		<frame public="1">
-			<c path="pixi.core.Rectangle"/>
+			<c path="pixi.geom.Rectangle"/>
 			<haxe_doc>* The frame specifies the region of the base texture that this texture uses</haxe_doc>
 		</frame>
 		<trim public="1">
-			<c path="pixi.core.Rectangle"/>
+			<c path="pixi.geom.Rectangle"/>
 			<haxe_doc>* The trim point</haxe_doc>
 		</trim>
 		<valid public="1">
@@ -22943,7 +23227,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* The height of the Texture in pixels.</haxe_doc>
 		</height>
 		<crop public="1">
-			<c path="pixi.core.Rectangle"/>
+			<c path="pixi.geom.Rectangle"/>
 			<haxe_doc>* This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
 	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)</haxe_doc>
 		</crop>
@@ -22960,9 +23244,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<new public="1" set="method">
 			<f a="baseTexture:?frame:?crop:?trim">
 				<c path="pixi.textures.BaseTexture"/>
-				<c path="pixi.core.Rectangle"/>
-				<c path="pixi.core.Rectangle"/>
-				<c path="pixi.core.Rectangle"/>
+				<c path="pixi.geom.Rectangle"/>
+				<c path="pixi.geom.Rectangle"/>
+				<c path="pixi.geom.Rectangle"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* A texture stores the information that represents an image or part of an image. It cannot be added
@@ -22983,7 +23267,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<render public="1">
 			<f a="::">
 				<c path="pixi.display.DisplayObject"/>
-				<c path="pixi.core.Matrix"/>
+				<c path="pixi.geom.Matrix"/>
 				<x path="Bool"/>
 				<x path="Void"/>
 			</f>
@@ -23379,6 +23663,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param number {Float}
 	 * @return {Float} the closest number that is a power of two</haxe_doc>
 		</getNextPowerOfTwo>
+		<isPowerOfTwo public="1" set="method" static="1">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* checks if the given width and height make a power of two texture
+	 * @method isPowerOfTwo
+	 * @param width {Float}
+	 * @param height {Float}
+	 * @return {Bool}</haxe_doc>
+		</isPowerOfTwo>
 		<meta><m n=":native"><e>"PIXI.Utils"</e></m></meta>
 	</class>
 	<class path="pixi.utils.AjaxRequest" params="" file="pixi/utils/Utils.hx" module="pixi.utils.Utils" extern="1">

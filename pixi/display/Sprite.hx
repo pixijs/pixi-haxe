@@ -3,7 +3,7 @@ package pixi.display;
 import pixi.filters.AbstractFilter;
 import pixi.textures.VideoTexture;
 import pixi.textures.Texture;
-import pixi.core.Point;
+import pixi.geom.Point;
 
 @:native("PIXI.Sprite")
 extern class Sprite extends DisplayObjectContainer {
