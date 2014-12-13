@@ -39,6 +39,7 @@ Ported from pixi.js
 New Demos
 
 * [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
+* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/bunnymark.html)
 
 Look at the `samples` folder for the source code of above examples.
 
