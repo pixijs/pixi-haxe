@@ -84,6 +84,13 @@
 --next
 -cp samples
 -cp src
+-main samples.bunnymark.Main
+-js samples/_output/hx-pixi-bunnymark.js
+-dce full
+
+--next
+-cp samples
+-cp src
 -main samples.nape.Main
 -js samples/_output/hx-pixi-nape.js
 -dce full
