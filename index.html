@@ -45,7 +45,7 @@
 
 <p><img src="https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png" alt="haxe pixi logo"></p>
 
-<p>Externs of pixi.js (v2.1.1) for Haxe - 2D webGL renderer with canvas fallback.</p>
+<p>Externs of pixi.js (v2.2.0) for Haxe - 2D webGL renderer with canvas fallback.</p>
 
 <h3>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
@@ -56,7 +56,7 @@
 <a id="api-documentation" class="anchor" href="#api-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Documentation</h3>
 
 <p>Click <a href="http://adireddy.github.io/docs/haxe-pixi">here</a> for API documentation.
-<a href="http://adireddy.github.io/docs/haxe-pixi/yui/">YUIDoc API</a> similar to pixi.js also available.</p>
+<a href="http://adireddy.github.io/docs/haxe-pixi/yui/">YUIDoc API</a> similar to <a href="http://www.goodboydigital.com/pixijs/docs/">pixi.js docs</a> also available.</p>
 
 <h3>
 <a id="issues" class="anchor" href="#issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issues</h3>
@@ -97,6 +97,7 @@
 <div class="highlight highlight-haxe"><pre>
 <span class="pl-st">package</span><span class="pl-en"> </span>;
 
+<span class="pl-st">import</span> <span class="pl-en">pixi.renderers.</span><span class="pl-en">IRenderer</span>;
 <span class="pl-st">import</span> <span class="pl-en">pixi.display.</span><span class="pl-en">Sprite</span>;
 <span class="pl-st">import</span> <span class="pl-en">pixi.display.</span><span class="pl-en">Stage</span>;
 <span class="pl-st">import</span> <span class="pl-en">pixi.textures.</span><span class="pl-en">Texture</span>;
@@ -106,7 +107,7 @@
 <span class="pl-st">class</span> <span class="pl-en">Main</span> {
 
     <span class="pl-k">var</span> _bunny:<span class="pl-en">Sprite</span>;
-    <span class="pl-k">var</span> _renderer:<span class="pl-s3">Dynamic</span>;
+    <span class="pl-k">var</span> _renderer:<span class="pl-en">IRenderer</span>;
     <span class="pl-k">var</span> _stage:<span class="pl-en">Stage</span>;
 
     <span class="pl-s">public</span> <span class="pl-k">function</span> <span class="pl-en">new</span>() {
