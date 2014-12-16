@@ -9,7 +9,7 @@ samples.spine.Main = function() {
 	this._renderer = PIXI.autoDetectRenderer(800,600);
 	this._renderer.view.style.display = "block";
 	window.document.body.appendChild(this._renderer.view);
-	var assetsToLoader = ["assets/spine/data/spineboy.json","assets/spine/data/spineboySpineData.json"];
+	var assetsToLoader = ["assets/spine/data/spineboy.json"];
 	this._loader = new PIXI.AssetLoader(assetsToLoader);
 	this._loader.onComplete = $bind(this,this.onAssetsLoaded);
 	this._loader.load();
@@ -24,18 +24,18 @@ samples.spine.Main.prototype = {
 		this._renderer.render(this._stage);
 	}
 	,onAssetsLoaded: function() {
-		this._spineBoy = new PIXI.Spine("assets/spine/data/spineboySpineData.json");
+		this._spineBoy = new PIXI.Spine("assets/spine/data/spineboy.json");
 		this._spineBoy.position.x = 400;
 		this._spineBoy.position.y = 600;
 		this._spineBoy.stateData.setMixByName("walk","jump",0.2);
 		this._spineBoy.stateData.setMixByName("jump","walk",0.4);
-		this._spineBoy.state.setAnimationByName("walk",true);
+		this._spineBoy.state.setAnimationByName(0,"walk",true);
 		this._stage.addChild(this._spineBoy);
 		this._stage.click = $bind(this,this._stageOnClick);
 	}
 	,_stageOnClick: function(data) {
-		this._spineBoy.state.setAnimationByName("jump",false);
-		this._spineBoy.state.addAnimationByName("walk",true);
+		this._spineBoy.state.setAnimationByName(0,"jump",false);
+		this._spineBoy.state.addAnimationByName(0,"walk",true);
 	}
 };
 var $_, $fid = 0;

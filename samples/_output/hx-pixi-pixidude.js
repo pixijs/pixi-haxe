@@ -11,7 +11,7 @@ samples.pixidude.Main = function() {
 	this._renderer.view.style.width = "100%";
 	this._renderer.view.style.height = "100%";
 	window.document.body.appendChild(this._renderer.view);
-	var assetsToLoader = ["assets/spine/data/PixieSpineData.json","assets/spine/data/Pixie.json","assets/spine/data/iP4_BGtile.jpg","assets/spine/data/iP4_ground.png"];
+	var assetsToLoader = ["assets/spine/data/Pixie.json","assets/spine/data/iP4_BGtile.jpg","assets/spine/data/iP4_ground.png"];
 	this._loader = new PIXI.AssetLoader(assetsToLoader);
 	this._loader.onComplete = $bind(this,this.onAssetsLoaded);
 	this._loader.load();
@@ -36,20 +36,20 @@ samples.pixidude.Main.prototype = {
 		this._stage.addChild(this._foreground1);
 		this._stage.addChild(this._foreground2);
 		this._foreground1.position.y = this._foreground2.position.y = 640 - this._foreground2.height;
-		this._pixie = new PIXI.Spine("assets/spine/data/PixieSpineData.json");
+		this._pixie = new PIXI.Spine("assets/spine/data/Pixie.json");
 		var scale = 0.3;
 		this._pixie.position.x = 341.333333333333314;
 		this._pixie.position.y = 500;
 		this._pixie.scale.x = this._pixie.scale.y = scale;
 		this._pixie.stateData.setMixByName("running","jump",0.2);
 		this._pixie.stateData.setMixByName("jump","running",0.4);
-		this._pixie.state.setAnimationByName("running",true);
+		this._pixie.state.setAnimationByName(0,"running",true);
 		this._stage.addChild(this._pixie);
 		this._stage.click = $bind(this,this._stageOnClick);
 	}
 	,_stageOnClick: function(data) {
-		this._pixie.state.setAnimationByName("jump",false);
-		this._pixie.state.addAnimationByName("running",true);
+		this._pixie.state.setAnimationByName(0,"jump",false);
+		this._pixie.state.addAnimationByName(0,"running",true,0);
 	}
 };
 var $_, $fid = 0;

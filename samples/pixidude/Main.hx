@@ -31,7 +31,7 @@ class Main {
 		_renderer.view.style.height = "100%";
 		Browser.document.body.appendChild(_renderer.view);
 
-		var assetsToLoader:Array<String> = ["assets/spine/data/PixieSpineData.json", "assets/spine/data/Pixie.json", "assets/spine/data/iP4_BGtile.jpg", "assets/spine/data/iP4_ground.png"];
+		var assetsToLoader:Array<String> = ["assets/spine/data/Pixie.json", "assets/spine/data/iP4_BGtile.jpg", "assets/spine/data/iP4_ground.png"];
 		_loader = new AssetLoader(assetsToLoader);
 		_loader.onComplete = onAssetsLoaded;
 		_loader.load();
@@ -57,7 +57,7 @@ class Main {
 		_stage.addChild(_foreground2);
 		_foreground1.position.y = _foreground2.position.y = 640 - _foreground2.height;
 
-		_pixie = new Spine("assets/spine/data/PixieSpineData.json");
+		_pixie = new Spine("assets/spine/data/Pixie.json");
 		var scale = 0.3;
 
 		_pixie.position.x = 1024 / 3;
@@ -68,7 +68,7 @@ class Main {
 		_pixie.stateData.setMixByName("running", "jump", 0.2);
 		_pixie.stateData.setMixByName("jump", "running", 0.4);
 
-		_pixie.state.setAnimationByName("running", true);
+		_pixie.state.setAnimationByName(0, "running", true);
 
 		_stage.addChild(_pixie);
 
@@ -76,8 +76,8 @@ class Main {
 	}
 
 	function _stageOnClick(data:InteractionData) {
-		_pixie.state.setAnimationByName("jump", false);
-		_pixie.state.addAnimationByName("running", true);
+		_pixie.state.setAnimationByName(0, "jump", false);
+		_pixie.state.addAnimationByName(0, "running", true, 0);
 	}
 
 	static function main() {

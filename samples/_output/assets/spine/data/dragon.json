@@ -64,7 +64,8 @@
 	{ "name": "R_front_toe3", "bone": "R_front_toe3", "attachment": "front_toeB" },
 	{ "name": "chin", "bone": "chin", "attachment": "chin" },
 	{ "name": "R_wing", "bone": "R_wing", "attachment": "R_wing01" },
-	{ "name": "head", "bone": "head", "attachment": "head" }
+	{ "name": "head", "bone": "head", "attachment": "head" },
+	{ "name": "logo", "bone": "root", "attachment": "logo" }
 ],
 "skins": {
 	"default": {
@@ -156,6 +157,9 @@
 		"head": {
 			"head": { "x": 76.68, "y": 32.21, "rotation": -47.12, "width": 296, "height": 260 }
 		},
+		"logo": {
+			"logo": { "y": -176.72, "width": 897, "height": 92 }
+		},
 		"tail1": {
 			"tail01": { "x": 22.59, "y": -4.5, "rotation": 163.85, "width": 120, "height": 153 }
 		},
@@ -178,6 +182,53 @@
 },
 "animations": {
 	"flying": {
+		"slots": {
+			"L_wing": {
+				"attachment": [
+					{ "time": 0, "name": "L_wing01" },
+					{ "time": 0.0666, "name": "L_wing02" },
+					{ "time": 0.1333, "name": "L_wing03" },
+					{ "time": 0.2, "name": "L_wing04" },
+					{ "time": 0.2666, "name": "L_wing05" },
+					{ "time": 0.3333, "name": "L_wing06" },
+					{ "time": 0.4, "name": "L_wing07" },
+					{ "time": 0.4666, "name": "L_wing08" },
+					{ "time": 0.5333, "name": "L_wing09" },
+					{ "time": 0.6, "name": "L_wing01" },
+					{ "time": 0.7333, "name": "L_wing02" },
+					{ "time": 0.8, "name": "L_wing03" },
+					{ "time": 0.8333, "name": "L_wing04" },
+					{ "time": 0.8666, "name": "L_wing05" },
+					{ "time": 0.9, "name": "L_wing06" },
+					{ "time": 0.9333, "name": "L_wing07" },
+					{ "time": 0.9666, "name": "L_wing08" },
+					{ "time": 1, "name": "L_wing01" }
+				]
+			},
+			"R_wing": {
+				"attachment": [
+					{ "time": 0, "name": "R_wing01" },
+					{ "time": 0.0666, "name": "R_wing02" },
+					{ "time": 0.1333, "name": "R_wing03" },
+					{ "time": 0.2, "name": "R_wing04" },
+					{ "time": 0.2666, "name": "R_wing05" },
+					{ "time": 0.3333, "name": "R_wing06" },
+					{ "time": 0.4, "name": "R_wing07" },
+					{ "time": 0.4666, "name": "R_wing08" },
+					{ "time": 0.5333, "name": "R_wing09" },
+					{ "time": 0.6, "name": "R_wing01" },
+					{ "time": 0.7333, "name": "R_wing02" },
+					{ "time": 0.7666, "name": "R_wing02" },
+					{ "time": 0.8, "name": "R_wing03" },
+					{ "time": 0.8333, "name": "R_wing04" },
+					{ "time": 0.8666, "name": "R_wing05" },
+					{ "time": 0.9, "name": "R_wing06" },
+					{ "time": 0.9333, "name": "R_wing07" },
+					{ "time": 0.9666, "name": "R_wing08" },
+					{ "time": 1, "name": "R_wing01" }
+				]
+			}
+		},
 		"bones": {
 			"back": {
 				"rotate": [
@@ -724,53 +775,6 @@
 						"curve": [ 0.396, 0, 0.709, 2.03 ]
 					},
 					{ "time": 1, "x": 0, "y": 0 }
-				]
-			}
-		},
-		"slots": {
-			"R_wing": {
-				"attachment": [
-					{ "time": 0, "name": "R_wing01" },
-					{ "time": 0.0666, "name": "R_wing02" },
-					{ "time": 0.1333, "name": "R_wing03" },
-					{ "time": 0.2, "name": "R_wing04" },
-					{ "time": 0.2666, "name": "R_wing05" },
-					{ "time": 0.3333, "name": "R_wing06" },
-					{ "time": 0.4, "name": "R_wing07" },
-					{ "time": 0.4666, "name": "R_wing08" },
-					{ "time": 0.5333, "name": "R_wing09" },
-					{ "time": 0.6, "name": "R_wing01" },
-					{ "time": 0.7333, "name": "R_wing02" },
-					{ "time": 0.7666, "name": "R_wing02" },
-					{ "time": 0.8, "name": "R_wing03" },
-					{ "time": 0.8333, "name": "R_wing04" },
-					{ "time": 0.8666, "name": "R_wing05" },
-					{ "time": 0.9, "name": "R_wing06" },
-					{ "time": 0.9333, "name": "R_wing07" },
-					{ "time": 0.9666, "name": "R_wing08" },
-					{ "time": 1, "name": "R_wing09" }
-				]
-			},
-			"L_wing": {
-				"attachment": [
-					{ "time": 0, "name": "L_wing01" },
-					{ "time": 0.0666, "name": "L_wing02" },
-					{ "time": 0.1333, "name": "L_wing03" },
-					{ "time": 0.2, "name": "L_wing04" },
-					{ "time": 0.2666, "name": "L_wing05" },
-					{ "time": 0.3333, "name": "L_wing06" },
-					{ "time": 0.4, "name": "L_wing07" },
-					{ "time": 0.4666, "name": "L_wing08" },
-					{ "time": 0.5333, "name": "L_wing09" },
-					{ "time": 0.6, "name": "L_wing01" },
-					{ "time": 0.7333, "name": "L_wing02" },
-					{ "time": 0.8, "name": "L_wing03" },
-					{ "time": 0.8333, "name": "L_wing04" },
-					{ "time": 0.8666, "name": "L_wing05" },
-					{ "time": 0.9, "name": "L_wing06" },
-					{ "time": 0.9333, "name": "L_wing07" },
-					{ "time": 0.9666, "name": "L_wing08" },
-					{ "time": 1, "name": "L_wing09" }
 				]
 			}
 		}

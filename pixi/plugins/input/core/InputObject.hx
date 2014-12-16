@@ -1,4 +1,4 @@
-package pixi.plugins.input;
+package pixi.plugins.input.core;
 
 import pixi.display.Sprite;
 

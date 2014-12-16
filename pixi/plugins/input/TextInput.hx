@@ -1,5 +1,7 @@
 package pixi.plugins.input;
 
+import pixi.plugins.input.core.InputObject;
+
 @:native("PIXI.Input")
 extern class TextInput extends InputObject {
 	function new(?options:Options);

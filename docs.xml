@@ -20614,7 +20614,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpriteSheetLoader"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.input.InputObject" params="" file="pixi/plugins/input/InputObject.hx" extern="1">
+	<class path="pixi.plugins.input.core.InputObject" params="" file="pixi/plugins/input/core/InputObject.hx" extern="1">
 		<extends path="pixi.display.Sprite"/>
 		<new public="1" set="method"><f a="?index">
 	<x path="Int"/>
@@ -20623,15 +20623,24 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.InputObject"</e></m></meta>
 	</class>
 	<class path="pixi.plugins.input.Button" params="" file="pixi/plugins/input/Button.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
+		<extends path="pixi.plugins.input.core.InputObject"/>
 		<new public="1" set="method"><f a="?data">
 	<d/>
 	<x path="Void"/>
 </f></new>
 		<meta><m n=":native"><e>"PIXI.Button"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.input.Input" params="" file="pixi/plugins/input/Input.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
+	<class path="pixi.plugins.input.Select" params="" file="pixi/plugins/input/Select.hx" extern="1">
+		<extends path="pixi.plugins.input.core.InputObject"/>
+		<value public="1"><d/></value>
+		<new public="1" set="method"><f a="?data">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.Select"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.input.TextInput" params="" file="pixi/plugins/input/TextInput.hx" extern="1">
+		<extends path="pixi.plugins.input.core.InputObject"/>
 		<value public="1"><c path="String"/></value>
 		<new public="1" set="method"><f a="?options">
 	<t path="pixi.plugins.input.Options"/>
@@ -20639,7 +20648,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></new>
 		<meta><m n=":native"><e>"PIXI.Input"</e></m></meta>
 	</class>
-	<typedef path="pixi.plugins.input.Options" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<typedef path="pixi.plugins.input.Options" params="" file="pixi/plugins/input/TextInput.hx" module="pixi.plugins.input.TextInput"><a>
 	<width>
 		<x path="Float"/>
 		<meta><m n=":optional"/></meta>
@@ -20757,7 +20766,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<typedef path="pixi.plugins.input.InputTextStyle" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<typedef path="pixi.plugins.input.InputTextStyle" params="" file="pixi/plugins/input/TextInput.hx" module="pixi.plugins.input.TextInput"><a>
 	<strokeThickness>
 		<x path="Float"/>
 		<meta><m n=":optional"/></meta>
@@ -20779,15 +20788,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<class path="pixi.plugins.input.Select" params="" file="pixi/plugins/input/Select.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
-		<value public="1"><d/></value>
-		<new public="1" set="method"><f a="?data">
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<meta><m n=":native"><e>"PIXI.Select"</e></m></meta>
-	</class>
 	<class path="pixi.primitives.Graphics" params="" file="pixi/primitives/Graphics.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<POLY public="1" static="1"><x path="Int"/></POLY>
@@ -22604,28 +22604,39 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<x path="Void"/>
 </f></apply>
 		<clearAnimation public="1" set="method"><f a=""><x path="Void"/></f></clearAnimation>
-		<setAnimationByName public="1" set="method"><f a="animationName:loop">
+		<setAnimationByName public="1" set="method"><f a="trackIndex:animationName:loop">
+	<x path="Int"/>
 	<c path="String"/>
 	<x path="Bool"/>
 	<x path="Void"/>
 </f></setAnimationByName>
-		<setAnimation public="1" set="method"><f a="animation:loop">
-	<d/>
-	<x path="Bool"/>
-	<x path="Void"/>
-</f></setAnimation>
-		<addAnimationByName public="1" set="method"><f a="animationName:loop:?delay">
+		<setAnimation public="1" set="method">
+			<f a="trackIndex:animation:loop">
+				<x path="Int"/>
+				<d/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the current animation. Any queued animations are cleared.</haxe_doc>
+		</setAnimation>
+		<addAnimationByName public="1" set="method"><f a="trackIndex:animationName:loop:?delay">
+	<x path="Int"/>
 	<c path="String"/>
 	<x path="Bool"/>
 	<x path="Float"/>
 	<x path="Void"/>
 </f></addAnimationByName>
-		<addAnimation public="1" set="method"><f a="animation:loop:?delay">
-	<d/>
-	<x path="Bool"/>
-	<x path="Float"/>
-	<x path="Void"/>
-</f></addAnimation>
+		<addAnimation public="1" set="method">
+			<f a="trackIndex:animation:loop:?delay">
+				<x path="Int"/>
+				<d/>
+				<x path="Bool"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[Adds an animation to be played delay seconds after the current or last queued animation.
+	 * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay.]]></haxe_doc>
+		</addAnimation>
 		<isComplete public="1" set="method"><f a=""><x path="Bool"/></f></isComplete>
 		<new public="1" set="method"><f a="stateData">
 	<c path="pixi.spine.AnimationStateData"/>
