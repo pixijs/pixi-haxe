@@ -14,4 +14,4 @@ before_install:
     - haxelib install nape
 
 script:
-    - haxe demos.hxml
+    - haxe build.hxml

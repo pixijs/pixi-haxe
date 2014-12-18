@@ -23,13 +23,19 @@ extern class AnimationState {
 
 	function clearAnimation():Void;
 
-	function setAnimationByName(animationName:String, loop:Bool):Void;
+	function setAnimationByName(trackIndex:Int, animationName:String, loop:Bool):Void;
 
-	function setAnimation(animation:Dynamic, loop:Bool):Void;
+	/**
+	* Set the current animation. Any queued animations are cleared.
+	*/
+	function setAnimation(trackIndex:Int, animation:Dynamic, loop:Bool):Void;
 
-	function addAnimationByName(animationName:String, loop:Bool, ?delay:Float = 0):Void;
+	function addAnimationByName(trackIndex:Int, animationName:String, loop:Bool, ?delay:Float = 0):Void;
 
-	function addAnimation(animation:Dynamic, loop:Bool, ?delay:Float = 0):Void;
+	/** Adds an animation to be played delay seconds after the current or last queued animation.
+	 * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay.
+	 */
+	function addAnimation(trackIndex:Int, animation:Dynamic, loop:Bool, ?delay:Float = 0):Void;
 
 	function isComplete():Bool;
 }

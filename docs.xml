@@ -17741,7 +17741,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @type Sprite</haxe_doc>
 		</target>
 		<originalEvent public="1">
-			<d/>
+			<c path="pixi.utils.Event"/>
 			<haxe_doc>* When passed to an event handler, this will be the original DOM Event that was captured
 	 *
 	 * @property originalEvent
@@ -17789,81 +17789,81 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* An object that stores current touches (InteractionData) by id reference
 	 *
 	 * @property touches
-	 * @type Object</haxe_doc>
+	 * @type Dynamic</haxe_doc>
 		</touches>
 		<mouseoverEnabled public="1">
 			<x path="Bool"/>
 			<haxe_doc>* @property mouseoverEnabled
-	 * @type Boolean
+	 * @type Bool
 	 * @default true</haxe_doc>
 		</mouseoverEnabled>
 		<pool public="1">
 			<c path="Array"><d/></c>
-			<haxe_doc>* Tiny little interactiveData pool !
+			<haxe_doc><![CDATA[* Tiny little interactiveData pool !
 	 *
 	 * @property pool
-	 * @type Array</haxe_doc>
+	 * @type Array<Dynamic>]]></haxe_doc>
 		</pool>
 		<onMouseMove public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onMouseMove
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onMouseMove
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onMouseMove>
 		<onMouseDown public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onMouseDown
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onMouseDown
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onMouseDown>
 		<onMouseOut public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onMouseOut
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onMouseOut
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onMouseOut>
 		<onMouseUp public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onMouseUp
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onMouseUp
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onMouseUp>
 		<onTouchStart public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onTouchStart
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onTouchStart
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onTouchStart>
 		<onTouchEnd public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onTouchEnd
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onTouchEnd
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onTouchEnd>
 		<onTouchMove public="1">
 			<f a="">
 				<c path="pixi.InteractionData"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @property onTouchMove
-	 * @type Function</haxe_doc>
+			<haxe_doc><![CDATA[* @property onTouchMove
+	 * @type InteractionData -> Void]]></haxe_doc>
 		</onTouchMove>
 		<last public="1">
 			<x path="Float"/>
 			<haxe_doc>* @property last
-	 * @type Number</haxe_doc>
+	 * @type Float</haxe_doc>
 		</last>
 		<currentCursorStyle public="1">
 			<c path="String"/>
@@ -17875,13 +17875,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<x path="Bool"/>
 			<haxe_doc>* Is set to true when the mouse is moved out of the canvas
 	 * @property mouseOut
-	 * @type Boolean
+	 * @type Bool
 	 * @default false</haxe_doc>
 		</mouseOut>
 		<resolution public="1">
 			<x path="Float"/>
 			<haxe_doc>* @property resolution
-	 * @type Number</haxe_doc>
+	 * @type Float</haxe_doc>
 		</resolution>
 		<new public="1" set="method">
 			<f a="stage">
@@ -20443,7 +20443,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Whether the requests should be treated as cross origin
 	 *
 	 * @property crossorigin
-	 * @type Boolean</haxe_doc>
+	 * @type Bool</haxe_doc>
 		</crossorigin>
 		<baseUrl public="1">
 			<c path="String"/>
@@ -20458,7 +20458,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* [read-only] Whether the data has loaded yet
 	 *
 	 * @property loaded
-	 * @type Boolean
+	 * @type Bool
 	 * @readOnly</haxe_doc>
 		</loaded>
 		<json public="1">
@@ -20614,7 +20614,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.SpriteSheetLoader"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.input.InputObject" params="" file="pixi/plugins/input/InputObject.hx" extern="1">
+	<class path="pixi.plugins.input.core.InputObject" params="" file="pixi/plugins/input/core/InputObject.hx" extern="1">
 		<extends path="pixi.display.Sprite"/>
 		<new public="1" set="method"><f a="?index">
 	<x path="Int"/>
@@ -20623,15 +20623,24 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.InputObject"</e></m></meta>
 	</class>
 	<class path="pixi.plugins.input.Button" params="" file="pixi/plugins/input/Button.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
+		<extends path="pixi.plugins.input.core.InputObject"/>
 		<new public="1" set="method"><f a="?data">
 	<d/>
 	<x path="Void"/>
 </f></new>
 		<meta><m n=":native"><e>"PIXI.Button"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.input.Input" params="" file="pixi/plugins/input/Input.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
+	<class path="pixi.plugins.input.Select" params="" file="pixi/plugins/input/Select.hx" extern="1">
+		<extends path="pixi.plugins.input.core.InputObject"/>
+		<value public="1"><d/></value>
+		<new public="1" set="method"><f a="?data">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.Select"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.input.TextInput" params="" file="pixi/plugins/input/TextInput.hx" extern="1">
+		<extends path="pixi.plugins.input.core.InputObject"/>
 		<value public="1"><c path="String"/></value>
 		<new public="1" set="method"><f a="?options">
 	<t path="pixi.plugins.input.Options"/>
@@ -20639,7 +20648,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></new>
 		<meta><m n=":native"><e>"PIXI.Input"</e></m></meta>
 	</class>
-	<typedef path="pixi.plugins.input.Options" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<typedef path="pixi.plugins.input.Options" params="" file="pixi/plugins/input/TextInput.hx" module="pixi.plugins.input.TextInput"><a>
 	<width>
 		<x path="Float"/>
 		<meta><m n=":optional"/></meta>
@@ -20757,7 +20766,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<typedef path="pixi.plugins.input.InputTextStyle" params="" file="pixi/plugins/input/Input.hx" module="pixi.plugins.input.Input"><a>
+	<typedef path="pixi.plugins.input.InputTextStyle" params="" file="pixi/plugins/input/TextInput.hx" module="pixi.plugins.input.TextInput"><a>
 	<strokeThickness>
 		<x path="Float"/>
 		<meta><m n=":optional"/></meta>
@@ -20779,15 +20788,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<class path="pixi.plugins.input.Select" params="" file="pixi/plugins/input/Select.hx" extern="1">
-		<extends path="pixi.plugins.input.InputObject"/>
-		<value public="1"><d/></value>
-		<new public="1" set="method"><f a="?data">
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<meta><m n=":native"><e>"PIXI.Select"</e></m></meta>
-	</class>
 	<class path="pixi.primitives.Graphics" params="" file="pixi/primitives/Graphics.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<POLY public="1" static="1"><x path="Int"/></POLY>
@@ -22604,28 +22604,39 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<x path="Void"/>
 </f></apply>
 		<clearAnimation public="1" set="method"><f a=""><x path="Void"/></f></clearAnimation>
-		<setAnimationByName public="1" set="method"><f a="animationName:loop">
+		<setAnimationByName public="1" set="method"><f a="trackIndex:animationName:loop">
+	<x path="Int"/>
 	<c path="String"/>
 	<x path="Bool"/>
 	<x path="Void"/>
 </f></setAnimationByName>
-		<setAnimation public="1" set="method"><f a="animation:loop">
-	<d/>
-	<x path="Bool"/>
-	<x path="Void"/>
-</f></setAnimation>
-		<addAnimationByName public="1" set="method"><f a="animationName:loop:?delay">
+		<setAnimation public="1" set="method">
+			<f a="trackIndex:animation:loop">
+				<x path="Int"/>
+				<d/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the current animation. Any queued animations are cleared.</haxe_doc>
+		</setAnimation>
+		<addAnimationByName public="1" set="method"><f a="trackIndex:animationName:loop:?delay">
+	<x path="Int"/>
 	<c path="String"/>
 	<x path="Bool"/>
 	<x path="Float"/>
 	<x path="Void"/>
 </f></addAnimationByName>
-		<addAnimation public="1" set="method"><f a="animation:loop:?delay">
-	<d/>
-	<x path="Bool"/>
-	<x path="Float"/>
-	<x path="Void"/>
-</f></addAnimation>
+		<addAnimation public="1" set="method">
+			<f a="trackIndex:animation:loop:?delay">
+				<x path="Int"/>
+				<d/>
+				<x path="Bool"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[Adds an animation to be played delay seconds after the current or last queued animation.
+	 * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay.]]></haxe_doc>
+		</addAnimation>
 		<isComplete public="1" set="method"><f a=""><x path="Bool"/></f></isComplete>
 		<new public="1" set="method"><f a="stateData">
 	<c path="pixi.spine.AnimationStateData"/>
@@ -22768,11 +22779,28 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.spine.Spine" params="" file="pixi/spine/Spine.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
-		<createSprite public="1" set="method"><f a="slot:descriptor">
-	<d/>
-	<t path="pixi.spine.Descriptor"/>
-	<c path="pixi.display.Sprite"/>
-</f></createSprite>
+		<autoUpdate public="1">
+			<x path="Bool"/>
+			<haxe_doc>* If this flag is set to true, the spine animation will be autoupdated every time
+	 * the object id drawn. The down side of this approach is that the delta time is
+	 * automatically calculated and you could miss out on cool effects like slow motion,
+	 * pause, skip ahead and the sorts. Most of these effects can be achieved even with
+	 * autoupdate enabled but are harder to achieve.
+	 *
+	 * @property autoUpdate
+	 * @type { Bool }
+	 * @default true</haxe_doc>
+		</autoUpdate>
+		<update public="1" set="method">
+			<f a="dt">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Update the spine skeleton and its animations by delta time (dt)
+	 *
+	 * @method update
+	 * @param dt {Float} Delta time. Time by which the animation should be updated</haxe_doc>
+		</update>
 		<spineData public="1"><c path="pixi.spine.SkeletonData"/></spineData>
 		<skeleton public="1"><c path="pixi.spine.Skeleton"/></skeleton>
 		<stateData public="1"><c path="pixi.spine.AnimationStateData"/></stateData>
@@ -22798,6 +22826,45 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<rotation><x path="Float"/></rotation>
 	<name><c path="String"/></name>
 </a></typedef>
+	<class path="pixi.spine.SpineTextureLoader" params="" file="pixi/spine/SpineTextureLoader.hx" extern="1">
+		<load public="1" set="method">
+			<f a="page:file">
+				<d/>
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Starts loading a base texture as per spine specification
+	 *
+	 * @method load
+	 * @param page {spine.AtlasPage} Atlas page to which texture belongs
+	 * @param file {String} The file to load, this is just the file path relative to the base path configured in the constructor</haxe_doc>
+		</load>
+		<unload public="1" set="method">
+			<f a="texture">
+				<c path="pixi.textures.BaseTexture"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Unloads a previously loaded texture as per spine specification
+	 *
+	 * @method unload
+	 * @param texture {BaseTexture} Texture object to destroy</haxe_doc>
+		</unload>
+		<new public="1" set="method">
+			<f a="basePath:?crossorigin">
+				<c path="String"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Supporting class to load images from spine atlases as per spine spec.
+	 *
+	 * @class SpineTextureLoader
+	 * @uses EventTarget
+	 * @constructor
+	 * @param basePath {String} Tha base path where to look for the images to be loaded
+	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.SpineTextureLoader"</e></m></meta>
+	</class>
 	<class path="pixi.text.BitmapText" params="" file="pixi/text/BitmapText.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<setStyle public="1" set="method">

@@ -22,7 +22,7 @@ class Main {
 		_renderer.view.style.display = "block";
 		Browser.document.body.appendChild(_renderer.view);
 
-		var assetsToLoader:Array<String> = ["assets/spine/data/spineboy.json", "assets/spine/data/spineboySpineData.json"];
+		var assetsToLoader:Array<String> = ["assets/spine/data/spineboy.json"];
 
 		_loader = new AssetLoader(assetsToLoader);
 		_loader.onComplete = onAssetsLoaded;
@@ -37,21 +37,21 @@ class Main {
 	}
 
 	function onAssetsLoaded() {
-		_spineBoy = new Spine("assets/spine/data/spineboySpineData.json");
+		_spineBoy = new Spine("assets/spine/data/spineboy.json");
 
 		_spineBoy.position.x = 400;
 		_spineBoy.position.y = 600;
 		_spineBoy.stateData.setMixByName("walk", "jump", 0.2);
 		_spineBoy.stateData.setMixByName("jump", "walk", 0.4);
-		_spineBoy.state.setAnimationByName("walk", true);
+		_spineBoy.state.setAnimationByName(0, "walk", true);
 		_stage.addChild(_spineBoy);
 
 		_stage.click = _stageOnClick;
 	}
 
 	function _stageOnClick(data:InteractionData) {
-		_spineBoy.state.setAnimationByName("jump", false);
-		_spineBoy.state.addAnimationByName("walk", true);
+		_spineBoy.state.setAnimationByName(0, "jump", false);
+		_spineBoy.state.addAnimationByName(0, "walk", true);
 	}
 
 	static function main() {

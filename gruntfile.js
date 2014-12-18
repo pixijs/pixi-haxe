@@ -5,7 +5,7 @@ module.exports = function (grunt) {
 
         haxe: {
             project: {
-                hxml: "demos.hxml -xml docs.xml --macro include('pixi')"
+                hxml: "build.hxml -xml docs.xml --macro include('pixi')"
             }
         },
 
