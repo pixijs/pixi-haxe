@@ -36,13 +36,13 @@ extern class InteractionManager {
 	 * An object that stores current touches (InteractionData) by id reference
 	 *
 	 * @property touches
-	 * @type Object
+	 * @type Dynamic
 	 */
 	var touches:Dynamic;
 
 	/**
 	 * @property mouseoverEnabled
-	 * @type Boolean
+	 * @type Bool
 	 * @default true
 	 */
 	var mouseoverEnabled:Bool;
@@ -51,55 +51,55 @@ extern class InteractionManager {
 	 * Tiny little interactiveData pool !
 	 *
 	 * @property pool
-	 * @type Array
+	 * @type Array<Dynamic>
 	 */
 	var pool:Array<Dynamic>;
 
 	/**
 	 * @property onMouseMove
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onMouseMove:InteractionData -> Void;
 
 	/**
 	 * @property onMouseDown
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onMouseDown:InteractionData -> Void;
 
 	/**
 	 * @property onMouseOut
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onMouseOut:InteractionData -> Void;
 
 	/**
 	 * @property onMouseUp
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onMouseUp:InteractionData -> Void;
 
 	/**
 	 * @property onTouchStart
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onTouchStart:InteractionData -> Void;
 
 	/**
 	 * @property onTouchEnd
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onTouchEnd:InteractionData -> Void;
 
 	/**
 	 * @property onTouchMove
-	 * @type Function
+	 * @type InteractionData -> Void
 	 */
 	var onTouchMove:InteractionData -> Void;
 
 	/**
 	 * @property last
-	 * @type Number
+	 * @type Float
 	 */
 	var last:Float;
 
@@ -113,14 +113,14 @@ extern class InteractionManager {
 	/**
 	 * Is set to true when the mouse is moved out of the canvas
 	 * @property mouseOut
-	 * @type Boolean
+	 * @type Bool
 	 * @default false
 	 */
 	var mouseOut:Bool;
 
 	/**
 	 * @property resolution
-	 * @type Number
+	 * @type Float
 	 */
 	var resolution:Float;
 }

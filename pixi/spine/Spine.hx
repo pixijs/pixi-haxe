@@ -1,6 +1,5 @@
 package pixi.spine;
 
-import pixi.display.Sprite;
 import pixi.display.DisplayObjectContainer;
 
 @:native("PIXI.Spine")
@@ -16,9 +15,28 @@ extern class Spine extends DisplayObjectContainer {
 	 * @constructor
 	 * @param url {String} The url of the spine anim file to be used
 	*/
-	function new(url:String):Void;
+	function new(url:String);
 
-	function createSprite(slot:Dynamic, descriptor:Descriptor):Sprite;
+		/**
+	 * If this flag is set to true, the spine animation will be autoupdated every time
+	 * the object id drawn. The down side of this approach is that the delta time is
+	 * automatically calculated and you could miss out on cool effects like slow motion,
+	 * pause, skip ahead and the sorts. Most of these effects can be achieved even with
+	 * autoupdate enabled but are harder to achieve.
+	 *
+	 * @property autoUpdate
+	 * @type { Bool }
+	 * @default true
+	 */
+	var autoUpdate:Bool;
+
+	/**
+	 * Update the spine skeleton and its animations by delta time (dt)
+	 *
+	 * @method update
+	 * @param dt {Float} Delta time. Time by which the animation should be updated
+	 */
+	function update(dt:Float):Void;
 
 	var spineData:SkeletonData;
 	var skeleton:Skeleton;

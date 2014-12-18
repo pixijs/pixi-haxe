@@ -1,5 +1,6 @@
 package pixi;
 
+import pixi.utils.Event;
 import pixi.display.Sprite;
 import pixi.display.DisplayObject;
 import pixi.geom.Point;
@@ -37,7 +38,7 @@ extern class InteractionData {
 	 * @property originalEvent
 	 * @type Event
 	 */
-	var originalEvent:Dynamic;
+	var originalEvent:Event;
 
 	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData

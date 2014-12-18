@@ -30,7 +30,7 @@ extern class JsonLoader extends EventTarget {
 	 * Whether the requests should be treated as cross origin
 	 *
 	 * @property crossorigin
-	 * @type Boolean
+	 * @type Bool
 	 */
 	var crossorigin:Bool;
 
@@ -47,7 +47,7 @@ extern class JsonLoader extends EventTarget {
 	 * [read-only] Whether the data has loaded yet
 	 *
 	 * @property loaded
-	 * @type Boolean
+	 * @type Bool
 	 * @readOnly
 	 */
 	var loaded:Bool;
