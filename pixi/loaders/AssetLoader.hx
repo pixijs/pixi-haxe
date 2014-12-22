@@ -1,8 +1,10 @@
 package pixi.loaders;
 
+import pixi.utils.EventTarget;
+
 @:native("PIXI.AssetLoader")
-extern class AssetLoader extends pixi.utils.EventTarget {
-	
+extern class AssetLoader extends EventTarget {
+
 	/**
 	 * A Class that loads a bunch of images / sprite sheet / bitmap font files. Once the
 	 * assets have been loaded they are added to the PIXI Texture cache and can be accessed
@@ -17,35 +19,65 @@ extern class AssetLoader extends pixi.utils.EventTarget {
 	 *      supported. Supported image formats include 'jpeg', 'jpg', 'png', 'gif'. Supported
 	 *      sprite sheet data formats only include 'JSON' at this time. Supported bitmap font
 	 *      data formats include 'xml' and 'fnt'.
-	 * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+	 * @param [crossorigin] {Bool} Whether requests should be treated as crossorigin
 	*/
-	function new(assetURLs:Dynamic, ?crossorigin:Bool);
-	
+	function new(assetURLs:Array<String>, ?crossorigin:Bool);
+
 	/**
 	 * The array of asset URLs that are going to be loaded
+	 *
+	 * @property assetURLs
+	 * @type Array<String>
+	 */
+	var assetURLs:Array<String>;
+
+	/**
+	 * @property loadCount
+	 * @type Int
 	*/
-	var assetURLs:Dynamic;
-	
+	var loadCount:Int;
+
 	/**
 	 * Whether the requests should be treated as cross origin
-	*/
+	 *
+	 * @property crossorigin
+	 * @type Boolean
+	 */
 	var crossorigin:Bool;
-	
+
 	/**
 	 * Maps file extension to loader types
+	 * @property loadersByType
+	 * @type Dynamic
 	*/
 	var loadersByType:Dynamic;
 
-	var loadCount:Int;
+	/**
+	 * Fired when an item finishes loading
+	 * @property onProgress
+	 * @type Function
+	*/
+	var onProgress:AssetLoader -> Void;
 
-	var onProgress:Dynamic;
-
-	var onComplete:Dynamic;
+	/**
+	 * Fired when all the assets are loaded
+	 * @property onComplete
+	 * @type Function
+	*/
+	var onComplete:Void -> Void;
 
 	/**
 	 * Starts loading the assets sequentially
 	 *
 	 * @method load
 	*/
-	function load():Void;	
+	function load():Void;
+
+	/**
+	 * Given a filename, returns its extension.
+	 *
+	 * @method _getDataType
+	 * @param str {String} the name of the asset
+	 */
+	function _getDataType(str:String):String;
 }

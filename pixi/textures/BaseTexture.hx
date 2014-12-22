@@ -1,10 +1,11 @@
 package pixi.textures;
 
+import js.html.CanvasElement;
 import pixi.utils.EventTarget;
 
 @:native("PIXI.BaseTexture")
 extern class BaseTexture extends EventTarget {
-	
+
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture
 	 *
@@ -12,47 +13,57 @@ extern class BaseTexture extends EventTarget {
 	 * @uses EventTarget
 	 * @constructor
 	 * @param source {String} the source object (image or canvas)
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 */
-	function new(source:String, scaleMode:Float);
+	function new(source:String, scaleMode:Int);
 
-    /**
-     * The Resolution of the texture.
-     *
-     * @property resolution
-     * @type Number
-     */
-    var resolution:Float;
+	/**
+	 * The Resolution of the texture.
+	 *
+	 * @property resolution
+	 * @type Float
+	 */
+	var resolution:Float;
 
 	/**
 	 * [read-only] The width of the base texture set when the image has loaded
+	 * @property width
+	 * @type Float
 	 */
 	var width:Float;
-	
+
 	/**
 	 * [read-only] The height of the base texture set when the image has loaded
+	 * @property height
+	 * @type Float
 	 */
 	var height:Float;
-	
+
 	/**
 	 * The scale mode to apply when scaling this texture
+	 * @property scaleMode
+	 * @type Float
 	 */
 	var scaleMode:Float;
-	
+
 	/**
 	 * [read-only] Describes if the base texture has loaded or not
+	 * @property hasLoaded
+	 * @type Bool
 	 */
 	var hasLoaded:Bool;
-	
+
 	/**
 	 * The source that is loaded to create the texture
+	 * @property source
+	 * @type Dynamic
 	 */
 	var source:Dynamic;
 
-    var imageUrl:String;
+	var imageUrl:String;
 
-    var premultipliedAlpha:Bool;
-	
+	var premultipliedAlpha:Bool;
+
 	/**
 	 * Destroys this base texture
 	 *
@@ -60,12 +71,12 @@ extern class BaseTexture extends EventTarget {
 	 */
 	function destroy():Void;
 
-    /**
+	/**
 	 * Sets all glTextures to be dirty.
 	 *
 	 * @method dirty
 	 */
-    function dirty():Void;
+	function dirty():Void;
 
 	/**
 	 * Changes the source image of the texture
@@ -82,11 +93,11 @@ extern class BaseTexture extends EventTarget {
 	 * @static
 	 * @method fromImage
 	 * @param imageUrl {String} The image url of the texture
-	 * @param crossorigin {Boolean} 
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param crossorigin {Bool}
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
-	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Float):BaseTexture;
+	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
 
 	/**
 	 * Helper function that returns a base texture based on a canvas element
@@ -95,8 +106,8 @@ extern class BaseTexture extends EventTarget {
 	 * @static
 	 * @method fromCanvas
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Number} Should be one of the PIXI.scaleMode consts
+	 * @param scaleMode {Int} Should be one of the PIXI.scaleMode consts
 	 * @return BaseTexture
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Float):BaseTexture;
+	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
 }

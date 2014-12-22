@@ -1,34 +1,34 @@
 package pixi.extras;
 
-import pixi.core.Point;
+import pixi.geom.Point;
 import pixi.textures.Texture;
 
 @:native("PIXI.Rope")
-extern class Rope extends pixi.extras.Strip {
+extern class Rope extends Strip {
 
 	/**
-	 * 
+	 *
 	 * @class Rope
 	 * @constructor
-	 * @param texture {Texture} The texture to use
-	 * @param points {Array}
-	 * 
-	*/
-	function new(texture:Texture, points:Array<Point>):Void;
+	 * @extends Strip
+	 * @param {Texture} texture - The texture to use on the rope.
+	 * @param {Array<Point>} points.
+	 *
+	 */
+	function new(texture:Texture, points:Array<Point>);
 
 	/*
-	 * Sets the texture that the Rope will use 
+	 * Refreshes
+	 *
+	 * @method refresh
+	 */
+	function refresh():Void;
+
+	/*
+	 * Sets the texture that the Rope will use
 	 *
 	 * @method setTexture
 	 * @param texture {Texture} the texture that will be used
-	*/
+	 */
 	function setTexture(texture:Texture):Void;
-
-	/*
-	 * Refreshes 
-	 *
-	 * @method refresh
-	*/
-	function refresh():Void;
-
 }

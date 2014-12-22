@@ -1,8 +1,15 @@
 package pixi.filters;
 
 @:native("PIXI.NoiseFilter")
-extern class NoiseFilter {
+extern class NoiseFilter extends AbstractFilter {
 
+	/**
+	 * A Noise effect filter.
+	 *
+	 * @class NoiseFilter
+	 * @extends AbstractFilter
+	 * @constructor
+	 */
 	function new():Void;
 
 	/**

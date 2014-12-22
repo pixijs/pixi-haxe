@@ -2,12 +2,13 @@ package pixi.utils;
 
 @:native("PIXI.Utils")
 extern class Utils {
-	
+
 	/**
 	 * Converts a hex color number to an [R, G, B] array
 	 *
 	 * @method hex2rgb
-	 * @param hex {Number}
+	 * @param hex {Float}
+	 * @return Array<Float>
 	*/
 	static function hex2rgb(hex:Float):Array<Float>;
 
@@ -16,6 +17,7 @@ extern class Utils {
 	 *
 	 * @method rgb2hex
 	 * @param rgb {Array}
+	 * @return Float
 	*/
 	static function rgb2hex(rgb:Array<Float>):Float;
 
@@ -23,7 +25,7 @@ extern class Utils {
 	 * Checks whether the Canvas BlendModes are supported by the current browser
 	 *
 	 * @method canUseNewCanvasBlendModes
-	 * @return {Boolean} whether they are supported
+	 * @return {Bool} whether they are supported
 	*/
 	static function canUseNewCanvasBlendModes():Bool;
 
@@ -32,10 +34,19 @@ extern class Utils {
 	 * this function is taken from Starling Framework as its pretty neat ;)
 	 *
 	 * @method getNextPowerOfTwo
-	 * @param number {Number}
-	 * @return {Number} the closest number that is a power of two
+	 * @param number {Float}
+	 * @return {Float} the closest number that is a power of two
 	*/
 	static function getNextPowerOfTwo(hex:Float):Float;
+
+	/**
+	 * checks if the given width and height make a power of two texture
+	 * @method isPowerOfTwo
+	 * @param width {Float}
+	 * @param height {Float}
+	 * @return {Bool}
+	 */
+	static function isPowerOfTwo(width:Float, height:Float):Bool;
 }
 
 /**
@@ -46,14 +57,14 @@ extern class Utils {
 @:native("PIXI.AjaxRequest")
 extern class AjaxRequest {
 
-	var overrideMimeType :String->Void;
-	var responseXML :Dynamic;
-	var responseText :String;
-	var status :Int;
-	var readyState :Int;
-	var onreadystatechange :Void->Void;
+	var overrideMimeType:String -> Void;
+	var responseXML:Dynamic;
+	var responseText:String;
+	var status:Int;
+	var readyState:Int;
+	var onreadystatechange:Void -> Void;
 
 	function new():Void;
-	function open(method :String, url :String, value :Bool):Void;
-	function send(data :Dynamic) :Void;
+	function open(method:String, url:String, value:Bool):Void;
+	function send(data:Dynamic):Void;
 }

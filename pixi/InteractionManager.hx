@@ -1,58 +1,126 @@
 package pixi;
 
+import pixi.display.Stage;
+
 @:native("PIXI.InteractionManager")
 extern class InteractionManager {
-	
+
 	/**
 	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
 	 * if its interactive parameter is set to true
 	 * This manager also supports multitouch.
+	 *
+	 * @class InteractionManager
+	 * @constructor
+	 * @param stage {Stage} The stage to handle interactions
 	 */
-	function new (stage:Dynamic);
-	
+	function new(stage:Stage);
+
 	/**
-	 * a reference to the stage
+	 * A reference to the stage
+	 *
+	 * @property stage
+	 * @type Stage
 	 */
-	var stage:Dynamic;
-	
+	var stage:Stage;
+
 	/**
-	 * the mouse data
+	 * The mouse data
+	 *
+	 * @property mouse
+	 * @type InteractionData
 	 */
-	var mouse:Dynamic;
-	
+	var mouse:InteractionData;
+
 	/**
-	 * an object that stores current touches (InteractionData) by id reference
+	 * An object that stores current touches (InteractionData) by id reference
+	 *
+	 * @property touches
+	 * @type Dynamic
 	 */
-	var touchs:Dynamic;
-	
+	var touches:Dynamic;
+
 	/**
 	 * @property mouseoverEnabled
+	 * @type Bool
+	 * @default true
 	 */
-	var mouseoverEnabled:Dynamic;
-	
+	var mouseoverEnabled:Bool;
+
 	/**
-	 * tiny little interactiveData pool !
+	 * Tiny little interactiveData pool !
+	 *
+	 * @property pool
+	 * @type Array<Dynamic>
 	 */
 	var pool:Array<Dynamic>;
-	
+
 	/**
-	 * An array containing all the iterative items from the our interactive tree
+	 * @property onMouseMove
+	 * @type InteractionData -> Void
 	 */
-	var interactiveItems:Array<Dynamic>;
-	
+	var onMouseMove:InteractionData -> Void;
+
 	/**
-	 * Our canvas
+	 * @property onMouseDown
+	 * @type InteractionData -> Void
 	 */
-	var interactionDOMElement:Dynamic;
-	
+	var onMouseDown:InteractionData -> Void;
+
+	/**
+	 * @property onMouseOut
+	 * @type InteractionData -> Void
+	 */
+	var onMouseOut:InteractionData -> Void;
+
+	/**
+	 * @property onMouseUp
+	 * @type InteractionData -> Void
+	 */
+	var onMouseUp:InteractionData -> Void;
+
+	/**
+	 * @property onTouchStart
+	 * @type InteractionData -> Void
+	 */
+	var onTouchStart:InteractionData -> Void;
+
+	/**
+	 * @property onTouchEnd
+	 * @type InteractionData -> Void
+	 */
+	var onTouchEnd:InteractionData -> Void;
+
+	/**
+	 * @property onTouchMove
+	 * @type InteractionData -> Void
+	 */
+	var onTouchMove:InteractionData -> Void;
+
+	/**
+	 * @property last
+	 * @type Float
+	 */
+	var last:Float;
+
 	/**
 	 * The css style of the cursor that is being used
+	 * @property currentCursorStyle
+	 * @type String
 	 */
 	var currentCursorStyle:String;
-	
+
 	/**
 	 * Is set to true when the mouse is moved out of the canvas
+	 * @property mouseOut
+	 * @type Bool
+	 * @default false
 	 */
 	var mouseOut:Bool;
-	
+
+	/**
+	 * @property resolution
+	 * @type Float
+	 */
+	var resolution:Float;
 }

@@ -1,13 +1,19 @@
 package pixi.filters;
 
 @:native("PIXI.ColorStepFilter")
-extern class ColorStepFilter {
-	
-	function new():Void;
-	
+extern class ColorStepFilter extends AbstractFilter {
+
 	/**
-	 * The number of steps.
+	 * This lowers the color depth of your image by the given amount, producing an image with a smaller palette.
+	 *
+	 * @class ColorStepFilter
+	 * @extends AbstractFilter
+	 * @constructor
 	 */
-	var step:Dynamic;
-	
+	function new():Void;
+
+	/**
+	 * The number of steps to reduce the palette by.
+	 */
+	var step:Int;
 }

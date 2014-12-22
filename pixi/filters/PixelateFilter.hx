@@ -1,13 +1,22 @@
 package pixi.filters;
 
+import pixi.geom.Point;
+
 @:native("PIXI.PixelateFilter")
-extern class PixelateFilter {
-	
-	function new():Void;
-	
+extern class PixelateFilter extends AbstractFilter {
+
 	/**
-	 * This a point that describes the size of the blocs. x is the width of the block and y is the the height
+	 * This filter applies a pixelate effect making display objects appear 'blocky'.
+	 *
+	 * @class PixelateFilter
+	 * @extends AbstractFilter
+	 * @constructor
 	 */
-	var size:Dynamic;
-	
+	function new():Void;
+
+	/**
+	 * This a point that describes the size of the blocs. x is the width of the block and y is the the height.
+	 */
+	var size:Point;
+
 }

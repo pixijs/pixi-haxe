@@ -1,7 +1,10 @@
 package pixi.display;
 
+import pixi.filters.AbstractFilter;
+import pixi.textures.VideoTexture;
 import pixi.textures.Texture;
-import pixi.core.Point;
+import pixi.geom.Point;
+
 @:native("PIXI.Sprite")
 extern class Sprite extends DisplayObjectContainer {
 
@@ -12,36 +15,60 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @extends DisplayObjectContainer
 	 * @constructor
 	 * @param texture {Texture} The texture for this sprite
-	 * 
-	 * A sprite can be created directly from an image like this : 
+	 *
+	 * A sprite can be created directly from an image like this :
 	 * var sprite = new PIXI.Sprite.fromImage('assets/image.png');
 	 * yourStage.addChild(sprite);
 	 * then obviously don't forget to add it to the stage you have already created
 	*/
-	function new(texture:Dynamic):Void;
+	@:overload(function(texture:VideoTexture):Void {})
+	function new(texture:Texture):Void;
 
 	/**
 	 * The anchor sets the origin point of the texture.
 	 * The default is 0,0 this means the texture's origin is the top left
-	 * Setting than anchor to 0.5,0.5 means the textures origin is centred
+	 * Setting than anchor to 0.5,0.5 means the textures origin is centered
 	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
-	*/
+	 *
+	 * @property anchor
+	 * @type Point
+	 */
 	var anchor:Point;
-	
+
 	/**
 	 * The texture that the sprite is using
-	*/
-	var texture:Texture;
-	
-	/**
-	 * The tint applied to the sprite. This is a hex value
+	 *
+	 * @property texture
+	 * @type Texture
 	 */
-	var tint:Float;
-	
+	var texture:Texture;
+
 	/**
-	 * The blend mode to be applied to the sprite
-	*/
-	var blendMode:Float;
+	 * The tint applied to the sprite. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+	 *
+	 * @property tint
+	 * @type Int
+	 * @default 0xFFFFFF
+	 */
+	var tint:Int;
+
+	/**
+	 * The blend mode to be applied to the sprite. Set to PIXI.blendModes.NORMAL to remove any blend mode.
+	 *
+	 * @property blendMode
+	 * @type Int
+	 * @default PIXI.blendModes.NORMAL;
+	 */
+	var blendMode:Int;
+
+	/**
+	 * The shader that will be used to render the texture to the stage. Set to null to remove a current shader.
+	 *
+	 * @property shader
+	 * @type PIXI.AbstractFilter
+	 * @default null
+	 */
+	var shader:AbstractFilter;
 
 	/**
 	 * Sets the texture of the sprite
@@ -50,24 +77,6 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param texture {Texture} The PIXI texture that is displayed by the sprite
 	*/
 	function setTexture(texture:Texture):Void;
-
-	/**
-	 * When the texture is updated, this event will fire to update the scale and frame
-	 *
-	 * @method onTextureUpdate
-	 * @param event
-	 * @private
-	*/
-	function onTextureUpdate():Void;
-
-	/**
-	 * Returns the framing rectangle of the sprite as a PIXI.Rectangle object
-	 *
-	 * @method getBounds
-	 * @param matrix {Matrix} the transformation matrix of the sprite
-	 * @return {Rectangle} the framing rectangle
-	 */
-	override function getBounds(matrix:Dynamic):Dynamic;
 
 	/**
 	 *
@@ -79,7 +88,7 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @param frameId {String} The frame Id of the texture in the cache
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the frameId
 	*/
-	static function fromFrame(frameId:String):Dynamic;
+	static function fromFrame(frameId:String):Sprite;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of image ids
@@ -87,7 +96,9 @@ extern class Sprite extends DisplayObjectContainer {
 	 * @static
 	 * @method fromImage
 	 * @param imageId {String}
+	 * @param [crossorigin] {Bool}
+	 * @param [scaleMode] {Int}
+	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the imageId
 	*/
-	static function fromImage(imageId:String, ?crossorigin:Dynamic, ?scaleMode:Dynamic):Dynamic;
-
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Sprite;
 }

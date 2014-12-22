@@ -1,8 +1,11 @@
 package pixi.renderers.canvas;
 
+import js.html.CanvasRenderingContext2D;
+import pixi.primitives.Graphics;
+
 @:native("PIXI.CanvasGraphics")
 extern class CanvasGraphics {
-	
+
 	/**
 	 * A set of functions used by the canvas renderer to draw the primitive graphics data
 	 *
@@ -11,15 +14,14 @@ extern class CanvasGraphics {
 	function new();
 
 	/*
-	 * Renders the graphics object
+	 * Renders a PIXI.Graphics object to a canvas.
 	 *
-	 * @static
-	 * @private
 	 * @method renderGraphics
+	 * @static
 	 * @param graphics {Graphics} the actual graphics object to render
-	 * @param context {Context2D} the 2d drawing method of the canvas
+	 * @param context {CanvasRenderingContext2D} the 2d drawing method of the canvas
 	 */
-	function renderGraphics(graphics:pixi.primitives.Graphics, context:Dynamic):Void;
+	static function renderGraphics(graphics:Graphics, context:CanvasRenderingContext2D):Void;
 
 	/*
 	 * Renders a graphics mask
@@ -28,7 +30,7 @@ extern class CanvasGraphics {
 	 * @private
 	 * @method renderGraphicsMask
 	 * @param graphics {Graphics} the graphics which will be used as a mask
-	 * @param context {Context2D} the context 2d method of the canvas
+	 * @param context {CanvasRenderingContext2D} the context 2d method of the canvas
 	 */
-	 function renderGraphicsMask(graphics:pixi.primitives.Graphics, context:Dynamic):Void;
+	static function renderGraphicsMask(graphics:Graphics, context:CanvasRenderingContext2D):Void;
 }

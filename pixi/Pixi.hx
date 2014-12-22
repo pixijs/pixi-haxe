@@ -2,18 +2,18 @@ package pixi;
 
 @:native("PIXI")
 extern class Pixi {
-	
+
 	static var WEBGL_RENDERER:Int;
 	static var CANVAS_RENDERER:Int;
 	static var WEBGL:Int;
 	static var HEADLESS:Int;
-	
+
 	static var NONE:Int;
 	static var LEFT:Int;
 	static var RIGHT:Int;
 	static var UP:Int;
 	static var DOWN:Int;
-	
+
 	static var SPRITE:Int;
 	static var BUTTON:Int;
 	static var IMAGE:Int;
@@ -48,35 +48,35 @@ extern class Pixi {
 	static var _UID:Float;
 
 	static var blendModes: {
-        NORMAL:Int,
-        ADD:Int,
-        MULTIPLY:Int,
-        SCREEN:Int,
-        OVERLAY:Int,
-        DARKEN:Int,
-        LIGHTEN:Int,
-        COLOR_DODGE:Int,
-        COLOR_BURN:Int,
-        HARD_LIGHT:Int,
-        SOFT_LIGHT:Int,
-        DIFFERENCE:Int,
-        EXCLUSION:Int,
-        HUE:Int,
-        SATURATION:Int,
-        COLOR:Int,
-        LUMINOSITY:Int
-    };
-	
+		NORMAL:Int,
+		ADD:Int,
+		MULTIPLY:Int,
+		SCREEN:Int,
+		OVERLAY:Int,
+		DARKEN:Int,
+		LIGHTEN:Int,
+		COLOR_DODGE:Int,
+		COLOR_BURN:Int,
+		HARD_LIGHT:Int,
+		SOFT_LIGHT:Int,
+		DIFFERENCE:Int,
+		EXCLUSION:Int,
+		HUE:Int,
+		SATURATION:Int,
+		COLOR:Int,
+		LUMINOSITY:Int
+	};
+
 	static var scaleModes: {
-        DEFAULT:Int,
-        LINEAR:Int,
-        NEAREST:Int
-    };
+		DEFAULT:Int,
+		LINEAR:Int,
+		NEAREST:Int
+	};
 
-    static var TextureCache:Array<Dynamic>;
-    static var FrameCache:Array<Dynamic>;
+	static var TextureCache:Array<Dynamic>;
+	static var FrameCache:Array<Dynamic>;
 
-    static var TextureCacheIdGenerator:Int;
+	static var TextureCacheIdGenerator:Int;
 
-    static function sayHello(type:Dynamic):Void;
+	static function sayHello(type:Dynamic):Void;
 }

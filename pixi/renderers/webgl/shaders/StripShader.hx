@@ -2,33 +2,33 @@ package pixi.renderers.webgl.shaders;
 
 @:native("PIXI.StripShader")
 extern class StripShader {
-	
+
 	/**
 	 * @class StripShader
 	 * @constructor
 	 * @param gl {WebGLContext} the current WebGL drawing context
 	 */
-	function new (gl:Dynamic);
-	
+	function new(gl:Dynamic);
+
 	/**
-     * @property gl
-     * @type WebGLContext
-     */
+	 * @property gl
+	 * @type WebGLContext
+	 */
 	var gl:Dynamic;
-	
+
 	/**
-     * @property {any} program - The WebGL program.
-     */
+	 * @property {any} program - The WebGL program.
+	 */
 	var program:Dynamic;
-	
+
 	/**
-     * @property {array} fragmentSrc - The fragment shader.
-     */
+	 * @property {array} fragmentSrc - The fragment shader.
+	 */
 	var fragmentSrc:Array<Dynamic>;
-	
+
 	/**
-     * @property {array} vertexSrc - The vertex shader
-     */
+	 * @property {array} vertexSrc - The vertex shader
+	 */
 	var vertexSrc:Array<Dynamic>;
 
 	/**
@@ -43,5 +43,5 @@ extern class StripShader {
 	 * @method destroy
 	 *
 	 */
-	function destroy():Void;	
+	function destroy():Void;
 }
