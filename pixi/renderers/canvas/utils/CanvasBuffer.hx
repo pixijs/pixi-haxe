@@ -1,7 +1,6 @@
 package pixi.renderers.canvas.utils;
 
-import js.html.CanvasRenderingContext2D;
-import js.html.CanvasElement;
+import pixi.DomDefinitions;
 
 @:native("PIXI.CanvasBuffer")
 extern class CanvasBuffer {

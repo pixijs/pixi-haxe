@@ -2,8 +2,7 @@ package pixi.textures;
 
 import pixi.geom.Matrix;
 import pixi.display.DisplayObject;
-import js.html.Image;
-import js.html.CanvasElement;
+import pixi.DomDefinitions;
 import pixi.renderers.canvas.CanvasRenderer;
 import pixi.renderers.webgl.WebGLRenderer;
 

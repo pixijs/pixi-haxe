@@ -1,6 +1,6 @@
 package pixi.utils;
 
-import js.html.DivElement;
+import pixi.DomDefinitions;
 
 @:native("Stats")
 extern class Stats {

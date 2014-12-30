@@ -1,6 +1,6 @@
 package pixi.textures;
 
-import js.html.CanvasElement;
+import pixi.DomDefinitions;
 import pixi.utils.EventTarget;
 
 @:native("PIXI.BaseTexture")

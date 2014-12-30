@@ -1,10 +1,9 @@
 package pixi.renderers.canvas;
 
 import pixi.utils.Detector.RenderingOptions;
-import js.html.CanvasRenderingContext2D;
-import js.html.CanvasElement;
 import pixi.display.Stage;
 import pixi.renderers.canvas.utils.CanvasMaskManager;
+import pixi.DomDefinitions;
 
 @:native("PIXI.CanvasRenderer")
 extern class CanvasRenderer implements IRenderer {
