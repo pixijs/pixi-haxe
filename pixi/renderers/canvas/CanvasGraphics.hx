@@ -1,6 +1,6 @@
 package pixi.renderers.canvas;
 
-import js.html.CanvasRenderingContext2D;
+import pixi.DomDefinitions;
 import pixi.primitives.Graphics;
 
 @:native("PIXI.CanvasGraphics")

@@ -1,8 +1,8 @@
 package pixi.utils;
 
-import js.html.Element;
-import pixi.renderers.webgl.WebGLRenderer;
+import pixi.DomDefinitions;
 import pixi.renderers.canvas.CanvasRenderer;
+import pixi.renderers.webgl.WebGLRenderer;
 
 @:native("PIXI")
 extern class Detector {

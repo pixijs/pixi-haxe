@@ -1,7 +1,6 @@
 package pixi.renderers;
-
-import js.html.CanvasElement;
 import pixi.display.Stage;
+import pixi.DomDefinitions;
 
 interface IRenderer {
 

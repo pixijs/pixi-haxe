@@ -1,8 +1,8 @@
 package pixi.renderers.canvas.utils;
 
-import js.html.CanvasElement;
-import pixi.textures.Texture;
 import pixi.display.Sprite;
+import pixi.DomDefinitions;
+import pixi.textures.Texture;
 
 @:native("PIXI.CanvasTinter")
 extern class CanvasTinter {

@@ -1,6 +1,6 @@
 package pixi.display;
 
-import js.html.Element;
+import pixi.DomDefinitions;
 import pixi.geom.Point;
 
 @:native("PIXI.Stage")

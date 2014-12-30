@@ -8,7 +8,7 @@ import pixi.renderers.webgl.utils.WebGLBlendModeManager;
 import pixi.renderers.webgl.utils.WebGLShaderManager;
 import pixi.utils.Event;
 import pixi.utils.Detector.RenderingOptions;
-import js.html.CanvasElement;
+import pixi.DomDefinitions;
 import pixi.textures.Texture;
 import pixi.geom.Point;
 import pixi.display.DisplayObject;

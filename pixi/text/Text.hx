@@ -1,8 +1,7 @@
 package pixi.text;
 
 import pixi.display.Sprite;
-import js.html.CanvasRenderingContext2D;
-import js.html.CanvasElement;
+import pixi.DomDefinitions;
 
 @:native("PIXI.Text")
 extern class Text extends Sprite {
