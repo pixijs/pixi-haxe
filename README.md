@@ -104,3 +104,7 @@ class Main {
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License. [![Analytics](https://ga-beacon.appspot.com/UA-31531781-2/haxe-pixi/)](https://github.com/igrigorik/ga-beacon)
 
 [pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+
+### Contributor Code of Conduct ###
+
+Code of Conduct is adapted from [Contributor Covenant](http://contributor-covenant.org/version/1/0/0/)
