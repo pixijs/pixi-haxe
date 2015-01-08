@@ -28,4 +28,65 @@ extern class Event {
 	 * @method stopImmediatePropagation
 	 */
 	function stopImmediatePropagation():Void;
+
+	/**
+     * Tracks the state of bubbling propagation. Do not
+     * set this directly, instead use `event.stopPropagation()`
+     *
+     * @property stopped
+     * @type Bool
+     * @private
+     * @readOnly
+     */
+	var stopped:Bool;
+
+	/**
+     * Tracks the state of sibling listener propagation. Do not
+     * set this directly, instead use `event.stopImmediatePropagation()`
+     *
+     * @property stoppedImmediate
+     * @type Bool
+     * @private
+     * @readOnly
+     */
+	var stoppedImmediate:Bool;
+
+	/**
+     * The original target the event triggered on.
+     *
+     * @property target
+     * @type Dynamic
+     * @readOnly
+     */
+	var target:Dynamic;
+
+	/**
+     * The string name of the event that this represents.
+     *
+     * @property type
+     * @type String
+     * @readOnly
+     */
+	var type:String;
+
+	/**
+     * The data that was passed in with this event.
+     *
+     * @property data
+     * @type Object
+     * @readOnly
+     */
+	var data:Dynamic;
+
+	//backwards compat with older version of events
+	var content:Dynamic;
+
+	/**
+     * The timestamp when the event occurred.
+     *
+     * @property timeStamp
+     * @type Number
+     * @readOnly
+     */
+	var timeStamp:Int;
 }

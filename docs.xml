@@ -17725,6 +17725,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<m n=":final"/>
 		</meta>
 	</class>
+	<typedef path="pixi.CanvasElement" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions">
+		<c path="js.html.CanvasElement"/>
+		<haxe_doc>* Because macros cannot access the JS package, put
+ * a bunch of dummy typedefs so compilation will go through.</haxe_doc>
+	</typedef>
+	<typedef path="pixi.CanvasRenderingContext2D" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions"><c path="js.html.CanvasRenderingContext2D"/></typedef>
+	<typedef path="pixi.Element" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions"><c path="js.html.Element"/></typedef>
+	<typedef path="pixi.Image" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions"><c path="js.html.Image"/></typedef>
+	<typedef path="pixi.DivElement" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions"><c path="js.html.DivElement"/></typedef>
 	<class path="pixi.InteractionData" params="" file="pixi/InteractionData.hx" extern="1">
 		<global public="1">
 			<c path="pixi.geom.Point"/>
@@ -18804,7 +18813,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</setBackgroundColor>
 		<setInteractionDelegate public="1" set="method">
 			<f a="domElement">
-				<c path="js.html.Element"/>
+				<t path="pixi.Element"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Sets another DOM element which can receive mouse/touch interactions instead of the default Canvas element.
@@ -21173,7 +21182,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
 	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1">
-		<view public="1"><c path="js.html.CanvasElement"/></view>
+		<view public="1"><t path="pixi.CanvasElement"/></view>
 		<render public="1" set="method"><f a="stage">
 	<c path="pixi.display.Stage"/>
 	<x path="Void"/>
@@ -21183,12 +21192,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.renderers.canvas.CanvasGraphics" params="" file="pixi/renderers/canvas/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.primitives.Graphics"/>
-	<c path="js.html.CanvasRenderingContext2D"/>
+	<t path="pixi.CanvasRenderingContext2D"/>
 	<x path="Void"/>
 </f></renderGraphics>
 		<renderGraphicsMask public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.primitives.Graphics"/>
-	<c path="js.html.CanvasRenderingContext2D"/>
+	<t path="pixi.CanvasRenderingContext2D"/>
 	<x path="Void"/>
 </f></renderGraphicsMask>
 		<new public="1" set="method">
@@ -21249,14 +21258,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @default 600</haxe_doc>
 		</height>
 		<view public="1">
-			<c path="js.html.CanvasElement"/>
+			<t path="pixi.CanvasElement"/>
 			<haxe_doc>* The canvas element that everything is drawn to
 	 *
 	 * @property view
 	 * @type CanvasElement</haxe_doc>
 		</view>
 		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
+			<t path="pixi.CanvasRenderingContext2D"/>
 			<haxe_doc>* The canvas 2d context that everything is drawn with
 	 * @property context
 	 * @type CanvasRenderingContext2D 2d Context</haxe_doc>
@@ -21352,14 +21361,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @type Float</haxe_doc>
 		</height>
 		<canvas public="1">
-			<c path="js.html.CanvasElement"/>
+			<t path="pixi.CanvasElement"/>
 			<haxe_doc>* The Canvas object that belongs to this CanvasBuffer.
 	 *
 	 * @property canvas
 	 * @type HTMLCanvasElement</haxe_doc>
 		</canvas>
 		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
+			<t path="pixi.CanvasRenderingContext2D"/>
 			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
 	 *
 	 * @property context
@@ -21442,7 +21451,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
 				<x path="Int"/>
-				<c path="js.html.CanvasElement"/>
+				<t path="pixi.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture using the "multiply" operation
@@ -21455,7 +21464,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
 				<x path="Int"/>
-				<c path="js.html.CanvasElement"/>
+				<t path="pixi.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture using the "overlay" operation
@@ -21468,7 +21477,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="texture:color:canvas">
 				<c path="pixi.textures.Texture"/>
 				<x path="Int"/>
-				<c path="js.html.CanvasElement"/>
+				<t path="pixi.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Tint a texture pixel per pixel
@@ -21545,7 +21554,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @default 600</haxe_doc>
 		</height>
 		<view public="1">
-			<c path="js.html.CanvasElement"/>
+			<t path="pixi.CanvasElement"/>
 			<haxe_doc>* The canvas element that everything is drawn to
 	 *
 	 * @property view
@@ -22983,13 +22992,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well</haxe_doc>
 		</destroy>
 		<canvas public="1">
-			<c path="js.html.CanvasElement"/>
+			<t path="pixi.CanvasElement"/>
 			<haxe_doc>* The canvas element that everything is drawn to
 	 * @property canvas
 	 * @type CanvasElement</haxe_doc>
 		</canvas>
 		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
+			<t path="pixi.CanvasRenderingContext2D"/>
 			<haxe_doc>* The canvas 2d context that everything is drawn with
 	 * @property context
 	 * @type CanvasRenderingContext2D</haxe_doc>
@@ -23090,7 +23099,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</fromImage>
 		<fromCanvas public="1" set="method" static="1">
 			<f a="canvas:?scaleMode">
-				<c path="js.html.CanvasElement"/>
+				<t path="pixi.CanvasElement"/>
 				<x path="Int"/>
 				<c path="pixi.textures.BaseTexture"/>
 			</f>
@@ -23373,14 +23382,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {String} A base64 encoded string of the texture.</haxe_doc>
 		</getBase64>
 		<getCanvas public="1" set="method">
-			<f a=""><c path="js.html.CanvasElement"/></f>
+			<f a=""><t path="pixi.CanvasElement"/></f>
 			<haxe_doc>* Creates a Canvas element, renders this RenderTexture to it and then returns it.
 	 *
 	 * @method getCanvas
 	 * @return {CanvasElement} A Canvas element with the texture rendered on.</haxe_doc>
 		</getCanvas>
 		<getImage public="1" set="method">
-			<f a=""><c path="js.html.Image"/></f>
+			<f a=""><t path="pixi.Image"/></f>
 			<haxe_doc>* Will return a HTML Image of the texture
 	 *
 	 * @method getImage
@@ -23588,7 +23597,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<typedef path="pixi.utils.RenderingOptions" params="" file="pixi/utils/Detector.hx" module="pixi.utils.Detector"><a>
 	<view>
-		<c path="js.html.Element"/>
+		<t path="pixi.Element"/>
 		<meta><m n=":optional"/></meta>
 	</view>
 	<transparent>
@@ -23627,6 +23636,59 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @method stopImmediatePropagation</haxe_doc>
 		</stopImmediatePropagation>
+		<stopped public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Tracks the state of bubbling propagation. Do not
+     * set this directly, instead use `event.stopPropagation()`
+     *
+     * @property stopped
+     * @type Bool
+     * @private
+     * @readOnly</haxe_doc>
+		</stopped>
+		<stoppedImmediate public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Tracks the state of sibling listener propagation. Do not
+     * set this directly, instead use `event.stopImmediatePropagation()`
+     *
+     * @property stoppedImmediate
+     * @type Bool
+     * @private
+     * @readOnly</haxe_doc>
+		</stoppedImmediate>
+		<target public="1">
+			<d/>
+			<haxe_doc>* The original target the event triggered on.
+     *
+     * @property target
+     * @type Dynamic
+     * @readOnly</haxe_doc>
+		</target>
+		<type public="1">
+			<c path="String"/>
+			<haxe_doc>* The string name of the event that this represents.
+     *
+     * @property type
+     * @type String
+     * @readOnly</haxe_doc>
+		</type>
+		<data public="1">
+			<d/>
+			<haxe_doc>* The data that was passed in with this event.
+     *
+     * @property data
+     * @type Object
+     * @readOnly</haxe_doc>
+		</data>
+		<content public="1"><d/></content>
+		<timeStamp public="1">
+			<x path="Int"/>
+			<haxe_doc>* The timestamp when the event occurred.
+     *
+     * @property timeStamp
+     * @type Number
+     * @readOnly</haxe_doc>
+		</timeStamp>
 		<new public="1" set="method">
 			<f a="target:name:?data">
 				<d/>
@@ -23648,7 +23710,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.utils.Polyk" params="" file="pixi/utils/Polyk.hx" extern="1"><meta><m n=":native"><e>"PolyK"</e></m></meta></class>
 	<class path="pixi.utils.Stats" params="" file="pixi/utils/Stats.hx" extern="1">
 		<domElement public="1" set="null">
-			<c path="js.html.DivElement"/>
+			<t path="pixi.DivElement"/>
 			<haxe_doc>* Stats DOM element
 	 * @property domElement
 	 * @type DivElement</haxe_doc>
