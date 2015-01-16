@@ -1,6 +1,6 @@
 package pixi.plugins.particles.cloudkid;
 
-@:native("cloudkid:AnimatedParticle")
+@:native("cloudkid.AnimatedParticle")
 extern class AnimatedParticle {
 
 	/**

@@ -1,6 +1,6 @@
 package pixi.plugins.particles.cloudkid;
 
-@:native("pixi.plugins.particles.cloudkid.Emitter")
+@:native("cloudkid.Emitter")
 extern class Emitter {
 		 
 	/**
