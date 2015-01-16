@@ -1,6 +1,6 @@
-package cloudkid;
+package pixi.plugins.particles.cloudkid;
 
-@:native("cloudkid:Particle")
+@:native("pixi.plugins.particles.cloudkid:Particle")
 extern class Particle {
 
 	/**
@@ -96,7 +96,7 @@ extern class Particle {
 	*	@constructor
 	*	@param {Emitter} emitter The emitter that controls this particle.
 	*/
-	function new(emitter : cloudkid.Emitter):Void;
+	function new(emitter : pixi.plugins.particles.cloudkid.Emitter):Void;
 
 	/**
 	*	Sets the texture for the particle. This can be overridden to allow

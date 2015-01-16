@@ -1,4 +1,4 @@
-package cloudkid;
+package pixi.plugins.particles.cloudkid;
 
 @:native("cloudkid:AnimatedParticle")
 extern class AnimatedParticle {
@@ -10,7 +10,7 @@ extern class AnimatedParticle {
 	*	@constructor
 	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
 	*/
-	function new(e : Emitter ) : Void;
+	function new(e : pixi.plugins.particles.cloudkid.Emitter ) : Void;
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to

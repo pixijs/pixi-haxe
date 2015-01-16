@@ -1,6 +1,6 @@
-package cloudkid;
+package pixi.plugins.particles.cloudkid;
 
-@:native("cloudkid.Emitter")
+@:native("pixi.plugins.particles.cloudkid.Emitter")
 extern class Emitter {
 		 
 	/**
@@ -289,7 +289,7 @@ extern class Emitter {
 	*	@method recycle
 	*	@param {Particle} particle The particle to recycle.
 	*/
-	 function recycle( particle : cloudkid.Particle ) : Void;
+	 function recycle( particle : pixi.plugins.particles.cloudkid.Particle ) : Void;
 
 	/**
 	*	Prevents emitter position interpolation in the next update.

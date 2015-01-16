@@ -1,4 +1,4 @@
-package cloudkid;
+package pixi.plugins.particles.cloudkid;
 
 @:native("cloudkid:PathParticle")
 extern class PathParticle {
