@@ -20797,6 +20797,648 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
+	<class path="pixi.plugins.particles.cloudkid.AnimatedParticle" params="" file="pixi/plugins/particles/cloudkid/AnimatedParticle.hx" extern="1">
+		<init public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Initializes the particle for use, based on the properties that have to
+	*	have been set already on the particle.
+	*	@method init</haxe_doc>
+		</init>
+		<applyArt public="1" set="method">
+			<f a="art">
+				<c path="Array"><c path="pixi.textures.Texture"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[*	Sets the textures for the particle.
+	*	@method applyArt
+	*	@param {Array<pixi.textures.Texture>} art An array of pixi.textures.Texture objects for this animated particle.]]></haxe_doc>
+		</applyArt>
+		<update public="1" set="method">
+			<f a="delta">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Updates the particle.
+	*	@method update
+	*	@param {Float} delta Time elapsed since the previous frame, in __seconds__.</haxe_doc>
+		</update>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Destroys the particle, removing references and preventing future use.
+	*	@method destroy</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="e">
+				<c path="pixi.plugins.particles.cloudkid.Emitter"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	An individual particle image with an animation. While this class may be functional, it
+	*	has not gotten thorough testing or examples yet, and is not considered to be release ready.
+	*	@class AnimatedParticle
+	*	@constructor
+	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"cloudkid.AnimatedParticle"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.particles.cloudkid.Emitter" params="" file="pixi/plugins/particles/cloudkid/Emitter.hx" extern="1">
+		<_posChanged public="1">
+			<x path="Bool"/>
+			<haxe_doc>*	If either ownerPos or spawnPos has changed since the previous update.
+	*	@property {Bool} _posChanged</haxe_doc>
+		</_posChanged>
+		<acceleration public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	Acceleration to apply to particles. Using this disables
+	*	any interpolation of particle speed. If the particles do
+	*	not have a rotation speed, then they will be rotated to
+	*	match the direction of travel.
+	*	@property {pixi.geom.Point} acceleration
+	*	@default null</haxe_doc>
+		</acceleration>
+		<addAtBack public="1">
+			<x path="Bool"/>
+			<haxe_doc>*	If particles should be added at the back of the display list instead of the front.
+	*	@property {Bool} addAtBack</haxe_doc>
+		</addAtBack>
+		<angleStart public="1">
+			<x path="Float"/>
+			<haxe_doc>*	Angle at which to start spawning particles in a burst.
+	*	@property {Float} angleStart
+	*	@default 0</haxe_doc>
+		</angleStart>
+		<customEase public="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc><![CDATA[*	An easing function for nonlinear interpolation of values. Accepts a single
+	*	parameter of time as a value from 0-1, inclusive. Expected outputs are values
+	*	from 0-1, inclusive.
+	*	@property {Void->Void} customEase]]></haxe_doc>
+		</customEase>
+		<emit public="1"><x path="Bool"/></emit>
+		<emitterLife public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The amount of time in seconds to emit for before setting emit to false.
+	*	A value of -1 is an unlimited amount of time.
+	*	@property {Float} emitterLifetime
+	*	@default -1</haxe_doc>
+		</emitterLife>
+		<endAlpha public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The ending alpha of all particles.
+	*	@property {Float} endAlpha
+	*	@default 1</haxe_doc>
+		</endAlpha>
+		<endColor public="1">
+			<c path="Array"><x path="Int"/></c>
+			<haxe_doc><![CDATA[*	The ending color of all particles, as red, green, and blue uints from 0-255.
+	*	@property {Array<Int>} endColor]]></haxe_doc>
+		</endColor>
+		<endScale public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The ending scale of all particles.
+	*	@property {Float} endScale
+	*	@default 1</haxe_doc>
+		</endScale>
+		<endSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The ending speed of all particles.
+	*	@property {Float} endSpeed
+	*	@default 0</haxe_doc>
+		</endSpeed>
+		<extraData public="1">
+			<d/>
+			<haxe_doc>*	Extra data for use in custom particles. The emitter doesn't look inside, but
+	 *	passes it on to the particle to use in init().
+	 *	@property {Dynamic} extraData</haxe_doc>
+		</extraData>
+		<frequency public="1">
+			<x path="Float"/>
+			<haxe_doc>*	Time between particle spawns in seconds.
+	*	@property {Float} frequency</haxe_doc>
+		</frequency>
+		<maxLifetime public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The maximum lifetime for a particle, in seconds.
+	*	@property {Float} maxLifetime</haxe_doc>
+		</maxLifetime>
+		<maxParticles public="1">
+			<x path="Int"/>
+			<haxe_doc>*	Maximum number of particles to keep alive at a time. If this limit
+	*	is reached, no more particles will spawn until some have died.
+	*	@property {Int} maxParticles
+	*	@default 1000</haxe_doc>
+		</maxParticles>
+		<maxRotationSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The maximum start rotation for a particle, in degrees. This value
+	*	is ignored if the spawn type is "burst" or "arc".
+	*	@property {Float} maxStartRotation</haxe_doc>
+		</maxRotationSpeed>
+		<maxStartRotation public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The maximum rotation speed for a particle, in degrees per second.
+	*	This only visually spins the particle, it does not change direction of movement.
+	*	@property {Float} maxRotationSpeed</haxe_doc>
+		</maxStartRotation>
+		<minimumScaleMultiplier public="1">
+			<x path="Float"/>
+			<haxe_doc>*	A minimum multiplier for the scale of a particle at both start and
+	*	end. A value between minimumScaleMultiplier and 1 is randomly generated
+	*	and multiplied with startScale and endScale to provide the actual
+	*	startScale and endScale for each particle.
+	*	@property {Float} minimumScaleMultiplier
+	*	@default 1</haxe_doc>
+		</minimumScaleMultiplier>
+		<minLifetime public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The minimum lifetime for a particle, in seconds.
+	*	@property {Float} minLifetime</haxe_doc>
+		</minLifetime>
+		<minRotationSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The minimum rotation speed for a particle, in degrees per second.
+	*	This only visually spins the particle, it does not change direction of movement.
+	*	@property {Float} minRotationSpeed</haxe_doc>
+		</minRotationSpeed>
+		<ownerPos public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	The world position of the emitter's owner, to add spawnPos to when
+	*	spawning particles. To change this, use updateSpawnOrigin().
+	*	@property {pixi.geom.Point} ownerPos
+	*	@default {x:0, y:0}
+	*	@readOnly</haxe_doc>
+		</ownerPos>
+		<parent public="1">
+			<c path="pixi.display.DisplayObjectContainer"/>
+			<haxe_doc>*	The display object to add particles to.
+	*	@property {pixi.display.DisplayObjectContainer} parent</haxe_doc>
+		</parent>
+		<particleBlendMode public="1">
+			<x path="Int"/>
+			<haxe_doc>*	The blend mode for all particles, as named by PIXI.blendModes.
+	*	@property {Int} particleBlendMode</haxe_doc>
+		</particleBlendMode>
+		<particleImage public="1">
+			<c path="Array"><c path="pixi.textures.Texture"/></c>
+			<haxe_doc><![CDATA[*	An array of PIXI Texture objects.
+	*	@property {Array<pixi.textures.Texture>} particleImages]]></haxe_doc>
+		</particleImage>
+		<particleSpacing public="1">
+			<x path="Float"/>
+			<haxe_doc>*	Spacing between particles in a burst. 0 gives a random angle for each particle.
+	*	@property {Float} particleSpacing
+	*	@default 0</haxe_doc>
+		</particleSpacing>
+		<particlePerWave public="1">
+			<x path="Int"/>
+			<haxe_doc>*	Float of particles to spawn each wave in a burst.
+	*	@property {int} particlesPerWave
+	*	@default 1</haxe_doc>
+		</particlePerWave>
+		<rotation public="1">
+			<x path="Float"/>
+			<haxe_doc>*	Rotation of the emitter or emitter's owner in degrees. This is added to
+	*	the calculated spawn angle.
+	*	To change this, use rotate().
+	*	@property {Float} rotation
+	*	@default 0
+	*	@readOnly</haxe_doc>
+		</rotation>
+		<spawnCircle public="1">
+			<c path="pixi.geom.Circle"/>
+			<haxe_doc>*	A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
+	*	@property {pixi.geom.Circle} spawnCircle</haxe_doc>
+		</spawnCircle>
+		<spawnPos public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	Position at which to spawn particles, relative to the emitter's owner's origin.
+	*	For example, the flames of a rocket travelling right might have a spawnPos
+	*	of {x:-50, y:0}.
+	*	to spawn at the rear of the rocket.
+	*	To change this, use updateSpawnPos().
+	*	@property {pixi.geom.Point} spawnPos
+	*	@readOnly</haxe_doc>
+		</spawnPos>
+		<spawnRect public="1">
+			<c path="pixi.geom.Rectangle"/>
+			<haxe_doc>*	A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
+	*	@property {pixi.geom.Rectangle} spawnRect</haxe_doc>
+		</spawnRect>
+		<spawnType public="1">
+			<c path="String"/>
+			<haxe_doc>*	How the particles will be spawned. Valid types are "point", "rectangle",
+	*	"circle", "burst".
+	*	@property {String} spawnType
+	*	@readOnly</haxe_doc>
+		</spawnType>
+		<startAlpha public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The starting alpha of all particles.
+	*	@property {Float} startAlpha
+	*	@default 1</haxe_doc>
+		</startAlpha>
+		<startColor public="1"><c path="Array"><x path="Int"/></c></startColor>
+		<startScale public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The starting scale of all particles.
+	*	@property {Float} startScale
+	*	@default 1</haxe_doc>
+		</startScale>
+		<startSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The starting speed of all particles.
+	*	@property {Float} startSpeed
+	*	@default 0</haxe_doc>
+		</startSpeed>
+		<cleanup public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Kills all active particles immediately.
+	*	@method cleanup</haxe_doc>
+		</cleanup>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Destroys the emitter and all of its particles.
+	*	@method destroy</haxe_doc>
+		</destroy>
+		<init public="1" set="method">
+			<f a="particleImages:config">
+				<c path="Array"><c path="pixi.textures.Texture"/></c>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[*	Sets up the emitter based on the config settings.
+	*	@method init
+	*	@param {Array<pixi.textures.Texture>} particleImages A texture or array of textures to use for the particles.
+	*	@param {Dynamic} config A configuration object containing settings for the emitter.]]></haxe_doc>
+		</init>
+		<recycle public="1" set="method">
+			<f a="particle">
+				<c path="pixi.plugins.particles.cloudkid.Particle"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Recycles an individual particle.
+	*	@method recycle
+	*	@param {Particle} particle The particle to recycle.</haxe_doc>
+		</recycle>
+		<resetPositionTracking public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Prevents emitter position interpolation in the next update.
+	*	This should be used if you made a major position change of your emitter's owner
+	*	that was not normal movement.
+	*	@method resetPositionTracking</haxe_doc>
+		</resetPositionTracking>
+		<rotate public="1" set="method">
+			<f a="newRot">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Sets the rotation of the emitter to a new value.
+	*	@method rotate
+	*	@param {Float} newRot The new rotation, in degrees.</haxe_doc>
+		</rotate>
+		<update public="1" set="method">
+			<f a="delta">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Updates all particles spawned by this emitter and emits new ones.
+	*	@method update
+	*	@param {Float} delta Time elapsed since the previous frame, in __seconds__.</haxe_doc>
+		</update>
+		<updateOwnerPos public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Changes the position of the emitter's owner. You should call this if you are adding
+	*	particles to the world display object that your emitter's owner is moving around in.
+	*	@method updateOwnerPos
+	*	@param {Float} x The new x value of the emitter's owner.
+	*	@param {Float} y The new y value of the emitter's owner.</haxe_doc>
+		</updateOwnerPos>
+		<updateSpawnPos public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Changes the spawn position of the emitter.
+	*	@method updateSpawnPos
+	*	@param {Float} x The new x value of the spawn position for the emitter.
+	*	@param {Float} y The new y value of the spawn position for the emitter.</haxe_doc>
+		</updateSpawnPos>
+		<new public="1" set="method">
+			<f a="parent:?particleImages:?config">
+				<c path="pixi.display.DisplayObjectContainer"/>
+				<c path="Array"><c path="pixi.textures.Texture"/></c>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[*	A particle emitter.
+	*	@class Emitter
+	*	@constructor
+	*	@param {pixi.display.DisplayObjectContainer} particleParent The display object to add the
+	*														particles to.
+	*	@param {Array<pixi.textures.Texture>} [particleImages] A texture or array of textures to use
+	*												for the particles.
+	*	@param {Dynamic} [config] A configuration object containing settings for the emitter.]]></haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"cloudkid.Emitter"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.particles.cloudkid.Particle" params="" file="pixi/plugins/particles/cloudkid/Particle.hx" extern="1">
+		<acceleration public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	Acceleration to apply to the particle.
+	*	@property {pixi.geom.Point} acceleration</haxe_doc>
+		</acceleration>
+		<age public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The current age of the particle, in seconds.
+	*	@property {Float} age</haxe_doc>
+		</age>
+		<ease public="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc><![CDATA[*	A simple easing function to be applied to all properties that
+	*	are being interpolated.
+	*	@property {Void->Void} ease]]></haxe_doc>
+		</ease>
+		<emitter public="1">
+			<c path="pixi.plugins.particles.cloudkid.Emitter"/>
+			<haxe_doc>*	The emitter that controls this particle.
+	*	@property {Emitter} emitter</haxe_doc>
+		</emitter>
+		<endAlpha public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The alpha of the particle at the end of its life.
+	*	@property {Float} endAlpha</haxe_doc>
+		</endAlpha>
+		<endColor public="1"><c path="Array"><x path="Int"/></c></endColor>
+		<endScale public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The scale of the particle at the start of its life.
+	*	@property {Float} endScale</haxe_doc>
+		</endScale>
+		<endSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The speed of the particle at the end of its life.
+	*	@property {Number} endSpeed</haxe_doc>
+		</endSpeed>
+		<extraData public="1">
+			<d/>
+			<haxe_doc>*	Extra data that the emitter passes along for custom particles.
+	*	@property {Dynamic} extraData</haxe_doc>
+		</extraData>
+		<maxLife public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The maximum lifetime of this particle, in seconds.
+	*	@property {Float} maxLife</haxe_doc>
+		</maxLife>
+		<startAlpha public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The alpha of the particle at the start of its life.
+	*	@property {Float} startAlpha</haxe_doc>
+		</startAlpha>
+		<startColor public="1">
+			<c path="Array"><x path="Int"/></c>
+			<haxe_doc><![CDATA[*	The tint of the particle at the start of its life.
+	*	@property {Array<Int>} startColor]]></haxe_doc>
+		</startColor>
+		<startScale public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The scale of the particle at the start of its life.
+	*	@property {Float} startScale</haxe_doc>
+		</startScale>
+		<startSpeed public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The speed of the particle at the start of its life.
+	*	@property {Float} startSpeed</haxe_doc>
+		</startSpeed>
+		<velocity public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	The velocity of the particle. Speed may change, but the angle also
+	*	contained in velocity is constant.
+	*	@property {pixi.geom.Point} velocity</haxe_doc>
+		</velocity>
+		<applyArt public="1" set="method">
+			<f a="art">
+				<c path="pixi.textures.Texture"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Sets the texture for the particle. This can be overridden to allow
+	*	for an animated particle.
+	*	@method applyArt
+	*	@param {pixi.textures.Texture} art The texture to set.</haxe_doc>
+		</applyArt>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Destroys the particle, removing references and preventing future use.
+	*	@method destroy</haxe_doc>
+		</destroy>
+		<init public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Initializes the particle for use, based on the properties that have to
+	*	have been set already on the particle.
+	*	@method init</haxe_doc>
+		</init>
+		<kill public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Kills the particle, removing it from the display list
+	*	and telling the emitter to recycle it.
+	*	@method kill</haxe_doc>
+		</kill>
+		<update public="1" set="method">
+			<f a="delta">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>*	Updates the particle.
+	*	@method update
+	*	@param {Float} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Float} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.</haxe_doc>
+		</update>
+		<new public="1" set="method">
+			<f a="emitter">
+				<c path="pixi.plugins.particles.cloudkid.Emitter"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	@class Particle
+	*	@constructor
+	*	@param {Emitter} emitter The emitter that controls this particle.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"cloudkid.Particle"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.particles.cloudkid.ParticleUtils" params="" file="pixi/plugins/particles/cloudkid/ParticleUtils.hx" extern="1">
+		<combineRGBComponents public="1" set="method" static="1">
+			<f a="r:g:b">
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>*	Combines separate color components (0-255) into a single uint color.
+	*	@method combineRGBComponents
+	*	@param {Int} r The red value of the color
+	*	@param {Int} g The green value of the color
+	*	@param {Int} b The blue value of the color
+	*	@return {Int} The color in the form of 0xRRGGBB
+	*	@static</haxe_doc>
+		</combineRGBComponents>
+		<generateEase public="1" set="method" static="1">
+			<f a="segments">
+				<c path="Array"><d/></c>
+				<f a="">
+					<x path="Float"/>
+					<x path="Float"/>
+				</f>
+			</f>
+			<haxe_doc><![CDATA[*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
+	*	by the related tool at http://www.greensock.com/customease/.
+	*	@method generateEase
+	*	@param {Array<Dynamic>} segments An array of segments, as created by
+	*	http://www.greensock.com/customease/.
+	*	@return {Float->Float} A function that calculates the percentage of change at
+	*						a given point in time (0-1 inclusive).
+	*	@static]]></haxe_doc>
+		</generateEase>
+		<getBlendMode public="1" set="method" static="1">
+			<f a="name">
+				<c path="String"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>*	Gets a blend mode, ensuring that it is valid.
+	*	@method getBlendMode
+	*	@param {String} name The name of the blend mode to get.
+	*	@return {Int} The blend mode as specified in the PIXI.blendModes enumeration.
+	*	@static</haxe_doc>
+		</getBlendMode>
+		<hexToRGB public="1" set="method" static="1">
+			<f a="color:output">
+				<c path="String"/>
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc><![CDATA[*	Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+	*	"AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+	*	[r, g, b, (a)].
+	*	@method hexToRGB
+	*	@param {String} color The input color string.
+	*	@param {Array<Int>} output An array to put the output in. If omitted, a new array is created.
+	*	@return {Array<Int>} The array of numeric color values.
+	*	@static]]></haxe_doc>
+		</hexToRGB>
+		<length public="1" set="method" static="1">
+			<f a="point">
+				<c path="pixi.geom.Point"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>* Returns the length (or magnitude) of this point.
+	 * @method length
+	 * @static
+	 * @param {pixi.geom.Point} point The point to measure length
+	 * @return {Float} The length of this point.</haxe_doc>
+		</length>
+		<normalize public="1" set="method" static="1">
+			<f a="point">
+				<c path="pixi.geom.Point"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Reduces the point to a length of 1.
+	 * @method normalize
+	 * @static
+	 * @param {pixi.geom.Point} point The point to normalize</haxe_doc>
+		</normalize>
+		<rotatePoint public="1" set="method" static="1">
+			<f a="angle:p">
+				<x path="Float"/>
+				<c path="pixi.geom.Point"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	Rotates a point by a given angle.
+	*	@method rotatePoint
+	*	@param {Float} angle The angle to rotate by in degrees
+	*	@param {pixi.geom.Point} p The point to rotate around 0,0.
+	*	@static</haxe_doc>
+		</rotatePoint>
+		<scaleBy public="1" set="method" static="1">
+			<f a="point:value">
+				<c path="pixi.geom.Point"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Multiplies the x and y values of this point by a value.
+	 * @method scaleBy
+	 * @static
+	 * @param {pixi.geom.Point} point The point to scaleBy
+	 * @param value {Float} The value to scale by.</haxe_doc>
+		</scaleBy>
+		<meta><m n=":native"><e>"cloudkid.ParticleUtils"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.particles.cloudkid.PathParticle" params="" file="pixi/plugins/particles/cloudkid/PathParticle.hx" extern="1">
+		<path public="1">
+			<f a="">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc><![CDATA[*	The function representing the path the particle should take.
+	*	@property {Float->Float} path]]></haxe_doc>
+		</path>
+		<initialRotation public="1">
+			<x path="Float"/>
+			<haxe_doc>*	The initial rotation in degrees of the particle, because the direction of the path
+	*	is based on that.
+	*	@property {Float} initialRotation</haxe_doc>
+		</initialRotation>
+		<initialPosition public="1">
+			<c path="pixi.geom.Point"/>
+			<haxe_doc>*	The initial position of the particle, as all path movement is added to that.
+	*	@property {pixi.geom.Point} initialPosition</haxe_doc>
+		</initialPosition>
+		<movement public="1">
+			<x path="Float"/>
+			<haxe_doc>*	Total single directional movement, due to speed.
+	*	@property {Float} movement</haxe_doc>
+		</movement>
+		<init public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Initializes the particle for use, based on the properties that have to
+	*	have been set already on the particle.
+	*	@method init</haxe_doc>
+		</init>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*	Destroys the particle, removing references and preventing future use.
+	*	@method destroy</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="emitter">
+				<c path="pixi.plugins.particles.cloudkid.Emitter"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*	An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
+	*	"5x + 3".
+	*	To use this class, the particle config must have a "path" string in the
+	*	"extraData" parameter. This string should have "x" in it to represent movement (from the
+	*	speed settings of the particle). It may have numbers, parentheses, the four basic
+	*	operations, and the following Math functions or properties (without the preceding "Math."):
+	*	"pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
+	*	"acos", "atan", "atan2", "log".
+	*	The overall movement of the particle and the expression value become x and y positions for
+	*	the particle, respectively. The final position is rotated by the spawn rotation/angle of
+	*	the particle.
+	*
+	*	Some example paths:
+	*
+	*		"sin(x/10) * 20" // A sine wave path.
+	*		"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
+	*		"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
+	*
+	*	@class PathParticle
+	*	@constructor
+	*	@param {Emitter} emitter The emitter that controls this PathParticle.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"cloudkid.PathParticle"</e></m></meta>
+	</class>
 	<class path="pixi.primitives.Graphics" params="" file="pixi/primitives/Graphics.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>
 		<POLY public="1" static="1"><x path="Int"/></POLY>

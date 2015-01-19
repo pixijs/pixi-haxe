@@ -7,26 +7,26 @@ extern class PathParticle {
 	*	The function representing the path the particle should take.
 	*	@property {Float->Float} path
 	*/
-	var path: Float->Float;
+	var path:Float -> Float;
 
 	/**
 	*	The initial rotation in degrees of the particle, because the direction of the path
 	*	is based on that.
 	*	@property {Float} initialRotation
 	*/
-	var initialRotation : Float;
+	var initialRotation:Float;
 
 	/**
 	*	The initial position of the particle, as all path movement is added to that.
 	*	@property {pixi.geom.Point} initialPosition
 	*/
-	var initialPosition : pixi.geom.Point;
+	var initialPosition:pixi.geom.Point;
 
 	/**
 	*	Total single directional movement, due to speed.
 	*	@property {Float} movement
 	*/
-	var movement : Float;
+	var movement:Float;
 
 	/**
 	*	An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
@@ -51,19 +51,18 @@ extern class PathParticle {
 	*	@constructor
 	*	@param {Emitter} emitter The emitter that controls this PathParticle.
 	*/
-	function new( Emitter ) : Void;
+	function new(emitter:Emitter):Void;
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
 	*	have been set already on the particle.
 	*	@method init
 	*/
-	function init() : Void;
+	function init():Void;
 
 	/**
 	*	Destroys the particle, removing references and preventing future use.
 	*	@method destroy
 	*/
-	function destroy() : Void;
-	
+	function destroy():Void;
 }
