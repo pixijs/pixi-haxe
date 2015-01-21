@@ -1,11 +1,9 @@
 package samples.nape;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.textures.Texture;
-import pixi.utils.Detector;
-import js.Browser;
 import haxe.Timer;
 
 import nape.geom.Vec2;
@@ -16,10 +14,7 @@ import nape.shape.Polygon;
 import nape.space.Space;
 import nape.phys.Material;
 
-class Main {
-
-	var _renderer:IRenderer;
-	var _stage:Stage;
+class Main extends Application {
 
 	var _floor:Body;
 	var _space:Space;
@@ -27,18 +22,35 @@ class Main {
 	var _pballs:Array<Body>;
 
 	public function new() {
-		_stage = new Stage(0x00FFFF);
-
-		_renderer = Detector.autoDetectRenderer(800, 600);
-		Browser.document.body.appendChild(_renderer.view);
+		super();
+		_init();
 
 		_balls = [];
 		_pballs = [];
 		_setUpPhysics();
+		onUpdate = _onUpdate;
 		var timer:Timer = new Timer(1000);
 		timer.run = _addBall;
+		_addBall();
+	}
 
-		Browser.window.requestAnimationFrame(cast animate);
+	function _init() {
+		stats = true;
+		backgroundColor = 0x00FFFF;
+		resize = false;
+		width = 800;
+		height = 600;
+		super.start();
+	}
+
+	function _onUpdate(elapsedTime:Float) {
+		_space.step(1 / 60);
+
+		for(i in 0 ... _pballs.length) {
+			_balls[i].position.x = _pballs[i].position.x;
+			_balls[i].position.y = _pballs[i].position.y;
+			_balls[i].rotation = _pballs[i].rotation;
+		}
 	}
 
 	function _setUpPhysics() {
@@ -66,20 +78,6 @@ class Main {
 		pball.setShapeMaterials(Material.rubber());
 		pball.space = _space;
 		_pballs.push(pball);
-	}
-
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
-
-		_space.step(1 / 60);
-
-		for(i in 0 ... _pballs.length) {
-			_balls[i].position.x = _pballs[i].position.x;
-			_balls[i].position.y = _pballs[i].position.y;
-			_balls[i].rotation = _pballs[i].rotation;
-		}
-
-		_renderer.render(_stage);
 	}
 
 	static function main() {

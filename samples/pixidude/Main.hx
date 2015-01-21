@@ -1,19 +1,15 @@
 package samples.pixidude;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.InteractionData;
 import pixi.display.Sprite;
 import pixi.display.Stage;
 import pixi.spine.Spine;
-import pixi.utils.Detector;
 import pixi.loaders.AssetLoader;
-import js.Browser;
 
-class Main {
+class Main extends Application {
 
 	var _loader:AssetLoader;
-	var _renderer:IRenderer;
-	var _stage:Stage;
 
 	var _pixie:Spine;
 
@@ -24,12 +20,8 @@ class Main {
 	var _foreground2:Sprite;
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
-		_renderer = Detector.autoDetectRenderer(800, 600);
-		_renderer.view.style.display = "block";
-		_renderer.view.style.width = "100%";
-		_renderer.view.style.height = "100%";
-		Browser.document.body.appendChild(_renderer.view);
+		super();
+		_init();
 
 		var assetsToLoader:Array<String> = ["assets/spine/data/Pixie.json", "assets/spine/data/iP4_BGtile.jpg", "assets/spine/data/iP4_ground.png"];
 		_loader = new AssetLoader(assetsToLoader);
@@ -37,12 +29,15 @@ class Main {
 		_loader.load();
 
 		_postition = 0;
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
-		_renderer.render(_stage);
+	function _init() {
+		stats = true;
+		backgroundColor = 0x00FF00;
+		resize = false;
+		width = 800;
+		height = 600;
+		super.start();
 	}
 
 	function onAssetsLoaded() {

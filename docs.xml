@@ -17725,6 +17725,44 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<m n=":final"/>
 		</meta>
 	</class>
+	<class path="pixi.IApplication" params="" file="pixi/IApplication.hx" interface="1"><meta><m n=":keep"/></meta></class>
+	<class path="pixi.Application" params="" file="pixi/Application.hx">
+		<implements path="pixi.IApplication"/>
+		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
+		<skipFrame public="1" get="null"><x path="Bool"/></skipFrame>
+		<width public="1" get="null"><x path="Float"/></width>
+		<height public="1" get="null"><x path="Float"/></height>
+		<resize public="1" get="null"><x path="Bool"/></resize>
+		<stats public="1" get="null" set="accessor"><x path="Bool"/></stats>
+		<backgroundColor public="1" get="null"><x path="Int"/></backgroundColor>
+		<onUpdate public="1"><f a="">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></onUpdate>
+		<onResize public="1"><f a=""><x path="Void"/></f></onResize>
+		<_stage set="null"><c path="pixi.display.Stage"/></_stage>
+		<_canvas><c path="js.html.CanvasElement"/></_canvas>
+		<_renderer><c path="pixi.renderers.webgl.WebGLRenderer"/></_renderer>
+		<_stats><c path="pixi.utils.Stats"/></_stats>
+		<_lastTime><c path="Date"/></_lastTime>
+		<_currentTime><c path="Date"/></_currentTime>
+		<_elapsedTime><x path="Float"/></_elapsedTime>
+		<_skipFrame><x path="Bool"/></_skipFrame>
+		<_setDefaultValues set="method" line="96"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="106"><f a=""><x path="Void"/></f></start>
+		<_onWindowResize set="method" line="126"><f a="event">
+	<c path="js.html.Event"/>
+	<x path="Void"/>
+</f></_onWindowResize>
+		<_onRequestAnimationFrame set="method" line="135"><f a=""><x path="Void"/></f></_onRequestAnimationFrame>
+		<_calculateElapsedTime set="method" line="147"><f a=""><x path="Void"/></f></_calculateElapsedTime>
+		<set_stats set="method" line="153"><f a="val">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></set_stats>
+		<new public="1" set="method" line="91"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<typedef path="pixi.CanvasElement" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions">
 		<c path="js.html.CanvasElement"/>
 		<haxe_doc>* Because macros cannot access the JS package, put
@@ -21823,14 +21861,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></new>
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
-	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1">
-		<view public="1"><t path="pixi.CanvasElement"/></view>
-		<render public="1" set="method"><f a="stage">
-	<c path="pixi.display.Stage"/>
-	<x path="Void"/>
-</f></render>
-		<meta><m n=":keep"/></meta>
-	</class>
+	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1"><meta><m n=":keep"/></meta></class>
 	<class path="pixi.renderers.canvas.CanvasGraphics" params="" file="pixi/renderers/canvas/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.primitives.Graphics"/>
@@ -24475,20 +24506,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.AjaxRequest"</e></m></meta>
 	</class>
 	<class path="samples.nape.Main" params="" file="samples/nape/Main.hx">
-		<main set="method" line="85" static="1">
+		<extends path="pixi.Application"/>
+		<main set="method" line="83" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_renderer><c path="pixi.renderers.IRenderer"/></_renderer>
-		<_stage><c path="pixi.display.Stage"/></_stage>
 		<_floor><c path="nape.phys.Body"/></_floor>
 		<_space><c path="nape.space.Space"/></_space>
 		<_balls><c path="Array"><c path="pixi.display.Sprite"/></c></_balls>
 		<_pballs><c path="Array"><c path="nape.phys.Body"/></c></_pballs>
-		<_setUpPhysics set="method" line="44"><f a=""><x path="Void"/></f></_setUpPhysics>
-		<_addBall set="method" line="54"><f a=""><x path="Void"/></f></_addBall>
-		<animate set="method" line="71"><f a=""><x path="Void"/></f></animate>
-		<new public="1" set="method" line="29"><f a=""><x path="Void"/></f></new>
+		<_init set="method" line="37"><f a=""><x path="Void"/></f></_init>
+		<_onUpdate set="method" line="46"><f a="elapsedTime">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></_onUpdate>
+		<_setUpPhysics set="method" line="56"><f a=""><x path="Void"/></f></_setUpPhysics>
+		<_addBall set="method" line="66"><f a=""><x path="Void"/></f></_addBall>
+		<new public="1" set="method" line="24"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 	<class path="zpp_nape.ZPP_ID" params="" file="/haxelib/nape/2,0,16/zpp_nape/ID.hx" module="zpp_nape.ID">

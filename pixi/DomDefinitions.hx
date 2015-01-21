@@ -17,3 +17,5 @@ package pixi;
 	typedef Image = Dynamic;
 	typedef DivElement = Dynamic;
 #end
+
+class DomDefinitions {}

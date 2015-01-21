@@ -1,27 +1,18 @@
 package samples.graphics;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.InteractionData;
-import pixi.display.Stage;
 import pixi.primitives.Graphics;
-import pixi.utils.Detector;
-import js.Browser;
 
-class Main {
-
-	var _renderer:IRenderer;
-	var _stage:Stage;
+class Main extends Application {
 
 	var _graphics:Graphics;
 	var _thing:Graphics;
 	var _count:Float;
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
-		_stage.interactive = true;
-		_renderer = Detector.autoDetectRenderer(620, 380);
-		_renderer.view.style.display = "block";
-		Browser.document.body.appendChild(_renderer.view);
+		super();
+		_init();
 
 		_graphics = new Graphics();
 		_graphics.beginFill(0xFF3300);
@@ -68,19 +59,19 @@ class Main {
 		_count = 0;
 
 		_stage.click = _stage.tap = _onStageClick;
-
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
-	function _onStageClick(data:InteractionData) {
-		_graphics.lineStyle(Math.random() * 30, Std.int(Math.random() * 0xFFFFFF), 1);
-		_graphics.moveTo(Math.random() * 620, Math.random() * 380);
-		_graphics.lineTo(Math.random() * 620, Math.random() * 380);
+	function _init() {
+		stats = true;
+		backgroundColor = 0x00FF66;
+		onUpdate = _onUpdate;
+		resize = false;
+		width = 620;
+		height = 380;
+		super.start();
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
-
+	function _onUpdate(elapsedTime:Float) {
 		_count += 0.1;
 
 		_thing.clear();
@@ -94,8 +85,12 @@ class Main {
 		_thing.lineTo(-120 + Math.sin(_count) * 20, -100 + Math.cos(_count) * 20);
 
 		_thing.rotation = _count * 0.1;
+	}
 
-		_renderer.render(_stage);
+	function _onStageClick(data:InteractionData) {
+		_graphics.lineStyle(Math.random() * 30, Std.int(Math.random() * 0xFFFFFF), 1);
+		_graphics.moveTo(Math.random() * 620, Math.random() * 380);
+		_graphics.lineTo(Math.random() * 620, Math.random() * 380);
 	}
 
 	static function main() {
