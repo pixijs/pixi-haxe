@@ -6,12 +6,10 @@ function $extend(from, fields) {
 	return proto;
 }
 var pixi = {};
-pixi.IApplication = function() { };
 pixi.Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.Application.__interfaces__ = [pixi.IApplication];
 pixi.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;

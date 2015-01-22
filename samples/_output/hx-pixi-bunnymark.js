@@ -10,12 +10,10 @@ Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
 var pixi = {};
-pixi.IApplication = function() { };
 pixi.Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.Application.__interfaces__ = [pixi.IApplication];
 pixi.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;

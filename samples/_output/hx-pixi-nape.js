@@ -3366,14 +3366,11 @@ nape.space.Space.prototype = {
 	,__class__: nape.space.Space
 };
 var pixi = {};
-pixi.IApplication = function() { };
-pixi.IApplication.__name__ = true;
 pixi.Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
 pixi.Application.__name__ = true;
-pixi.Application.__interfaces__ = [pixi.IApplication];
 pixi.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;

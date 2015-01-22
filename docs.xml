@@ -17725,9 +17725,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<m n=":final"/>
 		</meta>
 	</class>
-	<class path="pixi.IApplication" params="" file="pixi/IApplication.hx" interface="1"><meta><m n=":keep"/></meta></class>
 	<class path="pixi.Application" params="" file="pixi/Application.hx">
-		<implements path="pixi.IApplication"/>
 		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
 		<skipFrame public="1" get="null"><x path="Bool"/></skipFrame>
 		<width public="1" get="null"><x path="Float"/></width>

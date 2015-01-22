@@ -16,7 +16,7 @@ import pixi.utils.Detector;
 import pixi.display.Stage;
 import pixi.utils.Stats;
 
-class Application implements IApplication {
+class Application {
 
 	/*
 	 * Sets the pixel ratio of the application

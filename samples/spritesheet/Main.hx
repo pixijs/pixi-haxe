@@ -57,7 +57,7 @@ class Main extends Application {
         _alienContainer.y = 300;
 
         _stage.addChild(_alienContainer);
-        
+
         for (i in 0...100) {
             var frameName:String = _alienFrames[i % 4];
             var alien = Sprite.fromFrame(frameName);
