@@ -1,36 +1,32 @@
 package samples.bitmaptext;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.display.Stage;
-import pixi.utils.Detector;
 import pixi.loaders.AssetLoader;
 import pixi.text.BitmapText;
-import js.Browser;
 
-class Main {
+class Main extends Application {
 
 	var _loader:AssetLoader;
-	var _renderer:IRenderer;
-	var _stage:Stage;
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
-		_renderer = Detector.autoDetectRenderer(800, 600);
-		_renderer.view.style.display = "block";
-		Browser.document.body.appendChild(_renderer.view);
+		super();
+		_init();
 
 		var assetsToLoader:Array<String> = ["assets/fonts/desyrel.xml"];
 
 		_loader = new AssetLoader(assetsToLoader);
 		_loader.onComplete = onAssetsLoaded;
 		_loader.load();
-
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
-		_renderer.render(_stage);
+	function _init() {
+		stats = true;
+		backgroundColor = 0x003366;
+		resize = false;
+		width = 800;
+		height = 600;
+		super.start();
 	}
 
 	function onAssetsLoaded() {

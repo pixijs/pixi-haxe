@@ -1,13 +1,11 @@
 package samples.blur;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.filters.BlurFilter;
 import pixi.display.Sprite;
 import pixi.display.Stage;
-import pixi.utils.Detector;
-import js.Browser;
 
-class Main {
+class Main extends Application {
 
 	var _bg:Sprite;
 	var _littleDudes:Sprite;
@@ -17,19 +15,10 @@ class Main {
 	var _blurFilter2:BlurFilter;
 
 	var _count:Float;
-	var _renderer:IRenderer;
-	var _stage:Stage;
 
 	public function new() {
-		_stage = new Stage(0xFFFFFF);
-
-		_renderer = Detector.autoDetectRenderer(Browser.window.innerWidth, Browser.window.innerHeight);
-		Browser.document.body.appendChild(_renderer.view);
-
-		_renderer.view.style.position = "absolute";
-		_renderer.view.style.width = Browser.window.innerWidth + "px";
-		_renderer.view.style.height = Browser.window.innerHeight + "px";
-		_renderer.view.style.display = "block";
+		super();
+		_init();
 
 		_bg = Sprite.fromImage("assets/filters/depth_blur_BG.jpg");
 		_stage.addChild(_bg);
@@ -49,12 +38,19 @@ class Main {
 		_littleRobot.filters = [_blurFilter2];
 
 		_count = 0;
-
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
+	function _init() {
+		stats = true;
+		backgroundColor = 0xFFFFFF;
+		onUpdate = _onUpdate;
+		resize = false;
+		width = 800;
+		height = 600;
+		super.start();
+	}
+
+	function _onUpdate(elapsedTime:Float) {
 		_count += 0.01;
 
 		var blurAmount1 = Math.cos(_count);

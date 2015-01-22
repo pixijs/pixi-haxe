@@ -3366,31 +3366,118 @@ nape.space.Space.prototype = {
 	,__class__: nape.space.Space
 };
 var pixi = {};
+pixi.Application = function() {
+	this._lastTime = new Date();
+	this._setDefaultValues();
+};
+pixi.Application.__name__ = true;
+pixi.Application.prototype = {
+	_setDefaultValues: function() {
+		this.pixelRatio = 1;
+		this.skipFrame = false;
+		this.set_stats(false);
+		this.backgroundColor = 16777215;
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+		this._skipFrame = false;
+	}
+	,start: function() {
+		var _this = window.document;
+		this._canvas = _this.createElement("canvas");
+		this._canvas.style.width = this.width + "px";
+		this._canvas.style.height = this.height + "px";
+		this._canvas.style.position = "absolute";
+		window.document.body.appendChild(this._canvas);
+		this._stage = new PIXI.Stage(this.backgroundColor);
+		var renderingOptions = { };
+		renderingOptions.view = this._canvas;
+		renderingOptions.resolution = this.pixelRatio;
+		this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions);
+		window.document.body.appendChild(this._renderer.view);
+		window.onresize = $bind(this,this._onWindowResize);
+		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+		this._lastTime = new Date();
+	}
+	,_onWindowResize: function(event) {
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+		this._renderer.resize(this.width,this.height);
+		this._canvas.style.width = this.width + "px";
+		this._canvas.style.height = this.height + "px";
+		if(this.onResize != null) this.onResize();
+	}
+	,_onRequestAnimationFrame: function() {
+		if(this.skipFrame && this._skipFrame) this._skipFrame = false; else {
+			this._skipFrame = true;
+			this._calculateElapsedTime();
+			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
+			this._renderer.render(this._stage);
+		}
+		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+		if(this._stats != null) this._stats.update();
+	}
+	,_calculateElapsedTime: function() {
+		this._currentTime = new Date();
+		this._elapsedTime = this._currentTime.getTime() - this._lastTime.getTime();
+		this._lastTime = this._currentTime;
+	}
+	,set_stats: function(val) {
+		if(val) {
+			var _container = window.document.createElement("div");
+			window.document.body.appendChild(_container);
+			this._stats = new Stats();
+			this._stats.domElement.style.position = "absolute";
+			this._stats.domElement.style.top = "2px";
+			this._stats.domElement.style.right = "2px";
+			_container.appendChild(this._stats.domElement);
+			this._stats.begin();
+		}
+		return this.stats = val;
+	}
+	,__class__: pixi.Application
+};
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 pixi.renderers.IRenderer.__name__ = true;
-pixi.renderers.IRenderer.prototype = {
-	__class__: pixi.renderers.IRenderer
-};
 var samples = {};
 samples.nape = {};
 samples.nape.Main = function() {
-	this._stage = new PIXI.Stage(65535);
-	this._renderer = PIXI.autoDetectRenderer(800,600);
-	window.document.body.appendChild(this._renderer.view);
+	pixi.Application.call(this);
+	this._init();
 	this._balls = [];
 	this._pballs = [];
 	this._setUpPhysics();
+	this.onUpdate = $bind(this,this._onUpdate);
 	var timer = new haxe.Timer(1000);
 	timer.run = $bind(this,this._addBall);
-	window.requestAnimationFrame($bind(this,this.animate));
+	this._addBall();
 };
 samples.nape.Main.__name__ = true;
 samples.nape.Main.main = function() {
 	new samples.nape.Main();
 };
-samples.nape.Main.prototype = {
-	_setUpPhysics: function() {
+samples.nape.Main.__super__ = pixi.Application;
+samples.nape.Main.prototype = $extend(pixi.Application.prototype,{
+	_init: function() {
+		this.set_stats(true);
+		this.backgroundColor = 65535;
+		this.resize = false;
+		this.width = 800;
+		this.height = 600;
+		pixi.Application.prototype.start.call(this);
+	}
+	,_onUpdate: function(elapsedTime) {
+		this._space.step(0.0166666666666666664);
+		var _g1 = 0;
+		var _g = this._pballs.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this._balls[i].position.x = this._pballs[i].get_position().get_x();
+			this._balls[i].position.y = this._pballs[i].get_position().get_y();
+			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
+		}
+	}
+	,_setUpPhysics: function() {
 		var gravity = nape.geom.Vec2.get(0,600,true);
 		this._space = new nape.space.Space(gravity);
 		this._floor = new nape.phys.Body((function($this) {
@@ -3446,21 +3533,8 @@ samples.nape.Main.prototype = {
 		pball.set_space(this._space);
 		this._pballs.push(pball);
 	}
-	,animate: function() {
-		window.requestAnimationFrame($bind(this,this.animate));
-		this._space.step(0.0166666666666666664);
-		var _g1 = 0;
-		var _g = this._pballs.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			this._balls[i].position.x = this._pballs[i].get_position().get_x();
-			this._balls[i].position.y = this._pballs[i].get_position().get_y();
-			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
-		}
-		this._renderer.render(this._stage);
-	}
 	,__class__: samples.nape.Main
-};
+});
 var zpp_nape = {};
 zpp_nape.ZPP_ID = function() { };
 zpp_nape.ZPP_ID.__name__ = true;
@@ -17951,6 +18025,8 @@ Math.isNaN = function(i1) {
 String.prototype.__class__ = String;
 String.__name__ = true;
 Array.__name__ = true;
+Date.prototype.__class__ = Date;
+Date.__name__ = ["Date"];
 var Int = { __name__ : ["Int"]};
 var Dynamic = { __name__ : ["Dynamic"]};
 var Float = Number;

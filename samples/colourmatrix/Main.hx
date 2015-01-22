@@ -1,16 +1,15 @@
 package samples.colourmatrix;
 
-import pixi.renderers.IRenderer;
+import pixi.Application;
 import pixi.text.Text;
 import pixi.InteractionData;
 import pixi.display.DisplayObjectContainer;
 import pixi.filters.ColorMatrixFilter;
 import pixi.display.Sprite;
 import pixi.display.Stage;
-import pixi.utils.Detector;
 import js.Browser;
 
-class Main {
+class Main extends Application {
 
 	var _bg:Sprite;
 	var _colorMatrix:Array<Float>;
@@ -24,15 +23,12 @@ class Main {
 
 	var _count:Float;
 	var _switchy:Bool;
-	var _renderer:IRenderer;
-	var _stage:Stage;
 
 	public function new() {
-		_stage = new Stage(0x003366);
-		_stage.interactive = true;
+		super();
+		_init();
 
-		_renderer = Detector.autoDetectRenderer(Browser.window.innerWidth, Browser.window.innerHeight);
-		Browser.document.body.appendChild(_renderer.view);
+		_stage.interactive = true;
 
 		_bg = Sprite.fromImage("assets/filters/BGrotate.jpg");
 		_bg.anchor.set(0.5, 0.5);
@@ -79,18 +75,16 @@ class Main {
 		var style:TextStyle = {font: "bold 12pt Arial", fill: "#FFFFFF"};
 		var help = new Text("Click to turn filters on / off.", style);
 		_stage.addChild(help);
-
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
-	function _onClick(data:InteractionData) {
-		_switchy = !_switchy;
-		if (!_switchy) _stage.filters = [_filter];
-		else _stage.filters = null;
+	function _init() {
+		stats = true;
+		backgroundColor = 0x00FF66;
+		onUpdate = _onUpdate;
+		super.start();
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
+	function _onUpdate(elapsedTime:Float) {
 		_count += 0.01;
 
 		_bg.rotation += 0.01;
@@ -111,7 +105,12 @@ class Main {
 		_colorMatrix[5] = Math.sin(_count / 2);
 		_colorMatrix[6] = Math.sin(_count / 4);
 		_filter.matrix = _colorMatrix;
-		_renderer.render(_stage);
+	}
+
+	function _onClick(data:InteractionData) {
+		_switchy = !_switchy;
+		if (!_switchy) _stage.filters = [_filter];
+		else _stage.filters = null;
 	}
 
 	static function main() {
