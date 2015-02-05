@@ -1,5 +1,6 @@
 package samples.bunnymark;
 
+import pixi.display.DisplayObjectContainer;
 import js.Browser;
 import pixi.Application;
 import pixi.InteractionData;
@@ -25,6 +26,8 @@ class Main extends Application {
 
 	var _add:Bool;
 
+	var _container:DisplayObjectContainer;
+
 	public function new() {
 		super();
 		_init();
@@ -42,6 +45,9 @@ class Main extends Application {
 
 		_stage.mousedown = _stage.touchstart = function(data:InteractionData) { _add = true; }
 		_stage.mouseup = _stage.touchend = function(data:InteractionData) { _add = false; }
+
+		_container = new DisplayObjectContainer();
+		_stage.addChild(_container);
 	}
 
 	function _init() {
@@ -84,7 +90,8 @@ class Main extends Application {
 	function _addBunnys() {
 		for (i in 0 ... 10) {
 			_bunny = new Bunny(_bunnyTexture);
-			_stage.addChild(_bunny);
+			_bunny.name = "bunny" + i;
+			_container.addChild(_bunny);
 			_bunny.x = Std.random(_maxX);
 			_bunny.y = Std.random(_maxY);
 			_bunny.anchor.set(0.5, 0.5);

@@ -18014,7 +18014,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></sayHello>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
-	<class path="pixi.display.DisplayObject" params="" file="pixi/display/DisplayObject.hx" extern="1">
+	<class path="pixi.display.CoreDisplayObject" params="" file="pixi/display/CoreDisplayObject.hx" extern="1">
 		<generateTexture public="1" set="method">
 			<f a="resolution:scaleMode:?renderer">
 				<x path="Float"/>
@@ -18422,7 +18422,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.DisplayObject"</e></m></meta>
 	</class>
-	<class path="pixi.display.DisplayObjectContainer" params="" file="pixi/display/DisplayObjectContainer.hx" extern="1">
+	<class path="pixi.display.DisplayObject" params="" file="pixi/display/DisplayObject.hx">
+		<extends path="pixi.display.CoreDisplayObject"/>
+		<name public="1"><c path="String"/></name>
+		<new public="1" set="method" line="7"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":keep"/></meta>
+	</class>
+	<class path="pixi.display.CoreDisplayObjectContainer" params="" file="pixi/display/CoreDisplayObjectContainer.hx" extern="1">
 		<extends path="pixi.display.DisplayObject"/>
 		<width public="1">
 			<x path="Float"/>
@@ -18562,6 +18568,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @constructor</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.DisplayObjectContainer"</e></m></meta>
+	</class>
+	<class path="pixi.display.DisplayObjectContainer" params="" file="pixi/display/DisplayObjectContainer.hx">
+		<extends path="pixi.display.CoreDisplayObjectContainer"/>
+		<new public="1" set="method" line="5"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":keep"/></meta>
 	</class>
 	<class path="pixi.display.Sprite" params="" file="pixi/display/Sprite.hx" extern="1">
 		<extends path="pixi.display.DisplayObjectContainer"/>

@@ -78,6 +78,20 @@ pixi.Application.prototype = {
 		return this.stats = val;
 	}
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
