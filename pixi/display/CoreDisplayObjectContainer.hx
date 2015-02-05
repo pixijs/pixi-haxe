@@ -3,7 +3,7 @@ package pixi.display;
 import pixi.display.DisplayObject;
 
 @:native("PIXI.DisplayObjectContainer")
-extern class DisplayObjectContainer extends DisplayObject {
+extern class CoreDisplayObjectContainer extends DisplayObject {
 
 	/**
 	 * A DisplayObjectContainer represents a collection of display objects.

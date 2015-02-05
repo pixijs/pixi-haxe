@@ -74,6 +74,20 @@ pixi.Application.prototype = {
 		return this.stats = val;
 	}
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
@@ -89,7 +103,7 @@ samples.rendertexture.Main = function() {
 	this._outputSprite.position.y = this.height / 2;
 	this._outputSprite.anchor.set(0.5,0.5);
 	this._stage.addChild(this._outputSprite);
-	this._bunnyContainer = new PIXI.DisplayObjectContainer();
+	this._bunnyContainer = new pixi.display.DisplayObjectContainer();
 	this._bunnyContainer.position.x = this.width / 2;
 	this._bunnyContainer.position.y = this.height / 2;
 	this._stage.addChild(this._bunnyContainer);

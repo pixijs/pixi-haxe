@@ -74,6 +74,20 @@ pixi.Application.prototype = {
 		return this.stats = val;
 	}
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
@@ -88,7 +102,7 @@ samples.colourmatrix.Main = function() {
 	this._bg.y = window.innerHeight / 2;
 	this._colorMatrix = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 	this._filter = new PIXI.ColorMatrixFilter();
-	this._container = new PIXI.DisplayObjectContainer();
+	this._container = new pixi.display.DisplayObjectContainer();
 	this._container.x = window.innerWidth / 2;
 	this._container.y = window.innerHeight / 2;
 	this._bgFront = PIXI.Sprite.fromImage("assets/filters/SceneRotate.jpg");

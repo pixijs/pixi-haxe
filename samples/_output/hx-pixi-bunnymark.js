@@ -78,6 +78,20 @@ pixi.Application.prototype = {
 		return this.stats = val;
 	}
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
@@ -106,6 +120,8 @@ samples.bunnymark.Main = function() {
 	this._stage.mouseup = this._stage.touchend = function(data1) {
 		_g._add = false;
 	};
+	this._container = new pixi.display.DisplayObjectContainer();
+	this._stage.addChild(this._container);
 };
 samples.bunnymark.Main.main = function() {
 	new samples.bunnymark.Main();
@@ -150,7 +166,8 @@ samples.bunnymark.Main.prototype = $extend(pixi.Application.prototype,{
 		while(_g < 10) {
 			var i = _g++;
 			this._bunny = new samples.bunnymark.Bunny(this._bunnyTexture);
-			this._stage.addChild(this._bunny);
+			this._bunny.name = "bunny" + i;
+			this._container.addChild(this._bunny);
 			this._bunny.x = Std.random(this._maxX);
 			this._bunny.y = Std.random(this._maxY);
 			this._bunny.anchor.set(0.5,0.5);

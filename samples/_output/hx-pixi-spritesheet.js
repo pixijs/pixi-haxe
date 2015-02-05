@@ -74,6 +74,20 @@ pixi.Application.prototype = {
 		return this.stats = val;
 	}
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
@@ -115,7 +129,7 @@ samples.spritesheet.Main.prototype = $extend(pixi.Application.prototype,{
 		this._count = 0;
 		this._aliens = [];
 		this._alienFrames = ["eggHead.png","flowerTop.png","helmlok.png","skully.png"];
-		this._alienContainer = new PIXI.DisplayObjectContainer();
+		this._alienContainer = new pixi.display.DisplayObjectContainer();
 		this._alienContainer.x = 400;
 		this._alienContainer.y = 300;
 		this._stage.addChild(this._alienContainer);

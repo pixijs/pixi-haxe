@@ -3436,6 +3436,24 @@ pixi.Application.prototype = {
 	}
 	,__class__: pixi.Application
 };
+pixi.display = {};
+pixi.display.DisplayObject = function() {
+	PIXI.DisplayObject.call(this);
+	this.name = "";
+};
+pixi.display.DisplayObject.__name__ = true;
+pixi.display.DisplayObject.__super__ = PIXI.DisplayObject;
+pixi.display.DisplayObject.prototype = $extend(PIXI.DisplayObject.prototype,{
+	__class__: pixi.display.DisplayObject
+});
+pixi.display.DisplayObjectContainer = function() {
+	PIXI.DisplayObjectContainer.call(this);
+};
+pixi.display.DisplayObjectContainer.__name__ = true;
+pixi.display.DisplayObjectContainer.__super__ = PIXI.DisplayObjectContainer;
+pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContainer.prototype,{
+	__class__: pixi.display.DisplayObjectContainer
+});
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 pixi.renderers.IRenderer.__name__ = true;
