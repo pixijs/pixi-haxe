@@ -96,5 +96,11 @@
 -dce full
 -lib nape
 
+--next
+-cp samples
+-cp src
+-main samples.particles.Main
+-js samples/_output/hx-pixi-particles.js
+-dce full
 #-D source-map-content
 #-debug
