@@ -3485,7 +3485,7 @@ samples.nape.Main.prototype = $extend(pixi.Application.prototype,{
 		pixi.Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
-		this._space.step(0.0166666666666666664);
+		this._space.step(0.016666666666666666);
 		var _g1 = 0;
 		var _g = this._pballs.length;
 		while(_g1 < _g) {
@@ -11542,7 +11542,6 @@ zpp_nape.space.ZPP_DynAABBPhase = function(space) {
 	this.pairs = null;
 	this.dtree = null;
 	this.stree = null;
-	zpp_nape.space.ZPP_Broadphase.call(this);
 	this.space = space;
 	this.is_sweep = false;
 	this.dynab = this;
@@ -14167,7 +14166,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						var miny = aabb.miny;
 						var maxx = aabb.maxx;
 						var maxy = aabb.maxy;
-						var count = angvel * dt * s.sweepCoef * 0.00833333333333333322 | 0;
+						var count = angvel * dt * s.sweepCoef * 0.0083333333333333332 | 0;
 						if(count > 8) count = 8;
 						var anginc = angvel * dt / count;
 						cur.sweepIntegrate(dt);
@@ -14229,7 +14228,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						var miny1 = aabb1.miny;
 						var maxx1 = aabb1.maxx;
 						var maxy1 = aabb1.maxy;
-						var count1 = angvel1 * dt * s1.sweepCoef * 0.00833333333333333322 | 0;
+						var count1 = angvel1 * dt * s1.sweepCoef * 0.0083333333333333332 | 0;
 						if(count1 > 8) count1 = 8;
 						var anginc1 = angvel1 * dt / count1;
 						cur1.sweepIntegrate(dt);
@@ -15433,7 +15432,6 @@ zpp_nape.space.ZPP_SweepData.prototype = {
 };
 zpp_nape.space.ZPP_SweepPhase = function(space) {
 	this.list = null;
-	zpp_nape.space.ZPP_Broadphase.call(this);
 	this.space = space;
 	this.is_sweep = true;
 	this.sweep = this;

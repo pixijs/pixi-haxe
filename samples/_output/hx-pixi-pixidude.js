@@ -126,7 +126,7 @@ samples.pixidude.Main.prototype = $extend(pixi.Application.prototype,{
 		this._foreground1.position.y = this._foreground2.position.y = 640 - this._foreground2.height;
 		this._pixie = new PIXI.Spine("assets/spine/data/Pixie.json");
 		var scale = 0.3;
-		this._pixie.position.x = 341.333333333333314;
+		this._pixie.position.x = 341.33333333333331;
 		this._pixie.position.y = 500;
 		this._pixie.scale.x = this._pixie.scale.y = scale;
 		this._pixie.stateData.setMixByName("running","jump",0.2);
