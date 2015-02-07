@@ -1,37 +1,32 @@
 package samples.particles;
 
+import haxe.Timer;
 import pixi.Application;
-import pixi.renderers.IRenderer;
-import pixi.display.MovieClip;
 import pixi.display.Stage;
 import pixi.textures.Texture;
-import pixi.utils.Detector;
 import pixi.loaders.AssetLoader;
-import js.Browser;
 
-import pixi.loaders.JsonLoader;
 import pixi.plugins.particles.cloudkid.Emitter;
-import pixi.plugins.particles.cloudkid.Particle;
-
 
 class Main extends Application {
 
 	var _loader:AssetLoader;
 
-	var lastLaunch : Float;
-	var elapsed : Float;
-	var emitters : Array<Emitter>;
-	var particle_json_config : Dynamic;
-
+	var lastLaunch:Float;
+	var elapsed:Float;
+	var emitters:Array<Emitter>;
+	var particle_json_config:Dynamic;
 
 	public function new() {
 		super();
 		_init();
 
-		var assetsToLoader:Array<String> = ["assets/particles/particle.png"];
+		// json has been generated using http://cloudkidstudio.github.io/PixiParticlesEditor/#
+		var assetsToLoader:Array<String> = ["assets/particles/particle.png", "assets/particles/p_blow.json"];
 
 		_loader = new AssetLoader(assetsToLoader);
-		_loader.onComplete = onAssetsLoaded;
+		_loader.onProgress = _onAssetLoaded;
+		_loader.onComplete = _onAssetsLoaded;
 		_loader.load();
 	}
 
@@ -48,68 +43,48 @@ class Main extends Application {
 	}
 
 	function _onUpdate(elapsedTime:Float) {
-		var now = haxe.Timer.stamp();
+		var now = Timer.stamp();
 
-		// launch new Emitter every .2 secs
+		// launch new Emitter every .3 secs
 		// remove this to get particles launching all the time
+
 		var launch = now - lastLaunch > .3;
-		if( launch ) {
+		if (launch) {
 
 			// using a simple bitmap. Use tilesheets for much improved performance
-			var t = Texture.fromImage("assets/particles/particle.png");			
-			var e = new Emitter( _stage, [t], particle_json_config );
+			var t = Texture.fromImage("assets/particles/particle.png");
+			var e = new Emitter(_stage, [t], particle_json_config);
 
 			// emitter is spawned at a random position
-			var x = Std.random( Std.int( width ) );
-			var y = Std.random( Std.int( height ) );
-			e.spawnPos = new pixi.geom.Point(x, y );
+			var x = Std.random(Std.int(width));
+			var y = Std.random(Std.int(height));
+			e.spawnPos = new pixi.geom.Point(x, y);
 
 			// start to emit right away
 			e.emit = true;
-			emitters.push(e);		
+			emitters.push(e);
 			lastLaunch = now;
 		}
 
 		// update our emitters
-		var t = now - elapsed;
-		if( emitters.length > 0 ) {
-			for( e in emitters ) {	
-				e.update( t );
+		var u = now - elapsed;
+		if (emitters.length > 0) {
+			for (e in emitters) {
+				e.update(u);
 			}
 			elapsed = now;
 		}
-
-		_renderer.render(_stage);
 	}
 
-	function onAssetsLoaded() {
+	function _onAssetLoaded(loader:Dynamic) {
+		if (loader.url == "assets/particles/p_blow.json") particle_json_config = loader.json;
+	}
 
-		// load particles json configuration files 
-		// json are loaded in a funny way. (need to check if pixi.js will make/has made this easier)
-		// this one has been generated using http://cloudkidstudio.github.io/PixiParticlesEditor/#
-		var j = new CustomJsonLoader("assets/particles/p_blow.json");
-		j.on("error",  function( evt ) {
-			throw evt;
-		});
-		j.on("loaded",  function( evt ) {
-			particle_json_config = j.json;
-			elapsed = lastLaunch = haxe.Timer.stamp();
-		});
-		j.load();
+	function _onAssetsLoaded() {
+		elapsed = lastLaunch = Timer.stamp();
 	}
 
 	static function main() {
 		new Main();
 	}
 }
-
-class CustomJsonLoader extends JsonLoader {
-
-	public var name : String;
-
-	public function new( name : String ) {
-		super(name);
-		this.name = name;
-	}
-}
-

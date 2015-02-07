@@ -5,6 +5,15 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var Std = function() { };
+Std.random = function(x) {
+	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
+};
+var haxe = {};
+haxe.Timer = function() { };
+haxe.Timer.stamp = function() {
+	return new Date().getTime() / 1000;
+};
 var pixi = {};
 pixi.Application = function() {
 	this._lastTime = new Date();
@@ -91,56 +100,75 @@ pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContai
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 var samples = {};
-samples.pixidude = {};
-samples.pixidude.Main = function() {
+samples.particles = {};
+samples.particles.Main = function() {
 	pixi.Application.call(this);
 	this._init();
-	var assetsToLoader = ["assets/spine/data/Pixie.json","assets/spine/data/iP4_BGtile.jpg","assets/spine/data/iP4_ground.png"];
+	var assetsToLoader = ["assets/particles/particle.png","assets/particles/p_blow.json"];
 	this._loader = new PIXI.AssetLoader(assetsToLoader);
-	this._loader.onComplete = $bind(this,this.onAssetsLoaded);
+	this._loader.onProgress = $bind(this,this._onAssetLoaded);
+	this._loader.onComplete = $bind(this,this._onAssetsLoaded);
 	this._loader.load();
-	this._postition = 0;
 };
-samples.pixidude.Main.main = function() {
-	new samples.pixidude.Main();
+samples.particles.Main.main = function() {
+	new samples.particles.Main();
 };
-samples.pixidude.Main.__super__ = pixi.Application;
-samples.pixidude.Main.prototype = $extend(pixi.Application.prototype,{
+samples.particles.Main.__super__ = pixi.Application;
+samples.particles.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.set_stats(true);
-		this.backgroundColor = 65280;
+		this.backgroundColor = 0;
+		this.onUpdate = $bind(this,this._onUpdate);
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
+		this.emitters = new Array();
 		pixi.Application.prototype.start.call(this);
 	}
-	,onAssetsLoaded: function() {
-		this._background1 = PIXI.Sprite.fromImage("assets/spine/data/iP4_BGtile.jpg");
-		this._background2 = PIXI.Sprite.fromImage("assets/spine/data/iP4_BGtile.jpg");
-		this._stage.addChild(this._background1);
-		this._stage.addChild(this._background2);
-		this._foreground1 = PIXI.Sprite.fromImage("assets/spine/data/iP4_ground.png");
-		this._foreground2 = PIXI.Sprite.fromImage("assets/spine/data/iP4_ground.png");
-		this._stage.addChild(this._foreground1);
-		this._stage.addChild(this._foreground2);
-		this._foreground1.position.y = this._foreground2.position.y = 640 - this._foreground2.height;
-		this._pixie = new PIXI.Spine("assets/spine/data/Pixie.json");
-		var scale = 0.3;
-		this._pixie.position.x = 341.333333333333314;
-		this._pixie.position.y = 500;
-		this._pixie.scale.x = this._pixie.scale.y = scale;
-		this._pixie.stateData.setMixByName("running","jump",0.2);
-		this._pixie.stateData.setMixByName("jump","running",0.4);
-		this._pixie.state.setAnimationByName(0,"running",true);
-		this._stage.addChild(this._pixie);
-		this._stage.click = $bind(this,this._stageOnClick);
+	,_onUpdate: function(elapsedTime) {
+		var now = haxe.Timer.stamp();
+		var launch = now - this.lastLaunch > .3;
+		if(launch) {
+			var t = PIXI.Texture.fromImage("assets/particles/particle.png");
+			var e = new cloudkid.Emitter(this._stage,[t],this.particle_json_config);
+			var x = Std.random(this.width | 0);
+			var y = Std.random(this.height | 0);
+			e.spawnPos = new PIXI.Point(x,y);
+			e.emit = true;
+			this.emitters.push(e);
+			this.lastLaunch = now;
+		}
+		var u = now - this.elapsed;
+		if(this.emitters.length > 0) {
+			var _g = 0;
+			var _g1 = this.emitters;
+			while(_g < _g1.length) {
+				var e1 = _g1[_g];
+				++_g;
+				e1.update(u);
+			}
+			this.elapsed = now;
+		}
 	}
-	,_stageOnClick: function(data) {
-		this._pixie.state.setAnimationByName(0,"jump",false);
-		this._pixie.state.addAnimationByName(0,"running",true,0);
+	,_onAssetLoaded: function(loader) {
+		if(loader.url == "assets/particles/p_blow.json") this.particle_json_config = loader.json;
+	}
+	,_onAssetsLoaded: function() {
+		this.elapsed = this.lastLaunch = haxe.Timer.stamp();
 	}
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-samples.pixidude.Main.main();
+Math.NaN = Number.NaN;
+Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
+Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
+Math.isFinite = function(i) {
+	return isFinite(i);
+};
+Math.isNaN = function(i1) {
+	return isNaN(i1);
+};
+samples.particles.Main.main();
 })();
+
+//# sourceMappingURL=hx-pixi-particles.js.map
