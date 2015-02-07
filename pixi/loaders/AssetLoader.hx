@@ -57,7 +57,7 @@ extern class AssetLoader extends EventTarget {
 	 * @property onProgress
 	 * @type Function
 	*/
-	var onProgress:AssetLoader -> Void;
+	var onProgress:Dynamic -> Void;
 
 	/**
 	 * Fired when all the assets are loaded
