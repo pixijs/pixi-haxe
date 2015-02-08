@@ -1,5 +1,6 @@
 package samples.particles;
 
+import js.Browser;
 import haxe.Timer;
 import pixi.Application;
 import pixi.display.Stage;
@@ -31,15 +32,15 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
-		backgroundColor = 0x000000;
+		backgroundColor = 0x003366;
 		onUpdate = _onUpdate;
-		resize = false;
-		width = 800;
-		height = 600;
-		emitters = new Array();
-
+		resize = true;
+		width = Browser.window.innerWidth;
+		height = Browser.window.innerHeight;
 		super.start();
+		stats = true;
+
+		emitters = new Array();
 	}
 
 	function _onUpdate(elapsedTime:Float) {

@@ -103,5 +103,5 @@
 -js samples/_output/hx-pixi-particles.js
 -dce full
 
--D source-map-content
--debug
+#-D source-map-content
+#-debug

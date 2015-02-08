@@ -116,14 +116,14 @@ samples.particles.Main.main = function() {
 samples.particles.Main.__super__ = pixi.Application;
 samples.particles.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
-		this.backgroundColor = 0;
+		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
-		this.resize = false;
-		this.width = 800;
-		this.height = 600;
-		this.emitters = new Array();
+		this.resize = true;
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
+		this.emitters = new Array();
 	}
 	,_onUpdate: function(elapsedTime) {
 		var now = haxe.Timer.stamp();
@@ -170,5 +170,3 @@ Math.isNaN = function(i1) {
 };
 samples.particles.Main.main();
 })();
-
-//# sourceMappingURL=hx-pixi-particles.js.map
