@@ -3379,6 +3379,7 @@ pixi.Application.prototype = {
 		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
+		this.resize = true;
 		this._skipFrame = false;
 	}
 	,start: function() {
@@ -3394,7 +3395,7 @@ pixi.Application.prototype = {
 		renderingOptions.resolution = this.pixelRatio;
 		this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
-		window.onresize = $bind(this,this._onWindowResize);
+		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
 	}

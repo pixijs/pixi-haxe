@@ -100,6 +100,7 @@ class Application {
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
+		resize = true;
 		_skipFrame = false;
 	}
 
@@ -118,7 +119,7 @@ class Application {
 
 		_renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		Browser.document.body.appendChild(_renderer.view);
-		Browser.window.onresize = _onWindowResize;
+		if (resize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
 	}

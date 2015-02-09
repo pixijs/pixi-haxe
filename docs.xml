@@ -13489,23 +13489,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_setDefaultValues>
-		<start public="1" set="method" line="106"><f a=""><x path="Void"/></f></start>
-		<_onWindowResize set="method" line="126">
+		<start public="1" set="method" line="107"><f a=""><x path="Void"/></f></start>
+		<_onWindowResize set="method" line="127">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="135">
+		<_onRequestAnimationFrame set="method" line="136">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="147">
+		<_calculateElapsedTime set="method" line="148">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<set_stats set="method" line="153">
+		<set_stats set="method" line="154">
 			<f a="val">
 				<x path="Bool"/>
 				<x path="Bool"/>
