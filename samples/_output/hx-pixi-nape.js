@@ -3457,6 +3457,9 @@ pixi.display.DisplayObjectContainer.prototype = $extend(PIXI.DisplayObjectContai
 pixi.renderers = {};
 pixi.renderers.IRenderer = function() { };
 pixi.renderers.IRenderer.__name__ = true;
+pixi.renderers.IRenderer.prototype = {
+	__class__: pixi.renderers.IRenderer
+};
 var samples = {};
 samples.nape = {};
 samples.nape.Main = function() {

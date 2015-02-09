@@ -1,6 +1,6 @@
 {
   "name": "pixijs",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Externs of pixi.js v2.2.0 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "repository": {
     "type": "git",

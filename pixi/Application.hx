@@ -11,10 +11,10 @@ package pixi;
 import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
-import pixi.renderers.webgl.WebGLRenderer;
 import pixi.utils.Detector;
 import pixi.display.Stage;
 import pixi.utils.Stats;
+import pixi.renderers.IRenderer;
 
 class Application {
 
@@ -79,21 +79,21 @@ class Application {
 	 */
 	var _stage(default, null):Stage;
 
-	var _canvas:CanvasElement;
-	var _renderer:WebGLRenderer;
-	var _stats:Stats;
+	@:noCompletion var _canvas:CanvasElement;
+	@:noCompletion var _renderer:IRenderer;
+	@:noCompletion var _stats:Stats;
 
-	var _lastTime:Date;
-	var _currentTime:Date;
-	var _elapsedTime:Float;
-	var _skipFrame:Bool;
+	@:noCompletion var _lastTime:Date;
+	@:noCompletion var _currentTime:Date;
+	@:noCompletion var _elapsedTime:Float;
+	@:noCompletion var _skipFrame:Bool;
 
 	public function new() {
 		_lastTime = Date.now();
 		_setDefaultValues();
 	}
 
-	function _setDefaultValues() {
+	@:noCompletion function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
 		stats = false;
@@ -123,7 +123,7 @@ class Application {
 		_lastTime = Date.now();
 	}
 
-	function _onWindowResize(event:Event) {
+	@:noCompletion function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		_renderer.resize(width, height);
@@ -132,7 +132,7 @@ class Application {
 		if (onResize != null) onResize();
 	}
 
-	function _onRequestAnimationFrame() {
+	@:noCompletion function _onRequestAnimationFrame() {
 		if (skipFrame && _skipFrame) _skipFrame = false;
 		else {
 			_skipFrame = true;
@@ -144,13 +144,13 @@ class Application {
 		if (_stats != null) _stats.update();
 	}
 
-	function _calculateElapsedTime() {
+	@:noCompletion function _calculateElapsedTime() {
 		_currentTime = Date.now();
 		_elapsedTime = _currentTime.getTime() - _lastTime.getTime();
 		_lastTime = _currentTime;
 	}
 
-	function set_stats(val:Bool):Bool {
+	@:noCompletion function set_stats(val:Bool):Bool {
 		if (val) {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);

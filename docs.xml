@@ -13457,25 +13457,61 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></onUpdate>
 		<onResize public="1"><f a=""><x path="Void"/></f></onResize>
 		<_stage set="null"><c path="pixi.display.Stage"/></_stage>
-		<_canvas><c path="js.html.CanvasElement"/></_canvas>
-		<_renderer><c path="pixi.renderers.webgl.WebGLRenderer"/></_renderer>
-		<_stats><c path="pixi.utils.Stats"/></_stats>
-		<_lastTime><c path="Date"/></_lastTime>
-		<_currentTime><c path="Date"/></_currentTime>
-		<_elapsedTime><x path="Float"/></_elapsedTime>
-		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="96"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<_canvas>
+			<c path="js.html.CanvasElement"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_canvas>
+		<_renderer>
+			<c path="pixi.renderers.IRenderer"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_renderer>
+		<_stats>
+			<c path="pixi.utils.Stats"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_stats>
+		<_lastTime>
+			<c path="Date"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_lastTime>
+		<_currentTime>
+			<c path="Date"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_currentTime>
+		<_elapsedTime>
+			<x path="Float"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_elapsedTime>
+		<_skipFrame>
+			<x path="Bool"/>
+			<meta><m n=":noCompletion"/></meta>
+		</_skipFrame>
+		<_setDefaultValues set="method" line="96">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_setDefaultValues>
 		<start public="1" set="method" line="106"><f a=""><x path="Void"/></f></start>
-		<_onWindowResize set="method" line="126"><f a="event">
-	<c path="js.html.Event"/>
-	<x path="Void"/>
-</f></_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="135"><f a=""><x path="Void"/></f></_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="147"><f a=""><x path="Void"/></f></_calculateElapsedTime>
-		<set_stats set="method" line="153"><f a="val">
-	<x path="Bool"/>
-	<x path="Bool"/>
-</f></set_stats>
+		<_onWindowResize set="method" line="126">
+			<f a="event">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onWindowResize>
+		<_onRequestAnimationFrame set="method" line="135">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onRequestAnimationFrame>
+		<_calculateElapsedTime set="method" line="147">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_calculateElapsedTime>
+		<set_stats set="method" line="153">
+			<f a="val">
+				<x path="Bool"/>
+				<x path="Bool"/>
+			</f>
+			<meta><m n=":noCompletion"/></meta>
+		</set_stats>
 		<new public="1" set="method" line="91"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
@@ -17588,7 +17624,19 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 </f></new>
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
-	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1"><meta><m n=":keep"/></meta></class>
+	<class path="pixi.renderers.IRenderer" params="" file="pixi/renderers/IRenderer.hx" interface="1">
+		<view public="1"><t path="pixi.CanvasElement"/></view>
+		<render public="1" set="method"><f a="stage">
+	<c path="pixi.display.Stage"/>
+	<x path="Void"/>
+</f></render>
+		<resize public="1" set="method"><f a="width:height">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></resize>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="pixi.renderers.canvas.CanvasGraphics" params="" file="pixi/renderers/canvas/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.primitives.Graphics"/>
