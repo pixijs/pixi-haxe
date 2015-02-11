@@ -21,4 +21,14 @@ class DisplayObjectContainer extends CoreDisplayObjectContainer {
 		}
 		return null;
 	}
+
+	/**
+	 * Helper function to apply scale based on the pixel ratio passed
+	 *
+	 * @method applyScale
+	 * @param pixelRatio {Float} pixel ratio
+	*/
+	public function applyScale(pixelRatio:Float) {
+		if (pixelRatio > 0) scale.set(1 / pixelRatio, 1 / pixelRatio);
+	}
 }
