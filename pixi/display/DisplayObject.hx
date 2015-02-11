@@ -8,4 +8,8 @@ class DisplayObject extends CoreDisplayObject {
 		super();
 		name = "";
 	}
+
+	public function applyScale(pixelRatio:Float) {
+		if (pixelRatio > 0) scale.set(1 / pixelRatio, 1 / pixelRatio);
+	}
 }
