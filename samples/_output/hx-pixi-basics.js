@@ -21,7 +21,8 @@ pixi.Application.prototype = {
 		this.resize = true;
 		this._skipFrame = false;
 	}
-	,start: function() {
+	,start: function(renderer) {
+		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
 		this._canvas.style.width = this.width + "px";
@@ -32,7 +33,7 @@ pixi.Application.prototype = {
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.resolution = this.pixelRatio;
-		this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions);
+		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
@@ -108,13 +109,13 @@ samples.basics.Main.main = function() {
 samples.basics.Main.__super__ = pixi.Application;
 samples.basics.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._bunny.rotation += 0.1;

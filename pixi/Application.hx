@@ -8,6 +8,8 @@
 
 package pixi;
 
+import pixi.renderers.webgl.WebGLRenderer;
+import pixi.renderers.canvas.CanvasRenderer;
 import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
@@ -79,6 +81,11 @@ class Application {
 	 */
 	var _stage(default, null):Stage;
 
+	public static inline var AUTO:String = "auto";
+	public static inline var RECOMMENDED:String = "recommended";
+	public static inline var CANVAS:String = "canvas";
+	public static inline var WEBGL:String = "webgl";
+
 	@:noCompletion var _canvas:CanvasElement;
 	@:noCompletion var _renderer:IRenderer;
 	@:noCompletion var _stats:Stats;
@@ -104,7 +111,11 @@ class Application {
 		_skipFrame = false;
 	}
 
-	public function start() {
+	/*
+	 * Type of the renderer to use AUTO | RECOMMENDED | CANVAS | WEBGL
+	 * @default AUTO
+	 */
+	public function start(?renderer:String = AUTO) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
 		_canvas.style.height = height + "px";
@@ -117,7 +128,11 @@ class Application {
 		renderingOptions.view = _canvas;
 		renderingOptions.resolution = pixelRatio;
 
-		_renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
+		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
+		else if (renderer == RECOMMENDED) _renderer = Detector.autoDetectRecommendedRenderer(width, height, renderingOptions);
+		else if (renderer == CANVAS) _renderer = new CanvasRenderer(width, height, renderingOptions);
+		else _renderer = new WebGLRenderer(width, height, renderingOptions);
+
 		Browser.document.body.appendChild(_renderer.view);
 		if (resize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
