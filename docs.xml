@@ -13485,34 +13485,37 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<x path="Bool"/>
 			<meta><m n=":noCompletion"/></meta>
 		</_skipFrame>
-		<_setDefaultValues set="method" line="96">
+		<_setDefaultValues set="method" line="103">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_setDefaultValues>
-		<start public="1" set="method" line="107"><f a=""><x path="Void"/></f></start>
-		<_onWindowResize set="method" line="127">
+		<start public="1" set="method" line="118"><f a="?renderer" v="'auto'">
+	<c path="String"/>
+	<x path="Void"/>
+</f></start>
+		<_onWindowResize set="method" line="142">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="136">
+		<_onRequestAnimationFrame set="method" line="151">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="148">
+		<_calculateElapsedTime set="method" line="163">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<set_stats set="method" line="154">
+		<set_stats set="method" line="169">
 			<f a="val">
 				<x path="Bool"/>
 				<x path="Bool"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</set_stats>
-		<new public="1" set="method" line="91"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="98"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 	<typedef path="pixi.CanvasElement" params="" file="pixi/DomDefinitions.hx" module="pixi.DomDefinitions">
