@@ -132,10 +132,10 @@ samples.rendertexture.Main.main = function() {
 samples.rendertexture.Main.__super__ = pixi.Application;
 samples.rendertexture.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65280;
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		var _g1 = 0;

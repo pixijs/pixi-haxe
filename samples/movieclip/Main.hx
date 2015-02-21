@@ -5,9 +5,7 @@ import pixi.renderers.IRenderer;
 import pixi.display.MovieClip;
 import pixi.display.Stage;
 import pixi.textures.Texture;
-import pixi.utils.Detector;
 import pixi.loaders.AssetLoader;
-import js.Browser;
 
 class Main extends Application {
 
@@ -25,13 +23,13 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
 		backgroundColor = 0x00FF66;
 		onUpdate = _onUpdate;
 		resize = false;
 		width = 800;
 		height = 600;
 		super.start();
+		stats = true;
 	}
 
 	function _onUpdate(elapsedTime:Float) {

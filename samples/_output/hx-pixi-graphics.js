@@ -143,13 +143,13 @@ samples.graphics.Main.main = function() {
 samples.graphics.Main.__super__ = pixi.Application;
 samples.graphics.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.resize = false;
 		this.width = 620;
 		this.height = 380;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.1;

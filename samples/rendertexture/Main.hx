@@ -69,10 +69,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
 		backgroundColor = 0x00FF00;
 		onUpdate = _onUpdate;
 		super.start();
+		stats = true;
 	}
 
 	function _onUpdate(elapsedTime:Float) {

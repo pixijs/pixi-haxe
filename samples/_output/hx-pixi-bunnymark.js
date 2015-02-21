@@ -131,10 +131,10 @@ samples.bunnymark.Main.main = function() {
 samples.bunnymark.Main.__super__ = pixi.Application;
 samples.bunnymark.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		if(this._add) this._addBunnys();
