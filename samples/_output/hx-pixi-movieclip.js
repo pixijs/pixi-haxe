@@ -112,13 +112,13 @@ samples.movieclip.Main.main = function() {
 samples.movieclip.Main.__super__ = pixi.Application;
 samples.movieclip.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._renderer.render(this._stage);

@@ -108,12 +108,12 @@ samples.bitmaptext.Main.main = function() {
 samples.bitmaptext.Main.__super__ = pixi.Application;
 samples.bitmaptext.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 13158;
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,onAssetsLoaded: function() {
 		var bitmapFontText = new PIXI.BitmapText("bitmap fonts are\n now supported!",{ font : "60px Desyrel"});

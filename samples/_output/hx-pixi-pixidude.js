@@ -109,12 +109,12 @@ samples.pixidude.Main.main = function() {
 samples.pixidude.Main.__super__ = pixi.Application;
 samples.pixidude.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65280;
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,onAssetsLoaded: function() {
 		this._background1 = PIXI.Sprite.fromImage("assets/spine/data/iP4_BGtile.jpg");

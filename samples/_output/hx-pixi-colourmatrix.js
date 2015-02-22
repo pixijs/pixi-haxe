@@ -134,10 +134,10 @@ samples.colourmatrix.Main.main = function() {
 samples.colourmatrix.Main.__super__ = pixi.Application;
 samples.colourmatrix.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.01;

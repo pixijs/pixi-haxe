@@ -121,10 +121,10 @@ samples.snake.Main.main = function() {
 samples.snake.Main.__super__ = pixi.Application;
 samples.snake.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.1;

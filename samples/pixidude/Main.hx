@@ -32,12 +32,12 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
 		backgroundColor = 0x00FF00;
 		resize = false;
 		width = 800;
 		height = 600;
 		super.start();
+		stats = true;
 	}
 
 	function onAssetsLoaded() {

@@ -35,11 +35,10 @@ class Main extends Application {
 		_bg.x = Browser.window.innerWidth / 2;
 		_bg.y = Browser.window.innerHeight / 2;
 
-		_colorMatrix =  [1,0,0,0,
-						0,1,0,0,
-						0,0,1,0,
-						0,0,0,1];
-
+		_colorMatrix = [1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1];
 
 		_filter = new ColorMatrixFilter();
 
@@ -60,7 +59,7 @@ class Main extends Application {
 		_light1.anchor.set(0.5, 0.5);
 		_container.addChild(_light1);
 
-		_panda =  Sprite.fromImage("assets/filters/panda.png");
+		_panda = Sprite.fromImage("assets/filters/panda.png");
 		_panda.anchor.set(0.5, 0.5);
 
 		_container.addChild(_panda);
@@ -78,10 +77,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
 		backgroundColor = 0x00FF66;
 		onUpdate = _onUpdate;
 		super.start();
+		stats = true;
 	}
 
 	function _onUpdate(elapsedTime:Float) {

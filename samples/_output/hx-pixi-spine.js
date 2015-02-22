@@ -108,12 +108,12 @@ samples.spine.Main.main = function() {
 samples.spine.Main.__super__ = pixi.Application;
 samples.spine.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 65382;
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,onAssetsLoaded: function() {
 		this._spineBoy = new PIXI.Spine("assets/spine/data/spineboy.json");

@@ -117,13 +117,13 @@ samples.blur.Main.main = function() {
 samples.blur.Main.__super__ = pixi.Application;
 samples.blur.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
-		this.set_stats(true);
 		this.backgroundColor = 16777215;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.resize = false;
 		this.width = 800;
 		this.height = 600;
 		pixi.Application.prototype.start.call(this);
+		this.set_stats(true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.01;
