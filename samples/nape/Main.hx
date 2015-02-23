@@ -35,12 +35,11 @@ class Main extends Application {
 	}
 
 	function _init() {
-		stats = true;
 		backgroundColor = 0x00FFFF;
 		resize = false;
 		width = 800;
 		height = 600;
-		super.start();
+		super.start(true);
 	}
 
 	function _onUpdate(elapsedTime:Float) {

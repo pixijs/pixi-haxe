@@ -67,8 +67,7 @@ class Main extends Application {
 		resize = false;
 		width = 620;
 		height = 380;
-		super.start();
-		stats = true;
+		super.start(true);
 	}
 
 	function _onUpdate(elapsedTime:Float) {

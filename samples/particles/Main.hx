@@ -37,8 +37,7 @@ class Main extends Application {
 		resize = true;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		super.start();
-		stats = true;
+		super.start(true);
 
 		emitters = new Array();
 	}
