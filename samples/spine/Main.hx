@@ -27,8 +27,7 @@ class Main extends Application {
 		resize = false;
 		width = 800;
 		height = 600;
-		super.start();
-		stats = true;
+		super.start(true);
 	}
 
 	function onAssetsLoaded() {

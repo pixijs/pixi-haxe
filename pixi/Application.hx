@@ -52,14 +52,6 @@ class Application {
 	public var resize(null, default):Bool;
 
 	/*
-	 * Enable/disable stats for the application
-	 * Note that stats.js is not part of pixi so don't forget to include it you html page
-	 * Can be found in libs folder - <script type="text/javascript" src="libs/stats.min.js"></script>
-	 * @default false
-	 */
-	public var stats(null, set):Bool;
-
-	/*
 	 * Sets the background color of the stage
 	 * @default 0xFFFFFF
 	 */
@@ -103,7 +95,6 @@ class Application {
 	@:noCompletion function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
-		stats = false;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -112,10 +103,13 @@ class Application {
 	}
 
 	/*
-	 * Type of the renderer to use AUTO | RECOMMENDED | CANVAS | WEBGL
+	 * Type of the renderer to use AUTO | RECOMMENDED | CANVAS | WEBGL - @default AUTO
+	 * and Enable/disable stats for the application - @default false
+	 * Note that stats.js is not part of pixi so don't forget to include it you html page
+	 * Can be found in libs folder - <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @default AUTO
 	 */
-	public function start(?renderer:String = AUTO) {
+	public function start(?renderer:String = AUTO, ?stats:Bool = false) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
 		_canvas.style.height = height + "px";
@@ -137,6 +131,8 @@ class Application {
 		if (resize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
+
+		if (stats) _addStats();
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
@@ -166,8 +162,9 @@ class Application {
 		_lastTime = _currentTime;
 	}
 
-	@:noCompletion function set_stats(val:Bool):Bool {
-		if (val) {
+	@:noCompletion function _addStats() {
+		if (untyped __js__("window").Stats == null) trace("stats.js not foind");
+		else {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);
 			_stats = new Stats();
@@ -177,6 +174,5 @@ class Application {
 			_container.appendChild(_stats.domElement);
 			_stats.begin();
 		}
-		return stats = val;
 	}
 }

@@ -18,14 +18,14 @@ pixi.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
-		this.set_stats(false);
 		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 		this.resize = true;
 		this._skipFrame = false;
 	}
-	,start: function(renderer) {
+	,start: function(renderer,stats) {
+		if(stats == null) stats = false;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -42,6 +42,7 @@ pixi.Application.prototype = {
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
+		if(stats) this._addStats();
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -66,8 +67,8 @@ pixi.Application.prototype = {
 		this._elapsedTime = this._currentTime.getTime() - this._lastTime.getTime();
 		this._lastTime = this._currentTime;
 	}
-	,set_stats: function(val) {
-		if(val) {
+	,_addStats: function() {
+		if(window.Stats == null) console.log("stats.js not foind"); else {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -77,7 +78,6 @@ pixi.Application.prototype = {
 			_container.appendChild(this._stats.domElement);
 			this._stats.begin();
 		}
-		return this.stats = val;
 	}
 };
 pixi.display = {};
@@ -133,8 +133,7 @@ samples.bunnymark.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.Application.prototype.start.call(this);
-		this.set_stats(true);
+		pixi.Application.prototype.start.call(this,null,true);
 	}
 	,_onUpdate: function(elapsedTime) {
 		if(this._add) this._addBunnys();

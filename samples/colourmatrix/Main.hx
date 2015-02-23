@@ -79,8 +79,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0x00FF66;
 		onUpdate = _onUpdate;
-		super.start();
-		stats = true;
+		super.start(true);
 	}
 
 	function _onUpdate(elapsedTime:Float) {
