@@ -1,5 +1,6 @@
 package samples.movieclip;
 
+import js.Browser;
 import pixi.Application;
 import pixi.renderers.IRenderer;
 import pixi.display.MovieClip;
@@ -25,10 +26,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0x00FF66;
 		onUpdate = _onUpdate;
-		resize = false;
-		width = 800;
-		height = 600;
-		super.start(true);
+		super.start();
 	}
 
 	function _onUpdate(elapsedTime:Float) {
@@ -45,12 +43,11 @@ class Main extends Application {
 		}
 
 		var explosion:MovieClip;
-		for (i in 0...50) {
+		for (i in 0 ... 80) {
 			explosion = new MovieClip(explosionTextures);
-			explosion.position.x = Math.random() * 800;
-			explosion.position.y = Math.random() * 600;
-			explosion.anchor.x = 0.5;
-			explosion.anchor.y = 0.5;
+			explosion.position.x = Math.random() * Browser.window.innerWidth;
+			explosion.position.y = Math.random() * Browser.window.innerHeight;
+			explosion.anchor.set(0.5, 0.5);
 
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;

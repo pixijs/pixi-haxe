@@ -13488,27 +13488,27 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_setDefaultValues>
-		<start public="1" set="method" line="112"><f a="?renderer:?stats" v="'auto':false">
+		<start public="1" set="method" line="111"><f a="?renderer:?stats" v="'auto':true">
 	<c path="String"/>
 	<x path="Bool"/>
 	<x path="Void"/>
 </f></start>
-		<_onWindowResize set="method" line="138">
+		<_onWindowResize set="method" line="137">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="147">
+		<_onRequestAnimationFrame set="method" line="146">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="159">
+		<_calculateElapsedTime set="method" line="158">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="165">
+		<_addStats set="method" line="164">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>
@@ -20282,7 +20282,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="samples.particles.Main" params="" file="samples/particles/Main.hx">
 		<extends path="pixi.Application"/>
-		<main set="method" line="87" static="1">
+		<main set="method" line="84" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
@@ -20292,15 +20292,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<emitters><c path="Array"><c path="pixi.plugins.particles.cloudkid.Emitter"/></c></emitters>
 		<particle_json_config><d/></particle_json_config>
 		<_init set="method" line="34"><f a=""><x path="Void"/></f></_init>
-		<_onUpdate set="method" line="45"><f a="elapsedTime">
+		<_onUpdate set="method" line="42"><f a="elapsedTime">
 	<x path="Float"/>
 	<x path="Void"/>
 </f></_onUpdate>
-		<_onAssetLoaded set="method" line="79"><f a="loader">
+		<_onAssetLoaded set="method" line="76"><f a="loader">
 	<d/>
 	<x path="Void"/>
 </f></_onAssetLoaded>
-		<_onAssetsLoaded set="method" line="83"><f a=""><x path="Void"/></f></_onAssetsLoaded>
+		<_onAssetsLoaded set="method" line="80"><f a=""><x path="Void"/></f></_onAssetsLoaded>
 		<new public="1" set="method" line="21"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>

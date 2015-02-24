@@ -24,10 +24,7 @@ class Main extends Application {
 
 	function _init() {
 		backgroundColor = 0x00FF66;
-		resize = false;
-		width = 800;
-		height = 600;
-		super.start(true);
+		super.start();
 	}
 
 	function onAssetsLoaded() {

@@ -104,12 +104,11 @@ class Application {
 
 	/*
 	 * Type of the renderer to use AUTO | RECOMMENDED | CANVAS | WEBGL - @default AUTO
-	 * and Enable/disable stats for the application - @default false
+	 * and Enable/disable stats for the application - @default true
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder - <script type="text/javascript" src="libs/stats.min.js"></script>
-	 * @default AUTO
 	 */
-	public function start(?renderer:String = AUTO, ?stats:Bool = false) {
+	public function start(?renderer:String = AUTO, ?stats:Bool = true) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
 		_canvas.style.height = height + "px";
@@ -163,8 +162,7 @@ class Application {
 	}
 
 	@:noCompletion function _addStats() {
-		if (untyped __js__("window").Stats == null) trace("stats.js not foind");
-		else {
+		if (untyped __js__("window").Stats != null) {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);
 			_stats = new Stats();

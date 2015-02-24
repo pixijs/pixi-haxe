@@ -25,7 +25,7 @@ pixi.Application.prototype = {
 		this._skipFrame = false;
 	}
 	,start: function(renderer,stats) {
-		if(stats == null) stats = false;
+		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -68,7 +68,7 @@ pixi.Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats == null) console.log("stats.js not foind"); else {
+		if(window.Stats != null) {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -114,10 +114,7 @@ samples.movieclip.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
-		this.resize = false;
-		this.width = 800;
-		this.height = 600;
-		pixi.Application.prototype.start.call(this,null,true);
+		pixi.Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._renderer.render(this._stage);
@@ -133,13 +130,12 @@ samples.movieclip.Main.prototype = $extend(pixi.Application.prototype,{
 		}
 		var explosion;
 		var _g1 = 0;
-		while(_g1 < 50) {
+		while(_g1 < 80) {
 			var i1 = _g1++;
 			explosion = new PIXI.MovieClip(explosionTextures);
-			explosion.position.x = Math.random() * 800;
-			explosion.position.y = Math.random() * 600;
-			explosion.anchor.x = 0.5;
-			explosion.anchor.y = 0.5;
+			explosion.position.x = Math.random() * window.innerWidth;
+			explosion.position.y = Math.random() * window.innerHeight;
+			explosion.anchor.set(0.5,0.5);
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
 			explosion.gotoAndPlay(Std.random(27));

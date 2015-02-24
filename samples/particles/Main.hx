@@ -34,10 +34,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0x003366;
 		onUpdate = _onUpdate;
-		resize = true;
-		width = Browser.window.innerWidth;
-		height = Browser.window.innerHeight;
-		super.start(true);
+		super.start();
 
 		emitters = new Array();
 	}

@@ -1,5 +1,6 @@
 package samples.graphics;
 
+import js.Browser;
 import pixi.Application;
 import pixi.InteractionData;
 import pixi.primitives.Graphics;
@@ -53,8 +54,8 @@ class Main extends Application {
 
 		_thing = new Graphics();
 		_stage.addChild(_thing);
-		_thing.position.x = 620 / 2;
-		_thing.position.y = 380 / 2;
+		_thing.position.x = Browser.window.innerWidth / 2;
+		_thing.position.y = Browser.window.innerHeight / 2;
 
 		_count = 0;
 
@@ -64,10 +65,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0x00FF66;
 		onUpdate = _onUpdate;
-		resize = false;
-		width = 620;
-		height = 380;
-		super.start(true);
+		super.start();
 	}
 
 	function _onUpdate(elapsedTime:Float) {

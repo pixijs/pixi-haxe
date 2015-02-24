@@ -1,5 +1,6 @@
 package samples.bitmaptext;
 
+import js.Browser;
 import pixi.Application;
 import pixi.display.Stage;
 import pixi.loaders.AssetLoader;
@@ -22,16 +23,13 @@ class Main extends Application {
 
 	function _init() {
 		backgroundColor = 0x003366;
-		resize = false;
-		width = 800;
-		height = 600;
-		super.start(true);
+		super.start();
 	}
 
 	function onAssetsLoaded() {
 		var bitmapFontText = new BitmapText("bitmap fonts are\n now supported!", {font: "60px Desyrel"});
-		bitmapFontText.position.x = 400 - bitmapFontText.width / 2;
-		bitmapFontText.position.y = 300 - bitmapFontText.height / 2;
+		bitmapFontText.position.x = (Browser.window.innerWidth - bitmapFontText.width) / 2;
+		bitmapFontText.position.y = (Browser.window.innerHeight - bitmapFontText.height) / 2;
 		_stage.addChild(bitmapFontText);
 	}
 

@@ -21,7 +21,7 @@ pixi.Application.prototype = {
 		this._skipFrame = false;
 	}
 	,start: function(renderer,stats) {
-		if(stats == null) stats = false;
+		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -64,7 +64,7 @@ pixi.Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats == null) console.log("stats.js not foind"); else {
+		if(window.Stats != null) {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -134,7 +134,7 @@ samples.rendertexture.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 65280;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.Application.prototype.start.call(this,null,true);
+		pixi.Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		var _g1 = 0;

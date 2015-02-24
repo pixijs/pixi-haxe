@@ -1,5 +1,6 @@
 package samples.basics;
 
+import js.Browser;
 import pixi.Application;
 import pixi.display.Sprite;
 import pixi.display.Stage;
@@ -15,18 +16,14 @@ class Main extends Application {
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5, 0.5);
-		_bunny.scale.set(2, 2);
-		_bunny.position.set(400, 300);
+		_bunny.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		_stage.addChild(_bunny);
 	}
 
 	function _init() {
 		backgroundColor = 0x003366;
 		onUpdate = _onUpdate;
-		resize = false;
-		width = 800;
-		height = 600;
-		super.start(true);
+		super.start();
 	}
 
 	function _onUpdate(elapsedTime:Float) {

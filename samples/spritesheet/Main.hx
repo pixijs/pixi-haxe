@@ -1,5 +1,6 @@
 package samples.spritesheet;
 
+import js.Browser;
 import pixi.Application;
 import pixi.renderers.webgl.WebGLRenderer;
 import pixi.display.Sprite;
@@ -28,10 +29,7 @@ class Main extends Application {
 
     function _init() {
         backgroundColor = 0x00FF66;
-        resize = false;
-        width = 800;
-        height = 600;
-        super.start(true);
+        super.start();
     }
 
     function _onUpdate(elapsedTime:Float) {
@@ -52,16 +50,16 @@ class Main extends Application {
         _alienFrames = ["eggHead.png", "flowerTop.png", "helmlok.png", "skully.png"];
 
         _alienContainer = new DisplayObjectContainer();
-        _alienContainer.x = 400;
-        _alienContainer.y = 300;
+        _alienContainer.x = Browser.window.innerWidth / 2;
+        _alienContainer.y = Browser.window.innerHeight / 2;
 
         _stage.addChild(_alienContainer);
 
         for (i in 0...100) {
             var frameName:String = _alienFrames[i % 4];
             var alien = Sprite.fromFrame(frameName);
-            alien.x = Math.random() * 800 - 400;
-            alien.y = Math.random() * 600 - 300;
+            alien.x = Math.random() * Browser.window.innerWidth - 400;
+            alien.y = Math.random() * Browser.window.innerHeight - 300;
             alien.anchor.set(0.5, 0.5);
             _aliens.push(alien);
             _alienContainer.addChild(alien);
