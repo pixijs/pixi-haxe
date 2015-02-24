@@ -21,7 +21,7 @@ pixi.Application.prototype = {
 		this._skipFrame = false;
 	}
 	,start: function(renderer,stats) {
-		if(stats == null) stats = false;
+		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -64,7 +64,7 @@ pixi.Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats == null) console.log("stats.js not foind"); else {
+		if(window.Stats != null) {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -109,15 +109,12 @@ samples.bitmaptext.Main.__super__ = pixi.Application;
 samples.bitmaptext.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
-		this.resize = false;
-		this.width = 800;
-		this.height = 600;
-		pixi.Application.prototype.start.call(this,null,true);
+		pixi.Application.prototype.start.call(this);
 	}
 	,onAssetsLoaded: function() {
 		var bitmapFontText = new PIXI.BitmapText("bitmap fonts are\n now supported!",{ font : "60px Desyrel"});
-		bitmapFontText.position.x = 400 - bitmapFontText.width / 2;
-		bitmapFontText.position.y = 300 - bitmapFontText.height / 2;
+		bitmapFontText.position.x = (window.innerWidth - bitmapFontText.width) / 2;
+		bitmapFontText.position.y = (window.innerHeight - bitmapFontText.height) / 2;
 		this._stage.addChild(bitmapFontText);
 	}
 });

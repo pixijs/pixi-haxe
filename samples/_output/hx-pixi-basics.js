@@ -21,7 +21,7 @@ pixi.Application.prototype = {
 		this._skipFrame = false;
 	}
 	,start: function(renderer,stats) {
-		if(stats == null) stats = false;
+		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -64,7 +64,7 @@ pixi.Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats == null) console.log("stats.js not foind"); else {
+		if(window.Stats != null) {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -99,8 +99,7 @@ samples.basics.Main = function() {
 	this._init();
 	this._bunny = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
 	this._bunny.anchor.set(0.5,0.5);
-	this._bunny.scale.set(2,2);
-	this._bunny.position.set(400,300);
+	this._bunny.position.set(window.innerWidth / 2,window.innerHeight / 2);
 	this._stage.addChild(this._bunny);
 };
 samples.basics.Main.main = function() {
@@ -111,10 +110,7 @@ samples.basics.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
-		this.resize = false;
-		this.width = 800;
-		this.height = 600;
-		pixi.Application.prototype.start.call(this,null,true);
+		pixi.Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._bunny.rotation += 0.1;

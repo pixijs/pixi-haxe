@@ -25,7 +25,7 @@ pixi.Application.prototype = {
 		this._skipFrame = false;
 	}
 	,start: function(renderer,stats) {
-		if(stats == null) stats = false;
+		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
 		this._canvas = _this.createElement("canvas");
@@ -68,7 +68,7 @@ pixi.Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats == null) console.log("stats.js not foind"); else {
+		if(window.Stats != null) {
 			var _container = window.document.createElement("div");
 			window.document.body.appendChild(_container);
 			this._stats = new Stats();
@@ -132,8 +132,8 @@ samples.graphics.Main = function() {
 	this._stage.addChild(this._graphics);
 	this._thing = new PIXI.Graphics();
 	this._stage.addChild(this._thing);
-	this._thing.position.x = 310.;
-	this._thing.position.y = 190.;
+	this._thing.position.x = window.innerWidth / 2;
+	this._thing.position.y = window.innerHeight / 2;
 	this._count = 0;
 	this._stage.click = this._stage.tap = $bind(this,this._onStageClick);
 };
@@ -145,10 +145,7 @@ samples.graphics.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
-		this.resize = false;
-		this.width = 620;
-		this.height = 380;
-		pixi.Application.prototype.start.call(this,null,true);
+		pixi.Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.1;

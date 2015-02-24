@@ -1,5 +1,6 @@
 package samples.pixidude;
 
+import js.Browser;
 import pixi.Application;
 import pixi.InteractionData;
 import pixi.display.Sprite;
@@ -33,10 +34,7 @@ class Main extends Application {
 
 	function _init() {
 		backgroundColor = 0x00FF00;
-		resize = false;
-		width = 800;
-		height = 600;
-		super.start(true);
+		super.start();
 	}
 
 	function onAssetsLoaded() {
@@ -49,13 +47,13 @@ class Main extends Application {
 		_foreground2 = Sprite.fromImage("assets/spine/data/iP4_ground.png");
 		_stage.addChild(_foreground1);
 		_stage.addChild(_foreground2);
-		_foreground1.position.y = _foreground2.position.y = 640 - _foreground2.height;
+		_foreground1.position.y = _foreground2.position.y = Browser.window.innerHeight - _foreground2.height;
 
 		_pixie = new Spine("assets/spine/data/Pixie.json");
 		var scale = 0.3;
 
-		_pixie.position.x = 1024 / 3;
-		_pixie.position.y = 500;
+		_pixie.position.x = Browser.window.innerWidth / 3;
+		_pixie.position.y = 600;
 
 		_pixie.scale.x = _pixie.scale.y = scale;
 
