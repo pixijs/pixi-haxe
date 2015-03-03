@@ -14325,6 +14325,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.display.DisplayObjectContainer" params="" file="pixi/display/DisplayObjectContainer.hx">
 		<extends path="pixi.display.CoreDisplayObjectContainer"/>
+		<getChildByName public="1" set="method" line="16">
+			<f a="name">
+				<c path="String"/>
+				<c path="pixi.display.DisplayObject"/>
+			</f>
+			<meta><m n=":keep"/></meta>
+			<haxe_doc>* Returns the child with the specified name
+	 *
+	 * @method getChildByName
+	 * @param name {String} The name of the child
+	 * @return {DisplayObject}</haxe_doc>
+		</getChildByName>
 		<new public="1" set="method" line="5"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
