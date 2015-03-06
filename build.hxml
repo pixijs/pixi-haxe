@@ -103,5 +103,12 @@
 -js samples/_output/hx-pixi-particles.js
 -dce full
 
-#-D source-map-content
-#-debug
+--next
+-cp samples
+-cp src
+-main samples.video.Main
+-js samples/_output/hx-pixi-video.js
+-dce full
+
+-D source-map-content
+-debug

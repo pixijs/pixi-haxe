@@ -50,7 +50,7 @@ extern class RenderTexture extends Texture {
 	 * @param [matrix] {Matrix} Optional matrix to apply to the display object before rendering.
 	 * @param [clear] {Bool} If true the texture will be cleared before the displayObject is drawn
 	 */
-	var render:DisplayObject -> Matrix -> Bool -> Void;
+	function render(displayObject:DisplayObject, matrix:Matrix, clear:Bool):Void;
 
 	/**
 	 * Resize the RenderTexture.

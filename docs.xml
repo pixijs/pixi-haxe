@@ -4,22 +4,6 @@
 			<x path="Int"/>
 			<haxe_doc>The length of `this` Array.</haxe_doc>
 		</length>
-		<push public="1" set="method">
-			<f a="x">
-				<c path="Array.T"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>Adds the element `x` at the end of `this` Array and returns the new
-		length of `this` Array.
-
-		This operation modifies `this` Array in place.
-
-		`this.length` increases by 1.</haxe_doc>
-		</push>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Creates a new Array.</haxe_doc>
-		</new>
 		<haxe_doc>An Array is a storage for values. You can access it using indexes or
 	with its API.</haxe_doc>
 		<meta>
@@ -156,89 +140,6 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<class path="Math" params="" file="/usr/lib/haxe/std/Math.hx" extern="1">
-		<NEGATIVE_INFINITY public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes negative infinity.
-
-		For example, this is the result of -1.0 / 0.0.
-
-		Operations with NEGATIVE_INFINITY as an operand may result in
-		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.</haxe_doc>
-		</NEGATIVE_INFINITY>
-		<POSITIVE_INFINITY public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes negative infinity.
-
-		For example, this is the result of 1.0 / 0.0.
-
-		Operations with POSITIVE_INFINITY as an operand may result in
-		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.</haxe_doc>
-		</POSITIVE_INFINITY>
-		<NaN public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes an invalid number.
-
-		NaN stands for "Not a Number". It occurs when a mathematically incorrect
-		operation is executed, such as taking the square root of a negative
-		number: Math.sqrt(-1).
-
-		All further operations with NaN as an operand will result in NaN.
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.
-
-		In order to test if a value is NaN, you should use Math.isNaN() function.
-
-		@php In PHP versions prior to 5.3.1 VC 9 there may be unexpected
-		results when performing arithmetic operations with NaN on Windows, 
-		see [https://bugs.php.net/bug.php?id=42143]</haxe_doc>
-		</NaN>
-		<floor public="1" set="method" static="1">
-			<f a="v">
-				<x path="Float"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>Returns the largest integer value that is not greater than `v`.
-
-		If `v` is outside of the signed Int32 range, or is NaN, NEGATIVE_INFINITY 
-		or POSITIVE_INFINITY, the result is unspecified.</haxe_doc>
-		</floor>
-		<random public="1" set="method" static="1">
-			<f a=""><x path="Float"/></f>
-			<haxe_doc>Returns a pseudo-random number which is greater than or equal to 0.0, 
-		and less than 1.0.</haxe_doc>
-		</random>
-		<isFinite public="1" set="method" static="1">
-			<f a="f">
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Tells if `f` is a finite number.
-
-		If `f` is POSITIVE_INFINITY, NEGATIVE_INFINITY or NaN, the result 
-		is false, otherwise the result is true.</haxe_doc>
-		</isFinite>
-		<isNaN public="1" set="method" static="1">
-			<f a="f">
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Tells if `f` is not a valid number.
-
-		If `f` is NaN, the result is true, otherwise the result is false. 
-		In particular, both POSITIVE_INFINITY and NEGATIVE_INFINITY are
-		not considered NaN.</haxe_doc>
-		</isNaN>
-		<haxe_doc>This class defines mathematical functions and constants.</haxe_doc>
-		<meta><m n=":keep"/></meta>
-	</class>
 	<class path="String" params="" file="/usr/lib/haxe/std/js/_std/String.hx" extern="1">
 		<fromCharCode public="1" set="method" static="1">
 			<f a="code">
@@ -405,16 +306,7 @@
 	String, it is passed through Std.string() first.</haxe_doc>
 		<meta><m n=":coreApi"/></meta>
 	</class>
-	<class path="Std" params="" file="/usr/lib/haxe/std/js/_std/Std.hx">
-		<random public="1" set="method" line="57" static="1">
-			<f a="x">
-				<x path="Int"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc><![CDATA[Return a random integer between 0 included and `x` excluded.
-
-		If `x <= 1`, the result is always 0.]]></haxe_doc>
-		</random>
+	<class path="Std" params="" file="/usr/lib/haxe/std/js/_std/Std.hx" extern="1">
 		<haxe_doc>The Std class provides standard methods for manipulating basic types.</haxe_doc>
 		<meta>
 			<m n=":keep"/>
@@ -670,28 +562,6 @@
 	This can be used to track positions of calls in e.g. a unit testing
 	framework.</haxe_doc>
 	</typedef>
-	<class path="haxe.Timer" params="" file="/usr/lib/haxe/std/haxe/Timer.hx">
-		<stamp public="1" set="method" line="161" static="1">
-			<f a=""><x path="Float"/></f>
-			<haxe_doc>Returns a timestamp, in seconds with fractions.
-
-		The value itself might differ depending on platforms, only differences
-		between two values make sense.</haxe_doc>
-		</stamp>
-		<haxe_doc>The Timer class allows you to create asynchronous timers on platforms that
-	support events.
-
-	The intended usage is to create an instance of the Timer class with a given
-	interval, set its run() method to a custom function to be invoked and
-	eventually call stop() to stop the Timer.
-
-	Note that a running Timer may or may not prevent the program to exit
-	automatically when main() returns.
-
-	It is also possible to extend this class and override its run() method in
-	the child class.</haxe_doc>
-		<meta><m n=":keep"/></meta>
-	</class>
 	<class path="js.html.EventTarget" params="" file="/usr/lib/haxe/std/js/html/EventTarget.hx" extern="1">
 		<addEventListener public="1" set="method"><f a="type:listener:?useCapture">
 	<c path="String"/>
@@ -14325,6 +14195,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.display.DisplayObjectContainer" params="" file="pixi/display/DisplayObjectContainer.hx">
 		<extends path="pixi.display.CoreDisplayObjectContainer"/>
+		<getChildByName public="1" set="method" line="16">
+			<f a="name">
+				<c path="String"/>
+				<c path="pixi.display.DisplayObject"/>
+			</f>
+			<meta><m n=":keep"/></meta>
+			<haxe_doc>* Returns the child with the specified name
+	 *
+	 * @method getChildByName
+	 * @param name {String} The name of the child
+	 * @return {DisplayObject}</haxe_doc>
+		</getChildByName>
 		<new public="1" set="method" line="5"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
@@ -19788,8 +19670,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.textures.RenderTexture" params="" file="pixi/textures/RenderTexture.hx" extern="1">
 		<extends path="pixi.textures.Texture"/>
-		<render public="1">
-			<f a="::">
+		<render public="1" set="method">
+			<f a="displayObject:matrix:clear">
 				<c path="pixi.display.DisplayObject"/>
 				<c path="pixi.geom.Matrix"/>
 				<x path="Bool"/>
@@ -19938,7 +19820,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<class path="pixi.textures.VideoTexture" params="" file="pixi/textures/VideoTexture.hx" extern="1">
 		<extends path="pixi.textures.BaseTexture"/>
 		<baseTextureFromVideo public="1" set="method" static="1">
-			<f a="video:scaleMode">
+			<f a="video:?scaleMode">
 				<d/>
 				<x path="Int"/>
 				<c path="pixi.textures.VideoTexture"/>
@@ -19949,7 +19831,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @returns {PIXI.VideoTexture}</haxe_doc>
 		</baseTextureFromVideo>
 		<textureFromVideo public="1" set="method" static="1">
-			<f a="video:scaleMode">
+			<f a="video:?scaleMode">
 				<d/>
 				<x path="Int"/>
 				<c path="pixi.textures.Texture"/>
@@ -19962,7 +19844,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<fromUrl public="1" set="method" static="1"><f a="videoSrc:?scaleMode">
 	<c path="String"/>
 	<x path="Int"/>
-	<c path="pixi.textures.VideoTexture"/>
+	<c path="pixi.textures.Texture"/>
 </f></fromUrl>
 		<onPlayStart public="1"><f a=""><x path="Void"/></f></onPlayStart>
 		<onPlayStop public="1"><f a=""><x path="Void"/></f></onPlayStop>
@@ -20280,28 +20162,27 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
  * @method AjaxRequest</haxe_doc>
 		<meta><m n=":native"><e>"PIXI.AjaxRequest"</e></m></meta>
 	</class>
-	<class path="samples.particles.Main" params="" file="samples/particles/Main.hx">
+	<class path="samples.video.Main" params="" file="samples/video/Main.hx">
 		<extends path="pixi.Application"/>
-		<main set="method" line="84" static="1">
+		<main set="method" line="65" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_loader><c path="pixi.loaders.AssetLoader"/></_loader>
-		<lastLaunch><x path="Float"/></lastLaunch>
-		<elapsed><x path="Float"/></elapsed>
-		<emitters><c path="Array"><c path="pixi.plugins.particles.cloudkid.Emitter"/></c></emitters>
-		<particle_json_config><d/></particle_json_config>
-		<_init set="method" line="34"><f a=""><x path="Void"/></f></_init>
-		<_onUpdate set="method" line="42"><f a="elapsedTime">
+		<_vidTexture><c path="pixi.textures.Texture"/></_vidTexture>
+		<_vidSprite><c path="pixi.display.Sprite"/></_vidSprite>
+		<_vidContainer><c path="pixi.display.DisplayObjectContainer"/></_vidContainer>
+		<_bg><c path="pixi.display.Sprite"/></_bg>
+		<_init set="method" line="25"><f a=""><x path="Void"/></f></_init>
+		<_addVideo set="method" line="50"><f a="data">
+	<c path="pixi.InteractionData"/>
+	<x path="Void"/>
+</f></_addVideo>
+		<_onUpdate set="method" line="57"><f a="elapsedTime">
 	<x path="Float"/>
 	<x path="Void"/>
 </f></_onUpdate>
-		<_onAssetLoaded set="method" line="76"><f a="loader">
-	<d/>
-	<x path="Void"/>
-</f></_onAssetLoaded>
-		<_onAssetsLoaded set="method" line="80"><f a=""><x path="Void"/></f></_onAssetsLoaded>
-		<new public="1" set="method" line="21"><f a=""><x path="Void"/></f></new>
+		<_onResize set="method" line="61"><f a=""><x path="Void"/></f></_onResize>
+		<new public="1" set="method" line="20"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>
