@@ -18,7 +18,7 @@ extern class VideoTexture extends BaseTexture {
 	 * @param scaleMode
 	 * @returns {PIXI.VideoTexture}
 	 */
-	static function baseTextureFromVideo(video:Dynamic, scaleMode:Int):VideoTexture;
+	static function baseTextureFromVideo(video:Dynamic, ?scaleMode:Int):VideoTexture;
 
 	/**
 	 * Mimic PIXI Texture.from... method.
@@ -26,7 +26,7 @@ extern class VideoTexture extends BaseTexture {
 	 * @param scaleMode
 	 * @returns {PIXI.Texture}
 	 */
-	static function textureFromVideo(video:Dynamic, scaleMode:Int):Texture;
+	static function textureFromVideo(video:Dynamic, ?scaleMode:Int):Texture;
 
-	static function fromUrl(videoSrc:String, ?scaleMode:Int):VideoTexture;
+	static function fromUrl(videoSrc:String, ?scaleMode:Int):Texture;
 }
