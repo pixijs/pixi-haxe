@@ -22,8 +22,8 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 Ported from pixi.js
 
-* [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
 * [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
+* [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
 * [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
 
 Look at the `samples` folder for the source code of above examples.
