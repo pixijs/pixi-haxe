@@ -2,7 +2,7 @@
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-Externs of pixi.js (v2.2.5) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of pixi.js (v2.2.7) for Haxe - 2D webGL renderer with canvas fallback.
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
