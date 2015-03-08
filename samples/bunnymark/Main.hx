@@ -24,7 +24,7 @@ class Main extends Application {
 	var startBunnyCount:Int = 2;
 	var isAdding:Bool = false;
 	var count:Int = 0;
-	var container:ParticleContainer;
+	var container:Container;
 
 	var amount:Int = 100;
 	var bunnyType:Int;
@@ -70,19 +70,17 @@ class Main extends Application {
 		count = startBunnyCount;
 		counter.innerHTML = count + " BUNNIES";
 
-		wabbitTexture = Texture.fromImage("assets/bunnymark/bunnys.png");
-
-		container = new ParticleContainer(200000, [false, true, false, false, false]);
+		container = new Container();
 		_stage.addChild(container);
 
-		var bunny1 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 47, 26, 37));
-		var bunny2 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 86, 26, 37));
-		var bunny3 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 125, 26, 37));
-		var bunny4 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 164, 26, 37));
-		var bunny5 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 2, 26, 37));
+		var bunny1 = Texture.fromImage("assets/bunnymark/bunny1.png");
+		var bunny2 = Texture.fromImage("assets/bunnymark/bunny2.png");
+		var bunny3 = Texture.fromImage("assets/bunnymark/bunny3.png");
+		var bunny4 = Texture.fromImage("assets/bunnymark/bunny4.png");
+		var bunny5 = Texture.fromImage("assets/bunnymark/bunny5.png");
 
 		bunnyTextures = [bunny1, bunny2, bunny3, bunny4, bunny5];
-		bunnyType = 2;
+		bunnyType = 1;
 		currentTexture = bunnyTextures[bunnyType];
 
 		for (i in 0 ... startBunnyCount) {
@@ -112,7 +110,6 @@ class Main extends Application {
 		bunnyType++;
 		bunnyType %= 5;
 		currentTexture = bunnyTextures[bunnyType];
-
 		isAdding = false;
 	}
 
