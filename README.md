@@ -18,7 +18,7 @@ Coming soon.
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
 
-### Demos (v3) ###
+### Demos ###
 
 Ported from pixi.js
 
