@@ -1,7 +1,7 @@
 -cp samples
 -cp src
--main samples.basics.Main
--js samples/_output/basics.js
+-main samples.retina.Main
+-js samples/_output/retina.js
 
 -dce full
 -D source-map-content

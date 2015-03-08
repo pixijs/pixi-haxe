@@ -83,22 +83,22 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.basics = {};
-samples.basics.Main = function() {
+samples.retina = {};
+samples.retina.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.basics.Main.main = function() {
-	new samples.basics.Main();
+samples.retina.Main.main = function() {
+	new samples.retina.Main();
 };
-samples.basics.Main.__super__ = pixi.plugins.app.Application;
-samples.basics.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.retina.Main.__super__ = pixi.plugins.app.Application;
+samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		pixi.plugins.app.Application.prototype.start.call(this);
 		var resolution;
 		if(window.devicePixelRatio >= 2) resolution = 2; else resolution = 1;
 		var imgPath;
-		if(resolution == 2) imgPath = "assets/basics/img@2x.jpg"; else imgPath = "assets/basics/img.jpg";
+		if(resolution == 2) imgPath = "assets/retina/img@2x.jpg"; else imgPath = "assets/retina/img.jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
 		this._img.anchor.set(0.5,0.5);
 		this._img.name = "img";
@@ -114,7 +114,7 @@ samples.basics.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-samples.basics.Main.main();
+samples.retina.Main.main();
 })();
 
-//# sourceMappingURL=basics.js.map
+//# sourceMappingURL=retina.js.map

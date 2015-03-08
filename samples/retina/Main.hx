@@ -1,4 +1,4 @@
-package samples.basics;
+package samples.retina;
 
 import pixi.text.Text;
 import pixi.core.textures.Texture;
@@ -21,7 +21,7 @@ class Main extends Application {
 
 		var resolution:Int = (Browser.window.devicePixelRatio >= 2) ? 2 : 1;
 
-		var imgPath:String = (resolution == 2) ? "assets/basics/img@2x.jpg" : "assets/basics/img.jpg";
+		var imgPath:String = (resolution == 2) ? "assets/retina/img@2x.jpg" : "assets/retina/img.jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));
 		_img.anchor.set(0.5, 0.5);
 		_img.name = "img";

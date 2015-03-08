@@ -18,82 +18,15 @@ Coming soon.
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
 
-### Demos (v2.x.x) ###
+### Demos (v3) ###
 
 Ported from pixi.js
 
-* [Basics](http://adireddy.github.io/demos/haxe-pixi/basics.html)
-* [Graphics](http://adireddy.github.io/demos/haxe-pixi/graphics.html)
-* [Movieclip](http://adireddy.github.io/demos/haxe-pixi/movieclip.html)
-* [Spritesheet](http://adireddy.github.io/demos/haxe-pixi/spritesheet.html)
-* [Snake](http://adireddy.github.io/demos/haxe-pixi/snake.html)
-* [Spine](http://adireddy.github.io/demos/haxe-pixi/spine.html)
-* [Render Texture](http://adireddy.github.io/demos/haxe-pixi/rendertexture.html)
-* [Pixi Dude](http://adireddy.github.io/demos/haxe-pixi/pixidude.html)
-* [Bitmap Text](http://adireddy.github.io/demos/haxe-pixi/bitmaptext.html)
-* [Tiling Sprite](http://adireddy.github.io/demos/haxe-pixi/tiling.html)
-* [Blur (Depth of Field)](http://adireddy.github.io/demos/haxe-pixi/blur.html)
-* [Colour Matrix](http://adireddy.github.io/demos/haxe-pixi/colourmatrix.html)
-
-New Demos
-
-* [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
-* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/bunnymark.html)
+* [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
+* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
+* [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
 
 Look at the `samples` folder for the source code of above examples.
-
-### Usage (v2.x.x) ###
-
-```haxe
-
-package ;
-
-import pixi.renderers.IRenderer;
-import pixi.display.Sprite;
-import pixi.display.Stage;
-import pixi.textures.Texture;
-import pixi.utils.Detector;
-import js.Browser;
-
-class Main {
-
-	var _bunny:Sprite;
-    var _renderer:IRenderer;
-    var _stage:Stage;
-
-	public function new() {
-		_stage = new Stage(0x00FF00);
-
-		// Rendering options usage sample
-		var options:RenderingOptions = {};
-		options.antialias = true;
-		options.resolution = 1;
-		options.transparent = true;
-
-        _renderer = Detector.autoDetectRenderer(800, 600, options);
-        Browser.document.body.appendChild(_renderer.view);
-
-        _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-        _bunny.anchor.set(0.5, 0.5);
-        _bunny.scale.set(2, 2);
-        _bunny.position.set(400, 300);
-
-        _stage.addChild(_bunny);
-
-        Browser.window.requestAnimationFrame(cast animate);
-	}
-
-	function animate() {
-        Browser.window.requestAnimationFrame(cast animate);
-        _bunny.rotation += 0.1;
-        _renderer.render(_stage);
-    }
-
-	static function main() {
-		new Main();
-	}
-}
-```
 
 ### Licensing Information ###
 
