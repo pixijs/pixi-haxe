@@ -2,7 +2,7 @@ package pixi.text;
 
 import pixi.core.display.Container;
 
-@:native("PIXI.text.BitmapText")
+@:native("PIXI.BitmapText")
 extern class BitmapText extends Container {
 
 	/**

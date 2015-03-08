@@ -2,7 +2,7 @@ package pixi.text;
 
 import pixi.core.sprites.Sprite;
 
-@:native("PIXI.text.Text")
+@:native("PIXI.Text")
 extern class Text extends Sprite {
 
 	/**

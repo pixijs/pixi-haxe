@@ -16279,7 +16279,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [style.font.name] {string} The bitmap font id
 	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.text.BitmapText"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.BitmapText"</e></m></meta>
 	</class>
 	<typedef path="pixi.text.BitmapTextStyle" params="" file="pixi/text/BitmapText.hx" module="pixi.text.BitmapText"><a><font>
 	<t path="pixi.text.FontProperties"/>
@@ -16363,7 +16363,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
 	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.text.Text"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
 	</class>
 	<typedef path="pixi.text.TextStyle" params="" file="pixi/text/Text.hx" module="pixi.text.Text"><a>
 	<wordWrapWidth>
