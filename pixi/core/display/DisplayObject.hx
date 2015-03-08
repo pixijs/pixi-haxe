@@ -199,4 +199,9 @@ extern class DisplayObject {
      * @memberof DisplayObject#
      */
 	var filters:Dynamic;
+
+	var interactive:Bool;
+	var buttonMode:Bool;
+	var interactiveChildren:Bool;
+	var defaultCursor:String;
 }

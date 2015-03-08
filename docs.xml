@@ -13651,6 +13651,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {Filter[]}
      * @memberof DisplayObject#</haxe_doc>
 		</filters>
+		<interactive public="1"><x path="Bool"/></interactive>
+		<buttonMode public="1"><x path="Bool"/></buttonMode>
+		<interactiveChildren public="1"><x path="Bool"/></interactiveChildren>
+		<defaultCursor public="1"><c path="String"/></defaultCursor>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
@@ -16106,6 +16110,203 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param height {Float} the height of the tiling sprite</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.TilingSprite"</e></m></meta>
+	</class>
+	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">
+		<global public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* This point stores the global coords of where the touch/mouse event happened
+     *
+     * @member {Point}</haxe_doc>
+		</global>
+		<target public="1">
+			<c path="pixi.core.sprites.Sprite"/>
+			<haxe_doc>* The target Sprite that was interacted with
+     *
+     * @member {Sprite}</haxe_doc>
+		</target>
+		<originalEvent public="1">
+			<c path="js.html.Event"/>
+			<haxe_doc>* When passed to an event handler, this will be the original DOM Event that was captured
+     *
+     * @member {Event}</haxe_doc>
+		</originalEvent>
+		<getLocalPosition public="1" set="method">
+			<f a="displayObject:point">
+				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.math.Point"/>
+				<c path="pixi.core.math.Point"/>
+			</f>
+			<haxe_doc>* This will return the local coordinates of the specified displayObject for this InteractionData
+	 *
+	 * @param displayObject {DisplayObject} The DisplayObject that you would like the local coords off
+	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new point)
+	 * @return {Point} A point containing the coordinates of the InteractionData position relative to the DisplayObject</haxe_doc>
+		</getLocalPosition>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Holds all information related to an Interaction event
+	 *
+	 * @class
+	 * @memberof PIXI.interaction</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.interaction.InteractionData"</e></m></meta>
+	</class>
+	<class path="pixi.interaction.InteractionManager" params="" file="pixi/interaction/InteractionManager.hx" extern="1">
+		<renderer public="1"><d/></renderer>
+		<mouse public="1">
+			<c path="pixi.interaction.InteractionData"/>
+			<haxe_doc>* The mouse data
+     *
+     * @member {InteractionData}</haxe_doc>
+		</mouse>
+		<eventData public="1">
+			<c path="pixi.core.utils.EventData"/>
+			<haxe_doc>* An event data object to handle all the event tracking/dispatching
+     *
+     * @member {EventData}</haxe_doc>
+		</eventData>
+		<interactiveDataPool public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* Tiny little interactiveData pool !
+     *
+     * @member {Array}</haxe_doc>
+		</interactiveDataPool>
+		<interactionDOMElement public="1">
+			<c path="js.html.HtmlElement"/>
+			<haxe_doc>* The DOM element to bind to.
+     *
+     * @member {HTMLElement}
+     * @private</haxe_doc>
+		</interactionDOMElement>
+		<eventsAdded public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Have events been attached to the dom element?
+     *
+     * @member {Bool}
+     * @private</haxe_doc>
+		</eventsAdded>
+		<onMouseUp public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onMouseUp>
+		<onMouseDown public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onMouseDown>
+		<onMouseMove public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onMouseMove>
+		<onMouseOut public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onMouseOut>
+		<onTouchStart public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onTouchStart>
+		<onTouchEnd public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onTouchEnd>
+		<onTouchMove public="1">
+			<f a="">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {Function}</haxe_doc>
+		</onTouchMove>
+		<last public="1">
+			<x path="Int"/>
+			<haxe_doc>* @member {Int}</haxe_doc>
+		</last>
+		<currentCursorStyle public="1">
+			<c path="String"/>
+			<haxe_doc>* The css style of the cursor that is being used
+     * @member {String}</haxe_doc>
+		</currentCursorStyle>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The current resolution
+     * @member {Float}</haxe_doc>
+		</resolution>
+		<mapPositionToPoint public="1" set="method">
+			<f a="point:x:y">
+				<c path="pixi.core.math.Point"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Maps x and y coords from a DOM object and maps them correctly to the pixi view. The resulting value is stored in the point.
+	 * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
+	 *
+	 * @param  {Point} point the point that the result will be stored in
+	 * @param  {Float} x     the x coord of the position to map
+	 * @param  {Float} y     the y coord of the position to map</haxe_doc>
+		</mapPositionToPoint>
+		<processInteractive public="1" set="method">
+			<f a="point:displayObject:func:hitTest:interactive">
+				<c path="pixi.core.math.Point"/>
+				<c path="pixi.core.display.DisplayObject"/>
+				<f a=""><x path="Void"/></f>
+				<x path="Bool"/>
+				<x path="Bool"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* This function is provides a neat way of crawling through the scene graph and running a specified function on all interactive objects it finds.
+	 * It will also take care of hit testing the interactive objects and passes the hit across in the function.
+	 *
+	 * @param  {Point} point the point that is tested for collision
+	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
+	 * @param  {function} func the function that will be called on each interactive object. The displayObject and hit will be passed to the function
+	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
+	 * @return {Bool} returns true if the displayObject hit the point</haxe_doc>
+		</processInteractive>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
+	 * if its interactive parameter is set to true
+	 * This manager also supports multitouch.
+	 *
+	 * @class
+	 * @memberof PIXI.interaction
+	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="renderer">
+		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
+	 * if its interactive parameter is set to true
+	 * This manager also supports multitouch.
+	 *
+	 * @class
+	 * @memberof PIXI.interaction
+	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer</haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
 		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
