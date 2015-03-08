@@ -106,9 +106,9 @@ samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._stage.addChild(this._img);
 		var style = { };
 		style.fill = "#FFFFFF";
-		style.font = "16px Tahoma";
+		style.font = "12px Courier";
 		this._label = new PIXI.text.Text(imgPath,style);
-		this._label.position.set(this._img.x - 480,this._img.y - 300);
+		this._label.position.set(this._img.x - 478,this._img.y - 300);
 		this._stage.addChild(this._label);
 	}
 });

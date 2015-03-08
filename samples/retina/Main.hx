@@ -30,10 +30,10 @@ class Main extends Application {
 
 		var style:TextStyle = {};
 		style.fill = "#FFFFFF";
-		style.font = "16px Tahoma";
+		style.font = "12px Courier";
 
 		_label = new Text(imgPath, style);
-		_label.position.set(_img.x - 480, _img.y - 300);
+		_label.position.set(_img.x - 478, _img.y - 300);
 		_stage.addChild(_label);
 	}
 
