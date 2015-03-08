@@ -1,114 +1,29 @@
 -cp samples
 -cp src
 -main samples.basics.Main
--js samples/_output/hx-pixi-basics.js
+-js samples/_output/basics.js
+
 -dce full
+-D source-map-content
+-debug
 
 --next
--cp samples
--cp src
--main samples.bitmaptext.Main
--js samples/_output/hx-pixi-bitmaptext.js
--dce full
 
---next
--cp samples
--cp src
--main samples.graphics.Main
--js samples/_output/hx-pixi-graphics.js
--dce full
-
---next
--cp samples
--cp src
--main samples.movieclip.Main
--js samples/_output/hx-pixi-movieclip.js
--dce full
-
---next
--cp samples
--cp src
--main samples.pixidude.Main
--js samples/_output/hx-pixi-pixidude.js
--dce full
-
---next
--cp samples
--cp src
--main samples.rendertexture.Main
--js samples/_output/hx-pixi-rendertexture.js
--dce full
-
---next
--cp samples
--cp src
--main samples.snake.Main
--js samples/_output/hx-pixi-snake.js
--dce full
-
---next
--cp samples
--cp src
--main samples.spine.Main
--js samples/_output/hx-pixi-spine.js
--dce full
-
---next
--cp samples
--cp src
--main samples.spritesheet.Main
--js samples/_output/hx-pixi-spritesheet.js
--dce full
-
---next
--cp samples
--cp src
--main samples.tilingsprite.Main
--js samples/_output/hx-pixi-tilingsprite.js
--dce full
-
---next
--cp samples
--cp src
--main samples.blur.Main
--js samples/_output/hx-pixi-blur.js
--dce full
-
---next
--cp samples
--cp src
--main samples.colourmatrix.Main
--js samples/_output/hx-pixi-colourmatrix.js
--dce full
-
---next
 -cp samples
 -cp src
 -main samples.bunnymark.Main
--js samples/_output/hx-pixi-bunnymark.js
--dce full
+-js samples/_output/bunnymark.js
 
---next
--cp samples
--cp src
--main samples.nape.Main
--js samples/_output/hx-pixi-nape.js
 -dce full
--lib nape
-
---next
--cp samples
--cp src
--main samples.particles.Main
--js samples/_output/hx-pixi-particles.js
--dce full
+-D source-map-content
+-debug
 
 --next
 -cp samples
 -cp src
 -main samples.video.Main
--js samples/_output/hx-pixi-video.js
--dce full
+-js samples/_output/video.js
 
+-dce full
 -D source-map-content
 -debug

@@ -1,26 +1,24 @@
-# haxe-pixi [![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-pixi.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-
+# haxe-pixi [![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-pixi.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
-Externs of pixi.js (v2.2.7) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of pixi.js (v3) for Haxe - 2D webGL renderer with canvas fallback.
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Please note that the development of v3 externs is in progress.
 
 ### Installation ###
 
 ```haxe
-haxelib install pixijs
+haxelib install pixijs - (v3 not published yet)
 ```
 ### API Documentation ###
 
-Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
-[YUIDoc API](http://adireddy.github.io/docs/haxe-pixi/yui/) similar to [pixi.js docs](http://www.goodboydigital.com/pixijs/docs/) also available.
+Coming soon.
 
 ### Issues ###
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
 
-### Demos ###
+### Demos (v2.x.x) ###
 
 Ported from pixi.js
 
@@ -41,11 +39,10 @@ New Demos
 
 * [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
 * [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/bunnymark.html)
-* [Particles](http://adireddy.github.io/demos/haxe-pixi/particles.html)
 
 Look at the `samples` folder for the source code of above examples.
 
-### Usage ###
+### Usage (v2.x.x) ###
 
 ```haxe
 
@@ -66,29 +63,29 @@ class Main {
 
 	public function new() {
 		_stage = new Stage(0x00FF00);
-		
+
 		// Rendering options usage sample
 		var options:RenderingOptions = {};
 		options.antialias = true;
 		options.resolution = 1;
 		options.transparent = true;
-		
+
         _renderer = Detector.autoDetectRenderer(800, 600, options);
         Browser.document.body.appendChild(_renderer.view);
-        
+
         _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
         _bunny.anchor.set(0.5, 0.5);
         _bunny.scale.set(2, 2);
         _bunny.position.set(400, 300);
-        
+
         _stage.addChild(_bunny);
-        
+
         Browser.window.requestAnimationFrame(cast animate);
 	}
 
 	function animate() {
         Browser.window.requestAnimationFrame(cast animate);
-        _bunny.rotation += 0.1;  
+        _bunny.rotation += 0.1;
         _renderer.render(_stage);
     }
 
@@ -103,7 +100,7 @@ class Main {
 <a rel="license" href="http://opensource.org/licenses/MIT">
 <img alt="MIT license" height="40" src="http://upload.wikimedia.org/wikipedia/commons/c/c3/License_icon-mit.svg" /></a>
 
-This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+This content is released under the [MIT](http://opensource.org/licenses/MIT) License. [![Analytics](https://ga-beacon.appspot.com/UA-31531781-2/haxe-pixi/)](https://github.com/igrigorik/ga-beacon)
 
 [pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
 

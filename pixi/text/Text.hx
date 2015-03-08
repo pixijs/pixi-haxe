@@ -1,83 +1,69 @@
 package pixi.text;
 
-import pixi.display.Sprite;
-import pixi.DomDefinitions;
+import pixi.core.sprites.Sprite;
 
-@:native("PIXI.Text")
+@:native("PIXI.text.Text")
 extern class Text extends Sprite {
 
 	/**
-	 * A Text Object will create a line(s) of text. To split a line you can use '\n'
-	 * or add a wordWrap property set to true and and wordWrapWidth property with a value
-	 * in the style object
+	 * A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
+	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
 	 *
-	 * @class Text
+	 * A Text can be created directly from a string and a style object
+	 *
+	 * ```js
+	 * var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * ```
+	 *
+	 * @class
 	 * @extends Sprite
-	 * @constructor
+	 * @memberof PIXI.text
 	 * @param text {String} The copy that you would like the text to display
 	 * @param [style] {TextStyle} The style parameters
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g ''#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
+	 * @param [style.font] {string} default 'bold 20px Arial' The style and size of the font
+	 * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
+	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
+	 * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
+	 * @param [style.wordWrapWidth=100] {number} The width at which text will wrap, it needs wordWrap to be set to true
+	 * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
+	 * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
+	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
+	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
+	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
 	 */
-	function new(text:String, ?style:TextStyle):Void;
+	function new(text:String, ?style:TextStyle, ?resolution:Float):Void;
 
 	/**
-	 * Set the style of the text
-	 *
-	 * @method setStyle
-	 * @param style {TextStyle} The style parameters
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g ''#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Number} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Number} Set a distance of the drop shadow
-	 */
-	function setStyle(style:TextStyle):Void;
+     * Set the style of the text
+     *
+     * @param [style] {TextStyle} The style parameters
+     * @param [style.font='bold 20pt Arial'] {string} The style and size of the font
+     * @param [style.fill='black'] {object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
+     * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+     * @param [style.stroke='black'] {string} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
+     * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+     * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
+     * @param [style.wordWrapWidth=100] {number} The width at which text will wrap
+     * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
+     * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
+     * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+     * @param [style.dropShadowAngle=Math.PI/6] {number} Set a angle of the drop shadow
+     * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
+     * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
+     * @memberof Text#
+     */
+	var style:TextStyle;
 
 	/**
-	 * Set the copy for the text object. To split a line you can use '\n'
-	 *
-	 * @method setText
-	 * @param {String} text The copy that you would like the text to display
-	 */
-	function setText(text:String):Void;
-
-	/**
-	 * Destroys this text object
-	 *
-	 * @method destroy
-	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well
-	 */
-	function destroy(?destroyBaseTexture:Bool):Void;
-
-	/**
-	 * The canvas element that everything is drawn to
-	 * @property canvas
-	 * @type CanvasElement
-	 */
-	var canvas:CanvasElement;
-
-	/**
-	 * The canvas 2d context that everything is drawn with
-	 * @property context
-	 * @type CanvasRenderingContext2D
-	 */
-	var context:CanvasRenderingContext2D;
+     * Set the copy for the text object. To split a line you can use '\n'.
+     *
+     * @param text {String} The copy that you would like the text to display
+     * @memberof Text#
+     */
+	var text:String;
 }
 
 typedef TextStyle = {
@@ -92,4 +78,5 @@ typedef TextStyle = {
 	@:optional var dropShadowColor:String;
 	@:optional var dropShadowAngle:Float;
 	@:optional var dropShadowDistance:Float;
+	@:optional var padding:Float;
 }

@@ -1,33 +1,40 @@
 package samples.basics;
 
+import pixi.text.Text;
+import pixi.core.textures.Texture;
+import pixi.core.sprites.Sprite;
+import pixi.plugins.app.Application;
 import js.Browser;
-import pixi.Application;
-import pixi.display.Sprite;
-import pixi.display.Stage;
-import pixi.textures.Texture;
 
 class Main extends Application {
 
-	var _bunny:Sprite;
+	var _img:Sprite;
+	var _label:Text;
 
 	public function new() {
 		super();
 		_init();
-
-		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_bunny.anchor.set(0.5, 0.5);
-		_bunny.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
-		_stage.addChild(_bunny);
 	}
 
 	function _init() {
-		backgroundColor = 0x003366;
-		onUpdate = _onUpdate;
 		super.start();
-	}
 
-	function _onUpdate(elapsedTime:Float) {
-		_bunny.rotation += 0.1;
+		var resolution:Int = (Browser.window.devicePixelRatio >= 2) ? 2 : 1;
+
+		var imgPath:String = (resolution == 2) ? "assets/basics/img@2x.jpg" : "assets/basics/img.jpg";
+		_img = new Sprite(Texture.fromImage(imgPath));
+		_img.anchor.set(0.5, 0.5);
+		_img.name = "img";
+		_img.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
+		_stage.addChild(_img);
+
+		var style:TextStyle = {};
+		style.fill = "#FFFFFF";
+		style.font = "16px Tahoma";
+
+		_label = new Text(imgPath, style);
+		_label.position.set(_img.x - 480, _img.y - 300);
+		_stage.addChild(_label);
 	}
 
 	static function main() {

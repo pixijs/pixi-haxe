@@ -1,110 +1,181 @@
 package samples.bunnymark;
 
-import pixi.display.DisplayObjectContainer;
+import js.html.DivElement;
+import pixi.core.math.shapes.Rectangle;
+import pixi.core.particles.ParticleContainer;
 import js.Browser;
-import pixi.Application;
-import pixi.InteractionData;
-import pixi.text.Text;
-import pixi.display.Stage;
-import pixi.textures.Texture;
+import pixi.core.display.Container;
+import pixi.core.textures.Texture;
+import pixi.plugins.app.Application;
 
 class Main extends Application {
 
-	var _bunny:Bunny;
-	var _bunnyTexture:Texture;
+	var wabbitTexture:Texture;
 
-	var _sprites:Array<Bunny>;
-	var _quantityLabel:Text;
+	var bunnys:Array<Bunny> = [];
+	var bunnyTextures:Array<Texture> = [];
+	var gravity:Float = 0.5;
 
-	var _isScale:Bool;
-	var _isRotation:Bool;
+	var maxX:Float;
+	var minX:Float = 0;
+	var maxY:Float;
+	var minY:Float = 0;
 
-	var _maxX:Int;
-	var _maxY:Int;
-	var _minX:Int;
-	var _minY:Int;
+	var startBunnyCount:Int = 2;
+	var isAdding:Bool = false;
+	var count:Int = 0;
+	var container:ParticleContainer;
 
-	var _add:Bool;
-
-	var _container:DisplayObjectContainer;
+	var amount:Int = 100;
+	var bunnyType:Int;
+	var currentTexture:Texture;
+	var counter:DivElement;
 
 	public function new() {
 		super();
 		_init();
-
-		_sprites = [];
-		_add = false;
-		_minX = _minY = 0;
-		_maxX = Browser.window.innerWidth;
-		_maxY = Browser.window.innerHeight;
-
-		_bunnyTexture = Texture.fromImage("assets/basics/bunny.png");
-
-		_quantityLabel = new Text("Press/Touch and hold to add bunnies continuously", {font: "15px Tahoma", fill:"#FFFFFF"});
-		_stage.addChild(_quantityLabel);
-
-		_stage.mousedown = _stage.touchstart = function(data:InteractionData) { _add = true; }
-		_stage.mouseup = _stage.touchend = function(data:InteractionData) { _add = false; }
-
-		_container = new DisplayObjectContainer();
-		_stage.addChild(_container);
 	}
 
 	function _init() {
-		backgroundColor = 0x003366;
+		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
-		super.start();
+		onResize = _onResize;
+		resize = true;
+		width = Browser.window.innerWidth;
+		height = Browser.window.innerHeight;
+		super.start(true);
+		_setup();
+	}
+
+	function _setup() {
+		maxX = Browser.window.innerWidth;
+		maxY = Browser.window.innerHeight;
+
+		counter = Browser.document.createDivElement();
+		counter.style.position = "absolute";
+		counter.style.top = "1px";
+		counter.style.left = "1px";
+		counter.style.width = "90px";
+		counter.style.background = "#CCCCC";
+		counter.style.backgroundColor = "#105CB6";
+		counter.style.fontFamily = "Helvetica,Arial";
+		counter.style.padding = "3px";
+		counter.style.color = "#0FF";
+		counter.style.fontSize = "10px";
+		counter.style.fontWeight = "bold";
+		counter.style.textAlign = "center";
+		counter.className = "counter";
+		Browser.document.body.appendChild(counter);
+
+		count = startBunnyCount;
+		counter.innerHTML = count + " BUNNIES";
+
+		wabbitTexture = Texture.fromImage("assets/bunnymark/bunnys.png");
+
+		container = new ParticleContainer(200000, [false, true, false, false, false]);
+		_stage.addChild(container);
+
+		var bunny1 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 47, 26, 37));
+		var bunny2 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 86, 26, 37));
+		var bunny3 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 125, 26, 37));
+		var bunny4 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 164, 26, 37));
+		var bunny5 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 2, 26, 37));
+
+		bunnyTextures = [bunny1, bunny2, bunny3, bunny4, bunny5];
+		bunnyType = 2;
+		currentTexture = bunnyTextures[bunnyType];
+
+		for (i in 0 ... startBunnyCount) {
+			var bunny = new Bunny(currentTexture);
+			bunny.speedX = Math.random() * 10;
+			bunny.speedY = (Math.random() * 10) - 5;
+
+			bunny.anchor.x = 0.5;
+			bunny.anchor.y = 1;
+
+			bunnys.push(bunny);
+			container.addChild(bunny);
+		}
+
+		_renderer.view.onmousedown = onTouchStart;
+		_renderer.view.onmouseup = onTouchEnd;
+
+		Browser.document.addEventListener("touchstart", onTouchStart, true);
+		Browser.document.addEventListener("touchend", onTouchEnd, true);
+	}
+
+	function onTouchStart(event) {
+		isAdding = true;
+	}
+
+	function onTouchEnd(event) {
+		bunnyType++;
+		bunnyType %= 5;
+		currentTexture = bunnyTextures[bunnyType];
+
+		isAdding = false;
 	}
 
 	function _onUpdate(elapsedTime:Float) {
-		if (_add) _addBunnys();
+		if (isAdding) {
+			if (count < 200000) {
 
-		for (i in 0 ... _sprites.length) {
-			var bunny:Bunny = _sprites[i];
+				for (i in 0 ... amount) {
+					var bunny = new Bunny(currentTexture);
+					bunny.speedX = Math.random() * 10;
+					bunny.speedY = (Math.random() * 10) - 5;
+					bunny.anchor.y = 1;
+					//bunny.alpha = 0.3 + Math.random() * 0.7;
+					bunnys.push(bunny);
+					bunny.scale.set(0.5 + Math.random() * 0.5, 0.5 + Math.random() * 0.5);
+					bunny.rotation = (Math.random() - 0.5);
+
+					//bunny.rotation = Math.random() - 0.5;
+					var random = Std.random(container.children.length - 2);
+					container.addChild(bunny);
+
+					count++;
+				}
+			}
+			counter.innerHTML = count + " BUNNIES";
+		}
+
+		for (i in 0 ... bunnys.length) {
+			var bunny = bunnys[i];
+			//bunny.rotation += 0.1
+
 			bunny.position.x += bunny.speedX;
 			bunny.position.y += bunny.speedY;
-			bunny.speedY += 2;
+			bunny.speedY += gravity;
 
-			if (bunny.position.x > _maxX) {
+			if (bunny.position.x > maxX) {
 				bunny.speedX *= -1;
-				bunny.position.x = _maxX;
+				bunny.position.x = maxX;
 			}
-			else if (bunny.position.x < _minX) {
+			else if (bunny.position.x < minX) {
 				bunny.speedX *= -1;
-				bunny.position.x = _minX;
+				bunny.position.x = minX;
 			}
 
-			if (bunny.position.y > _maxY) {
-				bunny.speedY *= -0.9;
-				bunny.position.y = _maxY;
+			if (bunny.position.y > maxY) {
+				bunny.speedY *= -0.85;
+				bunny.position.y = maxY;
+				//bunny.spin = (Math.random()-0.5) * 0.2
 				if (Math.random() > 0.5) bunny.speedY -= Math.random() * 6;
 			}
-			else if (bunny.position.y < _minY) {
+			else if (bunny.position.y < minY) {
 				bunny.speedY = 0;
-				bunny.position.y = _minY;
+				bunny.position.y = minY;
 			}
 		}
 	}
 
-	function _addBunnys() {
-		for (i in 0 ... 10) {
-			_bunny = new Bunny(_bunnyTexture);
-			_bunny.name = "bunny" + i;
-			_container.addChild(_bunny);
-			_bunny.x = Std.random(_maxX);
-			_bunny.y = Std.random(_maxY);
-			_bunny.anchor.set(0.5, 0.5);
-			_bunny.speedX = Math.random() * 16 + 2;
-			_bunny.speedY = (Math.random() * 16) - 10;
-			_bunny.rotationSpeed = Math.random() / 50 + 0.01;
-			_bunny.scaleSpeed = Math.random() / 50 + 0.01;
-			_sprites.push(_bunny);
-		}
-		_updateQuanityLabel();
-	}
+	function _onResize() {
+		maxX = Browser.window.innerWidth;
+		maxY = Browser.window.innerHeight;
 
-	function _updateQuanityLabel() {
-		_quantityLabel.setText("Quantity: " + _sprites.length);
+		counter.style.top = "1px";
+		counter.style.left = "1px";
 	}
 
 	static function main() {

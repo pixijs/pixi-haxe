@@ -1,21 +1,17 @@
 package samples.video;
 
-import pixi.display.DisplayObjectContainer;
-import pixi.textures.VideoTexture;
-import pixi.display.Sprite;
-import pixi.textures.Texture;
-import pixi.Application;
 import js.html.VideoElement;
 import js.Browser;
+import pixi.core.sprites.Sprite;
+import pixi.core.display.Container;
+import pixi.core.textures.Texture;
+import pixi.plugins.app.Application;
 
 class Main extends Application {
 
 	var _vidTexture:Texture;
 	var _vidSprite:Sprite;
 	var _vidElement:VideoElement;
-	var _vidContainer:DisplayObjectContainer;
-
-	var _bg:Sprite;
 
 	public function new() {
 		super();
@@ -23,35 +19,26 @@ class Main extends Application {
 	}
 
 	function _init() {
-		backgroundColor = 0xFFFFFF;
+		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
 		resize = true;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		super.start(Application.CANVAS);
+		super.start();
 
-		_bg = new Sprite(Texture.fromImage("assets/video/bg.jpg"));
-		_stage.addChild(_bg);
+		_vidElement = Browser.document.createVideoElement();
+		_vidElement.src = "assets/video/test.mp4";
 
-		_bg.interactive = true;
-		_bg.mousedown = _bg.touchstart = _addVideo;
+		_vidTexture = Texture.fromVideoUrl("assets/video/test.mp4");
+		_vidSprite = new Sprite(_vidTexture);
+		_stage.addChild(_vidSprite);
 
-		_vidContainer = new DisplayObjectContainer();
-		_stage.addChild(_vidContainer);
-
-		/*var _vidElement = Browser.document.createVideoElement();
-		_vidElement.autoplay = true;
-		_vidElement.loop = true;
-		_vidElement.src =  _vidURL;
-		//Browser.document.body.appendChild(_vidElement);*/
+		//haxe.Timer.delay(_setup, 3000);
 	}
 
-	function _addVideo(data) {
-		var _vidURL:String = "assets/video/test.mp4";
-		_vidTexture = VideoTexture.fromUrl(_vidURL);
-		_vidSprite = new Sprite(_vidTexture);
-		_vidContainer.addChild(_vidSprite);
+	function _setup() {
+
 	}
 
 	function _onUpdate(elapsedTime:Float) {
@@ -64,13 +51,5 @@ class Main extends Application {
 
 	static function main() {
 		new Main();
-	}
-
-	function _isAndroid():Bool {
-		return ~/Android/i.match(Browser.navigator.userAgent);
-	}
-
-	function _isiOS():Bool {
-		return ~/(iPad|iPhone|iPod)/i.match(Browser.navigator.userAgent);
 	}
 }
