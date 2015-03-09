@@ -21,7 +21,7 @@ class Main extends Application {
 
 		var resolution:Int = (Browser.window.devicePixelRatio >= 2) ? 2 : 1;
 
-		var imgPath:String = (resolution == 2) ? "assets/retina/img@2x.jpg" : "assets/retina/img.jpg";
+		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));
 		_img.anchor.set(0.5, 0.5);
 		_img.name = "img";
@@ -35,6 +35,13 @@ class Main extends Application {
 		_label = new Text(imgPath, style);
 		_label.position.set(_img.x - 478, _img.y - 300);
 		_stage.addChild(_label);
+	}
+
+	function _getResolutionStr():String {
+		if (Browser.window.devicePixelRatio <= 1 || (Browser.window.devicePixelRatio > 1 && Browser.window.devicePixelRatio < 1.5)) return "";
+		else if (Browser.window.devicePixelRatio >= 1.5 && Browser.window.devicePixelRatio < 2) return "@1.5x";
+		else if (Browser.window.devicePixelRatio >= 2 && Browser.window.devicePixelRatio < 3) return "@2x";
+		else return return "@3x";
 	}
 
 	static function main() {

@@ -16308,6 +16308,173 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
+	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
+		<baseUrl public="1">
+			<c path="String"/>
+			<haxe_doc>* The base url for all resources loaded by this loader.
+     *
+     * @member {String}</haxe_doc>
+		</baseUrl>
+		<progress public="1">
+			<x path="Float"/>
+			<haxe_doc>* The progress percent of the loader going through the queue.
+     *
+     * @member {Float}</haxe_doc>
+		</progress>
+		<loading public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Loading state of the loader, true if it is currently loading resources.
+     *
+     * @member {Bool}</haxe_doc>
+		</loading>
+		<add public="1" set="method">
+			<f a="name:url:?options:?callback">
+				<c path="String"/>
+				<c path="String"/>
+				<t path="pixi.loaders.LoaderOptions"/>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.Loader"/>
+			</f>
+			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', function () {})
+	 *     .add('http://...', function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} Function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+		</add>
+		<after public="1" set="method">
+			<f a="fn">
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.Loader"/>
+			</f>
+			<haxe_doc>* Sets up a middleware function that will run *after* the
+	 * resource is loaded.
+	 *
+	 * @alias use
+	 * @param middleware {function} The middleware function to register.
+	 * @return {Loader}</haxe_doc>
+		</after>
+		<before public="1" set="method">
+			<f a="fn">
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.Loader"/>
+			</f>
+			<haxe_doc>* Sets up a middleware function that will run *before* the
+	 * resource is loaded.
+	 *
+	 * @alias pre
+	 * @param middleware {function} The middleware function to register.
+	 * @return {Loader}</haxe_doc>
+		</before>
+		<reset public="1" set="method">
+			<f a=""><c path="pixi.loaders.Loader"/></f>
+			<haxe_doc>* Resets the queue of the loader to prepare for a new load.
+	 *
+	 * @return {Loader}</haxe_doc>
+		</reset>
+		<load public="1" set="method">
+			<f a="?cb">
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.Loader"/>
+			</f>
+			<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+		</load>
+		<loadResource public="1" set="method">
+			<f a="resource:?cb">
+				<c path="String"/>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.Loader"/>
+			</f>
+			<haxe_doc>* Loads a single resource.
+	 *
+	 * @fires progress</haxe_doc>
+		</loadResource>
+		<new public="1" set="method">
+			<f a="?baseUrl:?concurrency">
+				<c path="String"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>*
+	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
+	 *
+	 * ```js
+	 * var loader = new PIXI.loader();
+	 *
+	 * loader.add('spineboy',"data/spineboy.json");
+	 *
+	 * loader.once('complete',onAssetsLoaded);
+	 *
+	 * loader.load();
+	 * ```
+	 *
+	 * @class
+	 * @extends ResourceLoader
+	 * @memberof PIXI.loaders</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
+	</class>
+	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/Loader.hx" module="pixi.loaders.Loader"><a>
+	<xhrType>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</xhrType>
+	<loadType>
+		<x path="Int"/>
+		<meta><m n=":optional"/></meta>
+	</loadType>
+	<crossOrigin>
+		<x path="Bool"/>
+		<meta><m n=":optional"/></meta>
+	</crossOrigin>
+</a></typedef>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
 		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
 		<skipFrame public="1" get="null"><x path="Bool"/></skipFrame>

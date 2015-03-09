@@ -97,8 +97,7 @@ samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		pixi.plugins.app.Application.prototype.start.call(this);
 		var resolution;
 		if(window.devicePixelRatio >= 2) resolution = 2; else resolution = 1;
-		var imgPath;
-		if(resolution == 2) imgPath = "assets/retina/img@2x.jpg"; else imgPath = "assets/retina/img.jpg";
+		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
 		this._img.anchor.set(0.5,0.5);
 		this._img.name = "img";
@@ -110,6 +109,9 @@ samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._label = new PIXI.Text(imgPath,style);
 		this._label.position.set(this._img.x - 478,this._img.y - 300);
 		this._stage.addChild(this._label);
+	}
+	,_getResolutionStr: function() {
+		if(window.devicePixelRatio <= 1 || window.devicePixelRatio > 1 && window.devicePixelRatio < 1.5) return ""; else if(window.devicePixelRatio >= 1.5 && window.devicePixelRatio < 2) return "@1.5x"; else if(window.devicePixelRatio >= 2 && window.devicePixelRatio < 3) return "@2x"; else return "@3x";
 	}
 });
 var $_, $fid = 0;
