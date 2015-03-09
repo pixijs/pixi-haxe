@@ -38,4 +38,4 @@ This content is released under the [MIT](http://opensource.org/licenses/MIT) Lic
 
 ### Contributor Code of Conduct ###
 
-Code of Conduct is adapted from [Contributor Covenant](http://contributor-covenant.org/version/1/0/0/)
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant](http://contributor-covenant.org/version/1/0/0/)
