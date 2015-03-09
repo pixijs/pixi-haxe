@@ -83,38 +83,59 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.retina = {};
-samples.retina.Main = function() {
+samples.loader = {};
+samples.loader.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.retina.Main.main = function() {
-	new samples.retina.Main();
+samples.loader.Main.main = function() {
+	new samples.loader.Main();
 };
-samples.retina.Main.__super__ = pixi.plugins.app.Application;
-samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.loader.Main.__super__ = pixi.plugins.app.Application;
+samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		pixi.plugins.app.Application.prototype.start.call(this);
-		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
-		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
-		this._img.anchor.set(0.5,0.5);
-		this._img.name = "img";
-		this._img.position.set(window.innerWidth / 2,window.innerHeight / 2);
-		this._stage.addChild(this._img);
-		var style = { };
-		style.fill = "#FFFFFF";
-		style.font = "12px Courier";
-		this._label = new PIXI.Text(imgPath,style);
-		this._label.position.set(this._img.x - 478,this._img.y - 300);
-		this._stage.addChild(this._label);
+		this._baseURL = "assets/loader/";
+		this._loader = new PIXI.Loader();
+		this._loader.baseUrl = this._baseURL;
+		var _g = 1;
+		while(_g < 10) {
+			var i = _g++;
+			this._loader.add("img" + i,i + ".png");
+		}
+		this._loader.on("complete",$bind(this,this._onLoaded));
+		this._loader.on("progress",$bind(this,this._onLoadProgress));
+		this._loader.load();
 	}
-	,_getResolutionStr: function() {
-		if(window.devicePixelRatio <= 1 || window.devicePixelRatio > 1 && window.devicePixelRatio < 1.5) return ""; else if(window.devicePixelRatio >= 1.5 && window.devicePixelRatio < 2) return "@1.5x"; else if(window.devicePixelRatio >= 2 && window.devicePixelRatio < 3) return "@2x"; else return "@3x";
+	,_onLoadProgress: function() {
+		console.log("Loaded: " + Math.round(this._loader.progress));
+	}
+	,_onLoaded: function() {
+		var _container = new PIXI.Container();
+		this._stage.addChild(_container);
+		var _g = 1;
+		while(_g < 11) {
+			var i = _g++;
+			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
+			this._img.name = "img" + i;
+			if(i < 5) this._img.position.set(this._img.width * i,0); else this._img.position.set(this._img.width * (i - 5),this._img.height);
+			_container.addChild(this._img);
+		}
+		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
 	}
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-samples.retina.Main.main();
+Math.NaN = Number.NaN;
+Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
+Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
+Math.isFinite = function(i) {
+	return isFinite(i);
+};
+Math.isNaN = function(i1) {
+	return isNaN(i1);
+};
+samples.loader.Main.main();
 })();
 
-//# sourceMappingURL=retina.js.map
+//# sourceMappingURL=loader.js.map

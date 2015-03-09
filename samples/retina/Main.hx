@@ -19,8 +19,6 @@ class Main extends Application {
 	function _init() {
 		super.start();
 
-		var resolution:Int = (Browser.window.devicePixelRatio >= 2) ? 2 : 1;
-
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));
 		_img.anchor.set(0.5, 0.5);

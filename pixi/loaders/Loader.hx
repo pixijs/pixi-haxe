@@ -1,6 +1,6 @@
 package pixi.loaders;
 
-@:native("PIXI.loaders.Loader")
+@:native("PIXI.Loader")
 extern class Loader {
 
 	/**
@@ -21,7 +21,7 @@ extern class Loader {
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders
 	 */
-	function new(?baseUrl:String, ?concurrency:Int);
+	function new();
 
 	/**
      * The base url for all resources loaded by this loader.
@@ -44,7 +44,8 @@ extern class Loader {
      */
 	var loading:Bool;
 
-	//function on
+	function on(type:String, callback:Void -> Void):Void;
+	function once(type:String, callback:Void -> Void):Void;
 
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.

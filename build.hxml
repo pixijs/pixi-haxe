@@ -21,6 +21,16 @@
 --next
 -cp samples
 -cp src
+-main samples.loader.Main
+-js samples/_output/loader.js
+
+-dce full
+-D source-map-content
+-debug
+
+--next
+-cp samples
+-cp src
 -main samples.video.Main
 -js samples/_output/video.js
 
