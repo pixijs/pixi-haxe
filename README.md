@@ -22,10 +22,10 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 Ported from pixi.js
 
-* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
-* [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
-* [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
-* [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
+* [Bunnymark - Perormance Check](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
+* [Retina - Retina Asset Handling](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
+* [Loader - Using Loader to load 10 images](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
+* [Video - Video Test](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
 
 Look at the `samples` folder for the source code of above examples.
 
