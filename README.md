@@ -22,7 +22,7 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 * [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html) - perormance check
 * [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html) - retina asset handling
-* [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html) - using loader to load 10 images
+* [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html) - using loader to load images
 * [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html) - video test
 
 Look at the `samples` folder for the source code of above examples.
