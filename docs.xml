@@ -16482,18 +16482,53 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</crossOrigin>
 </a></typedef>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
-		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
-		<skipFrame public="1" get="null"><x path="Bool"/></skipFrame>
-		<width public="1" get="null"><x path="Float"/></width>
-		<height public="1" get="null"><x path="Float"/></height>
-		<resize public="1" get="null"><x path="Bool"/></resize>
-		<backgroundColor public="1" get="null"><x path="Int"/></backgroundColor>
-		<onUpdate public="1"><f a="">
-	<x path="Float"/>
-	<x path="Void"/>
-</f></onUpdate>
-		<onResize public="1"><f a=""><x path="Void"/></f></onResize>
-		<_stage set="null"><c path="pixi.core.display.Container"/></_stage>
+		<pixelRatio public="1" get="null">
+			<x path="Float"/>
+			<haxe_doc>* Sets the pixel ratio of the application.
+     * default - 1</haxe_doc>
+		</pixelRatio>
+		<skipFrame public="1" get="null">
+			<x path="Bool"/>
+			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
+	 * default - false</haxe_doc>
+		</skipFrame>
+		<width public="1" get="null">
+			<x path="Float"/>
+			<haxe_doc>* Width of the application.
+	 * default - Browser.window.innerWidth</haxe_doc>
+		</width>
+		<height public="1" get="null">
+			<x path="Float"/>
+			<haxe_doc>* Height of the application.
+	 * default - Browser.window.innerHeight</haxe_doc>
+		</height>
+		<resize public="1" get="null">
+			<x path="Bool"/>
+			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
+	 * Should be set to false when custom width and height are used for the application.
+	 * default - true</haxe_doc>
+		</resize>
+		<backgroundColor public="1" get="null">
+			<x path="Int"/>
+			<haxe_doc>* Sets the background color of the stage.
+	 * default - 0xFFFFFF</haxe_doc>
+		</backgroundColor>
+		<onUpdate public="1">
+			<f a="">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Update listener function</haxe_doc>
+		</onUpdate>
+		<onResize public="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Window resize listener function</haxe_doc>
+		</onResize>
+		<_stage set="null">
+			<c path="pixi.core.display.Container"/>
+			<haxe_doc>* Global Container.
+	 * Read-only</haxe_doc>
+		</_stage>
 		<_canvas><c path="js.html.CanvasElement"/></_canvas>
 		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
 		<_stats><c path="pixi.plugins.stats.Stats"/></_stats>
@@ -16501,23 +16536,32 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="94"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="109"><f a="?renderer:?stats" v="'auto':true">
-	<c path="String"/>
-	<x path="Bool"/>
-	<x path="Void"/>
-</f></start>
+		<_setDefaultValues set="method" line="93"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="109">
+			<f a="?renderer:?stats" v="'auto':true">
+				<c path="String"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
+	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL | RECOMMENDED
+	 * @param [stats] - Enable/disable stats for the application.
+	 * Note that stats.js is not part of pixi so don't forget to include it you html page
+	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>]]></haxe_doc>
+		</start>
 		<_onWindowResize set="method" line="136"><f a="event">
 	<c path="js.html.Event"/>
 	<x path="Void"/>
 </f></_onWindowResize>
 		<_onRequestAnimationFrame set="method" line="151"><f a=""><x path="Void"/></f></_onRequestAnimationFrame>
 		<_calculateElapsedTime set="method" line="163"><f a=""><x path="Void"/></f></_calculateElapsedTime>
-		<_addStats set="method" line="169">
-			<f a=""><x path="Void"/></f>
-			<meta><m n=":noCompletion"/></meta>
-		</_addStats>
-		<new public="1" set="method" line="89"><f a=""><x path="Void"/></f></new>
+		<_addStats set="method" line="169"><f a=""><x path="Void"/></f></_addStats>
+		<new public="1" set="method" line="88"><f a=""><x path="Void"/></f></new>
+		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
+ * @author Adi Reddy Mora
+ * http://adireddy.github.io
+ * @license MIT
+ * @copyright 2015</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
@@ -16561,6 +16605,78 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * https://github.com/luizbills/stats.js.hx (Original Haxe Externs</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"Stats"</e></m></meta>
+	</class>
+	<class path="pixi.spine.Spine" params="" file="pixi/spine/Spine.hx" extern="1">
+		<autoUpdate public="1">
+			<x path="Bool"/>
+			<haxe_doc>* If this flag is set to true, the spine animation will be autoupdated every time
+     * the object id drawn. The down side of this approach is that the delta time is
+     * automatically calculated and you could miss out on cool effects like slow motion,
+     * pause, skip ahead and the sorts. Most of these effects can be achieved even with
+     * autoupdate enabled but are harder to achieve.
+     *
+     * @member {boolean}
+     * @memberof Spine#
+     * @default true</haxe_doc>
+		</autoUpdate>
+		<spineData public="1">
+			<d/>
+			<haxe_doc>* The spineData object
+     *
+     * @member {object}</haxe_doc>
+		</spineData>
+		<skeleton public="1">
+			<d/>
+			<haxe_doc>* A spine Skeleton object
+     *
+     * @member {object}</haxe_doc>
+		</skeleton>
+		<stateData public="1">
+			<d/>
+			<haxe_doc>* A spine AnimationStateData object created from the spine data passed in the constructor
+     *
+     * @member {object}</haxe_doc>
+		</stateData>
+		<state public="1">
+			<d/>
+			<haxe_doc>* A spine AnimationState object created from the spine AnimationStateData object
+     *
+     * @member {object}</haxe_doc>
+		</state>
+		<slotContainers public="1">
+			<c path="Array"><c path="pixi.core.display.Container"/></c>
+			<haxe_doc><![CDATA[* An array of containers
+     *
+     * @member {Array<Container>}]]></haxe_doc>
+		</slotContainers>
+		<update public="1" set="method">
+			<f a="dt">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Update the spine skeleton and its animations by delta time (dt)
+	 *
+	 * @param dt {Float} Delta time. Time by which the animation should be updated</haxe_doc>
+		</update>
+		<new public="1" set="method">
+			<f a="spineData">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A class that enables the you to import and run your spine animations in pixi.
+	 * The Spine animation data needs to be loaded using either the Loader or a SpineLoader before it can be used by this class
+	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
+	 *
+	 * ```js
+	 * var spineAnimation = new PIXI.Spine(spineData);
+	 * ```
+	 *
+	 * @class
+	 * @extends Container
+	 * @memberof PIXI.spine
+	 * @param spineData {object} The spine data loaded from a spine atlas.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
 	<class path="pixi.text.BitmapText" params="" file="pixi/text/BitmapText.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>

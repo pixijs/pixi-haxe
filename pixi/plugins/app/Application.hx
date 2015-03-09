@@ -1,11 +1,3 @@
-/* Helper class that can be used by any pixi application
- *
- * @author Adi Reddy Mora
- * http://adireddy.github.io
- * @license MIT
- * @copyright 2015
- */
-
 package pixi.plugins.app;
 
 import pixi.core.renderers.webgl.WebGLRenderer;
@@ -18,57 +10,64 @@ import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
 
+/**
+ * Pixi Boilerplate Helper class that can be used by any application
+ * @author Adi Reddy Mora
+ * http://adireddy.github.io
+ * @license MIT
+ * @copyright 2015
+ */
 class Application {
 
-	/*
-	 * Sets the pixel ratio of the application
-	 * @default 1
-	 */
+	/**
+     * Sets the pixel ratio of the application.
+     * default - 1
+     */
 	public var pixelRatio(null, default):Float;
 
-	/*
-	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS
-	 * @default false
+	/**
+	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
+	 * default - false
 	 */
 	public var skipFrame(null, default):Bool;
 
-	/*
-	 * Width of the application
-	 * @default Browser.window.innerWidth
+	/**
+	 * Width of the application.
+	 * default - Browser.window.innerWidth
 	 */
 	public var width(null, default):Float;
 
-	/*
-	 * Height of the application
-	 * @default Browser.window.innerHeight
+	/**
+	 * Height of the application.
+	 * default - Browser.window.innerHeight
 	 */
 	public var height(null, default):Float;
 
-	/*
-	 * Whether you want to resize the canvas and renderer on browser resize
-	 * Should be set to false when custom width and height are used for the application
-	 * @default true
+	/**
+	 * Whether you want to resize the canvas and renderer on browser resize.
+	 * Should be set to false when custom width and height are used for the application.
+	 * default - true
 	 */
 	public var resize(null, default):Bool;
 
-	/*
-	 * Sets the background color of the stage
-	 * @default 0xFFFFFF
+	/**
+	 * Sets the background color of the stage.
+	 * default - 0xFFFFFF
 	 */
 	public var backgroundColor(null, default):Int;
 
-	/*
+	/**
 	 * Update listener function
 	 */
 	public var onUpdate:Float -> Void;
 
-	/*
+	/**
 	 * Window resize listener function
 	 */
 	public var onResize:Void -> Void;
 
-	/*
-	 * Pixi stage
+	/**
+	 * Global Container.
 	 * Read-only
 	 */
 	var _stage(default, null):Container;
@@ -100,11 +99,12 @@ class Application {
 		_skipFrame = false;
 	}
 
-	/*
-	 * Enable/disable stats for the application
+	/**
+	 * Starts pixi application setup using the properties set or default values
+	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL | RECOMMENDED
+	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
-	 * Can be found in libs folder - <script type="text/javascript" src="libs/stats.min.js"></script>
-	 * @default false
+	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 */
 	public function start(?renderer:String = AUTO, ?stats:Bool = true) {
 		_canvas = Browser.document.createCanvasElement();
@@ -166,7 +166,7 @@ class Application {
 		_lastTime = _currentTime;
 	}
 
-	@:noCompletion function _addStats() {
+	function _addStats() {
 		if (untyped __js__("window").Stats != null) {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);

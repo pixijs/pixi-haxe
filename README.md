@@ -20,6 +20,7 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 ### Demos ###
 
+* [Basics](http://adireddy.github.io/demos/haxe-pixi/v3/basics.html) - basic example
 * [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html) - perormance check
 * [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html) - retina asset handling
 * [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html) - using loader to load images
