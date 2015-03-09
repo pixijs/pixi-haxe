@@ -12,7 +12,7 @@ haxelib install pixijs - (v3 not published yet)
 ```
 ### API Documentation ###
 
-Coming soon.
+[Documentation](http://adireddy.github.io/docs/haxe-pixi/v3/) - generated with chxdocs
 
 ### Issues ###
 
