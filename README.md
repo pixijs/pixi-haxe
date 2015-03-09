@@ -24,6 +24,7 @@ Ported from pixi.js
 
 * [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
 * [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
+* [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
 * [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
 
 Look at the `samples` folder for the source code of above examples.
