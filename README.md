@@ -20,8 +20,6 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 ### Demos ###
 
-Ported from pixi.js
-
 * [Bunnymark - Perormance Check](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
 * [Retina - Retina Asset Handling](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
 * [Loader - Using Loader to load 10 images](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
