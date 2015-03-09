@@ -20,10 +20,10 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi
 
 ### Demos ###
 
-* [Bunnymark - Perormance Check](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
-* [Retina - Retina Asset Handling](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
-* [Loader - Using Loader to load 10 images](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
-* [Video - Video Test](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
+* [Bunnymark - perormance check](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html)
+* [Retina - retina asset handling](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html)
+* [Loader - using loader to load 10 images](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html)
+* [Video - video test](http://adireddy.github.io/demos/haxe-pixi/v3/video.html)
 
 Look at the `samples` folder for the source code of above examples.
 
