@@ -1,7 +1,7 @@
 package samples.loader;
 
-import pixi.core.display.Container;
 import pixi.loaders.Loader;
+import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import pixi.plugins.app.Application;

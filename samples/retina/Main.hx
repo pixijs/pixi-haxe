@@ -39,7 +39,7 @@ class Main extends Application {
 		if (Browser.window.devicePixelRatio <= 1 || (Browser.window.devicePixelRatio > 1 && Browser.window.devicePixelRatio < 1.5)) return "";
 		else if (Browser.window.devicePixelRatio >= 1.5 && Browser.window.devicePixelRatio < 2) return "@1.5x";
 		else if (Browser.window.devicePixelRatio >= 2 && Browser.window.devicePixelRatio < 3) return "@2x";
-		else return return "@3x";
+		else return "@3x";
 	}
 
 	static function main() {

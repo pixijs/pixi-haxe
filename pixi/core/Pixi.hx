@@ -72,10 +72,10 @@ extern class Pixi {
      *
      * @static
      * @constant
-     * @property {string} RETINA_PREFIX
+     * @property {String} RETINA_PREFIX
      */
 	//example: '@2x', /@(.+)x/
-	static var RETINA_PREFIX:EReg;
+	static var RETINA_PREFIX:String;
 
 	static var RESOLUTION:Float;
 

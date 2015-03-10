@@ -171,7 +171,7 @@ extern class Graphics extends Container {
 	 * @param alpha {Float} the alpha of the fill
 	 * @return {Graphics}
 	 */
-	function beginFill(color:Int, alpha:Float):Graphics;
+	function beginFill(color:Int, ?alpha:Float):Graphics;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.

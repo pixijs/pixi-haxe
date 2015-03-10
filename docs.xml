@@ -13363,12 +13363,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @property {number} SCALE_MODES.NEAREST Pixelating scaling</haxe_doc>
 		</SCALE_MODES>
 		<RETINA_PREFIX public="1" static="1">
-			<c path="EReg"/>
+			<c path="String"/>
 			<haxe_doc>* The prefix that denotes a URL is for a retina asset
      *
      * @static
      * @constant
-     * @property {string} RETINA_PREFIX</haxe_doc>
+     * @property {String} RETINA_PREFIX</haxe_doc>
 		</RETINA_PREFIX>
 		<RESOLUTION public="1" static="1"><x path="Float"/></RESOLUTION>
 		<DEFAULT_RENDER_OPTIONS public="1" static="1">
@@ -13985,7 +13985,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Graphics}</haxe_doc>
 		</arc>
 		<beginFill public="1" set="method">
-			<f a="color:alpha">
+			<f a="color:?alpha">
 				<x path="Int"/>
 				<x path="Float"/>
 				<c path="pixi.core.graphics.Graphics"/>
