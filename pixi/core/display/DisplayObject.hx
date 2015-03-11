@@ -1,11 +1,12 @@
 package pixi.core.display;
 
+import pixi.core.utils.EventTarget;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
 
 @:native("PIXI.DisplayObject")
-extern class DisplayObject {
+extern class DisplayObject extends EventTarget {
 
 	/**
 	 * The base class for all objects that are rendered on the screen.

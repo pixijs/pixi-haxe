@@ -13479,7 +13479,121 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
+	<class path="pixi.core.utils.EventTarget" params="" file="pixi/core/utils/EventTarget.hx" extern="1">
+		<listeners public="1" set="method">
+			<f a="eventName">
+				<c path="String"/>
+				<c path="Array"><d/></c>
+			</f>
+			<haxe_doc>* Return a list of assigned event listeners.
+     *
+     * @param eventName {String} The events that should be listed.
+     * @return {Array} An array of listener functions</haxe_doc>
+		</listeners>
+		<emit public="1" set="method">
+			<f a="eventName:?data">
+				<c path="String"/>
+				<c path="pixi.core.utils.EventData"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Emit an event to all registered event listeners.
+     *
+     * @alias dispatchEvent
+     * @param eventName {String} The name of the event.
+     * @return {Bool} Indication if we've emitted an event.</haxe_doc>
+		</emit>
+		<dispatchEvent public="1" set="method"><f a="eventName:?data">
+	<c path="String"/>
+	<c path="pixi.core.utils.EventData"/>
+	<x path="Bool"/>
+</f></dispatchEvent>
+		<on public="1" set="method">
+			<f a="eventName:fn">
+				<c path="String"/>
+				<f a="">
+					<c path="pixi.core.utils.EventData"/>
+					<x path="Void"/>
+				</f>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Register a new EventListener for the given event.
+     *
+     * @alias addEventListener
+     * @param eventName {String} Name of the event.
+     * @param callback {Functon} fn Callback function.</haxe_doc>
+		</on>
+		<addEventListener public="1" set="method"><f a="eventName:fn">
+	<c path="String"/>
+	<f a="">
+		<c path="pixi.core.utils.EventData"/>
+		<x path="Void"/>
+	</f>
+	<x path="Void"/>
+</f></addEventListener>
+		<once public="1" set="method">
+			<f a="eventName:fn">
+				<c path="String"/>
+				<f a="">
+					<c path="pixi.core.utils.EventData"/>
+					<x path="Void"/>
+				</f>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Add an EventListener that's only called once.
+     *
+     * @param eventName {String} Name of the event.
+     * @param callback {Function} Callback function.</haxe_doc>
+		</once>
+		<off public="1" set="method">
+			<f a="eventName:fn">
+				<c path="String"/>
+				<f a="">
+					<c path="pixi.core.utils.EventData"/>
+					<x path="Void"/>
+				</f>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove event listeners.
+     *
+     * @alias removeEventListener
+     * @param eventName {String} The event we want to remove.
+     * @param callback {Function} The listener that we need to find.</haxe_doc>
+		</off>
+		<removeEventListener public="1" set="method"><f a="eventName:fn">
+	<c path="String"/>
+	<f a="">
+		<c path="pixi.core.utils.EventData"/>
+		<x path="Void"/>
+	</f>
+	<x path="Void"/>
+</f></removeEventListener>
+		<removeAllListeners public="1" set="method">
+			<f a="eventName">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
+     *
+     * @param eventName {string} The event you want to remove all listeners for.</haxe_doc>
+		</removeAllListeners>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Mixins event emitter functionality to an object.
+	 *
+	 * @mixin
+	 * @namespace PIXI
+	 * @example
+	 *      function MyEmitter() {}
+	 *
+	 *      eventTarget.mixin(MyEmitter.prototype);
+	 *
+	 *      var em = new MyEmitter();
+	 *      em.emit('eventName', 'some data', 'some more data', {}, null, ...);</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.eventTarget"</e></m></meta>
+	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
+		<extends path="pixi.core.utils.EventTarget"/>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
 				<c path="pixi.core.math.Matrix"/>
@@ -15803,119 +15917,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.EventData"</e></m></meta>
 	</class>
-	<class path="pixi.core.utils.EventTarget" params="" file="pixi/core/utils/EventTarget.hx" extern="1">
-		<listeners public="1" set="method">
-			<f a="eventName">
-				<c path="String"/>
-				<c path="Array"><d/></c>
-			</f>
-			<haxe_doc>* Return a list of assigned event listeners.
-     *
-     * @param eventName {String} The events that should be listed.
-     * @return {Array} An array of listener functions</haxe_doc>
-		</listeners>
-		<emit public="1" set="method">
-			<f a="eventName:?data">
-				<c path="String"/>
-				<c path="pixi.core.utils.EventData"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Emit an event to all registered event listeners.
-     *
-     * @alias dispatchEvent
-     * @param eventName {String} The name of the event.
-     * @return {Bool} Indication if we've emitted an event.</haxe_doc>
-		</emit>
-		<dispatchEvent public="1" set="method"><f a="eventName:?data">
-	<c path="String"/>
-	<c path="pixi.core.utils.EventData"/>
-	<x path="Bool"/>
-</f></dispatchEvent>
-		<on public="1" set="method">
-			<f a="eventName:fn">
-				<c path="String"/>
-				<f a="">
-					<c path="pixi.core.utils.EventData"/>
-					<x path="Void"/>
-				</f>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Register a new EventListener for the given event.
-     *
-     * @alias addEventListener
-     * @param eventName {String} Name of the event.
-     * @param callback {Functon} fn Callback function.</haxe_doc>
-		</on>
-		<addEventListener public="1" set="method"><f a="eventName:fn">
-	<c path="String"/>
-	<f a="">
-		<c path="pixi.core.utils.EventData"/>
-		<x path="Void"/>
-	</f>
-	<x path="Void"/>
-</f></addEventListener>
-		<once public="1" set="method">
-			<f a="eventName:fn">
-				<c path="String"/>
-				<f a="">
-					<c path="pixi.core.utils.EventData"/>
-					<x path="Void"/>
-				</f>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Add an EventListener that's only called once.
-     *
-     * @param eventName {String} Name of the event.
-     * @param callback {Function} Callback function.</haxe_doc>
-		</once>
-		<off public="1" set="method">
-			<f a="eventName:fn">
-				<c path="String"/>
-				<f a="">
-					<c path="pixi.core.utils.EventData"/>
-					<x path="Void"/>
-				</f>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove event listeners.
-     *
-     * @alias removeEventListener
-     * @param eventName {String} The event we want to remove.
-     * @param callback {Function} The listener that we need to find.</haxe_doc>
-		</off>
-		<removeEventListener public="1" set="method"><f a="eventName:fn">
-	<c path="String"/>
-	<f a="">
-		<c path="pixi.core.utils.EventData"/>
-		<x path="Void"/>
-	</f>
-	<x path="Void"/>
-</f></removeEventListener>
-		<removeAllListeners public="1" set="method">
-			<f a="eventName">
-				<c path="String"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
-     *
-     * @param eventName {string} The event you want to remove all listeners for.</haxe_doc>
-		</removeAllListeners>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Mixins event emitter functionality to an object.
-	 *
-	 * @mixin
-	 * @namespace PIXI
-	 * @example
-	 *      function MyEmitter() {}
-	 *
-	 *      eventTarget.mixin(MyEmitter.prototype);
-	 *
-	 *      var em = new MyEmitter();
-	 *      em.emit('eventName', 'some data', 'some more data', {}, null, ...);</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.eventTarget"</e></m></meta>
-	</class>
 	<class path="pixi.extras.MovieClip" params="" file="pixi/extras/MovieClip.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<fromFrames public="1" set="method" static="1">
@@ -16327,6 +16328,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      *
      * @member {Bool}</haxe_doc>
 		</loading>
+		<queue public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* The resources waiting to be loaded.
+     *
+     * @member {Resource[]}</haxe_doc>
+		</queue>
+		<resources public="1">
+			<d/>
+			<haxe_doc><![CDATA[* All the resources for this loader keyed by name.
+     *
+     * @member {object<string, Resource>}]]></haxe_doc>
+		</resources>
 		<on public="1" set="method"><f a="type:callback">
 	<c path="String"/>
 	<f a=""><x path="Void"/></f>
@@ -16481,89 +16494,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</crossOrigin>
 </a></typedef>
-	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
-		<pixelRatio public="1" get="null">
-			<x path="Float"/>
-			<haxe_doc>* Sets the pixel ratio of the application.
-     * default - 1</haxe_doc>
-		</pixelRatio>
-		<skipFrame public="1" get="null">
-			<x path="Bool"/>
-			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
-	 * default - false</haxe_doc>
-		</skipFrame>
-		<width public="1" get="null">
-			<x path="Float"/>
-			<haxe_doc>* Width of the application.
-	 * default - Browser.window.innerWidth</haxe_doc>
-		</width>
-		<height public="1" get="null">
-			<x path="Float"/>
-			<haxe_doc>* Height of the application.
-	 * default - Browser.window.innerHeight</haxe_doc>
-		</height>
-		<resize public="1" get="null">
-			<x path="Bool"/>
-			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
-	 * Should be set to false when custom width and height are used for the application.
-	 * default - true</haxe_doc>
-		</resize>
-		<backgroundColor public="1" get="null">
-			<x path="Int"/>
-			<haxe_doc>* Sets the background color of the stage.
-	 * default - 0xFFFFFF</haxe_doc>
-		</backgroundColor>
-		<onUpdate public="1">
-			<f a="">
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Update listener function</haxe_doc>
-		</onUpdate>
-		<onResize public="1">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Window resize listener function</haxe_doc>
-		</onResize>
-		<_stage set="null">
-			<c path="pixi.core.display.Container"/>
-			<haxe_doc>* Global Container.
-	 * Read-only</haxe_doc>
-		</_stage>
-		<_canvas><c path="js.html.CanvasElement"/></_canvas>
-		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
-		<_stats><c path="pixi.plugins.stats.Stats"/></_stats>
-		<_lastTime><c path="Date"/></_lastTime>
-		<_currentTime><c path="Date"/></_currentTime>
-		<_elapsedTime><x path="Float"/></_elapsedTime>
-		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="93"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="109">
-			<f a="?renderer:?stats" v="'auto':true">
-				<c path="String"/>
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
-	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL | RECOMMENDED
-	 * @param [stats] - Enable/disable stats for the application.
-	 * Note that stats.js is not part of pixi so don't forget to include it you html page
-	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>]]></haxe_doc>
-		</start>
-		<_onWindowResize set="method" line="136"><f a="event">
-	<c path="js.html.Event"/>
-	<x path="Void"/>
-</f></_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="151"><f a=""><x path="Void"/></f></_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="163"><f a=""><x path="Void"/></f></_calculateElapsedTime>
-		<_addStats set="method" line="169"><f a=""><x path="Void"/></f></_addStats>
-		<new public="1" set="method" line="88"><f a=""><x path="Void"/></f></new>
-		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
- * @author Adi Reddy Mora
- * http://adireddy.github.io
- * @license MIT
- * @copyright 2015</haxe_doc>
-		<meta><m n=":keep"/></meta>
-	</class>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>
@@ -16905,22 +16835,26 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<class path="samples.video.Main" params="" file="samples/video/Main.hx">
-		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="52" static="1">
+	<class path="samples.stream.Main" params="" file="samples/stream/Main.hx">
+		<main set="method" line="98" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_vidTexture><c path="pixi.core.textures.Texture"/></_vidTexture>
-		<_vidSprite><c path="pixi.core.sprites.Sprite"/></_vidSprite>
-		<_vidElement><c path="js.html.VideoElement"/></_vidElement>
-		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
-		<_onUpdate set="method" line="44"><f a="elapsedTime">
-	<x path="Float"/>
+		<_wrapper><c path="js.html.Element"/></_wrapper>
+		<_videoElement><c path="js.html.VideoElement"/></_videoElement>
+		<_videoCover><c path="js.html.ImageElement"/></_videoCover>
+		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
+		<_stage><c path="pixi.core.display.Container"/></_stage>
+		<_bunny><c path="pixi.core.sprites.Sprite"/></_bunny>
+		<_table><c path="pixi.core.sprites.Sprite"/></_table>
+		<_label><c path="pixi.text.Text"/></_label>
+		<_init set="method" line="36"><f a=""><x path="Void"/></f></_init>
+		<_onTap set="method" line="89"><f a="data">
+	<c path="pixi.core.utils.EventData"/>
 	<x path="Void"/>
-</f></_onUpdate>
-		<_onResize set="method" line="48"><f a=""><x path="Void"/></f></_onResize>
-		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
+</f></_onTap>
+		<_animate set="method" line="93"><f a=""><x path="Void"/></f></_animate>
+		<new public="1" set="method" line="31"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>
