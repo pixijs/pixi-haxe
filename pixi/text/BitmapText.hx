@@ -54,6 +54,12 @@ extern class BitmapText extends DisplayObjectContainer {
 	 * @type Float
 	 */
 	var textHeight:Float;
+
+	/**
+	 * Text value
+	 * @type String
+	 */
+	var text:String;
 }
 
 /**

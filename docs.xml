@@ -19244,6 +19244,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @property textHeight
 	 * @type Float</haxe_doc>
 		</textHeight>
+		<text public="1">
+			<c path="String"/>
+			<haxe_doc>* Text value
+	 * @type String</haxe_doc>
+		</text>
 		<new public="1" set="method">
 			<f a="text:style">
 				<c path="String"/>
@@ -19321,6 +19326,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @method destroy
 	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well</haxe_doc>
 		</destroy>
+		<text public="1">
+			<c path="String"/>
+			<haxe_doc>* Text value
+	 * @type String</haxe_doc>
+		</text>
 		<canvas public="1">
 			<t path="pixi.CanvasElement"/>
 			<haxe_doc>* The canvas element that everything is drawn to

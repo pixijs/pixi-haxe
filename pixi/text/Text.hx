@@ -66,6 +66,12 @@ extern class Text extends Sprite {
 	function destroy(?destroyBaseTexture:Bool):Void;
 
 	/**
+	 * Text value
+	 * @type String
+	 */
+	var text:String;
+
+	/**
 	 * The canvas element that everything is drawn to
 	 * @property canvas
 	 * @type CanvasElement
