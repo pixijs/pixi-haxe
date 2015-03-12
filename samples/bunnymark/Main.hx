@@ -1,8 +1,6 @@
 package samples.bunnymark;
 
 import js.html.DivElement;
-import pixi.core.math.shapes.Rectangle;
-import pixi.core.particles.ParticleContainer;
 import js.Browser;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
