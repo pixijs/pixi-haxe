@@ -59,6 +59,7 @@ extern class Loader {
 	var resources:Dynamic;
 
 	function on(type:String, callback:Void -> Void):Void;
+
 	function once(type:String, callback:Void -> Void):Void;
 
 	/**
@@ -112,7 +113,7 @@ extern class Loader {
 	 * @param [callback] {function} Function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
-	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Void -> Void):Loader;
+	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Dynamic -> Void):Loader;
 
 	/**
 	 * Sets up a middleware function that will run *after* the
@@ -136,10 +137,8 @@ extern class Loader {
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
-	 *
-	 * @return {Loader}
 	 */
-	function reset():Loader;
+	function reset():Void;
 
 	/**
 	 * Starts loading the queued resources.
@@ -156,6 +155,8 @@ extern class Loader {
 	 * @fires progress
 	 */
 	function loadResource(resource:String, ?cb:Void -> Void):Loader;
+
+	function use(fn:Dynamic):Void;
 }
 
 typedef LoaderOptions = {

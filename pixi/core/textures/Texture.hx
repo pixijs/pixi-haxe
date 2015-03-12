@@ -138,6 +138,16 @@ extern class Texture {
 	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Texture;
 
 	/**
+	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+	 * The frame ids are created when a Texture packer file has been loaded
+	 *
+	 * @static
+	 * @param frameId {String} The frame Id of the texture in the cache
+	 * @return {Texture} The newly created texture
+	 */
+	static function fromFrame(frameId:String):Texture;
+
+	/**
 	 * Helper function that creates a new Texture based on the given canvas element.
 	 *
 	 * @static
@@ -152,11 +162,19 @@ extern class Texture {
 	 *
 	 * @static
 	 * @param video {VideoElement}
-	 * @param scaleMode {number} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
 	static function fromVideo(video:VideoElement, ?scaleMode:Int):Texture;
 
+	/**
+	 * Helper function that creates a new Texture based on the video url.
+	 *
+	 * @static
+	 * @param videoUrl {String}
+	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @return {Texture} A Texture
+	 */
 	static function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
 
 	/**

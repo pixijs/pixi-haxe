@@ -13632,12 +13632,36 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toLocal>
-		<updateCache public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Generates and updates the cached sprite for this object.
+		<generateTexture public="1" set="method">
+			<f a="renderer:?resolution:?scaleMode">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<c path="pixi.core.textures.Texture"/>
+			</f>
+			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
+	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
-	 * @method updateCache</haxe_doc>
-		</updateCache>
+	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param resolution {Number} The resolution of the texture being generated
+	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @return {Texture} a texture of the display object</haxe_doc>
+			<overloads><generateTexture public="1" set="method">
+	<f a="renderer:?resolution:?scaleMode">
+		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+		<x path="Float"/>
+		<x path="Int"/>
+		<c path="pixi.core.textures.Texture"/>
+	</f>
+	<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
+	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
+	 *
+	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param resolution {Number} The resolution of the texture being generated
+	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @return {Texture} a texture of the display object</haxe_doc>
+</generateTexture></overloads>
+		</generateTexture>
 		<name public="1">
 			<c path="String"/>
 			<haxe_doc>* The instance name of the object.
@@ -13741,14 +13765,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</y>
 		<worldVisible public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Indicates if the sprite is globally visible.
+			<haxe_doc>* Indicates if the displayObject is globally visible.
      *
      * @member {Bool}
      * @memberof DisplayObject#
      * @readonly</haxe_doc>
 		</worldVisible>
 		<mask public="1">
-			<d/>
+			<c path="pixi.core.graphics.Graphics"/>
 			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
      * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
      * To remove a mask, set this property to null.
@@ -13757,7 +13781,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
-			<d/>
+			<c path="Array"><d/></c>
 			<haxe_doc>* Sets the filters for the displayObject.
      * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
      * To remove filters simply set this property to 'null'
@@ -13765,10 +13789,38 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {Filter[]}
      * @memberof DisplayObject#</haxe_doc>
 		</filters>
-		<interactive public="1"><x path="Bool"/></interactive>
-		<buttonMode public="1"><x path="Bool"/></buttonMode>
-		<interactiveChildren public="1"><x path="Bool"/></interactiveChildren>
-		<defaultCursor public="1"><c path="String"/></defaultCursor>
+		<interactive public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Indicates if the displayObject is interactive or not.
+     *
+     * @member {Bool}
+     * @default false
+     * @memberof DisplayObject#</haxe_doc>
+		</interactive>
+		<buttonMode public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Indicates if the displayObject uses button mode or normal mode.
+     *
+     * @member {Bool}
+     * @default false
+     * @memberof DisplayObject#</haxe_doc>
+		</buttonMode>
+		<interactiveChildren public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Indicates if the children of displayObject are interactive or not.
+     *
+     * @member {Bool}
+     * @default true
+     * @memberof DisplayObject#</haxe_doc>
+		</interactiveChildren>
+		<defaultCursor public="1">
+			<c path="String"/>
+			<haxe_doc>* Default cursor.
+     *
+     * @member {String}
+     * @default pointer
+     * @memberof DisplayObject#</haxe_doc>
+		</defaultCursor>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
@@ -13897,25 +13949,16 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param beginIndex {Int} The beginning position. Default value is 0.
 	 * @param endIndex {Int} The ending position. Default value is size of the container.</haxe_doc>
 		</removeChildren>
-		<generateTexture public="1" set="method">
-			<f a="resolution:scaleMode:renderer">
-				<x path="Float"/>
-				<x path="Float"/>
-				<d/>
-				<c path="pixi.core.textures.Texture"/>
+		<getChildByName public="1" set="method">
+			<f a="name">
+				<c path="String"/>
+				<c path="pixi.core.display.DisplayObject"/>
 			</f>
-			<haxe_doc>* Useful function that returns a texture of the displayObject object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Float} See {{#crossLink "PIXI/scaleModes:property"}}PIXI.scaleModes{{/crossLink}} for possible values
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @return {Texture} a texture of the graphics object</haxe_doc>
-		</generateTexture>
-		<getChildByName public="1" set="method"><f a="name">
-	<c path="String"/>
-	<c path="pixi.core.display.DisplayObject"/>
-</f></getChildByName>
+			<haxe_doc>* Returns the display object in the container
+	*
+	* @param name {string} instance name
+	* @return {DisplayObject}</haxe_doc>
+		</getChildByName>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* A Container represents a collection of display objects.
@@ -15495,6 +15538,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return Texture</haxe_doc>
 		</fromImage>
+		<fromFrame public="1" set="method" static="1">
+			<f a="frameId">
+				<c path="String"/>
+				<c path="pixi.core.textures.Texture"/>
+			</f>
+			<haxe_doc>* Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+	 * The frame ids are created when a Texture packer file has been loaded
+	 *
+	 * @static
+	 * @param frameId {String} The frame Id of the texture in the cache
+	 * @return {Texture} The newly created texture</haxe_doc>
+		</fromFrame>
 		<fromCanvas public="1" set="method" static="1">
 			<f a="canvas:?scaleMode">
 				<d/>
@@ -15518,14 +15573,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @static
 	 * @param video {VideoElement}
-	 * @param scaleMode {number} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture</haxe_doc>
 		</fromVideo>
-		<fromVideoUrl public="1" set="method" static="1"><f a="videoUrl:?scaleMode">
-	<c path="String"/>
-	<x path="Int"/>
-	<c path="pixi.core.textures.Texture"/>
-</f></fromVideoUrl>
+		<fromVideoUrl public="1" set="method" static="1">
+			<f a="videoUrl:?scaleMode">
+				<c path="String"/>
+				<x path="Int"/>
+				<c path="pixi.core.textures.Texture"/>
+			</f>
+			<haxe_doc>* Helper function that creates a new Texture based on the video url.
+	 *
+	 * @static
+	 * @param videoUrl {String}
+	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @return {Texture} A Texture</haxe_doc>
+		</fromVideoUrl>
 		<addTextureToCache public="1" set="method" static="1">
 			<f a="texture:id">
 				<c path="pixi.core.textures.Texture"/>
@@ -15917,6 +15980,20 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.EventData"</e></m></meta>
 	</class>
+	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
+		<getResolutionOfUrl public="1" set="method" static="1">
+			<f a="url">
+				<c path="String"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>* get the resolution of an asset by looking for the prefix
+     * used by spritesheets and image urls
+     *
+     * @param url {String} the image path
+     * @return {Float}</haxe_doc>
+		</getResolutionOfUrl>
+		<meta><m n=":native"><e>"PIXI.utils"</e></m></meta>
+	</class>
 	<class path="pixi.extras.MovieClip" params="" file="pixi/extras/MovieClip.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<fromFrames public="1" set="method" static="1">
@@ -16047,6 +16124,67 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param textures {Texture[]} an array of {Texture} objects that make up the animation]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.MovieClip"</e></m></meta>
+	</class>
+	<class path="pixi.extras.Ticker" params="" file="pixi/extras/Ticker.hx" extern="1">
+		<active public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether or not this ticker runs
+	*
+	* @member {Bool}</haxe_doc>
+		</active>
+		<eventData public="1">
+			<c path="pixi.core.utils.EventData"/>
+			<haxe_doc>* the event data for this ticker to dispatch the tick event
+     *
+     * @member {EventData}</haxe_doc>
+		</eventData>
+		<deltaTime public="1">
+			<x path="Float"/>
+			<haxe_doc>* The deltaTime
+     *
+     * @member {Float}</haxe_doc>
+		</deltaTime>
+		<timeElapsed public="1">
+			<x path="Float"/>
+			<haxe_doc>* The time between two frames
+     *
+     * @member {Float}</haxe_doc>
+		</timeElapsed>
+		<lastTime public="1">
+			<x path="Float"/>
+			<haxe_doc>* The time at the last frame
+     *
+     * @member {Float}</haxe_doc>
+		</lastTime>
+		<speed public="1">
+			<x path="Float"/>
+			<haxe_doc>* The speed
+     *
+     * @member {Float}</haxe_doc>
+		</speed>
+		<start public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Starts the ticker, automatically called by the constructor
+	 *</haxe_doc>
+		</start>
+		<stop public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the ticker
+	 *</haxe_doc>
+		</stop>
+		<update public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* The update loop, fires the 'tick' event
+	 *</haxe_doc>
+		</update>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* A Ticker class that runs an update loop that other objects listen to
+	 *
+	 * @class
+	 * @memberof PIXI.extras</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Ticker"</e></m></meta>
 	</class>
 	<class path="pixi.extras.TilingSprite" params="" file="pixi/extras/TilingSprite.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
@@ -16355,7 +16493,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<c path="String"/>
 				<t path="pixi.loaders.LoaderOptions"/>
-				<f a=""><x path="Void"/></f>
+				<f a="">
+					<d/>
+					<x path="Void"/>
+				</f>
 				<c path="pixi.loaders.Loader"/>
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
@@ -16433,10 +16574,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Loader}</haxe_doc>
 		</before>
 		<reset public="1" set="method">
-			<f a=""><c path="pixi.loaders.Loader"/></f>
-			<haxe_doc>* Resets the queue of the loader to prepare for a new load.
-	 *
-	 * @return {Loader}</haxe_doc>
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Resets the queue of the loader to prepare for a new load.</haxe_doc>
 		</reset>
 		<load public="1" set="method">
 			<f a="?cb">
@@ -16459,6 +16598,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @fires progress</haxe_doc>
 		</loadResource>
+		<use public="1" set="method"><f a="fn">
+	<d/>
+	<x path="Void"/>
+</f></use>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>*
@@ -16836,25 +16979,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</align>
 </a></typedef>
 	<class path="samples.stream.Main" params="" file="samples/stream/Main.hx">
-		<main set="method" line="98" static="1">
+		<main set="method" line="97" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
 		<_wrapper><c path="js.html.Element"/></_wrapper>
 		<_videoElement><c path="js.html.VideoElement"/></_videoElement>
-		<_videoCover><c path="js.html.ImageElement"/></_videoCover>
 		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
 		<_stage><c path="pixi.core.display.Container"/></_stage>
 		<_bunny><c path="pixi.core.sprites.Sprite"/></_bunny>
-		<_table><c path="pixi.core.sprites.Sprite"/></_table>
-		<_label><c path="pixi.text.Text"/></_label>
-		<_init set="method" line="36"><f a=""><x path="Void"/></f></_init>
-		<_onTap set="method" line="89"><f a="data">
+		<_init set="method" line="38"><f a=""><x path="Void"/></f></_init>
+		<_onTap set="method" line="88"><f a="data">
 	<c path="pixi.core.utils.EventData"/>
 	<x path="Void"/>
 </f></_onTap>
-		<_animate set="method" line="93"><f a=""><x path="Void"/></f></_animate>
-		<new public="1" set="method" line="31"><f a=""><x path="Void"/></f></new>
+		<_animate set="method" line="92"><f a=""><x path="Void"/></f></_animate>
+		<new public="1" set="method" line="33"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>

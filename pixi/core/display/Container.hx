@@ -113,15 +113,10 @@ extern class Container extends DisplayObject {
 	function removeChildren(?beginIndex:Int, ?endIndex:Int):Void;
 
 	/**
-	 * Useful function that returns a texture of the displayObject object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Float} See {{#crossLink "PIXI/scaleModes:property"}}PIXI.scaleModes{{/crossLink}} for possible values
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @return {Texture} a texture of the graphics object
-	 */
-	function generateTexture(resolution:Float, scaleMode:Float, renderer:Dynamic):Texture;
-
+	* Returns the display object in the container
+	*
+	* @param name {string} instance name
+	* @return {DisplayObject}
+	*/
 	function getChildByName(name:String):DisplayObject;
 }

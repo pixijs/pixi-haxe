@@ -1,7 +1,5 @@
 package pixi.core.graphics;
 
-import pixi.core.math.Matrix;
-import pixi.core.textures.Texture;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Ellipse;
 import pixi.core.math.shapes.Rectangle;

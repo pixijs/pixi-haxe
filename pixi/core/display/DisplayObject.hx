@@ -1,5 +1,9 @@
 package pixi.core.display;
 
+import pixi.core.renderers.canvas.CanvasRenderer;
+import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.textures.Texture;
+import pixi.core.graphics.Graphics;
 import pixi.core.utils.EventTarget;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
@@ -50,11 +54,16 @@ extern class DisplayObject extends EventTarget {
 	function toLocal(position:Point, ?frm:DisplayObject):Point;
 
 	/**
-	 * Generates and updates the cached sprite for this object.
+	 * Useful function that returns a texture of the display object that can then be used to create sprites
+	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
-	 * @method updateCache
+	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
+	 * @param resolution {Number} The resolution of the texture being generated
+	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @return {Texture} a texture of the display object
 	 */
-	function updateCache():Void;
+	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
+	function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
 
 	/**
 	 * The instance name of the object.
@@ -173,7 +182,7 @@ extern class DisplayObject extends EventTarget {
 	var y:Float;
 
 	/**
-     * Indicates if the sprite is globally visible.
+     * Indicates if the displayObject is globally visible.
      *
      * @member {Bool}
      * @memberof DisplayObject#
@@ -189,7 +198,7 @@ extern class DisplayObject extends EventTarget {
      * @member {Graphics}
      * @memberof DisplayObject#
      */
-	var mask:Dynamic;
+	var mask:Graphics;
 
 	/**
      * Sets the filters for the displayObject.
@@ -199,10 +208,41 @@ extern class DisplayObject extends EventTarget {
      * @member {Filter[]}
      * @memberof DisplayObject#
      */
-	var filters:Dynamic;
+	var filters:Array<Dynamic>;
 
+	/**
+     * Indicates if the displayObject is interactive or not.
+     *
+     * @member {Bool}
+     * @default false
+     * @memberof DisplayObject#
+     */
 	var interactive:Bool;
+
+	/**
+     * Indicates if the displayObject uses button mode or normal mode.
+     *
+     * @member {Bool}
+     * @default false
+     * @memberof DisplayObject#
+     */
 	var buttonMode:Bool;
+
+	/**
+     * Indicates if the children of displayObject are interactive or not.
+     *
+     * @member {Bool}
+     * @default true
+     * @memberof DisplayObject#
+     */
 	var interactiveChildren:Bool;
+
+	/**
+     * Default cursor.
+     *
+     * @member {String}
+     * @default pointer
+     * @memberof DisplayObject#
+     */
 	var defaultCursor:String;
 }
