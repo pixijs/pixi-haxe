@@ -14138,7 +14138,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Graphics}</haxe_doc>
 		</clone>
 		<lineStyle public="1" set="method">
-			<f a="lineWidth:color:alpha">
+			<f a="?lineWidth:?color:?alpha">
 				<x path="Float"/>
 				<x path="Int"/>
 				<x path="Float"/>
@@ -14254,7 +14254,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Graphics}</haxe_doc>
 		</arc>
 		<beginFill public="1" set="method">
-			<f a="color:?alpha">
+			<f a="?color:?alpha">
 				<x path="Int"/>
 				<x path="Float"/>
 				<c path="pixi.core.graphics.Graphics"/>

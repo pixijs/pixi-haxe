@@ -1,5 +1,6 @@
 package samples.basics;
 
+import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.core.renderers.SystemRenderer;
@@ -12,6 +13,8 @@ class Main {
 	var _bunny:Sprite;
 	var _renderer:SystemRenderer;
 	var _stage:Container;
+
+	var _graphic:Graphics;
 
 	public function new() {
 		// Rendering options usage sample
@@ -27,6 +30,13 @@ class Main {
 		_bunny.position.set(400, 300);
 
 		_stage.addChild(_bunny);
+
+		_graphic = new Graphics();
+		_graphic.beginFill(0xff0000, 0.4);
+		_graphic.drawRect(200, 150, 400, 300);
+		_graphic.endFill();
+
+		_stage.addChild(_graphic);
 
 		Browser.document.body.appendChild(_renderer.view);
 		Browser.window.requestAnimationFrame(cast _animate);

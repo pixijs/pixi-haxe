@@ -88,7 +88,7 @@ extern class Graphics extends Container {
 	 * @param alpha {Float} alpha of the line to draw, will update the objects stored style
 	 * @return {Graphics}
 	 */
-	function lineStyle(lineWidth:Float, color:Int, alpha:Float):Graphics;
+	function lineStyle(?lineWidth:Float, ?color:Int, ?alpha:Float):Graphics;
 
 	/**
 	 * Moves the current drawing position to x, y.
@@ -169,7 +169,7 @@ extern class Graphics extends Container {
 	 * @param alpha {Float} the alpha of the fill
 	 * @return {Graphics}
 	 */
-	function beginFill(color:Int, ?alpha:Float):Graphics;
+	function beginFill(?color:Int, ?alpha:Float):Graphics;
 
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.

@@ -11,6 +11,11 @@ samples.basics.Main = function() {
 	this._bunny.anchor.set(0.5,0.5);
 	this._bunny.position.set(400,300);
 	this._stage.addChild(this._bunny);
+	this._graphic = new PIXI.Graphics();
+	this._graphic.beginFill(16711680,0.4);
+	this._graphic.drawRect(200,150,400,300);
+	this._graphic.endFill();
+	this._stage.addChild(this._graphic);
 	window.document.body.appendChild(this._renderer.view);
 	window.requestAnimationFrame($bind(this,this._animate));
 };
