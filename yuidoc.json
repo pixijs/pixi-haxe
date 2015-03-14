@@ -1,7 +1,7 @@
 {
     "name": "haxe-pixi",
     "description": "Haxe Pixi Externs",
-    "version": "2.2.1",
+    "version": "3.0.0-alpha",
     "url": "https://github.com/adireddy/haxe-pixi",
     "options": {
         "linkNatives": "true",

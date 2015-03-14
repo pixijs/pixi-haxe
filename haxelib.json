@@ -4,7 +4,7 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "added pixi.Application utility class that contains pixi boilerplate code",
+  "releasenote": "Alpha release. Filters and few other packages outside core pending.",
   "version": "3.0.0-alpha",
   "url": "https://github.com/adireddy/haxe-pixi",
   "dependencies": {
