@@ -1,4 +1,4 @@
-# haxe-pixi [![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-pixi.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 ![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
 
@@ -9,7 +9,7 @@ Externs of pixi.js (v2.2.7) for Haxe - 2D webGL renderer with canvas fallback.
 ### Installation ###
 
 ```haxe
-haxelib install pixijs
+haxelib install pixijs 2.3.0
 ```
 ### API Documentation ###
 
