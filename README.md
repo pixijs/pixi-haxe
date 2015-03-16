@@ -8,7 +8,7 @@ Externs of pixi.js (v3) for Haxe - 2D webGL renderer with canvas fallback.
 ### Installation ###
 
 ```haxe
-haxelib install pixijs
+haxelib install pixijs 3.0.0-alpha
 ```
 ### API Documentation ###
 
