@@ -1,5 +1,6 @@
 package pixi.loaders;
 
+import pixi.core.textures.Texture;
 @:native("PIXI.Loader")
 extern class Loader {
 
@@ -113,7 +114,7 @@ extern class Loader {
 	 * @param [callback] {function} Function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
-	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Dynamic -> Void):Loader;
+	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):Loader;
 
 	/**
 	 * Sets up a middleware function that will run *after* the
@@ -160,7 +161,18 @@ extern class Loader {
 }
 
 typedef LoaderOptions = {
-	@:optional var crossOrigin:Bool;
+	@:optional var crossOrigin:Dynamic;
 	@:optional var loadType:Int;
 	@:optional var xhrType:String;
+}
+
+typedef Resource = {
+	var name:String;
+	var url:String;
+	var xhr:Dynamic;
+	var xhrType:String;
+	var data:Dynamic;
+	var texture:Texture;
+	var crossOrigin:String;
+	var loadType:Int;
 }
