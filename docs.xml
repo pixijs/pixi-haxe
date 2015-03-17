@@ -13515,7 +13515,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @property {object} SHAPES.RREC=4</haxe_doc>
 		</SHAPES>
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
-		<meta><m n=":native"><e>"PIXI"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.CONST"</e></m></meta>
 	</class>
 	<typedef path="pixi.core.RendererType" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<WEBGL><x path="Int"/></WEBGL>
