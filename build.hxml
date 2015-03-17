@@ -22,6 +22,17 @@
 
 -cp samples
 -cp src
+-main samples.bunnymark3.Main
+-js samples/_output/bunnymark3.js
+
+-dce full
+-D source-map-content
+-debug
+
+--next
+
+-cp samples
+-cp src
 -main samples.bunnymark.Main
 -js samples/_output/bunnymark.js
 
