@@ -1,5 +1,6 @@
 package samples.bunnymark3;
 
+import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.plugins.app.Application;
@@ -13,6 +14,7 @@ class Main extends Application {
 
 	var _sprites:Array<Bunny>;
 	var _quantityLabel:Text;
+	var _graphic:Graphics;
 
 	var _isScale:Bool;
 	var _isRotation:Bool;
@@ -41,8 +43,17 @@ class Main extends Application {
 		_quantityLabel = new Text("Press/Touch and hold to add bunnies continuously", {font: "15px Tahoma", fill:"#FFFFFF"});
 		_stage.addChild(_quantityLabel);
 
-		_renderer.view.onmousedown = onTouchStart;
-		_renderer.view.onmouseup = onTouchEnd;
+		_graphic = new Graphics();
+		_graphic.beginFill(0xff0000, 0.4);
+		_graphic.drawRect(200, 150, 400, 300);
+		_graphic.endFill();
+
+		_graphic.interactive = true;
+		_graphic.on("mousedown", onTouchStart);
+		_graphic.on("mouseup", onTouchEnd);
+		_graphic.on("touchstart", onTouchStart);
+		_graphic.on("touchend", onTouchEnd);
+		_stage.addChild(_graphic);
 
 		_container = new Container();
 		_stage.addChild(_container);
@@ -55,6 +66,7 @@ class Main extends Application {
 	}
 
 	function onTouchStart(event) {
+		trace("FFF");
 		_add = true;
 	}
 

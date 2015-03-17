@@ -105,8 +105,16 @@ samples.bunnymark3.Main = function() {
 	this._bunnyTexture = PIXI.Texture.fromImage("assets/basics/bunny.png");
 	this._quantityLabel = new PIXI.Text("Press/Touch and hold to add bunnies continuously",{ font : "15px Tahoma", fill : "#FFFFFF"});
 	this._stage.addChild(this._quantityLabel);
-	this._renderer.view.onmousedown = $bind(this,this.onTouchStart);
-	this._renderer.view.onmouseup = $bind(this,this.onTouchEnd);
+	this._graphic = new PIXI.Graphics();
+	this._graphic.beginFill(16711680,0.4);
+	this._graphic.drawRect(200,150,400,300);
+	this._graphic.endFill();
+	this._graphic.interactive = true;
+	this._graphic.on("mousedown",$bind(this,this.onTouchStart));
+	this._graphic.on("mouseup",$bind(this,this.onTouchEnd));
+	this._graphic.on("touchstart",$bind(this,this.onTouchStart));
+	this._graphic.on("touchend",$bind(this,this.onTouchEnd));
+	this._stage.addChild(this._graphic);
 	this._container = new PIXI.Container();
 	this._stage.addChild(this._container);
 };
@@ -121,6 +129,7 @@ samples.bunnymark3.Main.prototype = $extend(pixi.plugins.app.Application.prototy
 		pixi.plugins.app.Application.prototype.start.call(this);
 	}
 	,onTouchStart: function(event) {
+		console.log("FFF");
 		this._add = true;
 	}
 	,onTouchEnd: function(event) {
