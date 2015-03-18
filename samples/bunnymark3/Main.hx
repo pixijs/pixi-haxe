@@ -38,7 +38,7 @@ class Main extends Application {
 		_maxX = Browser.window.innerWidth;
 		_maxY = Browser.window.innerHeight;
 
-		_bunnyTexture = Texture.fromImage("assets/basics/bunny.png");
+		_bunnyTexture = Texture.fromImage("assets/bunnymark/bunny.png");
 
 		_quantityLabel = new Text("Press/Touch and hold to add bunnies continuously", {font: "15px Tahoma", fill:"#FFFFFF"});
 		_stage.addChild(_quantityLabel);

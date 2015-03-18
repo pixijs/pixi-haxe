@@ -102,7 +102,7 @@ samples.bunnymark3.Main = function() {
 	this._minX = this._minY = 0;
 	this._maxX = window.innerWidth;
 	this._maxY = window.innerHeight;
-	this._bunnyTexture = PIXI.Texture.fromImage("assets/basics/bunny.png");
+	this._bunnyTexture = PIXI.Texture.fromImage("assets/bunnymark/bunny.png");
 	this._quantityLabel = new PIXI.Text("Press/Touch and hold to add bunnies continuously",{ font : "15px Tahoma", fill : "#FFFFFF"});
 	this._stage.addChild(this._quantityLabel);
 	this._graphic = new PIXI.Graphics();
