@@ -13,7 +13,7 @@ samples.stream.Main.prototype = {
 		options.backgroundColor = 13158;
 		options.resolution = 1;
 		this._stage = new PIXI.Container();
-		this._renderer = PIXI.autoDetectRenderer(1024,648,options);
+		this._renderer = PIXI.autoDetectRenderer(window.innerWidth,window.innerHeight,options);
 		this._wrapper = window.document.getElementById("game");
 		var _this = window.document;
 		this._videoElement = _this.createElement("video");
@@ -30,7 +30,7 @@ samples.stream.Main.prototype = {
 		this._bunny = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
 		this._bunny.anchor.set(0.5,0.5);
 		this._bunny.scale.set(4,4);
-		this._bunny.position.set(550,450);
+		this._bunny.position.set(550,window.innerHeight);
 		this._bunny.interactive = true;
 		this._stage.addChild(this._bunny);
 		this._bunny.on("tap",$bind(this,this._onTap));

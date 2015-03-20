@@ -26,7 +26,7 @@ pixi.plugins.app.Application.prototype = {
 		this.height = window.innerHeight;
 		this._skipFrame = false;
 	}
-	,start: function(renderer,stats) {
+	,start: function(renderer,stats,parentDom) {
 		if(stats == null) stats = true;
 		if(renderer == null) renderer = "auto";
 		var _this = window.document;
@@ -34,7 +34,7 @@ pixi.plugins.app.Application.prototype = {
 		this._canvas.style.width = this.width + "px";
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
-		window.document.body.appendChild(this._canvas);
+		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
 		this._stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
@@ -117,10 +117,6 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.onResize = $bind(this,this._onResize);
-		this.skipFrame = true;
-		this.resize = true;
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
 		pixi.plugins.app.Application.prototype.start.call(this,null,true);
 		this._setup();
 	}

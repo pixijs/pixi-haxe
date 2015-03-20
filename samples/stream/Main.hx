@@ -31,7 +31,6 @@ class Main {
 	var _vidSprite:Sprite;
 
 	public function new() {
-		//super();
 		_init();
 	}
 
@@ -41,7 +40,7 @@ class Main {
 		options.resolution = 1;
 
 		_stage = new Container();
-		_renderer = Detector.autoDetectRenderer(1024, 648, options);
+		_renderer = Detector.autoDetectRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
 		_wrapper = Browser.document.getElementById("game");
 
 		_videoElement = Browser.document.createVideoElement();
@@ -49,40 +48,21 @@ class Main {
 		_videoElement.style.position = "absolute";
 		_videoElement.style.top = "0px";
 		_videoElement.autoplay = true;
-		//_videoElement.width = 384;
-		//_videoElement.height = 320;
 		_videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
-
-		//"/live/smil:multiplayer-roulette.smil/playlist.m3u8";
-		//"http://91.213.212.37/casino/roulette/wh_vir-mob_med_hls/playlist.m3u8"
-		/*_videoCover = Browser.document.createImageElement();
-		_videoCover.style.position = "absolute";
-		_videoCover.width = 384;
-		_videoCover.height = 354;
-		_videoCover.src = "assets/stream/outter_wheel.png";*/
 
 		Browser.document.body.appendChild(_wrapper);
 		_wrapper.appendChild(_renderer.view);
 		_renderer.view.style.position = "absolute";
 		_wrapper.appendChild(_videoElement);
-		//_wrapper.appendChild(_videoCover);
 		Browser.window.requestAnimationFrame(cast _animate);
-
-		//_table = new Sprite(Texture.fromImage("assets/stream/bg.png"));
-		//_stage.addChild(_table);
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5, 0.5);
 		_bunny.scale.set(4, 4);
-		_bunny.position.set(550, 450);
+		_bunny.position.set(550, Browser.window.innerHeight);
 		_bunny.interactive = true;
 		_stage.addChild(_bunny);
 		_bunny.on("tap", _onTap);
-
-		/*var ua:String = Browser.window.navigator.userAgent;
-		_label = new Text(ua.substring(ua.indexOf("Browser"), ua.length), {font: "14px Arial", fill: "#FFFFFF"});
-		_label.position.set(0, _bunny.y + 100);
-		_stage.addChild(_label);*/
 	}
 
 	function _onTap(data:EventData) {

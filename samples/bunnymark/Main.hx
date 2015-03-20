@@ -38,10 +38,6 @@ class Main extends Application {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
-		skipFrame = true;
-		resize = true;
-		width = Browser.window.innerWidth;
-		height = Browser.window.innerHeight;
 		super.start(true);
 		_setup();
 	}
@@ -156,7 +152,6 @@ class Main extends Application {
 			if (bunny.position.y > maxY) {
 				bunny.speedY *= -0.85;
 				bunny.position.y = maxY;
-				//bunny.spin = (Math.random()-0.5) * 0.2
 				if (Math.random() > 0.5) bunny.speedY -= Math.random() * 6;
 			}
 			else if (bunny.position.y < minY) {

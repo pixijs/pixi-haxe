@@ -1647,6 +1647,1136 @@ EventEmitter.EventEmitter3 = EventEmitter;
 module.exports = EventEmitter;
 
 },{}],5:[function(require,module,exports){
+(function (process){
+/*!
+ * async
+ * https://github.com/caolan/async
+ *
+ * Copyright 2010-2014 Caolan McMahon
+ * Released under the MIT license
+ */
+/*jshint onevar: false, indent:4 */
+/*global setImmediate: false, setTimeout: false, console: false */
+(function () {
+
+    var async = {};
+
+    // global on the server, window in the browser
+    var root, previous_async;
+
+    root = this;
+    if (root != null) {
+      previous_async = root.async;
+    }
+
+    async.noConflict = function () {
+        root.async = previous_async;
+        return async;
+    };
+
+    function only_once(fn) {
+        var called = false;
+        return function() {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(root, arguments);
+        }
+    }
+
+    //// cross-browser compatiblity functions ////
+
+    var _toString = Object.prototype.toString;
+
+    var _isArray = Array.isArray || function (obj) {
+        return _toString.call(obj) === '[object Array]';
+    };
+
+    var _each = function (arr, iterator) {
+        if (arr.forEach) {
+            return arr.forEach(iterator);
+        }
+        for (var i = 0; i < arr.length; i += 1) {
+            iterator(arr[i], i, arr);
+        }
+    };
+
+    var _map = function (arr, iterator) {
+        if (arr.map) {
+            return arr.map(iterator);
+        }
+        var results = [];
+        _each(arr, function (x, i, a) {
+            results.push(iterator(x, i, a));
+        });
+        return results;
+    };
+
+    var _reduce = function (arr, iterator, memo) {
+        if (arr.reduce) {
+            return arr.reduce(iterator, memo);
+        }
+        _each(arr, function (x, i, a) {
+            memo = iterator(memo, x, i, a);
+        });
+        return memo;
+    };
+
+    var _keys = function (obj) {
+        if (Object.keys) {
+            return Object.keys(obj);
+        }
+        var keys = [];
+        for (var k in obj) {
+            if (obj.hasOwnProperty(k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    };
+
+    //// exported async module functions ////
+
+    //// nextTick implementation with browser-compatible fallback ////
+    if (typeof process === 'undefined' || !(process.nextTick)) {
+        if (typeof setImmediate === 'function') {
+            async.nextTick = function (fn) {
+                // not a direct alias for IE10 compatibility
+                setImmediate(fn);
+            };
+            async.setImmediate = async.nextTick;
+        }
+        else {
+            async.nextTick = function (fn) {
+                setTimeout(fn, 0);
+            };
+            async.setImmediate = async.nextTick;
+        }
+    }
+    else {
+        async.nextTick = process.nextTick;
+        if (typeof setImmediate !== 'undefined') {
+            async.setImmediate = function (fn) {
+              // not a direct alias for IE10 compatibility
+              setImmediate(fn);
+            };
+        }
+        else {
+            async.setImmediate = async.nextTick;
+        }
+    }
+
+    async.each = function (arr, iterator, callback) {
+        callback = callback || function () {};
+        if (!arr.length) {
+            return callback();
+        }
+        var completed = 0;
+        _each(arr, function (x) {
+            iterator(x, only_once(done) );
+        });
+        function done(err) {
+          if (err) {
+              callback(err);
+              callback = function () {};
+          }
+          else {
+              completed += 1;
+              if (completed >= arr.length) {
+                  callback();
+              }
+          }
+        }
+    };
+    async.forEach = async.each;
+
+    async.eachSeries = function (arr, iterator, callback) {
+        callback = callback || function () {};
+        if (!arr.length) {
+            return callback();
+        }
+        var completed = 0;
+        var iterate = function () {
+            iterator(arr[completed], function (err) {
+                if (err) {
+                    callback(err);
+                    callback = function () {};
+                }
+                else {
+                    completed += 1;
+                    if (completed >= arr.length) {
+                        callback();
+                    }
+                    else {
+                        iterate();
+                    }
+                }
+            });
+        };
+        iterate();
+    };
+    async.forEachSeries = async.eachSeries;
+
+    async.eachLimit = function (arr, limit, iterator, callback) {
+        var fn = _eachLimit(limit);
+        fn.apply(null, [arr, iterator, callback]);
+    };
+    async.forEachLimit = async.eachLimit;
+
+    var _eachLimit = function (limit) {
+
+        return function (arr, iterator, callback) {
+            callback = callback || function () {};
+            if (!arr.length || limit <= 0) {
+                return callback();
+            }
+            var completed = 0;
+            var started = 0;
+            var running = 0;
+
+            (function replenish () {
+                if (completed >= arr.length) {
+                    return callback();
+                }
+
+                while (running < limit && started < arr.length) {
+                    started += 1;
+                    running += 1;
+                    iterator(arr[started - 1], function (err) {
+                        if (err) {
+                            callback(err);
+                            callback = function () {};
+                        }
+                        else {
+                            completed += 1;
+                            running -= 1;
+                            if (completed >= arr.length) {
+                                callback();
+                            }
+                            else {
+                                replenish();
+                            }
+                        }
+                    });
+                }
+            })();
+        };
+    };
+
+
+    var doParallel = function (fn) {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fn.apply(null, [async.each].concat(args));
+        };
+    };
+    var doParallelLimit = function(limit, fn) {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fn.apply(null, [_eachLimit(limit)].concat(args));
+        };
+    };
+    var doSeries = function (fn) {
+        return function () {
+            var args = Array.prototype.slice.call(arguments);
+            return fn.apply(null, [async.eachSeries].concat(args));
+        };
+    };
+
+
+    var _asyncMap = function (eachfn, arr, iterator, callback) {
+        arr = _map(arr, function (x, i) {
+            return {index: i, value: x};
+        });
+        if (!callback) {
+            eachfn(arr, function (x, callback) {
+                iterator(x.value, function (err) {
+                    callback(err);
+                });
+            });
+        } else {
+            var results = [];
+            eachfn(arr, function (x, callback) {
+                iterator(x.value, function (err, v) {
+                    results[x.index] = v;
+                    callback(err);
+                });
+            }, function (err) {
+                callback(err, results);
+            });
+        }
+    };
+    async.map = doParallel(_asyncMap);
+    async.mapSeries = doSeries(_asyncMap);
+    async.mapLimit = function (arr, limit, iterator, callback) {
+        return _mapLimit(limit)(arr, iterator, callback);
+    };
+
+    var _mapLimit = function(limit) {
+        return doParallelLimit(limit, _asyncMap);
+    };
+
+    // reduce only has a series version, as doing reduce in parallel won't
+    // work in many situations.
+    async.reduce = function (arr, memo, iterator, callback) {
+        async.eachSeries(arr, function (x, callback) {
+            iterator(memo, x, function (err, v) {
+                memo = v;
+                callback(err);
+            });
+        }, function (err) {
+            callback(err, memo);
+        });
+    };
+    // inject alias
+    async.inject = async.reduce;
+    // foldl alias
+    async.foldl = async.reduce;
+
+    async.reduceRight = function (arr, memo, iterator, callback) {
+        var reversed = _map(arr, function (x) {
+            return x;
+        }).reverse();
+        async.reduce(reversed, memo, iterator, callback);
+    };
+    // foldr alias
+    async.foldr = async.reduceRight;
+
+    var _filter = function (eachfn, arr, iterator, callback) {
+        var results = [];
+        arr = _map(arr, function (x, i) {
+            return {index: i, value: x};
+        });
+        eachfn(arr, function (x, callback) {
+            iterator(x.value, function (v) {
+                if (v) {
+                    results.push(x);
+                }
+                callback();
+            });
+        }, function (err) {
+            callback(_map(results.sort(function (a, b) {
+                return a.index - b.index;
+            }), function (x) {
+                return x.value;
+            }));
+        });
+    };
+    async.filter = doParallel(_filter);
+    async.filterSeries = doSeries(_filter);
+    // select alias
+    async.select = async.filter;
+    async.selectSeries = async.filterSeries;
+
+    var _reject = function (eachfn, arr, iterator, callback) {
+        var results = [];
+        arr = _map(arr, function (x, i) {
+            return {index: i, value: x};
+        });
+        eachfn(arr, function (x, callback) {
+            iterator(x.value, function (v) {
+                if (!v) {
+                    results.push(x);
+                }
+                callback();
+            });
+        }, function (err) {
+            callback(_map(results.sort(function (a, b) {
+                return a.index - b.index;
+            }), function (x) {
+                return x.value;
+            }));
+        });
+    };
+    async.reject = doParallel(_reject);
+    async.rejectSeries = doSeries(_reject);
+
+    var _detect = function (eachfn, arr, iterator, main_callback) {
+        eachfn(arr, function (x, callback) {
+            iterator(x, function (result) {
+                if (result) {
+                    main_callback(x);
+                    main_callback = function () {};
+                }
+                else {
+                    callback();
+                }
+            });
+        }, function (err) {
+            main_callback();
+        });
+    };
+    async.detect = doParallel(_detect);
+    async.detectSeries = doSeries(_detect);
+
+    async.some = function (arr, iterator, main_callback) {
+        async.each(arr, function (x, callback) {
+            iterator(x, function (v) {
+                if (v) {
+                    main_callback(true);
+                    main_callback = function () {};
+                }
+                callback();
+            });
+        }, function (err) {
+            main_callback(false);
+        });
+    };
+    // any alias
+    async.any = async.some;
+
+    async.every = function (arr, iterator, main_callback) {
+        async.each(arr, function (x, callback) {
+            iterator(x, function (v) {
+                if (!v) {
+                    main_callback(false);
+                    main_callback = function () {};
+                }
+                callback();
+            });
+        }, function (err) {
+            main_callback(true);
+        });
+    };
+    // all alias
+    async.all = async.every;
+
+    async.sortBy = function (arr, iterator, callback) {
+        async.map(arr, function (x, callback) {
+            iterator(x, function (err, criteria) {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    callback(null, {value: x, criteria: criteria});
+                }
+            });
+        }, function (err, results) {
+            if (err) {
+                return callback(err);
+            }
+            else {
+                var fn = function (left, right) {
+                    var a = left.criteria, b = right.criteria;
+                    return a < b ? -1 : a > b ? 1 : 0;
+                };
+                callback(null, _map(results.sort(fn), function (x) {
+                    return x.value;
+                }));
+            }
+        });
+    };
+
+    async.auto = function (tasks, callback) {
+        callback = callback || function () {};
+        var keys = _keys(tasks);
+        var remainingTasks = keys.length
+        if (!remainingTasks) {
+            return callback();
+        }
+
+        var results = {};
+
+        var listeners = [];
+        var addListener = function (fn) {
+            listeners.unshift(fn);
+        };
+        var removeListener = function (fn) {
+            for (var i = 0; i < listeners.length; i += 1) {
+                if (listeners[i] === fn) {
+                    listeners.splice(i, 1);
+                    return;
+                }
+            }
+        };
+        var taskComplete = function () {
+            remainingTasks--
+            _each(listeners.slice(0), function (fn) {
+                fn();
+            });
+        };
+
+        addListener(function () {
+            if (!remainingTasks) {
+                var theCallback = callback;
+                // prevent final callback from calling itself if it errors
+                callback = function () {};
+
+                theCallback(null, results);
+            }
+        });
+
+        _each(keys, function (k) {
+            var task = _isArray(tasks[k]) ? tasks[k]: [tasks[k]];
+            var taskCallback = function (err) {
+                var args = Array.prototype.slice.call(arguments, 1);
+                if (args.length <= 1) {
+                    args = args[0];
+                }
+                if (err) {
+                    var safeResults = {};
+                    _each(_keys(results), function(rkey) {
+                        safeResults[rkey] = results[rkey];
+                    });
+                    safeResults[k] = args;
+                    callback(err, safeResults);
+                    // stop subsequent errors hitting callback multiple times
+                    callback = function () {};
+                }
+                else {
+                    results[k] = args;
+                    async.setImmediate(taskComplete);
+                }
+            };
+            var requires = task.slice(0, Math.abs(task.length - 1)) || [];
+            var ready = function () {
+                return _reduce(requires, function (a, x) {
+                    return (a && results.hasOwnProperty(x));
+                }, true) && !results.hasOwnProperty(k);
+            };
+            if (ready()) {
+                task[task.length - 1](taskCallback, results);
+            }
+            else {
+                var listener = function () {
+                    if (ready()) {
+                        removeListener(listener);
+                        task[task.length - 1](taskCallback, results);
+                    }
+                };
+                addListener(listener);
+            }
+        });
+    };
+
+    async.retry = function(times, task, callback) {
+        var DEFAULT_TIMES = 5;
+        var attempts = [];
+        // Use defaults if times not passed
+        if (typeof times === 'function') {
+            callback = task;
+            task = times;
+            times = DEFAULT_TIMES;
+        }
+        // Make sure times is a number
+        times = parseInt(times, 10) || DEFAULT_TIMES;
+        var wrappedTask = function(wrappedCallback, wrappedResults) {
+            var retryAttempt = function(task, finalAttempt) {
+                return function(seriesCallback) {
+                    task(function(err, result){
+                        seriesCallback(!err || finalAttempt, {err: err, result: result});
+                    }, wrappedResults);
+                };
+            };
+            while (times) {
+                attempts.push(retryAttempt(task, !(times-=1)));
+            }
+            async.series(attempts, function(done, data){
+                data = data[data.length - 1];
+                (wrappedCallback || callback)(data.err, data.result);
+            });
+        }
+        // If a callback is passed, run this as a controll flow
+        return callback ? wrappedTask() : wrappedTask
+    };
+
+    async.waterfall = function (tasks, callback) {
+        callback = callback || function () {};
+        if (!_isArray(tasks)) {
+          var err = new Error('First argument to waterfall must be an array of functions');
+          return callback(err);
+        }
+        if (!tasks.length) {
+            return callback();
+        }
+        var wrapIterator = function (iterator) {
+            return function (err) {
+                if (err) {
+                    callback.apply(null, arguments);
+                    callback = function () {};
+                }
+                else {
+                    var args = Array.prototype.slice.call(arguments, 1);
+                    var next = iterator.next();
+                    if (next) {
+                        args.push(wrapIterator(next));
+                    }
+                    else {
+                        args.push(callback);
+                    }
+                    async.setImmediate(function () {
+                        iterator.apply(null, args);
+                    });
+                }
+            };
+        };
+        wrapIterator(async.iterator(tasks))();
+    };
+
+    var _parallel = function(eachfn, tasks, callback) {
+        callback = callback || function () {};
+        if (_isArray(tasks)) {
+            eachfn.map(tasks, function (fn, callback) {
+                if (fn) {
+                    fn(function (err) {
+                        var args = Array.prototype.slice.call(arguments, 1);
+                        if (args.length <= 1) {
+                            args = args[0];
+                        }
+                        callback.call(null, err, args);
+                    });
+                }
+            }, callback);
+        }
+        else {
+            var results = {};
+            eachfn.each(_keys(tasks), function (k, callback) {
+                tasks[k](function (err) {
+                    var args = Array.prototype.slice.call(arguments, 1);
+                    if (args.length <= 1) {
+                        args = args[0];
+                    }
+                    results[k] = args;
+                    callback(err);
+                });
+            }, function (err) {
+                callback(err, results);
+            });
+        }
+    };
+
+    async.parallel = function (tasks, callback) {
+        _parallel({ map: async.map, each: async.each }, tasks, callback);
+    };
+
+    async.parallelLimit = function(tasks, limit, callback) {
+        _parallel({ map: _mapLimit(limit), each: _eachLimit(limit) }, tasks, callback);
+    };
+
+    async.series = function (tasks, callback) {
+        callback = callback || function () {};
+        if (_isArray(tasks)) {
+            async.mapSeries(tasks, function (fn, callback) {
+                if (fn) {
+                    fn(function (err) {
+                        var args = Array.prototype.slice.call(arguments, 1);
+                        if (args.length <= 1) {
+                            args = args[0];
+                        }
+                        callback.call(null, err, args);
+                    });
+                }
+            }, callback);
+        }
+        else {
+            var results = {};
+            async.eachSeries(_keys(tasks), function (k, callback) {
+                tasks[k](function (err) {
+                    var args = Array.prototype.slice.call(arguments, 1);
+                    if (args.length <= 1) {
+                        args = args[0];
+                    }
+                    results[k] = args;
+                    callback(err);
+                });
+            }, function (err) {
+                callback(err, results);
+            });
+        }
+    };
+
+    async.iterator = function (tasks) {
+        var makeCallback = function (index) {
+            var fn = function () {
+                if (tasks.length) {
+                    tasks[index].apply(null, arguments);
+                }
+                return fn.next();
+            };
+            fn.next = function () {
+                return (index < tasks.length - 1) ? makeCallback(index + 1): null;
+            };
+            return fn;
+        };
+        return makeCallback(0);
+    };
+
+    async.apply = function (fn) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return function () {
+            return fn.apply(
+                null, args.concat(Array.prototype.slice.call(arguments))
+            );
+        };
+    };
+
+    var _concat = function (eachfn, arr, fn, callback) {
+        var r = [];
+        eachfn(arr, function (x, cb) {
+            fn(x, function (err, y) {
+                r = r.concat(y || []);
+                cb(err);
+            });
+        }, function (err) {
+            callback(err, r);
+        });
+    };
+    async.concat = doParallel(_concat);
+    async.concatSeries = doSeries(_concat);
+
+    async.whilst = function (test, iterator, callback) {
+        if (test()) {
+            iterator(function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                async.whilst(test, iterator, callback);
+            });
+        }
+        else {
+            callback();
+        }
+    };
+
+    async.doWhilst = function (iterator, test, callback) {
+        iterator(function (err) {
+            if (err) {
+                return callback(err);
+            }
+            var args = Array.prototype.slice.call(arguments, 1);
+            if (test.apply(null, args)) {
+                async.doWhilst(iterator, test, callback);
+            }
+            else {
+                callback();
+            }
+        });
+    };
+
+    async.until = function (test, iterator, callback) {
+        if (!test()) {
+            iterator(function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                async.until(test, iterator, callback);
+            });
+        }
+        else {
+            callback();
+        }
+    };
+
+    async.doUntil = function (iterator, test, callback) {
+        iterator(function (err) {
+            if (err) {
+                return callback(err);
+            }
+            var args = Array.prototype.slice.call(arguments, 1);
+            if (!test.apply(null, args)) {
+                async.doUntil(iterator, test, callback);
+            }
+            else {
+                callback();
+            }
+        });
+    };
+
+    async.queue = function (worker, concurrency) {
+        if (concurrency === undefined) {
+            concurrency = 1;
+        }
+        function _insert(q, data, pos, callback) {
+          if (!q.started){
+            q.started = true;
+          }
+          if (!_isArray(data)) {
+              data = [data];
+          }
+          if(data.length == 0) {
+             // call drain immediately if there are no tasks
+             return async.setImmediate(function() {
+                 if (q.drain) {
+                     q.drain();
+                 }
+             });
+          }
+          _each(data, function(task) {
+              var item = {
+                  data: task,
+                  callback: typeof callback === 'function' ? callback : null
+              };
+
+              if (pos) {
+                q.tasks.unshift(item);
+              } else {
+                q.tasks.push(item);
+              }
+
+              if (q.saturated && q.tasks.length === q.concurrency) {
+                  q.saturated();
+              }
+              async.setImmediate(q.process);
+          });
+        }
+
+        var workers = 0;
+        var q = {
+            tasks: [],
+            concurrency: concurrency,
+            saturated: null,
+            empty: null,
+            drain: null,
+            started: false,
+            paused: false,
+            push: function (data, callback) {
+              _insert(q, data, false, callback);
+            },
+            kill: function () {
+              q.drain = null;
+              q.tasks = [];
+            },
+            unshift: function (data, callback) {
+              _insert(q, data, true, callback);
+            },
+            process: function () {
+                if (!q.paused && workers < q.concurrency && q.tasks.length) {
+                    var task = q.tasks.shift();
+                    if (q.empty && q.tasks.length === 0) {
+                        q.empty();
+                    }
+                    workers += 1;
+                    var next = function () {
+                        workers -= 1;
+                        if (task.callback) {
+                            task.callback.apply(task, arguments);
+                        }
+                        if (q.drain && q.tasks.length + workers === 0) {
+                            q.drain();
+                        }
+                        q.process();
+                    };
+                    var cb = only_once(next);
+                    worker(task.data, cb);
+                }
+            },
+            length: function () {
+                return q.tasks.length;
+            },
+            running: function () {
+                return workers;
+            },
+            idle: function() {
+                return q.tasks.length + workers === 0;
+            },
+            pause: function () {
+                if (q.paused === true) { return; }
+                q.paused = true;
+                q.process();
+            },
+            resume: function () {
+                if (q.paused === false) { return; }
+                q.paused = false;
+                q.process();
+            }
+        };
+        return q;
+    };
+    
+    async.priorityQueue = function (worker, concurrency) {
+        
+        function _compareTasks(a, b){
+          return a.priority - b.priority;
+        };
+        
+        function _binarySearch(sequence, item, compare) {
+          var beg = -1,
+              end = sequence.length - 1;
+          while (beg < end) {
+            var mid = beg + ((end - beg + 1) >>> 1);
+            if (compare(item, sequence[mid]) >= 0) {
+              beg = mid;
+            } else {
+              end = mid - 1;
+            }
+          }
+          return beg;
+        }
+        
+        function _insert(q, data, priority, callback) {
+          if (!q.started){
+            q.started = true;
+          }
+          if (!_isArray(data)) {
+              data = [data];
+          }
+          if(data.length == 0) {
+             // call drain immediately if there are no tasks
+             return async.setImmediate(function() {
+                 if (q.drain) {
+                     q.drain();
+                 }
+             });
+          }
+          _each(data, function(task) {
+              var item = {
+                  data: task,
+                  priority: priority,
+                  callback: typeof callback === 'function' ? callback : null
+              };
+              
+              q.tasks.splice(_binarySearch(q.tasks, item, _compareTasks) + 1, 0, item);
+
+              if (q.saturated && q.tasks.length === q.concurrency) {
+                  q.saturated();
+              }
+              async.setImmediate(q.process);
+          });
+        }
+        
+        // Start with a normal queue
+        var q = async.queue(worker, concurrency);
+        
+        // Override push to accept second parameter representing priority
+        q.push = function (data, priority, callback) {
+          _insert(q, data, priority, callback);
+        };
+        
+        // Remove unshift function
+        delete q.unshift;
+
+        return q;
+    };
+
+    async.cargo = function (worker, payload) {
+        var working     = false,
+            tasks       = [];
+
+        var cargo = {
+            tasks: tasks,
+            payload: payload,
+            saturated: null,
+            empty: null,
+            drain: null,
+            drained: true,
+            push: function (data, callback) {
+                if (!_isArray(data)) {
+                    data = [data];
+                }
+                _each(data, function(task) {
+                    tasks.push({
+                        data: task,
+                        callback: typeof callback === 'function' ? callback : null
+                    });
+                    cargo.drained = false;
+                    if (cargo.saturated && tasks.length === payload) {
+                        cargo.saturated();
+                    }
+                });
+                async.setImmediate(cargo.process);
+            },
+            process: function process() {
+                if (working) return;
+                if (tasks.length === 0) {
+                    if(cargo.drain && !cargo.drained) cargo.drain();
+                    cargo.drained = true;
+                    return;
+                }
+
+                var ts = typeof payload === 'number'
+                            ? tasks.splice(0, payload)
+                            : tasks.splice(0, tasks.length);
+
+                var ds = _map(ts, function (task) {
+                    return task.data;
+                });
+
+                if(cargo.empty) cargo.empty();
+                working = true;
+                worker(ds, function () {
+                    working = false;
+
+                    var args = arguments;
+                    _each(ts, function (data) {
+                        if (data.callback) {
+                            data.callback.apply(null, args);
+                        }
+                    });
+
+                    process();
+                });
+            },
+            length: function () {
+                return tasks.length;
+            },
+            running: function () {
+                return working;
+            }
+        };
+        return cargo;
+    };
+
+    var _console_fn = function (name) {
+        return function (fn) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            fn.apply(null, args.concat([function (err) {
+                var args = Array.prototype.slice.call(arguments, 1);
+                if (typeof console !== 'undefined') {
+                    if (err) {
+                        if (console.error) {
+                            console.error(err);
+                        }
+                    }
+                    else if (console[name]) {
+                        _each(args, function (x) {
+                            console[name](x);
+                        });
+                    }
+                }
+            }]));
+        };
+    };
+    async.log = _console_fn('log');
+    async.dir = _console_fn('dir');
+    /*async.info = _console_fn('info');
+    async.warn = _console_fn('warn');
+    async.error = _console_fn('error');*/
+
+    async.memoize = function (fn, hasher) {
+        var memo = {};
+        var queues = {};
+        hasher = hasher || function (x) {
+            return x;
+        };
+        var memoized = function () {
+            var args = Array.prototype.slice.call(arguments);
+            var callback = args.pop();
+            var key = hasher.apply(null, args);
+            if (key in memo) {
+                async.nextTick(function () {
+                    callback.apply(null, memo[key]);
+                });
+            }
+            else if (key in queues) {
+                queues[key].push(callback);
+            }
+            else {
+                queues[key] = [callback];
+                fn.apply(null, args.concat([function () {
+                    memo[key] = arguments;
+                    var q = queues[key];
+                    delete queues[key];
+                    for (var i = 0, l = q.length; i < l; i++) {
+                      q[i].apply(null, arguments);
+                    }
+                }]));
+            }
+        };
+        memoized.memo = memo;
+        memoized.unmemoized = fn;
+        return memoized;
+    };
+
+    async.unmemoize = function (fn) {
+      return function () {
+        return (fn.unmemoized || fn).apply(null, arguments);
+      };
+    };
+
+    async.times = function (count, iterator, callback) {
+        var counter = [];
+        for (var i = 0; i < count; i++) {
+            counter.push(i);
+        }
+        return async.map(counter, iterator, callback);
+    };
+
+    async.timesSeries = function (count, iterator, callback) {
+        var counter = [];
+        for (var i = 0; i < count; i++) {
+            counter.push(i);
+        }
+        return async.mapSeries(counter, iterator, callback);
+    };
+
+    async.seq = function (/* functions... */) {
+        var fns = arguments;
+        return function () {
+            var that = this;
+            var args = Array.prototype.slice.call(arguments);
+            var callback = args.pop();
+            async.reduce(fns, args, function (newargs, fn, cb) {
+                fn.apply(that, newargs.concat([function () {
+                    var err = arguments[0];
+                    var nextargs = Array.prototype.slice.call(arguments, 1);
+                    cb(err, nextargs);
+                }]))
+            },
+            function (err, results) {
+                callback.apply(that, [err].concat(results));
+            });
+        };
+    };
+
+    async.compose = function (/* functions... */) {
+      return async.seq.apply(null, Array.prototype.reverse.call(arguments));
+    };
+
+    var _applyEach = function (eachfn, fns /*args...*/) {
+        var go = function () {
+            var that = this;
+            var args = Array.prototype.slice.call(arguments);
+            var callback = args.pop();
+            return eachfn(fns, function (fn, cb) {
+                fn.apply(that, args.concat([cb]));
+            },
+            callback);
+        };
+        if (arguments.length > 2) {
+            var args = Array.prototype.slice.call(arguments, 2);
+            return go.apply(this, args);
+        }
+        else {
+            return go;
+        }
+    };
+    async.applyEach = doParallel(_applyEach);
+    async.applyEachSeries = doSeries(_applyEach);
+
+    async.forever = function (fn, callback) {
+        function next(err) {
+            if (err) {
+                if (callback) {
+                    return callback(err);
+                }
+                throw err;
+            }
+            fn(next);
+        }
+        next();
+    };
+
+    // Node.js
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = async;
+    }
+    // AMD / RequireJS
+    else if (typeof define !== 'undefined' && define.amd) {
+        define([], function () {
+            return async;
+        });
+    }
+    // included directly via <script> tag
+    else {
+        root.async = async;
+    }
+
+}());
+
+}).call(this,require('_process'))
+
+},{"_process":3}],6:[function(require,module,exports){
+arguments[4][4][0].apply(exports,arguments)
+},{"dup":4}],7:[function(require,module,exports){
 var async = require('async'),
     Resource = require('./Resource'),
     EventEmitter = require('eventemitter3').EventEmitter;
@@ -1870,8 +3000,13 @@ Loader.prototype.add = Loader.prototype.enqueue = function (name, url, options, 
         throw new Error('Resource with name "' + name + '" already exists.');
     }
 
+    // add base url if this isn't a data url
+    if (url.indexOf('data:') !== 0) {
+        url = this.baseUrl + url;
+    }
+
     // create the store the resource
-    this.resources[name] = new Resource(name, this.baseUrl + url, options);
+    this.resources[name] = new Resource(name, url, options);
 
     if (typeof cb === 'function') {
         this.resources[name].once('afterMiddleware', cb);
@@ -2043,7 +3178,7 @@ Loader.LOAD_TYPE = Resource.LOAD_TYPE;
 Loader.XHR_READY_STATE = Resource.XHR_READY_STATE;
 Loader.XHR_RESPONSE_TYPE = Resource.XHR_RESPONSE_TYPE;
 
-},{"./Resource":6,"async":1,"eventemitter3":4}],6:[function(require,module,exports){
+},{"./Resource":8,"async":5,"eventemitter3":6}],8:[function(require,module,exports){
 var EventEmitter = require('eventemitter3').EventEmitter,
     // tests is CORS is supported in XHR, if not we need to use XDR
     useXdr = !!(window.XDomainRequest && !('withCredentials' in (new XMLHttpRequest())));
@@ -2319,11 +3454,8 @@ Resource.prototype._loadXhr = function () {
     // set the request type and url
     xhr.open('GET', this.url, true);
 
-    console.log(this.xhrType);
-    console.log(xhr);
     // set the responseType
-    console.log(xhr.responseType);
-    xhr.responseType = "json";
+    xhr.responseType = this.xhrType;
 
     xhr.addEventListener('error', this._boundXhrOnError, false);
     xhr.addEventListener('abort', this._boundXhrOnAbort, false);
@@ -2636,7 +3768,7 @@ Resource.XHR_RESPONSE_TYPE = {
     TEXT:       'text'
 };
 
-},{"eventemitter3":4}],7:[function(require,module,exports){
+},{"eventemitter3":6}],9:[function(require,module,exports){
 module.exports = require('./Loader');
 
 module.exports.Resource = require('./Resource');
@@ -2651,7 +3783,7 @@ module.exports.middleware = {
     }
 };
 
-},{"./Loader":5,"./Resource":6,"./middlewares/caching/memory":8,"./middlewares/parsing/blob":9,"./middlewares/parsing/json":10}],8:[function(require,module,exports){
+},{"./Loader":7,"./Resource":8,"./middlewares/caching/memory":10,"./middlewares/parsing/blob":11,"./middlewares/parsing/json":12}],10:[function(require,module,exports){
 // a simple in-memory cache for resources
 var cache = {};
 
@@ -2673,7 +3805,7 @@ module.exports = function () {
     };
 };
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var Resource = require('../../Resource');
 
 window.URL = window.URL || window.webkitURL;
@@ -2706,7 +3838,7 @@ module.exports = function () {
     };
 };
 
-},{"../../Resource":6}],10:[function(require,module,exports){
+},{"../../Resource":8}],12:[function(require,module,exports){
 // a simple json-parsing middleware for resources
 
 module.exports = function () {
@@ -2727,7 +3859,7 @@ module.exports = function () {
     };
 };
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports={
   "name": "pixi.js",
   "version": "3.0.0-rc2",
@@ -2793,7 +3925,7 @@ module.exports={
   }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * Constant values used in pixi
  *
@@ -2890,6 +4022,16 @@ module.exports = {
         NEAREST:    1
     },
 
+    /**
+     * The prefix that denotes a URL is for a retina asset
+     *
+     * @static
+     * @constant
+     * @property {string} RETINA_PREFIX
+     */
+    //example: '@2x',
+    RETINA_PREFIX: /@(.+)x/,
+
     RESOLUTION:1,
 
     FILTER_RESOLUTION:1,
@@ -2907,7 +4049,6 @@ module.exports = {
      * @property {boolean} DEFAULT_RENDER_OPTIONS.forceFXAA=false
      * @property {boolean} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
      * @property {number} DEFAULT_RENDER_OPTIONS.resolution=1
-     * @property {number} DEFAULT_RENDER_OPTIONS.retinaPrefix=/@(.+)x/
      * @property {number} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
      * @property {boolean} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
      * @property {boolean} DEFAULT_RENDER_OPTIONS.autoResize=false
@@ -2915,7 +4056,6 @@ module.exports = {
     DEFAULT_RENDER_OPTIONS: {
         view: null,
         resolution: 1,
-        retinaPrefix: /@(.+)x/,
         antialias: false,
         forceFXAA: false,
         autoResize: false,
@@ -2948,7 +4088,7 @@ module.exports = {
     SPRITE_BATCH_SIZE: 2000 //nice balance between mobile and desktop machines
 };
 
-},{"../../package.json":11}],13:[function(require,module,exports){
+},{"../../package.json":13}],15:[function(require,module,exports){
 var math = require('../math'),
     DisplayObject = require('./DisplayObject'),
     RenderTexture = require('../textures/RenderTexture'),
@@ -3350,8 +4490,6 @@ Container.prototype.getBounds = function ()
     return this._currentBounds;
 };
 
-Container.prototype.containerGetBounds = Container.prototype.getBounds;
-
 /**
  * Retrieves the non-global local bounds of the Container as a rectangle.
  * The calculation takes all visible children into consideration.
@@ -3519,7 +4657,7 @@ Container.prototype.destroy = function (destroyChildren)
     this.children = null;
 };
 
-},{"../math":22,"../textures/RenderTexture":59,"./DisplayObject":14}],14:[function(require,module,exports){
+},{"../math":24,"../textures/RenderTexture":61,"./DisplayObject":16}],16:[function(require,module,exports){
 var math = require('../math'),
     RenderTexture = require('../textures/RenderTexture'),
     EventEmitter = require('eventemitter3').EventEmitter,
@@ -3985,7 +5123,7 @@ DisplayObject.prototype.destroy = function ()
     this.listeners = null;
 };
 
-},{"../math":22,"../textures/RenderTexture":59,"eventemitter3":4}],15:[function(require,module,exports){
+},{"../math":24,"../textures/RenderTexture":61,"eventemitter3":4}],17:[function(require,module,exports){
 var Container = require('../display/Container'),
     Sprite = require('../sprites/Sprite'),
     Texture = require('../textures/Texture'),
@@ -4660,12 +5798,11 @@ Graphics.prototype.clear = function ()
  * @param scaleMode {number} Should be one of the scaleMode consts
  * @return {Texture} a texture of the graphics object
  */
-Graphics.prototype.generateTexture = function (renderer, resolution, scaleMode)
+Graphics.prototype.generateTexture = function (resolution, scaleMode)
 {
-
     resolution = resolution || 1;
 
-    var bounds = this.getLocalBounds();
+    var bounds = this.getBounds();
 
     var canvasBuffer = new CanvasBuffer(bounds.width * resolution, bounds.height * resolution);
 
@@ -5122,7 +6259,7 @@ Graphics.prototype.drawShape = function (shape)
     return data;
 };
 
-},{"../const":12,"../display/Container":13,"../math":22,"../renderers/canvas/utils/CanvasBuffer":34,"../renderers/canvas/utils/CanvasGraphics":35,"../sprites/Sprite":56,"../textures/Texture":60,"./GraphicsData":16}],16:[function(require,module,exports){
+},{"../const":14,"../display/Container":15,"../math":24,"../renderers/canvas/utils/CanvasBuffer":36,"../renderers/canvas/utils/CanvasGraphics":37,"../sprites/Sprite":58,"../textures/Texture":62,"./GraphicsData":18}],18:[function(require,module,exports){
 /**
  * A GraphicsData object.
  *
@@ -5208,7 +6345,7 @@ GraphicsData.prototype.clone = function ()
     );
 };
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var utils = require('../../utils'),
     math = require('../../math'),
     CONST = require('../../const'),
@@ -6100,7 +7237,7 @@ GraphicsRenderer.prototype.buildPoly = function (graphicsData, webGLData)
     return true;
 };
 
-},{"../../const":12,"../../math":22,"../../renderers/webgl/WebGLRenderer":38,"../../renderers/webgl/utils/ObjectRenderer":52,"../../utils":64,"./WebGLGraphicsData":18}],18:[function(require,module,exports){
+},{"../../const":14,"../../math":24,"../../renderers/webgl/WebGLRenderer":40,"../../renderers/webgl/utils/ObjectRenderer":54,"../../utils":66,"./WebGLGraphicsData":20}],20:[function(require,module,exports){
 /**
  * An object containing WebGL specific properties to be used by the WebGL renderer
  *
@@ -6198,7 +7335,7 @@ WebGLGraphicsData.prototype.upload = function () {
     this.dirty = false;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI core library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -6266,7 +7403,6 @@ var core = module.exports = {
      * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable this if you
      *      need to call toDataUrl on the webgl context
      * @param [options.resolution=1] {number} the resolution of the renderer, retina would be 2
-     * @param [options.retinaPrefix=/@(.+)x/] {string} the prefix that denotes a URL is for a retina asset
      * @param [noWebGL=false] {boolean} prevents selection of WebGL renderer, even if such is present
      *
      * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
@@ -6315,7 +7451,7 @@ function checkWebGL()
     }
 }
 
-},{"./const":12,"./display/Container":13,"./display/DisplayObject":14,"./graphics/Graphics":15,"./graphics/GraphicsData":16,"./graphics/webgl/GraphicsRenderer":17,"./math":22,"./particles/ParticleContainer":28,"./particles/webgl/ParticleRenderer":30,"./renderers/canvas/CanvasRenderer":33,"./renderers/canvas/utils/CanvasBuffer":34,"./renderers/canvas/utils/CanvasGraphics":35,"./renderers/webgl/WebGLRenderer":38,"./renderers/webgl/filters/AbstractFilter":39,"./renderers/webgl/managers/ShaderManager":45,"./renderers/webgl/shaders/Shader":50,"./sprites/Sprite":56,"./sprites/webgl/SpriteRenderer":57,"./textures/BaseTexture":58,"./textures/RenderTexture":59,"./textures/Texture":60,"./textures/VideoBaseTexture":62,"./utils":64}],20:[function(require,module,exports){
+},{"./const":14,"./display/Container":15,"./display/DisplayObject":16,"./graphics/Graphics":17,"./graphics/GraphicsData":18,"./graphics/webgl/GraphicsRenderer":19,"./math":24,"./particles/ParticleContainer":30,"./particles/webgl/ParticleRenderer":32,"./renderers/canvas/CanvasRenderer":35,"./renderers/canvas/utils/CanvasBuffer":36,"./renderers/canvas/utils/CanvasGraphics":37,"./renderers/webgl/WebGLRenderer":40,"./renderers/webgl/filters/AbstractFilter":41,"./renderers/webgl/managers/ShaderManager":47,"./renderers/webgl/shaders/Shader":52,"./sprites/Sprite":58,"./sprites/webgl/SpriteRenderer":59,"./textures/BaseTexture":60,"./textures/RenderTexture":61,"./textures/Texture":62,"./textures/VideoBaseTexture":64,"./utils":66}],22:[function(require,module,exports){
 var Point = require('./Point');
 
 /**
@@ -6675,7 +7811,7 @@ Matrix.IDENTITY = new Matrix();
  */
 Matrix.TEMP_MATRIX = new Matrix();
 
-},{"./Point":21}],21:[function(require,module,exports){
+},{"./Point":23}],23:[function(require,module,exports){
 /**
  * The Point object represents a location in a two-dimensional coordinate system, where x represents
  * the horizontal axis and y represents the vertical axis.
@@ -6745,7 +7881,7 @@ Point.prototype.set = function (x, y)
     this.y = y || ( (y !== 0) ? this.x : 0 ) ;
 };
 
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * @namespace PIXI.math
  */
@@ -6781,7 +7917,7 @@ module.exports = {
     RoundedRectangle: require('./shapes/RoundedRectangle')
 };
 
-},{"./Matrix":20,"./Point":21,"./shapes/Circle":23,"./shapes/Ellipse":24,"./shapes/Polygon":25,"./shapes/Rectangle":26,"./shapes/RoundedRectangle":27}],23:[function(require,module,exports){
+},{"./Matrix":22,"./Point":23,"./shapes/Circle":25,"./shapes/Ellipse":26,"./shapes/Polygon":27,"./shapes/Rectangle":28,"./shapes/RoundedRectangle":29}],25:[function(require,module,exports){
 var Rectangle = require('./Rectangle'),
     CONST = require('../../const');
 
@@ -6869,7 +8005,7 @@ Circle.prototype.getBounds = function ()
     return new Rectangle(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
 };
 
-},{"../../const":12,"./Rectangle":26}],24:[function(require,module,exports){
+},{"../../const":14,"./Rectangle":28}],26:[function(require,module,exports){
 var Rectangle = require('./Rectangle'),
     CONST = require('../../const');
 
@@ -6964,7 +8100,7 @@ Ellipse.prototype.getBounds = function ()
     return new Rectangle(this.x - this.width, this.y - this.height, this.width, this.height);
 };
 
-},{"../../const":12,"./Rectangle":26}],25:[function(require,module,exports){
+},{"../../const":14,"./Rectangle":28}],27:[function(require,module,exports){
 var Point = require('../Point'),
     CONST = require('../../const');
 
@@ -7057,7 +8193,7 @@ Polygon.prototype.contains = function (x, y)
     return inside;
 };
 
-},{"../../const":12,"../Point":21}],26:[function(require,module,exports){
+},{"../../const":14,"../Point":23}],28:[function(require,module,exports){
 var CONST = require('../../const');
 
 /**
@@ -7151,7 +8287,7 @@ Rectangle.prototype.contains = function (x, y)
     return false;
 };
 
-},{"../../const":12}],27:[function(require,module,exports){
+},{"../../const":14}],29:[function(require,module,exports){
 var CONST = require('../../const');
 
 /**
@@ -7243,7 +8379,7 @@ RoundedRectangle.prototype.contains = function (x, y)
     return false;
 };
 
-},{"../../const":12}],28:[function(require,module,exports){
+},{"../../const":14}],30:[function(require,module,exports){
 var Container = require('../display/Container');
 
 /**
@@ -7516,7 +8652,7 @@ ParticleContainer.prototype.renderCanvas = function (renderer)
     }
 };
 
-},{"../display/Container":13}],29:[function(require,module,exports){
+},{"../display/Container":15}],31:[function(require,module,exports){
 
 /**
  * @author Mat Groves
@@ -7723,7 +8859,7 @@ ParticleBuffer.prototype.destroy = function ()
     //TODO implement this :) to busy making the fun bits..
 };
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var ObjectRenderer = require('../../renderers/webgl/utils/ObjectRenderer'),
     WebGLRenderer = require('../../renderers/webgl/WebGLRenderer'),
     ParticleShader = require('./ParticleShader'),
@@ -8207,7 +9343,7 @@ ParticleRenderer.prototype.destroy = function ()
     //TODO implement this!
 };
 
-},{"../../math":22,"../../renderers/webgl/WebGLRenderer":38,"../../renderers/webgl/utils/ObjectRenderer":52,"./ParticleBuffer":29,"./ParticleShader":31}],31:[function(require,module,exports){
+},{"../../math":24,"../../renderers/webgl/WebGLRenderer":40,"../../renderers/webgl/utils/ObjectRenderer":54,"./ParticleBuffer":31,"./ParticleShader":33}],33:[function(require,module,exports){
 var TextureShader = require('../../renderers/webgl/shaders/TextureShader');
 
 /**
@@ -8280,7 +9416,7 @@ ParticleShader.prototype.constructor = ParticleShader;
 
 module.exports = ParticleShader;
 
-},{"../../renderers/webgl/shaders/TextureShader":51}],32:[function(require,module,exports){
+},{"../../renderers/webgl/shaders/TextureShader":53}],34:[function(require,module,exports){
 var utils = require('../utils'),
     math = require('../math'),
     CONST = require('../const'),
@@ -8301,7 +9437,6 @@ var utils = require('../utils'),
  * @param [options.autoResize=false] {boolean} If the render view is automatically resized, default false
  * @param [options.antialias=false] {boolean} sets antialias (only applicable in chrome at the moment)
  * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
- * @param [options.retinaPrefix=/@(.+)x/] {string} the prefix that denotes a URL is for a retina asset
  * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
  *      not before the new render pass.
  */
@@ -8325,11 +9460,6 @@ function SystemRenderer(system, width, height, options)
     else
     {
         options = CONST.DEFAULT_RENDER_OPTIONS;
-    }
-
-    if (options.retinaPrefix !== null)
-    {
-        utils.retinaPrefix = options.retinaPrefix;
     }
 
     /**
@@ -8423,7 +9553,7 @@ function SystemRenderer(system, width, height, options)
      * @member {number}
      * @private
      */
-    this._backgroundColor = options.backgroundColor || 0x000000;
+    this._backgroundColor = 0xFFFFFF;
 
     /**
      * The background color as an [R, G, B] array.
@@ -8535,7 +9665,7 @@ SystemRenderer.prototype.destroy = function (removeView) {
     this._backgroundColorString = null;
 };
 
-},{"../const":12,"../math":22,"../utils":64,"eventemitter3":4}],33:[function(require,module,exports){
+},{"../const":14,"../math":24,"../utils":66,"eventemitter3":4}],35:[function(require,module,exports){
 var SystemRenderer = require('../SystemRenderer'),
     CanvasMaskManager = require('./utils/CanvasMaskManager'),
     utils = require('../../utils'),
@@ -8557,7 +9687,6 @@ var SystemRenderer = require('../SystemRenderer'),
  * @param [options.autoResize=false] {boolean} If the render view is automatically resized, default false
  * @param [options.antialias=false] {boolean} sets antialias (only applicable in chrome at the moment)
  * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
- * @param [options.retinaPrefix=/@(.+)x/] {string} the prefix that denotes a URL is for a retina asset
  * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
  *      not before the new render pass.
  */
@@ -8806,7 +9935,7 @@ CanvasRenderer.prototype._mapBlendModes = function ()
     }
 };
 
-},{"../../const":12,"../../math":22,"../../utils":64,"../SystemRenderer":32,"./utils/CanvasMaskManager":36}],34:[function(require,module,exports){
+},{"../../const":14,"../../math":24,"../../utils":66,"../SystemRenderer":34,"./utils/CanvasMaskManager":38}],36:[function(require,module,exports){
 /**
  * Creates a Canvas element of the given size.
  *
@@ -8906,7 +10035,7 @@ CanvasBuffer.prototype.destroy = function ()
     this.canvas = null;
 };
 
-},{}],35:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var CONST = require('../../../const');
 
 /**
@@ -9257,7 +10386,7 @@ CanvasGraphics.updateGraphicsTint = function (graphics)
 };
 
 
-},{"../../../const":12}],36:[function(require,module,exports){
+},{"../../../const":14}],38:[function(require,module,exports){
 var CanvasGraphics = require('./CanvasGraphics');
 
 /**
@@ -9317,7 +10446,7 @@ CanvasMaskManager.prototype.popMask = function (renderer)
     renderer.context.restore();
 };
 
-},{"./CanvasGraphics":35}],37:[function(require,module,exports){
+},{"./CanvasGraphics":37}],39:[function(require,module,exports){
 var utils = require('../../../utils');
 
 /**
@@ -9549,7 +10678,7 @@ CanvasTinter.canUseMultiply = utils.canUseNewCanvasBlendModes();
  */
 CanvasTinter.tintMethod = CanvasTinter.canUseMultiply ? CanvasTinter.tintWithMultiply :  CanvasTinter.tintWithPerPixel;
 
-},{"../../../utils":64}],38:[function(require,module,exports){
+},{"../../../utils":66}],40:[function(require,module,exports){
 var SystemRenderer = require('../SystemRenderer'),
     ShaderManager = require('./managers/ShaderManager'),
     MaskManager = require('./managers/MaskManager'),
@@ -9580,7 +10709,6 @@ var SystemRenderer = require('../SystemRenderer'),
  * @param [options.antialias=false] {boolean} sets antialias. If not available natively then FXAA antialiasing is used
  * @param [options.forceFXAA=false] {boolean} forces FXAA antialiasing to be used over native. FXAA is faster, but may not always lok as great
  * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
- * @param [options.retinaPrefix=/@(.+)x/] {string} the prefix that denotes a URL is for a retina asset
  * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
  *      not before the new render pass.
  * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable this if
@@ -9819,16 +10947,11 @@ WebGLRenderer.prototype.render = function (object)
  * @param renderTarget {RenderTarget} The render target to use to render this display object
  *
  */
-WebGLRenderer.prototype.renderDisplayObject = function (displayObject, renderTarget, clear)//projection, buffer)
+WebGLRenderer.prototype.renderDisplayObject = function (displayObject, renderTarget)//projection, buffer)
 {
     // TODO is this needed...
     //this.blendModeManager.setBlendMode(CONST.BLEND_MODES.NORMAL);
     this.setRenderTarget(renderTarget);
-
-    if(clear)
-    {
-        renderTarget.clear();
-    }
 
     // start the filter manager
     this.filterManager.setFilterStack( renderTarget.filterStack );
@@ -10072,7 +11195,7 @@ WebGLRenderer.prototype._mapBlendModes = function ()
     }
 };
 
-},{"../../const":12,"../../utils":64,"../SystemRenderer":32,"./filters/FXAAFilter":40,"./managers/BlendModeManager":42,"./managers/FilterManager":43,"./managers/MaskManager":44,"./managers/ShaderManager":45,"./managers/StencilManager":46,"./utils/ObjectRenderer":52,"./utils/RenderTarget":54}],39:[function(require,module,exports){
+},{"../../const":14,"../../utils":66,"../SystemRenderer":34,"./filters/FXAAFilter":42,"./managers/BlendModeManager":44,"./managers/FilterManager":45,"./managers/MaskManager":46,"./managers/ShaderManager":47,"./managers/StencilManager":48,"./utils/ObjectRenderer":54,"./utils/RenderTarget":56}],41:[function(require,module,exports){
 var DefaultShader = require('../shaders/TextureShader');
 
 /**
@@ -10191,7 +11314,7 @@ AbstractFilter.prototype.apply = function (frameBuffer)
 };
 */
 
-},{"../shaders/TextureShader":51}],40:[function(require,module,exports){
+},{"../shaders/TextureShader":53}],42:[function(require,module,exports){
 var AbstractFilter = require('./AbstractFilter');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -10239,7 +11362,7 @@ FXAAFilter.prototype.applyFilter = function (renderer, input, output)
     filterManager.applyFilter(shader, input, output);
 };
 
-},{"./AbstractFilter":39}],41:[function(require,module,exports){
+},{"./AbstractFilter":41}],43:[function(require,module,exports){
 var AbstractFilter = require('./AbstractFilter'),
     math =  require('../../../math');
 
@@ -10336,7 +11459,7 @@ Object.defineProperties(SpriteMaskFilter.prototype, {
     }
 });
 
-},{"../../../math":22,"./AbstractFilter":39}],42:[function(require,module,exports){
+},{"../../../math":24,"./AbstractFilter":41}],44:[function(require,module,exports){
 var WebGLManager = require('./WebGLManager');
 
 /**
@@ -10379,7 +11502,7 @@ BlendModeManager.prototype.setBlendMode = function (blendMode)
     return true;
 };
 
-},{"./WebGLManager":47}],43:[function(require,module,exports){
+},{"./WebGLManager":49}],45:[function(require,module,exports){
 var WebGLManager = require('./WebGLManager'),
     RenderTarget = require('../utils/RenderTarget'),
     CONST = require('../../../const'),
@@ -10794,7 +11917,7 @@ FilterManager.prototype.destroy = function ()
     this.texturePool = null;
 };
 
-},{"../../../const":12,"../../../math":22,"../utils/Quad":53,"../utils/RenderTarget":54,"./WebGLManager":47}],44:[function(require,module,exports){
+},{"../../../const":14,"../../../math":24,"../utils/Quad":55,"../utils/RenderTarget":56,"./WebGLManager":49}],46:[function(require,module,exports){
 var WebGLManager = require('./WebGLManager'),
     AlphaMaskFilter = require('../filters/SpriteMaskFilter');
 
@@ -10907,7 +12030,7 @@ MaskManager.prototype.popStencilMask = function (target, maskData)
 };
 
 
-},{"../filters/SpriteMaskFilter":41,"./WebGLManager":47}],45:[function(require,module,exports){
+},{"../filters/SpriteMaskFilter":43,"./WebGLManager":49}],47:[function(require,module,exports){
 var WebGLManager = require('./WebGLManager'),
     TextureShader = require('../shaders/TextureShader'),
     ComplexPrimitiveShader = require('../shaders/ComplexPrimitiveShader'),
@@ -11062,7 +12185,7 @@ ShaderManager.prototype.destroy = function ()
     this.tempAttribState = null;
 };
 
-},{"../../../utils":64,"../shaders/ComplexPrimitiveShader":48,"../shaders/PrimitiveShader":49,"../shaders/TextureShader":51,"./WebGLManager":47}],46:[function(require,module,exports){
+},{"../../../utils":66,"../shaders/ComplexPrimitiveShader":50,"../shaders/PrimitiveShader":51,"../shaders/TextureShader":53,"./WebGLManager":49}],48:[function(require,module,exports){
 var WebGLManager = require('./WebGLManager'),
     utils = require('../../../utils');
 
@@ -11406,7 +12529,7 @@ WebGLMaskManager.prototype.popMask = function (maskData)
 };
 
 
-},{"../../../utils":64,"./WebGLManager":47}],47:[function(require,module,exports){
+},{"../../../utils":66,"./WebGLManager":49}],49:[function(require,module,exports){
 /**
  * @class
  * @memberof PIXI
@@ -11447,7 +12570,7 @@ WebGLManager.prototype.destroy = function ()
     this.renderer = null;
 };
 
-},{}],48:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var Shader = require('./Shader');
 
 /**
@@ -11507,7 +12630,7 @@ ComplexPrimitiveShader.prototype = Object.create(Shader.prototype);
 ComplexPrimitiveShader.prototype.constructor = ComplexPrimitiveShader;
 module.exports = ComplexPrimitiveShader;
 
-},{"./Shader":50}],49:[function(require,module,exports){
+},{"./Shader":52}],51:[function(require,module,exports){
 var Shader = require('./Shader');
 
 /**
@@ -11568,7 +12691,7 @@ PrimitiveShader.prototype = Object.create(Shader.prototype);
 PrimitiveShader.prototype.constructor = PrimitiveShader;
 module.exports = PrimitiveShader;
 
-},{"./Shader":50}],50:[function(require,module,exports){
+},{"./Shader":52}],52:[function(require,module,exports){
 /*global console */
 var utils = require('../../../utils');
 
@@ -12117,7 +13240,7 @@ Shader.prototype._glCompile = function (type, src)
     return shader;
 };
 
-},{"../../../utils":64}],51:[function(require,module,exports){
+},{"../../../utils":66}],53:[function(require,module,exports){
 var Shader = require('./Shader');
 
 /**
@@ -12214,7 +13337,7 @@ TextureShader.defaultFragmentSrc = [
     '}'
 ].join('\n');
 
-},{"./Shader":50}],52:[function(require,module,exports){
+},{"./Shader":52}],54:[function(require,module,exports){
 var WebGLManager = require('../managers/WebGLManager');
 
 /**
@@ -12271,7 +13394,7 @@ ObjectRenderer.prototype.render = function (object) // jshint unused:false
     // render the object
 };
 
-},{"../managers/WebGLManager":47}],53:[function(require,module,exports){
+},{"../managers/WebGLManager":49}],55:[function(require,module,exports){
 /**
  * Helper class to create a quad
  * @class
@@ -12417,7 +13540,7 @@ module.exports = Quad;
 
 
 
-},{}],54:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var math = require('../../../math'),
     utils = require('../../../utils'),
     CONST = require('../../../const'),
@@ -12723,7 +13846,7 @@ RenderTarget.prototype.destroy = function()
     this.texture = null;
 };
 
-},{"../../../const":12,"../../../math":22,"../../../utils":64,"./StencilMaskStack":55}],55:[function(require,module,exports){
+},{"../../../const":14,"../../../math":24,"../../../utils":66,"./StencilMaskStack":57}],57:[function(require,module,exports){
 /**
  * Generic Mask Stack data structure
  * @class
@@ -12757,7 +13880,7 @@ function StencilMaskStack()
 StencilMaskStack.prototype.constructor = StencilMaskStack;
 module.exports = StencilMaskStack;
 
-},{}],56:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 var math = require('../math'),
     Texture = require('../textures/Texture'),
     Container = require('../display/Container'),
@@ -12997,7 +14120,6 @@ Sprite.prototype.getBounds = function (matrix)
             minY,
             maxY;
 
-
         if (b === 0 && c === 0)
         {
             // scale may be negative!
@@ -13051,23 +14173,6 @@ Sprite.prototype.getBounds = function (matrix)
             maxY = y2 > maxY ? y2 : maxY;
             maxY = y3 > maxY ? y3 : maxY;
             maxY = y4 > maxY ? y4 : maxY;
-        }
-
-        // check for children
-        if(this.children.length)
-        {
-            var childBounds = this.containerGetBounds();
-
-            w0 = childBounds.x;
-            w1 = childBounds.x + childBounds.width;
-            h0 = childBounds.y;
-            h1 = childBounds.y + childBounds.height;
-
-            minX = (minX < w0) ? minX : w0;
-            minY = (minY < h0) ? minY : h0;
-
-            maxX = (maxX > w1) ? maxX : w1;
-            maxY = (maxY > h1) ? maxY : h1;
         }
 
         var bounds = this._bounds;
@@ -13319,7 +14424,7 @@ Sprite.fromImage = function (imageId, crossorigin, scaleMode)
     return new Sprite(Texture.fromImage(imageId, crossorigin, scaleMode));
 };
 
-},{"../const":12,"../display/Container":13,"../math":22,"../renderers/canvas/utils/CanvasTinter":37,"../textures/Texture":60,"../utils":64}],57:[function(require,module,exports){
+},{"../const":14,"../display/Container":15,"../math":24,"../renderers/canvas/utils/CanvasTinter":39,"../textures/Texture":62,"../utils":66}],59:[function(require,module,exports){
 var ObjectRenderer = require('../../renderers/webgl/utils/ObjectRenderer'),
     WebGLRenderer = require('../../renderers/webgl/WebGLRenderer'),
     CONST = require('../../const');
@@ -13836,7 +14941,7 @@ SpriteRenderer.prototype.destroy = function ()
     this.shader = null;
 };
 
-},{"../../const":12,"../../renderers/webgl/WebGLRenderer":38,"../../renderers/webgl/utils/ObjectRenderer":52}],58:[function(require,module,exports){
+},{"../../const":14,"../../renderers/webgl/WebGLRenderer":40,"../../renderers/webgl/utils/ObjectRenderer":54}],60:[function(require,module,exports){
 var utils = require('../utils'),
     CONST = require('../const'),
     EventEmitter = require('eventemitter3').EventEmitter;
@@ -14267,7 +15372,7 @@ BaseTexture.fromCanvas = function (canvas, scaleMode)
     return baseTexture;
 };
 
-},{"../const":12,"../utils":64,"eventemitter3":4}],59:[function(require,module,exports){
+},{"../const":14,"../utils":66,"eventemitter3":4}],61:[function(require,module,exports){
 var BaseTexture = require('./BaseTexture'),
     Texture = require('./Texture'),
     RenderTarget = require('../renderers/webgl/utils/RenderTarget'),
@@ -14547,11 +15652,17 @@ RenderTexture.prototype.renderWebGL = function (displayObject, matrix, clear, up
         }
     }
 
+
+    if (clear)
+    {
+        this.textureBuffer.clear();
+    }
+
     //TODO rename textureBuffer to renderTarget..
     var temp =  this.renderer.filterManager;
 
     this.renderer.filterManager = this.filterManager;
-    this.renderer.renderDisplayObject(displayObject, this.textureBuffer, clear);
+    this.renderer.renderDisplayObject(displayObject, this.textureBuffer);
 
     this.renderer.filterManager = temp;
 };
@@ -14696,7 +15807,7 @@ RenderTexture.prototype.getCanvas = function ()
     }
 };
 
-},{"../const":12,"../math":22,"../renderers/canvas/utils/CanvasBuffer":34,"../renderers/webgl/managers/FilterManager":43,"../renderers/webgl/utils/RenderTarget":54,"./BaseTexture":58,"./Texture":60}],60:[function(require,module,exports){
+},{"../const":14,"../math":24,"../renderers/canvas/utils/CanvasBuffer":36,"../renderers/webgl/managers/FilterManager":45,"../renderers/webgl/utils/RenderTarget":56,"./BaseTexture":60,"./Texture":62}],62:[function(require,module,exports){
 var BaseTexture = require('./BaseTexture'),
     VideoBaseTexture = require('./VideoBaseTexture'),
     TextureUvs = require('./TextureUvs'),
@@ -15070,7 +16181,7 @@ Texture.removeTextureFromCache = function (id)
 
 Texture.emptyTexture = new Texture(new BaseTexture());
 
-},{"../math":22,"../utils":64,"./BaseTexture":58,"./TextureUvs":61,"./VideoBaseTexture":62,"eventemitter3":4}],61:[function(require,module,exports){
+},{"../math":24,"../utils":66,"./BaseTexture":60,"./TextureUvs":63,"./VideoBaseTexture":64,"eventemitter3":4}],63:[function(require,module,exports){
 
 /**
  * A standard object to store the Uvs of a texture
@@ -15138,7 +16249,7 @@ TextureUvs.prototype.set = function (frame, baseFrame, rotate)
     }
 };
 
-},{}],62:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var BaseTexture = require('./BaseTexture'),
     utils = require('../utils');
 
@@ -15374,7 +16485,7 @@ function createSource(path, type)
     return source;
 }
 
-},{"../utils":64,"./BaseTexture":58}],63:[function(require,module,exports){
+},{"../utils":66,"./BaseTexture":60}],65:[function(require,module,exports){
 //TODO: Have Graphics use https://github.com/mattdesl/shape2d
 // and https://github.com/mattdesl/shape2d-triangulate instead of custom code.
 
@@ -15546,7 +16657,7 @@ PolyK._convex = function (ax, ay, bx, by, cx, cy, sign)
     return ((ay-by)*(cx-bx) + (bx-ax)*(cy-by) >= 0) === sign;
 };
 
-},{}],64:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 var CONST = require('../const');
 
 /**
@@ -15558,15 +16669,6 @@ var utils = module.exports = {
 
     pluginTarget:   require('./pluginTarget'),
     PolyK:          require('./PolyK'),
-
-    /**
-     * The prefix that denotes a URL is for a retina asset
-     *
-     * @static
-     * @property {string} retinaPrefix
-     */
-    //example: '@2x',
-    retinaPrefix: /@(.+)x/,
 
 
     /**
@@ -15704,7 +16806,7 @@ var utils = module.exports = {
      */
     getResolutionOfUrl: function (url)
     {
-        var resolution = utils.retinaPrefix.exec(url);
+        var resolution = CONST.RETINA_PREFIX.exec(url);
 
         if (resolution)
         {
@@ -15760,7 +16862,7 @@ var utils = module.exports = {
     BaseTextureCache: {}
 };
 
-},{"../const":12,"./PolyK":63,"./pluginTarget":65}],65:[function(require,module,exports){
+},{"../const":14,"./PolyK":65,"./pluginTarget":67}],67:[function(require,module,exports){
 /**
  * Mixins functionality to make an object have "plugins".
  *
@@ -15830,7 +16932,7 @@ module.exports = {
     }
 };
 
-},{}],66:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 var core   = require('./core'),
     mesh   = require('./mesh'),
     text   = require('./text');
@@ -15893,7 +16995,7 @@ text.Text.prototype.setText = function (text)
 
 module.exports = {};
 
-},{"./core":19,"./mesh":113,"./text":122}],67:[function(require,module,exports){
+},{"./core":21,"./mesh":115,"./text":124}],69:[function(require,module,exports){
 var core    = require('../core'),
     Ticker  = require('./Ticker');
 
@@ -16160,7 +17262,7 @@ MovieClip.fromImages = function (images)
     return new MovieClip(textures);
 };
 
-},{"../core":19,"./Ticker":68}],68:[function(require,module,exports){
+},{"../core":21,"./Ticker":70}],70:[function(require,module,exports){
 var EventEmitter = require('eventemitter3').EventEmitter;
 
 /**
@@ -16278,7 +17380,7 @@ Ticker.prototype.update = function()
 
 module.exports = new Ticker();
 
-},{"eventemitter3":4}],69:[function(require,module,exports){
+},{"eventemitter3":4}],71:[function(require,module,exports){
 var core = require('../core'),
     TextureUvs = require('../core/textures/TextureUvs'),
     RenderTexture = require('../core/textures/RenderTexture'),
@@ -16783,7 +17885,7 @@ TilingSprite.fromImage = function (imageId, width, height, crossorigin, scaleMod
     return new TilingSprite(core.Texture.fromImage(imageId, crossorigin, scaleMode),width,height);
 };
 
-},{"../core":19,"../core/textures/RenderTexture":59,"../core/textures/TextureUvs":61}],70:[function(require,module,exports){
+},{"../core":21,"../core/textures/RenderTexture":61,"../core/textures/TextureUvs":63}],72:[function(require,module,exports){
 var math = require('../core/math'),
     RenderTexture = require('../core/textures/RenderTexture'),
     DisplayObject = require('../core/display/DisplayObject'),
@@ -17040,7 +18142,7 @@ DisplayObject.prototype._destroyCachedDisplayObject = function()
 
 module.exports = {};
 
-},{"../core/display/DisplayObject":14,"../core/math":22,"../core/sprites/Sprite":56,"../core/textures/RenderTexture":59}],71:[function(require,module,exports){
+},{"../core/display/DisplayObject":16,"../core/math":24,"../core/sprites/Sprite":58,"../core/textures/RenderTexture":61}],73:[function(require,module,exports){
 var DisplayObject = require('../core/display/DisplayObject'),
     Container = require('../core/display/Container');
 
@@ -17070,7 +18172,7 @@ Container.prototype.getChildByName = function (name)
 };
 
 module.exports = {};
-},{"../core/display/Container":13,"../core/display/DisplayObject":14}],72:[function(require,module,exports){
+},{"../core/display/Container":15,"../core/display/DisplayObject":16}],74:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI extras library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -17089,7 +18191,7 @@ module.exports = {
     getChildByName: require('./getChildByName')
 };
 
-},{"./MovieClip":67,"./Ticker":68,"./TilingSprite":69,"./cacheAsBitmap":70,"./getChildByName":71}],73:[function(require,module,exports){
+},{"./MovieClip":69,"./Ticker":70,"./TilingSprite":71,"./cacheAsBitmap":72,"./getChildByName":73}],75:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -17146,7 +18248,7 @@ Object.defineProperties(AsciiFilter.prototype, {
     }
 });
 
-},{"../../core":19}],74:[function(require,module,exports){
+},{"../../core":21}],76:[function(require,module,exports){
 var core = require('../../core'),
     BlurXFilter = require('../blur/BlurXFilter'),
     BlurYFilter = require('../blur/BlurYFilter');
@@ -17247,7 +18349,7 @@ Object.defineProperties(BloomFilter.prototype, {
     }
 });
 
-},{"../../core":19,"../blur/BlurXFilter":76,"../blur/BlurYFilter":77}],75:[function(require,module,exports){
+},{"../../core":21,"../blur/BlurXFilter":78,"../blur/BlurYFilter":79}],77:[function(require,module,exports){
 var core = require('../../core'),
     BlurXFilter = require('./BlurXFilter'),
     BlurYFilter = require('./BlurYFilter');
@@ -17359,7 +18461,7 @@ Object.defineProperties(BlurFilter.prototype, {
     }
 });
 
-},{"../../core":19,"./BlurXFilter":76,"./BlurYFilter":77}],76:[function(require,module,exports){
+},{"../../core":21,"./BlurXFilter":78,"./BlurYFilter":79}],78:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -17453,7 +18555,7 @@ Object.defineProperties(BlurXFilter.prototype, {
     },
 });
 
-},{"../../core":19}],77:[function(require,module,exports){
+},{"../../core":21}],79:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -17539,7 +18641,7 @@ Object.defineProperties(BlurYFilter.prototype, {
     },
 });
 
-},{"../../core":19}],78:[function(require,module,exports){
+},{"../../core":21}],80:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -17565,7 +18667,7 @@ SmartBlurFilter.prototype = Object.create(core.AbstractFilter.prototype);
 SmartBlurFilter.prototype.constructor = SmartBlurFilter;
 module.exports = SmartBlurFilter;
 
-},{"../../core":19}],79:[function(require,module,exports){
+},{"../../core":21}],81:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18115,16 +19217,16 @@ Object.defineProperties(ColorMatrixFilter.prototype, {
     matrix: {
         get: function ()
         {
-            return this.uniforms.m.value;
+            return this.uniforms.matrix.value;
         },
         set: function (value)
         {
-            this.uniforms.m.value = value;
+            this.uniforms.matrix.value = value;
         }
     }
 });
 
-},{"../../core":19}],80:[function(require,module,exports){
+},{"../../core":21}],82:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18173,7 +19275,7 @@ Object.defineProperties(ColorStepFilter.prototype, {
     }
 });
 
-},{"../../core":19}],81:[function(require,module,exports){
+},{"../../core":21}],83:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18264,7 +19366,7 @@ Object.defineProperties(ConvolutionFilter.prototype, {
     }
 });
 
-},{"../../core":19}],82:[function(require,module,exports){
+},{"../../core":21}],84:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18290,7 +19392,7 @@ CrossHatchFilter.prototype = Object.create(core.AbstractFilter.prototype);
 CrossHatchFilter.prototype.constructor = CrossHatchFilter;
 module.exports = CrossHatchFilter;
 
-},{"../../core":19}],83:[function(require,module,exports){
+},{"../../core":21}],85:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18371,7 +19473,7 @@ Object.defineProperties(DisplacementFilter.prototype, {
     }
 });
 
-},{"../../core":19}],84:[function(require,module,exports){
+},{"../../core":21}],86:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18443,7 +19545,7 @@ Object.defineProperties(DotScreenFilter.prototype, {
     }
 });
 
-},{"../../core":19}],85:[function(require,module,exports){
+},{"../../core":21}],87:[function(require,module,exports){
 var core = require('../../core');
 
 // @see https://github.com/substack/brfs/issues/25
@@ -18534,7 +19636,7 @@ Object.defineProperties(BlurYTintFilter.prototype, {
     },
 });
 
-},{"../../core":19}],86:[function(require,module,exports){
+},{"../../core":21}],88:[function(require,module,exports){
 var core = require('../../core'),
     BlurXFilter = require('../blur/BlurXFilter'),
     BlurYTintFilter = require('./BlurYTintFilter');
@@ -18703,7 +19805,7 @@ Object.defineProperties(DropShadowFilter.prototype, {
     }
 });
 
-},{"../../core":19,"../blur/BlurXFilter":76,"./BlurYTintFilter":85}],87:[function(require,module,exports){
+},{"../../core":21,"../blur/BlurXFilter":78,"./BlurYTintFilter":87}],89:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18752,7 +19854,7 @@ Object.defineProperties(GrayFilter.prototype, {
     }
 });
 
-},{"../../core":19}],88:[function(require,module,exports){
+},{"../../core":21}],90:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI filters library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -18796,7 +19898,7 @@ module.exports = {
     TwistFilter:        require('./twist/TwistFilter')
 };
 
-},{"../core/renderers/webgl/filters/AbstractFilter":39,"../core/renderers/webgl/filters/FXAAFilter":40,"../core/renderers/webgl/filters/SpriteMaskFilter":41,"./ascii/AsciiFilter":73,"./bloom/BloomFilter":74,"./blur/BlurFilter":75,"./blur/BlurXFilter":76,"./blur/BlurYFilter":77,"./blur/SmartBlurFilter":78,"./color/ColorMatrixFilter":79,"./color/ColorStepFilter":80,"./convolution/ConvolutionFilter":81,"./crosshatch/CrossHatchFilter":82,"./displacement/DisplacementFilter":83,"./dot/DotScreenFilter":84,"./dropshadow/DropShadowFilter":86,"./gray/GrayFilter":87,"./invert/InvertFilter":89,"./noise/NoiseFilter":90,"./normal/NormalMapFilter":91,"./pixelate/PixelateFilter":92,"./rgb/RGBSplitFilter":93,"./sepia/SepiaFilter":94,"./shockwave/ShockwaveFilter":95,"./tiltshift/TiltShiftFilter":97,"./tiltshift/TiltShiftXFilter":98,"./tiltshift/TiltShiftYFilter":99,"./twist/TwistFilter":100}],89:[function(require,module,exports){
+},{"../core/renderers/webgl/filters/AbstractFilter":41,"../core/renderers/webgl/filters/FXAAFilter":42,"../core/renderers/webgl/filters/SpriteMaskFilter":43,"./ascii/AsciiFilter":75,"./bloom/BloomFilter":76,"./blur/BlurFilter":77,"./blur/BlurXFilter":78,"./blur/BlurYFilter":79,"./blur/SmartBlurFilter":80,"./color/ColorMatrixFilter":81,"./color/ColorStepFilter":82,"./convolution/ConvolutionFilter":83,"./crosshatch/CrossHatchFilter":84,"./displacement/DisplacementFilter":85,"./dot/DotScreenFilter":86,"./dropshadow/DropShadowFilter":88,"./gray/GrayFilter":89,"./invert/InvertFilter":91,"./noise/NoiseFilter":92,"./normal/NormalMapFilter":93,"./pixelate/PixelateFilter":94,"./rgb/RGBSplitFilter":95,"./sepia/SepiaFilter":96,"./shockwave/ShockwaveFilter":97,"./tiltshift/TiltShiftFilter":99,"./tiltshift/TiltShiftXFilter":100,"./tiltshift/TiltShiftYFilter":101,"./twist/TwistFilter":102}],91:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18846,7 +19948,7 @@ Object.defineProperties(InvertFilter.prototype, {
     }
 });
 
-},{"../../core":19}],90:[function(require,module,exports){
+},{"../../core":21}],92:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -18901,7 +20003,7 @@ Object.defineProperties(NoiseFilter.prototype, {
     }
 });
 
-},{"../../core":19}],91:[function(require,module,exports){
+},{"../../core":21}],93:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19014,7 +20116,7 @@ Object.defineProperties(NormalMapFilter.prototype, {
     }
 });
 
-},{"../../core":19}],92:[function(require,module,exports){
+},{"../../core":21}],94:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19065,7 +20167,7 @@ Object.defineProperties(PixelateFilter.prototype, {
     }
 });
 
-},{"../../core":19}],93:[function(require,module,exports){
+},{"../../core":21}],95:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19151,7 +20253,7 @@ Object.defineProperties(RGBSplitFilter.prototype, {
     }
 });
 
-},{"../../core":19}],94:[function(require,module,exports){
+},{"../../core":21}],96:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19201,7 +20303,7 @@ Object.defineProperties(SepiaFilter.prototype, {
     }
 });
 
-},{"../../core":19}],95:[function(require,module,exports){
+},{"../../core":21}],97:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19289,7 +20391,7 @@ Object.defineProperties(ShockwaveFilter.prototype, {
     }
 });
 
-},{"../../core":19}],96:[function(require,module,exports){
+},{"../../core":21}],98:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19414,7 +20516,7 @@ Object.defineProperties(TiltShiftAxisFilter.prototype, {
     }
 });
 
-},{"../../core":19}],97:[function(require,module,exports){
+},{"../../core":21}],99:[function(require,module,exports){
 var core = require('../../core'),
     TiltShiftXFilter = require('./TiltShiftXFilter'),
     TiltShiftYFilter = require('./TiltShiftYFilter');
@@ -19524,7 +20626,7 @@ Object.defineProperties(TiltShiftFilter.prototype, {
     }
 });
 
-},{"../../core":19,"./TiltShiftXFilter":98,"./TiltShiftYFilter":99}],98:[function(require,module,exports){
+},{"../../core":21,"./TiltShiftXFilter":100,"./TiltShiftYFilter":101}],100:[function(require,module,exports){
 var TiltShiftAxisFilter = require('./TiltShiftAxisFilter');
 
 /**
@@ -19562,7 +20664,7 @@ TiltShiftXFilter.prototype.updateDelta = function ()
     this.uniforms.delta.value.y = dy / d;
 };
 
-},{"./TiltShiftAxisFilter":96}],99:[function(require,module,exports){
+},{"./TiltShiftAxisFilter":98}],101:[function(require,module,exports){
 var TiltShiftAxisFilter = require('./TiltShiftAxisFilter');
 
 /**
@@ -19600,7 +20702,7 @@ TiltShiftYFilter.prototype.updateDelta = function ()
     this.uniforms.delta.value.y = dx / d;
 };
 
-},{"./TiltShiftAxisFilter":96}],100:[function(require,module,exports){
+},{"./TiltShiftAxisFilter":98}],102:[function(require,module,exports){
 var core = require('../../core');
 // @see https://github.com/substack/brfs/issues/25
 
@@ -19685,7 +20787,7 @@ Object.defineProperties(TwistFilter.prototype, {
     }
 });
 
-},{"../../core":19}],101:[function(require,module,exports){
+},{"../../core":21}],103:[function(require,module,exports){
 var core = require('../core');
 
 /**
@@ -19747,7 +20849,7 @@ InteractionData.prototype.getLocalPosition = function (displayObject, point)
     return point;
 };
 
-},{"../core":19}],102:[function(require,module,exports){
+},{"../core":21}],104:[function(require,module,exports){
 var core = require('../core'),
     InteractionData = require('./InteractionData');
 
@@ -20546,7 +21648,7 @@ InteractionManager.prototype.returnTouchData = function ( touchData )
 core.WebGLRenderer.registerPlugin('interaction', InteractionManager);
 core.CanvasRenderer.registerPlugin('interaction', InteractionManager);
 
-},{"../core":19,"./InteractionData":101}],103:[function(require,module,exports){
+},{"../core":21,"./InteractionData":103}],105:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI interactions library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -20563,7 +21665,7 @@ module.exports = {
     interactiveTarget: require('./interactiveTarget')
 };
 
-},{"./InteractionData":101,"./InteractionManager":102,"./interactiveTarget":104}],104:[function(require,module,exports){
+},{"./InteractionData":103,"./InteractionManager":104,"./interactiveTarget":106}],106:[function(require,module,exports){
 var core = require('../core');
 
 
@@ -20578,7 +21680,7 @@ core.DisplayObject.prototype._touchDown = false;
 
 module.exports = {};
 
-},{"../core":19}],105:[function(require,module,exports){
+},{"../core":21}],107:[function(require,module,exports){
 var Resource = require('resource-loader').Resource,
     core = require('../core'),
     text = require('../text'),
@@ -20707,7 +21809,7 @@ module.exports = function ()
     };
 };
 
-},{"../core":19,"../text":122,"path":2,"resource-loader":7}],106:[function(require,module,exports){
+},{"../core":21,"../text":124,"path":2,"resource-loader":9}],108:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI loaders library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -20731,7 +21833,7 @@ module.exports = {
 
 module.exports.loader = new module.exports.Loader();
 
-},{"./bitmapFontParser":105,"./loader":107,"./spineAtlasParser":108,"./spritesheetParser":109,"./textureParser":110}],107:[function(require,module,exports){
+},{"./bitmapFontParser":107,"./loader":109,"./spineAtlasParser":110,"./spritesheetParser":111,"./textureParser":112}],109:[function(require,module,exports){
 var ResourceLoader = require('resource-loader'),
     textureParser = require('./textureParser'),
     spritesheetParser = require('./spritesheetParser'),
@@ -20784,7 +21886,7 @@ Loader.prototype.constructor = Loader;
 
 module.exports = Loader;
 
-},{"./bitmapFontParser":105,"./spineAtlasParser":108,"./spritesheetParser":109,"./textureParser":110,"resource-loader":7}],108:[function(require,module,exports){
+},{"./bitmapFontParser":107,"./spineAtlasParser":110,"./spritesheetParser":111,"./textureParser":112,"resource-loader":9}],110:[function(require,module,exports){
 var Resource = require('resource-loader').Resource,
     async = require('async'),
     spine = require('../spine');
@@ -20842,7 +21944,7 @@ module.exports = function ()
     };
 };
 
-},{"../spine":119,"async":1,"resource-loader":7}],109:[function(require,module,exports){
+},{"../spine":121,"async":1,"resource-loader":9}],111:[function(require,module,exports){
 var Resource = require('resource-loader').Resource,
     path = require('path'),
     core = require('../core');
@@ -20926,7 +22028,7 @@ module.exports = function ()
     };
 };
 
-},{"../core":19,"path":2,"resource-loader":7}],110:[function(require,module,exports){
+},{"../core":21,"path":2,"resource-loader":9}],112:[function(require,module,exports){
 var core = require('../core');
 
 module.exports = function ()
@@ -20945,7 +22047,7 @@ module.exports = function ()
     };
 };
 
-},{"../core":19}],111:[function(require,module,exports){
+},{"../core":21}],113:[function(require,module,exports){
 var core = require('../core');
 
 /**
@@ -21334,7 +22436,7 @@ Mesh.DRAW_MODES = {
     TRIANGLES: 1
 };
 
-},{"../core":19}],112:[function(require,module,exports){
+},{"../core":21}],114:[function(require,module,exports){
 var Mesh = require('./Mesh');
 
 /**
@@ -21528,7 +22630,7 @@ Rope.prototype.updateTransform = function ()
     this.containerUpdateTransform();
 };
 
-},{"./Mesh":111}],113:[function(require,module,exports){
+},{"./Mesh":113}],115:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI extras library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -21546,7 +22648,7 @@ module.exports = {
     MeshShader:    require('./webgl/MeshShader')
 };
 
-},{"./Mesh":111,"./Rope":112,"./webgl/MeshRenderer":114,"./webgl/MeshShader":115}],114:[function(require,module,exports){
+},{"./Mesh":113,"./Rope":114,"./webgl/MeshRenderer":116,"./webgl/MeshShader":117}],116:[function(require,module,exports){
 var ObjectRenderer = require('../../core/renderers/webgl/utils/ObjectRenderer'),
     WebGLRenderer = require('../../core/renderers/webgl/WebGLRenderer');
 
@@ -21756,7 +22858,7 @@ MeshRenderer.prototype.destroy = function ()
 {
 };
 
-},{"../../core/renderers/webgl/WebGLRenderer":38,"../../core/renderers/webgl/utils/ObjectRenderer":52}],115:[function(require,module,exports){
+},{"../../core/renderers/webgl/WebGLRenderer":40,"../../core/renderers/webgl/utils/ObjectRenderer":54}],117:[function(require,module,exports){
 var core = require('../../core');
 
 /**
@@ -21817,7 +22919,7 @@ module.exports = StripShader;
 
 core.ShaderManager.registerPlugin('meshShader', StripShader);
 
-},{"../../core":19}],116:[function(require,module,exports){
+},{"../../core":21}],118:[function(require,module,exports){
 (function (global){
 // References:
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -21888,7 +22990,7 @@ if (!global.cancelAnimationFrame) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],117:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 var core = require('../core'),
     spine = require('./SpineRuntime');
 
@@ -22194,7 +23296,7 @@ Spine.prototype.createMesh = function (slot, attachment)
     return strip;
 };
 
-},{"../core":19,"./SpineRuntime":118}],118:[function(require,module,exports){
+},{"../core":21,"./SpineRuntime":120}],120:[function(require,module,exports){
 /******************************************************************************
  * Spine Runtimes Software License
  * Version 2.1
@@ -25161,7 +26263,7 @@ spine.SkeletonBounds.prototype = {
 	}
 };
 
-},{"../core":19}],119:[function(require,module,exports){
+},{"../core":21}],121:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI spine library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -25177,7 +26279,7 @@ module.exports = {
     SpineRuntime:    require('./SpineRuntime')
 };
 
-},{"./Spine":117,"./SpineRuntime":118}],120:[function(require,module,exports){
+},{"./Spine":119,"./SpineRuntime":120}],122:[function(require,module,exports){
 var core = require('../core');
 
 /**
@@ -25525,7 +26627,7 @@ BitmapText.prototype.updateTransform = function ()
 
 BitmapText.fonts = {};
 
-},{"../core":19}],121:[function(require,module,exports){
+},{"../core":21}],123:[function(require,module,exports){
 var core = require('../core');
 
 /**
@@ -26117,7 +27219,7 @@ Text.prototype.destroy = function (destroyBaseTexture)
     this._texture.destroy(destroyBaseTexture === undefined ? true : destroyBaseTexture);
 };
 
-},{"../core":19}],122:[function(require,module,exports){
+},{"../core":21}],124:[function(require,module,exports){
 /**
  * @file        Main export of the PIXI text library
  * @author      Mat Groves <mat@goodboydigital.com>
@@ -26133,7 +27235,7 @@ module.exports = {
     BitmapText: require('./BitmapText')
 };
 
-},{"./BitmapText":120,"./Text":121}],"pixi.js":[function(require,module,exports){
+},{"./BitmapText":122,"./Text":123}],"pixi.js":[function(require,module,exports){
 require('./polyfill/requestAnimationFrame');
 
 var core = require('./core');
@@ -26158,7 +27260,7 @@ function extendCore(obj)
 
 module.exports = core;
 
-},{"./core":19,"./core/math":22,"./deprecation":66,"./extras":72,"./filters":88,"./interaction":103,"./loaders":106,"./mesh":113,"./polyfill/requestAnimationFrame":116,"./spine":119,"./text":122}]},{},["pixi.js"])("pixi.js")
+},{"./core":21,"./core/math":24,"./deprecation":68,"./extras":74,"./filters":90,"./interaction":105,"./loaders":108,"./mesh":115,"./polyfill/requestAnimationFrame":118,"./spine":121,"./text":124}]},{},["pixi.js"])("pixi.js")
 });
 
 
