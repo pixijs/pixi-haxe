@@ -38,6 +38,7 @@ class Main extends Application {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
+		skipFrame = true;
 		resize = true;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -83,8 +84,8 @@ class Main extends Application {
 
 		for (i in 0 ... startBunnyCount) {
 			var bunny = new Bunny(currentTexture);
-			bunny.speedX = Math.random() * 10;
-			bunny.speedY = (Math.random() * 10) - 5;
+			bunny.speedX = Math.random() * 5;
+			bunny.speedY = (Math.random() * 5) - 3;
 
 			bunny.anchor.x = 0.5;
 			bunny.anchor.y = 1;
@@ -117,8 +118,8 @@ class Main extends Application {
 
 				for (i in 0 ... amount) {
 					var bunny = new Bunny(currentTexture);
-					bunny.speedX = Math.random() * 10;
-					bunny.speedY = (Math.random() * 10) - 5;
+					bunny.speedX = Math.random() * 5;
+					bunny.speedY = (Math.random() * 5) - 3;
 					bunny.anchor.y = 1;
 					//bunny.alpha = 0.3 + Math.random() * 0.7;
 					bunnys.push(bunny);

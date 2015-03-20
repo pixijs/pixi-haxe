@@ -20,6 +20,7 @@ pixi.plugins.app.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
+		this.resize = true;
 		this.backgroundColor = 0;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
@@ -41,7 +42,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.resolution = this.pixelRatio;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
-		window.onresize = $bind(this,this._onWindowResize);
+		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
 		if(stats) this._addStats();
@@ -116,6 +117,7 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.onResize = $bind(this,this._onResize);
+		this.skipFrame = true;
 		this.resize = true;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
@@ -158,8 +160,8 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 		while(_g1 < _g) {
 			var i = _g1++;
 			var bunny = new samples.bunnymark.Bunny(this.currentTexture);
-			bunny.speedX = Math.random() * 10;
-			bunny.speedY = Math.random() * 10 - 5;
+			bunny.speedX = Math.random() * 5;
+			bunny.speedY = Math.random() * 5 - 3;
 			bunny.anchor.x = 0.5;
 			bunny.anchor.y = 1;
 			this.bunnys.push(bunny);
@@ -187,8 +189,8 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 				while(_g1 < _g) {
 					var i = _g1++;
 					var bunny = new samples.bunnymark.Bunny(this.currentTexture);
-					bunny.speedX = Math.random() * 10;
-					bunny.speedY = Math.random() * 10 - 5;
+					bunny.speedX = Math.random() * 5;
+					bunny.speedY = Math.random() * 5 - 3;
 					bunny.anchor.y = 1;
 					this.bunnys.push(bunny);
 					bunny.scale.set(0.5 + Math.random() * 0.5,0.5 + Math.random() * 0.5);

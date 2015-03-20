@@ -16780,6 +16780,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Height of the application.
 	 * default - Browser.window.innerHeight</haxe_doc>
 		</height>
+		<resize public="1" get="null">
+			<x path="Bool"/>
+			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
+	 * Should be set to false when custom width and height are used for the application.
+	 * default - true</haxe_doc>
+		</resize>
 		<backgroundColor public="1" get="null">
 			<x path="Int"/>
 			<haxe_doc>* Sets the background color of the stage.
@@ -16809,7 +16815,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_skipFrame><x path="Bool"/></_skipFrame>
 		<_setDefaultValues set="method" line="93"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="109">
+		<start public="1" set="method" line="110">
 			<f a="?renderer:?stats" v="'auto':true">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -16821,13 +16827,25 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="136"><f a="event">
-	<c path="js.html.Event"/>
-	<x path="Void"/>
-</f></_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="151"><f a=""><x path="Void"/></f></_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="163"><f a=""><x path="Void"/></f></_calculateElapsedTime>
-		<_addStats set="method" line="169"><f a=""><x path="Void"/></f></_addStats>
+		<_onWindowResize set="method" line="137">
+			<f a="event">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onWindowResize>
+		<_onRequestAnimationFrame set="method" line="152">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onRequestAnimationFrame>
+		<_calculateElapsedTime set="method" line="164">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_calculateElapsedTime>
+		<_addStats set="method" line="170">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":noCompletion"/></meta>
+		</_addStats>
 		<new public="1" set="method" line="88"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora

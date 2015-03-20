@@ -1,5 +1,6 @@
 package pixi.plugins.app;
 
+import js.html.Element;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.SystemRenderer;
@@ -93,6 +94,7 @@ class Application {
 	function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
+		resize = true;
 		backgroundColor = 0x000000;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -105,13 +107,15 @@ class Application {
 	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
+	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-	public function start(?renderer:String = AUTO, ?stats:Bool = true) {
+	public function start(?renderer:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
 		_canvas.style.height = height + "px";
 		_canvas.style.position = "absolute";
-		Browser.document.body.appendChild(_canvas);
+		if (parentDom == null) Browser.document.body.appendChild(_canvas);
+		else parentDom.appendChild(_canvas);
 
 		_stage = new Container();
 
@@ -126,14 +130,14 @@ class Application {
 		else _renderer = new WebGLRenderer(width, height, renderingOptions);
 
 		Browser.document.body.appendChild(_renderer.view);
-		Browser.window.onresize = _onWindowResize;
+		if (resize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
 
 		if (stats) _addStats();
 	}
 
-	function _onWindowResize(event:Event) {
+	@:noCompletion function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		_renderer.resize(width, height);
@@ -148,7 +152,7 @@ class Application {
 		if (onResize != null) onResize();
 	}
 
-	function _onRequestAnimationFrame() {
+	@:noCompletion function _onRequestAnimationFrame() {
 		if (skipFrame && _skipFrame) _skipFrame = false;
 		else {
 			_skipFrame = true;
@@ -160,13 +164,13 @@ class Application {
 		if (_stats != null) _stats.update();
 	}
 
-	function _calculateElapsedTime() {
+	@:noCompletion function _calculateElapsedTime() {
 		_currentTime = Date.now();
 		_elapsedTime = _currentTime.getTime() - _lastTime.getTime();
 		_lastTime = _currentTime;
 	}
 
-	function _addStats() {
+	@:noCompletion function _addStats() {
 		if (untyped __js__("window").Stats != null) {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);

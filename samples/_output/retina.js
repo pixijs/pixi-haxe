@@ -16,6 +16,7 @@ pixi.plugins.app.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
+		this.resize = true;
 		this.backgroundColor = 0;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
@@ -37,7 +38,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.resolution = this.pixelRatio;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
-		window.onresize = $bind(this,this._onWindowResize);
+		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
 		if(stats) this._addStats();
@@ -94,6 +95,8 @@ samples.retina.Main.main = function() {
 samples.retina.Main.__super__ = pixi.plugins.app.Application;
 samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
+		this.backgroundColor = 16777215;
+		this.pixelRatio = this._getPixelRatio();
 		pixi.plugins.app.Application.prototype.start.call(this);
 		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
@@ -102,14 +105,17 @@ samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._img.position.set(window.innerWidth / 2,window.innerHeight / 2);
 		this._stage.addChild(this._img);
 		var style = { };
-		style.fill = "#FFFFFF";
+		style.fill = "#F78181";
 		style.font = "12px Courier";
 		this._label = new PIXI.Text(imgPath,style);
-		this._label.position.set(this._img.x - 478,this._img.y - 300);
+		this._label.position.set(0,0);
 		this._stage.addChild(this._label);
 	}
+	,_getPixelRatio: function() {
+		if(window.devicePixelRatio <= 1 || window.devicePixelRatio > 1 && window.devicePixelRatio < 1.5) return 1; else if(window.devicePixelRatio >= 1.5 && window.devicePixelRatio < 2) return 1.5; else if(window.devicePixelRatio >= 2 && window.devicePixelRatio < 3) return 2; else return 3;
+	}
 	,_getResolutionStr: function() {
-		if(window.devicePixelRatio <= 1 || window.devicePixelRatio > 1 && window.devicePixelRatio < 1.5) return ""; else if(window.devicePixelRatio >= 1.5 && window.devicePixelRatio < 2) return "@1.5x"; else if(window.devicePixelRatio >= 2 && window.devicePixelRatio < 3) return "@2x"; else return "@3x";
+		return "@" + this._getPixelRatio() + "x";
 	}
 });
 var $_, $fid = 0;

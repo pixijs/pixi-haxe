@@ -17,6 +17,8 @@ class Main extends Application {
 	}
 
 	function _init() {
+		backgroundColor = 0xFFFFFF;
+		pixelRatio = _getPixelRatio();
 		super.start();
 
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
@@ -27,19 +29,23 @@ class Main extends Application {
 		_stage.addChild(_img);
 
 		var style:TextStyle = {};
-		style.fill = "#FFFFFF";
+		style.fill = "#F78181";
 		style.font = "12px Courier";
 
 		_label = new Text(imgPath, style);
-		_label.position.set(_img.x - 478, _img.y - 300);
+		_label.position.set(0, 0);
 		_stage.addChild(_label);
 	}
 
+	function _getPixelRatio():Float {
+		if (Browser.window.devicePixelRatio <= 1 || (Browser.window.devicePixelRatio > 1 && Browser.window.devicePixelRatio < 1.5)) return 1;
+		else if (Browser.window.devicePixelRatio >= 1.5 && Browser.window.devicePixelRatio < 2) return 1.5;
+		else if (Browser.window.devicePixelRatio >= 2 && Browser.window.devicePixelRatio < 3) return 2;
+		else return 3;
+	}
+
 	function _getResolutionStr():String {
-		if (Browser.window.devicePixelRatio <= 1 || (Browser.window.devicePixelRatio > 1 && Browser.window.devicePixelRatio < 1.5)) return "";
-		else if (Browser.window.devicePixelRatio >= 1.5 && Browser.window.devicePixelRatio < 2) return "@1.5x";
-		else if (Browser.window.devicePixelRatio >= 2 && Browser.window.devicePixelRatio < 3) return "@2x";
-		else return "@3x";
+		return "@" + _getPixelRatio() + "x";
 	}
 
 	static function main() {
