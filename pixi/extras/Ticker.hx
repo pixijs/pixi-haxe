@@ -2,7 +2,7 @@ package pixi.extras;
 
 import pixi.core.utils.EventData;
 
-@:native("PIXI.Ticker")
+@:native("PIXI.extras.Ticker")
 extern class Ticker {
 
 	/**

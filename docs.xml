@@ -16235,7 +16235,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @memberof PIXI.extras
 	 * @param textures {Texture[]} an array of {Texture} objects that make up the animation]]></haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.MovieClip"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.extras.MovieClip"</e></m></meta>
 	</class>
 	<class path="pixi.extras.Ticker" params="" file="pixi/extras/Ticker.hx" extern="1">
 		<active public="1">
@@ -16296,7 +16296,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @class
 	 * @memberof PIXI.extras</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Ticker"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.extras.Ticker"</e></m></meta>
 	</class>
 	<class path="pixi.extras.TilingSprite" params="" file="pixi/extras/TilingSprite.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
@@ -16360,7 +16360,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param width {Float}  the width of the tiling sprite
 	 * @param height {Float} the height of the tiling sprite</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.TilingSprite"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.extras.TilingSprite"</e></m></meta>
 	</class>
 	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">
 		<global public="1">
