@@ -3,7 +3,7 @@ package pixi.extras;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.MovieClip")
+@:native("PIXI.extras.MovieClip")
 extern class MovieClip extends Sprite {
 
 	/**

@@ -17,7 +17,7 @@ pixi.plugins.app.Application.prototype = {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
 		this.resize = true;
-		this.backgroundColor = 0;
+		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 		this._skipFrame = false;
@@ -36,6 +36,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.autoResize = true;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
@@ -95,9 +96,9 @@ samples.loader.Main.main = function() {
 samples.loader.Main.__super__ = pixi.plugins.app.Application;
 samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi.plugins.app.Application.prototype.start.call(this,"auto");
 		this._baseURL = "assets/loader/";
-		this._loader = new PIXI.Loader();
+		this._loader = new PIXI.loaders.Loader();
 		this._loader.baseUrl = this._baseURL;
 		var _g = 1;
 		while(_g < 10) {
@@ -119,7 +120,7 @@ samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 			var i = _g++;
 			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
 			this._img.name = "img" + i;
-			if(i < 5) this._img.position.set(this._img.width * i,0); else this._img.position.set(this._img.width * (i - 5),this._img.height);
+			if(i < 5) this._img.position.set(128 * i,0); else this._img.position.set(128 * (i - 5),128);
 			_container.addChild(this._img);
 		}
 		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);

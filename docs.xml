@@ -14711,7 +14711,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param y {Float} The Y coordinate of the center of this circle
 	 * @param radius {Float} The radius of the circle</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.math.Circle"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Circle"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.Ellipse" params="" file="pixi/core/math/shapes/Ellipse.hx" extern="1">
 		<clone public="1" set="method">
@@ -14782,7 +14782,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param width {Float} The half width of this ellipse
 	 * @param height {Float} The half height of this ellipse</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.math.Ellipse"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Ellipse"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.Polygon" params="" file="pixi/core/math/shapes/Polygon.hx" extern="1">
 		<clone public="1" set="method">
@@ -14838,7 +14838,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *      Numbers.]]></haxe_doc>
 </new></overloads>
 		</new>
-		<meta><m n=":native"><e>"PIXI.math.Polygon"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Polygon"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.Rectangle" params="" file="pixi/core/math/shapes/Rectangle.hx" extern="1">
 		<clone public="1" set="method">
@@ -14902,7 +14902,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param width {Float} The overall width of this rectangle
 	 * @param height {Float} The overall height of this rectangle</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.math.Rectangle"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Rectangle"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.RoundedRectangle" params="" file="pixi/core/math/shapes/RoundedRectangle.hx" extern="1">
 		<clone public="1" set="method">
@@ -14974,7 +14974,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param height {Number} The overall height of this rounded rectangle
 	 * @param radius {Number} The overall radius of this corners of this rounded rectangle</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.math.RoundedRectangle"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
 	<class path="pixi.core.particles.ParticleContainer" params="" file="pixi/core/particles/ParticleContainer.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
@@ -16733,7 +16733,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Loader"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
 	</class>
 	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/Loader.hx" module="pixi.loaders.Loader"><a>
 	<xhrType>
@@ -16829,22 +16829,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="140">
+		<_onWindowResize set="method" line="141">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="155">
+		<_onRequestAnimationFrame set="method" line="156">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="167">
+		<_calculateElapsedTime set="method" line="168">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="173">
+		<_addStats set="method" line="174">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>

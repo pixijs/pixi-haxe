@@ -21,7 +21,7 @@ pixi.plugins.app.Application.prototype = {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
 		this.resize = true;
-		this.backgroundColor = 0;
+		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 		this._skipFrame = false;
@@ -40,6 +40,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.autoResize = true;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
@@ -100,8 +101,8 @@ samples.spritesheet.Main.__super__ = pixi.plugins.app.Application;
 samples.spritesheet.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this);
-		this._loader = new PIXI.Loader();
+		pixi.plugins.app.Application.prototype.start.call(this,"canvas");
+		this._loader = new PIXI.loaders.Loader();
 		this._loader.baseUrl = "assets/spritesheet/";
 		this._loader.add("fighter","fighter.json");
 		this._loader.load($bind(this,this._onLoaded));
@@ -134,7 +135,7 @@ samples.spritesheet.Main.prototype = $extend(pixi.plugins.app.Application.protot
 		if(this._isAdding) this._addFighter(Std.random(window.innerWidth),Std.random(window.innerHeight));
 	}
 	,_addFighter: function(x,y) {
-		var fighter = new PIXI.MovieClip(this._fighterTextures);
+		var fighter = new PIXI.extras.MovieClip(this._fighterTextures);
 		fighter.anchor.set(0.5,0.5);
 		fighter.position.set(x,y);
 		fighter.play();

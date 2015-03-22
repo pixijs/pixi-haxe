@@ -1,7 +1,8 @@
 package pixi.loaders;
 
 import pixi.core.textures.Texture;
-@:native("PIXI.Loader")
+
+@:native("PIXI.loaders.Loader")
 extern class Loader {
 
 	/**

@@ -1,5 +1,6 @@
 package samples.retina;
 
+import pixi.plugins.app.Application;
 import pixi.text.Text;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
@@ -19,7 +20,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0xFFFFFF;
 		pixelRatio = _getPixelRatio();
-		super.start();
+		super.start(Application.AUTO);
 
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));

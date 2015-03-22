@@ -95,7 +95,7 @@ class Application {
 		pixelRatio = 1;
 		skipFrame = false;
 		resize = true;
-		backgroundColor = 0x000000;
+		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		_skipFrame = false;
@@ -123,6 +123,7 @@ class Application {
 		renderingOptions.view = _canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
+		renderingOptions.autoResize = true;
 
 		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		else if (renderer == RECOMMENDED) _renderer = Detector.autoDetectRecommendedRenderer(width, height, renderingOptions);

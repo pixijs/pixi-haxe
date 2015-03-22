@@ -19,7 +19,7 @@ class Main extends Application {
 	}
 
 	function _init() {
-		super.start();
+		super.start(Application.AUTO);
 		_baseURL = "assets/loader/";
 
 		_loader = new Loader();
@@ -41,8 +41,8 @@ class Main extends Application {
 		for (i in 1 ... 11) {
 			_img = new Sprite(Texture.fromImage(_baseURL + i + ".png"));
 			_img.name = "img" + i;
-			if (i < 5) _img.position.set(_img.width * i, 0);
-			else _img.position.set(_img.width * (i - 5), _img.height);
+			if (i < 5) _img.position.set(128 * i, 0);
+			else _img.position.set(128 * (i - 5), 128);
 			_container.addChild(_img);
 		}
 		_container.position.set((Browser.window.innerWidth - _container.width) / 2, (Browser.window.innerHeight - _container.height) / 2);

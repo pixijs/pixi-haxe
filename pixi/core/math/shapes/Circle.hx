@@ -1,6 +1,6 @@
 package pixi.core.math.shapes;
 
-@:native("PIXI.math.Circle")
+@:native("PIXI.Circle")
 extern class Circle {
 
 	/**

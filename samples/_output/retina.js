@@ -17,7 +17,7 @@ pixi.plugins.app.Application.prototype = {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
 		this.resize = true;
-		this.backgroundColor = 0;
+		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 		this._skipFrame = false;
@@ -36,6 +36,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.autoResize = true;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
@@ -97,7 +98,7 @@ samples.retina.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.pixelRatio = this._getPixelRatio();
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi.plugins.app.Application.prototype.start.call(this,"auto");
 		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
 		this._img.anchor.set(0.5,0.5);

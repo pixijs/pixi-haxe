@@ -24,7 +24,7 @@ class Main extends Application {
 
 	function _init() {
 		onUpdate = _onUpdate;
-		super.start();
+		super.start(Application.CANVAS);
 
 		_loader = new Loader();
 		_loader.baseUrl = "assets/spritesheet/";
