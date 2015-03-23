@@ -32,7 +32,7 @@ class Main {
 		_stage.addChild(_bunny);
 
 		_graphic = new Graphics();
-		_graphic.beginFill(0xff0000, 0.4);
+		_graphic.beginFill(0xFF0000, 0.4);
 		_graphic.drawRect(200, 150, 400, 300);
 		_graphic.endFill();
 

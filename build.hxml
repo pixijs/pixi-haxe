@@ -1,70 +1,35 @@
 -cp samples
--cp src
+-cp pixi
+-dce full
+-D source-map-content
+-debug
+
+--each
+
+--next
 -main samples.basics.Main
 -js samples/_output/basics.js
 
--dce full
--D source-map-content
--debug
-
 --next
-
--cp samples
--cp src
 -main samples.retina.Main
 -js samples/_output/retina.js
 
--dce full
--D source-map-content
--debug
-
 --next
-
--cp samples
--cp src
 -main samples.bunnymark.Main
 -js samples/_output/bunnymark.js
 
--dce full
--D source-map-content
--debug
-
 --next
--cp samples
--cp src
 -main samples.loader.Main
 -js samples/_output/loader.js
 
--dce full
--D source-map-content
--debug
-
 --next
--cp samples
--cp src
 -main samples.video.Main
 -js samples/_output/video.js
 
--dce full
--D source-map-content
--debug
-
 --next
--cp samples
--cp src
 -main samples.stream.Main
 -js samples/_output/stream.js
 
--dce full
--D source-map-content
--debug
-
 --next
--cp samples
--cp src
 -main samples.spritesheet.Main
 -js samples/_output/spritesheet.js
-
--dce full
--D source-map-content
--debug

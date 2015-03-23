@@ -1,6 +1,6 @@
 package pixi.core;
 
-@:native("PIXI.CONST")
+@:native("PIXI")
 extern class Pixi {
 
 	/**
