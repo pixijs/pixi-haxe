@@ -47,13 +47,6 @@ extern class Loader {
 	var loading:Bool;
 
 	/**
-     * The resources waiting to be loaded.
-     *
-     * @member {Resource[]}
-     */
-	var queue:Array<Dynamic>;
-
-	/**
      * All the resources for this loader keyed by name.
      *
      * @member {object<string, Resource>}
@@ -61,7 +54,6 @@ extern class Loader {
 	var resources:Dynamic;
 
 	function on(type:String, callback:Void -> Void):Void;
-
 	function once(type:String, callback:Void -> Void):Void;
 
 	/**
@@ -158,6 +150,11 @@ extern class Loader {
 	 */
 	function loadResource(resource:String, ?cb:Void -> Void):Loader;
 
+	/**
+	 * Middleware function to use
+	 *
+	 * @param {function} function to call
+	 */
 	function use(fn:Dynamic):Void;
 }
 
@@ -170,10 +167,12 @@ typedef LoaderOptions = {
 typedef Resource = {
 	var name:String;
 	var url:String;
+	var data:Dynamic;
 	var xhr:Dynamic;
 	var xhrType:String;
 	var data:Dynamic;
 	var texture:Texture;
 	var crossOrigin:String;
 	var loadType:Int;
+	var error:Dynamic;
 }
