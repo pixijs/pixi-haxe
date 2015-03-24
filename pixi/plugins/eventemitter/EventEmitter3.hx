@@ -1,6 +1,5 @@
 package pixi.plugins.eventemitter;
 
-@:jsRequire("eventemitter3")
 extern class EventEmitter3 {
 
 	/**

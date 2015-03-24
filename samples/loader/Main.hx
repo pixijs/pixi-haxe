@@ -1,6 +1,5 @@
 package samples.loader;
 
-import pixi.plugins.eventemitter.EventTarget;
 import pixi.loaders.Loader;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
@@ -41,8 +40,8 @@ class Main extends Application {
 		for (i in 1 ... 11) {
 			_img = new Sprite(Texture.fromImage(_baseURL + i + ".png"));
 			_img.name = "img" + i;
-			if (i < 5) _img.position.set(128 * i, 0);
-			else _img.position.set(128 * (i - 5), 128);
+			if (i < 6) _img.position.set(128 * (i - 1), 0);
+			else _img.position.set(128 * (i - 6), 128);
 			_container.addChild(_img);
 		}
 		_container.position.set((Browser.window.innerWidth - _container.width) / 2, (Browser.window.innerHeight - _container.height) / 2);

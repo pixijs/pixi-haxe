@@ -119,7 +119,7 @@ samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 			var i = _g++;
 			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
 			this._img.name = "img" + i;
-			if(i < 5) this._img.position.set(128 * i,0); else this._img.position.set(128 * (i - 5),128);
+			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
 			_container.addChild(this._img);
 		}
 		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);

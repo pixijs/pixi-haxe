@@ -13869,7 +13869,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @constructor</haxe_doc>
 		</new>
-		<meta><m n=":jsRequire"><e>"eventemitter3"</e></m></meta>
 	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
 		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
@@ -16676,7 +16675,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
-	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
+	<class path="pixi.plugins.resourceloader.ResourceLoader" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" extern="1">
 		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
 		<baseUrl public="1">
 			<c path="String"/>
@@ -16706,12 +16705,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="name:url:?options:?callback">
 				<c path="String"/>
 				<c path="String"/>
-				<t path="pixi.loaders.LoaderOptions"/>
+				<t path="pixi.plugins.resourceloader.LoaderOptions"/>
 				<f a="">
-					<t path="pixi.loaders.Resource"/>
+					<t path="pixi.plugins.resourceloader.Resource"/>
 					<x path="Void"/>
 				</f>
-				<c path="pixi.loaders.Loader"/>
+				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
 	 *
@@ -16766,7 +16765,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<after public="1" set="method">
 			<f a="fn">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.Loader"/>
+				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Sets up a middleware function that will run *after* the
 	 * resource is loaded.
@@ -16778,7 +16777,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<before public="1" set="method">
 			<f a="fn">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.Loader"/>
+				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Sets up a middleware function that will run *before* the
 	 * resource is loaded.
@@ -16794,7 +16793,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<load public="1" set="method">
 			<f a="?cb">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.Loader"/>
+				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Starts loading the queued resources.
 	 *
@@ -16806,7 +16805,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="resource:?cb">
 				<c path="String"/>
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.Loader"/>
+				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Loads a single resource.
 	 *
@@ -16821,6 +16820,21 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @param {function} function to call</haxe_doc>
 		</use>
+		<new public="1" set="method">
+			<f a="?baseUrl:?concurrency">
+				<c path="String"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Manages the state and loading of multiple resources to load.
+	 *
+	 * @class
+	 * @param [baseUrl=''] {string} The base url for all resources loaded by this loader.
+	 * @param [concurrency=10] {number} The number of resources to load concurrently.</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
+		<extends path="pixi.plugins.resourceloader.ResourceLoader"/>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>*
@@ -16842,31 +16856,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
 	</class>
-	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/Loader.hx" module="pixi.loaders.Loader"><a>
-	<xhrType>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</xhrType>
-	<loadType>
-		<x path="Int"/>
-		<meta><m n=":optional"/></meta>
-	</loadType>
-	<crossOrigin>
-		<d/>
-		<meta><m n=":optional"/></meta>
-	</crossOrigin>
-</a></typedef>
-	<typedef path="pixi.loaders.Resource" params="" file="pixi/loaders/Loader.hx" module="pixi.loaders.Loader"><a>
-	<xhrType><c path="String"/></xhrType>
-	<xhr><d/></xhr>
-	<url><c path="String"/></url>
-	<texture><c path="pixi.core.textures.Texture"/></texture>
-	<name><c path="String"/></name>
-	<loadType><x path="Int"/></loadType>
-	<error><d/></error>
-	<data><d/></data>
-	<crossOrigin><c path="String"/></crossOrigin>
-</a></typedef>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
 		<pixelRatio public="1" get="null">
 			<x path="Float"/>
@@ -16969,6 +16958,31 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<target><d/></target>
 	<stopped><x path="Bool"/></stopped>
 	<data><d/></data>
+</a></typedef>
+	<typedef path="pixi.plugins.resourceloader.LoaderOptions" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" module="pixi.plugins.resourceloader.ResourceLoader"><a>
+	<xhrType>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</xhrType>
+	<loadType>
+		<x path="Int"/>
+		<meta><m n=":optional"/></meta>
+	</loadType>
+	<crossOrigin>
+		<d/>
+		<meta><m n=":optional"/></meta>
+	</crossOrigin>
+</a></typedef>
+	<typedef path="pixi.plugins.resourceloader.Resource" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" module="pixi.plugins.resourceloader.ResourceLoader"><a>
+	<xhrType><c path="String"/></xhrType>
+	<xhr><d/></xhr>
+	<url><c path="String"/></url>
+	<texture><c path="pixi.core.textures.Texture"/></texture>
+	<name><c path="String"/></name>
+	<loadType><x path="Int"/></loadType>
+	<error><d/></error>
+	<data><d/></data>
+	<crossOrigin><c path="String"/></crossOrigin>
 </a></typedef>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">

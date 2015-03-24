@@ -1,30 +1,18 @@
-package pixi.loaders;
+package pixi.plugins.resourceloader;
 
 import pixi.plugins.eventemitter.EventEmitter3;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.loaders.Loader")
-extern class Loader extends EventEmitter3 {
+extern class ResourceLoader extends EventEmitter3 {
 
 	/**
-	 *
-	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
-	 *
-	 * ```js
-	 * var loader = new PIXI.loader();
-	 *
-	 * loader.add('spineboy',"data/spineboy.json");
-	 *
-	 * loader.once('complete',onAssetsLoaded);
-	 *
-	 * loader.load();
-	 * ```
+	 * Manages the state and loading of multiple resources to load.
 	 *
 	 * @class
-	 * @extends ResourceLoader
-	 * @memberof PIXI.loaders
+	 * @param [baseUrl=''] {string} The base url for all resources loaded by this loader.
+	 * @param [concurrency=10] {number} The number of resources to load concurrently.
 	 */
-	function new();
+	function new(?baseUrl:String, ?concurrency:Int);
 
 	/**
      * The base url for all resources loaded by this loader.
@@ -105,7 +93,7 @@ extern class Loader extends EventEmitter3 {
 	 * @param [callback] {function} Function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
-	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):Loader;
+	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *after* the
@@ -115,7 +103,7 @@ extern class Loader extends EventEmitter3 {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function after(fn:Void -> Void):Loader;
+	function after(fn:Void -> Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *before* the
@@ -125,7 +113,7 @@ extern class Loader extends EventEmitter3 {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Void -> Void):Loader;
+	function before(fn:Void -> Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
@@ -139,14 +127,14 @@ extern class Loader extends EventEmitter3 {
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}
 	 */
-	function load(?cb:Void -> Void):Loader;
+	function load(?cb:Void -> Void):ResourceLoader;
 
 	/**
 	 * Loads a single resource.
 	 *
 	 * @fires progress
 	 */
-	function loadResource(resource:String, ?cb:Void -> Void):Loader;
+	function loadResource(resource:String, ?cb:Void -> Void):ResourceLoader;
 
 	/**
 	 * Middleware function to use
