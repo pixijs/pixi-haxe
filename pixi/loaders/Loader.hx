@@ -170,7 +170,6 @@ typedef Resource = {
 	var data:Dynamic;
 	var xhr:Dynamic;
 	var xhrType:String;
-	var data:Dynamic;
 	var texture:Texture;
 	var crossOrigin:String;
 	var loadType:Int;
