@@ -88,5 +88,5 @@ extern class EventEmitter3 {
 	 *
 	 * @param {String} event The event want to remove all listeners for.
 	 */
-	function removeAllListeners(event:String):Void;
+	function removeAllListeners(?event:String):Void;
 }
