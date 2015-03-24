@@ -15,6 +15,10 @@ samples.basics.Main = function() {
 	this._graphic.beginFill(16711680,0.4);
 	this._graphic.drawRect(200,150,400,300);
 	this._graphic.endFill();
+	this._graphic.interactive = true;
+	this._graphic.on("click",function(evt) {
+		console.log(evt);
+	});
 	this._stage.addChild(this._graphic);
 	window.document.body.appendChild(this._renderer.view);
 	window.requestAnimationFrame($bind(this,this._animate));

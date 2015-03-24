@@ -36,6 +36,9 @@ class Main {
 		_graphic.drawRect(200, 150, 400, 300);
 		_graphic.endFill();
 
+		_graphic.interactive = true;
+		_graphic.on("click", function(evt) {trace(evt);});
+
 		_stage.addChild(_graphic);
 
 		Browser.document.body.appendChild(_renderer.view);

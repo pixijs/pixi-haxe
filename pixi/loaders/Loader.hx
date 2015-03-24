@@ -1,9 +1,10 @@
 package pixi.loaders;
 
+import pixi.plugins.eventemitter.EventEmitter3;
 import pixi.core.textures.Texture;
 
 @:native("PIXI.loaders.Loader")
-extern class Loader {
+extern class Loader extends EventEmitter3 {
 
 	/**
 	 *
@@ -52,9 +53,6 @@ extern class Loader {
      * @member {object<string, Resource>}
      */
 	var resources:Dynamic;
-
-	function on(type:String, callback:Void -> Void):Void;
-	function once(type:String, callback:Void -> Void):Void;
 
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.

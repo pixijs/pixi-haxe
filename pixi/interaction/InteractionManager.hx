@@ -1,10 +1,10 @@
 package pixi.interaction;
 
+import pixi.plugins.eventemitter.EventTarget;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
 import js.html.Event;
 import js.html.HtmlElement;
-import pixi.core.utils.EventData;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 
@@ -35,9 +35,9 @@ extern class InteractionManager {
 	/**
      * An event data object to handle all the event tracking/dispatching
      *
-     * @member {EventData}
+     * @member {EventTarget}
      */
-	var eventData:EventData;
+	var eventData:EventTarget;
 
 	/**
      * Tiny little interactiveData pool !

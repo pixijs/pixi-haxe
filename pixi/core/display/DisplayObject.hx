@@ -1,16 +1,16 @@
 package pixi.core.display;
 
+import pixi.plugins.eventemitter.EventEmitter3;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.textures.Texture;
 import pixi.core.graphics.Graphics;
-import pixi.core.utils.EventTarget;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
 
 @:native("PIXI.DisplayObject")
-extern class DisplayObject extends EventTarget {
+extern class DisplayObject extends EventEmitter3 {
 
 	/**
 	 * The base class for all objects that are rendered on the screen.
@@ -20,6 +20,14 @@ extern class DisplayObject extends EventTarget {
 	 * @namespace PIXI
 	 */
 	function new();
+
+	/**
+	* Returns the global position of the displayObject
+	*
+	* @param point {Point} the point to write the global value to. If null a new point will be returned
+	* @return {Point}
+	*/
+	function getGlobalPosition(point:Point):Point;
 
 	/**
 	 * Retrieves the bounds of the displayObject as a rectangle object

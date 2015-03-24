@@ -1,8 +1,8 @@
 package samples.stream;
 
+import pixi.plugins.eventemitter.EventTarget;
 import pixi.text.Text;
 import js.html.ImageElement;
-import pixi.core.utils.EventData;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import js.html.Element;
@@ -65,7 +65,7 @@ class Main {
 		_bunny.on("tap", _onTap);
 	}
 
-	function _onTap(data:EventData) {
+	function _onTap(data:EventTarget) {
 		_videoElement.play();
 	}
 

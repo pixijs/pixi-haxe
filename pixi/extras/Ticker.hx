@@ -1,9 +1,9 @@
 package pixi.extras;
 
-import pixi.core.utils.EventData;
+import pixi.plugins.eventemitter.EventEmitter3;
 
 @:native("PIXI.extras.Ticker")
-extern class Ticker {
+extern class Ticker extends EventEmitter3 {
 
 	/**
 	 * A Ticker class that runs an update loop that other objects listen to
@@ -19,13 +19,6 @@ extern class Ticker {
 	* @member {Bool}
 	*/
 	var active:Bool;
-
-	/**
-     * the event data for this ticker to dispatch the tick event
-     *
-     * @member {EventData}
-     */
-	var eventData:EventData;
 
 	/**
      * The deltaTime

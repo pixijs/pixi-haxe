@@ -13591,21 +13591,25 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
-	<class path="pixi.core.utils.EventTarget" params="" file="pixi/core/utils/EventTarget.hx" extern="1">
+	<class path="pixi.plugins.eventemitter.EventEmitter3" params="" file="pixi/plugins/eventemitter/EventEmitter3.hx" extern="1">
 		<listeners public="1" set="method">
-			<f a="eventName">
+			<f a="event">
 				<c path="String"/>
 				<c path="Array"><d/></c>
 			</f>
 			<haxe_doc>* Return a list of assigned event listeners.
-     *
-     * @param eventName {String} The events that should be listed.
-     * @return {Array} An array of listener functions</haxe_doc>
+	 *
+	 * @param {String} eventName
+	 * @returns {Array}</haxe_doc>
 		</listeners>
 		<emit public="1" set="method">
-			<f a="eventName:?data">
+			<f a="event:?a1:?a2:?a3:?a4:?a5">
 				<c path="String"/>
-				<c path="pixi.core.utils.EventData"/>
+				<d/>
+				<d/>
+				<d/>
+				<d/>
+				<d/>
 				<x path="Bool"/>
 			</f>
 			<haxe_doc>* Emit an event to all registered event listeners.
@@ -13614,98 +13618,271 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @param eventName {String} The name of the event.
      * @return {Bool} Indication if we've emitted an event.</haxe_doc>
 		</emit>
-		<dispatchEvent public="1" set="method"><f a="eventName:?data">
-	<c path="String"/>
-	<c path="pixi.core.utils.EventData"/>
-	<x path="Bool"/>
-</f></dispatchEvent>
 		<on public="1" set="method">
-			<f a="eventName:fn">
+			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<c path="pixi.core.utils.EventData"/>
+					<t path="pixi.plugins.eventemitter.EventTarget"/>
 					<x path="Void"/>
 				</f>
+				<d/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Register a new EventListener for the given event.
-     *
-     * @alias addEventListener
-     * @param eventName {String} Name of the event.
-     * @param callback {Functon} fn Callback function.</haxe_doc>
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
+			</overloads>
 		</on>
-		<addEventListener public="1" set="method"><f a="eventName:fn">
-	<c path="String"/>
-	<f a="">
-		<c path="pixi.core.utils.EventData"/>
-		<x path="Void"/>
-	</f>
-	<x path="Void"/>
-</f></addEventListener>
 		<once public="1" set="method">
-			<f a="eventName:fn">
+			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<c path="pixi.core.utils.EventData"/>
+					<t path="pixi.plugins.eventemitter.EventTarget"/>
 					<x path="Void"/>
 				</f>
+				<d/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Add an EventListener that's only called once.
-     *
-     * @param eventName {String} Name of the event.
-     * @param callback {Function} Callback function.</haxe_doc>
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+			</overloads>
 		</once>
-		<off public="1" set="method">
-			<f a="eventName:fn">
+		<addListener public="1" set="method">
+			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<c path="pixi.core.utils.EventData"/>
+					<t path="pixi.plugins.eventemitter.EventTarget"/>
 					<x path="Void"/>
 				</f>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Functon} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
+			</overloads>
+		</addListener>
+		<off public="1" set="method">
+			<f a="event:fn:?once">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<x path="Bool"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Remove event listeners.
-     *
-     * @alias removeEventListener
-     * @param eventName {String} The event we want to remove.
-     * @param callback {Function} The listener that we need to find.</haxe_doc>
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+			<overloads>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+				</off>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+				</off>
+			</overloads>
 		</off>
-		<removeEventListener public="1" set="method"><f a="eventName:fn">
-	<c path="String"/>
-	<f a="">
-		<c path="pixi.core.utils.EventData"/>
-		<x path="Void"/>
-	</f>
-	<x path="Void"/>
-</f></removeEventListener>
+		<removeListener public="1" set="method">
+			<f a="event:fn:?once">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+			<overloads>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+			</overloads>
+		</removeListener>
 		<removeAllListeners public="1" set="method">
-			<f a="eventName">
+			<f a="event">
 				<c path="String"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
-     *
-     * @param eventName {string} The event you want to remove all listeners for.</haxe_doc>
+	 *
+	 * @param {String} event The event want to remove all listeners for.</haxe_doc>
 		</removeAllListeners>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Mixins event emitter functionality to an object.
+			<haxe_doc>* Minimal EventEmitter interface that is molded against the Node.js
+	 * EventEmitter interface.
 	 *
-	 * @mixin
-	 * @namespace PIXI
-	 * @example
-	 *      function MyEmitter() {}
-	 *
-	 *      eventTarget.mixin(MyEmitter.prototype);
-	 *
-	 *      var em = new MyEmitter();
-	 *      em.emit('eventName', 'some data', 'some more data', {}, null, ...);</haxe_doc>
+	 * @constructor</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.eventTarget"</e></m></meta>
+		<meta><m n=":jsRequire"><e>"eventemitter3"</e></m></meta>
 	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
-		<extends path="pixi.core.utils.EventTarget"/>
+		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+		<getGlobalPosition public="1" set="method">
+			<f a="point">
+				<c path="pixi.core.math.Point"/>
+				<c path="pixi.core.math.Point"/>
+			</f>
+			<haxe_doc>* Returns the global position of the displayObject
+	*
+	* @param point {Point} the point to write the global value to. If null a new point will be returned
+	* @return {Point}</haxe_doc>
+		</getGlobalPosition>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
 				<c path="pixi.core.math.Matrix"/>
@@ -15634,6 +15811,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
 	<class path="pixi.core.textures.Texture" params="" file="pixi/core/textures/Texture.hx" extern="1">
+		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
 		<fromImage public="1" set="method" static="1">
 			<f a="imageId:?crossorigin:?scaleMode">
 				<c path="String"/>
@@ -16036,62 +16214,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.VideoBaseTexture"</e></m></meta>
 	</class>
-	<class path="pixi.core.utils.EventData" params="" file="pixi/core/utils/EventData.hx" extern="1">
-		<target public="1">
-			<d/>
-			<haxe_doc>* The original target the event triggered on.
-     *
-     * @member {Dynamic}
-     * @readonly</haxe_doc>
-		</target>
-		<type public="1">
-			<c path="String"/>
-			<haxe_doc>* The string name of the event that this represents.
-     *
-     * @member {String}
-     * @readonly</haxe_doc>
-		</type>
-		<data public="1">
-			<d/>
-			<haxe_doc>* The data that was passed in with this event.
-     *
-     * @member {Dynamic}
-     * @readonly</haxe_doc>
-		</data>
-		<timeStamp public="1">
-			<x path="Int"/>
-			<haxe_doc>* The timestamp when the event occurred.
-     *
-     * @member {Int}
-     * @readonly</haxe_doc>
-		</timeStamp>
-		<stopPropagation public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Stops the propagation of events up the scene graph (prevents bubbling).
-	 *</haxe_doc>
-		</stopPropagation>
-		<stopImmediatePropagation public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Stops the propagation of events to sibling listeners (no longer calls any listeners).
-	 *</haxe_doc>
-		</stopImmediatePropagation>
-		<new public="1" set="method">
-			<f a="target:name:data">
-				<d/>
-				<c path="String"/>
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Creates an homogenous object for tracking events so users can know what to expect.
-	 *
-	 * @class
-	 * @namespace PIXI
-	 * @param target {object} The target object that the event is called on
-	 * @param name {String} The string name of the event that was triggered
-	 * @param data {object} Arbitrary event data to pass along</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.EventData"</e></m></meta>
-	</class>
 	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
 		<getResolutionOfUrl public="1" set="method" static="1">
 			<f a="url">
@@ -16238,18 +16360,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.extras.MovieClip"</e></m></meta>
 	</class>
 	<class path="pixi.extras.Ticker" params="" file="pixi/extras/Ticker.hx" extern="1">
+		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
 		<active public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether or not this ticker runs
 	*
 	* @member {Bool}</haxe_doc>
 		</active>
-		<eventData public="1">
-			<c path="pixi.core.utils.EventData"/>
-			<haxe_doc>* the event data for this ticker to dispatch the tick event
-     *
-     * @member {EventData}</haxe_doc>
-		</eventData>
 		<deltaTime public="1">
 			<x path="Float"/>
 			<haxe_doc>* The deltaTime
@@ -16411,10 +16528,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {InteractionData}</haxe_doc>
 		</mouse>
 		<eventData public="1">
-			<c path="pixi.core.utils.EventData"/>
+			<t path="pixi.plugins.eventemitter.EventTarget"/>
 			<haxe_doc>* An event data object to handle all the event tracking/dispatching
      *
-     * @member {EventData}</haxe_doc>
+     * @member {EventTarget}</haxe_doc>
 		</eventData>
 		<interactiveDataPool public="1">
 			<c path="Array"><d/></c>
@@ -16560,6 +16677,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
 	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
+		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
 		<baseUrl public="1">
 			<c path="String"/>
 			<haxe_doc>* The base url for all resources loaded by this loader.
@@ -16578,28 +16696,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      *
      * @member {Bool}</haxe_doc>
 		</loading>
-		<queue public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* The resources waiting to be loaded.
-     *
-     * @member {Resource[]}</haxe_doc>
-		</queue>
 		<resources public="1">
 			<d/>
 			<haxe_doc><![CDATA[* All the resources for this loader keyed by name.
      *
      * @member {object<string, Resource>}]]></haxe_doc>
 		</resources>
-		<on public="1" set="method"><f a="type:callback">
-	<c path="String"/>
-	<f a=""><x path="Void"/></f>
-	<x path="Void"/>
-</f></on>
-		<once public="1" set="method"><f a="type:callback">
-	<c path="String"/>
-	<f a=""><x path="Void"/></f>
-	<x path="Void"/>
-</f></once>
 		<add public="1" set="method">
 			<f a="name:url:?options:?callback">
 				<c path="String"/>
@@ -16710,10 +16812,15 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @fires progress</haxe_doc>
 		</loadResource>
-		<use public="1" set="method"><f a="fn">
-	<d/>
-	<x path="Void"/>
-</f></use>
+		<use public="1" set="method">
+			<f a="fn">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Middleware function to use
+	 *
+	 * @param {function} function to call</haxe_doc>
+		</use>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>*
@@ -16756,6 +16863,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<texture><c path="pixi.core.textures.Texture"/></texture>
 	<name><c path="String"/></name>
 	<loadType><x path="Int"/></loadType>
+	<error><d/></error>
 	<data><d/></data>
 	<crossOrigin><c path="String"/></crossOrigin>
 </a></typedef>
@@ -16856,6 +16964,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
  * @copyright 2015</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
+	<typedef path="pixi.plugins.eventemitter.EventTarget" params="" file="pixi/plugins/eventemitter/EventTarget.hx"><a>
+	<type><c path="String"/></type>
+	<target><d/></target>
+	<stopped><x path="Bool"/></stopped>
+	<data><d/></data>
+</a></typedef>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>

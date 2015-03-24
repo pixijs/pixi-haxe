@@ -1,5 +1,6 @@
 package samples.loader;
 
+import pixi.plugins.eventemitter.EventTarget;
 import pixi.loaders.Loader;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
@@ -26,9 +27,8 @@ class Main extends Application {
 		_loader.baseUrl = _baseURL;
 
 		for (i in 1 ... 10) _loader.add("img" + i, i + ".png");
-		_loader.on("complete", _onLoaded);
 		_loader.on("progress", _onLoadProgress);
-		_loader.load();
+		_loader.load(_onLoaded);
 	}
 
 	function _onLoadProgress() {

@@ -105,9 +105,8 @@ samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 			var i = _g++;
 			this._loader.add("img" + i,i + ".png");
 		}
-		this._loader.on("complete",$bind(this,this._onLoaded));
 		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.load();
+		this._loader.load($bind(this,this._onLoaded));
 	}
 	,_onLoadProgress: function() {
 		console.log("Loaded: " + Math.round(this._loader.progress));
