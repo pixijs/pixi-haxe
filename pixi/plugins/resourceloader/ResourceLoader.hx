@@ -1,7 +1,6 @@
 package pixi.plugins.resourceloader;
 
 import pixi.plugins.eventemitter.EventEmitter3;
-import pixi.core.textures.Texture;
 
 extern class ResourceLoader extends EventEmitter3 {
 
@@ -142,22 +141,4 @@ extern class ResourceLoader extends EventEmitter3 {
 	 * @param {function} function to call
 	 */
 	function use(fn:Dynamic):Void;
-}
-
-typedef LoaderOptions = {
-	@:optional var crossOrigin:Dynamic;
-	@:optional var loadType:Int;
-	@:optional var xhrType:String;
-}
-
-typedef Resource = {
-	var name:String;
-	var url:String;
-	var data:Dynamic;
-	var xhr:Dynamic;
-	var xhrType:String;
-	var texture:Texture;
-	var crossOrigin:String;
-	var loadType:Int;
-	var error:Dynamic;
 }

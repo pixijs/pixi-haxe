@@ -16707,7 +16707,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<t path="pixi.plugins.resourceloader.LoaderOptions"/>
 				<f a="">
-					<t path="pixi.plugins.resourceloader.Resource"/>
+					<c path="pixi.plugins.resourceloader.Resource"/>
 					<x path="Void"/>
 				</f>
 				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
@@ -16959,7 +16959,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<stopped><x path="Bool"/></stopped>
 	<data><d/></data>
 </a></typedef>
-	<typedef path="pixi.plugins.resourceloader.LoaderOptions" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" module="pixi.plugins.resourceloader.ResourceLoader"><a>
+	<typedef path="pixi.plugins.resourceloader.LoaderOptions" params="" file="pixi/plugins/resourceloader/LoaderOptions.hx"><a>
 	<xhrType>
 		<c path="String"/>
 		<meta><m n=":optional"/></meta>
@@ -16973,17 +16973,137 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":optional"/></meta>
 	</crossOrigin>
 </a></typedef>
-	<typedef path="pixi.plugins.resourceloader.Resource" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" module="pixi.plugins.resourceloader.ResourceLoader"><a>
-	<xhrType><c path="String"/></xhrType>
-	<xhr><d/></xhr>
-	<url><c path="String"/></url>
-	<texture><c path="pixi.core.textures.Texture"/></texture>
-	<name><c path="String"/></name>
-	<loadType><x path="Int"/></loadType>
-	<error><d/></error>
-	<data><d/></data>
-	<crossOrigin><c path="String"/></crossOrigin>
-</a></typedef>
+	<class path="pixi.plugins.resourceloader.Resource" params="" file="pixi/plugins/resourceloader/Resource.hx" extern="1">
+		<texture public="1"><c path="pixi.core.textures.Texture"/></texture>
+		<name public="1">
+			<c path="String"/>
+			<haxe_doc>* The name of this resource.
+     *
+     * @member {string}
+     * @readonly</haxe_doc>
+		</name>
+		<url public="1">
+			<c path="String"/>
+			<haxe_doc>* The url used to load this resource.
+     *
+     * @member {string}
+     * @readonly</haxe_doc>
+		</url>
+		<data public="1">
+			<d/>
+			<haxe_doc>* The data that was loaded by the resource.
+     *
+     * @member {any}</haxe_doc>
+		</data>
+		<xhr public="1">
+			<d/>
+			<haxe_doc>* The XHR object that was used to load this resource. This is only set
+     * when `loadType` is `Resource.LOAD_TYPE.XHR`.
+     *
+     * @member {XMLHttpRequest}</haxe_doc>
+		</xhr>
+		<xhrType public="1">
+			<c path="String"/>
+			<haxe_doc>* The type used to load the resource via XHR. If unset, determined automatically.
+     *
+     * @member {string}</haxe_doc>
+		</xhrType>
+		<crossOrigin public="1">
+			<c path="String"/>
+			<haxe_doc>* Is this request cross-origin? If unset, determined automatically.
+     *
+     * @member {string}</haxe_doc>
+		</crossOrigin>
+		<loadType public="1">
+			<x path="Int"/>
+			<haxe_doc>* The method of loading to use for this resource.
+     *
+     * @member {Resource.LOAD_TYPE}</haxe_doc>
+		</loadType>
+		<error public="1">
+			<d/>
+			<haxe_doc>* The error that occurred while loading (if any).
+     *
+     * @member {Error}
+     * @readonly</haxe_doc>
+		</error>
+		<new public="1" set="method">
+			<f a="name:url:?options">
+				<c path="String"/>
+				<c path="String"/>
+				<t path="pixi.plugins.resourceloader.LoaderOptions"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Manages the state and loading of a single resource represented by
+	 * a single URL.
+	 *
+	 * @class
+	 * @param name {string} The name of the resource to load.
+	 * @param url {string|string[]} The url for this resource, for audio/video loads you can pass an array of sources.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?</haxe_doc>
+		</new>
+	</class>
+	<typedef path="pixi.plugins.resourceloader.LOAD_TYPE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
+		<a>
+			<XHR><x path="Int"/></XHR>
+			<VIDEO><x path="Int"/></VIDEO>
+			<IMAGE><x path="Int"/></IMAGE>
+			<AUDIO><x path="Int"/></AUDIO>
+		</a>
+		<haxe_doc>* The types of loading a resource can use.
+ *
+ * @static
+ * @constant
+ * @property {object} LOAD_TYPE
+ * @property {number} LOAD_TYPE.XHR - Uses XMLHttpRequest to load the resource.
+ * @property {number} LOAD_TYPE.IMAGE - Uses an `Image` object to load the resource.
+ * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
+ * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.</haxe_doc>
+	</typedef>
+	<typedef path="pixi.plugins.resourceloader.XHR_READY_STATE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
+		<a>
+			<UNSENT><x path="Int"/></UNSENT>
+			<OPENED><x path="Int"/></OPENED>
+			<LOADING><x path="Int"/></LOADING>
+			<HEADERS_RECEIVED><x path="Int"/></HEADERS_RECEIVED>
+			<DONE><x path="Int"/></DONE>
+		</a>
+		<haxe_doc>* The XHR ready states, used internally.
+ *
+ * @static
+ * @constant
+ * @property {object} XHR_READY_STATE
+ * @property {number} XHR_READY_STATE.UNSENT - open()has not been called yet.
+ * @property {number} XHR_READY_STATE.OPENED - send()has not been called yet.
+ * @property {number} XHR_READY_STATE.HEADERS_RECEIVED - send() has been called, and headers and status are available.
+ * @property {number} XHR_READY_STATE.LOADING - Downloading; responseText holds partial data.
+ * @property {number} XHR_READY_STATE.DONE - The operation is complete.</haxe_doc>
+	</typedef>
+	<typedef path="pixi.plugins.resourceloader.XHR_RESPONSE_TYPE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
+		<a>
+			<TEXT><c path="String"/></TEXT>
+			<JSON><c path="String"/></JSON>
+			<DOCUMENT><c path="String"/></DOCUMENT>
+			<DEFAULT><c path="String"/></DEFAULT>
+			<BUFFER><c path="String"/></BUFFER>
+			<BLOB><c path="String"/></BLOB>
+		</a>
+		<haxe_doc>* The XHR ready states, used internally.
+ *
+ * @static
+ * @constant
+ * @property {object} XHR_RESPONSE_TYPE
+ * @property {string} XHR_RESPONSE_TYPE.DEFAULT - defaults to text
+ * @property {string} XHR_RESPONSE_TYPE.BUFFER - ArrayBuffer
+ * @property {string} XHR_RESPONSE_TYPE.BLOB - Blob
+ * @property {string} XHR_RESPONSE_TYPE.DOCUMENT - Document
+ * @property {string} XHR_RESPONSE_TYPE.JSON - Object
+ * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
+	</typedef>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>
