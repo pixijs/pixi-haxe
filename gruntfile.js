@@ -10,8 +10,6 @@ module.exports = function (grunt) {
         },
 
         exec: {
-            //resourceloader: "browserify -r resource-loader > ./libs/resource-loader.dev.js && uglify -s ./libs/resource-loader.dev.js -o ./libs/resource-loader.min.js",
-            //eventemitter3: "browserify -r eventemitter3 > ./libs/eventemitter3.dev.js && uglify -s ./libs/eventemitter3.dev.js -o ./libs/eventemitter3.min.js",
             docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/haxe-pixi/v3 -f docs.xml " +
                 " --showTodoTags=false " +
                 " --deny=demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
