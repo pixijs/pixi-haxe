@@ -1,10 +1,12 @@
 package pixi.core;
 
+import pixi.core.RendererType;
+
 @:native("PIXI")
 extern class Pixi {
 
 	/**
-     * String of the current PIXI version
+	 * String of the current PIXI version
      *
      * @static
      * @constant
@@ -25,7 +27,7 @@ extern class Pixi {
 	static var RENDERER_TYPE:RendererType;
 
 	/**
-     * 	various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
+     * various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
      * the NORMAL, ADD, MULTIPLY and SCREEN blend modes. Anything else will silently act like
      * NORMAL.
      *
@@ -160,7 +162,7 @@ typedef BlendModes = {
 	var LUMINOSITY:Int;
 }
 
-typedef Shapes = {
+	typedef Shapes = {
 	var POLY:Int;
 	var RECT:Int;
 	var CIRC:Int;

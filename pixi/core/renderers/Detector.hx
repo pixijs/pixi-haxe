@@ -27,8 +27,8 @@ extern class Detector {
      *
      * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
      */
-@:overload(	function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
-static 	function autoDetectRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
+	@:overload(function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
+	static function autoDetectRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
 
 	/**
      * This helper 	function will automatically detect which renderer you should be using. This 	function is very
@@ -49,8 +49,8 @@ static 	function autoDetectRenderer(width:Float, height:Float, ?options:Renderin
      * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
      */
 
-@:overload(	function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
-static 	function autoDetectRecommendedRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
+	@:overload(function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
+	static function autoDetectRecommendedRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
 }
 
 typedef RenderingOptions = {

@@ -13,12 +13,12 @@ class Main extends Application {
 	var _vidSprite:Sprite;
 	var _vidElement:VideoElement;
 
-	public 	function new() {
+	public function new() {
 		super();
 		_init();
 	}
 
-		function _init() {
+	function _init() {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
@@ -37,19 +37,19 @@ class Main extends Application {
 		//haxe.Timer.delay(_setup, 3000);
 	}
 
-		function _setup() {
+	function _setup() {
 
 	}
 
-		function _onUpdate(elapsedTime:Float) {
+	function _onUpdate(elapsedTime:Float) {
 
 	}
 
-		function _onResize() {
+	function _onResize() {
 
 	}
 
-	static 	function main() {
+	static function main() {
 		new Main();
 	}
 }

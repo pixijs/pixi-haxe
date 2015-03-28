@@ -1,6 +1,5 @@
 package pixi.core.textures;
 
-import Array;
 import js.html.VideoElement;
 
 @:native("PIXI.VideoBaseTexture")
@@ -27,7 +26,7 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}
 	 */
-static 	function fromVideo(video:VideoElement, ?scaleMode:Int):VideoBaseTexture;
+	static function fromVideo(video:VideoElement, ?scaleMode:Int):VideoBaseTexture;
 
 	/**
 	 * Mimic Pixi BaseTexture.from.... method.
@@ -56,6 +55,6 @@ static 	function fromVideo(video:VideoElement, ?scaleMode:Int):VideoBaseTexture;
 	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}
 	 */
-static 	function fromUrl(videoSrc:String, ?scaleMode:Int):VideoBaseTexture;
-static 	function fromUrls(videoSrc:Array<String>, ?scaleMode:Int):VideoBaseTexture;
+	static function fromUrl(videoSrc:String, ?scaleMode:Int):VideoBaseTexture;
+	static function fromUrls(videoSrc:Array<String>, ?scaleMode:Int):VideoBaseTexture;
 }

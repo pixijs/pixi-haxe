@@ -41,7 +41,7 @@ extern class TilingSprite extends Sprite {
 	 * @param texture {Texture} The texture to use to generate the tiling texture
 	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two
 	 */
-@:overload(	function(renderer:WebGLRenderer, texture:Texture, forcePowerOfTwo:Bool):Void {})
+	@:overload( function(renderer:WebGLRenderer, texture:Texture, forcePowerOfTwo:Bool):Void {})
 	function generateTilingTexture(renderer:CanvasRenderer, texture:Texture, forcePowerOfTwo:Bool):Void;
 
 	/**

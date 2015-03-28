@@ -10,5 +10,5 @@ extern class Utils {
      * @param url {String} the image path
      * @return {Float}
      */
-static 	function getResolutionOfUrl(url:String):Float;
+	static function getResolutionOfUrl(url:String):Float;
 }

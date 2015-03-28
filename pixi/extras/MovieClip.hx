@@ -122,7 +122,7 @@ extern class MovieClip extends Sprite {
 	 * @static
 	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames
 	 */
-static 	function fromFrames(frames:Array<String>):MovieClip;
+	static function fromFrames(frames:Array<String>):MovieClip;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of image ids
@@ -130,5 +130,5 @@ static 	function fromFrames(frames:Array<String>):MovieClip;
 	 * @static
 	 * @param images {Array<String>} the array of image urls the movieclip will use as its texture frames
 	 */
-static 	function fromImages(images:Array<String>):MovieClip;
+	static function fromImages(images:Array<String>):MovieClip;
 }

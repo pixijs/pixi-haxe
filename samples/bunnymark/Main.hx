@@ -29,12 +29,12 @@ class Main extends Application {
 	var currentTexture:Texture;
 	var counter:DivElement;
 
-	public 	function new() {
+	public function new() {
 		super();
 		_init();
 	}
 
-		function _init() {
+	function _init() {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
@@ -42,7 +42,7 @@ class Main extends Application {
 		_setup();
 	}
 
-		function _setup() {
+	function _setup() {
 		maxX = Browser.window.innerWidth;
 		maxY = Browser.window.innerHeight;
 
@@ -97,18 +97,18 @@ class Main extends Application {
 		Browser.document.addEventListener("touchend", onTouchEnd, true);
 	}
 
-		function onTouchStart(event) {
+	function onTouchStart(event) {
 		isAdding = true;
 	}
 
-		function onTouchEnd(event) {
+	function onTouchEnd(event) {
 		bunnyType++;
 		bunnyType %= 5;
 		currentTexture = bunnyTextures[bunnyType];
 		isAdding = false;
 	}
 
-		function _onUpdate(elapsedTime:Float) {
+	function _onUpdate(elapsedTime:Float) {
 		if (isAdding) {
 			if (count < 200000) {
 
@@ -161,7 +161,7 @@ class Main extends Application {
 		}
 	}
 
-		function _onResize() {
+	function _onResize() {
 		maxX = Browser.window.innerWidth;
 		maxY = Browser.window.innerHeight;
 
@@ -169,7 +169,7 @@ class Main extends Application {
 		counter.style.left = "1px";
 	}
 
-	static 	function main() {
+	static function main() {
 		new Main();
 	}
 }

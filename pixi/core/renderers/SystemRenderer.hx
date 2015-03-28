@@ -95,9 +95,6 @@ extern class SystemRenderer {
      */
 	var blendModes:Dynamic;
 
-	///////////////////////////
-	// TODO: Combine these!
-
 	/**
      * The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
      *

@@ -1,15 +1,15 @@
-package pixi.interaction;
+	package pixi.interaction;
 
-import pixi.plugins.eventemitter.EventTarget;
-import pixi.core.display.DisplayObject;
-import pixi.core.math.Point;
-import js.html.Event;
-import js.html.HtmlElement;
-import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
+	import pixi.plugins.eventemitter.EventTarget;
+	import pixi.core.display.DisplayObject;
+	import pixi.core.math.Point;
+	import js.html.Event;
+	import js.html.HtmlElement;
+	import pixi.core.renderers.canvas.CanvasRenderer;
+	import pixi.core.renderers.webgl.WebGLRenderer;
 
-@:native("PIXI.interaction.InteractionManager")
-extern class InteractionManager {
+	@:native("PIXI.interaction.InteractionManager")
+	extern class InteractionManager {
 
 	/**
 	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
@@ -20,7 +20,7 @@ extern class InteractionManager {
 	 * @memberof PIXI.interaction
 	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
 	 */
-@:overload(	function(renderer:CanvasRenderer):Void {})
+	@:overload( function(renderer:CanvasRenderer):Void {})
 	function new(renderer:WebGLRenderer);
 
 	var renderer:Dynamic;

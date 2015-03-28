@@ -13,7 +13,7 @@ extern class Ellipse {
 	 * @param width {Float} The half width of this ellipse
 	 * @param height {Float} The half height of this ellipse
 	*/
-	function new(x:Float, y:Float, width:Float, height:Float):Void;
+function new(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
 	 * Creates a clone of this Ellipse instance
@@ -21,7 +21,7 @@ extern class Ellipse {
 	 * @method clone
 	 * @return {Ellipse} a copy of the ellipse
 	*/
-	function clone():Ellipse;
+function clone():Ellipse;
 
 	/**
 	 * Checks whether the x and y coordinates passed to this 	function are contained within this ellipse
@@ -31,7 +31,7 @@ extern class Ellipse {
 	 * @param y {Float} The Y coordinate of the point to test
 	 * @return {Bool} Whether the x/y coords are within this ellipse
 	*/
-	function contains(x:Float, y:Float):Bool;
+function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * Returns the framing rectangle of the circle as a PIXI.Rectangle object
@@ -39,33 +39,33 @@ extern class Ellipse {
 	 * @method getBounds
 	 * @return {Rectangle} the framing rectangle
 	*/
-	function getBounds():Rectangle;
+function getBounds():Rectangle;
 
 	/**
 	 * @property x
 	 * @type Float
 	 * @default 0
 	 */
-	var x:Float;
+var x:Float;
 
 	/**
 	 * @property y
 	 * @type Float
 	 * @default 0
 	 */
-	var y:Float;
+var y:Float;
 
 	/**
 	 * @property width
 	 * @type Float
 	 * @default 0
 	 */
-	var width:Float;
+var width:Float;
 
 	/**
 	 * @property height
 	 * @type Float
 	 * @default 0
 	 */
-	var height:Float;
+var height:Float;
 }

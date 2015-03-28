@@ -34,8 +34,8 @@ extern class EventEmitter3 {
 	 * @param {Functon} fn Callback 	function.
 	 * @param {Mixed} context The context of the 	function.
 	 */
-@:overload(	function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
-@:overload(	function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	function on(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -45,8 +45,8 @@ extern class EventEmitter3 {
 	 * @param {	function} fn Callback 	function.
 	 * @param {Mixed} context The context of the 	function.
 	 */
-@:overload(	function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
-@:overload(	function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	function once(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -56,8 +56,8 @@ extern class EventEmitter3 {
 	 * @param {Functon} fn Callback 	function.
 	 * @param {Mixed} context The context of the 	function.
 	 */
-@:overload(	function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
-@:overload(	function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	function addListener(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -67,8 +67,8 @@ extern class EventEmitter3 {
 	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.
 	 */
-@:overload(	function(event:String, fn:Void -> Void, ?once:Bool):Void {})
-@:overload(	function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
 	function off(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
 
 	/**
@@ -78,8 +78,8 @@ extern class EventEmitter3 {
 	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.
 	 */
-@:overload(	function(event:String, fn:Void -> Void, ?once:Bool):Void {})
-@:overload(	function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
 	function removeListener(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
 
 	/**

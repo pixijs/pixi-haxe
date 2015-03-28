@@ -19,7 +19,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @class
 	 * @namespace PIXI
 	 */
-	function new();
+	 function new();
 
 	/**
 	* Returns the global position of the displayObject
@@ -27,7 +27,7 @@ extern class DisplayObject extends EventEmitter3 {
 	* @param point {Point} the point to write the global value to. If null a new point will be returned
 	* @return {Point}
 	*/
-	function getGlobalPosition(point:Point):Point;
+	 function getGlobalPosition(point:Point):Point;
 
 	/**
 	 * Retrieves the bounds of the displayObject as a rectangle object
@@ -35,14 +35,14 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @param matrix {Matrix}
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getBounds(?matrix:Matrix):Rectangle;
+	 function getBounds(?matrix:Matrix):Rectangle;
 
 	/**
 	 * Retrieves the local bounds of the displayObject as a rectangle object
 	 *
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getLocalBounds():Rectangle;
+	 function getLocalBounds():Rectangle;
 
 	/**
 	 * Calculates the global position of the display object
@@ -50,7 +50,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @param position {Point} The world origin to calculate from
 	 * @return {Point} A point object representing the position of this object
 	 */
-	function toGlobal(position:Point):Point;
+	 function toGlobal(position:Point):Point;
 
 	/**
 	 * Calculates the local position of the display object relative to another point
@@ -59,10 +59,10 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
 	 * @return {Point} A point object representing the position of this object
 	 */
-	function toLocal(position:Point, ?frm:DisplayObject):Point;
+	 function toLocal(position:Point, ?frm:DisplayObject):Point;
 
 	/**
-	 * Useful function that returns a texture of the display object that can then be used to create sprites
+	 * Useful 	 function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -71,14 +71,14 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @return {Texture} a texture of the display object
 	 */
 	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
-	function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
+	 function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
 
 	/**
 	 * The instance name of the object.
 	 *
 	 * @member {String}
 	 */
-	var name:String;
+	 var name:String;
 
 	/**
 	 * Set this to true if you want this display object to be cached as a bitmap.
@@ -88,50 +88,50 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Bool}
 	 * @memberof DisplayObject#
 	 */
-	var cacheAsBitmap:Bool;
+	 var cacheAsBitmap:Bool;
 
 	/**
 	 * The coordinate of the object relative to the local coordinates of the parent.
 	 *
 	 * @member {Point}
 	 */
-	var position:Point;
+	 var position:Point;
 
 	/**
 	 * The scale factor of the object.
 	 *
 	 * @member {Point}
 	 */
-	var scale:Point;
+	 var scale:Point;
 
 	/**
 	 * The pivot point of the displayObject that it rotates around
 	 *
 	 * @member {Point}
 	 */
-	var pivot:Point;
+	 var pivot:Point;
 
 	/**
 	 * The rotation of the object in radians.
 	 *
 	 * @member {Float}
 	 */
-	var rotation:Float;
+	 var rotation:Float;
 
 	/**
 	 * The opacity of the object.
 	 *
 	 * @member {Float}
 	 */
-	var alpha:Float;
+	 var alpha:Float;
 
 	/**
 	 * The visibility of the object. If false the object will not be drawn, and
-	 * the updateTransform 	function will not be called.
+	 * the updateTransform 		 function will not be called.
 	 *
 	 * @member {Bool}
 	 */
-	var visible:Bool;
+	 var visible:Bool;
 
 	/**
 	 * Can this object be rendered, if false the object will not be drawn but the updateTransform
@@ -139,7 +139,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 *
 	 * @member {Bool}
 	 */
-	var renderable:Bool;
+	 var renderable:Bool;
 
 	/**
 	 * The display object container that contains this display object.
@@ -147,7 +147,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Container}
 	 * @readOnly
 	 */
-	var parent:Container;
+	 var parent:Container;
 
 	/**
 	 * The multiplied alpha of the displayObject
@@ -155,7 +155,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Float}
 	 * @readOnly
 	 */
-	var worldAlpha:Float;
+	 var worldAlpha:Float;
 
 	/**
 	 * Current transform of the object based on world (parent) factors
@@ -163,7 +163,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Matrix}
 	 * @readOnly
 	 */
-	var worldTransform:Matrix;
+	 var worldTransform:Matrix;
 
 	/**
 	 * The area the filter is applied to. This is used as more of an optimisation
@@ -171,7 +171,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 *
 	 * @member {Rectangle}
 	 */
-	var filterArea:Rectangle;
+	 var filterArea:Rectangle;
 
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
@@ -179,7 +179,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Float}
 	 * @memberof DisplayObject#
 	 */
-	var x:Float;
+	 var x:Float;
 
 	/**
 	 * The position of the displayObject on the y axis relative to the local coordinates of the parent.
@@ -187,7 +187,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Float}
 	 * @memberof DisplayObject#
 	 */
-	var y:Float;
+	 var y:Float;
 
 	/**
 	 * Indicates if the displayObject is globally visible.
@@ -196,7 +196,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @memberof DisplayObject#
 	 * @readonly
 	 */
-	var worldVisible:Bool;
+	 var worldVisible:Bool;
 
 	/**
 	 * Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
@@ -206,7 +206,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Graphics}
 	 * @memberof DisplayObject#
 	 */
-	var mask:Graphics;
+	 var mask:Graphics;
 
 	/**
 	 * Sets the filters for the displayObject.
@@ -216,7 +216,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Filter[]}
 	 * @memberof DisplayObject#
 	 */
-	var filters:Array<Dynamic>;
+	 var filters:Array<Dynamic>;
 
 	/**
 	 * Indicates if the displayObject is interactive or not.
@@ -225,7 +225,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @default false
 	 * @memberof DisplayObject#
 	 */
-	var interactive:Bool;
+	 var interactive:Bool;
 
 	/**
 	 * Indicates if the displayObject uses button mode or normal mode.
@@ -234,7 +234,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @default false
 	 * @memberof DisplayObject#
 	 */
-	var buttonMode:Bool;
+	 var buttonMode:Bool;
 
 	/**
 	 * Indicates if the children of displayObject are interactive or not.
@@ -243,7 +243,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @default true
 	 * @memberof DisplayObject#
 	 */
-	var interactiveChildren:Bool;
+	 var interactiveChildren:Bool;
 
 	/**
 	 * Default cursor.
@@ -252,5 +252,5 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @default pointer
 	 * @memberof DisplayObject#
 	 */
-	var defaultCursor:String;
+	 var defaultCursor:String;
 }

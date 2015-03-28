@@ -166,7 +166,7 @@ extern class BaseTexture {
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link scaleModes} for possible values
 	 * @return BaseTexture
 	 */
-static 	function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
+	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
 
 	/**
 	 * Helper 	function that creates a base texture from the given canvas element.
@@ -176,5 +176,5 @@ static 	function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):B
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return BaseTexture
 	 */
-static 	function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
+	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
 }
