@@ -20,57 +20,57 @@ extern class Graphics extends Container {
 	function new();
 
 	/**
-     * The alpha value used when filling the Graphics object.
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * The alpha value used when filling the Graphics object.
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var fillAlpha:Float;
 
 	/**
-     * The width (thickness) of any lines drawn.
-     *
-     * @member {Float}
-     * @default 0
-     */
+	 * The width (thickness) of any lines drawn.
+	 *
+	 * @member {Float}
+	 * @default 0
+	 */
 	var lineWidth:Float;
 
 	/**
-     * The color of any lines drawn.
-     *
-     * @member {Int}
-     * @default 0
-     */
+	 * The color of any lines drawn.
+	 *
+	 * @member {Int}
+	 * @default 0
+	 */
 	var lineColor:Int;
 
 	/**
-     * The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
-     *
-     * @member {Int}
-     * @default 0xFFFFFF
-     */
+	 * The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
+	 *
+	 * @member {Int}
+	 * @default 0xFFFFFF
+	 */
 	var tint:Int;
 
 	/**
-     * The blend mode to be applied to the graphic shape. Apply a value of blendModes.NORMAL to reset the blend mode.
-     *
-     * @member {Int}
-     * @default CONST.BLEND_MODES.NORMAL;
-     */
+	 * The blend mode to be applied to the graphic shape. Apply a value of blendModes.NORMAL to reset the blend mode.
+	 *
+	 * @member {Int}
+	 * @default CONST.BLEND_MODES.NORMAL;
+	 */
 	var blendMode:Int;
 
 	/**
-     * Whether this shape is being used as a mask.
-     *
-     * @member {Bool}
-     */
+	 * Whether this shape is being used as a mask.
+	 *
+	 * @member {Bool}
+	 */
 	var isMask:Bool;
 
 	/**
-     * The bounds' padding used for bounds calculation.
-     *
-     * @member {Float}
-     */
+	 * The bounds' padding used for bounds calculation.
+	 *
+	 * @member {Float}
+	 */
 	var boundsPadding:Float;
 
 	/**
@@ -246,8 +246,8 @@ extern class Graphics extends Container {
 	 * @param {Circle|Rectangle|Ellipse|Line|Polygon} shape The Shape object to draw.
 	 * @return {GraphicsData} The generated GraphicsData object.
 	 */
-@:overload(	function(shape:Rectangle):GraphicsData {})
-@:overload(	function(shape:Ellipse):GraphicsData {})
-@:overload(	function(shape:Polygon):GraphicsData {})
+	@:overload(function(shape:Rectangle):GraphicsData {})
+	@:overload(function(shape:Ellipse):GraphicsData {})
+	@:overload(function(shape:Polygon):GraphicsData {})
 	function drawShape(shape:Circle):GraphicsData;
 }
