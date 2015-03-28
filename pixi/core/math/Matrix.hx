@@ -16,39 +16,39 @@ extern class Matrix {
 	function new():Void;
 
 	/**
-     * @member {Float}
-     * @default 1
-     */
+	 * @member {Float}
+	 * @default 1
+	 */
 	var a:Float;
 
 	/**
-     * @member {Float}
-     * @default 0
-     */
+	 * @member {Float}
+	 * @default 0
+	 */
 	var b:Float;
 
 	/**
-     * @member {Float}
-     * @default 0
-     */
+	 * @member {Float}
+	 * @default 0
+	 */
 	var c:Float;
 
 	/**
-     * @member {Float}
-     * @default 1
-     */
+	 * @member {Float}
+	 * @default 1
+	 */
 	var d:Float;
 
 	/**
-     * @member {Float}
-     * @default 0
-     */
+	 * @member {Float}
+	 * @default 0
+	 */
 	var tx:Float;
 
 	/**
-     * @member {Float}
-     * @default 0
-     */
+	 * @member {Float}
+	 * @default 0
+	 */
 	var ty:Float;
 
 	/**

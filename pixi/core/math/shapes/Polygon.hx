@@ -12,8 +12,8 @@ extern class Polygon {
 	 *      arguments passed can be flat x,y values e.g. `new PIXI.Polygon(x,y, x,y, x,y, ...)` where `x` and `y` are
 	 *      Numbers.
 	 */
-@:overload( function(points:Array<Float>):Void {})
-function new(points:Array<Point>):Void;
+	@:overload(function(points:Array<Float>):Void {})
+	function new(points:Array<Point>):Void;
 
 	/**
 	 * Creates a clone of this polygon
@@ -21,23 +21,23 @@ function new(points:Array<Point>):Void;
 	 * @method clone
 	 * @return {Polygon} a copy of the polygon
 	 */
-function clone():Polygon;
+	function clone():Polygon;
 
 	/**
-	 * Checks whether the x and y coordinates passed to this 	function are contained within this polygon
+	 * Checks whether the x and y coordinates passed to this function are contained within this polygon
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
 	 * @param y {Float} The Y coordinate of the point to test
 	 * @return {Bool} Whether the x/y coordinates are within this polygon
 	 */
-function contains(x:Float, y:Float):Bool;
+	function contains(x:Float, y:Float):Bool;
 
 	/**
-     * An array of the points of this polygon
-     * @property points
-     * @type Array<Point>
-     *
-     */
-var points:Array<Point>;
+	 * An array of the points of this polygon
+	 * @property points
+	 * @type Array<Point>
+	 *
+	 */
+	var points:Array<Point>;
 }

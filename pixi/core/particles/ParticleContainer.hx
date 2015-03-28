@@ -29,5 +29,4 @@ extern class ParticleContainer extends Container {
 	 * @namespace PIXI
 	 */
 	function new(size:Int, properties:Array<Bool>);
-
 }

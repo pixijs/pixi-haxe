@@ -14,7 +14,7 @@ extern class RoundedRectangle {
 	 * @param height {Number} The overall height of this rounded rectangle
 	 * @param radius {Number} The overall radius of this corners of this rounded rectangle
 	 */
-function new(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
+	function new(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
 
 	/**
 	 * Creates a clone of this Rounded Rectangle
@@ -22,7 +22,7 @@ function new(x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
 	 * @method clone
 	 * @return {RoundedRectangle} a copy of the rounded rectangle
 	 */
-function clone():RoundedRectangle;
+	function clone():RoundedRectangle;
 
 	/**
 	 * Checks whether the x and y coordinates given are contained within this Rounded Rectangle
@@ -32,40 +32,40 @@ function clone():RoundedRectangle;
 	 * @param y {Float} The Y coordinate of the point to test
 	 * @return {Boolean} Whether the x/y coordinates are within this Rounded Rectangle
 	 */
-function contains(x:Float, y:Float):Bool;
+	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * @property x
 	 * @type Float
 	 * @default 0
 	 */
-var x:Float;
+	var x:Float;
 
 	/**
 	 * @property y
 	 * @type Float
 	 * @default 0
 	 */
-var y:Float;
+	var y:Float;
 
 	/**
 	 * @property width
 	 * @type Float
 	 * @default 0
 	 */
-var width:Float;
+	var width:Float;
 
 	/**
 	 * @property height
 	 * @type Float
 	 * @default 0
 	 */
-var height:Float;
+	var height:Float;
 
 	/**
-     * @property radius
-     * @type Float
-     * @default 20
-     */
-var radius:Float;
+	 * @property radius
+	 * @type Float
+	 * @default 20
+	 */
+	var radius:Float;
 }

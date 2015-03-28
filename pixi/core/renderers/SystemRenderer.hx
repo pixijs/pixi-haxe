@@ -28,89 +28,89 @@ extern class SystemRenderer {
 	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderingOptions);
 
 	/**
-     * The background color to fill if not transparent
-     *
-     * @member {Int}
-     * @memberof SystemRenderer
-     */
+	 * The background color to fill if not transparent
+	 *
+	 * @member {Int}
+	 * @memberof SystemRenderer
+	 */
 	var backgroundColor:Int;
 
 	/**
-     * The type of the renderer.
-     *
-     * @member {CONST.RENDERER_TYPE}
-     * @default CONT.RENDERER_TYPE.UNKNOWN
-     */
+	 * The type of the renderer.
+	 *
+	 * @member {CONST.RENDERER_TYPE}
+	 * @default CONT.RENDERER_TYPE.UNKNOWN
+	 */
 	var type:Dynamic;
 
 	/**
-     * The width of the canvas view
-     *
-     * @member {Float}
-     * @default 800
-     */
+	 * The width of the canvas view
+	 *
+	 * @member {Float}
+	 * @default 800
+	 */
 	var width:Float;
 
 	/**
-     * The height of the canvas view
-     *
-     * @member {Float}
-     * @default 600
-     */
+	 * The height of the canvas view
+	 *
+	 * @member {Float}
+	 * @default 600
+	 */
 	var height:Float;
 
 	/**
-     * The canvas element that everything is drawn to
-     *
-     * @member {CanvasElement}
-     */
+	 * The canvas element that everything is drawn to
+	 *
+	 * @member {CanvasElement}
+	 */
 	var view:CanvasElement;
 
 	/**
-     * The resolution of the renderer
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * The resolution of the renderer
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var resolution:Float;
 
 	/**
-     * Whether the render view is transparent
-     *
-     * @member {Bool}
-     */
+	 * Whether the render view is transparent
+	 *
+	 * @member {Bool}
+	 */
 	var transparent:Bool;
 
 	/**
-     * Whether the render view should be resized automatically
-     *
-     * @member {Bool}
-     */
+	 * Whether the render view should be resized automatically
+	 *
+	 * @member {Bool}
+	 */
 	var autoResize:Bool;
 
 	/**
-     * Tracks the blend modes useful for this renderer.
-     *
-     * @member {object<string, mixed>}
-     */
+	 * Tracks the blend modes useful for this renderer.
+	 *
+	 * @member {object<string, mixed>}
+	 */
 	var blendModes:Dynamic;
 
 	/**
-     * The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
-     *
-     * @member {Bool}
-     */
+	 * The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
+	 *
+	 * @member {Bool}
+	 */
 	var preserveDrawingBuffer:Bool;
 
 	/**
-     * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
-     * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
-     * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
-     * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
-     *
-     * @member {Bool}
-     * @default
-     */
+	 * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+	 * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
+	 * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
+	 * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
+	 *
+	 * @member {Bool}
+	 * @default
+	 */
 	var clearBeforeRender:Bool;
 
 	/**

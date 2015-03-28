@@ -27,52 +27,52 @@ extern class CanvasRenderer extends SystemRenderer {
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
 	/**
-     * The canvas 2d context that everything is drawn with.
-     *
-     * @member {CanvasRenderingContext2D}
-     */
+	 * The canvas 2d context that everything is drawn with.
+	 *
+	 * @member {CanvasRenderingContext2D}
+	 */
 	var context:CanvasRenderingContext2D;
 
 	/**
-     * Boolean flag controlling canvas refresh.
-     *
-     * @member {Bool}
-     */
+	 * Boolean flag controlling canvas refresh.
+	 *
+	 * @member {Bool}
+	 */
 	var refresh:Bool;
 
 	/**
-     * Instance of a CanvasMaskManager, handles masking when using the canvas renderer.
-     *
-     * @member {CanvasMaskManager}
-     */
+	 * Instance of a CanvasMaskManager, handles masking when using the canvas renderer.
+	 *
+	 * @member {CanvasMaskManager}
+	 */
 	var maskManager:Dynamic;
 
 	/**
-     * If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
-     * Handy for crisp pixel art and speed on legacy devices.
-     *
-     * @member {Bool}
-     */
+	 * If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
+	 * Handy for crisp pixel art and speed on legacy devices.
+	 *
+	 * @member {Bool}
+	 */
 	var roundPixels:Bool;
 
 	/**
-     * Tracks the active scale mode for this renderer.
-     *
-     * @member {SCALE_MODE}
-     */
+	 * Tracks the active scale mode for this renderer.
+	 *
+	 * @member {SCALE_MODE}
+	 */
 	var currentScaleMode:Int;
 
 	/**
-     * Tracks the active blend mode for this renderer.
-     *
-     * @member {BLEND_MODES}
-     */
+	 * Tracks the active blend mode for this renderer.
+	 *
+	 * @member {BLEND_MODES}
+	 */
 	var currentBlendMode:Int;
 
 	/**
-     * The canvas property used to set the canvas smoothing property.
-     *
-     * @member {String}
-     */
+	 * The canvas property used to set the canvas smoothing property.
+	 *
+	 * @member {String}
+	 */
 	var smoothProperty:String;
 }

@@ -29,9 +29,9 @@ extern class WebGLRenderer extends SystemRenderer {
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
 	/**
-     * Counter for the number of draws made each frame
-     *
-     * @member {Int}
-     */
+	 * Counter for the number of draws made each frame
+	 *
+	 * @member {Int}
+	 */
 	var drawCount:Int;
 }
