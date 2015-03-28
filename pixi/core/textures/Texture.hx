@@ -33,81 +33,81 @@ extern class Texture extends EventEmitter3 {
 	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
 
 	/**
-     * Does this Texture have any frame data assigned to it?
-     *
-     * @member {Bool}
-     */
+	 * Does this Texture have any frame data assigned to it?
+	 *
+	 * @member {Bool}
+	 */
 	var noFrame:Bool;
 
 	/**
-     * The base texture that this texture uses.
-     *
-     * @member {BaseTexture}
-     */
+	 * The base texture that this texture uses.
+	 *
+	 * @member {BaseTexture}
+	 */
 	var baseTexture:BaseTexture;
 
 	/**
-     * The texture trim data.
-     *
-     * @member {Rectangle}
-     */
+	 * The texture trim data.
+	 *
+	 * @member {Rectangle}
+	 */
 	var trim:Rectangle;
 
 	/**
-     * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
-     *
-     * @member {Bool}
-     */
+	 * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
+	 *
+	 * @member {Bool}
+	 */
 	var valid:Bool;
 
 	/**
-     * This will let a renderer know that a texture has been updated (used mainly for webGL uv updates)
-     *
-     * @member {Bool}
-     */
+	 * This will let a renderer know that a texture has been updated (used mainly for webGL uv updates)
+	 *
+	 * @member {Bool}
+	 */
 	var requiresUpdate:Bool;
 
 	/**
-     * The width of the Texture in pixels.
-     *
-     * @member {Float}
-     */
+	 * The width of the Texture in pixels.
+	 *
+	 * @member {Float}
+	 */
 	var width:Float;
 
 	/**
-     * The height of the Texture in pixels.
-     *
-     * @member {Float}
-     */
+	 * The height of the Texture in pixels.
+	 *
+	 * @member {Float}
+	 */
 	var height:Float;
 
 	/**
-     * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
-     * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
-     *
-     * @member {Rectangle}
-     */
+	 * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
+	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+	 *
+	 * @member {Rectangle}
+	 */
 	var crop:Rectangle;
 
 	/**
-     * The pivot point to used for a sprite this texture belongs to.
-     *
-     * @member {Point}
-     */
+	 * The pivot point to used for a sprite this texture belongs to.
+	 *
+	 * @member {Point}
+	 */
 	var spritePivot:Point;
 
 	/**
-     * The rotation value of the texture, copied to a sprite when assigned to it.
-     *
-     * @member {Float}
-     */
+	 * The rotation value of the texture, copied to a sprite when assigned to it.
+	 *
+	 * @member {Float}
+	 */
 	var rotation:Float;
 
 	/**
-     * The frame specifies the region of the base texture that this texture uses
-     *
-     * @member {Rectangle}
-     */
+	 * The frame specifies the region of the base texture that this texture uses
+	 *
+	 * @member {Rectangle}
+	 */
 	var frame:Rectangle;
 
 	/**

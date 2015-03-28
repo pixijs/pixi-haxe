@@ -47,21 +47,21 @@ extern class RenderTexture extends Texture {
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {number} The resolution of the texture being generated
 	 */
-	//@:overload(	function(renderer, width, height, scaleMode, resolution):Void {})
+	//@:overload(function(renderer, width, height, scaleMode, resolution):Void {})
 	function new(renderer:Dynamic, width:Float, height:Float, scaleMode:Int, resolution:Float);
 
 	/**
-     * The Resolution of the texture.
-     *
-     * @member {Float}
-     */
+	 * The Resolution of the texture.
+	 *
+	 * @member {Float}
+	 */
 	var resolution:Float;
 
 	/**
-     * The renderer this RenderTexture uses. A RenderTexture can only belong to one renderer at the moment if its webGL.
-     *
-     * @member {CanvasRenderer|WebGLRenderer}
-     */
+	 * The renderer this RenderTexture uses. A RenderTexture can only belong to one renderer at the moment if its webGL.
+	 *
+	 * @member {CanvasRenderer|WebGLRenderer}
+	 */
 	var renderer:Dynamic;
 
 	/**

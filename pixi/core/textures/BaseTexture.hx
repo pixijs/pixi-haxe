@@ -18,88 +18,88 @@ extern class BaseTexture {
 	function new(source:String, ?scaleMode:Int, ?resolution:Float);
 
 	/**
-     * The Resolution of the texture.
-     *
-     * @member {Float}
-     */
+	 * The Resolution of the texture.
+	 *
+	 * @member {Float}
+	 */
 	var resolution:Float;
 
 	/**
-     * The width of the base texture set when the image has loaded
-     *
-     * @member {Float}
-     * @readOnly
-     */
+	 * The width of the base texture set when the image has loaded
+	 *
+	 * @member {Float}
+	 * @readOnly
+	 */
 	var width:Float;
 
 	/**
-     * The height of the base texture set when the image has loaded
-     *
-     * @member {Float}
-     * @readOnly
-     */
+	 * The height of the base texture set when the image has loaded
+	 *
+	 * @member {Float}
+	 * @readOnly
+	 */
 	var height:Float;
 
 	/**
-     * The scale mode to apply when scaling this texture
-     *
-     * @member {Float}
-     * @default scaleModes.LINEAR
-     */
+	 * The scale mode to apply when scaling this texture
+	 *
+	 * @member {Float}
+	 * @default scaleModes.LINEAR
+	 */
 	var scaleMode:Float;
 
 	/**
-     * Set to true once the base texture has successfully loaded.
-     *
-     * This is never true if the underlying source fails to load or has no texture data.
-     *
-     * @member {Bool}
-     * @readOnly
-     */
+	 * Set to true once the base texture has successfully loaded.
+	 *
+	 * This is never true if the underlying source fails to load or has no texture data.
+	 *
+	 * @member {Bool}
+	 * @readOnly
+	 */
 	var hasLoaded:Bool;
 
 	/**
-     * Set to true if the source is currently loading.
-     *
-     * If an Image source is loading the 'loaded' or 'error' event will be
-     * dispatched when the operation ends. An underyling source that is
-     * immediately-available bypasses loading entirely.
-     *
-     * @member {Bool}
-     * @readonly
-     */
+	 * Set to true if the source is currently loading.
+	 *
+	 * If an Image source is loading the 'loaded' or 'error' event will be
+	 * dispatched when the operation ends. An underyling source that is
+	 * immediately-available bypasses loading entirely.
+	 *
+	 * @member {Bool}
+	 * @readonly
+	 */
 	var isLoading:Bool;
 
 	/**
-     * The image source that is used to create the texture.
-     *
-     * TODO: Make this a setter that calls loadSource();
-     *
-     * @member {Image|Canvas}
-     * @readonly
-     */
+	 * The image source that is used to create the texture.
+	 *
+	 * TODO: Make this a setter that calls loadSource();
+	 *
+	 * @member {Image|Canvas}
+	 * @readonly
+	 */
 	var source:Dynamic;
 
 	/**
-     * Controls if RGB channels should be pre-multiplied by Alpha  (WebGL only)
-     *
-     * @member {Bool}
-     * @default true
-     */
+	 * Controls if RGB channels should be pre-multiplied by Alpha  (WebGL only)
+	 *
+	 * @member {Bool}
+	 * @default true
+	 */
 	var premultipliedAlpha:Bool;
 
 	/**
-     * @member {String}
-     */
+	 * @member {String}
+	 */
 	var imageUrl:String;
 
 	/**
-     *
-     * Set this to true if a mipmap of this texture needs to be generated. This value needs to be set before the texture is used
-     * Also the texture must be a power of two size to work
-     *
-     * @member {Bool}
-     */
+	 *
+	 * Set this to true if a mipmap of this texture needs to be generated. This value needs to be set before the texture is used
+	 * Also the texture must be a power of two size to work
+	 *
+	 * @member {Bool}
+	 */
 	var mipmap:Bool;
 
 	/**
@@ -132,11 +132,9 @@ extern class BaseTexture {
 	 *
 	 * The logic state after calling `loadSource` directly or indirectly (eg. `fromImage`, `new BaseTexture`) is:
 	 *
-	 *     if (texture.hasLoaded)
-	 {
+	 *     if (texture.hasLoaded) {
 	 *        // texture ready for use
-	 *     } else if (texture.isLoading)
-	 {
+	 *     } else if (texture.isLoading) {
 	 *        // listen to 'loaded' and/or 'error' events on texture
 	 *     } else {
 	 *        // not loading, not going to load UNLESS the source is reloaded
@@ -157,7 +155,7 @@ extern class BaseTexture {
 	function updateSourceImage(newSrc:String):Void;
 
 	/**
-	 * Helper 	function that creates a base texture from the given image url.
+	 * Helper function that creates a base texture from the given image url.
 	 * If the image is not in the base texture cache it will be created and loaded.
 	 *
 	 * @static
@@ -169,7 +167,7 @@ extern class BaseTexture {
 	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
 
 	/**
-	 * Helper 	function that creates a base texture from the given canvas element.
+	 * Helper function that creates a base texture from the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
