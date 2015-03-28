@@ -22,19 +22,19 @@ extern class Container extends DisplayObject {
 	var children:Array<DisplayObject>;
 
 	/**
-     * The width of the Container, setting this will actually modify the scale to achieve the value set
-     *
-     * @member {Float}
-     * @memberof Container#
-     */
+	 * The width of the Container, setting this will actually modify the scale to achieve the value set
+	 *
+	 * @member {Float}
+	 * @memberof Container#
+	 */
 	var width:Float;
 
 	/**
-     * The height of the Container, setting this will actually modify the scale to achieve the value set
-     *
-     * @member {Float}
-     * @memberof Container#
-     */
+	 * The height of the Container, setting this will actually modify the scale to achieve the value set
+	 *
+	 * @member {Float}
+	 * @memberof Container#
+	 */
 	var height:Float;
 
 	/**
