@@ -14,11 +14,11 @@ extern class Container extends DisplayObject {
 	function new();
 
 	/**
-     * The array of children of this container.
-     *
-     * @member {DisplayObject[]}
-     * @readonly
-     */
+	 * The array of children of this container.
+	 *
+	 * @member {DisplayObject[]}
+	 * @readonly
+	 */
 	var children:Array<DisplayObject>;
 
 	/**
