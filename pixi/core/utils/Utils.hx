@@ -4,11 +4,11 @@ package pixi.core.utils;
 extern class Utils {
 
 	/**
-     * get the resolution of an asset by looking for the prefix
-     * used by spritesheets and image urls
-     *
-     * @param url {String} the image path
-     * @return {Float}
-     */
+	 * get the resolution of an asset by looking for the prefix
+	 * used by spritesheets and image urls
+	 *
+	 * @param url {String} the image path
+	 * @return {Float}
+	 */
 	static function getResolutionOfUrl(url:String):Float;
 }
