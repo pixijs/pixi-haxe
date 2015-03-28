@@ -13435,7 +13435,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</RENDERER_TYPE>
 		<BLEND_MODES public="1" static="1">
 			<t path="pixi.core.BlendModes"/>
-			<haxe_doc>* Various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
+			<haxe_doc>* 	various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
      * the NORMAL, ADD, MULTIPLY and SCREEN blend modes. Anything else will silently act like
      * NORMAL.
      *
@@ -13631,8 +13631,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 			<overloads>
 				<on public="1" set="method">
 					<f a="event:fn:?context">
@@ -13644,8 +13644,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</on>
 				<on public="1" set="method">
 					<f a="event:fn:?context">
@@ -13660,8 +13660,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</on>
 			</overloads>
 		</on>
@@ -13678,8 +13678,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {	function} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 			<overloads>
 				<once public="1" set="method">
 					<f a="event:fn:?context">
@@ -13691,8 +13691,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {	function} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</once>
 				<once public="1" set="method">
 					<f a="event:fn:?context">
@@ -13707,8 +13707,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {	function} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</once>
 			</overloads>
 		</once>
@@ -13725,8 +13725,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 			<overloads>
 				<addListener public="1" set="method">
 					<f a="event:fn:?context">
@@ -13738,8 +13738,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</addListener>
 				<addListener public="1" set="method">
 					<f a="event:fn:?context">
@@ -13754,8 +13754,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
+	 * @param {Functon} fn Callback 	function.
+	 * @param {Mixed} context The context of the 	function.</haxe_doc>
 				</addListener>
 			</overloads>
 		</addListener>
@@ -13772,7 +13772,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 			<overloads>
 				<off public="1" set="method">
@@ -13785,7 +13785,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 				</off>
 				<off public="1" set="method">
@@ -13801,7 +13801,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 				</off>
 			</overloads>
@@ -13819,7 +13819,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 			<overloads>
 				<removeListener public="1" set="method">
@@ -13832,7 +13832,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 				</removeListener>
 				<removeListener public="1" set="method">
@@ -13848,7 +13848,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
+	 * @param {	function} fn The listener that we need to find.
 	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
 				</removeListener>
 			</overloads>
@@ -13927,7 +13927,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
+			<haxe_doc>* Useful 	function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -13941,7 +13941,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<x path="Int"/>
 		<c path="pixi.core.textures.Texture"/>
 	</f>
-	<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
+	<haxe_doc>* Useful 	function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -13998,7 +13998,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<visible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The visibility of the object. If false the object will not be drawn, and
-     * the updateTransform function will not be called.
+     * the updateTransform 	function will not be called.
      *
      * @member {Bool}</haxe_doc>
 		</visible>
@@ -14840,7 +14840,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x, and y coordinates passed to this function are contained within this circle
+			<haxe_doc>* Checks whether the x, and y coordinates passed to this 	function are contained within this circle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -14903,7 +14903,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this ellipse
+			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this ellipse
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -14974,7 +14974,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this polygon
+			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this polygon
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -15030,7 +15030,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this Rectangle
+			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this Rectangle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -15162,17 +15162,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc><![CDATA[* The ParticleContainer class is a really fast version of the Container built solely for speed,
 	 * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
-	 * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
-	 * Any other functionality like tinting, masking, etc will not work on sprites in this batch.
+	 * 	functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
+	 * Any other 	functionality like tinting, masking, etc will not work on sprites in this batch.
 	 *
 	 * It's extremely easy to use :
 	 *
 	 * ```js
-	 * var container = new ParticleContainer();
+	 * 	var container = new ParticleContainer();
 	 *
-	 * for (var i = 0; i < 100; ++i)
+	 * for (	var i = 0; i < 100; ++i)
 	 * {
-	 *     var sprite = new PIXI.Sprite.fromImage("myImage.png");
+	 *     	var sprite = new PIXI.Sprite.fromImage("myImage.png");
 	 *     container.addChild(sprite);
 	 * }
 	 * ```
@@ -15210,10 +15210,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<t path="pixi.core.renderers.RenderingOptions"/>
 				<d/>
 			</f>
-			<haxe_doc>* This helper function will automatically detect which renderer you should be using. This function is very
-     * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
+			<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This 	function is very
+     * similar to the autoDetectRenderer 	function except that is will return a canvas renderer for android.
      * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-     * This function will likely change and update as webGL performance improves on these devices.
+     * This 	function will likely change and update as webGL performance improves on these devices.
      *
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
@@ -15233,10 +15233,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<t path="pixi.core.renderers.RenderingOptions"/>
 		<d/>
 	</f>
-	<haxe_doc>* This helper function will automatically detect which renderer you should be using. This function is very
-     * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
+	<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This 	function is very
+     * similar to the autoDetectRenderer 	function except that is will return a canvas renderer for android.
      * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-     * This function will likely change and update as webGL performance improves on these devices.
+     * This 	function will likely change and update as webGL performance improves on these devices.
      *
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
@@ -15534,7 +15534,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<c path="pixi.core.sprites.Sprite"/>
 			</f>
-			<haxe_doc>* Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
@@ -15548,7 +15548,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.sprites.Sprite"/>
 			</f>
-			<haxe_doc>* Helper function that creates a sprite that will contain a texture based on an image url
+			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture based on an image url
 	 * If the image is not in the texture cache it will be loaded
 	 *
 	 * @static
@@ -15621,7 +15621,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * A sprite can be created directly from an image like this:
 	 *
 	 * ```js
-	 * var sprite = new Sprite.fromImage('assets/image.png');
+	 * 	var sprite = new Sprite.fromImage('assets/image.png');
 	 * ```
 	 *
 	 * @class Sprite
@@ -15639,7 +15639,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.BaseTexture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a base texture from the given image url.
+			<haxe_doc>* Helper 	function that creates a base texture from the given image url.
 	 * If the image is not in the base texture cache it will be created and loaded.
 	 *
 	 * @static
@@ -15654,7 +15654,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.BaseTexture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a base texture from the given canvas element.
+			<haxe_doc>* Helper 	function that creates a base texture from the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
@@ -15818,7 +15818,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a Texture object from the given image url.
+			<haxe_doc>* Helper 	function that creates a Texture object from the given image url.
 	 * If the image is not in the texture cache it will be  created and loaded.
 	 *
 	 * @static
@@ -15832,7 +15832,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
@@ -15845,7 +15845,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a new Texture based on the given canvas element.
+			<haxe_doc>* Helper 	function that creates a new Texture based on the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
@@ -15858,7 +15858,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a new Texture based on the given video element.
+			<haxe_doc>* Helper 	function that creates a new Texture based on the given video element.
 	 *
 	 * @static
 	 * @param video {VideoElement}
@@ -15871,7 +15871,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper function that creates a new Texture based on the video url.
+			<haxe_doc>* Helper 	function that creates a new Texture based on the video url.
 	 *
 	 * @static
 	 * @param videoUrl {String}
@@ -15997,9 +15997,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * You can directly create a texture from an image and then reuse it multiple times like this :
 	 *
 	 * ```js
-	 * var texture = PIXI.Texture.fromImage('assets/image.png');
-	 * var sprite1 = new PIXI.Sprite(texture);
-	 * var sprite2 = new PIXI.Sprite(texture);
+	 * 	var texture = PIXI.Texture.fromImage('assets/image.png');
+	 * 	var sprite1 = new PIXI.Sprite(texture);
+	 * 	var sprite2 = new PIXI.Sprite(texture);
 	 * ```
 	 *
 	 * @class
@@ -16025,9 +16025,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * You can directly create a texture from an image and then reuse it multiple times like this :
 	 *
 	 * ```js
-	 * var texture = PIXI.Texture.fromImage('assets/image.png');
-	 * var sprite1 = new PIXI.Sprite(texture);
-	 * var sprite2 = new PIXI.Sprite(texture);
+	 * 	var texture = PIXI.Texture.fromImage('assets/image.png');
+	 * 	var sprite1 = new PIXI.Sprite(texture);
+	 * 	var sprite2 = new PIXI.Sprite(texture);
 	 * ```
 	 *
 	 * @class
@@ -16110,8 +16110,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * and rotation of the given Display Objects is ignored. For example:
 	 *
 	 * ```js
-	 * var renderTexture = new PIXI.RenderTexture(800, 600);
-	 * var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
+	 * 	var renderTexture = new PIXI.RenderTexture(800, 600);
+	 * 	var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
 	 *
 	 * sprite.position.x = 800/2;
 	 * sprite.position.y = 600/2;
@@ -16125,7 +16125,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * position a Container should be used:
 	 *
 	 * ```js
-	 * var doc = new Container();
+	 * 	var doc = new Container();
 	 *
 	 * doc.addChild(sprite);
 	 *
@@ -16169,13 +16169,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * This can be used in a couple ways, such as:
 	 *
 	 * ```js
-	 * var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls([
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrls([
 	 *     { src: '/video.webm', mime: 'video/webm' },
 	 *     { src: '/video.mp4', mime: 'video/mp4' }
 	 * ]);
@@ -16265,7 +16265,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</loop>
 		<onComplete public="1">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Function to call when a MovieClip finishes playing
+			<haxe_doc>* 	function to call when a MovieClip finishes playing
      *
      * @method
      * @memberof MovieClip#</haxe_doc>
@@ -16339,16 +16339,16 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc><![CDATA[* A MovieClip is a simple way to display an animation depicted by a list of textures.
 	 *
 	 * ```js
-	 * var alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
-	 * var textureArray = [];
+	 * 	var alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
+	 * 	var textureArray = [];
 	 *
-	 * for (var i=0; i < 4; i++)
+	 * for (	var i=0; i < 4; i++)
 	 * {
-	 *      var texture = PIXI.Texture.fromImage(alienImages[i]);
+	 *      	var texture = PIXI.Texture.fromImage(alienImages[i]);
 	 *      textureArray.push(texture);
 	 * };
 	 *
-	 * var mc = new PIXI.MovieClip(textureArray);
+	 * 	var mc = new PIXI.MovieClip(textureArray);
 	 * ```
 	 *
 	 * @class
@@ -16557,49 +16557,49 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onMouseUp>
 		<onMouseDown public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onMouseDown>
 		<onMouseMove public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onMouseMove>
 		<onMouseOut public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onMouseOut>
 		<onTouchStart public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onTouchStart>
 		<onTouchEnd public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onTouchEnd>
 		<onTouchMove public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {Function}</haxe_doc>
+			<haxe_doc>* @member {	function}</haxe_doc>
 		</onTouchMove>
 		<last public="1">
 			<x path="Int"/>
@@ -16638,12 +16638,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Bool"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* This function is provides a neat way of crawling through the scene graph and running a specified function on all interactive objects it finds.
-	 * It will also take care of hit testing the interactive objects and passes the hit across in the function.
+			<haxe_doc>* This 	function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
+	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
 	 *
 	 * @param  {Point} point the point that is tested for collision
 	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
-	 * @param  {function} func the function that will be called on each interactive object. The displayObject and hit will be passed to the function
+	 * @param  {	function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
 	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
 	 * @return {Bool} returns true if the displayObject hit the point</haxe_doc>
 		</processInteractive>
@@ -16714,39 +16714,39 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
 	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * This 	function can take a wide 	variety of different parameters. The only thing that is always
 	 * required the url to load. All the following will work:
 	 *
 	 * ```js
 	 * loader
 	 *     // normal param syntax
-	 *     .add('key', 'http://...', function () {})
-	 *     .add('http://...', function () {})
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
 	 *     .add('http://...')
 	 *
 	 *     // object syntax
 	 *     .add({
 	 *         name: 'key2',
 	 *         url: 'http://...'
-	 *     }, function () {})
+	 *     }, 	function () {})
 	 *     .add({
 	 *         url: 'http://...'
-	 *     }, function () {})
+	 *     }, 	function () {})
 	 *     .add({
 	 *         name: 'key3',
 	 *         url: 'http://...'
-	 *         onComplete: function () {}
+	 *         onComplete: 	function () {}
 	 *     })
 	 *     .add({
 	 *         url: 'https://...',
-	 *         onComplete: function () {},
+	 *         onComplete: 	function () {},
 	 *         crossOrigin: true
 	 *     })
 	 *
 	 *     // you can also pass an array of objects or urls or both
 	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
+	 *         { name: 'key4', url: 'http://...', onComplete: 	function () {} },
+	 *         { url: 'http://...', onComplete: 	function () {} },
 	 *         'http://...'
 	 *     ]);
 	 * ```
@@ -16759,7 +16759,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
 	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
 	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} Function to call when this specific resource completes loading.
+	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
 	 * @return {Loader}</haxe_doc>
 		</add>
 		<after public="1" set="method">
@@ -16767,11 +16767,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<f a=""><x path="Void"/></f>
 				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware function that will run *after* the
+			<haxe_doc>* Sets up a middleware 	function that will run *after* the
 	 * resource is loaded.
 	 *
 	 * @alias use
-	 * @param middleware {function} The middleware function to register.
+	 * @param middleware {	function} The middleware 	function to register.
 	 * @return {Loader}</haxe_doc>
 		</after>
 		<before public="1" set="method">
@@ -16779,11 +16779,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<f a=""><x path="Void"/></f>
 				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware function that will run *before* the
+			<haxe_doc>* Sets up a middleware 	function that will run *before* the
 	 * resource is loaded.
 	 *
 	 * @alias pre
-	 * @param middleware {function} The middleware function to register.
+	 * @param middleware {	function} The middleware 	function to register.
 	 * @return {Loader}</haxe_doc>
 		</before>
 		<reset public="1" set="method">
@@ -16798,7 +16798,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Starts loading the queued resources.
 	 *
 	 * @fires start
-	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @param [callback] {	function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}</haxe_doc>
 		</load>
 		<loadResource public="1" set="method">
@@ -16816,9 +16816,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<d/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Middleware function to use
+			<haxe_doc>* Middleware 	function to use
 	 *
-	 * @param {function} function to call</haxe_doc>
+	 * @param {	function} 	function to call</haxe_doc>
 		</use>
 		<new public="1" set="method">
 			<f a="?baseUrl:?concurrency">
@@ -16841,7 +16841,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
 	 *
 	 * ```js
-	 * var loader = new PIXI.loader();
+	 * 	var loader = new PIXI.loader();
 	 *
 	 * loader.add('spineboy',"data/spineboy.json");
 	 *
@@ -16893,11 +16893,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Update listener function</haxe_doc>
+			<haxe_doc>* Update listener 	function</haxe_doc>
 		</onUpdate>
 		<onResize public="1">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Window resize listener function</haxe_doc>
+			<haxe_doc>* Window resize listener 	function</haxe_doc>
 		</onResize>
 		<_stage set="null">
 			<c path="pixi.core.display.Container"/>
@@ -16912,7 +16912,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_skipFrame><x path="Bool"/></_skipFrame>
 		<_setDefaultValues set="method" line="94"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="112">
+		<start public="1" set="method" line="113">
 			<f a="?renderer:?stats:?parentDom" v="'auto':true:null">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -16926,22 +16926,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="141">
+		<_onWindowResize set="method" line="142">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="156">
+		<_onRequestAnimationFrame set="method" line="157">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="168">
+		<_calculateElapsedTime set="method" line="169">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="174">
+		<_addStats set="method" line="175">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>
@@ -17208,7 +17208,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
 	 *
 	 * ```js
-	 * var spineAnimation = new PIXI.Spine(spineData);
+	 * 	var spineAnimation = new PIXI.Spine(spineData);
 	 * ```
 	 *
 	 * @class
@@ -17291,7 +17291,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * ```js
 	 * // in this case the font is in a file called 'desyrel.fnt'
-	 * var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
+	 * 	var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
 	 * ```
 	 *
 	 *
@@ -17371,7 +17371,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * A Text can be created directly from a string and a style object
 	 *
 	 * ```js
-	 * var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * 	var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
 	 * ```
 	 *
 	 * @class

@@ -10,16 +10,16 @@ extern class MovieClip extends Sprite {
 	 * A MovieClip is a simple way to display an animation depicted by a list of textures.
 	 *
 	 * ```js
-	 * var alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
-	 * var textureArray = [];
+	 * 	var alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
+	 * 	var textureArray = [];
 	 *
-	 * for (var i=0; i < 4; i++)
+	 * for (	var i=0; i < 4; i++)
 	 * {
-	 *      var texture = PIXI.Texture.fromImage(alienImages[i]);
+	 *      	var texture = PIXI.Texture.fromImage(alienImages[i]);
 	 *      textureArray.push(texture);
 	 * };
 	 *
-	 * var mc = new PIXI.MovieClip(textureArray);
+	 * 	var mc = new PIXI.MovieClip(textureArray);
 	 * ```
 	 *
 	 * @class
@@ -46,7 +46,7 @@ extern class MovieClip extends Sprite {
 	var loop:Bool;
 
 	/**
-     * Function to call when a MovieClip finishes playing
+     * 	function to call when a MovieClip finishes playing
      *
      * @method
      * @memberof MovieClip#
@@ -122,7 +122,7 @@ extern class MovieClip extends Sprite {
 	 * @static
 	 * @param frames {Array<String>} the array of frames ids the movieclip will use as its texture frames
 	 */
-	static function fromFrames(frames:Array<String>):MovieClip;
+static 	function fromFrames(frames:Array<String>):MovieClip;
 
 	/**
 	 * A short hand way of creating a movieclip from an array of image ids
@@ -130,5 +130,5 @@ extern class MovieClip extends Sprite {
 	 * @static
 	 * @param images {Array<String>} the array of image urls the movieclip will use as its texture frames
 	 */
-	static function fromImages(images:Array<String>):MovieClip;
+static 	function fromImages(images:Array<String>):MovieClip;
 }

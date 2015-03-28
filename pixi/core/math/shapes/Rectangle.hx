@@ -24,7 +24,7 @@ extern class Rectangle {
 	function clone():Rectangle;
 
 	/**
-	 * Checks whether the x and y coordinates passed to this function are contained within this Rectangle
+	 * Checks whether the x and y coordinates passed to this 	function are contained within this Rectangle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test

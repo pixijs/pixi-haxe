@@ -16,8 +16,8 @@ extern class RenderTexture extends Texture {
 	 * and rotation of the given Display Objects is ignored. For example:
 	 *
 	 * ```js
-	 * var renderTexture = new PIXI.RenderTexture(800, 600);
-	 * var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
+	 * 	var renderTexture = new PIXI.RenderTexture(800, 600);
+	 * 	var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
 	 *
 	 * sprite.position.x = 800/2;
 	 * sprite.position.y = 600/2;
@@ -31,7 +31,7 @@ extern class RenderTexture extends Texture {
 	 * position a Container should be used:
 	 *
 	 * ```js
-	 * var doc = new Container();
+	 * 	var doc = new Container();
 	 *
 	 * doc.addChild(sprite);
 	 *
@@ -47,7 +47,7 @@ extern class RenderTexture extends Texture {
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {number} The resolution of the texture being generated
 	 */
-	//@:overload(function(renderer, width, height, scaleMode, resolution):Void {})
+	//@:overload(	function(renderer, width, height, scaleMode, resolution):Void {})
 	function new(renderer:Dynamic, width:Float, height:Float, scaleMode:Int, resolution:Float);
 
 	/**

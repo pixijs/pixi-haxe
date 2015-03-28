@@ -13,7 +13,7 @@ extern class BitmapText extends Container {
 	 *
 	 * ```js
 	 * // in this case the font is in a file called 'desyrel.fnt'
-	 * var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
+	 * 	var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
 	 * ```
 	 *
 	 *

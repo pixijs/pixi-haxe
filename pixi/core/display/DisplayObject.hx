@@ -62,7 +62,7 @@ extern class DisplayObject extends EventEmitter3 {
 	function toLocal(position:Point, ?frm:DisplayObject):Point;
 
 	/**
-	 * Useful function that returns a texture of the display object that can then be used to create sprites
+	 * Useful 	function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -70,7 +70,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object
 	 */
-	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
+@:overload(	function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
 	function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
 
 	/**
@@ -127,7 +127,7 @@ extern class DisplayObject extends EventEmitter3 {
 
 	/**
      * The visibility of the object. If false the object will not be drawn, and
-     * the updateTransform function will not be called.
+     * the updateTransform 	function will not be called.
      *
      * @member {Bool}
      */

@@ -1,7 +1,5 @@
 package pixi.core.display;
 
-import pixi.core.textures.Texture;
-
 @:native("PIXI.Container")
 extern class Container extends DisplayObject {
 

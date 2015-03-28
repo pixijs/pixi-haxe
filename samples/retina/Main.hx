@@ -12,12 +12,12 @@ class Main extends Application {
 	var _img:Sprite;
 	var _label:Text;
 
-	public function new() {
+	public 	function new() {
 		super();
 		_init();
 	}
 
-	function _init() {
+		function _init() {
 		backgroundColor = 0xFFFFFF;
 		pixelRatio = _getPixelRatio();
 		super.start(Application.AUTO);
@@ -38,18 +38,18 @@ class Main extends Application {
 		_stage.addChild(_label);
 	}
 
-	function _getPixelRatio():Float {
+		function _getPixelRatio():Float {
 		if (Browser.window.devicePixelRatio <= 1 || (Browser.window.devicePixelRatio > 1 && Browser.window.devicePixelRatio < 1.5)) return 1;
 		else if (Browser.window.devicePixelRatio >= 1.5 && Browser.window.devicePixelRatio < 2) return 1.5;
 		else if (Browser.window.devicePixelRatio >= 2 && Browser.window.devicePixelRatio < 3) return 2;
 		else return 3;
 	}
 
-	function _getResolutionStr():String {
+		function _getResolutionStr():String {
 		return "@" + _getPixelRatio() + "x";
 	}
 
-	static function main() {
+	static 	function main() {
 		new Main();
 	}
 }

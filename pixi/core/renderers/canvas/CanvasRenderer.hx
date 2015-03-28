@@ -1,7 +1,6 @@
 package pixi.core.renderers.canvas;
 
 import js.html.CanvasRenderingContext2D;
-import pixi.core.display.DisplayObject;
 import pixi.core.renderers.Detector;
 
 @:native("PIXI.CanvasRenderer")

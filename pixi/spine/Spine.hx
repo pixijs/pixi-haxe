@@ -11,7 +11,7 @@ extern class Spine {
 	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
 	 *
 	 * ```js
-	 * var spineAnimation = new PIXI.Spine(spineData);
+	 * 	var spineAnimation = new PIXI.Spine(spineData);
 	 * ```
 	 *
 	 * @class

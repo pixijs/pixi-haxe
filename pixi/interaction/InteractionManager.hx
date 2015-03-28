@@ -20,7 +20,7 @@ extern class InteractionManager {
 	 * @memberof PIXI.interaction
 	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
 	 */
-	@:overload(function(renderer:CanvasRenderer):Void {})
+@:overload(	function(renderer:CanvasRenderer):Void {})
 	function new(renderer:WebGLRenderer);
 
 	var renderer:Dynamic;
@@ -63,37 +63,37 @@ extern class InteractionManager {
 	var eventsAdded:Bool;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onMouseUp:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onMouseDown:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onMouseMove:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onMouseOut:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onTouchStart:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onTouchEnd:Event -> Void;
 
 	/**
-     * @member {Function}
+     * @member {	function}
      */
 	var onTouchMove:Event -> Void;
 
@@ -125,12 +125,12 @@ extern class InteractionManager {
 	function mapPositionToPoint(point:Point, x:Float, y:Float):Void;
 
 	/**
-	 * This function is provides a neat way of crawling through the scene graph and running a specified function on all interactive objects it finds.
-	 * It will also take care of hit testing the interactive objects and passes the hit across in the function.
+	 * This 	function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
+	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
 	 *
 	 * @param  {Point} point the point that is tested for collision
 	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
-	 * @param  {function} func the function that will be called on each interactive object. The displayObject and hit will be passed to the function
+	 * @param  {	function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
 	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
 	 * @return {Bool} returns true if the displayObject hit the point
 	 */

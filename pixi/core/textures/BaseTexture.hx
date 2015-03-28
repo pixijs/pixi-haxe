@@ -157,7 +157,7 @@ extern class BaseTexture {
 	function updateSourceImage(newSrc:String):Void;
 
 	/**
-	 * Helper function that creates a base texture from the given image url.
+	 * Helper 	function that creates a base texture from the given image url.
 	 * If the image is not in the base texture cache it will be created and loaded.
 	 *
 	 * @static
@@ -166,15 +166,15 @@ extern class BaseTexture {
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link scaleModes} for possible values
 	 * @return BaseTexture
 	 */
-	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
+static 	function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
 
 	/**
-	 * Helper function that creates a base texture from the given canvas element.
+	 * Helper 	function that creates a base texture from the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return BaseTexture
 	 */
-	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
+static 	function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
 }

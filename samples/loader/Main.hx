@@ -13,12 +13,12 @@ class Main extends Application {
 	var _img:Sprite;
 	var _baseURL:String;
 
-	public function new() {
+	public 	function new() {
 		super();
 		_init();
 	}
 
-	function _init() {
+		function _init() {
 		super.start(Application.AUTO);
 		_baseURL = "assets/loader/";
 
@@ -30,11 +30,11 @@ class Main extends Application {
 		_loader.load(_onLoaded);
 	}
 
-	function _onLoadProgress() {
+		function _onLoadProgress() {
 		trace("Loaded: " + Math.round(_loader.progress));
 	}
 
-	function _onLoaded() {
+		function _onLoaded() {
 		var _container:Container = new Container();
 		_stage.addChild(_container);
 		for (i in 1 ... 11) {
@@ -47,7 +47,7 @@ class Main extends Application {
 		_container.position.set((Browser.window.innerWidth - _container.width) / 2, (Browser.window.innerHeight - _container.height) / 2);
 	}
 
-	static function main() {
+	static 	function main() {
 		new Main();
 	}
 }

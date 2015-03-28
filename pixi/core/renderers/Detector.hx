@@ -10,9 +10,9 @@ extern class Detector {
 	 */
 
 	/**
-     * This helper function will automatically detect which renderer you should be using.
+     * This helper 	function will automatically detect which renderer you should be using.
      * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
-     * the browser then this function will return a canvas renderer
+     * the browser then this 	function will return a canvas renderer
      *
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
@@ -27,14 +27,14 @@ extern class Detector {
      *
      * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
      */
-	@:overload(function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
-	static function autoDetectRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
+@:overload(	function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
+static 	function autoDetectRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
 
 	/**
-     * This helper function will automatically detect which renderer you should be using. This function is very
-     * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
+     * This helper 	function will automatically detect which renderer you should be using. This 	function is very
+     * similar to the autoDetectRenderer 	function except that is will return a canvas renderer for android.
      * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-     * This function will likely change and update as webGL performance improves on these devices.
+     * This 	function will likely change and update as webGL performance improves on these devices.
      *
      * @param width=800 {Float} the width of the renderers view
      * @param height=600 {Float} the height of the renderers view
@@ -49,8 +49,8 @@ extern class Detector {
      * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
      */
 
-	@:overload(function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
-	static function autoDetectRecommendedRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
+@:overload(	function(width:Float, height:Float, ?options:RenderingOptions):Dynamic {})
+static 	function autoDetectRecommendedRenderer(width:Float, height:Float, ?options:RenderingOptions):Dynamic;
 }
 
 typedef RenderingOptions = {

@@ -24,48 +24,48 @@ class Application {
      * Sets the pixel ratio of the application.
      * default - 1
      */
-	public var pixelRatio(null, default):Float;
+	public 	var pixelRatio(null, default):Float;
 
 	/**
 	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
 	 * default - false
 	 */
-	public var skipFrame(null, default):Bool;
+	public 	var skipFrame(null, default):Bool;
 
 	/**
 	 * Width of the application.
 	 * default - Browser.window.innerWidth
 	 */
-	public var width(null, default):Float;
+	public 	var width(null, default):Float;
 
 	/**
 	 * Height of the application.
 	 * default - Browser.window.innerHeight
 	 */
-	public var height(null, default):Float;
+	public 	var height(null, default):Float;
 
 	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true
 	 */
-	public var resize(null, default):Bool;
+	public 	var resize(null, default):Bool;
 
 	/**
 	 * Sets the background color of the stage.
 	 * default - 0xFFFFFF
 	 */
-	public var backgroundColor(null, default):Int;
+	public 	var backgroundColor(null, default):Int;
 
 	/**
-	 * Update listener function
+	 * Update listener 	function
 	 */
-	public var onUpdate:Float -> Void;
+	public 	var onUpdate:Float -> Void;
 
 	/**
-	 * Window resize listener function
+	 * Window resize listener 	function
 	 */
-	public var onResize:Void -> Void;
+	public 	var onResize:Void -> Void;
 
 	/**
 	 * Global Container.
@@ -73,10 +73,10 @@ class Application {
 	 */
 	var _stage(default, null):Container;
 
-	public static inline var AUTO:String = "auto";
-	public static inline var RECOMMENDED:String = "recommended";
-	public static inline var CANVAS:String = "canvas";
-	public static inline var WEBGL:String = "webgl";
+	public static inline 	var AUTO:String = "auto";
+	public static inline 	var RECOMMENDED:String = "recommended";
+	public static inline 	var CANVAS:String = "canvas";
+	public static inline 	var WEBGL:String = "webgl";
 
 	var _canvas:CanvasElement;
 	var _renderer:SystemRenderer;
@@ -86,12 +86,12 @@ class Application {
 	var _elapsedTime:Float;
 	var _skipFrame:Bool;
 
-	public function new() {
+	public 	function new() {
 		_lastTime = Date.now();
 		_setDefaultValues();
 	}
 
-	function _setDefaultValues() {
+		function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
 		resize = true;
@@ -109,7 +109,8 @@ class Application {
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-	public function start(?renderer:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
+
+	public 	function start(?renderer:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
 		_canvas.style.height = height + "px";
@@ -138,7 +139,7 @@ class Application {
 		if (stats) _addStats();
 	}
 
-	@:noCompletion function _onWindowResize(event:Event) {
+	@:noCompletion 	function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		_renderer.resize(width, height);
@@ -153,7 +154,7 @@ class Application {
 		if (onResize != null) onResize();
 	}
 
-	@:noCompletion function _onRequestAnimationFrame() {
+	@:noCompletion 	function _onRequestAnimationFrame() {
 		if (skipFrame && _skipFrame) _skipFrame = false;
 		else {
 			_skipFrame = true;
@@ -165,13 +166,13 @@ class Application {
 		if (_stats != null) _stats.update();
 	}
 
-	@:noCompletion function _calculateElapsedTime() {
+	@:noCompletion 	function _calculateElapsedTime() {
 		_currentTime = Date.now();
 		_elapsedTime = _currentTime.getTime() - _lastTime.getTime();
 		_lastTime = _currentTime;
 	}
 
-	@:noCompletion function _addStats() {
+	@:noCompletion 	function _addStats() {
 		if (untyped __js__("window").Stats != null) {
 			var _container = Browser.document.createElement("div");
 			Browser.document.body.appendChild(_container);

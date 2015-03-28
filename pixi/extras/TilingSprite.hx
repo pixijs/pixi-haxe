@@ -2,7 +2,6 @@ package pixi.extras;
 
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.math.shapes.Rectangle;
 import pixi.core.sprites.Sprite;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
@@ -42,7 +41,7 @@ extern class TilingSprite extends Sprite {
 	 * @param texture {Texture} The texture to use to generate the tiling texture
 	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two
 	 */
-	@:overload(function(renderer:WebGLRenderer, texture:Texture, forcePowerOfTwo:Bool):Void {})
+@:overload(	function(renderer:WebGLRenderer, texture:Texture, forcePowerOfTwo:Bool):Void {})
 	function generateTilingTexture(renderer:CanvasRenderer, texture:Texture, forcePowerOfTwo:Bool):Void;
 
 	/**

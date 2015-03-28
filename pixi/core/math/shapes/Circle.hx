@@ -23,7 +23,7 @@ extern class Circle {
 	function clone():Circle;
 
 	/**
-	 * Checks whether the x, and y coordinates passed to this function are contained within this circle
+	 * Checks whether the x, and y coordinates passed to this 	function are contained within this circle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test

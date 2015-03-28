@@ -27,7 +27,7 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}
 	 */
-	static function fromVideo(video:VideoElement, ?scaleMode:Int):VideoBaseTexture;
+static 	function fromVideo(video:VideoElement, ?scaleMode:Int):VideoBaseTexture;
 
 	/**
 	 * Mimic Pixi BaseTexture.from.... method.
@@ -35,13 +35,13 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * This can be used in a couple ways, such as:
 	 *
 	 * ```js
-	 * var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls([
+	 * 	var texture = PIXI.VideoBaseTexture.fromUrls([
 	 *     { src: '/video.webm', mime: 'video/webm' },
 	 *     { src: '/video.mp4', mime: 'video/mp4' }
 	 * ]);
@@ -56,6 +56,6 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}
 	 */
-	static function fromUrl(videoSrc:String, ?scaleMode:Int):VideoBaseTexture;
-	static function fromUrls(videoSrc:Array<String>, ?scaleMode:Int):VideoBaseTexture;
+static 	function fromUrl(videoSrc:String, ?scaleMode:Int):VideoBaseTexture;
+static 	function fromUrls(videoSrc:Array<String>, ?scaleMode:Int):VideoBaseTexture;
 }

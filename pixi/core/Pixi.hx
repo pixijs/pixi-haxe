@@ -25,7 +25,7 @@ extern class Pixi {
 	static var RENDERER_TYPE:RendererType;
 
 	/**
-     * Various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
+     * 	various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
      * the NORMAL, ADD, MULTIPLY and SCREEN blend modes. Anything else will silently act like
      * NORMAL.
      *
@@ -112,7 +112,8 @@ extern class Pixi {
      */
 	static var SHAPES:Shapes;
 
-	static var SPRITE_BATCH_SIZE:Int; //2000 - nice balance between mobile and desktop machines
+	static var SPRITE_BATCH_SIZE:Int;
+	//2000 - nice balance between mobile and desktop machines
 }
 
 typedef RendererType = {

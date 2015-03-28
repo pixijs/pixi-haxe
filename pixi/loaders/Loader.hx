@@ -10,7 +10,7 @@ extern class Loader extends ResourceLoader {
 	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
 	 *
 	 * ```js
-	 * var loader = new PIXI.loader();
+	 * 	var loader = new PIXI.loader();
 	 *
 	 * loader.add('spineboy',"data/spineboy.json");
 	 *

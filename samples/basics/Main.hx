@@ -16,7 +16,7 @@ class Main {
 
 	var _graphic:Graphics;
 
-	public function new() {
+	public 	function new() {
 		// Rendering options usage sample
 		var options:RenderingOptions = {};
 		options.backgroundColor = 0x003366;
@@ -37,7 +37,7 @@ class Main {
 		_graphic.endFill();
 
 		_graphic.interactive = true;
-		_graphic.on("click", function(evt) {trace(evt);});
+		_graphic.on("click", 	function(evt) {trace(evt);});
 
 		_stage.addChild(_graphic);
 
@@ -45,13 +45,13 @@ class Main {
 		Browser.window.requestAnimationFrame(cast _animate);
 	}
 
-	function _animate() {
+		function _animate() {
 		Browser.window.requestAnimationFrame(cast _animate);
 		_bunny.rotation += 0.1;
 		_renderer.render(_stage);
 	}
 
-	static function main() {
+	static 	function main() {
 		new Main();
 	}
 }

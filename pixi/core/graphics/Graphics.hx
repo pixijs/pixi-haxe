@@ -246,8 +246,8 @@ extern class Graphics extends Container {
 	 * @param {Circle|Rectangle|Ellipse|Line|Polygon} shape The Shape object to draw.
 	 * @return {GraphicsData} The generated GraphicsData object.
 	 */
-	@:overload(function(shape:Rectangle):GraphicsData {})
-	@:overload(function(shape:Ellipse):GraphicsData {})
-	@:overload(function(shape:Polygon):GraphicsData {})
+@:overload(	function(shape:Rectangle):GraphicsData {})
+@:overload(	function(shape:Ellipse):GraphicsData {})
+@:overload(	function(shape:Polygon):GraphicsData {})
 	function drawShape(shape:Circle):GraphicsData;
 }

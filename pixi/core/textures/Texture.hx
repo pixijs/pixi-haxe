@@ -15,9 +15,9 @@ extern class Texture extends EventEmitter3 {
 	 * You can directly create a texture from an image and then reuse it multiple times like this :
 	 *
 	 * ```js
-	 * var texture = PIXI.Texture.fromImage('assets/image.png');
-	 * var sprite1 = new PIXI.Sprite(texture);
-	 * var sprite2 = new PIXI.Sprite(texture);
+	 * 	var texture = PIXI.Texture.fromImage('assets/image.png');
+	 * 	var sprite1 = new PIXI.Sprite(texture);
+	 * 	var sprite2 = new PIXI.Sprite(texture);
 	 * ```
 	 *
 	 * @class
@@ -29,7 +29,7 @@ extern class Texture extends EventEmitter3 {
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
 	 */
-	@:overload(function(baseTexture:VideoBaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool):Void {})
+@:overload(	function(baseTexture:VideoBaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool):Void {})
 	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
 
 	/**
@@ -124,7 +124,7 @@ extern class Texture extends EventEmitter3 {
 	function update():Void;
 
 	/**
-	 * Helper function that creates a Texture object from the given image url.
+	 * Helper 	function that creates a Texture object from the given image url.
 	 * If the image is not in the texture cache it will be  created and loaded.
 	 *
 	 * @static
@@ -133,47 +133,47 @@ extern class Texture extends EventEmitter3 {
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return Texture
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Texture;
+static 	function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Texture;
 
 	/**
-	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+	 * Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
 	 * @param frameId {String} The frame Id of the texture in the cache
 	 * @return {Texture} The newly created texture
 	 */
-	static function fromFrame(frameId:String):Texture;
+static 	function fromFrame(frameId:String):Texture;
 
 	/**
-	 * Helper function that creates a new Texture based on the given canvas element.
+	 * Helper 	function that creates a new Texture based on the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture}
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Texture;
+static 	function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Texture;
 
 	/**
-	 * Helper function that creates a new Texture based on the given video element.
+	 * Helper 	function that creates a new Texture based on the given video element.
 	 *
 	 * @static
 	 * @param video {VideoElement}
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:VideoElement, ?scaleMode:Int):Texture;
+static 	function fromVideo(video:VideoElement, ?scaleMode:Int):Texture;
 
 	/**
-	 * Helper function that creates a new Texture based on the video url.
+	 * Helper 	function that creates a new Texture based on the video url.
 	 *
 	 * @static
 	 * @param videoUrl {String}
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
+static 	function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
 
 	/**
 	 * Adds a texture to the global utils.TextureCache. This cache is shared across the whole PIXI object.
@@ -182,7 +182,7 @@ extern class Texture extends EventEmitter3 {
 	 * @param texture {Texture} The Texture to add to the cache.
 	 * @param id {String} The id that the texture will be stored against.
 	 */
-	static function addTextureToCache(texture:Texture, id:String):Void;
+static 	function addTextureToCache(texture:Texture, id:String):Void;
 
 	/**
 	 * Remove a texture from the global utils.TextureCache.
@@ -191,5 +191,5 @@ extern class Texture extends EventEmitter3 {
 	 * @param id {String} The id of the texture to be removed
 	 * @return {Texture} The texture that was removed
 	 */
-	static function removeTextureFromCache(id:String):Texture;
+static 	function removeTextureFromCache(id:String):Texture;
 }

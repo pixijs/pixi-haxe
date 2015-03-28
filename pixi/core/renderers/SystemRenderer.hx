@@ -95,7 +95,6 @@ extern class SystemRenderer {
      */
 	var blendModes:Dynamic;
 
-
 	///////////////////////////
 	// TODO: Combine these!
 

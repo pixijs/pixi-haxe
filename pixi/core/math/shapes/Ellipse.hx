@@ -24,7 +24,7 @@ extern class Ellipse {
 	function clone():Ellipse;
 
 	/**
-	 * Checks whether the x and y coordinates passed to this function are contained within this ellipse
+	 * Checks whether the x and y coordinates passed to this 	function are contained within this ellipse
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test

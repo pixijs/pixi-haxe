@@ -13,7 +13,7 @@ extern class Sprite extends Container {
 	 * A sprite can be created directly from an image like this:
 	 *
 	 * ```js
-	 * var sprite = new Sprite.fromImage('assets/image.png');
+	 * 	var sprite = new Sprite.fromImage('assets/image.png');
 	 * ```
 	 *
 	 * @class Sprite
@@ -80,22 +80,22 @@ extern class Sprite extends Container {
 	function renderCanvas(renderer:Dynamic):Void;
 
 	/**
-	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+	 * Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
 	 * @param frameId {String} The frame Id of the texture in the cache
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the frameId
 	 */
-	static function fromFrame(frameId:String):Sprite;
+static 	function fromFrame(frameId:String):Sprite;
 
 	/**
-	 * Helper function that creates a sprite that will contain a texture based on an image url
+	 * Helper 	function that creates a sprite that will contain a texture based on an image url
 	 * If the image is not in the texture cache it will be loaded
 	 *
 	 * @static
 	 * @param imageId {String} The image url of the texture
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the image id
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Sprite;
+static 	function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Sprite;
 }

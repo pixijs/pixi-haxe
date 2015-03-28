@@ -30,11 +30,11 @@ class Main {
 	var _vidTexture:Texture;
 	var _vidSprite:Sprite;
 
-	public function new() {
+	public 	function new() {
 		_init();
 	}
 
-	function _init() {
+		function _init() {
 		var options:RenderingOptions = {};
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
@@ -65,16 +65,16 @@ class Main {
 		_bunny.on("tap", _onTap);
 	}
 
-	function _onTap(data:EventTarget) {
+		function _onTap(data:EventTarget) {
 		_videoElement.play();
 	}
 
-	function _animate() {
+		function _animate() {
 		Browser.window.requestAnimationFrame(cast _animate);
 		_renderer.render(_stage);
 	}
 
-	static function main() {
+	static 	function main() {
 		new Main();
 	}
 }

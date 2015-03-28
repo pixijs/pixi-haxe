@@ -17,12 +17,12 @@ class Main extends Application {
 	var _count:Int;
 	var _isAdding:Bool;
 
-	public function new() {
+	public 	function new() {
 		super();
 		_init();
 	}
 
-	function _init() {
+		function _init() {
 		onUpdate = _onUpdate;
 		super.start(Application.CANVAS);
 
@@ -32,7 +32,7 @@ class Main extends Application {
 		_loader.load(_onLoaded);
 	}
 
-	function _onLoaded() {
+		function _onLoaded() {
 		_count = 0;
 		_isAdding = false;
 		_fighterTextures = [];
@@ -52,21 +52,21 @@ class Main extends Application {
 		_addFighter(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 	}
 
-	function _onTouchStart(event) {
+		function _onTouchStart(event) {
 		_isAdding = true;
 	}
 
-	function _onTouchEnd(event) {
+		function _onTouchEnd(event) {
 		_isAdding = false;
 	}
 
-	function _onUpdate(elapsedTime:Float) {
+		function _onUpdate(elapsedTime:Float) {
 		if (_isAdding) {
 			_addFighter(Std.random(Browser.window.innerWidth), Std.random(Browser.window.innerHeight));
 		}
 	}
 
-	function _addFighter(x:Float, y:Float) {
+		function _addFighter(x:Float, y:Float) {
 		var fighter:MovieClip = new MovieClip(_fighterTextures);
 		fighter.anchor.set(0.5, 0.5);
 		fighter.position.set(x, y);
@@ -77,7 +77,7 @@ class Main extends Application {
 		_counter.innerHTML = _count + " SPRITES";
 	}
 
-	function _addCounter() {
+		function _addCounter() {
 		_counter = Browser.document.createDivElement();
 		_counter.style.position = "absolute";
 		_counter.style.top = "1px";
@@ -95,7 +95,7 @@ class Main extends Application {
 		Browser.document.body.appendChild(_counter);
 	}
 
-	static function main() {
+	static 	function main() {
 		new Main();
 	}
 }
