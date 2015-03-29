@@ -1,7 +1,5 @@
 package pixi.core;
 
-import pixi.core.RendererType;
-
 @:native("PIXI")
 extern class Pixi {
 

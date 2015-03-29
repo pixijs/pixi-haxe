@@ -13417,102 +13417,102 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<VERSION public="1" static="1">
 			<c path="String"/>
 			<haxe_doc>* String of the current PIXI version
-     *
-     * @static
-     * @constant
-     * @property {string} VERSION</haxe_doc>
+	 *
+	 * @static
+	 * @constant
+	 * @property {string} VERSION</haxe_doc>
 		</VERSION>
 		<RENDERER_TYPE public="1" static="1">
 			<t path="pixi.core.RendererType"/>
 			<haxe_doc>* Constant to identify the Renderer Type.
-     *
-     * @static
-     * @constant
-     * @property {object} RENDERER_TYPE
-     * @property {number} RENDERER_TYPE.UNKNOWN
-     * @property {number} RENDERER_TYPE.WEBGL
-     * @property {number} RENDERER_TYPE.CANVAS</haxe_doc>
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} RENDERER_TYPE
+	 * @property {number} RENDERER_TYPE.UNKNOWN
+	 * @property {number} RENDERER_TYPE.WEBGL
+	 * @property {number} RENDERER_TYPE.CANVAS</haxe_doc>
 		</RENDERER_TYPE>
 		<BLEND_MODES public="1" static="1">
 			<t path="pixi.core.BlendModes"/>
-			<haxe_doc>* 	various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
-     * the NORMAL, ADD, MULTIPLY and SCREEN blend modes. Anything else will silently act like
-     * NORMAL.
-     *
-     * @static
-     * @constant
-     * @property {object} BLEND_MODES
-     * @property {number} BLEND_MODES.NORMAL
-     * @property {number} BLEND_MODES.ADD
-     * @property {number} BLEND_MODES.MULTIPLY
-     * @property {number} BLEND_MODES.SCREEN
-     * @property {number} BLEND_MODES.OVERLAY
-     * @property {number} BLEND_MODES.DARKEN
-     * @property {number} BLEND_MODES.LIGHTEN
-     * @property {number} BLEND_MODES.COLOR_DODGE
-     * @property {number} BLEND_MODES.COLOR_BURN
-     * @property {number} BLEND_MODES.HARD_LIGHT
-     * @property {number} BLEND_MODES.SOFT_LIGHT
-     * @property {number} BLEND_MODES.DIFFERENCE
-     * @property {number} BLEND_MODES.EXCLUSION
-     * @property {number} BLEND_MODES.HUE
-     * @property {number} BLEND_MODES.SATURATION
-     * @property {number} BLEND_MODES.COLOR
-     * @property {number} BLEND_MODES.LUMINOSITY</haxe_doc>
+			<haxe_doc>* various blend modes supported by PIXI. IMPORTANT - The WebGL renderer only supports
+	 * the NORMAL, ADD, MULTIPLY and SCREEN blend modes. Anything else will silently act like
+	 * NORMAL.
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} BLEND_MODES
+	 * @property {number} BLEND_MODES.NORMAL
+	 * @property {number} BLEND_MODES.ADD
+	 * @property {number} BLEND_MODES.MULTIPLY
+	 * @property {number} BLEND_MODES.SCREEN
+	 * @property {number} BLEND_MODES.OVERLAY
+	 * @property {number} BLEND_MODES.DARKEN
+	 * @property {number} BLEND_MODES.LIGHTEN
+	 * @property {number} BLEND_MODES.COLOR_DODGE
+	 * @property {number} BLEND_MODES.COLOR_BURN
+	 * @property {number} BLEND_MODES.HARD_LIGHT
+	 * @property {number} BLEND_MODES.SOFT_LIGHT
+	 * @property {number} BLEND_MODES.DIFFERENCE
+	 * @property {number} BLEND_MODES.EXCLUSION
+	 * @property {number} BLEND_MODES.HUE
+	 * @property {number} BLEND_MODES.SATURATION
+	 * @property {number} BLEND_MODES.COLOR
+	 * @property {number} BLEND_MODES.LUMINOSITY</haxe_doc>
 		</BLEND_MODES>
 		<SCALE_MODES public="1" static="1">
 			<t path="pixi.core.ScaleModes"/>
 			<haxe_doc>* The scale modes that are supported by pixi.
-     *
-     * The DEFAULT scale mode affects the default scaling mode of future operations.
-     * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
-     *
-     * @static
-     * @constant
-     * @property {object} SCALE_MODES
-     * @property {number} SCALE_MODES.DEFAULT=LINEAR
-     * @property {number} SCALE_MODES.LINEAR Smooth scaling
-     * @property {number} SCALE_MODES.NEAREST Pixelating scaling</haxe_doc>
+	 *
+	 * The DEFAULT scale mode affects the default scaling mode of future operations.
+	 * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} SCALE_MODES
+	 * @property {number} SCALE_MODES.DEFAULT=LINEAR
+	 * @property {number} SCALE_MODES.LINEAR Smooth scaling
+	 * @property {number} SCALE_MODES.NEAREST Pixelating scaling</haxe_doc>
 		</SCALE_MODES>
 		<RETINA_PREFIX public="1" static="1">
 			<c path="String"/>
 			<haxe_doc>* The prefix that denotes a URL is for a retina asset
-     *
-     * @static
-     * @constant
-     * @property {String} RETINA_PREFIX</haxe_doc>
+	 *
+	 * @static
+	 * @constant
+	 * @property {String} RETINA_PREFIX</haxe_doc>
 		</RETINA_PREFIX>
 		<RESOLUTION public="1" static="1"><x path="Float"/></RESOLUTION>
 		<DEFAULT_RENDER_OPTIONS public="1" static="1">
 			<t path="pixi.core.DefaultRenderOptions"/>
 			<haxe_doc>* The default render options if none are supplied to {@link PIXI.WebGLRenderer}
-     * or {@link PIXI.CanvasRenderer}.
-     *
-     * @static
-     * @constant
-     * @property {object} DEFAULT_RENDER_OPTIONS
-     * @property {HTMLCanvasElement} DEFAULT_RENDER_OPTIONS.view=null
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.transparent=false
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.antialias=false
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.forceFXAA=false
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
-     * @property {number} DEFAULT_RENDER_OPTIONS.resolution=1
-     * @property {number} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
-     * @property {boolean} DEFAULT_RENDER_OPTIONS.autoResize=false</haxe_doc>
+	 * or {@link PIXI.CanvasRenderer}.
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} DEFAULT_RENDER_OPTIONS
+	 * @property {HTMLCanvasElement} DEFAULT_RENDER_OPTIONS.view=null
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.transparent=false
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.antialias=false
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.forceFXAA=false
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
+	 * @property {number} DEFAULT_RENDER_OPTIONS.resolution=1
+	 * @property {number} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
+	 * @property {boolean} DEFAULT_RENDER_OPTIONS.autoResize=false</haxe_doc>
 		</DEFAULT_RENDER_OPTIONS>
 		<SHAPES public="1" static="1">
 			<t path="pixi.core.Shapes"/>
 			<haxe_doc>* Constants that identify shapes, mainly to prevent `instanceof` calls.
-     *
-     * @static
-     * @constant
-     * @property {object} SHAPES
-     * @property {object} SHAPES.POLY=0
-     * @property {object} SHAPES.RECT=1
-     * @property {object} SHAPES.CIRC=2
-     * @property {object} SHAPES.ELIP=3
-     * @property {object} SHAPES.RREC=4</haxe_doc>
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} SHAPES
+	 * @property {object} SHAPES.POLY=0
+	 * @property {object} SHAPES.RECT=1
+	 * @property {object} SHAPES.CIRC=2
+	 * @property {object} SHAPES.ELIP=3
+	 * @property {object} SHAPES.RREC=4</haxe_doc>
 		</SHAPES>
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
@@ -13927,7 +13927,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Useful 	function that returns a texture of the display object that can then be used to create sprites
+			<haxe_doc>* Useful 	 function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -13941,7 +13941,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<x path="Int"/>
 		<c path="pixi.core.textures.Texture"/>
 	</f>
-	<haxe_doc>* Useful 	function that returns a texture of the display object that can then be used to create sprites
+	<haxe_doc>* Useful 	 function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -13959,155 +13959,155 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<cacheAsBitmap public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Set this to true if you want this display object to be cached as a bitmap.
-     * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects.
-     * To remove simply set this property to 'null'
-     *
-     * @member {Bool}
-     * @memberof DisplayObject#</haxe_doc>
+	 * This basically takes a snap shot of the display object as it is at that moment. It can provide a performance benefit for complex static displayObjects.
+	 * To remove simply set this property to 'null'
+	 *
+	 * @member {Bool}
+	 * @memberof DisplayObject#</haxe_doc>
 		</cacheAsBitmap>
 		<position public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</position>
 		<scale public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The scale factor of the object.
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</scale>
 		<pivot public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The pivot point of the displayObject that it rotates around
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</pivot>
 		<rotation public="1">
 			<x path="Float"/>
 			<haxe_doc>* The rotation of the object in radians.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</rotation>
 		<alpha public="1">
 			<x path="Float"/>
 			<haxe_doc>* The opacity of the object.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</alpha>
 		<visible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The visibility of the object. If false the object will not be drawn, and
-     * the updateTransform 	function will not be called.
-     *
-     * @member {Bool}</haxe_doc>
+	 * the updateTransform 		 function will not be called.
+	 *
+	 * @member {Bool}</haxe_doc>
 		</visible>
 		<renderable public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Can this object be rendered, if false the object will not be drawn but the updateTransform
-     * methods will still be called.
-     *
-     * @member {Bool}</haxe_doc>
+	 * methods will still be called.
+	 *
+	 * @member {Bool}</haxe_doc>
 		</renderable>
 		<parent public="1">
 			<c path="pixi.core.display.Container"/>
 			<haxe_doc>* The display object container that contains this display object.
-     *
-     * @member {Container}
-     * @readOnly</haxe_doc>
+	 *
+	 * @member {Container}
+	 * @readOnly</haxe_doc>
 		</parent>
 		<worldAlpha public="1">
 			<x path="Float"/>
 			<haxe_doc>* The multiplied alpha of the displayObject
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @readOnly</haxe_doc>
 		</worldAlpha>
 		<worldTransform public="1">
 			<c path="pixi.core.math.Matrix"/>
 			<haxe_doc>* Current transform of the object based on world (parent) factors
-     *
-     * @member {Matrix}
-     * @readOnly</haxe_doc>
+	 *
+	 * @member {Matrix}
+	 * @readOnly</haxe_doc>
 		</worldTransform>
 		<filterArea public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* The area the filter is applied to. This is used as more of an optimisation
-     * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
-     *
-     * @member {Rectangle}</haxe_doc>
+	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
+	 *
+	 * @member {Rectangle}</haxe_doc>
 		</filterArea>
 		<x public="1">
 			<x path="Float"/>
 			<haxe_doc>* The position of the displayObject on the x axis relative to the local coordinates of the parent.
-     *
-     * @member {Float}
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @memberof DisplayObject#</haxe_doc>
 		</x>
 		<y public="1">
 			<x path="Float"/>
 			<haxe_doc>* The position of the displayObject on the y axis relative to the local coordinates of the parent.
-     *
-     * @member {Float}
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @memberof DisplayObject#</haxe_doc>
 		</y>
 		<worldVisible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the displayObject is globally visible.
-     *
-     * @member {Bool}
-     * @memberof DisplayObject#
-     * @readonly</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @memberof DisplayObject#
+	 * @readonly</haxe_doc>
 		</worldVisible>
 		<mask public="1">
 			<c path="pixi.core.graphics.Graphics"/>
 			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
-     * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
-     * To remove a mask, set this property to null.
-     *
-     * @member {Graphics}
-     * @memberof DisplayObject#</haxe_doc>
+	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
+	 * To remove a mask, set this property to null.
+	 *
+	 * @member {Graphics}
+	 * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
 			<c path="Array"><d/></c>
 			<haxe_doc>* Sets the filters for the displayObject.
-     * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
-     * To remove filters simply set this property to 'null'
-     *
-     * @member {Filter[]}
-     * @memberof DisplayObject#</haxe_doc>
+	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
+	 * To remove filters simply set this property to 'null'
+	 *
+	 * @member {Filter[]}
+	 * @memberof DisplayObject#</haxe_doc>
 		</filters>
 		<interactive public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the displayObject is interactive or not.
-     *
-     * @member {Bool}
-     * @default false
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @default false
+	 * @memberof DisplayObject#</haxe_doc>
 		</interactive>
 		<buttonMode public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the displayObject uses button mode or normal mode.
-     *
-     * @member {Bool}
-     * @default false
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @default false
+	 * @memberof DisplayObject#</haxe_doc>
 		</buttonMode>
 		<interactiveChildren public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the children of displayObject are interactive or not.
-     *
-     * @member {Bool}
-     * @default true
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @default true
+	 * @memberof DisplayObject#</haxe_doc>
 		</interactiveChildren>
 		<defaultCursor public="1">
 			<c path="String"/>
 			<haxe_doc>* Default cursor.
-     *
-     * @member {String}
-     * @default pointer
-     * @memberof DisplayObject#</haxe_doc>
+	 *
+	 * @member {String}
+	 * @default pointer
+	 * @memberof DisplayObject#</haxe_doc>
 		</defaultCursor>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -14124,23 +14124,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<children public="1">
 			<c path="Array"><c path="pixi.core.display.DisplayObject"/></c>
 			<haxe_doc>* The array of children of this container.
-     *
-     * @member {DisplayObject[]}
-     * @readonly</haxe_doc>
+	 *
+	 * @member {DisplayObject[]}
+	 * @readonly</haxe_doc>
 		</children>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the Container, setting this will actually modify the scale to achieve the value set
-     *
-     * @member {Float}
-     * @memberof Container#</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @memberof Container#</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the Container, setting this will actually modify the scale to achieve the value set
-     *
-     * @member {Float}
-     * @memberof Container#</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @memberof Container#</haxe_doc>
 		</height>
 		<addChild public="1" set="method">
 			<f a="child">
@@ -14263,49 +14263,49 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<fillAlpha public="1">
 			<x path="Float"/>
 			<haxe_doc>* The alpha value used when filling the Graphics object.
-     *
-     * @member {Float}
-     * @default 1</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 1</haxe_doc>
 		</fillAlpha>
 		<lineWidth public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width (thickness) of any lines drawn.
-     *
-     * @member {Float}
-     * @default 0</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 0</haxe_doc>
 		</lineWidth>
 		<lineColor public="1">
 			<x path="Int"/>
 			<haxe_doc>* The color of any lines drawn.
-     *
-     * @member {Int}
-     * @default 0</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default 0</haxe_doc>
 		</lineColor>
 		<tint public="1">
 			<x path="Int"/>
 			<haxe_doc>* The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
-     *
-     * @member {Int}
-     * @default 0xFFFFFF</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default 0xFFFFFF</haxe_doc>
 		</tint>
 		<blendMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* The blend mode to be applied to the graphic shape. Apply a value of blendModes.NORMAL to reset the blend mode.
-     *
-     * @member {Int}
-     * @default CONST.BLEND_MODES.NORMAL;</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default CONST.BLEND_MODES.NORMAL;</haxe_doc>
 		</blendMode>
 		<isMask public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether this shape is being used as a mask.
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</isMask>
 		<boundsPadding public="1">
 			<x path="Float"/>
 			<haxe_doc>* The bounds' padding used for bounds calculation.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</boundsPadding>
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.graphics.Graphics"/></f>
@@ -14620,32 +14620,32 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<a public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 1</haxe_doc>
+	 * @default 1</haxe_doc>
 		</a>
 		<b public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 0</haxe_doc>
+	 * @default 0</haxe_doc>
 		</b>
 		<c public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 0</haxe_doc>
+	 * @default 0</haxe_doc>
 		</c>
 		<d public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 1</haxe_doc>
+	 * @default 1</haxe_doc>
 		</d>
 		<tx public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 0</haxe_doc>
+	 * @default 0</haxe_doc>
 		</tx>
 		<ty public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
-     * @default 0</haxe_doc>
+	 * @default 0</haxe_doc>
 		</ty>
 		<fromArray public="1" set="method">
 			<f a="array">
@@ -14840,7 +14840,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x, and y coordinates passed to this 	function are contained within this circle
+			<haxe_doc>* Checks whether the x, and y coordinates passed to this function are contained within this circle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -14903,7 +14903,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this ellipse
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this ellipse
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -14974,7 +14974,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this polygon
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this polygon
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -14984,9 +14984,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<points public="1">
 			<c path="Array"><c path="pixi.core.math.Point"/></c>
 			<haxe_doc><![CDATA[* An array of the points of this polygon
-     * @property points
-     * @type Array<Point>
-     *]]></haxe_doc>
+	 * @property points
+	 * @type Array<Point>
+	 *]]></haxe_doc>
 		</points>
 		<new public="1" set="method">
 			<f a="points">
@@ -15030,7 +15030,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* Checks whether the x and y coordinates passed to this 	function are contained within this Rectangle
+			<haxe_doc>* Checks whether the x and y coordinates passed to this function are contained within this Rectangle
 	 *
 	 * @method contains
 	 * @param x {Float} The X coordinate of the point to test
@@ -15128,8 +15128,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<radius public="1">
 			<x path="Float"/>
 			<haxe_doc>* @property radius
-     * @type Float
-     * @default 20</haxe_doc>
+	 * @type Float
+	 * @default 20</haxe_doc>
 		</radius>
 		<new public="1" set="method">
 			<f a="x:y:width:height:radius">
@@ -15210,22 +15210,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<t path="pixi.core.renderers.RenderingOptions"/>
 				<d/>
 			</f>
-			<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This 	function is very
-     * similar to the autoDetectRenderer 	function except that is will return a canvas renderer for android.
-     * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-     * This 	function will likely change and update as webGL performance improves on these devices.
-     *
-     * @param width=800 {Float} the width of the renderers view
-     * @param height=600 {Float} the height of the renderers view
-     * @param [options] {RenderingOptions} The optional renderer parameters
-     * @param [options.view] {CanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
-     *      need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-     *
-     * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
+			<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This function is very
+	 * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
+	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
+	 * This function will likely change and update as webGL performance improves on these devices.
+	 *
+	 * @param width=800 {Float} the width of the renderers view
+	 * @param height=600 {Float} the height of the renderers view
+	 * @param [options] {RenderingOptions} The optional renderer parameters
+	 * @param [options.view] {CanvasElement} the canvas to use as a view, optional
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
+	 *      need to call toDataUrl on the webgl context
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+	 *
+	 * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
 			<overloads><autoDetectRecommendedRenderer public="1" set="method">
 	<f a="width:height:?options">
 		<x path="Float"/>
@@ -15233,22 +15233,22 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<t path="pixi.core.renderers.RenderingOptions"/>
 		<d/>
 	</f>
-	<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This 	function is very
-     * similar to the autoDetectRenderer 	function except that is will return a canvas renderer for android.
-     * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-     * This 	function will likely change and update as webGL performance improves on these devices.
-     *
-     * @param width=800 {Float} the width of the renderers view
-     * @param height=600 {Float} the height of the renderers view
-     * @param [options] {RenderingOptions} The optional renderer parameters
-     * @param [options.view] {CanvasElement} the canvas to use as a view, optional
-     * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-     * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-     * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
-     *      need to call toDataUrl on the webgl context
-     * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-     *
-     * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
+	<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This function is very
+	 * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
+	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
+	 * This function will likely change and update as webGL performance improves on these devices.
+	 *
+	 * @param width=800 {Float} the width of the renderers view
+	 * @param height=600 {Float} the height of the renderers view
+	 * @param [options] {RenderingOptions} The optional renderer parameters
+	 * @param [options.view] {CanvasElement} the canvas to use as a view, optional
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
+	 *      need to call toDataUrl on the webgl context
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+	 *
+	 * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
 </autoDetectRecommendedRenderer></overloads>
 		</autoDetectRecommendedRenderer>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
@@ -15291,77 +15291,77 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<backgroundColor public="1">
 			<x path="Int"/>
 			<haxe_doc>* The background color to fill if not transparent
-     *
-     * @member {Int}
-     * @memberof SystemRenderer</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @memberof SystemRenderer</haxe_doc>
 		</backgroundColor>
 		<type public="1">
 			<d/>
 			<haxe_doc>* The type of the renderer.
-     *
-     * @member {CONST.RENDERER_TYPE}
-     * @default CONT.RENDERER_TYPE.UNKNOWN</haxe_doc>
+	 *
+	 * @member {CONST.RENDERER_TYPE}
+	 * @default CONT.RENDERER_TYPE.UNKNOWN</haxe_doc>
 		</type>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the canvas view
-     *
-     * @member {Float}
-     * @default 800</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 800</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the canvas view
-     *
-     * @member {Float}
-     * @default 600</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 600</haxe_doc>
 		</height>
 		<view public="1">
 			<c path="js.html.CanvasElement"/>
 			<haxe_doc>* The canvas element that everything is drawn to
-     *
-     * @member {CanvasElement}</haxe_doc>
+	 *
+	 * @member {CanvasElement}</haxe_doc>
 		</view>
 		<resolution public="1">
 			<x path="Float"/>
 			<haxe_doc>* The resolution of the renderer
-     *
-     * @member {Float}
-     * @default 1</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 1</haxe_doc>
 		</resolution>
 		<transparent public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether the render view is transparent
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</transparent>
 		<autoResize public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether the render view should be resized automatically
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</autoResize>
 		<blendModes public="1">
 			<d/>
 			<haxe_doc><![CDATA[* Tracks the blend modes useful for this renderer.
-     *
-     * @member {object<string, mixed>}]]></haxe_doc>
+	 *
+	 * @member {object<string, mixed>}]]></haxe_doc>
 		</blendModes>
 		<preserveDrawingBuffer public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The value of the preserveDrawingBuffer flag affects whether or not the contents of the stencil buffer is retained after rendering.
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</preserveDrawingBuffer>
 		<clearBeforeRender public="1">
 			<x path="Bool"/>
 			<haxe_doc>* This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
-     * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
-     * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
-     * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
-     *
-     * @member {Bool}
-     * @default</haxe_doc>
+	 * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
+	 * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
+	 * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
+	 *
+	 * @member {Bool}
+	 * @default</haxe_doc>
 		</clearBeforeRender>
 		<resize public="1" set="method">
 			<f a="width:height">
@@ -15424,45 +15424,45 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<context public="1">
 			<c path="js.html.CanvasRenderingContext2D"/>
 			<haxe_doc>* The canvas 2d context that everything is drawn with.
-     *
-     * @member {CanvasRenderingContext2D}</haxe_doc>
+	 *
+	 * @member {CanvasRenderingContext2D}</haxe_doc>
 		</context>
 		<refresh public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Boolean flag controlling canvas refresh.
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</refresh>
 		<maskManager public="1">
 			<d/>
 			<haxe_doc>* Instance of a CanvasMaskManager, handles masking when using the canvas renderer.
-     *
-     * @member {CanvasMaskManager}</haxe_doc>
+	 *
+	 * @member {CanvasMaskManager}</haxe_doc>
 		</maskManager>
 		<roundPixels public="1">
 			<x path="Bool"/>
 			<haxe_doc>* If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
-     * Handy for crisp pixel art and speed on legacy devices.
-     *
-     * @member {Bool}</haxe_doc>
+	 * Handy for crisp pixel art and speed on legacy devices.
+	 *
+	 * @member {Bool}</haxe_doc>
 		</roundPixels>
 		<currentScaleMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* Tracks the active scale mode for this renderer.
-     *
-     * @member {SCALE_MODE}</haxe_doc>
+	 *
+	 * @member {SCALE_MODE}</haxe_doc>
 		</currentScaleMode>
 		<currentBlendMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* Tracks the active blend mode for this renderer.
-     *
-     * @member {BLEND_MODES}</haxe_doc>
+	 *
+	 * @member {BLEND_MODES}</haxe_doc>
 		</currentBlendMode>
 		<smoothProperty public="1">
 			<c path="String"/>
 			<haxe_doc>* The canvas property used to set the canvas smoothing property.
-     *
-     * @member {String}</haxe_doc>
+	 *
+	 * @member {String}</haxe_doc>
 		</smoothProperty>
 		<new public="1" set="method">
 			<f a="width:height:?options">
@@ -15495,8 +15495,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<drawCount public="1">
 			<x path="Int"/>
 			<haxe_doc>* Counter for the number of draws made each frame
-     *
-     * @member {Int}</haxe_doc>
+	 *
+	 * @member {Int}</haxe_doc>
 		</drawCount>
 		<new public="1" set="method">
 			<f a="width:height:?options">
@@ -15534,7 +15534,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<c path="pixi.core.sprites.Sprite"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+			<haxe_doc>* Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
@@ -15548,7 +15548,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.sprites.Sprite"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture based on an image url
+			<haxe_doc>* Helper function that creates a sprite that will contain a texture based on an image url
 	 * If the image is not in the texture cache it will be loaded
 	 *
 	 * @static
@@ -15558,38 +15558,38 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<anchor public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The anchor sets the origin point of the texture.
-     * The default is 0,0 this means the texture's origin is the top left
-     * Setting than anchor to 0.5,0.5 means the textures origin is centered
-     * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
-     *
-     * @member {Point}</haxe_doc>
+	 * The default is 0,0 this means the texture's origin is the top left
+	 * Setting than anchor to 0.5,0.5 means the textures origin is centered
+	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
+	 *
+	 * @member {Point}</haxe_doc>
 		</anchor>
 		<texture public="1">
 			<c path="pixi.core.textures.Texture"/>
 			<haxe_doc>* The height of the sprite, setting this will actually modify the scale to achieve the value set
-     *
-     * @member
-     * @memberof Sprite#</haxe_doc>
+	 *
+	 * @member
+	 * @memberof Sprite#</haxe_doc>
 		</texture>
 		<tint public="1">
 			<x path="Int"/>
 			<haxe_doc>* The tint applied to the sprite. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
-     *
-     * @member {Int}
-     * @default 0xFFFFFF</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default 0xFFFFFF</haxe_doc>
 		</tint>
 		<blendMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* The blend mode to be applied to the sprite. Set to CONST.blendModes.NORMAL to remove any blend mode.
-     *
-     * @member {Int}
-     * @default CONST.blendModes.NORMAL;</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default CONST.blendModes.NORMAL;</haxe_doc>
 		</blendMode>
 		<shader public="1">
 			<d/>
 			<haxe_doc>* The shader that will be used to render the sprite. Set to null to remove a current shader.
-     *
-     * @member {AbstractFilter}</haxe_doc>
+	 *
+	 * @member {AbstractFilter}</haxe_doc>
 		</shader>
 		<destroy public="1" set="method">
 			<f a="?destroyTexture:?destroyBaseTexture">
@@ -15639,7 +15639,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.BaseTexture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a base texture from the given image url.
+			<haxe_doc>* Helper function that creates a base texture from the given image url.
 	 * If the image is not in the base texture cache it will be created and loaded.
 	 *
 	 * @static
@@ -15654,7 +15654,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.BaseTexture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a base texture from the given canvas element.
+			<haxe_doc>* Helper function that creates a base texture from the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
@@ -15664,65 +15664,65 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<resolution public="1">
 			<x path="Float"/>
 			<haxe_doc>* The Resolution of the texture.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</resolution>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the base texture set when the image has loaded
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @readOnly</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the base texture set when the image has loaded
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @readOnly</haxe_doc>
 		</height>
 		<scaleMode public="1">
 			<x path="Float"/>
 			<haxe_doc>* The scale mode to apply when scaling this texture
-     *
-     * @member {Float}
-     * @default scaleModes.LINEAR</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default scaleModes.LINEAR</haxe_doc>
 		</scaleMode>
 		<hasLoaded public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Set to true once the base texture has successfully loaded.
-     *
-     * This is never true if the underlying source fails to load or has no texture data.
-     *
-     * @member {Bool}
-     * @readOnly</haxe_doc>
+	 *
+	 * This is never true if the underlying source fails to load or has no texture data.
+	 *
+	 * @member {Bool}
+	 * @readOnly</haxe_doc>
 		</hasLoaded>
 		<isLoading public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Set to true if the source is currently loading.
-     *
-     * If an Image source is loading the 'loaded' or 'error' event will be
-     * dispatched when the operation ends. An underyling source that is
-     * immediately-available bypasses loading entirely.
-     *
-     * @member {Bool}
-     * @readonly</haxe_doc>
+	 *
+	 * If an Image source is loading the 'loaded' or 'error' event will be
+	 * dispatched when the operation ends. An underyling source that is
+	 * immediately-available bypasses loading entirely.
+	 *
+	 * @member {Bool}
+	 * @readonly</haxe_doc>
 		</isLoading>
 		<source public="1">
 			<d/>
 			<haxe_doc>* The image source that is used to create the texture.
-     *
-     * TODO: Make this a setter that calls loadSource();
-     *
-     * @member {Image|Canvas}
-     * @readonly</haxe_doc>
+	 *
+	 * TODO: Make this a setter that calls loadSource();
+	 *
+	 * @member {Image|Canvas}
+	 * @readonly</haxe_doc>
 		</source>
 		<premultipliedAlpha public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Controls if RGB channels should be pre-multiplied by Alpha  (WebGL only)
-     *
-     * @member {Bool}
-     * @default true</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @default true</haxe_doc>
 		</premultipliedAlpha>
 		<imageUrl public="1">
 			<c path="String"/>
@@ -15731,10 +15731,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<mipmap public="1">
 			<x path="Bool"/>
 			<haxe_doc>*
-     * Set this to true if a mipmap of this texture needs to be generated. This value needs to be set before the texture is used
-     * Also the texture must be a power of two size to work
-     *
-     * @member {Bool}</haxe_doc>
+	 * Set this to true if a mipmap of this texture needs to be generated. This value needs to be set before the texture is used
+	 * Also the texture must be a power of two size to work
+	 *
+	 * @member {Bool}</haxe_doc>
 		</mipmap>
 		<update public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -15767,11 +15767,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * The logic state after calling `loadSource` directly or indirectly (eg. `fromImage`, `new BaseTexture`) is:
 	 *
-	 *     if (texture.hasLoaded)
-	 {
+	 *     if (texture.hasLoaded) {
 	 *        // texture ready for use
-	 *     } else if (texture.isLoading)
-	 {
+	 *     } else if (texture.isLoading) {
 	 *        // listen to 'loaded' and/or 'error' events on texture
 	 *     } else {
 	 *        // not loading, not going to load UNLESS the source is reloaded
@@ -15818,7 +15816,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a Texture object from the given image url.
+			<haxe_doc>* Helper function that creates a Texture object from the given image url.
 	 * If the image is not in the texture cache it will be  created and loaded.
 	 *
 	 * @static
@@ -15832,7 +15830,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="String"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a sprite that will contain a texture from the TextureCache based on the frameId
+			<haxe_doc>* Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
 	 * The frame ids are created when a Texture packer file has been loaded
 	 *
 	 * @static
@@ -15845,7 +15843,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a new Texture based on the given canvas element.
+			<haxe_doc>* Helper function that creates a new Texture based on the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
@@ -15858,7 +15856,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a new Texture based on the given video element.
+			<haxe_doc>* Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
 	 * @param video {VideoElement}
@@ -15871,7 +15869,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Helper 	function that creates a new Texture based on the video url.
+			<haxe_doc>* Helper function that creates a new Texture based on the video url.
 	 *
 	 * @static
 	 * @param videoUrl {String}
@@ -15904,69 +15902,69 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<noFrame public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Does this Texture have any frame data assigned to it?
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</noFrame>
 		<baseTexture public="1">
 			<c path="pixi.core.textures.BaseTexture"/>
 			<haxe_doc>* The base texture that this texture uses.
-     *
-     * @member {BaseTexture}</haxe_doc>
+	 *
+	 * @member {BaseTexture}</haxe_doc>
 		</baseTexture>
 		<trim public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* The texture trim data.
-     *
-     * @member {Rectangle}</haxe_doc>
+	 *
+	 * @member {Rectangle}</haxe_doc>
 		</trim>
 		<valid public="1">
 			<x path="Bool"/>
 			<haxe_doc>* This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</valid>
 		<requiresUpdate public="1">
 			<x path="Bool"/>
 			<haxe_doc>* This will let a renderer know that a texture has been updated (used mainly for webGL uv updates)
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</requiresUpdate>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the Texture in pixels.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</width>
 		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the Texture in pixels.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</height>
 		<crop public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
-     * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
-     *
-     * @member {Rectangle}</haxe_doc>
+	 * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+	 *
+	 * @member {Rectangle}</haxe_doc>
 		</crop>
 		<spritePivot public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The pivot point to used for a sprite this texture belongs to.
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</spritePivot>
 		<rotation public="1">
 			<x path="Float"/>
 			<haxe_doc>* The rotation value of the texture, copied to a sprite when assigned to it.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</rotation>
 		<frame public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* The frame specifies the region of the base texture that this texture uses
-     *
-     * @member {Rectangle}</haxe_doc>
+	 *
+	 * @member {Rectangle}</haxe_doc>
 		</frame>
 		<destroy public="1" set="method">
 			<f a="?destroyBase">
@@ -16047,14 +16045,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<resolution public="1">
 			<x path="Float"/>
 			<haxe_doc>* The Resolution of the texture.
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</resolution>
 		<renderer public="1">
 			<d/>
 			<haxe_doc>* The renderer this RenderTexture uses. A RenderTexture can only belong to one renderer at the moment if its webGL.
-     *
-     * @member {CanvasRenderer|WebGLRenderer}</haxe_doc>
+	 *
+	 * @member {CanvasRenderer|WebGLRenderer}</haxe_doc>
 		</renderer>
 		<resize public="1" set="method">
 			<f a="width:height:updateBase">
@@ -16220,10 +16218,10 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Float"/>
 			</f>
 			<haxe_doc>* get the resolution of an asset by looking for the prefix
-     * used by spritesheets and image urls
-     *
-     * @param url {String} the image path
-     * @return {Float}</haxe_doc>
+	 * used by spritesheets and image urls
+	 *
+	 * @param url {String} the image path
+	 * @return {Float}</haxe_doc>
 		</getResolutionOfUrl>
 		<meta><m n=":native"><e>"PIXI.utils"</e></m></meta>
 	</class>

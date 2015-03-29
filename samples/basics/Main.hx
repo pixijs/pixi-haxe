@@ -12,7 +12,7 @@ class Main {
 
 	var _bunny:Sprite;
 	var _renderer:SystemRenderer;
-	var _stage:Container;
+	var _container:Container;
 
 	var _graphic:Graphics;
 
@@ -22,13 +22,14 @@ class Main {
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
 
+		_container = new Container();
 		_renderer = Detector.autoDetectRenderer(800, 600, options);
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5, 0.5);
 		_bunny.position.set(400, 300);
 
-		_stage.addChild(_bunny);
+		_container.addChild(_bunny);
 
 		_graphic = new Graphics();
 		_graphic.beginFill(0xFF0000, 0.4);
@@ -38,7 +39,7 @@ class Main {
 		_graphic.interactive = true;
 		_graphic.on("click", function(evt) {trace(evt);});
 
-		_stage.addChild(_graphic);
+		_container.addChild(_graphic);
 
 		Browser.document.body.appendChild(_renderer.view);
 		Browser.window.requestAnimationFrame(cast _animate);
@@ -47,6 +48,7 @@ class Main {
 	function _animate() {
 		Browser.window.requestAnimationFrame(cast _animate);
 		_bunny.rotation += 0.1;
+		_renderer.render(_container);
 	}
 
 	static function main() {
