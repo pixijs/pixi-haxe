@@ -103,7 +103,7 @@ class Application {
 
 	/**
 	 * Starts pixi application setup using the properties set or default values
-	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL | RECOMMENDED
+	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL
 	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
@@ -127,7 +127,6 @@ class Application {
 		renderingOptions.autoResize = true;
 
 		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
-		else if (renderer == RECOMMENDED) _renderer = Detector.autoDetectRecommendedRenderer(width, height, renderingOptions);
 		else if (renderer == CANVAS) _renderer = new CanvasRenderer(width, height, renderingOptions);
 		else _renderer = new WebGLRenderer(width, height, renderingOptions);
 

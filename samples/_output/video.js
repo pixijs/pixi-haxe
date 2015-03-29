@@ -37,7 +37,7 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
 		renderingOptions.autoResize = true;
-		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "recommended") this._renderer = PIXI.autoDetectRecommendedRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
 		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));

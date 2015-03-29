@@ -15186,71 +15186,25 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="pixi.core.renderers.Detector" params="" file="pixi/core/renderers/Detector.hx" extern="1">
 		<autoDetectRenderer public="1" set="method" static="1">
-			<f a="width:height:?options">
+			<f a="width:height:?options:?noWebGL">
 				<x path="Float"/>
 				<x path="Float"/>
 				<t path="pixi.core.renderers.RenderingOptions"/>
-				<d/>
+				<x path="Bool"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 			</f>
 			<haxe_doc>* @class Detector</haxe_doc>
 			<overloads><autoDetectRenderer public="1" set="method">
-	<f a="width:height:?options">
+	<f a="width:height:?options:?noWebGL">
 		<x path="Float"/>
 		<x path="Float"/>
 		<t path="pixi.core.renderers.RenderingOptions"/>
-		<d/>
+		<x path="Bool"/>
+		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
 	</f>
 	<haxe_doc>* @class Detector</haxe_doc>
 </autoDetectRenderer></overloads>
 		</autoDetectRenderer>
-		<autoDetectRecommendedRenderer public="1" set="method" static="1">
-			<f a="width:height:?options">
-				<x path="Float"/>
-				<x path="Float"/>
-				<t path="pixi.core.renderers.RenderingOptions"/>
-				<d/>
-			</f>
-			<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This function is very
-	 * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
-	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-	 * This function will likely change and update as webGL performance improves on these devices.
-	 *
-	 * @param width=800 {Float} the width of the renderers view
-	 * @param height=600 {Float} the height of the renderers view
-	 * @param [options] {RenderingOptions} The optional renderer parameters
-	 * @param [options.view] {CanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
-	 *      need to call toDataUrl on the webgl context
-	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 *
-	 * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
-			<overloads><autoDetectRecommendedRenderer public="1" set="method">
-	<f a="width:height:?options">
-		<x path="Float"/>
-		<x path="Float"/>
-		<t path="pixi.core.renderers.RenderingOptions"/>
-		<d/>
-	</f>
-	<haxe_doc>* This helper 	function will automatically detect which renderer you should be using. This function is very
-	 * similar to the autoDetectRenderer function except that is will return a canvas renderer for android.
-	 * Even thought both android chrome supports webGL the canvas implementation perform better at the time of writing.
-	 * This function will likely change and update as webGL performance improves on these devices.
-	 *
-	 * @param width=800 {Float} the width of the renderers view
-	 * @param height=600 {Float} the height of the renderers view
-	 * @param [options] {RenderingOptions} The optional renderer parameters
-	 * @param [options.view] {CanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.preserveDrawingBuffer=false] {Bool} enables drawing buffer preservation, enable this if you
-	 *      need to call toDataUrl on the webgl context
-	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 *
-	 * @return {WebGLRenderer|CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer</haxe_doc>
-</autoDetectRecommendedRenderer></overloads>
-		</autoDetectRecommendedRenderer>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
 	<typedef path="pixi.core.renderers.RenderingOptions" params="" file="pixi/core/renderers/Detector.hx" module="pixi.core.renderers.Detector"><a>
@@ -16225,6 +16179,117 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</getResolutionOfUrl>
 		<meta><m n=":native"><e>"PIXI.utils"</e></m></meta>
 	</class>
+	<class path="pixi.extras.BitmapText" params="" file="pixi/extras/BitmapText.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<textWidth public="1">
+			<x path="Float"/>
+			<haxe_doc>* The width of the overall text, different from fontSize,
+     * which is defined in the style object
+     *
+     * @member {Float}
+     * @readOnly</haxe_doc>
+		</textWidth>
+		<textHeight public="1">
+			<x path="Float"/>
+			<haxe_doc>* The height of the overall text, different from fontSize,
+     * which is defined in the style object
+     *
+     * @member {Float}
+     * @readOnly</haxe_doc>
+		</textHeight>
+		<maxWidth public="1">
+			<x path="Float"/>
+			<haxe_doc>* The max width of this bitmap text in pixels. If the text provided is longer than the value provided, line breaks will be automatically inserted in the last whitespace.
+     * Disable by setting value to 0
+     *
+     * @member {Float}</haxe_doc>
+		</maxWidth>
+		<dirty public="1">
+			<x path="Bool"/>
+			<haxe_doc>* The dirty state of this object.
+     *
+     * @member {Bool}</haxe_doc>
+		</dirty>
+		<tint public="1">
+			<x path="Float"/>
+			<haxe_doc>* The tint of the BitmapText object
+     *
+     * @member {Float}
+     * @memberof BitmapText#</haxe_doc>
+		</tint>
+		<align public="1">
+			<c path="String"/>
+			<haxe_doc>* The alignment of the BitmapText object
+     *
+     * @member {String}
+     * @default 'left'
+     * @memberof BitmapText#</haxe_doc>
+		</align>
+		<font public="1">
+			<t path="pixi.extras.FontProperties"/>
+			<haxe_doc>* The font descriptor of the BitmapText object
+     *
+     * @member {Font}
+     * @memberof BitmapText#</haxe_doc>
+		</font>
+		<text public="1">
+			<c path="String"/>
+			<haxe_doc>* The text of the BitmapText object
+     *
+     * @member {String}
+     * @memberof BitmapText#</haxe_doc>
+		</text>
+		<new public="1" set="method">
+			<f a="text:?style">
+				<c path="String"/>
+				<t path="pixi.extras.BitmapTextStyle"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A BitmapText object will create a line or multiple lines of text using bitmap font. To
+	 * split a line you can use '\n', '\r' or '\r\n' in your string. You can generate the fnt files using:
+	 *
+	 * A BitmapText can only be created when the font is loaded
+	 *
+	 * ```js
+	 * // in this case the font is in a file called 'desyrel.fnt'
+	 * 	var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
+	 * ```
+	 *
+	 *
+	 * http://www.angelcode.com/products/bmfont/ for windows or
+	 * http://www.bmglyph.com/ for mac.
+	 *
+	 * @class
+	 * @extends Container
+	 * @memberof PIXI.text
+	 * @param text {String} The copy that you would like the text to display
+	 * @param style {TextStyle} The style parameters
+	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
+	 *      "24px FontName" or "FontName" or as an object with explicit name/size properties.
+	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
+	 * @param [style.font.name] {string} The bitmap font id
+	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.extras.BitmapText"</e></m></meta>
+	</class>
+	<typedef path="pixi.extras.BitmapTextStyle" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a><font>
+	<t path="pixi.extras.FontProperties"/>
+	<meta><m n=":optional"/></meta>
+</font></a></typedef>
+	<typedef path="pixi.extras.FontProperties" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a>
+	<size>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</size>
+	<name>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</name>
+	<align>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</align>
+</a></typedef>
 	<class path="pixi.extras.MovieClip" params="" file="pixi/extras/MovieClip.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<fromFrames public="1" set="method" static="1">
@@ -16918,28 +16983,28 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
-	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL | RECOMMENDED
+	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL
 	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="142">
+		<_onWindowResize set="method" line="141">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="157">
+		<_onRequestAnimationFrame set="method" line="156">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="169">
+		<_calculateElapsedTime set="method" line="168">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="175">
+		<_addStats set="method" line="174">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>
@@ -17216,117 +17281,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
-	<class path="pixi.text.BitmapText" params="" file="pixi/text/BitmapText.hx" extern="1">
-		<extends path="pixi.core.display.Container"/>
-		<textWidth public="1">
-			<x path="Float"/>
-			<haxe_doc>* The width of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
-		</textWidth>
-		<textHeight public="1">
-			<x path="Float"/>
-			<haxe_doc>* The height of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
-		</textHeight>
-		<maxWidth public="1">
-			<x path="Float"/>
-			<haxe_doc>* The max width of this bitmap text in pixels. If the text provided is longer than the value provided, line breaks will be automatically inserted in the last whitespace.
-     * Disable by setting value to 0
-     *
-     * @member {Float}</haxe_doc>
-		</maxWidth>
-		<dirty public="1">
-			<x path="Bool"/>
-			<haxe_doc>* The dirty state of this object.
-     *
-     * @member {Bool}</haxe_doc>
-		</dirty>
-		<tint public="1">
-			<x path="Float"/>
-			<haxe_doc>* The tint of the BitmapText object
-     *
-     * @member {Float}
-     * @memberof BitmapText#</haxe_doc>
-		</tint>
-		<align public="1">
-			<c path="String"/>
-			<haxe_doc>* The alignment of the BitmapText object
-     *
-     * @member {String}
-     * @default 'left'
-     * @memberof BitmapText#</haxe_doc>
-		</align>
-		<font public="1">
-			<t path="pixi.text.FontProperties"/>
-			<haxe_doc>* The font descriptor of the BitmapText object
-     *
-     * @member {Font}
-     * @memberof BitmapText#</haxe_doc>
-		</font>
-		<text public="1">
-			<c path="String"/>
-			<haxe_doc>* The text of the BitmapText object
-     *
-     * @member {String}
-     * @memberof BitmapText#</haxe_doc>
-		</text>
-		<new public="1" set="method">
-			<f a="text:?style">
-				<c path="String"/>
-				<t path="pixi.text.BitmapTextStyle"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* A BitmapText object will create a line or multiple lines of text using bitmap font. To
-	 * split a line you can use '\n', '\r' or '\r\n' in your string. You can generate the fnt files using:
-	 *
-	 * A BitmapText can only be created when the font is loaded
-	 *
-	 * ```js
-	 * // in this case the font is in a file called 'desyrel.fnt'
-	 * 	var bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
-	 * ```
-	 *
-	 *
-	 * http://www.angelcode.com/products/bmfont/ for windows or
-	 * http://www.bmglyph.com/ for mac.
-	 *
-	 * @class
-	 * @extends Container
-	 * @memberof PIXI.text
-	 * @param text {String} The copy that you would like the text to display
-	 * @param style {TextStyle} The style parameters
-	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
-	 *      "24px FontName" or "FontName" or as an object with explicit name/size properties.
-	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
-	 * @param [style.font.name] {string} The bitmap font id
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.BitmapText"</e></m></meta>
-	</class>
-	<typedef path="pixi.text.BitmapTextStyle" params="" file="pixi/text/BitmapText.hx" module="pixi.text.BitmapText"><a><font>
-	<t path="pixi.text.FontProperties"/>
-	<meta><m n=":optional"/></meta>
-</font></a></typedef>
-	<typedef path="pixi.text.FontProperties" params="" file="pixi/text/BitmapText.hx" module="pixi.text.BitmapText"><a>
-	<size>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</size>
-	<name>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</name>
-	<align>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</align>
-</a></typedef>
 	<class path="pixi.text.Text" params="" file="pixi/text/Text.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<style public="1">
