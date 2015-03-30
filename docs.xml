@@ -15242,6 +15242,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</antialias>
 </a></typedef>
 	<class path="pixi.core.renderers.SystemRenderer" params="" file="pixi/core/renderers/SystemRenderer.hx" extern="1">
+		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
 		<backgroundColor public="1">
 			<x path="Int"/>
 			<haxe_doc>* The background color to fill if not transparent
@@ -15250,7 +15251,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @memberof SystemRenderer</haxe_doc>
 		</backgroundColor>
 		<type public="1">
-			<d/>
+			<x path="Int"/>
 			<haxe_doc>* The type of the renderer.
 	 *
 	 * @member {CONST.RENDERER_TYPE}
@@ -15444,6 +15445,202 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.CanvasRenderer"</e></m></meta>
 	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasBuffer" params="" file="pixi/core/renderers/canvas/utils/CanvasBuffer.hx" extern="1">
+		<canvas public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* The Canvas object that belongs to this CanvasBuffer.
+     *
+     * @member {HTMLCanvasElement}</haxe_doc>
+		</canvas>
+		<context public="1">
+			<c path="js.html.CanvasRenderingContext2D"/>
+			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
+	 *
+	 * @member {CanvasRenderingContext2D}</haxe_doc>
+		</context>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* The width of the canvas buffer in pixels.
+	 *
+	 * @member {number}
+	 * @memberof CanvasBuffer#</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* The height of the canvas buffer in pixels.
+	 *
+	 * @member {number}
+	 * @memberof CanvasBuffer#</haxe_doc>
+		</height>
+		<resize public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the canvas to the specified width and height.
+	 *
+	 * @param width {number} the new width of the canvas
+	 * @param height {number} the new height of the canvas</haxe_doc>
+		</resize>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys this canvas.
+	 *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Creates a Canvas element of the given size.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param width {Float} the width for the newly created canvas
+	 * @param height {Float} the height for the newly created canvas</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.CanvasBuffer"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
+		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
+	<c path="pixi.core.graphics.Graphics"/>
+	<c path="js.html.CanvasRenderingContext2D"/>
+	<x path="Void"/>
+</f></renderGraphics>
+		<meta><m n=":native"><e>"PIXI.CanvasGraphics"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasMaskManager" params="" file="pixi/core/renderers/canvas/utils/CanvasMaskManager.hx" extern="1">
+		<pushMask public="1" set="method">
+			<f a="maskData:renderer">
+				<d/>
+				<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* This method adds it to the current stack of masks.
+	 *
+	 * @param maskData {object} the maskData that will be pushed
+	 * @param renderer {WebGLRenderer|CanvasRenderer} The renderer context to use.</haxe_doc>
+			<overloads><pushMask public="1" set="method">
+	<f a="maskData:renderer">
+		<d/>
+		<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* This method adds it to the current stack of masks.
+	 *
+	 * @param maskData {object} the maskData that will be pushed
+	 * @param renderer {WebGLRenderer|CanvasRenderer} The renderer context to use.</haxe_doc>
+</pushMask></overloads>
+		</pushMask>
+		<popMask public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Restores the current drawing context to the state it was before the mask was applied.
+	 *
+	 * @param renderer {WebGLRenderer|CanvasRenderer} The renderer context to use.</haxe_doc>
+			<overloads><popMask public="1" set="method">
+	<f a="renderer">
+		<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* Restores the current drawing context to the state it was before the mask was applied.
+	 *
+	 * @param renderer {WebGLRenderer|CanvasRenderer} The renderer context to use.</haxe_doc>
+</popMask></overloads>
+		</popMask>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":native"><e>"PIXI.CanvasMaskManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasTinter" params="" file="pixi/core/renderers/canvas/utils/CanvasTinter.hx" extern="1">
+		<getTintedTexture public="1" set="method" static="1">
+			<f a="sprite:color">
+				<c path="pixi.core.sprites.Sprite"/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
+			</f>
+			<haxe_doc>* Basically this method just needs a sprite and a color and tints the sprite with the given color.
+	 *
+	 * @param sprite {Sprite} the sprite to tint
+	 * @param color {Int} the color to use to tint the sprite with
+	 * @return {HTMLCanvasElement} The tinted canvas</haxe_doc>
+		</getTintedTexture>
+		<tintWithMultiply public="1" set="method" static="1">
+			<f a="texture:color:canvas">
+				<c path="pixi.core.textures.Texture"/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Tint a texture using the 'multiply' operation.
+	 *
+	 * @param texture {Texture} the texture to tint
+	 * @param color {Int} the color to use to tint the sprite with
+	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
+		</tintWithMultiply>
+		<tintWithOverlay public="1" set="method" static="1">
+			<f a="texture:color:canvas">
+				<c path="pixi.core.textures.Texture"/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Tint a texture using the 'overlay' operation.
+	 *
+	 * @param texture {Texture} the texture to tint
+	 * @param color {Int} the color to use to tint the sprite with
+	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
+		</tintWithOverlay>
+		<tintWithPerPixel public="1" set="method" static="1">
+			<f a="texture:color:canvas">
+				<c path="pixi.core.textures.Texture"/>
+				<x path="Int"/>
+				<c path="js.html.CanvasElement"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Tint a texture pixel per pixel.
+	 *
+	 * @param texture {Texture} the texture to tint
+	 * @param color {Int} the color to use to tint the sprite with
+	 * @param canvas {HTMLCanvasElement} the current canvas</haxe_doc>
+		</tintWithPerPixel>
+		<roundColor public="1" set="method" static="1">
+			<f a="color">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>* Rounds the specified color according to the CanvasTinter.cacheStepsPerColorChannel.
+	 *
+	 * @param color {Int} the color to round, should be a hex color</haxe_doc>
+		</roundColor>
+		<cacheStepsPerColorChannel public="1">
+			<x path="Int"/>
+			<haxe_doc>* Number of steps which will be used as a cap when rounding colors.
+	 *
+	 * @member</haxe_doc>
+		</cacheStepsPerColorChannel>
+		<convertTintToImage public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Tint cache boolean flag.
+	 *
+	 * @member</haxe_doc>
+		</convertTintToImage>
+		<canUseMultiply public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether or not the Canvas BlendModes are supported, consequently the ability to tint using the multiply method.
+	 *
+	 * @member</haxe_doc>
+		</canUseMultiply>
+		<tintMethod public="1">
+			<d/>
+			<haxe_doc>* The tinting method that will be used.
+	 *</haxe_doc>
+		</tintMethod>
+		<meta><m n=":native"><e>"PIXI.CanvasTinter"</e></m></meta>
+	</class>
 	<class path="pixi.core.renderers.webgl.WebGLRenderer" params="" file="pixi/core/renderers/webgl/WebGLRenderer.hx" extern="1">
 		<extends path="pixi.core.renderers.SystemRenderer"/>
 		<drawCount public="1">
@@ -15452,6 +15649,45 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 *
 	 * @member {Int}</haxe_doc>
 		</drawCount>
+		<shaderManager public="1">
+			<d/>
+			<haxe_doc>* Deals with managing the shader programs and their attribs.
+     *
+     * @member {ShaderManager}</haxe_doc>
+		</shaderManager>
+		<maskManager public="1">
+			<d/>
+			<haxe_doc>* Manages the masks using the stencil buffer.
+     *
+     * @member {MaskManager}</haxe_doc>
+		</maskManager>
+		<stencilManager public="1">
+			<d/>
+			<haxe_doc>* Manages the stencil buffer.
+     *
+     * @member {StencilManager}</haxe_doc>
+		</stencilManager>
+		<filterManager public="1">
+			<d/>
+			<haxe_doc>* Manages the filters.
+     *
+     * @member {FilterManager}</haxe_doc>
+		</filterManager>
+		<blendModeManager public="1">
+			<d/>
+			<haxe_doc>* Manages the blendModes
+     * @member {BlendModeManager}</haxe_doc>
+		</blendModeManager>
+		<currentRenderTarget public="1">
+			<d/>
+			<haxe_doc>* Holds the current render target
+     * @member {Object}</haxe_doc>
+		</currentRenderTarget>
+		<currentRenderer public="1">
+			<d/>
+			<haxe_doc>* object renderer @alvin
+     * @member {ObjectRenderer}</haxe_doc>
+		</currentRenderer>
 		<new public="1" set="method">
 			<f a="width:height:?options">
 				<x path="Float"/>
@@ -15476,10 +15712,188 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
 	 * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
 	 *      not before the new render pass.
-	 * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable this if
+	 * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable var if
 	 *      you need to call toDataUrl on the webgl context.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.WebGLRenderer"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.webgl.filters.AbstractFilter" params="" file="pixi/core/renderers/webgl/filters/AbstractFilter.hx" extern="1">
+		<padding public="1">
+			<x path="Float"/>
+			<haxe_doc>* The extra padding that the filter might need
+     * @member {number}</haxe_doc>
+		</padding>
+		<getShader public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+</f></getShader>
+		<applyFilter public="1" set="method"><f a="renderer:input:output:clear">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+	<d/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></applyFilter>
+		<syncUniform public="1" set="method">
+			<f a="uniform">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Syncs a uniform between the class object and the shaders.
+	 *</haxe_doc>
+		</syncUniform>
+		<new public="1" set="method">
+			<f a="vertexSrc:fragmentSrc:uniforms">
+				<c path="String"/>
+				<c path="String"/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* This is the base class for creating a PIXI filter. Currently only WebGL supports filters.
+	 * If you want to make a custom filter this should be your base class.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param vertexSrc {String|String[]} The vertex shader source as an array of strings.
+	 * @param fragmentSrc {String|String[]} The fragment shader source as an array of strings.
+	 * @param uniforms {object} An object containing the uniforms for this filter.</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="vertexSrc:fragmentSrc:uniforms">
+		<c path="Array"><c path="String"/></c>
+		<c path="Array"><c path="String"/></c>
+		<d/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* This is the base class for creating a PIXI filter. Currently only WebGL supports filters.
+	 * If you want to make a custom filter this should be your base class.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param vertexSrc {String|String[]} The vertex shader source as an array of strings.
+	 * @param fragmentSrc {String|String[]} The fragment shader source as an array of strings.
+	 * @param uniforms {object} An object containing the uniforms for this filter.</haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"PIXI.AbstractFilter"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.webgl.managers.WebGLManager" params="" file="pixi/core/renderers/webgl/managers/WebGLManager.hx" extern="1">
+		<onContextChange public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Generic method called when there is a WebGL context change.
+	 *</haxe_doc>
+		</onContextChange>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Generic destroy methods to be overridden by the subclass
+	 *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.core.renderers.webgl.managers.BlendModeManager" params="" file="pixi/core/renderers/webgl/managers/BlendModeManager.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<setBlendMode public="1" set="method">
+			<f a="blendMode">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets-up the given blendMode from WebGL's point of view.
+	 *
+	 * @param blendMode {number} the blendMode, should be a Pixi const, such as BlendModes.ADD</haxe_doc>
+		</setBlendMode>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @extends WebGlManager
+	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.WebGLBlendModeManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.webgl.managers.FilterManager" params="" file="pixi/core/renderers/webgl/managers/FilterManager.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<filterStack public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @member {any[]}</haxe_doc>
+		</filterStack>
+		<texturePool public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @member {any[]}</haxe_doc>
+		</texturePool>
+		<setFilterStack public="1" set="method">
+			<f a="filterStack">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @param renderer {WebGLRenderer}
+	 * @param buffer {ArrayBuffer}</haxe_doc>
+		</setFilterStack>
+		<pushFilter public="1" set="method">
+			<f a="target:filters">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Applies the filter and adds it to the current filter stack.
+	 *
+	 * @param filterBlock {object} the filter that will be pushed to the current filter stack</haxe_doc>
+		</pushFilter>
+		<popFilter public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Removes the last filter from the filter stack and returns it.
+	 *</haxe_doc>
+		</popFilter>
+		<getRenderTarget public="1" set="method">
+			<f a="?clear">
+				<x path="Bool"/>
+				<d/>
+			</f>
+			<haxe_doc>* Grabs an render target from the internal pool
+	 *
+	 * @param clear {Bool} Whether or not we need to clear the RenderTarget
+	 * @return {RenderTarget}</haxe_doc>
+		</getRenderTarget>
+		<returnRenderTarget public="1" set="method"><f a="renderTarget">
+	<d/>
+	<d/>
+</f></returnRenderTarget>
+		<applyFilter public="1" set="method"><f a="shader:inputTarget:outputTarget:?clear">
+	<d/>
+	<d/>
+	<d/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></applyFilter>
+		<capFilterArea public="1" set="method"><f a="filterArea">
+	<c path="pixi.core.math.shapes.Rectangle"/>
+	<x path="Void"/>
+</f></capFilterArea>
+		<resize public="1" set="method"><f a="width:height">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></resize>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @extends WebGlManager
+	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.WebGLFilterManager"</e></m></meta>
 	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
@@ -15585,6 +15999,138 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Sprite"</e></m></meta>
 	</class>
+	<class path="pixi.core.text.Text" params="" file="pixi/core/text/Text.hx" extern="1">
+		<extends path="pixi.core.sprites.Sprite"/>
+		<canvas public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* The canvas element that everything is drawn to
+	 *
+	 * @member {HTMLCanvasElement}</haxe_doc>
+		</canvas>
+		<context public="1">
+			<c path="js.html.CanvasRenderingContext2D"/>
+			<haxe_doc>* The canvas 2d context that everything is drawn with
+	 * @member {HTMLCanvasElement}</haxe_doc>
+		</context>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of the canvas.
+	 * @member {number}</haxe_doc>
+		</resolution>
+		<style public="1">
+			<t path="pixi.core.text.TextStyle"/>
+			<haxe_doc>* Set the style of the text
+     *
+     * @param [style] {TextStyle} The style parameters
+     * @param [style.font='bold 20pt Arial'] {string} The style and size of the font
+     * @param [style.fill='black'] {object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
+     * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+     * @param [style.stroke='black'] {string} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
+     * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+     * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
+     * @param [style.wordWrapWidth=100] {number} The width at which text will wrap
+     * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
+     * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
+     * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+     * @param [style.dropShadowAngle=Math.PI/6] {number} Set a angle of the drop shadow
+     * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
+     * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
+     * @memberof Text#</haxe_doc>
+		</style>
+		<text public="1">
+			<c path="String"/>
+			<haxe_doc>* Set the copy for the text object. To split a line you can use '\n'.
+     *
+     * @param text {String} The copy that you would like the text to display
+     * @memberof Text#</haxe_doc>
+		</text>
+		<new public="1" set="method">
+			<f a="text:?style:?resolution">
+				<c path="String"/>
+				<t path="pixi.core.text.TextStyle"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
+	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
+	 *
+	 * A Text can be created directly from a string and a style object
+	 *
+	 * ```js
+	 * 	var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * ```
+	 *
+	 * @class
+	 * @extends Sprite
+	 * @memberof PIXI.text
+	 * @param text {String} The copy that you would like the text to display
+	 * @param [style] {TextStyle} The style parameters
+	 * @param [style.font] {string} default 'bold 20px Arial' The style and size of the font
+	 * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
+	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
+	 * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
+	 * @param [style.wordWrapWidth=100] {number} The width at which text will wrap, it needs wordWrap to be set to true
+	 * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
+	 * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
+	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
+	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
+	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
+	</class>
+	<typedef path="pixi.core.text.TextStyle" params="" file="pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
+	<wordWrapWidth>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</wordWrapWidth>
+	<wordWrap>
+		<x path="Bool"/>
+		<meta><m n=":optional"/></meta>
+	</wordWrap>
+	<strokeThickness>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</strokeThickness>
+	<stroke>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</stroke>
+	<padding>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</padding>
+	<font>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</font>
+	<fill>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</fill>
+	<dropShadowDistance>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</dropShadowDistance>
+	<dropShadowColor>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</dropShadowColor>
+	<dropShadowAngle>
+		<x path="Float"/>
+		<meta><m n=":optional"/></meta>
+	</dropShadowAngle>
+	<dropShadow>
+		<x path="Bool"/>
+		<meta><m n=":optional"/></meta>
+	</dropShadow>
+	<align>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</align>
+</a></typedef>
 	<class path="pixi.core.textures.BaseTexture" params="" file="pixi/core/textures/BaseTexture.hx" extern="1">
 		<fromImage public="1" set="method" static="1">
 			<f a="imageUrl:?crossorigin:?scaleMode">
@@ -16155,17 +16701,40 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			</f>
 			<haxe_doc>* A texture of a [playing] Video.
 	 *
+	 * Video base textures mimic Pixi BaseTexture.from.... method in their creation process.
+	 *
+	 * This can be used in several ways, such as:
+	 *
+	 * ```js
+	 * var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
+	 *
+	 * var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
+	 *
+	 * var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
+	 *
+	 * var texture = PIXI.VideoBaseTexture.fromUrls([
+	 *     { src: '/video.webm', mime: 'video/webm' },
+	 *     { src: '/video.mp4', mime: 'video/mp4' }
+	 * ]);
+	 * ```
+	 *
 	 * See the ["deus" demo](http://www.goodboydigital.com/pixijs/examples/deus/).
 	 *
 	 * @class
 	 * @extends BaseTexture
-	 * @namespace PIXI
-	 * @param source {VideoElement}
+	 * @memberof PIXI
+	 * @param source {HTMLVideoElement}
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.VideoBaseTexture"</e></m></meta>
 	</class>
 	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
+		<isWebGLSupported public="1" set="method" static="1">
+			<f a=""><x path="Bool"/></f>
+			<haxe_doc>* Helper for checking for webgl support
+	 *
+	 * @return {Bool}</haxe_doc>
+		</isWebGLSupported>
 		<getResolutionOfUrl public="1" set="method" static="1">
 			<f a="url">
 				<c path="String"/>
@@ -17281,122 +17850,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
-	<class path="pixi.text.Text" params="" file="pixi/text/Text.hx" extern="1">
-		<extends path="pixi.core.sprites.Sprite"/>
-		<style public="1">
-			<t path="pixi.text.TextStyle"/>
-			<haxe_doc>* Set the style of the text
-     *
-     * @param [style] {TextStyle} The style parameters
-     * @param [style.font='bold 20pt Arial'] {string} The style and size of the font
-     * @param [style.fill='black'] {object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
-     * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-     * @param [style.stroke='black'] {string} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
-     * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-     * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
-     * @param [style.wordWrapWidth=100] {number} The width at which text will wrap
-     * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
-     * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
-     * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-     * @param [style.dropShadowAngle=Math.PI/6] {number} Set a angle of the drop shadow
-     * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
-     * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
-     * @memberof Text#</haxe_doc>
-		</style>
-		<text public="1">
-			<c path="String"/>
-			<haxe_doc>* Set the copy for the text object. To split a line you can use '\n'.
-     *
-     * @param text {String} The copy that you would like the text to display
-     * @memberof Text#</haxe_doc>
-		</text>
-		<new public="1" set="method">
-			<f a="text:?style:?resolution">
-				<c path="String"/>
-				<t path="pixi.text.TextStyle"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
-	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
-	 *
-	 * A Text can be created directly from a string and a style object
-	 *
-	 * ```js
-	 * 	var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
-	 * ```
-	 *
-	 * @class
-	 * @extends Sprite
-	 * @memberof PIXI.text
-	 * @param text {String} The copy that you would like the text to display
-	 * @param [style] {TextStyle} The style parameters
-	 * @param [style.font] {string} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {number} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
-	</class>
-	<typedef path="pixi.text.TextStyle" params="" file="pixi/text/Text.hx" module="pixi.text.Text"><a>
-	<wordWrapWidth>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</wordWrapWidth>
-	<wordWrap>
-		<x path="Bool"/>
-		<meta><m n=":optional"/></meta>
-	</wordWrap>
-	<strokeThickness>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</strokeThickness>
-	<stroke>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</stroke>
-	<padding>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</padding>
-	<font>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</font>
-	<fill>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</fill>
-	<dropShadowDistance>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</dropShadowDistance>
-	<dropShadowColor>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</dropShadowColor>
-	<dropShadowAngle>
-		<x path="Float"/>
-		<meta><m n=":optional"/></meta>
-	</dropShadowAngle>
-	<dropShadow>
-		<x path="Bool"/>
-		<meta><m n=":optional"/></meta>
-	</dropShadow>
-	<align>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</align>
-</a></typedef>
 	<class path="samples.spritesheet.Main" params="" file="samples/spritesheet/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
 		<main set="method" line="98" static="1">

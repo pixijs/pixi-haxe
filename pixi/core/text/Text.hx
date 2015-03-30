@@ -1,5 +1,7 @@
-package pixi.text;
+package pixi.core.text;
 
+import js.html.CanvasRenderingContext2D;
+import js.html.CanvasElement;
 import pixi.core.sprites.Sprite;
 
 @:native("PIXI.Text")
@@ -35,6 +37,25 @@ extern class Text extends Sprite {
 	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
 	 */
 	function new(text:String, ?style:TextStyle, ?resolution:Float):Void;
+
+	/**
+	 * The canvas element that everything is drawn to
+	 *
+	 * @member {HTMLCanvasElement}
+ 	*/
+	var canvas:CanvasElement;
+
+	/**
+	 * The canvas 2d context that everything is drawn with
+	 * @member {HTMLCanvasElement}
+	 */
+	var context:CanvasRenderingContext2D;
+
+	/**
+	 * The resolution of the canvas.
+	 * @member {number}
+	 */
+	var resolution:Float;
 
 	/**
      * Set the style of the text

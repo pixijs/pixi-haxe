@@ -23,7 +23,7 @@ extern class WebGLRenderer extends SystemRenderer {
 	 * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
 	 * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
 	 *      not before the new render pass.
-	 * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable this if
+	 * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable var if
 	 *      you need to call toDataUrl on the webgl context.
 	 */
 	function new(width:Float, height:Float, ?options:RenderingOptions);
@@ -34,4 +34,50 @@ extern class WebGLRenderer extends SystemRenderer {
 	 * @member {Int}
 	 */
 	var drawCount:Int;
+
+	/**
+     * Deals with managing the shader programs and their attribs.
+     *
+     * @member {ShaderManager}
+     */
+	var shaderManager:Dynamic;
+
+	/**
+     * Manages the masks using the stencil buffer.
+     *
+     * @member {MaskManager}
+     */
+	var maskManager:Dynamic;
+
+	/**
+     * Manages the stencil buffer.
+     *
+     * @member {StencilManager}
+     */
+	var stencilManager:Dynamic;
+
+	/**
+     * Manages the filters.
+     *
+     * @member {FilterManager}
+     */
+	var filterManager:Dynamic;
+
+	/**
+     * Manages the blendModes
+     * @member {BlendModeManager}
+     */
+	var blendModeManager:Dynamic;
+
+	/**
+     * Holds the current render target
+     * @member {Object}
+     */
+	var currentRenderTarget:Dynamic;
+
+	/**
+     * object renderer @alvin
+     * @member {ObjectRenderer}
+     */
+	var currentRenderer:Dynamic;
 }

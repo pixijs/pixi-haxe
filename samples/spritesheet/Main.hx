@@ -1,9 +1,9 @@
 package samples.spritesheet;
 
+import pixi.core.text.Text;
 import js.html.DivElement;
 import pixi.loaders.Loader;
 import pixi.extras.MovieClip;
-import pixi.text.Text;
 import pixi.core.textures.Texture;
 import pixi.plugins.app.Application;
 import js.Browser;

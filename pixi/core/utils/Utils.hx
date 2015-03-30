@@ -4,6 +4,13 @@ package pixi.core.utils;
 extern class Utils {
 
 	/**
+	 * Helper for checking for webgl support
+	 *
+	 * @return {Bool}
+	 */
+	static function isWebGLSupported():Bool;
+
+	/**
 	 * get the resolution of an asset by looking for the prefix
 	 * used by spritesheets and image urls
 	 *

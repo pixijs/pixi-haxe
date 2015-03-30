@@ -1,11 +1,12 @@
 package pixi.core.renderers;
 
+import pixi.plugins.eventemitter.EventEmitter3;
 import pixi.core.display.DisplayObject;
 import pixi.core.renderers.Detector;
 import js.html.CanvasElement;
 
 @:native("PIXI.SystemRenderer")
-extern class SystemRenderer {
+extern class SystemRenderer extends EventEmitter3 {
 
 	/**
 	 * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
@@ -41,7 +42,7 @@ extern class SystemRenderer {
 	 * @member {CONST.RENDERER_TYPE}
 	 * @default CONT.RENDERER_TYPE.UNKNOWN
 	 */
-	var type:Dynamic;
+	var type:Int;
 
 	/**
 	 * The width of the canvas view

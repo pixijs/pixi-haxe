@@ -1,7 +1,7 @@
 package samples.retina;
 
+import pixi.core.text.Text;
 import pixi.plugins.app.Application;
-import pixi.text.Text;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import pixi.plugins.app.Application;

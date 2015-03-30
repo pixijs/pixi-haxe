@@ -1,7 +1,7 @@
 package samples.stream;
 
+import pixi.core.text.Text;
 import pixi.plugins.eventemitter.EventTarget;
-import pixi.text.Text;
 import js.html.ImageElement;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
