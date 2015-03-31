@@ -33,3 +33,7 @@
 --next
 -main samples.spritesheet.Main
 -js samples/_output/spritesheet.js
+
+--next
+-main samples.events.Main
+-js samples/_output/events.js

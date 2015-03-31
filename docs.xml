@@ -1,24 +1,4 @@
 <haxe>
-	<class path="Array" params="T" file="/usr/lib/haxe/std/js/_std/Array.hx" extern="1">
-		<push public="1" set="method">
-			<f a="x">
-				<c path="Array.T"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>Adds the element `x` at the end of `this` Array and returns the new
-		length of `this` Array.
-
-		This operation modifies `this` Array in place.
-
-		`this.length` increases by 1.</haxe_doc>
-		</push>
-		<haxe_doc>An Array is a storage for values. You can access it using indexes or
-	with its API.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":coreApi"/>
-		</meta>
-	</class>
 	<abstract path="Class" params="T" file="/usr/lib/haxe/std/Class.hx">
 		<this><x path="Class"><c path="Class.T"/></x></this>
 		<haxe_doc>An abstract type that represents a Class.
@@ -148,89 +128,6 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<class path="Math" params="" file="/usr/lib/haxe/std/Math.hx" extern="1">
-		<NEGATIVE_INFINITY public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes negative infinity.
-
-		For example, this is the result of -1.0 / 0.0.
-
-		Operations with NEGATIVE_INFINITY as an operand may result in
-		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.</haxe_doc>
-		</NEGATIVE_INFINITY>
-		<POSITIVE_INFINITY public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes negative infinity.
-
-		For example, this is the result of 1.0 / 0.0.
-
-		Operations with POSITIVE_INFINITY as an operand may result in
-		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.</haxe_doc>
-		</POSITIVE_INFINITY>
-		<NaN public="1" set="null" static="1">
-			<x path="Float"/>
-			<haxe_doc>A special Float constant which denotes an invalid number.
-
-		NaN stands for "Not a Number". It occurs when a mathematically incorrect
-		operation is executed, such as taking the square root of a negative
-		number: Math.sqrt(-1).
-
-		All further operations with NaN as an operand will result in NaN.
-
-		If this constant is converted to an Int, e.g. through Std.int(), the
-		result is unspecified.
-
-		In order to test if a value is NaN, you should use Math.isNaN() function.
-
-		@php In PHP versions prior to 5.3.1 VC 9 there may be unexpected
-		results when performing arithmetic operations with NaN on Windows, 
-		see [https://bugs.php.net/bug.php?id=42143]</haxe_doc>
-		</NaN>
-		<floor public="1" set="method" static="1">
-			<f a="v">
-				<x path="Float"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>Returns the largest integer value that is not greater than `v`.
-
-		If `v` is outside of the signed Int32 range, or is NaN, NEGATIVE_INFINITY 
-		or POSITIVE_INFINITY, the result is unspecified.</haxe_doc>
-		</floor>
-		<random public="1" set="method" static="1">
-			<f a=""><x path="Float"/></f>
-			<haxe_doc>Returns a pseudo-random number which is greater than or equal to 0.0, 
-		and less than 1.0.</haxe_doc>
-		</random>
-		<isFinite public="1" set="method" static="1">
-			<f a="f">
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Tells if `f` is a finite number.
-
-		If `f` is POSITIVE_INFINITY, NEGATIVE_INFINITY or NaN, the result 
-		is false, otherwise the result is true.</haxe_doc>
-		</isFinite>
-		<isNaN public="1" set="method" static="1">
-			<f a="f">
-				<x path="Float"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Tells if `f` is not a valid number.
-
-		If `f` is NaN, the result is true, otherwise the result is false. 
-		In particular, both POSITIVE_INFINITY and NEGATIVE_INFINITY are
-		not considered NaN.</haxe_doc>
-		</isNaN>
-		<haxe_doc>This class defines mathematical functions and constants.</haxe_doc>
-		<meta><m n=":keep"/></meta>
-	</class>
 	<class path="String" params="" file="/usr/lib/haxe/std/js/_std/String.hx" extern="1">
 		<fromCharCode public="1" set="method" static="1">
 			<f a="code">
@@ -397,16 +294,7 @@
 	String, it is passed through Std.string() first.</haxe_doc>
 		<meta><m n=":coreApi"/></meta>
 	</class>
-	<class path="Std" params="" file="/usr/lib/haxe/std/js/_std/Std.hx">
-		<random public="1" set="method" line="57" static="1">
-			<f a="x">
-				<x path="Int"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc><![CDATA[Return a random integer between 0 included and `x` excluded.
-
-		If `x <= 1`, the result is always 0.]]></haxe_doc>
-		</random>
+	<class path="Std" params="" file="/usr/lib/haxe/std/js/_std/Std.hx" extern="1">
 		<haxe_doc>The Std class provides standard methods for manipulating basic types.</haxe_doc>
 		<meta>
 			<m n=":keep"/>
@@ -17850,38 +17738,20 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
-	<class path="samples.spritesheet.Main" params="" file="samples/spritesheet/Main.hx">
+	<class path="samples.events.Main" params="" file="samples/events/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="98" static="1">
+		<main set="method" line="48" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_loader><c path="pixi.loaders.Loader"/></_loader>
-		<_fighterTextures><c path="Array"><c path="pixi.core.textures.Texture"/></c></_fighterTextures>
-		<_counter><c path="js.html.DivElement"/></_counter>
-		<_count><x path="Int"/></_count>
-		<_isAdding><x path="Bool"/></_isAdding>
-		<_init set="method" line="25"><f a=""><x path="Void"/></f></_init>
-		<_onLoaded set="method" line="35"><f a=""><x path="Void"/></f></_onLoaded>
-		<_onTouchStart set="method" line="55"><f a="event">
-	<unknown/>
+		<_img><c path="pixi.core.sprites.Sprite"/></_img>
+		<_label><c path="pixi.core.text.Text"/></_label>
+		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
+		<_onEvent set="method" line="44"><f a="target">
+	<t path="pixi.plugins.eventemitter.EventTarget"/>
 	<x path="Void"/>
-</f></_onTouchStart>
-		<_onTouchEnd set="method" line="59"><f a="event">
-	<unknown/>
-	<x path="Void"/>
-</f></_onTouchEnd>
-		<_onUpdate set="method" line="63"><f a="elapsedTime">
-	<x path="Float"/>
-	<x path="Void"/>
-</f></_onUpdate>
-		<_addFighter set="method" line="69"><f a="x:y">
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Void"/>
-</f></_addFighter>
-		<_addCounter set="method" line="80"><f a=""><x path="Void"/></f></_addCounter>
-		<new public="1" set="method" line="20"><f a=""><x path="Void"/></f></new>
+</f></_onEvent>
+		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>
