@@ -1,10 +1,10 @@
-### Switch to v2.x.x branch for stable v2 externs ###
+### Switch to v2.x branch for stable v2 externs ###
 
 [![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
-Externs of pixi.js (v3) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of Pixi.js (v3) for Haxe - 2D webGL renderer with canvas fallback.
 
 ### Installation ###
 
@@ -88,7 +88,7 @@ class Main {
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
-[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+[Pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
 
 ### Contributor Code of Conduct ###
 
