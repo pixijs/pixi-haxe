@@ -1,15 +1,13 @@
-# haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/v2.x/logo.png)
 
-![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
+Externs of pixi.js (v2.2.9) for Haxe - 2D webGL renderer with canvas fallback.
 
-Externs of pixi.js (v2.2.7) for Haxe - 2D webGL renderer with canvas fallback.
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/pixijs/pixi-haxe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ### Installation ###
 
 ```haxe
-haxelib install pixijs 2.3.0
+haxelib install pixijs 2.3.1
 ```
 ### API Documentation ###
 
@@ -18,11 +16,11 @@ Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
 
 ### Issues ###
 
-Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
+Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
 
 ### Demos ###
 
-Ported from pixi.js
+Ported from Pixi.js
 
 * [Basics](http://adireddy.github.io/demos/haxe-pixi/basics.html)
 * [Graphics](http://adireddy.github.io/demos/haxe-pixi/graphics.html)
@@ -105,7 +103,7 @@ class Main {
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
-[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
 
 ### Contributor Code of Conduct ###
 
