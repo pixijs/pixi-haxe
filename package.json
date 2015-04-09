@@ -1,6 +1,6 @@
 {
   "name": "pixijs",
-  "version": "3.0.0-rc",
+  "version": "3.0.0-rc.4",
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-exec": "^0.4.6",
     "grunt-haxe": "^0.1.12",
+    "grunt-npm-install": "^0.2.0",
     "grunt-shell": "^1.1.1",
     "grunt-zip": "^0.16.0",
     "jsdoc": "^3.2.2"
