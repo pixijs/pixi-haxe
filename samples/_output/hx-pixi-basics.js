@@ -119,7 +119,7 @@ samples.basics.Main.prototype = $extend(pixi.Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.Application.prototype.start.call(this);
+		pixi.Application.prototype.start.call(this,"canvas");
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._bunny.rotation += 0.1;

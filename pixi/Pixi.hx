@@ -47,6 +47,8 @@ extern class Pixi {
 	static var VERSION:String;
 	static var _UID:Float;
 
+	static var instances:Array<Dynamic>;
+
 	static var blendModes: {
 		NORMAL:Int,
 		ADD:Int,

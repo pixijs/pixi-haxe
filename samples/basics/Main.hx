@@ -1,5 +1,6 @@
 package samples.basics;
 
+import pixi.Pixi;
 import js.Browser;
 import pixi.Application;
 import pixi.display.Sprite;
@@ -23,7 +24,7 @@ class Main extends Application {
 	function _init() {
 		backgroundColor = 0x003366;
 		onUpdate = _onUpdate;
-		super.start();
+		super.start(Application.CANVAS);
 	}
 
 	function _onUpdate(elapsedTime:Float) {

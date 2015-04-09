@@ -13605,6 +13605,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<dontSayHello public="1" static="1"><x path="Bool"/></dontSayHello>
 		<VERSION public="1" static="1"><c path="String"/></VERSION>
 		<_UID public="1" static="1"><x path="Float"/></_UID>
+		<instances public="1" static="1"><c path="Array"><d/></c></instances>
 		<blendModes public="1" static="1"><a>
 	<SOFT_LIGHT><x path="Int"/></SOFT_LIGHT>
 	<SCREEN><x path="Int"/></SCREEN>
