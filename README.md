@@ -1,6 +1,6 @@
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/v2.x/logo.png)
 
-Externs of pixi.js (v2.2.9) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of Pixi.js (v2.2.9) for Haxe - 2D webGL renderer with canvas fallback.
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/pixijs/pixi-haxe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -103,7 +103,7 @@ class Main {
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
-[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+[Pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
 
 ### Contributor Code of Conduct ###
 
