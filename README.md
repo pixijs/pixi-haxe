@@ -1,5 +1,3 @@
-### Switch to v2.x branch for stable v2 externs ###
-
 [![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/pixijs/pixi-haxe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
