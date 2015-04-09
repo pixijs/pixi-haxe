@@ -4,7 +4,7 @@
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adireddy/haxe-pixi"
+    "url": "https://github.com/pixijs/pixi-haxe"
   },
   "keywords": [
     "js",
