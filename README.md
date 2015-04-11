@@ -32,6 +32,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Events](http://adireddy.github.io/demos/pixi-haxe/events.html)
 * [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
 * [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
+* [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
 
 Look at the `samples` folder for the source code of above examples.
 
