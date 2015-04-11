@@ -44,5 +44,5 @@ extern class InteractionData {
 	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new point)
 	 * @return {Point} A point containing the coordinates of the InteractionData position relative to the DisplayObject
 	 */
-	function getLocalPosition(displayObject:DisplayObject, point:Point):Point;
+	function getLocalPosition(displayObject:DisplayObject, ?point:Point):Point;
 }
