@@ -102,7 +102,7 @@ samples.spritesheet.Main.__super__ = pixi.plugins.app.Application;
 samples.spritesheet.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this,"canvas");
+		pixi.plugins.app.Application.prototype.start.call(this,"auto");
 		this._loader = new PIXI.loaders.Loader();
 		this._loader.baseUrl = "assets/spritesheet/";
 		this._loader.add("fighter","fighter.json");
@@ -137,7 +137,7 @@ samples.spritesheet.Main.prototype = $extend(pixi.plugins.app.Application.protot
 	}
 	,_addFighter: function(x,y) {
 		var fighter = new PIXI.extras.MovieClip(this._fighterTextures);
-		fighter.anchor.set(0.5,0.5);
+		fighter.anchor.set(0.5);
 		fighter.position.set(x,y);
 		fighter.play();
 		this._stage.addChild(fighter);

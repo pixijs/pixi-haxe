@@ -24,7 +24,7 @@ class Main extends Application {
 
 	function _init() {
 		onUpdate = _onUpdate;
-		super.start(Application.CANVAS);
+		super.start(Application.AUTO);
 
 		_loader = new Loader();
 		_loader.baseUrl = "assets/spritesheet/";
@@ -61,14 +61,12 @@ class Main extends Application {
 	}
 
 	function _onUpdate(elapsedTime:Float) {
-		if (_isAdding) {
-			_addFighter(Std.random(Browser.window.innerWidth), Std.random(Browser.window.innerHeight));
-		}
+		if (_isAdding) _addFighter(Std.random(Browser.window.innerWidth), Std.random(Browser.window.innerHeight));
 	}
 
 	function _addFighter(x:Float, y:Float) {
 		var fighter:MovieClip = new MovieClip(_fighterTextures);
-		fighter.anchor.set(0.5, 0.5);
+		fighter.anchor.set(0.5);
 		fighter.position.set(x, y);
 		fighter.play();
 

@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 				  " --showTodoTags=false " +
 				  " --deny=demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
 				  "--title='Externs of pixi.js for Haxe' " +
-				  "--subtitle='<a href='http://adireddy.github.io/pixi-haxe' target='_blank'>pixi-haxe</a>'",
+				  "--subtitle='<a href='http://adireddy.github.io/docs/pixi-haxe' target='_blank'>pixi-haxe</a>'",
 			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/",
 			cleanup: "rm ./libs/pixi.dev.js && rm ./libs/stats.dev.js"
 		},
