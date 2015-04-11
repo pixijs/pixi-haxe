@@ -48,12 +48,12 @@ module.exports = function (grunt) {
 
 		exec: {
 			copy_libs: "cp -R ./libs/*.min.js ./samples/_output/libs/",
-			docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/haxe-pixi/v3 -f docs.xml " +
+			docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/pixi-haxe/ -f docs.xml " +
 				  " --showTodoTags=false " +
 				  " --deny=demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
 				  "--title='Externs of pixi.js for Haxe' " +
-				  "--subtitle='<a href='http://adireddy.github.io/haxe-pixi' target='_blank'>haxe-pixi</a>'",
-			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/haxe-pixi/v3/",
+				  "--subtitle='<a href='http://adireddy.github.io/pixi-haxe' target='_blank'>pixi-haxe</a>'",
+			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/",
 			cleanup: "rm ./libs/pixi.dev.js && rm ./libs/stats.dev.js"
 		},
 

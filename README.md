@@ -11,7 +11,7 @@ haxelib install pixijs 3.0.0-rc.41
 ```
 ### API Documentation ###
 
-[Documentation](http://adireddy.github.io/docs/haxe-pixi/v3/) - generated with chxdocs
+[Documentation](http://adireddy.github.io/docs/haxe-pixi/) - generated with chxdocs
 
 ### Issues ###
 
@@ -19,13 +19,19 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 
 ### Demos ###
 
-* [Basics](http://adireddy.github.io/demos/haxe-pixi/v3/basics.html) - basic example
-* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/v3/bunnymark.html) - perormance check
-* [Spritesheet](http://adireddy.github.io/demos/haxe-pixi/v3/spritesheet.html) - perormance check
-* [Retina](http://adireddy.github.io/demos/haxe-pixi/v3/retina.html) - retina asset handling
-* [Events](http://adireddy.github.io/demos/haxe-pixi/v3/events.html) - events example
-* [Loader](http://adireddy.github.io/demos/haxe-pixi/v3/loader.html) - using loader to load images
-* [Video](http://adireddy.github.io/demos/haxe-pixi/v3/video.html) - video test
+* [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
+* [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
+* [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
+* [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
+* [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
+* [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
+* [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
+* [Bitmap Font](http://adireddy.github.io/demos/pixi-haxe/bitmapfont.html)
+* [Bunnymark](http://adireddy.github.io/demos/pixi-haxe/bunnymark.html)
+* [Retina](http://adireddy.github.io/demos/pixi-haxe/retina.html)
+* [Events](http://adireddy.github.io/demos/pixi-haxe/events.html)
+* [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
+* [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
 
 Look at the `samples` folder for the source code of above examples.
 
