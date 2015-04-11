@@ -13766,9 +13766,9 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="pixi.core.math.Point"/>
 			</f>
 			<haxe_doc>* Returns the global position of the displayObject
-	*
-	* @param point {Point} the point to write the global value to. If null a new point will be returned
-	* @return {Point}</haxe_doc>
+	 *
+	 * @param point {Point} the point to write the global value to. If null a new point will be returned
+	 * @return {Point}</haxe_doc>
 		</getGlobalPosition>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
@@ -14674,7 +14674,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @return {Point} a copy of the point</haxe_doc>
 		</clone>
 		<set public="1" set="method">
-			<f a="x:y">
+			<f a="?x:?y">
 				<x path="Float"/>
 				<x path="Float"/>
 				<x path="Void"/>
@@ -15544,7 +15544,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {ShaderManager}</haxe_doc>
 		</shaderManager>
 		<maskManager public="1">
-			<d/>
+			<c path="pixi.core.renderers.webgl.managers.MaskManager"/>
 			<haxe_doc>* Manages the masks using the stencil buffer.
      *
      * @member {MaskManager}</haxe_doc>
@@ -15556,13 +15556,13 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {StencilManager}</haxe_doc>
 		</stencilManager>
 		<filterManager public="1">
-			<d/>
+			<c path="pixi.core.renderers.webgl.managers.FilterManager"/>
 			<haxe_doc>* Manages the filters.
      *
      * @member {FilterManager}</haxe_doc>
 		</filterManager>
 		<blendModeManager public="1">
-			<d/>
+			<c path="pixi.core.renderers.webgl.managers.BlendModeManager"/>
 			<haxe_doc>* Manages the blendModes
      * @member {BlendModeManager}</haxe_doc>
 		</blendModeManager>
@@ -15609,7 +15609,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<padding public="1">
 			<x path="Float"/>
 			<haxe_doc>* The extra padding that the filter might need
-     * @member {number}</haxe_doc>
+	 * @member {number}</haxe_doc>
 		</padding>
 		<getShader public="1" set="method"><f a="renderer">
 	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
@@ -15706,7 +15706,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends WebGlManager
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.WebGLBlendModeManager"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.webgl.managers.FilterManager" params="" file="pixi/core/renderers/webgl/managers/FilterManager.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
@@ -15781,7 +15780,124 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @extends WebGlManager
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.WebGLFilterManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.webgl.managers.MaskManager" params="" file="pixi/core/renderers/webgl/managers/MaskManager.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<pushMask public="1" set="method">
+			<f a="target:maskData">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Applies the Mask and adds it to the current filter stack.
+	 *
+	 * @param graphics {Graphics}
+	 * @param webGLData {any[]}</haxe_doc>
+		</pushMask>
+		<popMask public="1" set="method">
+			<f a="target:maskData">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Removes the last mask from the mask stack and doesn't return it.
+	 *
+	 * @param target {RenderTarget}
+	 * @param maskData {any[]}</haxe_doc>
+		</popMask>
+		<pushSpriteMask public="1" set="method">
+			<f a="target:maskData">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Applies the Mask and adds it to the current filter stack.
+	 *
+	 * @param target {RenderTarget}
+	 * @param maskData {any[]}</haxe_doc>
+		</pushSpriteMask>
+		<popSpriteMask public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Removes the last filter from the filter stack and doesn't return it.
+	 *</haxe_doc>
+		</popSpriteMask>
+		<pushStencilMask public="1" set="method">
+			<f a="target:maskData">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Applies the Mask and adds it to the current filter stack.
+	 *
+	 * @param target {RenderTarget}
+	 * @param maskData {any[]}</haxe_doc>
+		</pushStencilMask>
+		<popStencilMask public="1" set="method">
+			<f a="target:maskData">
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Removes the last filter from the filter stack and doesn't return it.
+	 * @param target {RenderTarget}
+	 * @param maskData {any[]}</haxe_doc>
+		</popStencilMask>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.core.renderers.webgl.managers.ShaderManager" params="" file="pixi/core/renderers/webgl/managers/ShaderManager.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<maxAttibs public="1">
+			<x path="Int"/>
+			<haxe_doc>* @member {number}</haxe_doc>
+		</maxAttibs>
+		<attribState public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @member {any[]}</haxe_doc>
+		</attribState>
+		<tempAttribState public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @member {any[]}</haxe_doc>
+		</tempAttribState>
+		<stack public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* @member {any[]}</haxe_doc>
+		</stack>
+		<setAttribs public="1" set="method">
+			<f a="attribs">
+				<c path="Array"><d/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Takes the attributes given in parameters and uploads them.
+	 *
+	 * @param attribs {Array} attribs</haxe_doc>
+		</setAttribs>
+		<setShader public="1" set="method">
+			<f a="shader">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the current shader.
+	 *
+	 * @param shader {Shader} the shader to upload</haxe_doc>
+		</setShader>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @extends WebGLManager
+	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
 	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
@@ -16641,60 +16757,53 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<textWidth public="1">
 			<x path="Float"/>
 			<haxe_doc>* The width of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
+	 * which is defined in the style object
+	 *
+	 * @member {Float}
+	 * @readOnly</haxe_doc>
 		</textWidth>
 		<textHeight public="1">
 			<x path="Float"/>
 			<haxe_doc>* The height of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly</haxe_doc>
+	 * which is defined in the style object
+	 *
+	 * @member {Float}
+	 * @readOnly</haxe_doc>
 		</textHeight>
 		<maxWidth public="1">
 			<x path="Float"/>
 			<haxe_doc>* The max width of this bitmap text in pixels. If the text provided is longer than the value provided, line breaks will be automatically inserted in the last whitespace.
-     * Disable by setting value to 0
-     *
-     * @member {Float}</haxe_doc>
+	 * Disable by setting value to 0
+	 *
+	 * @member {Float}</haxe_doc>
 		</maxWidth>
 		<dirty public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The dirty state of this object.
-     *
-     * @member {Bool}</haxe_doc>
+	 *
+	 * @member {Bool}</haxe_doc>
 		</dirty>
 		<tint public="1">
 			<x path="Float"/>
 			<haxe_doc>* The tint of the BitmapText object
-     *
-     * @member {Float}
-     * @memberof BitmapText#</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @memberof BitmapText#</haxe_doc>
 		</tint>
 		<align public="1">
 			<c path="String"/>
 			<haxe_doc>* The alignment of the BitmapText object
-     *
-     * @member {String}
-     * @default 'left'
-     * @memberof BitmapText#</haxe_doc>
+	 *
+	 * @member {String}
+	 * @default 'left'
+	 * @memberof BitmapText#</haxe_doc>
 		</align>
-		<font public="1">
-			<t path="pixi.extras.FontProperties"/>
-			<haxe_doc>* The font descriptor of the BitmapText object
-     *
-     * @member {Font}
-     * @memberof BitmapText#</haxe_doc>
-		</font>
 		<text public="1">
 			<c path="String"/>
 			<haxe_doc>* The text of the BitmapText object
-     *
-     * @member {String}
-     * @memberof BitmapText#</haxe_doc>
+	 *
+	 * @member {String}
+	 * @memberof BitmapText#</haxe_doc>
 		</text>
 		<new public="1" set="method">
 			<f a="text:?style">
@@ -16722,26 +16831,24 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @param text {String} The copy that you would like the text to display
 	 * @param style {TextStyle} The style parameters
 	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
-	 *      "24px FontName" or "FontName" or as an object with explicit name/size properties.
-	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
+	 * "24px FontName" or "FontName" or as an object with explicit name/size properties.
 	 * @param [style.font.name] {string} The bitmap font id
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text</haxe_doc>
+	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
+	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect
+	 *      single line text
+	 * @param [style.tint=0xFFFFFF] {number} The tint color</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.BitmapText"</e></m></meta>
 	</class>
-	<typedef path="pixi.extras.BitmapTextStyle" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a><font>
-	<t path="pixi.extras.FontProperties"/>
-	<meta><m n=":optional"/></meta>
-</font></a></typedef>
-	<typedef path="pixi.extras.FontProperties" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a>
-	<size>
-		<x path="Float"/>
+	<typedef path="pixi.extras.BitmapTextStyle" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a>
+	<tint>
+		<x path="Int"/>
 		<meta><m n=":optional"/></meta>
-	</size>
-	<name>
+	</tint>
+	<font>
 		<c path="String"/>
 		<meta><m n=":optional"/></meta>
-	</name>
+	</font>
 	<align>
 		<c path="String"/>
 		<meta><m n=":optional"/></meta>
@@ -16772,56 +16879,56 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<animationSpeed public="1">
 			<x path="Float"/>
 			<haxe_doc>* The speed that the MovieClip will play at. Higher is faster, lower is slower
-     *
-     * @member {Float}
-     * @default 1</haxe_doc>
+	 *
+	 * @member {Float}
+	 * @default 1</haxe_doc>
 		</animationSpeed>
 		<loop public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether or not the movie clip repeats after playing.
-     *
-     * @member {Bool}
-     * @default true</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @default true</haxe_doc>
 		</loop>
 		<onComplete public="1">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* 	function to call when a MovieClip finishes playing
-     *
-     * @method
-     * @memberof MovieClip#</haxe_doc>
+	 *
+	 * @method
+	 * @memberof MovieClip#</haxe_doc>
 		</onComplete>
 		<currentFrame public="1">
 			<x path="Int"/>
 			<haxe_doc>* The MovieClips current frame index (this may not have to be a whole number)
-     *
-     * @member {Int}
-     * @default 0
-     * @readonly</haxe_doc>
+	 *
+	 * @member {Int}
+	 * @default 0
+	 * @readonly</haxe_doc>
 		</currentFrame>
 		<playing public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the MovieClip is currently playing
-     *
-     * @member {Bool}
-     * @readonly</haxe_doc>
+	 *
+	 * @member {Bool}
+	 * @readonly</haxe_doc>
 		</playing>
 		<totalFrames public="1">
 			<x path="Int"/>
 			<haxe_doc>* totalFrames is the total number of frames in the MovieClip. This is the same as number of textures
-     * assigned to the MovieClip.
-     *
-     * @member
-     * @memberof MovieClip#
-     * @default 0
-     * @readonly</haxe_doc>
+	 * assigned to the MovieClip.
+	 *
+	 * @member
+	 * @memberof MovieClip#
+	 * @default 0
+	 * @readonly</haxe_doc>
 		</totalFrames>
 		<textures public="1">
 			<c path="Array"><c path="pixi.core.textures.Texture"/></c>
 			<haxe_doc>* The array of textures used for this MovieClip
-     *
-     * @member
-     * @memberof MovieClip#
-     *</haxe_doc>
+	 *
+	 * @member
+	 * @memberof MovieClip#
+	 *</haxe_doc>
 		</textures>
 		<stop public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -16889,26 +16996,26 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<deltaTime public="1">
 			<x path="Float"/>
 			<haxe_doc>* The deltaTime
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</deltaTime>
 		<timeElapsed public="1">
 			<x path="Float"/>
 			<haxe_doc>* The time between two frames
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</timeElapsed>
 		<lastTime public="1">
 			<x path="Float"/>
 			<haxe_doc>* The time at the last frame
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</lastTime>
 		<speed public="1">
 			<x path="Float"/>
 			<haxe_doc>* The speed
-     *
-     * @member {Float}</haxe_doc>
+	 *
+	 * @member {Float}</haxe_doc>
 		</speed>
 		<start public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -16939,14 +17046,14 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<tileScale public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The scaling of the image that is being tiled
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</tileScale>
 		<tilePosition public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* The offset position of the image that is being tiled
-     *
-     * @member {Point}</haxe_doc>
+	 *
+	 * @member {Point}</haxe_doc>
 		</tilePosition>
 		<generateTilingTexture public="1" set="method">
 			<f a="renderer:texture:forcePowerOfTwo">
@@ -17018,7 +17125,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {Event}</haxe_doc>
 		</originalEvent>
 		<getLocalPosition public="1" set="method">
-			<f a="displayObject:point">
+			<f a="displayObject:?point">
 				<c path="pixi.core.display.DisplayObject"/>
 				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.math.Point"/>
@@ -17376,6 +17483,120 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
 	</class>
+	<class path="pixi.mesh.Mesh" params="" file="pixi/mesh/Mesh.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<DRAW_MODES public="1" static="1">
+			<t path="pixi.mesh.DrawModes"/>
+			<haxe_doc>* Different drawing buffer modes supported
+	 *
+	 * @static
+	 * @constant
+	 * @property {object} DRAW_MODES
+	 * @property {number} DRAW_MODES.TRIANGLE_MESH
+	 * @property {number} DRAW_MODES.TRIANGLES</haxe_doc>
+		</DRAW_MODES>
+		<texture public="1">
+			<c path="pixi.core.textures.Texture"/>
+			<haxe_doc>* The texture of the Mesh
+	 *
+	 * @member {Texture}</haxe_doc>
+		</texture>
+		<uvs public="1">
+			<c path="Array"><x path="Float"/></c>
+			<haxe_doc><![CDATA[* The Uvs of the Mesh
+	 *
+	 * @member {Array<Float>}]]></haxe_doc>
+		</uvs>
+		<vertices public="1">
+			<c path="Array"><x path="Float"/></c>
+			<haxe_doc><![CDATA[* An array of vertices
+	 *
+	 * @member {Array<Float>}]]></haxe_doc>
+		</vertices>
+		<indices public="1"><c path="Array"><x path="Int"/></c></indices>
+		<dirty public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether the Mesh is dirty or not
+	 *
+	 * @member {Bool}</haxe_doc>
+		</dirty>
+		<blendMode public="1">
+			<x path="Int"/>
+			<haxe_doc>* The blend mode to be applied to the sprite. Set to blendModes.NORMAL to remove any blend mode.
+	 *
+	 * @member {Int}
+	 * @default CONST.BLEND_MODES.NORMAL;</haxe_doc>
+		</blendMode>
+		<canvasPadding public="1">
+			<x path="Float"/>
+			<haxe_doc>* Triangles in canvas mode are automatically antialiased, use var value to force triangles to overlap a bit with each other.
+	 *
+	 * @member {Float}</haxe_doc>
+		</canvasPadding>
+		<drawMode public="1">
+			<x path="Int"/>
+			<haxe_doc>* The way the Mesh should be drawn, can be any of the Mesh.DRAW_MODES consts
+	 *
+	 * @member {Int}</haxe_doc>
+		</drawMode>
+		<new public="1" set="method">
+			<f a="texture:?vertices:?uvs:?indices:?drawMode">
+				<c path="pixi.core.textures.Texture"/>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* Base mesh class
+	 * @class
+	 * @extends Container
+	 * @memberof PIXI.mesh
+	 * @param texture {Texture} The texture to use
+	 * @param [vertices] {Array<Float>} if you want to specify the vertices
+	 * @param [uvs] {Array<Float>} if you want to specify the uvs
+	 * @param [indices] {Array<Int>} if you want to specify the indices
+	 * @param [drawMode] {Int} the drawMode, can be any of the Mesh.DRAW_MODES consts]]></haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.mesh.Mesh"</e></m></meta>
+	</class>
+	<typedef path="pixi.mesh.DrawModes" params="" file="pixi/mesh/Mesh.hx" module="pixi.mesh.Mesh"><a>
+	<TRIANGLE_MESH><x path="Int"/></TRIANGLE_MESH>
+	<TRIANGLES><x path="Int"/></TRIANGLES>
+</a></typedef>
+	<class path="pixi.mesh.Rope" params="" file="pixi/mesh/Rope.hx" extern="1">
+		<extends path="pixi.mesh.Mesh"/>
+		<points public="1"><c path="Array"><c path="pixi.core.math.Point"/></c></points>
+		<colors public="1"><c path="Array"><x path="Float"/></c></colors>
+		<refresh public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Refreshes
+	 *</haxe_doc>
+		</refresh>
+		<new public="1" set="method">
+			<f a="texture:?points">
+				<c path="pixi.core.textures.Texture"/>
+				<c path="Array"><c path="pixi.core.math.Point"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* The rope allows you to draw a texture across several points and them manipulate these points
+	 *
+	 *```js
+	 * for (var i = 0; i < 20; i++) {
+	 *     points.push(new PIXI.Point(i * 50, 0));
+	 * };
+	 * var rope = new PIXI.Rope(PIXI.Texture.fromImage("snake.png"), points);
+	 *  ```
+	 *
+	 * @class
+	 * @extends Mesh
+	 * @memberof PIXI.mesh
+	 * @param {Texture} texture - The texture to use on the rope.
+	 * @param {Array} points - An array of {Point} objects to construct var rope.
+	 *]]></haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.mesh.Rope"</e></m></meta>
+	</class>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
 		<pixelRatio public="1" get="null">
 			<x path="Float"/>
@@ -17397,12 +17618,17 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Height of the application.
 	 * default - Browser.window.innerHeight</haxe_doc>
 		</height>
-		<resize public="1" get="null">
+		<antialias public="1" get="null">
+			<x path="Bool"/>
+			<haxe_doc>* Graphics antialias property.
+	 * default - false</haxe_doc>
+		</antialias>
+		<autoResize public="1" get="null">
 			<x path="Bool"/>
 			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true</haxe_doc>
-		</resize>
+		</autoResize>
 		<backgroundColor public="1" get="null">
 			<x path="Int"/>
 			<haxe_doc>* Sets the background color of the stage.
@@ -17431,8 +17657,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="94"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="113">
+		<_setDefaultValues set="method" line="100"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="119">
 			<f a="?renderer:?stats:?parentDom" v="'auto':true:null">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -17446,26 +17672,26 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="141">
+		<_onWindowResize set="method" line="148">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="156">
+		<_onRequestAnimationFrame set="method" line="163">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="168">
+		<_calculateElapsedTime set="method" line="175">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="174">
+		<_addStats set="method" line="181">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>
-		<new public="1" set="method" line="89"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="95"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io

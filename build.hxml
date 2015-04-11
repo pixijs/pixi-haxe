@@ -11,6 +11,39 @@
 -js samples/_output/basics.js
 
 --next
+-main samples.spritesheet.Main
+-js samples/_output/spritesheet.js
+
+--next
+-main samples.movieclip.Main
+-js samples/_output/movieclip.js
+
+--next
+-main samples.graphics.Main
+-js samples/_output/graphics.js
+
+--next
+-main samples.tiling.Main
+-js samples/_output/tiling.js
+
+--next
+-main samples.bitmapfont.Main
+-js samples/_output/bitmapfont.js
+
+--next
+-main samples.dragging.Main
+-js samples/_output/dragging.js
+
+--next
+-main samples.nape.Main
+-js samples/_output/nape.js
+-lib nape
+
+--next
+-main samples.rope.Main
+-js samples/_output/rope.js
+
+--next
 -main samples.retina.Main
 -js samples/_output/retina.js
 
@@ -29,10 +62,6 @@
 --next
 -main samples.stream.Main
 -js samples/_output/stream.js
-
---next
--main samples.spritesheet.Main
--js samples/_output/spritesheet.js
 
 --next
 -main samples.events.Main
