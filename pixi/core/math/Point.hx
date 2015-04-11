@@ -29,7 +29,7 @@ extern class Point {
 	 * @param [x=0] {Float} position of the point on the x axis
 	 * @param [y=0] {Float} position of the point on the y axis
 	 */
-	function set(x:Float, y:Float):Void;
+	function set(?x:Float, ?y:Float):Void;
 
 	/**
 	 * @property x
