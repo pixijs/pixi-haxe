@@ -34,69 +34,69 @@ extern class BitmapText extends Container {
 	function new(text:String, ?style:BitmapTextStyle):Void;
 
 	/**
-     * The width of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly
-     */
+	 * The width of the overall text, different from fontSize,
+	 * which is defined in the style object
+	 *
+	 * @member {Float}
+	 * @readOnly
+	 */
 	var textWidth:Float;
 
 	/**
-     * The height of the overall text, different from fontSize,
-     * which is defined in the style object
-     *
-     * @member {Float}
-     * @readOnly
-     */
+	 * The height of the overall text, different from fontSize,
+	 * which is defined in the style object
+	 *
+	 * @member {Float}
+	 * @readOnly
+	 */
 	var textHeight:Float;
 
 	/**
-     * The max width of this bitmap text in pixels. If the text provided is longer than the value provided, line breaks will be automatically inserted in the last whitespace.
-     * Disable by setting value to 0
-     *
-     * @member {Float}
-     */
+	 * The max width of this bitmap text in pixels. If the text provided is longer than the value provided, line breaks will be automatically inserted in the last whitespace.
+	 * Disable by setting value to 0
+	 *
+	 * @member {Float}
+	 */
 	var maxWidth:Float;
 
 	/**
-     * The dirty state of this object.
-     *
-     * @member {Bool}
-     */
+	 * The dirty state of this object.
+	 *
+	 * @member {Bool}
+	 */
 	var dirty:Bool;
 
 	/**
-     * The tint of the BitmapText object
-     *
-     * @member {Float}
-     * @memberof BitmapText#
-     */
+	 * The tint of the BitmapText object
+	 *
+	 * @member {Float}
+	 * @memberof BitmapText#
+	 */
 	var tint:Float;
 
 	/**
-     * The alignment of the BitmapText object
-     *
-     * @member {String}
-     * @default 'left'
-     * @memberof BitmapText#
-     */
+	 * The alignment of the BitmapText object
+	 *
+	 * @member {String}
+	 * @default 'left'
+	 * @memberof BitmapText#
+	 */
 	var align:String;
 
 	/**
-     * The font descriptor of the BitmapText object
-     *
-     * @member {Font}
-     * @memberof BitmapText#
-     */
+	 * The font descriptor of the BitmapText object
+	 *
+	 * @member {Font}
+	 * @memberof BitmapText#
+	 */
 	var font:FontProperties;
 
 	/**
-     * The text of the BitmapText object
-     *
-     * @member {String}
-     * @memberof BitmapText#
-     */
+	 * The text of the BitmapText object
+	 *
+	 * @member {String}
+	 * @memberof BitmapText#
+	 */
 	var text:String;
 }
 
