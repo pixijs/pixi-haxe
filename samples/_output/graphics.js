@@ -5,6 +5,10 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var Std = function() { };
+Std["int"] = function(x) {
+	return x | 0;
+};
 var pixi = {};
 pixi.plugins = {};
 pixi.plugins.app = {};
@@ -86,44 +90,75 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.loader = {};
-samples.loader.Main = function() {
+samples.graphics = {};
+samples.graphics.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.loader.Main.main = function() {
-	new samples.loader.Main();
+samples.graphics.Main.main = function() {
+	new samples.graphics.Main();
 };
-samples.loader.Main.__super__ = pixi.plugins.app.Application;
-samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.graphics.Main.__super__ = pixi.plugins.app.Application;
+samples.graphics.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
-		pixi.plugins.app.Application.prototype.start.call(this,"auto");
-		this._baseURL = "assets/loader/";
-		this._loader = new PIXI.loaders.Loader();
-		this._loader.baseUrl = this._baseURL;
-		var _g = 1;
-		while(_g < 10) {
-			var i = _g++;
-			this._loader.add("img" + i,i + ".png");
-		}
-		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.load($bind(this,this._onLoaded));
+		this.backgroundColor = 0;
+		this.antialias = true;
+		this.onUpdate = $bind(this,this._onUpdate);
+		pixi.plugins.app.Application.prototype.start.call(this);
+		this._graphics = new PIXI.Graphics();
+		this._graphics.beginFill(16724736);
+		this._graphics.lineStyle(10,16767232,1);
+		this._graphics.moveTo(50,50);
+		this._graphics.lineTo(250,50);
+		this._graphics.lineTo(100,100);
+		this._graphics.lineTo(250,220);
+		this._graphics.lineTo(50,220);
+		this._graphics.lineTo(50,50);
+		this._graphics.endFill();
+		this._graphics.lineStyle(10,16711680,0.8);
+		this._graphics.beginFill(16740363,1);
+		this._graphics.moveTo(210,300);
+		this._graphics.lineTo(450,320);
+		this._graphics.lineTo(570,350);
+		this._graphics.lineTo(580,20);
+		this._graphics.lineTo(330,120);
+		this._graphics.lineTo(410,200);
+		this._graphics.lineTo(210,300);
+		this._graphics.endFill();
+		this._graphics.lineStyle(2,255,1);
+		this._graphics.drawRect(50,250,100,100);
+		this._graphics.lineStyle(0);
+		this._graphics.beginFill(16776971,0.5);
+		this._graphics.drawCircle(470,200,100);
+		this._graphics.lineStyle(20,3407616);
+		this._graphics.moveTo(30,30);
+		this._graphics.lineTo(600,300);
+		this._stage.addChild(this._graphics);
+		this._thing = new PIXI.Graphics();
+		this._stage.addChild(this._thing);
+		this._thing.position.x = window.innerWidth / 2;
+		this._thing.position.y = window.innerHeight / 2;
+		this._count = 0;
+		this._stage.interactive = true;
+		this._stage.on("click",$bind(this,this._onStageClick));
+		this._stage.on("tap",$bind(this,this._onStageClick));
 	}
-	,_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
+	,_onUpdate: function(elapsedTime) {
+		this._count += 0.1;
+		this._thing.clear();
+		this._thing.lineStyle(30,16711680,1);
+		this._thing.beginFill(16711680,0.5);
+		this._thing.moveTo(-120 + Math.sin(this._count) * 20,-100 + Math.cos(this._count) * 20);
+		this._thing.lineTo(120 + Math.cos(this._count) * 20,-100 + Math.sin(this._count) * 20);
+		this._thing.lineTo(120 + Math.sin(this._count) * 20,100 + Math.cos(this._count) * 20);
+		this._thing.lineTo(-120 + Math.cos(this._count) * 20,100 + Math.sin(this._count) * 20);
+		this._thing.lineTo(-120 + Math.sin(this._count) * 20,-100 + Math.cos(this._count) * 20);
+		this._thing.rotation = this._count * 0.1;
 	}
-	,_onLoaded: function() {
-		var _container = new PIXI.Container();
-		this._stage.addChild(_container);
-		var _g = 1;
-		while(_g < 11) {
-			var i = _g++;
-			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
-			this._img.name = "img" + i;
-			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
-			_container.addChild(this._img);
-		}
-		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
+	,_onStageClick: function(target) {
+		this._graphics.lineStyle(Math.random() * 30,Std["int"](Math.random() * 16777215),1);
+		this._graphics.moveTo(Math.random() * 620,Math.random() * 380);
+		this._graphics.lineTo(Math.random() * 620,Math.random() * 380);
 	}
 });
 var $_, $fid = 0;
@@ -137,7 +172,7 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-samples.loader.Main.main();
+samples.graphics.Main.main();
 })();
 
-//# sourceMappingURL=loader.js.map
+//# sourceMappingURL=graphics.js.map

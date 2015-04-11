@@ -20,7 +20,7 @@ pixi.plugins.app.Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
-		this.resize = true;
+		this.autoResize = true;
 		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
@@ -40,10 +40,11 @@ pixi.plugins.app.Application.prototype = {
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
-		renderingOptions.autoResize = true;
+		renderingOptions.antialias = this.antialias;
+		renderingOptions.autoResize = this.autoResize;
 		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		window.document.body.appendChild(this._renderer.view);
-		if(this.resize) window.onresize = $bind(this,this._onWindowResize);
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
 		if(stats) this._addStats();

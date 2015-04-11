@@ -86,44 +86,47 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.loader = {};
-samples.loader.Main = function() {
+samples.rope = {};
+samples.rope.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.loader.Main.main = function() {
-	new samples.loader.Main();
+samples.rope.Main.main = function() {
+	new samples.rope.Main();
 };
-samples.loader.Main.__super__ = pixi.plugins.app.Application;
-samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.rope.Main.__super__ = pixi.plugins.app.Application;
+samples.rope.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
+		this.backgroundColor = 16777215;
+		this.onUpdate = $bind(this,this._onUpdate);
 		pixi.plugins.app.Application.prototype.start.call(this,"auto");
-		this._baseURL = "assets/loader/";
-		this._loader = new PIXI.loaders.Loader();
-		this._loader.baseUrl = this._baseURL;
-		var _g = 1;
-		while(_g < 10) {
+		this._count = 0;
+		this._points = [];
+		this._length = 45.9;
+		var _g = 0;
+		while(_g < 20) {
 			var i = _g++;
-			this._loader.add("img" + i,i + ".png");
+			var segSize = this._length;
+			this._points.push(new PIXI.Point(i * this._length,0));
 		}
-		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.load($bind(this,this._onLoaded));
+		var strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("assets/rope/snake.png"),this._points);
+		strip.x = -459.;
+		var snakeContainer = new PIXI.Container();
+		snakeContainer.position.x = this.width / 2;
+		snakeContainer.position.y = this.height / 2;
+		snakeContainer.scale.x = this.width / 1100;
+		this._stage.addChild(snakeContainer);
+		snakeContainer.addChild(strip);
 	}
-	,_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
-	}
-	,_onLoaded: function() {
-		var _container = new PIXI.Container();
-		this._stage.addChild(_container);
-		var _g = 1;
-		while(_g < 11) {
-			var i = _g++;
-			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
-			this._img.name = "img" + i;
-			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
-			_container.addChild(this._img);
+	,_onUpdate: function(elapsedTime) {
+		this._count += 0.1;
+		var _g1 = 0;
+		var _g = this._points.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this._points[i].y = Math.sin(i * 0.5 + this._count) * 30;
+			this._points[i].x = i * this._length + Math.cos(i * 0.3 + this._count) * 20;
 		}
-		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
 	}
 });
 var $_, $fid = 0;
@@ -137,7 +140,7 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-samples.loader.Main.main();
+samples.rope.Main.main();
 })();
 
-//# sourceMappingURL=loader.js.map
+//# sourceMappingURL=rope.js.map

@@ -5,6 +5,10 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var Std = function() { };
+Std.random = function(x) {
+	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
+};
 var pixi = {};
 pixi.plugins = {};
 pixi.plugins.app = {};
@@ -86,44 +90,46 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.loader = {};
-samples.loader.Main = function() {
+samples.movieclip = {};
+samples.movieclip.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.loader.Main.main = function() {
-	new samples.loader.Main();
+samples.movieclip.Main.main = function() {
+	new samples.movieclip.Main();
 };
-samples.loader.Main.__super__ = pixi.plugins.app.Application;
-samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.movieclip.Main.__super__ = pixi.plugins.app.Application;
+samples.movieclip.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
+		this.backgroundColor = 16777215;
 		pixi.plugins.app.Application.prototype.start.call(this,"auto");
-		this._baseURL = "assets/loader/";
-		this._loader = new PIXI.loaders.Loader();
-		this._loader.baseUrl = this._baseURL;
-		var _g = 1;
-		while(_g < 10) {
-			var i = _g++;
-			this._loader.add("img" + i,i + ".png");
-		}
-		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.load($bind(this,this._onLoaded));
-	}
-	,_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
+		var mcloader = new PIXI.loaders.Loader();
+		mcloader.add("mc","assets/movieclip/SpriteSheet.json");
+		mcloader.load($bind(this,this._onLoaded));
 	}
 	,_onLoaded: function() {
-		var _container = new PIXI.Container();
-		this._stage.addChild(_container);
-		var _g = 1;
-		while(_g < 11) {
+		var explosionTextures = [];
+		var texture;
+		var _g = 0;
+		while(_g < 26) {
 			var i = _g++;
-			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
-			this._img.name = "img" + i;
-			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
-			_container.addChild(this._img);
+			texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
+			explosionTextures.push(texture);
 		}
-		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
+		var explosion;
+		var _g1 = 0;
+		while(_g1 < 80) {
+			var i1 = _g1++;
+			explosion = new PIXI.extras.MovieClip(explosionTextures);
+			explosion.position.x = Math.random() * window.innerWidth;
+			explosion.position.y = Math.random() * window.innerHeight;
+			explosion.anchor.set(0.5,0.5);
+			explosion.rotation = Math.random() * Math.PI;
+			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
+			explosion.gotoAndPlay(Std.random(27));
+			explosion.animationSpeed = 0.8;
+			this._stage.addChild(explosion);
+		}
 	}
 });
 var $_, $fid = 0;
@@ -137,7 +143,7 @@ Math.isFinite = function(i) {
 Math.isNaN = function(i1) {
 	return isNaN(i1);
 };
-samples.loader.Main.main();
+samples.movieclip.Main.main();
 })();
 
-//# sourceMappingURL=loader.js.map
+//# sourceMappingURL=movieclip.js.map

@@ -86,58 +86,33 @@ pixi.plugins.app.Application.prototype = {
 	}
 };
 var samples = {};
-samples.loader = {};
-samples.loader.Main = function() {
+samples.bitmapfont = {};
+samples.bitmapfont.Main = function() {
 	pixi.plugins.app.Application.call(this);
 	this._init();
 };
-samples.loader.Main.main = function() {
-	new samples.loader.Main();
+samples.bitmapfont.Main.main = function() {
+	new samples.bitmapfont.Main();
 };
-samples.loader.Main.__super__ = pixi.plugins.app.Application;
-samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples.bitmapfont.Main.__super__ = pixi.plugins.app.Application;
+samples.bitmapfont.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
-		pixi.plugins.app.Application.prototype.start.call(this,"auto");
-		this._baseURL = "assets/loader/";
-		this._loader = new PIXI.loaders.Loader();
-		this._loader.baseUrl = this._baseURL;
-		var _g = 1;
-		while(_g < 10) {
-			var i = _g++;
-			this._loader.add("img" + i,i + ".png");
-		}
-		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.load($bind(this,this._onLoaded));
-	}
-	,_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
+		this.backgroundColor = 13158;
+		pixi.plugins.app.Application.prototype.start.call(this);
+		var fontloader = new PIXI.loaders.Loader();
+		fontloader.add("font","assets/fonts/desyrel.xml");
+		fontloader.load($bind(this,this._onLoaded));
 	}
 	,_onLoaded: function() {
-		var _container = new PIXI.Container();
-		this._stage.addChild(_container);
-		var _g = 1;
-		while(_g < 11) {
-			var i = _g++;
-			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
-			this._img.name = "img" + i;
-			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
-			_container.addChild(this._img);
-		}
-		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
+		var bitmapFontText = new PIXI.extras.BitmapText("bitmap fonts are\n now supported!",{ font : "60px Desyrel"});
+		bitmapFontText.position.x = (window.innerWidth - bitmapFontText.width) / 2;
+		bitmapFontText.position.y = (window.innerHeight - bitmapFontText.height) / 2;
+		this._stage.addChild(bitmapFontText);
 	}
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.loader.Main.main();
+samples.bitmapfont.Main.main();
 })();
 
-//# sourceMappingURL=loader.js.map
+//# sourceMappingURL=bitmapfont.js.map
