@@ -26,10 +26,12 @@ extern class BitmapText extends Container {
 	 * @param text {String} The copy that you would like the text to display
 	 * @param style {TextStyle} The style parameters
 	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
-	 *      "24px FontName" or "FontName" or as an object with explicit name/size properties.
-	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
+	 * "24px FontName" or "FontName" or as an object with explicit name/size properties.
 	 * @param [style.font.name] {string} The bitmap font id
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
+	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect
+	 *      single line text
+	 * @param [style.tint=0xFFFFFF] {number} The tint color
 	 */
 	function new(text:String, ?style:BitmapTextStyle):Void;
 
@@ -84,14 +86,6 @@ extern class BitmapText extends Container {
 	var align:String;
 
 	/**
-	 * The font descriptor of the BitmapText object
-	 *
-	 * @member {Font}
-	 * @memberof BitmapText#
-	 */
-	var font:FontProperties;
-
-	/**
 	 * The text of the BitmapText object
 	 *
 	 * @member {String}
@@ -101,11 +95,7 @@ extern class BitmapText extends Container {
 }
 
 typedef BitmapTextStyle = {
-	@:optional var font:FontProperties;
-}
-
-typedef FontProperties = {
-	@:optional var name:String;
-	@:optional var size:Float;
+	@:optional var font:String;
 	@:optional var align:String;
+	@:optional var tint:Int;
 }
