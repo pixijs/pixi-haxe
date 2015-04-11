@@ -22,7 +22,7 @@ class Main extends Application {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
-		resize = true;
+		autoResize = true;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		super.start();
