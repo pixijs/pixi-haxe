@@ -52,6 +52,10 @@
 -js samples/_output/bunnymark.js
 
 --next
+-main samples.textureswap.Main
+-js samples/_output/textureswap.js
+
+--next
 -main samples.loader.Main
 -js samples/_output/loader.js
 
