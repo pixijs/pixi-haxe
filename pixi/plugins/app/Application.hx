@@ -45,11 +45,17 @@ class Application {
 	public var height(null, default):Float;
 
 	/**
+	 * Graphics antialias property.
+	 * default - false
+	 */
+	public var antialias(null, default):Bool;
+
+	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true
 	 */
-	public var resize(null, default):Bool;
+	public var autoResize(null, default):Bool;
 
 	/**
 	 * Sets the background color of the stage.
@@ -94,7 +100,7 @@ class Application {
 	function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
-		resize = true;
+		autoResize = true;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -124,14 +130,15 @@ class Application {
 		renderingOptions.view = _canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
-		renderingOptions.autoResize = true;
+		renderingOptions.antialias = antialias;
+		renderingOptions.autoResize = autoResize;
 
 		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		else if (renderer == CANVAS) _renderer = new CanvasRenderer(width, height, renderingOptions);
 		else _renderer = new WebGLRenderer(width, height, renderingOptions);
 
 		Browser.document.body.appendChild(_renderer.view);
-		if (resize) Browser.window.onresize = _onWindowResize;
+		if (autoResize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
 
