@@ -17,9 +17,9 @@ extern class AbstractFilter {
 	function new(vertexSrc:String, fragmentSrc:String, uniforms:Dynamic);
 
 	/**
-     * The extra padding that the filter might need
-     * @member {number}
-     */
+	 * The extra padding that the filter might need
+	 * @member {number}
+	 */
 	var padding:Float;
 
 	/*

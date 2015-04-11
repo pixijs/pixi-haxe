@@ -22,17 +22,17 @@ extern class TilingSprite extends Sprite {
 	function new(texture:Texture, width:Float, height:Float);
 
 	/**
-     * The scaling of the image that is being tiled
-     *
-     * @member {Point}
-     */
+	 * The scaling of the image that is being tiled
+	 *
+	 * @member {Point}
+	 */
 	var tileScale:Point;
 
 	/**
-     * The offset position of the image that is being tiled
-     *
-     * @member {Point}
-     */
+	 * The offset position of the image that is being tiled
+	 *
+	 * @member {Point}
+	 */
 	var tilePosition:Point;
 
 	/**
@@ -49,5 +49,4 @@ extern class TilingSprite extends Sprite {
 	 * @param point {Point} the point to check
 	 */
 	function containsPoint(point:Point):Bool;
-
 }

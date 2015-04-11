@@ -1,7 +1,7 @@
 package pixi.core.renderers.webgl.managers;
 
 import pixi.core.math.shapes.Rectangle;
-@:native("PIXI.WebGLFilterManager")
+
 extern class FilterManager extends WebGLManager {
 
 	/**
@@ -13,13 +13,13 @@ extern class FilterManager extends WebGLManager {
 	function new(renderer:WebGLRenderer);
 
 	/**
-     * @member {any[]}
-     */
+	 * @member {any[]}
+	 */
 	var filterStack:Array<Dynamic>;
 
 	/**
-     * @member {any[]}
-     */
+	 * @member {any[]}
+	 */
 	var texturePool:Array<Dynamic>;
 
 	/**

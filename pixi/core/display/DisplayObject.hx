@@ -22,11 +22,11 @@ extern class DisplayObject extends EventEmitter3 {
 	 function new();
 
 	/**
-	* Returns the global position of the displayObject
-	*
-	* @param point {Point} the point to write the global value to. If null a new point will be returned
-	* @return {Point}
-	*/
+	 * Returns the global position of the displayObject
+	 *
+	 * @param point {Point} the point to write the global value to. If null a new point will be returned
+	 * @return {Point}
+	 */
 	 function getGlobalPosition(point:Point):Point;
 
 	/**

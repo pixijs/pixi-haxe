@@ -21,31 +21,31 @@ extern class Ticker extends EventEmitter3 {
 	var active:Bool;
 
 	/**
-     * The deltaTime
-     *
-     * @member {Float}
-     */
+	 * The deltaTime
+	 *
+	 * @member {Float}
+	 */
 	var deltaTime:Float;
 
 	/**
-     * The time between two frames
-     *
-     * @member {Float}
-     */
+	 * The time between two frames
+	 *
+	 * @member {Float}
+	 */
 	var timeElapsed:Float;
 
 	/**
-     * The time at the last frame
-     *
-     * @member {Float}
-     */
+	 * The time at the last frame
+	 *
+	 * @member {Float}
+	 */
 	var lastTime:Float;
 
 	/**
-     * The speed
-     *
-     * @member {Float}
-     */
+	 * The speed
+	 *
+	 * @member {Float}
+	 */
 	var speed:Float;
 
 	/**

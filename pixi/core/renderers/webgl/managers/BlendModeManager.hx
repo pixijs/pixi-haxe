@@ -1,6 +1,5 @@
 package pixi.core.renderers.webgl.managers;
 
-@:native("PIXI.WebGLBlendModeManager")
 extern class BlendModeManager extends WebGLManager {
 
 	/**

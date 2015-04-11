@@ -30,64 +30,64 @@ extern class MovieClip extends Sprite {
 	function new(textures:Array<Texture>);
 
 	/**
-     * The speed that the MovieClip will play at. Higher is faster, lower is slower
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * The speed that the MovieClip will play at. Higher is faster, lower is slower
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var animationSpeed:Float;
 
 	/**
-     * Whether or not the movie clip repeats after playing.
-     *
-     * @member {Bool}
-     * @default true
-     */
+	 * Whether or not the movie clip repeats after playing.
+	 *
+	 * @member {Bool}
+	 * @default true
+	 */
 	var loop:Bool;
 
 	/**
-     * 	function to call when a MovieClip finishes playing
-     *
-     * @method
-     * @memberof MovieClip#
-     */
+	 * 	function to call when a MovieClip finishes playing
+	 *
+	 * @method
+	 * @memberof MovieClip#
+	 */
 	var onComplete:Void -> Void;
 
 	/**
-     * The MovieClips current frame index (this may not have to be a whole number)
-     *
-     * @member {Int}
-     * @default 0
-     * @readonly
-     */
+	 * The MovieClips current frame index (this may not have to be a whole number)
+	 *
+	 * @member {Int}
+	 * @default 0
+	 * @readonly
+	 */
 	var currentFrame:Int;
 
 	/**
-     * Indicates if the MovieClip is currently playing
-     *
-     * @member {Bool}
-     * @readonly
-     */
+	 * Indicates if the MovieClip is currently playing
+	 *
+	 * @member {Bool}
+	 * @readonly
+	 */
 	var playing:Bool;
 
 	/**
-     * totalFrames is the total number of frames in the MovieClip. This is the same as number of textures
-     * assigned to the MovieClip.
-     *
-     * @member
-     * @memberof MovieClip#
-     * @default 0
-     * @readonly
-     */
+	 * totalFrames is the total number of frames in the MovieClip. This is the same as number of textures
+	 * assigned to the MovieClip.
+	 *
+	 * @member
+	 * @memberof MovieClip#
+	 * @default 0
+	 * @readonly
+	 */
 	var totalFrames:Int;
 
 	/**
-     * The array of textures used for this MovieClip
-     *
-     * @member
-     * @memberof MovieClip#
-     *
-     */
+	 * The array of textures used for this MovieClip
+	 *
+	 * @member
+	 * @memberof MovieClip#
+	 *
+	 */
 	var textures:Array<Texture>;
 
 	/**

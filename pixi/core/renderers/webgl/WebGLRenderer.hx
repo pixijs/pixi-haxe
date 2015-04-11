@@ -1,5 +1,8 @@
 package pixi.core.renderers.webgl;
 
+import pixi.core.renderers.webgl.managers.BlendModeManager;
+import pixi.core.renderers.webgl.managers.FilterManager;
+import pixi.core.renderers.webgl.managers.MaskManager;
 import pixi.core.renderers.Detector;
 
 @:native("PIXI.WebGLRenderer")
@@ -47,7 +50,7 @@ extern class WebGLRenderer extends SystemRenderer {
      *
      * @member {MaskManager}
      */
-	var maskManager:Dynamic;
+	var maskManager:MaskManager;
 
 	/**
      * Manages the stencil buffer.
@@ -61,13 +64,13 @@ extern class WebGLRenderer extends SystemRenderer {
      *
      * @member {FilterManager}
      */
-	var filterManager:Dynamic;
+	var filterManager:FilterManager;
 
 	/**
      * Manages the blendModes
      * @member {BlendModeManager}
      */
-	var blendModeManager:Dynamic;
+	var blendModeManager:BlendModeManager;
 
 	/**
      * Holds the current render target
