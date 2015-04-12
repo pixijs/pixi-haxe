@@ -23,6 +23,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
 * [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
 * [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
+* [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
 * [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
 * [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
 * [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
