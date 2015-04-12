@@ -45,6 +45,12 @@ class Application {
 	public var height(null, default):Float;
 
 	/**
+	 * Renderer transparency property.
+	 * default - false
+	 */
+	public var transparent(null, default):Bool;
+
+	/**
 	 * Graphics antialias property.
 	 * default - false
 	 */
@@ -101,6 +107,7 @@ class Application {
 		pixelRatio = 1;
 		skipFrame = false;
 		autoResize = true;
+		transparent = false;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -132,6 +139,7 @@ class Application {
 		renderingOptions.resolution = pixelRatio;
 		renderingOptions.antialias = antialias;
 		renderingOptions.autoResize = autoResize;
+		renderingOptions.transparent = transparent;
 
 		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		else if (renderer == CANVAS) _renderer = new CanvasRenderer(width, height, renderingOptions);

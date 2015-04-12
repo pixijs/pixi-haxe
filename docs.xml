@@ -17618,6 +17618,11 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Height of the application.
 	 * default - Browser.window.innerHeight</haxe_doc>
 		</height>
+		<transparent public="1" get="null">
+			<x path="Bool"/>
+			<haxe_doc>* Renderer transparency property.
+	 * default - false</haxe_doc>
+		</transparent>
 		<antialias public="1" get="null">
 			<x path="Bool"/>
 			<haxe_doc>* Graphics antialias property.
@@ -17657,8 +17662,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="100"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="119">
+		<_setDefaultValues set="method" line="106"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="126">
 			<f a="?renderer:?stats:?parentDom" v="'auto':true:null">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -17672,26 +17677,26 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="148">
+		<_onWindowResize set="method" line="156">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="163">
+		<_onRequestAnimationFrame set="method" line="171">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="175">
+		<_calculateElapsedTime set="method" line="183">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="181">
+		<_addStats set="method" line="189">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_addStats>
-		<new public="1" set="method" line="95"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="101"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
