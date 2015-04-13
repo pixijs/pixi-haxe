@@ -35,6 +35,10 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
 * [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
 
+**Filters (WebGL only)**
+
+* [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
+
 Look at the `samples` folder for the source code of above examples.
 
 ### Usage ###

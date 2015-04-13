@@ -13886,7 +13886,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<visible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* The visibility of the object. If false the object will not be drawn, and
-	 * the updateTransform 		 function will not be called.
+	 * the updateTransform function will not be called.
 	 *
 	 * @member {Bool}</haxe_doc>
 		</visible>
@@ -17105,6 +17105,205 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.TilingSprite"</e></m></meta>
 	</class>
+	<class path="pixi.filters.color.ColorMatrixFilter" params="" file="pixi/filters/color/ColorMatrixFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<matrix public="1">
+			<c path="Array"><x path="Float"/></c>
+			<haxe_doc>* Sets the matrix of the color matrix filter
+     *
+     * @member {number[]}
+     * @memberof ColorMatrixFilter#
+     * @default [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]</haxe_doc>
+		</matrix>
+		<brightness public="1" set="method">
+			<f a="b:multiply">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Adjusts brightness
+	 *
+	 * Multiply the current matrix
+	 * @param b {Float} value of the brigthness (0 is black)
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</brightness>
+		<greyscale public="1" set="method">
+			<f a="scale:multiply">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the matrices in grey scales
+	 *
+	 * Multiply the current matrix
+	 * @param scale {Float} value of the grey (0 is black)
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</greyscale>
+		<blackAndWhite public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the black and white matrice
+	 * Multiply the current matrix
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</blackAndWhite>
+		<hue public="1" set="method">
+			<f a="rotation:multiply">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the hue propertie of the color
+	 *
+	 * Multiply the current matrix
+	 * @param rotation {Float} in degrees
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</hue>
+		<contrast public="1" set="method">
+			<f a="amount:multiply">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the contrast matrix, increase the separation between dark and bright
+	 * Increase contrast : shadows darker and highlights brighter
+	 * Decrease contrast : bring the shadows up and the highlights down
+	 *
+	 * @param amount {Float} value of the contrast
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</contrast>
+		<saturation public="1" set="method">
+			<f a="amount:multiply">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Set the saturation matrix, increase the separation between colors
+	 * Increase saturation : increase contrast, brightness, and sharpness
+	 * @param amount {Float}
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</saturation>
+		<desaturate public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Desaturate image (remove color)
+	 *
+	 * Call the saturate function
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</desaturate>
+		<negative public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Negative image (inverse of classic rgb matrix)
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</negative>
+		<sepia public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sepia image
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</sepia>
+		<technicolor public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Color motion picture process invented in 1916 (thanks Dominic Szablewski)
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</technicolor>
+		<polaroid public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Polaroid filter
+	 *
+	 * @param multiply {boolean} refer to ._loadMatrix() method</haxe_doc>
+		</polaroid>
+		<toBGR public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* Filter who transforms : Red -> Blue and Blue -> Red
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method]]></haxe_doc>
+		</toBGR>
+		<kodachrome public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Color reversal film introduced by Eastman Kodak in 1935. (thanks Dominic Szablewski)
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</kodachrome>
+		<browni public="1" set="method">
+			<f a="multiply">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Brown delicious browni filter (thanks Dominic Szablewski)
+	 *
+	 * @param multiply {Bool} refer to ._loadMatrix() method</haxe_doc>
+		</browni>
+		<vintage public="1" set="method"><f a="multiply">
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></vintage>
+		<colorTone public="1" set="method"><f a="desaturation:toned:lightColor:darkColor:multiply">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></colorTone>
+		<night public="1" set="method"><f a="intensity:multiply">
+	<x path="Float"/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></night>
+		<predator public="1" set="method"><f a="amount:multiply">
+	<x path="Float"/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></predator>
+		<lsd public="1" set="method"><f a="multiply">
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></lsd>
+		<reset public="1" set="method"><f a=""><x path="Void"/></f></reset>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc><![CDATA[* The ColorMatrixFilter class lets you apply a 5x5 matrix transformation on the RGBA
+	 * color and alpha values of every pixel on your displayObject to produce a result
+	 * with a new set of RGBA color and alpha values. It's pretty powerful!
+	 *
+	 * ```js
+	 *  var colorMatrix = new PIXI.ColorMatrixFilter();
+	 *  container.filters = [colorMatrix];
+	 *  colorMatrix.contrast(2);
+	 * ```
+	 * @author Clément Chenebault <clement@goodboydigital.com>
+	 * @class
+	 * @extends AbstractFilter
+	 * @memberof PIXI.filters]]></haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.ColorMatrixFilter"</e></m></meta>
+	</class>
 	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">
 		<global public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17184,49 +17383,49 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onMouseUp>
 		<onMouseDown public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onMouseDown>
 		<onMouseMove public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onMouseMove>
 		<onMouseOut public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onMouseOut>
 		<onTouchStart public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onTouchStart>
 		<onTouchEnd public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onTouchEnd>
 		<onTouchMove public="1">
 			<f a="">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* @member {	function}</haxe_doc>
+			<haxe_doc>* @member {function}</haxe_doc>
 		</onTouchMove>
 		<last public="1">
 			<x path="Int"/>

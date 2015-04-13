@@ -1,15 +1,15 @@
-	package pixi.interaction;
+package pixi.interaction;
 
-	import pixi.plugins.eventemitter.EventTarget;
-	import pixi.core.display.DisplayObject;
-	import pixi.core.math.Point;
-	import js.html.Event;
-	import js.html.HtmlElement;
-	import pixi.core.renderers.canvas.CanvasRenderer;
-	import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.plugins.eventemitter.EventTarget;
+import pixi.core.display.DisplayObject;
+import pixi.core.math.Point;
+import js.html.Event;
+import js.html.HtmlElement;
+import pixi.core.renderers.canvas.CanvasRenderer;
+import pixi.core.renderers.webgl.WebGLRenderer;
 
-	@:native("PIXI.interaction.InteractionManager")
-	extern class InteractionManager {
+@:native("PIXI.interaction.InteractionManager")
+extern class InteractionManager {
 
 	/**
 	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
@@ -63,37 +63,37 @@
 	var eventsAdded:Bool;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onMouseUp:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onMouseDown:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onMouseMove:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onMouseOut:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onTouchStart:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onTouchEnd:Event -> Void;
 
 	/**
-     * @member {	function}
+     * @member {function}
      */
 	var onTouchMove:Event -> Void;
 

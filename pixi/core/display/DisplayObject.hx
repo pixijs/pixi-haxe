@@ -127,7 +127,7 @@ extern class DisplayObject extends EventEmitter3 {
 
 	/**
 	 * The visibility of the object. If false the object will not be drawn, and
-	 * the updateTransform 		 function will not be called.
+	 * the updateTransform function will not be called.
 	 *
 	 * @member {Bool}
 	 */

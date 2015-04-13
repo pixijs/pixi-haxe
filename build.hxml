@@ -56,6 +56,10 @@
 -js samples/_output/textureswap.js
 
 --next
+-main samples.filters.colormatrix.Main
+-js samples/_output/colormatrix.js
+
+--next
 -main samples.loader.Main
 -js samples/_output/loader.js
 
