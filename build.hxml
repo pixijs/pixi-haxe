@@ -60,6 +60,10 @@
 -js samples/_output/colormatrix.js
 
 --next
+-main samples.filters.blur.Main
+-js samples/_output/blur.js
+
+--next
 -main samples.loader.Main
 -js samples/_output/loader.js
 

@@ -38,6 +38,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 **Filters (WebGL only)**
 
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
+* [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
 Look at the `samples` folder for the source code of above examples.
 
