@@ -56,6 +56,10 @@
 -js samples/_output/textureswap.js
 
 --next
+-main samples.alphamask.Main
+-js samples/_output/alphamask.js
+
+--next
 -main samples.filters.colormatrix.Main
 -js samples/_output/colormatrix.js
 

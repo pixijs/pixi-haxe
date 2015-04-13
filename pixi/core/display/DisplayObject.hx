@@ -206,7 +206,7 @@ extern class DisplayObject extends EventEmitter3 {
 	 * @member {Graphics}
 	 * @memberof DisplayObject#
 	 */
-	 var mask:Graphics;
+	 var mask:Dynamic;
 
 	/**
 	 * Sets the filters for the displayObject.

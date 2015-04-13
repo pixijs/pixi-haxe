@@ -13948,7 +13948,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @readonly</haxe_doc>
 		</worldVisible>
 		<mask public="1">
-			<c path="pixi.core.graphics.Graphics"/>
+			<d/>
 			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
 	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
 	 * To remove a mask, set this property to null.
@@ -14699,7 +14699,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * @default 0</haxe_doc>
 		</y>
 		<new public="1" set="method">
-			<f a="x:y">
+			<f a="?x:?y">
 				<x path="Float"/>
 				<x path="Float"/>
 				<x path="Void"/>

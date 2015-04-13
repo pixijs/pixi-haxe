@@ -12,7 +12,7 @@ extern class Point {
 	 * @param [x=0] {number} position of the point on the x axis
 	 * @param [y=0] {number} position of the point on the y axis
 	 */
-	function new(x:Float, y:Float);
+	function new(?x:Float, ?y:Float);
 
 	/**
 	 * Creates a clone of this point

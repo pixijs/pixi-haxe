@@ -28,6 +28,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
 * [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
 * [Bitmap Font](http://adireddy.github.io/demos/pixi-haxe/bitmapfont.html)
+* [Alpha Mask](http://adireddy.github.io/demos/pixi-haxe/alphamask.html)
 * [Bunnymark](http://adireddy.github.io/demos/pixi-haxe/bunnymark.html)
 * [Retina](http://adireddy.github.io/demos/pixi-haxe/retina.html)
 * [Events](http://adireddy.github.io/demos/pixi-haxe/events.html)
