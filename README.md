@@ -11,7 +11,7 @@ haxelib install pixijs 3.0.0-rc.42
 ```
 ### API Documentation ###
 
-[Documentation](http://adireddy.github.io/docs/pixi-haxe/) - generated with chxdocs
+[Documentation](http://adireddy.github.io/docs/pixi-haxe/)
 
 ### Issues ###
 
