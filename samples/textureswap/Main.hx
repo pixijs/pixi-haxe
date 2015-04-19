@@ -1,6 +1,6 @@
 package samples.textureswap;
 
-import pixi.plugins.eventemitter.EventTarget;
+import pixi.interaction.EventTarget;
 import pixi.core.sprites.Sprite;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;

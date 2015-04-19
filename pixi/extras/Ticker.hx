@@ -1,9 +1,9 @@
 package pixi.extras;
 
-import pixi.plugins.eventemitter.EventEmitter3;
+import pixi.interaction.EventEmitter;
 
 @:native("PIXI.extras.Ticker")
-extern class Ticker extends EventEmitter3 {
+extern class Ticker extends EventEmitter {
 
 	/**
 	 * A Ticker class that runs an update loop that other objects listen to

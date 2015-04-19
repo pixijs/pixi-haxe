@@ -1,11 +1,10 @@
 package samples.dragging;
 
+import pixi.interaction.EventTarget;
 import pixi.core.math.Point;
-import pixi.plugins.eventemitter.EventTarget;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
 import js.Browser;
 
 class Main extends Application {

@@ -37,6 +37,14 @@ extern class InteractionData {
      */
 	var originalEvent:Event;
 
+
+	/**
+     * Touch identifier
+     *
+     * @member {Event}
+     */
+	var identifier:Int;
+
 	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData
 	 *

@@ -1,7 +1,6 @@
 package samples.graphics;
 
-import pixi.plugins.eventemitter.EventTarget;
-import pixi.interaction.InteractionData;
+import pixi.interaction.EventTarget;
 import pixi.core.graphics.Graphics;
 import pixi.plugins.app.Application;
 import js.Browser;

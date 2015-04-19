@@ -1,12 +1,10 @@
 package samples.events;
 
-import pixi.plugins.eventemitter.EventTarget;
+import pixi.interaction.EventTarget;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
-import js.Browser;
 
 class Main extends Application {
 
@@ -29,7 +27,7 @@ class Main extends Application {
 		_img.on("click", _onEvent);
 		_img.on("mouseover", _onEvent);
 		_img.on("mousedown", _onEvent);
-		_img.on("touch", _onEvent);
+		_img.on("touchstart", _onEvent);
 		_stage.addChild(_img);
 
 		var style:TextStyle = {};

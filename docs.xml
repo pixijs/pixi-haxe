@@ -13479,7 +13479,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
-	<class path="pixi.plugins.eventemitter.EventEmitter3" params="" file="pixi/plugins/eventemitter/EventEmitter3.hx" extern="1">
+	<class path="pixi.interaction.EventEmitter" params="" file="pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
 				<c path="String"/>
@@ -13510,7 +13510,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<t path="pixi.interaction.EventTarget"/>
 					<x path="Void"/>
 				</f>
 				<d/>
@@ -13519,8 +13519,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 			<overloads>
 				<on public="1" set="method">
 					<f a="event:fn:?context">
@@ -13532,8 +13532,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</on>
 				<on public="1" set="method">
 					<f a="event:fn:?context">
@@ -13548,8 +13548,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</on>
 			</overloads>
 		</on>
@@ -13557,7 +13557,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<t path="pixi.interaction.EventTarget"/>
 					<x path="Void"/>
 				</f>
 				<d/>
@@ -13566,8 +13566,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {	function} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 			<overloads>
 				<once public="1" set="method">
 					<f a="event:fn:?context">
@@ -13579,8 +13579,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {	function} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</once>
 				<once public="1" set="method">
 					<f a="event:fn:?context">
@@ -13595,8 +13595,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {	function} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</once>
 			</overloads>
 		</once>
@@ -13604,7 +13604,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="event:fn:?context">
 				<c path="String"/>
 				<f a="">
-					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<t path="pixi.interaction.EventTarget"/>
 					<x path="Void"/>
 				</f>
 				<d/>
@@ -13613,8 +13613,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 			<overloads>
 				<addListener public="1" set="method">
 					<f a="event:fn:?context">
@@ -13626,8 +13626,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</addListener>
 				<addListener public="1" set="method">
 					<f a="event:fn:?context">
@@ -13642,8 +13642,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.</haxe_doc>
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</addListener>
 			</overloads>
 		</addListener>
@@ -13651,7 +13651,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="event:fn:?once">
 				<c path="String"/>
 				<f a="">
-					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<t path="pixi.interaction.EventTarget"/>
 					<x path="Void"/>
 				</f>
 				<x path="Bool"/>
@@ -13660,8 +13660,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 			<overloads>
 				<off public="1" set="method">
 					<f a="event:fn:?once">
@@ -13673,8 +13673,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 				</off>
 				<off public="1" set="method">
 					<f a="event:fn:?once">
@@ -13689,8 +13689,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 				</off>
 			</overloads>
 		</off>
@@ -13698,7 +13698,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="event:fn:?once">
 				<c path="String"/>
 				<f a="">
-					<t path="pixi.plugins.eventemitter.EventTarget"/>
+					<t path="pixi.interaction.EventTarget"/>
 					<x path="Void"/>
 				</f>
 				<x path="Bool"/>
@@ -13707,8 +13707,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 			<overloads>
 				<removeListener public="1" set="method">
 					<f a="event:fn:?once">
@@ -13720,8 +13720,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 				</removeListener>
 				<removeListener public="1" set="method">
 					<f a="event:fn:?once">
@@ -13736,8 +13736,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 					<haxe_doc>* Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.</haxe_doc>
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 				</removeListener>
 			</overloads>
 		</removeListener>
@@ -13759,7 +13759,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
-		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+		<extends path="pixi.interaction.EventEmitter"/>
 		<getGlobalPosition public="1" set="method">
 			<f a="point">
 				<c path="pixi.core.math.Point"/>
@@ -13815,7 +13815,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
-			<haxe_doc>* Useful 	 function that returns a texture of the display object that can then be used to create sprites
+			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -13829,7 +13829,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<x path="Int"/>
 		<c path="pixi.core.textures.Texture"/>
 	</f>
-	<haxe_doc>* Useful 	 function that returns a texture of the display object that can then be used to create sprites
+	<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
@@ -15130,7 +15130,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</antialias>
 </a></typedef>
 	<class path="pixi.core.renderers.SystemRenderer" params="" file="pixi/core/renderers/SystemRenderer.hx" extern="1">
-		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+		<extends path="pixi.interaction.EventEmitter"/>
 		<backgroundColor public="1">
 			<x path="Int"/>
 			<haxe_doc>* The background color to fill if not transparent
@@ -16312,7 +16312,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
 	<class path="pixi.core.textures.Texture" params="" file="pixi/core/textures/Texture.hx" extern="1">
-		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
 			<f a="imageId:?crossorigin:?scaleMode">
 				<c path="String"/>
@@ -16986,7 +16986,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<meta><m n=":native"><e>"PIXI.extras.MovieClip"</e></m></meta>
 	</class>
 	<class path="pixi.extras.Ticker" params="" file="pixi/extras/Ticker.hx" extern="1">
-		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+		<extends path="pixi.interaction.EventEmitter"/>
 		<active public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether or not this ticker runs
@@ -17444,6 +17444,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorStepFilter"</e></m></meta>
 	</class>
+	<typedef path="pixi.interaction.EventTarget" params="" file="pixi/interaction/EventTarget.hx"><a>
+	<type><c path="String"/></type>
+	<target><d/></target>
+	<stopped><x path="Bool"/></stopped>
+	<data><c path="pixi.interaction.InteractionData"/></data>
+</a></typedef>
 	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">
 		<global public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17493,7 +17499,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      * @member {InteractionData}</haxe_doc>
 		</mouse>
 		<eventData public="1">
-			<t path="pixi.plugins.eventemitter.EventTarget"/>
+			<t path="pixi.interaction.EventTarget"/>
 			<haxe_doc>* An event data object to handle all the event tracking/dispatching
      *
      * @member {EventTarget}</haxe_doc>
@@ -17592,8 +17598,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	 * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
 	 *
 	 * @param  {Point} point the point that the result will be stored in
-	 * @param  {Float} x     the x coord of the position to map
-	 * @param  {Float} y     the y coord of the position to map</haxe_doc>
+	 * @param  {Float} x the x coord of the position to map
+	 * @param  {Float} y the y coord of the position to map</haxe_doc>
 		</mapPositionToPoint>
 		<processInteractive public="1" set="method">
 			<f a="point:displayObject:func:hitTest:interactive">
@@ -17604,12 +17610,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 				<x path="Bool"/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>* This 	function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
+			<haxe_doc>* This function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
 	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
 	 *
 	 * @param  {Point} point the point that is tested for collision
 	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
-	 * @param  {	function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
+	 * @param  {function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
 	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
 	 * @return {Bool} returns true if the displayObject hit the point</haxe_doc>
 		</processInteractive>
@@ -17641,8 +17647,8 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.resourceloader.ResourceLoader" params="" file="pixi/plugins/resourceloader/ResourceLoader.hx" extern="1">
-		<extends path="pixi.plugins.eventemitter.EventEmitter3"/>
+	<class path="pixi.loaders.ResourceLoader" params="" file="pixi/loaders/ResourceLoader.hx" extern="1">
+		<extends path="pixi.interaction.EventEmitter"/>
 		<baseUrl public="1">
 			<c path="String"/>
 			<haxe_doc>* The base url for all resources loaded by this loader.
@@ -17671,12 +17677,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="name:url:?options:?callback">
 				<c path="String"/>
 				<c path="String"/>
-				<t path="pixi.plugins.resourceloader.LoaderOptions"/>
+				<t path="pixi.loaders.LoaderOptions"/>
 				<f a="">
-					<c path="pixi.plugins.resourceloader.Resource"/>
+					<c path="pixi.loaders.Resource"/>
 					<x path="Void"/>
 				</f>
-				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
+				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
 	 *
@@ -17731,7 +17737,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<after public="1" set="method">
 			<f a="fn">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
+				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Sets up a middleware 	function that will run *after* the
 	 * resource is loaded.
@@ -17743,7 +17749,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<before public="1" set="method">
 			<f a="fn">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
+				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Sets up a middleware 	function that will run *before* the
 	 * resource is loaded.
@@ -17759,7 +17765,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		<load public="1" set="method">
 			<f a="?cb">
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
+				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Starts loading the queued resources.
 	 *
@@ -17771,7 +17777,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 			<f a="resource:?cb">
 				<c path="String"/>
 				<f a=""><x path="Void"/></f>
-				<c path="pixi.plugins.resourceloader.ResourceLoader"/>
+				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Loads a single resource.
 	 *
@@ -17800,7 +17806,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 	</class>
 	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
-		<extends path="pixi.plugins.resourceloader.ResourceLoader"/>
+		<extends path="pixi.loaders.ResourceLoader"/>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>*
@@ -17822,6 +17828,151 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
 	</class>
+	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/LoaderOptions.hx"><a>
+	<xhrType>
+		<c path="String"/>
+		<meta><m n=":optional"/></meta>
+	</xhrType>
+	<loadType>
+		<x path="Int"/>
+		<meta><m n=":optional"/></meta>
+	</loadType>
+	<crossOrigin>
+		<d/>
+		<meta><m n=":optional"/></meta>
+	</crossOrigin>
+</a></typedef>
+	<class path="pixi.loaders.Resource" params="" file="pixi/loaders/Resource.hx" extern="1">
+		<texture public="1"><c path="pixi.core.textures.Texture"/></texture>
+		<name public="1">
+			<c path="String"/>
+			<haxe_doc>* The name of this resource.
+     *
+     * @member {string}
+     * @readonly</haxe_doc>
+		</name>
+		<url public="1">
+			<c path="String"/>
+			<haxe_doc>* The url used to load this resource.
+     *
+     * @member {string}
+     * @readonly</haxe_doc>
+		</url>
+		<data public="1">
+			<d/>
+			<haxe_doc>* The data that was loaded by the resource.
+     *
+     * @member {any}</haxe_doc>
+		</data>
+		<xhr public="1">
+			<d/>
+			<haxe_doc>* The XHR object that was used to load this resource. This is only set
+     * when `loadType` is `Resource.LOAD_TYPE.XHR`.
+     *
+     * @member {XMLHttpRequest}</haxe_doc>
+		</xhr>
+		<xhrType public="1">
+			<c path="String"/>
+			<haxe_doc>* The type used to load the resource via XHR. If unset, determined automatically.
+     *
+     * @member {string}</haxe_doc>
+		</xhrType>
+		<crossOrigin public="1">
+			<c path="String"/>
+			<haxe_doc>* Is this request cross-origin? If unset, determined automatically.
+     *
+     * @member {string}</haxe_doc>
+		</crossOrigin>
+		<loadType public="1">
+			<x path="Int"/>
+			<haxe_doc>* The method of loading to use for this resource.
+     *
+     * @member {Resource.LOAD_TYPE}</haxe_doc>
+		</loadType>
+		<error public="1">
+			<d/>
+			<haxe_doc>* The error that occurred while loading (if any).
+     *
+     * @member {Error}
+     * @readonly</haxe_doc>
+		</error>
+		<new public="1" set="method">
+			<f a="name:url:?options">
+				<c path="String"/>
+				<c path="String"/>
+				<t path="pixi.loaders.LoaderOptions"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Manages the state and loading of a single resource represented by
+	 * a single URL.
+	 *
+	 * @class
+	 * @param name {string} The name of the resource to load.
+	 * @param url {string|string[]} The url for this resource, for audio/video loads you can pass an array of sources.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?</haxe_doc>
+		</new>
+	</class>
+	<typedef path="pixi.loaders.LOAD_TYPE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+		<a>
+			<XHR><x path="Int"/></XHR>
+			<VIDEO><x path="Int"/></VIDEO>
+			<IMAGE><x path="Int"/></IMAGE>
+			<AUDIO><x path="Int"/></AUDIO>
+		</a>
+		<haxe_doc>* The types of loading a resource can use.
+ *
+ * @static
+ * @constant
+ * @property {object} LOAD_TYPE
+ * @property {number} LOAD_TYPE.XHR - Uses XMLHttpRequest to load the resource.
+ * @property {number} LOAD_TYPE.IMAGE - Uses an `Image` object to load the resource.
+ * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
+ * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.</haxe_doc>
+	</typedef>
+	<typedef path="pixi.loaders.XHR_READY_STATE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+		<a>
+			<UNSENT><x path="Int"/></UNSENT>
+			<OPENED><x path="Int"/></OPENED>
+			<LOADING><x path="Int"/></LOADING>
+			<HEADERS_RECEIVED><x path="Int"/></HEADERS_RECEIVED>
+			<DONE><x path="Int"/></DONE>
+		</a>
+		<haxe_doc>* The XHR ready states, used internally.
+ *
+ * @static
+ * @constant
+ * @property {object} XHR_READY_STATE
+ * @property {number} XHR_READY_STATE.UNSENT - open()has not been called yet.
+ * @property {number} XHR_READY_STATE.OPENED - send()has not been called yet.
+ * @property {number} XHR_READY_STATE.HEADERS_RECEIVED - send() has been called, and headers and status are available.
+ * @property {number} XHR_READY_STATE.LOADING - Downloading; responseText holds partial data.
+ * @property {number} XHR_READY_STATE.DONE - The operation is complete.</haxe_doc>
+	</typedef>
+	<typedef path="pixi.loaders.XHR_RESPONSE_TYPE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+		<a>
+			<TEXT><c path="String"/></TEXT>
+			<JSON><c path="String"/></JSON>
+			<DOCUMENT><c path="String"/></DOCUMENT>
+			<DEFAULT><c path="String"/></DEFAULT>
+			<BUFFER><c path="String"/></BUFFER>
+			<BLOB><c path="String"/></BLOB>
+		</a>
+		<haxe_doc>* The XHR ready states, used internally.
+ *
+ * @static
+ * @constant
+ * @property {object} XHR_RESPONSE_TYPE
+ * @property {string} XHR_RESPONSE_TYPE.DEFAULT - defaults to text
+ * @property {string} XHR_RESPONSE_TYPE.BUFFER - ArrayBuffer
+ * @property {string} XHR_RESPONSE_TYPE.BLOB - Blob
+ * @property {string} XHR_RESPONSE_TYPE.DOCUMENT - Document
+ * @property {string} XHR_RESPONSE_TYPE.JSON - Object
+ * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
+	</typedef>
 	<class path="pixi.mesh.Mesh" params="" file="pixi/mesh/Mesh.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<DRAW_MODES public="1" static="1">
@@ -18043,157 +18194,6 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
  * @copyright 2015</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
-	<typedef path="pixi.plugins.eventemitter.EventTarget" params="" file="pixi/plugins/eventemitter/EventTarget.hx"><a>
-	<type><c path="String"/></type>
-	<target><d/></target>
-	<stopped><x path="Bool"/></stopped>
-	<data><d/></data>
-</a></typedef>
-	<typedef path="pixi.plugins.resourceloader.LoaderOptions" params="" file="pixi/plugins/resourceloader/LoaderOptions.hx"><a>
-	<xhrType>
-		<c path="String"/>
-		<meta><m n=":optional"/></meta>
-	</xhrType>
-	<loadType>
-		<x path="Int"/>
-		<meta><m n=":optional"/></meta>
-	</loadType>
-	<crossOrigin>
-		<d/>
-		<meta><m n=":optional"/></meta>
-	</crossOrigin>
-</a></typedef>
-	<class path="pixi.plugins.resourceloader.Resource" params="" file="pixi/plugins/resourceloader/Resource.hx" extern="1">
-		<texture public="1"><c path="pixi.core.textures.Texture"/></texture>
-		<name public="1">
-			<c path="String"/>
-			<haxe_doc>* The name of this resource.
-     *
-     * @member {string}
-     * @readonly</haxe_doc>
-		</name>
-		<url public="1">
-			<c path="String"/>
-			<haxe_doc>* The url used to load this resource.
-     *
-     * @member {string}
-     * @readonly</haxe_doc>
-		</url>
-		<data public="1">
-			<d/>
-			<haxe_doc>* The data that was loaded by the resource.
-     *
-     * @member {any}</haxe_doc>
-		</data>
-		<xhr public="1">
-			<d/>
-			<haxe_doc>* The XHR object that was used to load this resource. This is only set
-     * when `loadType` is `Resource.LOAD_TYPE.XHR`.
-     *
-     * @member {XMLHttpRequest}</haxe_doc>
-		</xhr>
-		<xhrType public="1">
-			<c path="String"/>
-			<haxe_doc>* The type used to load the resource via XHR. If unset, determined automatically.
-     *
-     * @member {string}</haxe_doc>
-		</xhrType>
-		<crossOrigin public="1">
-			<c path="String"/>
-			<haxe_doc>* Is this request cross-origin? If unset, determined automatically.
-     *
-     * @member {string}</haxe_doc>
-		</crossOrigin>
-		<loadType public="1">
-			<x path="Int"/>
-			<haxe_doc>* The method of loading to use for this resource.
-     *
-     * @member {Resource.LOAD_TYPE}</haxe_doc>
-		</loadType>
-		<error public="1">
-			<d/>
-			<haxe_doc>* The error that occurred while loading (if any).
-     *
-     * @member {Error}
-     * @readonly</haxe_doc>
-		</error>
-		<new public="1" set="method">
-			<f a="name:url:?options">
-				<c path="String"/>
-				<c path="String"/>
-				<t path="pixi.plugins.resourceloader.LoaderOptions"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Manages the state and loading of a single resource represented by
-	 * a single URL.
-	 *
-	 * @class
-	 * @param name {string} The name of the resource to load.
-	 * @param url {string|string[]} The url for this resource, for audio/video loads you can pass an array of sources.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?</haxe_doc>
-		</new>
-	</class>
-	<typedef path="pixi.plugins.resourceloader.LOAD_TYPE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
-		<a>
-			<XHR><x path="Int"/></XHR>
-			<VIDEO><x path="Int"/></VIDEO>
-			<IMAGE><x path="Int"/></IMAGE>
-			<AUDIO><x path="Int"/></AUDIO>
-		</a>
-		<haxe_doc>* The types of loading a resource can use.
- *
- * @static
- * @constant
- * @property {object} LOAD_TYPE
- * @property {number} LOAD_TYPE.XHR - Uses XMLHttpRequest to load the resource.
- * @property {number} LOAD_TYPE.IMAGE - Uses an `Image` object to load the resource.
- * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
- * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.</haxe_doc>
-	</typedef>
-	<typedef path="pixi.plugins.resourceloader.XHR_READY_STATE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
-		<a>
-			<UNSENT><x path="Int"/></UNSENT>
-			<OPENED><x path="Int"/></OPENED>
-			<LOADING><x path="Int"/></LOADING>
-			<HEADERS_RECEIVED><x path="Int"/></HEADERS_RECEIVED>
-			<DONE><x path="Int"/></DONE>
-		</a>
-		<haxe_doc>* The XHR ready states, used internally.
- *
- * @static
- * @constant
- * @property {object} XHR_READY_STATE
- * @property {number} XHR_READY_STATE.UNSENT - open()has not been called yet.
- * @property {number} XHR_READY_STATE.OPENED - send()has not been called yet.
- * @property {number} XHR_READY_STATE.HEADERS_RECEIVED - send() has been called, and headers and status are available.
- * @property {number} XHR_READY_STATE.LOADING - Downloading; responseText holds partial data.
- * @property {number} XHR_READY_STATE.DONE - The operation is complete.</haxe_doc>
-	</typedef>
-	<typedef path="pixi.plugins.resourceloader.XHR_RESPONSE_TYPE" params="" file="pixi/plugins/resourceloader/Resource.hx" module="pixi.plugins.resourceloader.Resource">
-		<a>
-			<TEXT><c path="String"/></TEXT>
-			<JSON><c path="String"/></JSON>
-			<DOCUMENT><c path="String"/></DOCUMENT>
-			<DEFAULT><c path="String"/></DEFAULT>
-			<BUFFER><c path="String"/></BUFFER>
-			<BLOB><c path="String"/></BLOB>
-		</a>
-		<haxe_doc>* The XHR ready states, used internally.
- *
- * @static
- * @constant
- * @property {object} XHR_RESPONSE_TYPE
- * @property {string} XHR_RESPONSE_TYPE.DEFAULT - defaults to text
- * @property {string} XHR_RESPONSE_TYPE.BUFFER - ArrayBuffer
- * @property {string} XHR_RESPONSE_TYPE.BLOB - Blob
- * @property {string} XHR_RESPONSE_TYPE.DOCUMENT - Document
- * @property {string} XHR_RESPONSE_TYPE.JSON - Object
- * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
-	</typedef>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>
@@ -18310,18 +18310,18 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="samples.events.Main" params="" file="samples/events/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="48" static="1">
+		<main set="method" line="47" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
 		<_img><c path="pixi.core.sprites.Sprite"/></_img>
 		<_label><c path="pixi.core.text.Text"/></_label>
-		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
-		<_onEvent set="method" line="44"><f a="target">
-	<t path="pixi.plugins.eventemitter.EventTarget"/>
+		<_init set="method" line="19"><f a=""><x path="Void"/></f></_init>
+		<_onEvent set="method" line="42"><f a="target">
+	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onEvent>
-		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="14"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>

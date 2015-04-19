@@ -1,6 +1,6 @@
-package pixi.plugins.eventemitter;
+package pixi.interaction;
 
-extern class EventEmitter3 {
+extern class EventEmitter {
 
 	/**
 	 * Minimal EventEmitter interface that is molded against the Node.js
@@ -31,8 +31,8 @@ extern class EventEmitter3 {
 	 * Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
@@ -42,8 +42,8 @@ extern class EventEmitter3 {
 	 * Add an EventListener that's only called once.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {	function} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
@@ -53,8 +53,8 @@ extern class EventEmitter3 {
 	 * Register a new EventListener for the given event.
 	 *
 	 * @param {String} event Name of the event.
-	 * @param {Functon} fn Callback 	function.
-	 * @param {Mixed} context The context of the 	function.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
@@ -64,8 +64,8 @@ extern class EventEmitter3 {
 	 * Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
@@ -75,8 +75,8 @@ extern class EventEmitter3 {
 	 * Remove event listeners.
 	 *
 	 * @param {String} event The event we want to remove.
-	 * @param {	function} fn The listener that we need to find.
-	 * @param {Boolean} once Only remove once listeners.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})

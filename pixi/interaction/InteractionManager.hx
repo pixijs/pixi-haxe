@@ -1,6 +1,5 @@
 package pixi.interaction;
 
-import pixi.plugins.eventemitter.EventTarget;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
 import js.html.Event;
@@ -119,18 +118,18 @@ extern class InteractionManager {
 	 * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
 	 *
 	 * @param  {Point} point the point that the result will be stored in
-	 * @param  {Float} x     the x coord of the position to map
-	 * @param  {Float} y     the y coord of the position to map
+	 * @param  {Float} x the x coord of the position to map
+	 * @param  {Float} y the y coord of the position to map
 	 */
 	function mapPositionToPoint(point:Point, x:Float, y:Float):Void;
 
 	/**
-	 * This 	function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
+	 * This function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
 	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
 	 *
 	 * @param  {Point} point the point that is tested for collision
 	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
-	 * @param  {	function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
+	 * @param  {function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
 	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
 	 * @return {Bool} returns true if the displayObject hit the point
 	 */

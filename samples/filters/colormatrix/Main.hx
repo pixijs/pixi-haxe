@@ -1,8 +1,8 @@
 package samples.filters.colormatrix;
 
+import pixi.interaction.EventTarget;
 import pixi.core.display.Container;
 import pixi.filters.color.ColorMatrixFilter;
-import pixi.plugins.eventemitter.EventTarget;
 import pixi.core.text.Text;
 import pixi.core.sprites.Sprite;
 import pixi.plugins.app.Application;

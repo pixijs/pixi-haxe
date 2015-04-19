@@ -1,4 +1,4 @@
-package pixi.plugins.resourceloader;
+package pixi.loaders;
 
 typedef LoaderOptions = {
 	@:optional var crossOrigin:Dynamic;

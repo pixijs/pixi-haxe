@@ -1,4 +1,4 @@
-package pixi.plugins.resourceloader;
+package pixi.loaders;
 
 import pixi.core.textures.Texture;
 

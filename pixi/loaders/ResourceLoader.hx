@@ -1,8 +1,8 @@
-package pixi.plugins.resourceloader;
+package pixi.loaders;
 
-import pixi.plugins.eventemitter.EventEmitter3;
+import pixi.interaction.EventEmitter;
 
-extern class ResourceLoader extends EventEmitter3 {
+extern class ResourceLoader extends EventEmitter {
 
 	/**
 	 * Manages the state and loading of multiple resources to load.

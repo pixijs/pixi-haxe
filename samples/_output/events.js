@@ -108,7 +108,7 @@ samples.events.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._img.on("click",$bind(this,this._onEvent));
 		this._img.on("mouseover",$bind(this,this._onEvent));
 		this._img.on("mousedown",$bind(this,this._onEvent));
-		this._img.on("touch",$bind(this,this._onEvent));
+		this._img.on("touchstart",$bind(this,this._onEvent));
 		this._stage.addChild(this._img);
 		var style = { };
 		style.fill = "#000000";
@@ -118,6 +118,7 @@ samples.events.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._stage.addChild(this._label);
 	}
 	,_onEvent: function(target) {
+		console.log(target);
 		this._label.text = target.type;
 	}
 });

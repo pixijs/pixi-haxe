@@ -1,12 +1,12 @@
 package pixi.core.textures;
 
-import pixi.plugins.eventemitter.EventEmitter3;
+import pixi.interaction.EventEmitter;
 import pixi.core.math.Point;
 import js.html.VideoElement;
 import pixi.core.math.shapes.Rectangle;
 
 @:native("PIXI.Texture")
-extern class Texture extends EventEmitter3 {
+extern class Texture extends EventEmitter {
 
 	/**
 	 * A texture stores the information that represents an image or part of an image. It cannot be added
