@@ -118,7 +118,6 @@ samples.events.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		this._stage.addChild(this._label);
 	}
 	,_onEvent: function(target) {
-		console.log(target);
 		this._label.text = target.type;
 	}
 });

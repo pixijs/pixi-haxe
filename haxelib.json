@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "package changes - event emitter & target moved to interaction package, resource loader to loaders package",
-  "version": "3.0.0-rc.43",
+  "releasenote": "updted pixi to official v3 release",
+  "version": "3.0.0",
   "url": "https://github.com/pixijs/pixi-haxe",
   "dependencies": {
 

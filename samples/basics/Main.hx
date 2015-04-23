@@ -26,7 +26,7 @@ class Main {
 		_renderer = Detector.autoDetectRenderer(800, 600, options);
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_bunny.anchor.set(0.5, 0.5);
+		_bunny.anchor.set(0.5);
 		_bunny.position.set(400, 300);
 
 		_container.addChild(_bunny);

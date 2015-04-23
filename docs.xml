@@ -17469,6 +17469,12 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
      *
      * @member {Event}</haxe_doc>
 		</originalEvent>
+		<identifier public="1">
+			<x path="Int"/>
+			<haxe_doc>* Touch identifier
+     *
+     * @member {Event}</haxe_doc>
+		</identifier>
 		<getLocalPosition public="1" set="method">
 			<f a="displayObject:?point">
 				<c path="pixi.core.display.DisplayObject"/>
@@ -18310,7 +18316,7 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 	</class>
 	<class path="samples.events.Main" params="" file="samples/events/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="47" static="1">
+		<main set="method" line="46" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>

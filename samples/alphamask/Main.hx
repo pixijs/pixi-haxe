@@ -18,7 +18,7 @@ class Main extends Application {
 
 	function _init() {
 		onUpdate = _onUpdate;
-		super.start();
+		super.start(Application.RECOMMENDED);
 
 		_bg = Sprite.fromImage("assets/alphamask/bkg.jpg");
 

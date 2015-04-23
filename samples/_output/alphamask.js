@@ -100,7 +100,7 @@ samples.alphamask.Main.__super__ = pixi.plugins.app.Application;
 samples.alphamask.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 	_init: function() {
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi.plugins.app.Application.prototype.start.call(this,"recommended");
 		this._bg = PIXI.Sprite.fromImage("assets/alphamask/bkg.jpg");
 		this._stage.addChild(this._bg);
 		this._cells = PIXI.Sprite.fromImage("assets/alphamask/cells.png");
