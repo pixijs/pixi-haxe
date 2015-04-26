@@ -146,6 +146,16 @@ samples.graphics.Main.prototype = $extend(pixi.plugins.app.Application.prototype
 		this._stage.on("tap",$bind(this,this._onStageClick));
 	}
 	,_onUpdate: function(elapsedTime) {
+		this._count += 0.1;
+		this._thing.clear();
+		this._thing.lineStyle(30,16711680,1);
+		this._thing.beginFill(16711680,0.5);
+		this._thing.moveTo(-120 + Math.sin(this._count) * 20,-100 + Math.cos(this._count) * 20);
+		this._thing.lineTo(120 + Math.cos(this._count) * 20,-100 + Math.sin(this._count) * 20);
+		this._thing.lineTo(120 + Math.sin(this._count) * 20,100 + Math.cos(this._count) * 20);
+		this._thing.lineTo(-120 + Math.cos(this._count) * 20,100 + Math.sin(this._count) * 20);
+		this._thing.lineTo(-120 + Math.sin(this._count) * 20,-100 + Math.cos(this._count) * 20);
+		this._thing.rotation = this._count * 0.1;
 	}
 	,_onStageClick: function(target) {
 		this._graphics.lineStyle(Math.random() * 30,Std["int"](Math.random() * 16777215),1);
