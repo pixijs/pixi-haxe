@@ -41,5 +41,6 @@ typedef RenderingOptions = {
 	@:optional var resolution:Float;
 	@:optional var clearBeforeRender:Bool;
 	@:optional var antialias:Bool;
+	@:optional var forceFXAA:Bool;
 	@:optional var preserveDrawingBuffer:Bool;
 }

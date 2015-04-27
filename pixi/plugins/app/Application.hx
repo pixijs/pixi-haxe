@@ -57,6 +57,12 @@ class Application {
 	public var antialias(null, default):Bool;
 
 	/**
+	 * Force FXAA shader antialias instead of native (faster)
+	 * default - false
+	 */
+	public var forceFXAA(null, default):Bool;
+
+	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true
@@ -108,6 +114,8 @@ class Application {
 		skipFrame = false;
 		autoResize = true;
 		transparent = false;
+		antialias = false;
+		forceFXAA = false;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -138,6 +146,7 @@ class Application {
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
 		renderingOptions.antialias = antialias;
+		renderingOptions.forceFXAA = forceFXAA;
 		renderingOptions.autoResize = autoResize;
 		renderingOptions.transparent = transparent;
 
