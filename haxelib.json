@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "updted pixi to official v3 release",
-  "version": "3.0.0",
+  "releasenote": "added forceFXAA property to rendering options",
+  "version": "3.0.1",
   "url": "https://github.com/pixijs/pixi-haxe",
   "dependencies": {
 
