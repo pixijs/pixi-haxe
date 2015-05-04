@@ -19,7 +19,7 @@ extern class InteractionManager {
 	 * @memberof PIXI.interaction
 	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
 	 */
-	@:overload( function(renderer:CanvasRenderer):Void {})
+	@:overload(function(renderer:CanvasRenderer):Void {})
 	function new(renderer:WebGLRenderer);
 
 	var renderer:Dynamic;

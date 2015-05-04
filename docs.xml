@@ -1,4 +1,12 @@
 <haxe>
+	<class path="Array" params="T" file="/usr/lib/haxe/std/js/_std/Array.hx" extern="1">
+		<haxe_doc>An Array is a storage for values. You can access it using indexes or
+	with its API.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":coreApi"/>
+		</meta>
+	</class>
 	<abstract path="Class" params="T" file="/usr/lib/haxe/std/Class.hx">
 		<this><x path="Class"><c path="Class.T"/></x></this>
 		<haxe_doc>An abstract type that represents a Class.
@@ -128,6 +136,104 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
+	<class path="Math" params="" file="/usr/lib/haxe/std/Math.hx" extern="1">
+		<NEGATIVE_INFINITY public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>A special Float constant which denotes negative infinity.
+
+		For example, this is the result of -1.0 / 0.0.
+
+		Operations with NEGATIVE_INFINITY as an operand may result in
+		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
+
+		If this constant is converted to an Int, e.g. through Std.int(), the
+		result is unspecified.</haxe_doc>
+		</NEGATIVE_INFINITY>
+		<POSITIVE_INFINITY public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>A special Float constant which denotes negative infinity.
+
+		For example, this is the result of 1.0 / 0.0.
+
+		Operations with POSITIVE_INFINITY as an operand may result in
+		NEGATIVE_INFINITY, POSITIVE_INFINITY or NaN. 
+
+		If this constant is converted to an Int, e.g. through Std.int(), the
+		result is unspecified.</haxe_doc>
+		</POSITIVE_INFINITY>
+		<NaN public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>A special Float constant which denotes an invalid number.
+
+		NaN stands for "Not a Number". It occurs when a mathematically incorrect
+		operation is executed, such as taking the square root of a negative
+		number: Math.sqrt(-1).
+
+		All further operations with NaN as an operand will result in NaN.
+
+		If this constant is converted to an Int, e.g. through Std.int(), the
+		result is unspecified.
+
+		In order to test if a value is NaN, you should use Math.isNaN() function.
+
+		@php In PHP versions prior to 5.3.1 VC 9 there may be unexpected
+		results when performing arithmetic operations with NaN on Windows, 
+		see [https://bugs.php.net/bug.php?id=42143]</haxe_doc>
+		</NaN>
+		<abs public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the absolute value of `v`.
+
+		If `v` is positive or 0, the result is unchanged. Otherwise the result 
+		is -`v`.
+		
+		If `v` is NEGATIVE_INFINITY or POSITIVE_INFINITY, the result is 
+		POSITIVE_INFINITY.
+		
+		If `v` is NaN, the result is NaN.</haxe_doc>
+		</abs>
+		<floor public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the largest integer value that is not greater than `v`.
+
+		If `v` is outside of the signed Int32 range, or is NaN, NEGATIVE_INFINITY 
+		or POSITIVE_INFINITY, the result is unspecified.</haxe_doc>
+		</floor>
+		<random public="1" set="method" static="1">
+			<f a=""><x path="Float"/></f>
+			<haxe_doc>Returns a pseudo-random number which is greater than or equal to 0.0, 
+		and less than 1.0.</haxe_doc>
+		</random>
+		<isFinite public="1" set="method" static="1">
+			<f a="f">
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if `f` is a finite number.
+
+		If `f` is POSITIVE_INFINITY, NEGATIVE_INFINITY or NaN, the result 
+		is false, otherwise the result is true.</haxe_doc>
+		</isFinite>
+		<isNaN public="1" set="method" static="1">
+			<f a="f">
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if `f` is not a valid number.
+
+		If `f` is NaN, the result is true, otherwise the result is false. 
+		In particular, both POSITIVE_INFINITY and NEGATIVE_INFINITY are
+		not considered NaN.</haxe_doc>
+		</isNaN>
+		<haxe_doc>This class defines mathematical functions and constants.</haxe_doc>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="String" params="" file="/usr/lib/haxe/std/js/_std/String.hx" extern="1">
 		<fromCharCode public="1" set="method" static="1">
 			<f a="code">
@@ -18323,20 +18429,23 @@ Documentation for this class was provided by <a href="https://developer.mozilla.
 		</new>
 		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
-	<class path="samples.events.Main" params="" file="samples/events/Main.hx">
+	<class path="samples.mask.Main" params="" file="samples/mask/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="46" static="1">
+		<main set="method" line="58" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_img><c path="pixi.core.sprites.Sprite"/></_img>
-		<_label><c path="pixi.core.text.Text"/></_label>
-		<_init set="method" line="19"><f a=""><x path="Void"/></f></_init>
-		<_onEvent set="method" line="42"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+		<_bg><c path="pixi.core.sprites.Sprite"/></_bg>
+		<_cells><c path="pixi.core.sprites.Sprite"/></_cells>
+		<_mask><c path="pixi.core.graphics.Graphics"/></_mask>
+		<_target><c path="pixi.core.math.Point"/></_target>
+		<_init set="method" line="20"><f a=""><x path="Void"/></f></_init>
+		<_reset set="method" line="47"><f a=""><x path="Void"/></f></_reset>
+		<_onUpdate set="method" line="52"><f a="elapsedTime">
+	<x path="Float"/>
 	<x path="Void"/>
-</f></_onEvent>
-		<new public="1" set="method" line="14"><f a=""><x path="Void"/></f></new>
+</f></_onUpdate>
+		<new public="1" set="method" line="15"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":keep"/></meta>
 	</class>
 </haxe>

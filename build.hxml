@@ -82,3 +82,7 @@
 --next
 -main samples.events.Main
 -js samples/_output/events.js
+
+--next
+-main samples.mask.Main
+-js samples/_output/mask.js

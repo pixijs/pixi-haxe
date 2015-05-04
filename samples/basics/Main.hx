@@ -19,8 +19,10 @@ class Main {
 	public function new() {
 		// Rendering options usage sample
 		var options:RenderingOptions = {};
-		options.backgroundColor = 0x003366;
+		options.backgroundColor = 0x006666;
 		options.resolution = 1;
+		options.transparent = true;
+		options.antialias = true;
 
 		_container = new Container();
 		_renderer = Detector.autoDetectRenderer(800, 600, options);
