@@ -1,4 +1,4 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -9,14 +9,11 @@ var Std = function() { };
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -94,15 +91,13 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.bunnymark = {};
-samples.bunnymark.Bunny = function(texture) {
+var samples_bunnymark_Bunny = function(texture) {
 	PIXI.Sprite.call(this,texture);
 };
-samples.bunnymark.Bunny.__super__ = PIXI.Sprite;
-samples.bunnymark.Bunny.prototype = $extend(PIXI.Sprite.prototype,{
+samples_bunnymark_Bunny.__super__ = PIXI.Sprite;
+samples_bunnymark_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
 });
-samples.bunnymark.Main = function() {
+var samples_bunnymark_Main = function() {
 	this.amount = 100;
 	this.count = 0;
 	this.isAdding = false;
@@ -112,19 +107,19 @@ samples.bunnymark.Main = function() {
 	this.gravity = 0.5;
 	this.bunnyTextures = [];
 	this.bunnys = [];
-	pixi.plugins.app.Application.call(this);
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.bunnymark.Main.main = function() {
-	new samples.bunnymark.Main();
+samples_bunnymark_Main.main = function() {
+	new samples_bunnymark_Main();
 };
-samples.bunnymark.Main.__super__ = pixi.plugins.app.Application;
-samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_bunnymark_Main.__super__ = pixi_plugins_app_Application;
+samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.onResize = $bind(this,this._onResize);
-		pixi.plugins.app.Application.prototype.start.call(this,null,true);
+		pixi_plugins_app_Application.prototype.start.call(this,null,true);
 		this._setup();
 	}
 	,_setup: function() {
@@ -162,7 +157,7 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 		var _g = this.startBunnyCount;
 		while(_g1 < _g) {
 			var i = _g1++;
-			var bunny = new samples.bunnymark.Bunny(this.currentTexture);
+			var bunny = new samples_bunnymark_Bunny(this.currentTexture);
 			bunny.speedX = Math.random() * 5;
 			bunny.speedY = Math.random() * 5 - 3;
 			bunny.anchor.x = 0.5;
@@ -191,7 +186,7 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 				var _g = this.amount;
 				while(_g1 < _g) {
 					var i = _g1++;
-					var bunny = new samples.bunnymark.Bunny(this.currentTexture);
+					var bunny = new samples_bunnymark_Bunny(this.currentTexture);
 					bunny.speedX = Math.random() * 5;
 					bunny.speedY = Math.random() * 5 - 3;
 					bunny.anchor.y = 1;
@@ -239,16 +234,7 @@ samples.bunnymark.Main.prototype = $extend(pixi.plugins.app.Application.prototyp
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.bunnymark.Main.main();
-})();
+samples_bunnymark_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=bunnymark.js.map

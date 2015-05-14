@@ -1,18 +1,15 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -90,21 +87,19 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.rope = {};
-samples.rope.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_rope_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.rope.Main.main = function() {
-	new samples.rope.Main();
+samples_rope_Main.main = function() {
+	new samples_rope_Main();
 };
-samples.rope.Main.__super__ = pixi.plugins.app.Application;
-samples.rope.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_rope_Main.__super__ = pixi_plugins_app_Application;
+samples_rope_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this,"auto");
+		pixi_plugins_app_Application.prototype.start.call(this,"auto");
 		this._count = 0;
 		this._points = [];
 		this._length = 45.9;
@@ -136,16 +131,7 @@ samples.rope.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.rope.Main.main();
-})();
+samples_rope_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=rope.js.map

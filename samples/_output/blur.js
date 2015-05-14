@@ -1,18 +1,15 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -90,11 +87,8 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.filters = {};
-samples.filters.blur = {};
-samples.filters.blur.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_filters_blur_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 	this._container = new PIXI.Container();
 	this._stage.addChild(this._container);
@@ -116,15 +110,15 @@ samples.filters.blur.Main = function() {
 	this._littleRobot.filters = [this._blurFilter2];
 	this._count = 0;
 };
-samples.filters.blur.Main.main = function() {
-	new samples.filters.blur.Main();
+samples_filters_blur_Main.main = function() {
+	new samples_filters_blur_Main();
 };
-samples.filters.blur.Main.__super__ = pixi.plugins.app.Application;
-samples.filters.blur.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_filters_blur_Main.__super__ = pixi_plugins_app_Application;
+samples_filters_blur_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._count += 0.01;
@@ -137,16 +131,7 @@ samples.filters.blur.Main.prototype = $extend(pixi.plugins.app.Application.proto
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.filters.blur.Main.main();
-})();
+samples_filters_blur_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=blur.js.map

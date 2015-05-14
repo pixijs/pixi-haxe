@@ -1,18 +1,15 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -90,21 +87,19 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.textureswap = {};
-samples.textureswap.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_textureswap_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.textureswap.Main.main = function() {
-	new samples.textureswap.Main();
+samples_textureswap_Main.main = function() {
+	new samples_textureswap_Main();
 };
-samples.textureswap.Main.__super__ = pixi.plugins.app.Application;
-samples.textureswap.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_textureswap_Main.__super__ = pixi_plugins_app_Application;
+samples_textureswap_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._swap = false;
 		this._texture1 = PIXI.Texture.fromImage("assets/bunnymark/bunny2.png");
 		this._texture2 = PIXI.Texture.fromImage("assets/bunnymark/bunny4.png");
@@ -126,7 +121,7 @@ samples.textureswap.Main.prototype = $extend(pixi.plugins.app.Application.protot
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-samples.textureswap.Main.main();
-})();
+samples_textureswap_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=textureswap.js.map

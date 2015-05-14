@@ -1,4 +1,4 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -9,15 +9,31 @@ Math.__name__ = true;
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
-	return js.Boot.__string_rec(s,"");
+	return js_Boot.__string_rec(s,"");
 };
-var js = {};
-js.Boot = function() { };
-js.Boot.__name__ = true;
-js.Boot.getClass = function(o) {
-	if((o instanceof Array) && o.__enum__ == null) return Array; else return o.__class__;
+var js__$Boot_HaxeError = function(val) {
+	Error.call(this);
+	this.val = val;
+	this.message = String(val);
+	if(Error.captureStackTrace) Error.captureStackTrace(this,js__$Boot_HaxeError);
 };
-js.Boot.__string_rec = function(o,s) {
+js__$Boot_HaxeError.__name__ = true;
+js__$Boot_HaxeError.__super__ = Error;
+js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
+	__class__: js__$Boot_HaxeError
+});
+var js_Boot = function() { };
+js_Boot.__name__ = true;
+js_Boot.getClass = function(o) {
+	if((o instanceof Array) && o.__enum__ == null) return Array; else {
+		var cl = o.__class__;
+		if(cl != null) return cl;
+		var name = js_Boot.__nativeClassName(o);
+		if(name != null) return js_Boot.__resolveNativeClass(name);
+		return null;
+	}
+};
+js_Boot.__string_rec = function(o,s) {
 	if(o == null) return "null";
 	if(s.length >= 5) return "<...>";
 	var t = typeof(o);
@@ -27,24 +43,24 @@ js.Boot.__string_rec = function(o,s) {
 		if(o instanceof Array) {
 			if(o.__enum__) {
 				if(o.length == 2) return o[0];
-				var str = o[0] + "(";
+				var str2 = o[0] + "(";
 				s += "\t";
 				var _g1 = 2;
 				var _g = o.length;
 				while(_g1 < _g) {
-					var i = _g1++;
-					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
+					var i1 = _g1++;
+					if(i1 != 2) str2 += "," + js_Boot.__string_rec(o[i1],s); else str2 += js_Boot.__string_rec(o[i1],s);
 				}
-				return str + ")";
+				return str2 + ")";
 			}
 			var l = o.length;
-			var i1;
+			var i;
 			var str1 = "[";
 			s += "\t";
 			var _g2 = 0;
 			while(_g2 < l) {
 				var i2 = _g2++;
-				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
+				str1 += (i2 > 0?",":"") + js_Boot.__string_rec(o[i2],s);
 			}
 			str1 += "]";
 			return str1;
@@ -53,14 +69,15 @@ js.Boot.__string_rec = function(o,s) {
 		try {
 			tostr = o.toString;
 		} catch( e ) {
+			if (e instanceof js__$Boot_HaxeError) e = e.val;
 			return "???";
 		}
-		if(tostr != null && tostr != Object.toString) {
+		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
 			var s2 = o.toString();
 			if(s2 != "[object Object]") return s2;
 		}
 		var k = null;
-		var str2 = "{\n";
+		var str = "{\n";
 		s += "\t";
 		var hasp = o.hasOwnProperty != null;
 		for( var k in o ) {
@@ -70,12 +87,12 @@ js.Boot.__string_rec = function(o,s) {
 		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
 			continue;
 		}
-		if(str2.length != 2) str2 += ", \n";
-		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
+		if(str.length != 2) str += ", \n";
+		str += s + k + " : " + js_Boot.__string_rec(o[k],s);
 		}
 		s = s.substring(1);
-		str2 += "\n" + s + "}";
-		return str2;
+		str += "\n" + s + "}";
+		return str;
 	case "function":
 		return "<function>";
 	case "string":
@@ -84,7 +101,7 @@ js.Boot.__string_rec = function(o,s) {
 		return String(o);
 	}
 };
-js.Boot.__interfLoop = function(cc,cl) {
+js_Boot.__interfLoop = function(cc,cl) {
 	if(cc == null) return false;
 	if(cc == cl) return true;
 	var intf = cc.__interfaces__;
@@ -94,12 +111,12 @@ js.Boot.__interfLoop = function(cc,cl) {
 		while(_g1 < _g) {
 			var i = _g1++;
 			var i1 = intf[i];
-			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
+			if(i1 == cl || js_Boot.__interfLoop(i1,cl)) return true;
 		}
 	}
-	return js.Boot.__interfLoop(cc.__super__,cl);
+	return js_Boot.__interfLoop(cc.__super__,cl);
 };
-js.Boot.__instanceof = function(o,cl) {
+js_Boot.__instanceof = function(o,cl) {
 	if(cl == null) return false;
 	switch(cl) {
 	case Int:
@@ -118,7 +135,9 @@ js.Boot.__instanceof = function(o,cl) {
 		if(o != null) {
 			if(typeof(cl) == "function") {
 				if(o instanceof cl) return true;
-				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
+				if(js_Boot.__interfLoop(js_Boot.getClass(o),cl)) return true;
+			} else if(typeof(cl) == "object" && js_Boot.__isNativeObj(cl)) {
+				if(o instanceof cl) return true;
 			}
 		} else return false;
 		if(cl == Class && o.__name__ != null) return true;
@@ -126,18 +145,26 @@ js.Boot.__instanceof = function(o,cl) {
 		return o.__enum__ == cl;
 	}
 };
-js.Boot.__cast = function(o,t) {
-	if(js.Boot.__instanceof(o,t)) return o; else throw "Cannot cast " + Std.string(o) + " to " + Std.string(t);
+js_Boot.__cast = function(o,t) {
+	if(js_Boot.__instanceof(o,t)) return o; else throw new js__$Boot_HaxeError("Cannot cast " + Std.string(o) + " to " + Std.string(t));
 };
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+js_Boot.__nativeClassName = function(o) {
+	var name = js_Boot.__toStr.call(o).slice(8,-1);
+	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
+	return name;
+};
+js_Boot.__isNativeObj = function(o) {
+	return js_Boot.__nativeClassName(o) != null;
+};
+js_Boot.__resolveNativeClass = function(name) {
+	return (Function("return typeof " + name + " != \"undefined\" ? " + name + " : null"))();
+};
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.__name__ = true;
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.__name__ = true;
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -214,31 +241,29 @@ pixi.plugins.app.Application.prototype = {
 			this._stats.begin();
 		}
 	}
-	,__class__: pixi.plugins.app.Application
+	,__class__: pixi_plugins_app_Application
 };
-var samples = {};
-samples.dragging = {};
-samples.dragging.Bunny = function(texture) {
+var samples_dragging_Bunny = function(texture) {
 	PIXI.Sprite.call(this,texture);
 };
-samples.dragging.Bunny.__name__ = true;
-samples.dragging.Bunny.__super__ = PIXI.Sprite;
-samples.dragging.Bunny.prototype = $extend(PIXI.Sprite.prototype,{
-	__class__: samples.dragging.Bunny
+samples_dragging_Bunny.__name__ = true;
+samples_dragging_Bunny.__super__ = PIXI.Sprite;
+samples_dragging_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
+	__class__: samples_dragging_Bunny
 });
-samples.dragging.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_dragging_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.dragging.Main.__name__ = true;
-samples.dragging.Main.main = function() {
-	new samples.dragging.Main();
+samples_dragging_Main.__name__ = true;
+samples_dragging_Main.main = function() {
+	new samples_dragging_Main();
 };
-samples.dragging.Main.__super__ = pixi.plugins.app.Application;
-samples.dragging.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_dragging_Main.__super__ = pixi_plugins_app_Application;
+samples_dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._texture = PIXI.Texture.fromImage("assets/basics/bunny.png");
 		var _g = 0;
 		while(_g < 10) {
@@ -247,7 +272,7 @@ samples.dragging.Main.prototype = $extend(pixi.plugins.app.Application.prototype
 		}
 	}
 	,_createBunny: function(x,y) {
-		var bunny = new samples.dragging.Bunny(this._texture);
+		var bunny = new samples_dragging_Bunny(this._texture);
 		bunny.interactive = true;
 		bunny.buttonMode = true;
 		bunny.anchor.set(0.5);
@@ -265,39 +290,30 @@ samples.dragging.Main.prototype = $extend(pixi.plugins.app.Application.prototype
 	}
 	,_onDragStart: function(event) {
 		var bunny;
-		bunny = js.Boot.__cast(event.target , samples.dragging.Bunny);
+		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
 		bunny.data = event.data;
 		bunny.alpha = 0.5;
 		bunny.dragging = true;
 	}
 	,_onDragEnd: function(event) {
 		var bunny;
-		bunny = js.Boot.__cast(event.target , samples.dragging.Bunny);
+		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
 		bunny.alpha = 1;
 		bunny.dragging = false;
 		bunny.data = null;
 	}
 	,_onDragMove: function(event) {
 		var bunny;
-		bunny = js.Boot.__cast(event.target , samples.dragging.Bunny);
+		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
 		if(bunny.dragging) {
 			var newPosition = bunny.data.getLocalPosition(bunny.parent);
 			bunny.position.set(newPosition.x,newPosition.y);
 		}
 	}
-	,__class__: samples.dragging.Main
+	,__class__: samples_dragging_Main
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
 String.prototype.__class__ = String;
 String.__name__ = true;
 Array.__name__ = true;
@@ -311,7 +327,8 @@ var Bool = Boolean;
 Bool.__ename__ = ["Bool"];
 var Class = { __name__ : ["Class"]};
 var Enum = { };
-samples.dragging.Main.main();
-})();
+js_Boot.__toStr = {}.toString;
+samples_dragging_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=dragging.js.map

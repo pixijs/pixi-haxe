@@ -1,18 +1,15 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -90,19 +87,17 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.loader = {};
-samples.loader.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_loader_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.loader.Main.main = function() {
-	new samples.loader.Main();
+samples_loader_Main.main = function() {
+	new samples_loader_Main();
 };
-samples.loader.Main.__super__ = pixi.plugins.app.Application;
-samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_loader_Main.__super__ = pixi_plugins_app_Application;
+samples_loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
-		pixi.plugins.app.Application.prototype.start.call(this,"auto");
+		pixi_plugins_app_Application.prototype.start.call(this,"auto");
 		this._baseURL = "assets/loader/";
 		this._loader = new PIXI.loaders.Loader();
 		this._loader.baseUrl = this._baseURL;
@@ -133,16 +128,7 @@ samples.loader.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.loader.Main.main();
-})();
+samples_loader_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=loader.js.map

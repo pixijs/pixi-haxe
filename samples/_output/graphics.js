@@ -1,4 +1,4 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -9,14 +9,11 @@ var Std = function() { };
 Std["int"] = function(x) {
 	return x | 0;
 };
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -94,22 +91,20 @@ pixi.plugins.app.Application.prototype = {
 		}
 	}
 };
-var samples = {};
-samples.graphics = {};
-samples.graphics.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_graphics_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples.graphics.Main.main = function() {
-	new samples.graphics.Main();
+samples_graphics_Main.main = function() {
+	new samples_graphics_Main();
 };
-samples.graphics.Main.__super__ = pixi.plugins.app.Application;
-samples.graphics.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_graphics_Main.__super__ = pixi_plugins_app_Application;
+samples_graphics_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 0;
 		this.antialias = true;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._graphics = new PIXI.Graphics();
 		this._graphics.beginFill(16724736);
 		this._graphics.lineStyle(10,16767232,1);
@@ -168,16 +163,7 @@ samples.graphics.Main.prototype = $extend(pixi.plugins.app.Application.prototype
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
-samples.graphics.Main.main();
-})();
+samples_graphics_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=graphics.js.map

@@ -1,4 +1,4 @@
-(function () { "use strict";
+(function (console) { "use strict";
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -9,31 +9,46 @@ Math.__name__ = true;
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
-	return js.Boot.__string_rec(s,"");
+	return js_Boot.__string_rec(s,"");
 };
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
-var haxe = {};
-haxe.Timer = function(time_ms) {
+var haxe_Timer = function(time_ms) {
 	var me = this;
 	this.id = setInterval(function() {
 		me.run();
 	},time_ms);
 };
-haxe.Timer.__name__ = true;
-haxe.Timer.prototype = {
+haxe_Timer.__name__ = true;
+haxe_Timer.prototype = {
 	run: function() {
 	}
-	,__class__: haxe.Timer
+	,__class__: haxe_Timer
 };
-var js = {};
-js.Boot = function() { };
-js.Boot.__name__ = true;
-js.Boot.getClass = function(o) {
-	if((o instanceof Array) && o.__enum__ == null) return Array; else return o.__class__;
+var js__$Boot_HaxeError = function(val) {
+	Error.call(this);
+	this.val = val;
+	this.message = String(val);
+	if(Error.captureStackTrace) Error.captureStackTrace(this,js__$Boot_HaxeError);
 };
-js.Boot.__string_rec = function(o,s) {
+js__$Boot_HaxeError.__name__ = true;
+js__$Boot_HaxeError.__super__ = Error;
+js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
+	__class__: js__$Boot_HaxeError
+});
+var js_Boot = function() { };
+js_Boot.__name__ = true;
+js_Boot.getClass = function(o) {
+	if((o instanceof Array) && o.__enum__ == null) return Array; else {
+		var cl = o.__class__;
+		if(cl != null) return cl;
+		var name = js_Boot.__nativeClassName(o);
+		if(name != null) return js_Boot.__resolveNativeClass(name);
+		return null;
+	}
+};
+js_Boot.__string_rec = function(o,s) {
 	if(o == null) return "null";
 	if(s.length >= 5) return "<...>";
 	var t = typeof(o);
@@ -43,24 +58,24 @@ js.Boot.__string_rec = function(o,s) {
 		if(o instanceof Array) {
 			if(o.__enum__) {
 				if(o.length == 2) return o[0];
-				var str = o[0] + "(";
+				var str2 = o[0] + "(";
 				s += "\t";
 				var _g1 = 2;
 				var _g = o.length;
 				while(_g1 < _g) {
-					var i = _g1++;
-					if(i != 2) str += "," + js.Boot.__string_rec(o[i],s); else str += js.Boot.__string_rec(o[i],s);
+					var i1 = _g1++;
+					if(i1 != 2) str2 += "," + js_Boot.__string_rec(o[i1],s); else str2 += js_Boot.__string_rec(o[i1],s);
 				}
-				return str + ")";
+				return str2 + ")";
 			}
 			var l = o.length;
-			var i1;
+			var i;
 			var str1 = "[";
 			s += "\t";
 			var _g2 = 0;
 			while(_g2 < l) {
 				var i2 = _g2++;
-				str1 += (i2 > 0?",":"") + js.Boot.__string_rec(o[i2],s);
+				str1 += (i2 > 0?",":"") + js_Boot.__string_rec(o[i2],s);
 			}
 			str1 += "]";
 			return str1;
@@ -69,14 +84,15 @@ js.Boot.__string_rec = function(o,s) {
 		try {
 			tostr = o.toString;
 		} catch( e ) {
+			if (e instanceof js__$Boot_HaxeError) e = e.val;
 			return "???";
 		}
-		if(tostr != null && tostr != Object.toString) {
+		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
 			var s2 = o.toString();
 			if(s2 != "[object Object]") return s2;
 		}
 		var k = null;
-		var str2 = "{\n";
+		var str = "{\n";
 		s += "\t";
 		var hasp = o.hasOwnProperty != null;
 		for( var k in o ) {
@@ -86,12 +102,12 @@ js.Boot.__string_rec = function(o,s) {
 		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
 			continue;
 		}
-		if(str2.length != 2) str2 += ", \n";
-		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
+		if(str.length != 2) str += ", \n";
+		str += s + k + " : " + js_Boot.__string_rec(o[k],s);
 		}
 		s = s.substring(1);
-		str2 += "\n" + s + "}";
-		return str2;
+		str += "\n" + s + "}";
+		return str;
 	case "function":
 		return "<function>";
 	case "string":
@@ -100,7 +116,7 @@ js.Boot.__string_rec = function(o,s) {
 		return String(o);
 	}
 };
-js.Boot.__interfLoop = function(cc,cl) {
+js_Boot.__interfLoop = function(cc,cl) {
 	if(cc == null) return false;
 	if(cc == cl) return true;
 	var intf = cc.__interfaces__;
@@ -110,12 +126,12 @@ js.Boot.__interfLoop = function(cc,cl) {
 		while(_g1 < _g) {
 			var i = _g1++;
 			var i1 = intf[i];
-			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) return true;
+			if(i1 == cl || js_Boot.__interfLoop(i1,cl)) return true;
 		}
 	}
-	return js.Boot.__interfLoop(cc.__super__,cl);
+	return js_Boot.__interfLoop(cc.__super__,cl);
 };
-js.Boot.__instanceof = function(o,cl) {
+js_Boot.__instanceof = function(o,cl) {
 	if(cl == null) return false;
 	switch(cl) {
 	case Int:
@@ -134,7 +150,9 @@ js.Boot.__instanceof = function(o,cl) {
 		if(o != null) {
 			if(typeof(cl) == "function") {
 				if(o instanceof cl) return true;
-				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) return true;
+				if(js_Boot.__interfLoop(js_Boot.getClass(o),cl)) return true;
+			} else if(typeof(cl) == "object" && js_Boot.__isNativeObj(cl)) {
+				if(o instanceof cl) return true;
 			}
 		} else return false;
 		if(cl == Class && o.__name__ != null) return true;
@@ -142,47 +160,56 @@ js.Boot.__instanceof = function(o,cl) {
 		return o.__enum__ == cl;
 	}
 };
-var nape = {};
-nape.Config = function() { };
-nape.Config.__name__ = true;
-nape.callbacks = {};
-nape.callbacks.Callback = function() {
-	this.zpp_inner = null;
-	if(!zpp_nape.callbacks.ZPP_Callback.internal) throw "Error: Callback cannot be instantiated derp!";
+js_Boot.__nativeClassName = function(o) {
+	var name = js_Boot.__toStr.call(o).slice(8,-1);
+	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") return null;
+	return name;
 };
-nape.callbacks.Callback.__name__ = true;
-nape.callbacks.Callback.prototype = {
+js_Boot.__isNativeObj = function(o) {
+	return js_Boot.__nativeClassName(o) != null;
+};
+js_Boot.__resolveNativeClass = function(name) {
+	return (Function("return typeof " + name + " != \"undefined\" ? " + name + " : null"))();
+};
+var nape_Config = function() { };
+nape_Config.__name__ = true;
+var nape_callbacks_Callback = function() {
+	this.zpp_inner = null;
+	if(!zpp_$nape_callbacks_ZPP_$Callback.internal) throw new js__$Boot_HaxeError("Error: Callback cannot be instantiated derp!");
+};
+nape_callbacks_Callback.__name__ = true;
+nape_callbacks_Callback.prototype = {
 	toString: function() {
 		return "";
 	}
-	,__class__: nape.callbacks.Callback
+	,__class__: nape_callbacks_Callback
 };
-nape.callbacks.BodyCallback = function() {
-	nape.callbacks.Callback.call(this);
+var nape_callbacks_BodyCallback = function() {
+	nape_callbacks_Callback.call(this);
 };
-nape.callbacks.BodyCallback.__name__ = true;
-nape.callbacks.BodyCallback.__super__ = nape.callbacks.Callback;
-nape.callbacks.BodyCallback.prototype = $extend(nape.callbacks.Callback.prototype,{
+nape_callbacks_BodyCallback.__name__ = true;
+nape_callbacks_BodyCallback.__super__ = nape_callbacks_Callback;
+nape_callbacks_BodyCallback.prototype = $extend(nape_callbacks_Callback.prototype,{
 	toString: function() {
 		var ret = "Cb:";
-		ret += ["WAKE","SLEEP"][this.zpp_inner.event - zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE];
+		ret += ["WAKE","SLEEP"][this.zpp_inner.event - zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE];
 		ret += ":" + this.zpp_inner.body.outer.toString();
 		ret += " : listener: " + Std.string(this.zpp_inner.listener.outer);
 		return ret;
 	}
-	,__class__: nape.callbacks.BodyCallback
+	,__class__: nape_callbacks_BodyCallback
 });
-nape.callbacks.Listener = function() {
+var nape_callbacks_Listener = function() {
 	this.zpp_inner = null;
 };
-nape.callbacks.Listener.__name__ = true;
-nape.callbacks.Listener.prototype = {
+nape_callbacks_Listener.__name__ = true;
+nape_callbacks_Listener.prototype = {
 	toString: function() {
 		var event = ["BEGIN","END","WAKE","SLEEP","BREAK","PRE","ONGOING"][this.zpp_inner.event];
-		if(this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_ListenerType_BODY) {
+		if(this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_BODY) {
 			var body = this.zpp_inner.body;
 			return "BodyListener{" + event + "::" + Std.string(body.outer_zn.zpp_inner_zn.options.outer) + "}";
-		} else if(this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_ListenerType_CONSTRAINT) {
+		} else if(this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_CONSTRAINT) {
 			var con = this.zpp_inner.constraint;
 			return "ConstraintListener{" + event + "::" + Std.string(con.outer_zn.zpp_inner_zn.options.outer) + "}";
 		} else {
@@ -190,134 +217,134 @@ nape.callbacks.Listener.prototype = {
 			var itype;
 			var _g = con1.itype;
 			switch(_g) {
-			case zpp_nape.util.ZPP_Flags.id_InteractionType_COLLISION:
+			case 1:
 				itype = "COLLISION";
 				break;
-			case zpp_nape.util.ZPP_Flags.id_InteractionType_SENSOR:
+			case 2:
 				itype = "SENSOR";
 				break;
-			case zpp_nape.util.ZPP_Flags.id_InteractionType_FLUID:
+			case 4:
 				itype = "FLUID";
 				break;
 			default:
 				itype = "ALL";
 			}
-			return (this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_ListenerType_INTERACTION?"InteractionListener{" + event + "#" + itype + "::" + Std.string(con1.outer_zni.zpp_inner_zn.options1.outer) + ":" + Std.string(con1.outer_zni.zpp_inner_zn.options2.outer) + "}":"PreListener{" + itype + "::" + Std.string(con1.outer_znp.zpp_inner_zn.options1.outer) + ":" + Std.string(con1.outer_znp.zpp_inner_zn.options2.outer) + "}") + " precedence=" + this.zpp_inner.precedence;
+			return (this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_INTERACTION?"InteractionListener{" + event + "#" + itype + "::" + Std.string(con1.outer_zni.zpp_inner_zn.options1.outer) + ":" + Std.string(con1.outer_zni.zpp_inner_zn.options2.outer) + "}":"PreListener{" + itype + "::" + Std.string(con1.outer_znp.zpp_inner_zn.options1.outer) + ":" + Std.string(con1.outer_znp.zpp_inner_zn.options2.outer) + "}") + " precedence=" + this.zpp_inner.precedence;
 		}
 	}
-	,__class__: nape.callbacks.Listener
+	,__class__: nape_callbacks_Listener
 };
-nape.callbacks.BodyListener = function() {
+var nape_callbacks_BodyListener = function() {
 	this.zpp_inner_zn = null;
 };
-nape.callbacks.BodyListener.__name__ = true;
-nape.callbacks.BodyListener.__super__ = nape.callbacks.Listener;
-nape.callbacks.BodyListener.prototype = $extend(nape.callbacks.Listener.prototype,{
-	__class__: nape.callbacks.BodyListener
+nape_callbacks_BodyListener.__name__ = true;
+nape_callbacks_BodyListener.__super__ = nape_callbacks_Listener;
+nape_callbacks_BodyListener.prototype = $extend(nape_callbacks_Listener.prototype,{
+	__class__: nape_callbacks_BodyListener
 });
-nape.callbacks.CbEvent = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "CbEvent" + " derp!";
+var nape_callbacks_CbEvent = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "CbEvent" + " derp!");
 };
-nape.callbacks.CbEvent.__name__ = true;
-nape.callbacks.CbEvent.prototype = {
+nape_callbacks_CbEvent.__name__ = true;
+nape_callbacks_CbEvent.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_PRE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_PRE = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_PRE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_PRE = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_PRE;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_PRE;
 			return $r;
 		}(this))) return "PRE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_BEGIN == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_BEGIN = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_BEGIN == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_BEGIN = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_BEGIN;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_BEGIN;
 			return $r;
 		}(this))) return "BEGIN"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_ONGOING == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_ONGOING = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_ONGOING == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_ONGOING = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_ONGOING;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_ONGOING;
 			return $r;
 		}(this))) return "ONGOING"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_END == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_END = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_END == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_END = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_END;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_END;
 			return $r;
 		}(this))) return "END"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_WAKE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_WAKE = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_WAKE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_WAKE = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_WAKE;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_WAKE;
 			return $r;
 		}(this))) return "WAKE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_SLEEP == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_SLEEP = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_SLEEP == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_SLEEP = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_SLEEP;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_SLEEP;
 			return $r;
 		}(this))) return "SLEEP"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.CbEvent_BREAK == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.CbEvent_BREAK = new nape.callbacks.CbEvent();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.CbEvent_BREAK == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.CbEvent_BREAK = new nape_callbacks_CbEvent();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.CbEvent_BREAK;
+			$r = zpp_$nape_util_ZPP_$Flags.CbEvent_BREAK;
 			return $r;
 		}(this))) return "BREAK"; else return "";
 	}
-	,__class__: nape.callbacks.CbEvent
+	,__class__: nape_callbacks_CbEvent
 };
-nape.callbacks.CbType = function() {
+var nape_callbacks_CbType = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.callbacks.ZPP_CbType();
+	this.zpp_inner = new zpp_$nape_callbacks_ZPP_$CbType();
 	this.zpp_inner.outer = this;
 };
-nape.callbacks.CbType.__name__ = true;
-nape.callbacks.CbType.prototype = {
+nape_callbacks_CbType.__name__ = true;
+nape_callbacks_CbType.prototype = {
 	toString: function() {
-		if(this == zpp_nape.callbacks.ZPP_CbType.ANY_BODY) return "ANY_BODY"; else if(this == zpp_nape.callbacks.ZPP_CbType.ANY_SHAPE) return "ANY_SHAPE"; else if(this == zpp_nape.callbacks.ZPP_CbType.ANY_COMPOUND) return "ANY_COMPOUND"; else if(this == zpp_nape.callbacks.ZPP_CbType.ANY_CONSTRAINT) return "ANY_CONSTRAINT"; else return "CbType#" + this.zpp_inner.id;
+		if(this == zpp_$nape_callbacks_ZPP_$CbType.ANY_BODY) return "ANY_BODY"; else if(this == zpp_$nape_callbacks_ZPP_$CbType.ANY_SHAPE) return "ANY_SHAPE"; else if(this == zpp_$nape_callbacks_ZPP_$CbType.ANY_COMPOUND) return "ANY_COMPOUND"; else if(this == zpp_$nape_callbacks_ZPP_$CbType.ANY_CONSTRAINT) return "ANY_CONSTRAINT"; else return "CbType#" + this.zpp_inner.id;
 	}
-	,__class__: nape.callbacks.CbType
+	,__class__: nape_callbacks_CbType
 };
-nape.callbacks.CbTypeIterator = function() {
+var nape_callbacks_CbTypeIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_CbTypeList.internal) throw "Error: Cannot instantiate " + "CbType" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$CbTypeList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "CbType" + "Iterator derp!");
 };
-nape.callbacks.CbTypeIterator.__name__ = true;
-nape.callbacks.CbTypeIterator.get = function(list) {
+nape_callbacks_CbTypeIterator.__name__ = true;
+nape_callbacks_CbTypeIterator.get = function(list) {
 	var ret;
-	if(nape.callbacks.CbTypeIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_CbTypeList.internal = true;
-		var ret1 = new nape.callbacks.CbTypeIterator();
-		zpp_nape.util.ZPP_CbTypeList.internal = false;
+	if(nape_callbacks_CbTypeIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$CbTypeList.internal = true;
+		var ret1 = new nape_callbacks_CbTypeIterator();
+		zpp_$nape_util_ZPP_$CbTypeList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.callbacks.CbTypeIterator.zpp_pool;
-		nape.callbacks.CbTypeIterator.zpp_pool = r.zpp_next;
+		var r = nape_callbacks_CbTypeIterator.zpp_pool;
+		nape_callbacks_CbTypeIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -325,14 +352,14 @@ nape.callbacks.CbTypeIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.callbacks.CbTypeIterator.prototype = {
+nape_callbacks_CbTypeIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.callbacks.CbTypeIterator.zpp_pool;
-			nape.callbacks.CbTypeIterator.zpp_pool = this;
+			this.zpp_next = nape_callbacks_CbTypeIterator.zpp_pool;
+			nape_callbacks_CbTypeIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -341,15 +368,15 @@ nape.callbacks.CbTypeIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.callbacks.CbTypeIterator
+	,__class__: nape_callbacks_CbTypeIterator
 };
-nape.callbacks.CbTypeList = function() {
+var nape_callbacks_CbTypeList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_CbTypeList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$CbTypeList();
 	this.zpp_inner.outer = this;
 };
-nape.callbacks.CbTypeList.__name__ = true;
-nape.callbacks.CbTypeList.prototype = {
+nape_callbacks_CbTypeList.__name__ = true;
+nape_callbacks_CbTypeList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -360,7 +387,7 @@ nape.callbacks.CbTypeList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -376,7 +403,7 @@ nape.callbacks.CbTypeList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.callbacks.CbTypeIterator.get(this);
+		_g = nape_callbacks_CbTypeIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -387,37 +414,37 @@ nape.callbacks.CbTypeList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.callbacks.CbTypeList
+	,__class__: nape_callbacks_CbTypeList
 };
-nape.callbacks.ConstraintCallback = function() {
-	nape.callbacks.Callback.call(this);
+var nape_callbacks_ConstraintCallback = function() {
+	nape_callbacks_Callback.call(this);
 };
-nape.callbacks.ConstraintCallback.__name__ = true;
-nape.callbacks.ConstraintCallback.__super__ = nape.callbacks.Callback;
-nape.callbacks.ConstraintCallback.prototype = $extend(nape.callbacks.Callback.prototype,{
+nape_callbacks_ConstraintCallback.__name__ = true;
+nape_callbacks_ConstraintCallback.__super__ = nape_callbacks_Callback;
+nape_callbacks_ConstraintCallback.prototype = $extend(nape_callbacks_Callback.prototype,{
 	toString: function() {
 		var ret = "Cb:";
-		ret += ["WAKE","SLEEP","BREAK"][this.zpp_inner.event - zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE];
+		ret += ["WAKE","SLEEP","BREAK"][this.zpp_inner.event - zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE];
 		ret += ":" + this.zpp_inner.constraint.outer.toString();
 		ret += " : listener: " + Std.string(this.zpp_inner.listener.outer);
 		return ret;
 	}
-	,__class__: nape.callbacks.ConstraintCallback
+	,__class__: nape_callbacks_ConstraintCallback
 });
-nape.callbacks.ConstraintListener = function() {
+var nape_callbacks_ConstraintListener = function() {
 	this.zpp_inner_zn = null;
 };
-nape.callbacks.ConstraintListener.__name__ = true;
-nape.callbacks.ConstraintListener.__super__ = nape.callbacks.Listener;
-nape.callbacks.ConstraintListener.prototype = $extend(nape.callbacks.Listener.prototype,{
-	__class__: nape.callbacks.ConstraintListener
+nape_callbacks_ConstraintListener.__name__ = true;
+nape_callbacks_ConstraintListener.__super__ = nape_callbacks_Listener;
+nape_callbacks_ConstraintListener.prototype = $extend(nape_callbacks_Listener.prototype,{
+	__class__: nape_callbacks_ConstraintListener
 });
-nape.callbacks.InteractionCallback = function() {
-	nape.callbacks.Callback.call(this);
+var nape_callbacks_InteractionCallback = function() {
+	nape_callbacks_Callback.call(this);
 };
-nape.callbacks.InteractionCallback.__name__ = true;
-nape.callbacks.InteractionCallback.__super__ = nape.callbacks.Callback;
-nape.callbacks.InteractionCallback.prototype = $extend(nape.callbacks.Callback.prototype,{
+nape_callbacks_InteractionCallback.__name__ = true;
+nape_callbacks_InteractionCallback.__super__ = nape_callbacks_Callback;
+nape_callbacks_InteractionCallback.prototype = $extend(nape_callbacks_Callback.prototype,{
 	toString: function() {
 		var ret = "Cb:";
 		ret += ["BEGIN","END","","","","","ONGOING"][this.zpp_inner.event];
@@ -426,80 +453,80 @@ nape.callbacks.InteractionCallback.prototype = $extend(nape.callbacks.Callback.p
 		ret += " : listener: " + Std.string(this.zpp_inner.listener.outer);
 		return ret;
 	}
-	,__class__: nape.callbacks.InteractionCallback
+	,__class__: nape_callbacks_InteractionCallback
 });
-nape.callbacks.InteractionListener = function() {
+var nape_callbacks_InteractionListener = function() {
 	this.zpp_inner_zn = null;
 };
-nape.callbacks.InteractionListener.__name__ = true;
-nape.callbacks.InteractionListener.__super__ = nape.callbacks.Listener;
-nape.callbacks.InteractionListener.prototype = $extend(nape.callbacks.Listener.prototype,{
-	__class__: nape.callbacks.InteractionListener
+nape_callbacks_InteractionListener.__name__ = true;
+nape_callbacks_InteractionListener.__super__ = nape_callbacks_Listener;
+nape_callbacks_InteractionListener.prototype = $extend(nape_callbacks_Listener.prototype,{
+	__class__: nape_callbacks_InteractionListener
 });
-nape.callbacks.InteractionType = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "InteractionType" + " derp!";
+var nape_callbacks_InteractionType = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "InteractionType" + " derp!");
 };
-nape.callbacks.InteractionType.__name__ = true;
-nape.callbacks.InteractionType.prototype = {
+nape_callbacks_InteractionType.__name__ = true;
+nape_callbacks_InteractionType.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InteractionType_COLLISION == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InteractionType_COLLISION = new nape.callbacks.InteractionType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InteractionType_COLLISION == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InteractionType_COLLISION = new nape_callbacks_InteractionType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InteractionType_COLLISION;
+			$r = zpp_$nape_util_ZPP_$Flags.InteractionType_COLLISION;
 			return $r;
 		}(this))) return "COLLISION"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InteractionType_SENSOR == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InteractionType_SENSOR = new nape.callbacks.InteractionType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InteractionType_SENSOR == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InteractionType_SENSOR = new nape_callbacks_InteractionType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InteractionType_SENSOR;
+			$r = zpp_$nape_util_ZPP_$Flags.InteractionType_SENSOR;
 			return $r;
 		}(this))) return "SENSOR"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InteractionType_FLUID == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InteractionType_FLUID = new nape.callbacks.InteractionType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InteractionType_FLUID == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InteractionType_FLUID = new nape_callbacks_InteractionType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InteractionType_FLUID;
+			$r = zpp_$nape_util_ZPP_$Flags.InteractionType_FLUID;
 			return $r;
 		}(this))) return "FLUID"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InteractionType_ANY == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InteractionType_ANY = new nape.callbacks.InteractionType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InteractionType_ANY == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InteractionType_ANY = new nape_callbacks_InteractionType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InteractionType_ANY;
+			$r = zpp_$nape_util_ZPP_$Flags.InteractionType_ANY;
 			return $r;
 		}(this))) return "ANY"; else return "";
 	}
-	,__class__: nape.callbacks.InteractionType
+	,__class__: nape_callbacks_InteractionType
 };
-nape.callbacks.ListenerIterator = function() {
+var nape_callbacks_ListenerIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ListenerList.internal) throw "Error: Cannot instantiate " + "Listener" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ListenerList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Listener" + "Iterator derp!");
 };
-nape.callbacks.ListenerIterator.__name__ = true;
-nape.callbacks.ListenerIterator.get = function(list) {
+nape_callbacks_ListenerIterator.__name__ = true;
+nape_callbacks_ListenerIterator.get = function(list) {
 	var ret;
-	if(nape.callbacks.ListenerIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ListenerList.internal = true;
-		var ret1 = new nape.callbacks.ListenerIterator();
-		zpp_nape.util.ZPP_ListenerList.internal = false;
+	if(nape_callbacks_ListenerIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ListenerList.internal = true;
+		var ret1 = new nape_callbacks_ListenerIterator();
+		zpp_$nape_util_ZPP_$ListenerList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.callbacks.ListenerIterator.zpp_pool;
-		nape.callbacks.ListenerIterator.zpp_pool = r.zpp_next;
+		var r = nape_callbacks_ListenerIterator.zpp_pool;
+		nape_callbacks_ListenerIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -507,14 +534,14 @@ nape.callbacks.ListenerIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.callbacks.ListenerIterator.prototype = {
+nape_callbacks_ListenerIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.callbacks.ListenerIterator.zpp_pool;
-			nape.callbacks.ListenerIterator.zpp_pool = this;
+			this.zpp_next = nape_callbacks_ListenerIterator.zpp_pool;
+			nape_callbacks_ListenerIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -523,15 +550,15 @@ nape.callbacks.ListenerIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.callbacks.ListenerIterator
+	,__class__: nape_callbacks_ListenerIterator
 };
-nape.callbacks.ListenerList = function() {
+var nape_callbacks_ListenerList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_ListenerList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$ListenerList();
 	this.zpp_inner.outer = this;
 };
-nape.callbacks.ListenerList.__name__ = true;
-nape.callbacks.ListenerList.prototype = {
+nape_callbacks_ListenerList.__name__ = true;
+nape_callbacks_ListenerList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -542,7 +569,7 @@ nape.callbacks.ListenerList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -554,7 +581,7 @@ nape.callbacks.ListenerList.prototype = {
 		return this.zpp_inner.at_ite.elt.outer;
 	}
 	,remove: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Listener" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Listener" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var ret;
@@ -580,7 +607,7 @@ nape.callbacks.ListenerList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.callbacks.ListenerIterator.get(this);
+		_g = nape_callbacks_ListenerIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -591,59 +618,59 @@ nape.callbacks.ListenerList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.callbacks.ListenerList
+	,__class__: nape_callbacks_ListenerList
 };
-nape.callbacks.ListenerType = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "ListenerType" + " derp!";
+var nape_callbacks_ListenerType = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "ListenerType" + " derp!");
 };
-nape.callbacks.ListenerType.__name__ = true;
-nape.callbacks.ListenerType.prototype = {
+nape_callbacks_ListenerType.__name__ = true;
+nape_callbacks_ListenerType.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ListenerType_BODY == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ListenerType_BODY = new nape.callbacks.ListenerType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ListenerType_BODY == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ListenerType_BODY = new nape_callbacks_ListenerType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ListenerType_BODY;
+			$r = zpp_$nape_util_ZPP_$Flags.ListenerType_BODY;
 			return $r;
 		}(this))) return "BODY"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ListenerType_CONSTRAINT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ListenerType_CONSTRAINT = new nape.callbacks.ListenerType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ListenerType_CONSTRAINT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ListenerType_CONSTRAINT = new nape_callbacks_ListenerType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ListenerType_CONSTRAINT;
+			$r = zpp_$nape_util_ZPP_$Flags.ListenerType_CONSTRAINT;
 			return $r;
 		}(this))) return "CONSTRAINT"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ListenerType_INTERACTION == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ListenerType_INTERACTION = new nape.callbacks.ListenerType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ListenerType_INTERACTION == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ListenerType_INTERACTION = new nape_callbacks_ListenerType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ListenerType_INTERACTION;
+			$r = zpp_$nape_util_ZPP_$Flags.ListenerType_INTERACTION;
 			return $r;
 		}(this))) return "INTERACTION"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ListenerType_PRE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ListenerType_PRE = new nape.callbacks.ListenerType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ListenerType_PRE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ListenerType_PRE = new nape_callbacks_ListenerType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ListenerType_PRE;
+			$r = zpp_$nape_util_ZPP_$Flags.ListenerType_PRE;
 			return $r;
 		}(this))) return "PRE"; else return "";
 	}
-	,__class__: nape.callbacks.ListenerType
+	,__class__: nape_callbacks_ListenerType
 };
-nape.callbacks.OptionType = function() {
+var nape_callbacks_OptionType = function() {
 	this.zpp_inner = null;
 };
-nape.callbacks.OptionType.__name__ = true;
-nape.callbacks.OptionType.prototype = {
+nape_callbacks_OptionType.__name__ = true;
+nape_callbacks_OptionType.prototype = {
 	toString: function() {
 		var inc = ((function($this) {
 			var $r;
@@ -659,14 +686,14 @@ nape.callbacks.OptionType.prototype = {
 		}(this))).toString();
 		return "@{" + inc + " excluding " + exc + "}";
 	}
-	,__class__: nape.callbacks.OptionType
+	,__class__: nape_callbacks_OptionType
 };
-nape.callbacks.PreCallback = function() {
-	nape.callbacks.Callback.call(this);
+var nape_callbacks_PreCallback = function() {
+	nape_callbacks_Callback.call(this);
 };
-nape.callbacks.PreCallback.__name__ = true;
-nape.callbacks.PreCallback.__super__ = nape.callbacks.Callback;
-nape.callbacks.PreCallback.prototype = $extend(nape.callbacks.Callback.prototype,{
+nape_callbacks_PreCallback.__name__ = true;
+nape_callbacks_PreCallback.__super__ = nape_callbacks_Callback;
+nape_callbacks_PreCallback.prototype = $extend(nape_callbacks_Callback.prototype,{
 	toString: function() {
 		var ret = "Cb:PRE:";
 		ret += ":" + this.zpp_inner.int1.outer_i.toString() + "/" + this.zpp_inner.int2.outer_i.toString();
@@ -674,89 +701,88 @@ nape.callbacks.PreCallback.prototype = $extend(nape.callbacks.Callback.prototype
 		ret += " : listnener: " + Std.string(this.zpp_inner.listener.outer);
 		return ret;
 	}
-	,__class__: nape.callbacks.PreCallback
+	,__class__: nape_callbacks_PreCallback
 });
-nape.callbacks.PreFlag = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "PreFlag" + " derp!";
+var nape_callbacks_PreFlag = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "PreFlag" + " derp!");
 };
-nape.callbacks.PreFlag.__name__ = true;
-nape.callbacks.PreFlag.prototype = {
+nape_callbacks_PreFlag.__name__ = true;
+nape_callbacks_PreFlag.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT = new nape.callbacks.PreFlag();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT = new nape_callbacks_PreFlag();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT;
+			$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT;
 			return $r;
 		}(this))) return "ACCEPT"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.PreFlag_IGNORE = new nape.callbacks.PreFlag();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE = new nape_callbacks_PreFlag();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.PreFlag_IGNORE;
+			$r = zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE;
 			return $r;
 		}(this))) return "IGNORE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE = new nape.callbacks.PreFlag();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE = new nape_callbacks_PreFlag();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE;
+			$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE;
 			return $r;
 		}(this))) return "ACCEPT_ONCE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE = new nape.callbacks.PreFlag();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE = new nape_callbacks_PreFlag();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE;
+			$r = zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE;
 			return $r;
 		}(this))) return "IGNORE_ONCE"; else return "";
 	}
-	,__class__: nape.callbacks.PreFlag
+	,__class__: nape_callbacks_PreFlag
 };
-nape.callbacks.PreListener = function() {
+var nape_callbacks_PreListener = function() {
 	this.zpp_inner_zn = null;
 };
-nape.callbacks.PreListener.__name__ = true;
-nape.callbacks.PreListener.__super__ = nape.callbacks.Listener;
-nape.callbacks.PreListener.prototype = $extend(nape.callbacks.Listener.prototype,{
-	__class__: nape.callbacks.PreListener
+nape_callbacks_PreListener.__name__ = true;
+nape_callbacks_PreListener.__super__ = nape_callbacks_Listener;
+nape_callbacks_PreListener.prototype = $extend(nape_callbacks_Listener.prototype,{
+	__class__: nape_callbacks_PreListener
 });
-nape.constraint = {};
-nape.constraint.Constraint = function() { };
-nape.constraint.Constraint.__name__ = true;
-nape.constraint.Constraint.prototype = {
+var nape_constraint_Constraint = function() { };
+nape_constraint_Constraint.__name__ = true;
+nape_constraint_Constraint.prototype = {
 	toString: function() {
 		return "{Constraint}";
 	}
-	,__class__: nape.constraint.Constraint
+	,__class__: nape_constraint_Constraint
 };
-nape.constraint.ConstraintIterator = function() {
+var nape_constraint_ConstraintIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ConstraintList.internal) throw "Error: Cannot instantiate " + "Constraint" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ConstraintList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Constraint" + "Iterator derp!");
 };
-nape.constraint.ConstraintIterator.__name__ = true;
-nape.constraint.ConstraintIterator.get = function(list) {
+nape_constraint_ConstraintIterator.__name__ = true;
+nape_constraint_ConstraintIterator.get = function(list) {
 	var ret;
-	if(nape.constraint.ConstraintIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ConstraintList.internal = true;
-		var ret1 = new nape.constraint.ConstraintIterator();
-		zpp_nape.util.ZPP_ConstraintList.internal = false;
+	if(nape_constraint_ConstraintIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ConstraintList.internal = true;
+		var ret1 = new nape_constraint_ConstraintIterator();
+		zpp_$nape_util_ZPP_$ConstraintList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.constraint.ConstraintIterator.zpp_pool;
-		nape.constraint.ConstraintIterator.zpp_pool = r.zpp_next;
+		var r = nape_constraint_ConstraintIterator.zpp_pool;
+		nape_constraint_ConstraintIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -764,14 +790,14 @@ nape.constraint.ConstraintIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.constraint.ConstraintIterator.prototype = {
+nape_constraint_ConstraintIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.constraint.ConstraintIterator.zpp_pool;
-			nape.constraint.ConstraintIterator.zpp_pool = this;
+			this.zpp_next = nape_constraint_ConstraintIterator.zpp_pool;
+			nape_constraint_ConstraintIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -780,15 +806,15 @@ nape.constraint.ConstraintIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.constraint.ConstraintIterator
+	,__class__: nape_constraint_ConstraintIterator
 };
-nape.constraint.ConstraintList = function() {
+var nape_constraint_ConstraintList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_ConstraintList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$ConstraintList();
 	this.zpp_inner.outer = this;
 };
-nape.constraint.ConstraintList.__name__ = true;
-nape.constraint.ConstraintList.prototype = {
+nape_constraint_ConstraintList.__name__ = true;
+nape_constraint_ConstraintList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -799,7 +825,7 @@ nape.constraint.ConstraintList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -811,7 +837,7 @@ nape.constraint.ConstraintList.prototype = {
 		return this.zpp_inner.at_ite.elt.outer;
 	}
 	,remove: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Constraint" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Constraint" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var ret;
@@ -837,7 +863,7 @@ nape.constraint.ConstraintList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.constraint.ConstraintIterator.get(this);
+		_g = nape_constraint_ConstraintIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -848,90 +874,89 @@ nape.constraint.ConstraintList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.constraint.ConstraintList
+	,__class__: nape_constraint_ConstraintList
 };
-nape.dynamics = {};
-nape.dynamics.Arbiter = function() {
+var nape_dynamics_Arbiter = function() {
 	this.zpp_inner = null;
-	if(!zpp_nape.dynamics.ZPP_Arbiter.internal) throw "Error: Cannot instantiate Arbiter derp!";
+	if(!zpp_$nape_dynamics_ZPP_$Arbiter.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate Arbiter derp!");
 };
-nape.dynamics.Arbiter.__name__ = true;
-nape.dynamics.Arbiter.prototype = {
+nape_dynamics_Arbiter.__name__ = true;
+nape_dynamics_Arbiter.prototype = {
 	get_state: function() {
-		if(!this.zpp_inner.active) throw "Error: Arbiter not currently in use";
+		if(!this.zpp_inner.active) throw new js__$Boot_HaxeError("Error: Arbiter not currently in use");
 		var _g = this.zpp_inner.immState;
 		var x = _g;
-		if(x == (zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS)) {
-			if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT = new nape.callbacks.PreFlag();
-				zpp_nape.util.ZPP_Flags.internal = false;
+		if(x == (zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS)) {
+			if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT = new nape_callbacks_PreFlag();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			return zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT;
+			return zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT;
 		} else {
 			var x1 = _g;
 			switch(_g) {
-			case zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT:
-				if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE == null) {
-					zpp_nape.util.ZPP_Flags.internal = true;
-					zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE = new nape.callbacks.PreFlag();
-					zpp_nape.util.ZPP_Flags.internal = false;
+			case 1:
+				if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE == null) {
+					zpp_$nape_util_ZPP_$Flags.internal = true;
+					zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE = new nape_callbacks_PreFlag();
+					zpp_$nape_util_ZPP_$Flags.internal = false;
 				}
-				return zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE;
+				return zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE;
 			default:
-				if(x1 == (zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS)) {
-					if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE == null) {
-						zpp_nape.util.ZPP_Flags.internal = true;
-						zpp_nape.util.ZPP_Flags.PreFlag_IGNORE = new nape.callbacks.PreFlag();
-						zpp_nape.util.ZPP_Flags.internal = false;
+				if(x1 == (zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS)) {
+					if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE == null) {
+						zpp_$nape_util_ZPP_$Flags.internal = true;
+						zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE = new nape_callbacks_PreFlag();
+						zpp_$nape_util_ZPP_$Flags.internal = false;
 					}
-					return zpp_nape.util.ZPP_Flags.PreFlag_IGNORE;
+					return zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE;
 				} else {
-					if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE == null) {
-						zpp_nape.util.ZPP_Flags.internal = true;
-						zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE = new nape.callbacks.PreFlag();
-						zpp_nape.util.ZPP_Flags.internal = false;
+					if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE == null) {
+						zpp_$nape_util_ZPP_$Flags.internal = true;
+						zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE = new nape_callbacks_PreFlag();
+						zpp_$nape_util_ZPP_$Flags.internal = false;
 					}
-					return zpp_nape.util.ZPP_Flags.PreFlag_IGNORE_ONCE;
+					return zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE_ONCE;
 				}
 			}
 		}
 	}
 	,toString: function() {
 		var ret;
-		if(this.zpp_inner.type == zpp_nape.dynamics.ZPP_Arbiter.COL) ret = "CollisionArbiter"; else if(this.zpp_inner.type == zpp_nape.dynamics.ZPP_Arbiter.FLUID) ret = "FluidArbiter"; else ret = "SensorArbiter";
+		if(this.zpp_inner.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL) ret = "CollisionArbiter"; else if(this.zpp_inner.type == zpp_$nape_dynamics_ZPP_$Arbiter.FLUID) ret = "FluidArbiter"; else ret = "SensorArbiter";
 		if(this.zpp_inner.cleared) return ret + "(object-pooled)"; else return ret + "(" + ((function($this) {
 			var $r;
-			if(!$this.zpp_inner.active) throw "Error: Arbiter not currently in use";
+			if(!$this.zpp_inner.active) throw new js__$Boot_HaxeError("Error: Arbiter not currently in use");
 			$r = $this.zpp_inner.ws1.id > $this.zpp_inner.ws2.id?$this.zpp_inner.ws2.outer:$this.zpp_inner.ws1.outer;
 			return $r;
 		}(this))).toString() + "|" + ((function($this) {
 			var $r;
-			if(!$this.zpp_inner.active) throw "Error: Arbiter not currently in use";
+			if(!$this.zpp_inner.active) throw new js__$Boot_HaxeError("Error: Arbiter not currently in use");
 			$r = $this.zpp_inner.ws1.id > $this.zpp_inner.ws2.id?$this.zpp_inner.ws1.outer:$this.zpp_inner.ws2.outer;
 			return $r;
-		}(this))).toString() + ")" + (this.zpp_inner.type == zpp_nape.dynamics.ZPP_Arbiter.COL?"[" + ["SD","DD"][this.zpp_inner.colarb.stat?0:1] + "]":"") + "<-" + this.get_state().toString();
+		}(this))).toString() + ")" + (this.zpp_inner.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL?"[" + ["SD","DD"][this.zpp_inner.colarb.stat?0:1] + "]":"") + "<-" + this.get_state().toString();
 	}
-	,__class__: nape.dynamics.Arbiter
+	,__class__: nape_dynamics_Arbiter
 };
-nape.dynamics.ArbiterIterator = function() {
+var nape_dynamics_ArbiterIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ArbiterList.internal) throw "Error: Cannot instantiate " + "Arbiter" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ArbiterList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Arbiter" + "Iterator derp!");
 };
-nape.dynamics.ArbiterIterator.__name__ = true;
-nape.dynamics.ArbiterIterator.get = function(list) {
+nape_dynamics_ArbiterIterator.__name__ = true;
+nape_dynamics_ArbiterIterator.get = function(list) {
 	var ret;
-	if(nape.dynamics.ArbiterIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ArbiterList.internal = true;
-		var ret1 = new nape.dynamics.ArbiterIterator();
-		zpp_nape.util.ZPP_ArbiterList.internal = false;
+	if(nape_dynamics_ArbiterIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ArbiterList.internal = true;
+		var ret1 = new nape_dynamics_ArbiterIterator();
+		zpp_$nape_util_ZPP_$ArbiterList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.dynamics.ArbiterIterator.zpp_pool;
-		nape.dynamics.ArbiterIterator.zpp_pool = r.zpp_next;
+		var r = nape_dynamics_ArbiterIterator.zpp_pool;
+		nape_dynamics_ArbiterIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -939,14 +964,14 @@ nape.dynamics.ArbiterIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.dynamics.ArbiterIterator.prototype = {
+nape_dynamics_ArbiterIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.zpp_gl();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.dynamics.ArbiterIterator.zpp_pool;
-			nape.dynamics.ArbiterIterator.zpp_pool = this;
+			this.zpp_next = nape_dynamics_ArbiterIterator.zpp_pool;
+			nape_dynamics_ArbiterIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -955,15 +980,15 @@ nape.dynamics.ArbiterIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.dynamics.ArbiterIterator
+	,__class__: nape_dynamics_ArbiterIterator
 };
-nape.dynamics.ArbiterList = function() {
+var nape_dynamics_ArbiterList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_ArbiterList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$ArbiterList();
 	this.zpp_inner.outer = this;
 };
-nape.dynamics.ArbiterList.__name__ = true;
-nape.dynamics.ArbiterList.prototype = {
+nape_dynamics_ArbiterList.__name__ = true;
+nape_dynamics_ArbiterList.prototype = {
 	zpp_gl: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -983,7 +1008,7 @@ nape.dynamics.ArbiterList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_vm();
-		if(index < 0 || index >= this.zpp_gl()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.zpp_gl()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.zpp_gl() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = 0;
@@ -1007,7 +1032,7 @@ nape.dynamics.ArbiterList.prototype = {
 	}
 	,iterator: function() {
 		this.zpp_vm();
-		return nape.dynamics.ArbiterIterator.get(this);
+		return nape_dynamics_ArbiterIterator.get(this);
 	}
 	,toString: function() {
 		var ret = "[";
@@ -1023,83 +1048,83 @@ nape.dynamics.ArbiterList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.dynamics.ArbiterList
+	,__class__: nape_dynamics_ArbiterList
 };
-nape.dynamics.ArbiterType = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "ArbiterType" + " derp!";
+var nape_dynamics_ArbiterType = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "ArbiterType" + " derp!");
 };
-nape.dynamics.ArbiterType.__name__ = true;
-nape.dynamics.ArbiterType.prototype = {
+nape_dynamics_ArbiterType.__name__ = true;
+nape_dynamics_ArbiterType.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ArbiterType_COLLISION == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ArbiterType_COLLISION = new nape.dynamics.ArbiterType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ArbiterType_COLLISION == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ArbiterType_COLLISION = new nape_dynamics_ArbiterType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ArbiterType_COLLISION;
+			$r = zpp_$nape_util_ZPP_$Flags.ArbiterType_COLLISION;
 			return $r;
 		}(this))) return "COLLISION"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ArbiterType_SENSOR == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ArbiterType_SENSOR = new nape.dynamics.ArbiterType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ArbiterType_SENSOR == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ArbiterType_SENSOR = new nape_dynamics_ArbiterType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ArbiterType_SENSOR;
+			$r = zpp_$nape_util_ZPP_$Flags.ArbiterType_SENSOR;
 			return $r;
 		}(this))) return "SENSOR"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ArbiterType_FLUID == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ArbiterType_FLUID = new nape.dynamics.ArbiterType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ArbiterType_FLUID == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ArbiterType_FLUID = new nape_dynamics_ArbiterType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ArbiterType_FLUID;
+			$r = zpp_$nape_util_ZPP_$Flags.ArbiterType_FLUID;
 			return $r;
 		}(this))) return "FLUID"; else return "";
 	}
-	,__class__: nape.dynamics.ArbiterType
+	,__class__: nape_dynamics_ArbiterType
 };
-nape.dynamics.CollisionArbiter = function() {
-	if(!zpp_nape.dynamics.ZPP_Arbiter.internal) throw "Error: Cannot instantiate CollisionArbiter derp!";
-	nape.dynamics.Arbiter.call(this);
+var nape_dynamics_CollisionArbiter = function() {
+	if(!zpp_$nape_dynamics_ZPP_$Arbiter.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate CollisionArbiter derp!");
+	nape_dynamics_Arbiter.call(this);
 };
-nape.dynamics.CollisionArbiter.__name__ = true;
-nape.dynamics.CollisionArbiter.__super__ = nape.dynamics.Arbiter;
-nape.dynamics.CollisionArbiter.prototype = $extend(nape.dynamics.Arbiter.prototype,{
-	__class__: nape.dynamics.CollisionArbiter
+nape_dynamics_CollisionArbiter.__name__ = true;
+nape_dynamics_CollisionArbiter.__super__ = nape_dynamics_Arbiter;
+nape_dynamics_CollisionArbiter.prototype = $extend(nape_dynamics_Arbiter.prototype,{
+	__class__: nape_dynamics_CollisionArbiter
 });
-nape.dynamics.Contact = function() {
+var nape_dynamics_Contact = function() {
 	this.zpp_inner = null;
-	if(!zpp_nape.dynamics.ZPP_Contact.internal) throw "Error: Cannot instantiate Contact derp!";
+	if(!zpp_$nape_dynamics_ZPP_$Contact.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate Contact derp!");
 };
-nape.dynamics.Contact.__name__ = true;
-nape.dynamics.Contact.prototype = {
+nape_dynamics_Contact.__name__ = true;
+nape_dynamics_Contact.prototype = {
 	toString: function() {
 		if(this.zpp_inner.arbiter == null || this.zpp_inner.arbiter.cleared) return "{object-pooled}"; else return "{Contact}";
 	}
-	,__class__: nape.dynamics.Contact
+	,__class__: nape_dynamics_Contact
 };
-nape.dynamics.ContactIterator = function() {
+var nape_dynamics_ContactIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ContactList.internal) throw "Error: Cannot instantiate " + "Contact" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ContactList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Contact" + "Iterator derp!");
 };
-nape.dynamics.ContactIterator.__name__ = true;
-nape.dynamics.ContactIterator.get = function(list) {
+nape_dynamics_ContactIterator.__name__ = true;
+nape_dynamics_ContactIterator.get = function(list) {
 	var ret;
-	if(nape.dynamics.ContactIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ContactList.internal = true;
-		var ret1 = new nape.dynamics.ContactIterator();
-		zpp_nape.util.ZPP_ContactList.internal = false;
+	if(nape_dynamics_ContactIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ContactList.internal = true;
+		var ret1 = new nape_dynamics_ContactIterator();
+		zpp_$nape_util_ZPP_$ContactList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.dynamics.ContactIterator.zpp_pool;
-		nape.dynamics.ContactIterator.zpp_pool = r.zpp_next;
+		var r = nape_dynamics_ContactIterator.zpp_pool;
+		nape_dynamics_ContactIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1107,14 +1132,14 @@ nape.dynamics.ContactIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.dynamics.ContactIterator.prototype = {
+nape_dynamics_ContactIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.dynamics.ContactIterator.zpp_pool;
-			nape.dynamics.ContactIterator.zpp_pool = this;
+			this.zpp_next = nape_dynamics_ContactIterator.zpp_pool;
+			nape_dynamics_ContactIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1123,13 +1148,13 @@ nape.dynamics.ContactIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.dynamics.ContactIterator
+	,__class__: nape_dynamics_ContactIterator
 };
-nape.dynamics.ContactList = function() {
+var nape_dynamics_ContactList = function() {
 	this.zpp_inner = null;
 };
-nape.dynamics.ContactList.__name__ = true;
-nape.dynamics.ContactList.prototype = {
+nape_dynamics_ContactList.__name__ = true;
+nape_dynamics_ContactList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1146,7 +1171,7 @@ nape.dynamics.ContactList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = 0;
@@ -1173,7 +1198,7 @@ nape.dynamics.ContactList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.dynamics.ContactIterator.get(this);
+		_g = nape_dynamics_ContactIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -1184,18 +1209,18 @@ nape.dynamics.ContactList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.dynamics.ContactList
+	,__class__: nape_dynamics_ContactList
 };
-nape.dynamics.FluidArbiter = function() {
-	if(!zpp_nape.dynamics.ZPP_Arbiter.internal) throw "Error: Cannot instantiate FluidArbiter derp!";
-	nape.dynamics.Arbiter.call(this);
+var nape_dynamics_FluidArbiter = function() {
+	if(!zpp_$nape_dynamics_ZPP_$Arbiter.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate FluidArbiter derp!");
+	nape_dynamics_Arbiter.call(this);
 };
-nape.dynamics.FluidArbiter.__name__ = true;
-nape.dynamics.FluidArbiter.__super__ = nape.dynamics.Arbiter;
-nape.dynamics.FluidArbiter.prototype = $extend(nape.dynamics.Arbiter.prototype,{
-	__class__: nape.dynamics.FluidArbiter
+nape_dynamics_FluidArbiter.__name__ = true;
+nape_dynamics_FluidArbiter.__super__ = nape_dynamics_Arbiter;
+nape_dynamics_FluidArbiter.prototype = $extend(nape_dynamics_Arbiter.prototype,{
+	__class__: nape_dynamics_FluidArbiter
 });
-nape.dynamics.InteractionFilter = function(collisionGroup,collisionMask,sensorGroup,sensorMask,fluidGroup,fluidMask) {
+var nape_dynamics_InteractionFilter = function(collisionGroup,collisionMask,sensorGroup,sensorMask,fluidGroup,fluidMask) {
 	if(fluidMask == null) fluidMask = -1;
 	if(fluidGroup == null) fluidGroup = 1;
 	if(sensorMask == null) sensorMask = -1;
@@ -1203,9 +1228,9 @@ nape.dynamics.InteractionFilter = function(collisionGroup,collisionMask,sensorGr
 	if(collisionMask == null) collisionMask = -1;
 	if(collisionGroup == null) collisionGroup = 1;
 	this.zpp_inner = null;
-	if(zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool == null) this.zpp_inner = new zpp_nape.dynamics.ZPP_InteractionFilter(); else {
-		this.zpp_inner = zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool;
-		zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool = this.zpp_inner.next;
+	if(zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool == null) this.zpp_inner = new zpp_$nape_dynamics_ZPP_$InteractionFilter(); else {
+		this.zpp_inner = zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool;
+		zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool = this.zpp_inner.next;
 		this.zpp_inner.next = null;
 	}
 	null;
@@ -1241,40 +1266,40 @@ nape.dynamics.InteractionFilter = function(collisionGroup,collisionMask,sensorGr
 	}
 	this.zpp_inner.fluidMask;
 };
-nape.dynamics.InteractionFilter.__name__ = true;
-nape.dynamics.InteractionFilter.prototype = {
-	__class__: nape.dynamics.InteractionFilter
+nape_dynamics_InteractionFilter.__name__ = true;
+nape_dynamics_InteractionFilter.prototype = {
+	__class__: nape_dynamics_InteractionFilter
 };
-nape.dynamics.InteractionGroup = function() {
+var nape_dynamics_InteractionGroup = function() {
 	this.zpp_inner = null;
 };
-nape.dynamics.InteractionGroup.__name__ = true;
-nape.dynamics.InteractionGroup.prototype = {
+nape_dynamics_InteractionGroup.__name__ = true;
+nape_dynamics_InteractionGroup.prototype = {
 	toString: function() {
 		var ret = "InteractionGroup";
 		if(this.zpp_inner.ignore) ret += ":ignore";
 		return ret;
 	}
-	,__class__: nape.dynamics.InteractionGroup
+	,__class__: nape_dynamics_InteractionGroup
 };
-nape.dynamics.InteractionGroupIterator = function() {
+var nape_dynamics_InteractionGroupIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_InteractionGroupList.internal) throw "Error: Cannot instantiate " + "InteractionGroup" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$InteractionGroupList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "InteractionGroup" + "Iterator derp!");
 };
-nape.dynamics.InteractionGroupIterator.__name__ = true;
-nape.dynamics.InteractionGroupIterator.get = function(list) {
+nape_dynamics_InteractionGroupIterator.__name__ = true;
+nape_dynamics_InteractionGroupIterator.get = function(list) {
 	var ret;
-	if(nape.dynamics.InteractionGroupIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_InteractionGroupList.internal = true;
-		var ret1 = new nape.dynamics.InteractionGroupIterator();
-		zpp_nape.util.ZPP_InteractionGroupList.internal = false;
+	if(nape_dynamics_InteractionGroupIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$InteractionGroupList.internal = true;
+		var ret1 = new nape_dynamics_InteractionGroupIterator();
+		zpp_$nape_util_ZPP_$InteractionGroupList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.dynamics.InteractionGroupIterator.zpp_pool;
-		nape.dynamics.InteractionGroupIterator.zpp_pool = r.zpp_next;
+		var r = nape_dynamics_InteractionGroupIterator.zpp_pool;
+		nape_dynamics_InteractionGroupIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1282,14 +1307,14 @@ nape.dynamics.InteractionGroupIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.dynamics.InteractionGroupIterator.prototype = {
+nape_dynamics_InteractionGroupIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.dynamics.InteractionGroupIterator.zpp_pool;
-			nape.dynamics.InteractionGroupIterator.zpp_pool = this;
+			this.zpp_next = nape_dynamics_InteractionGroupIterator.zpp_pool;
+			nape_dynamics_InteractionGroupIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1298,13 +1323,13 @@ nape.dynamics.InteractionGroupIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.dynamics.InteractionGroupIterator
+	,__class__: nape_dynamics_InteractionGroupIterator
 };
-nape.dynamics.InteractionGroupList = function() {
+var nape_dynamics_InteractionGroupList = function() {
 	this.zpp_inner = null;
 };
-nape.dynamics.InteractionGroupList.__name__ = true;
-nape.dynamics.InteractionGroupList.prototype = {
+nape_dynamics_InteractionGroupList.__name__ = true;
+nape_dynamics_InteractionGroupList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1315,7 +1340,7 @@ nape.dynamics.InteractionGroupList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -1331,7 +1356,7 @@ nape.dynamics.InteractionGroupList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.dynamics.InteractionGroupIterator.get(this);
+		_g = nape_dynamics_InteractionGroupIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -1342,59 +1367,58 @@ nape.dynamics.InteractionGroupList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.dynamics.InteractionGroupList
+	,__class__: nape_dynamics_InteractionGroupList
 };
-nape.geom = {};
-nape.geom.AABB = function() {
+var nape_geom_AABB = function() {
 	this.zpp_inner = null;
 };
-nape.geom.AABB.__name__ = true;
-nape.geom.AABB.prototype = {
+nape_geom_AABB.__name__ = true;
+nape_geom_AABB.prototype = {
 	toString: function() {
 		this.zpp_inner.validate();
 		return this.zpp_inner.toString();
 	}
-	,__class__: nape.geom.AABB
+	,__class__: nape_geom_AABB
 };
-nape.geom.ConvexResult = function() {
+var nape_geom_ConvexResult = function() {
 	this.zpp_inner = null;
 };
-nape.geom.ConvexResult.__name__ = true;
-nape.geom.ConvexResult.prototype = {
+nape_geom_ConvexResult.__name__ = true;
+nape_geom_ConvexResult.prototype = {
 	toString: function() {
-		if(this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+		if(this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 		return "{ shape: " + Std.string((function($this) {
 			var $r;
-			if($this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+			if($this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 			$r = $this.zpp_inner.shape;
 			return $r;
 		}(this))) + " toi: " + (function($this) {
 			var $r;
-			if($this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+			if($this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 			$r = $this.zpp_inner.toiDistance;
 			return $r;
 		}(this)) + " }";
 	}
-	,__class__: nape.geom.ConvexResult
+	,__class__: nape_geom_ConvexResult
 };
-nape.geom.ConvexResultIterator = function() {
+var nape_geom_ConvexResultIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ConvexResultList.internal) throw "Error: Cannot instantiate " + "ConvexResult" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ConvexResultList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "ConvexResult" + "Iterator derp!");
 };
-nape.geom.ConvexResultIterator.__name__ = true;
-nape.geom.ConvexResultIterator.get = function(list) {
+nape_geom_ConvexResultIterator.__name__ = true;
+nape_geom_ConvexResultIterator.get = function(list) {
 	var ret;
-	if(nape.geom.ConvexResultIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ConvexResultList.internal = true;
-		var ret1 = new nape.geom.ConvexResultIterator();
-		zpp_nape.util.ZPP_ConvexResultList.internal = false;
+	if(nape_geom_ConvexResultIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ConvexResultList.internal = true;
+		var ret1 = new nape_geom_ConvexResultIterator();
+		zpp_$nape_util_ZPP_$ConvexResultList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.geom.ConvexResultIterator.zpp_pool;
-		nape.geom.ConvexResultIterator.zpp_pool = r.zpp_next;
+		var r = nape_geom_ConvexResultIterator.zpp_pool;
+		nape_geom_ConvexResultIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1402,14 +1426,14 @@ nape.geom.ConvexResultIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.geom.ConvexResultIterator.prototype = {
+nape_geom_ConvexResultIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.geom.ConvexResultIterator.zpp_pool;
-			nape.geom.ConvexResultIterator.zpp_pool = this;
+			this.zpp_next = nape_geom_ConvexResultIterator.zpp_pool;
+			nape_geom_ConvexResultIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1418,13 +1442,13 @@ nape.geom.ConvexResultIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.geom.ConvexResultIterator
+	,__class__: nape_geom_ConvexResultIterator
 };
-nape.geom.ConvexResultList = function() {
+var nape_geom_ConvexResultList = function() {
 	this.zpp_inner = null;
 };
-nape.geom.ConvexResultList.__name__ = true;
-nape.geom.ConvexResultList.prototype = {
+nape_geom_ConvexResultList.__name__ = true;
+nape_geom_ConvexResultList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1435,7 +1459,7 @@ nape.geom.ConvexResultList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -1451,7 +1475,7 @@ nape.geom.ConvexResultList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.geom.ConvexResultIterator.get(this);
+		_g = nape_geom_ConvexResultIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -1462,13 +1486,13 @@ nape.geom.ConvexResultList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.geom.ConvexResultList
+	,__class__: nape_geom_ConvexResultList
 };
-nape.geom.GeomPoly = function() {
+var nape_geom_GeomPoly = function() {
 	this.zpp_inner = null;
 };
-nape.geom.GeomPoly.__name__ = true;
-nape.geom.GeomPoly.prototype = {
+nape_geom_GeomPoly.__name__ = true;
+nape_geom_GeomPoly.prototype = {
 	toString: function() {
 		var ret = "GeomPoly[";
 		var F = this.zpp_inner.vertices;
@@ -1484,26 +1508,26 @@ nape.geom.GeomPoly.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.geom.GeomPoly
+	,__class__: nape_geom_GeomPoly
 };
-nape.geom.GeomPolyIterator = function() {
+var nape_geom_GeomPolyIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_GeomPolyList.internal) throw "Error: Cannot instantiate " + "GeomPoly" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$GeomPolyList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "GeomPoly" + "Iterator derp!");
 };
-nape.geom.GeomPolyIterator.__name__ = true;
-nape.geom.GeomPolyIterator.get = function(list) {
+nape_geom_GeomPolyIterator.__name__ = true;
+nape_geom_GeomPolyIterator.get = function(list) {
 	var ret;
-	if(nape.geom.GeomPolyIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_GeomPolyList.internal = true;
-		var ret1 = new nape.geom.GeomPolyIterator();
-		zpp_nape.util.ZPP_GeomPolyList.internal = false;
+	if(nape_geom_GeomPolyIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$GeomPolyList.internal = true;
+		var ret1 = new nape_geom_GeomPolyIterator();
+		zpp_$nape_util_ZPP_$GeomPolyList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.geom.GeomPolyIterator.zpp_pool;
-		nape.geom.GeomPolyIterator.zpp_pool = r.zpp_next;
+		var r = nape_geom_GeomPolyIterator.zpp_pool;
+		nape_geom_GeomPolyIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1511,14 +1535,14 @@ nape.geom.GeomPolyIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.geom.GeomPolyIterator.prototype = {
+nape_geom_GeomPolyIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.geom.GeomPolyIterator.zpp_pool;
-			nape.geom.GeomPolyIterator.zpp_pool = this;
+			this.zpp_next = nape_geom_GeomPolyIterator.zpp_pool;
+			nape_geom_GeomPolyIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1527,13 +1551,13 @@ nape.geom.GeomPolyIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.geom.GeomPolyIterator
+	,__class__: nape_geom_GeomPolyIterator
 };
-nape.geom.GeomPolyList = function() {
+var nape_geom_GeomPolyList = function() {
 	this.zpp_inner = null;
 };
-nape.geom.GeomPolyList.__name__ = true;
-nape.geom.GeomPolyList.prototype = {
+nape_geom_GeomPolyList.__name__ = true;
+nape_geom_GeomPolyList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1544,7 +1568,7 @@ nape.geom.GeomPolyList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -1560,7 +1584,7 @@ nape.geom.GeomPolyList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.geom.GeomPolyIterator.get(this);
+		_g = nape_geom_GeomPolyIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -1571,23 +1595,23 @@ nape.geom.GeomPolyList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.geom.GeomPolyList
+	,__class__: nape_geom_GeomPolyList
 };
-nape.geom.Mat23 = function() {
+var nape_geom_Mat23 = function() {
 	this.zpp_inner = null;
 };
-nape.geom.Mat23.__name__ = true;
-nape.geom.Mat23.prototype = {
+nape_geom_Mat23.__name__ = true;
+nape_geom_Mat23.prototype = {
 	toString: function() {
 		return "{ a: " + this.zpp_inner.a + " b: " + this.zpp_inner.b + " c: " + this.zpp_inner.c + " d: " + this.zpp_inner.d + " tx: " + this.zpp_inner.tx + " ty: " + this.zpp_inner.ty + " }";
 	}
-	,__class__: nape.geom.Mat23
+	,__class__: nape_geom_Mat23
 };
-nape.geom.MatMN = function() {
+var nape_geom_MatMN = function() {
 	this.zpp_inner = null;
 };
-nape.geom.MatMN.__name__ = true;
-nape.geom.MatMN.prototype = {
+nape_geom_MatMN.__name__ = true;
+nape_geom_MatMN.prototype = {
 	toString: function() {
 		var ret = "{ ";
 		var fst = true;
@@ -1603,7 +1627,7 @@ nape.geom.MatMN.prototype = {
 				var j = _g3++;
 				ret += (function($this) {
 					var $r;
-					if(i < 0 || j < 0 || i >= $this.zpp_inner.m || j >= $this.zpp_inner.n) throw "Error: MatMN indices out of range";
+					if(i < 0 || j < 0 || i >= $this.zpp_inner.m || j >= $this.zpp_inner.n) throw new js__$Boot_HaxeError("Error: MatMN indices out of range");
 					$r = $this.zpp_inner.x[i * $this.zpp_inner.n + j];
 					return $r;
 				}(this)) + " ";
@@ -1612,52 +1636,52 @@ nape.geom.MatMN.prototype = {
 		ret += "}";
 		return ret;
 	}
-	,__class__: nape.geom.MatMN
+	,__class__: nape_geom_MatMN
 };
-nape.geom.RayResult = function() {
+var nape_geom_RayResult = function() {
 	this.zpp_inner = null;
 };
-nape.geom.RayResult.__name__ = true;
-nape.geom.RayResult.prototype = {
+nape_geom_RayResult.__name__ = true;
+nape_geom_RayResult.prototype = {
 	toString: function() {
-		if(this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+		if(this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 		return "{ shape: " + Std.string((function($this) {
 			var $r;
-			if($this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+			if($this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 			$r = $this.zpp_inner.shape;
 			return $r;
 		}(this))) + " distance: " + (function($this) {
 			var $r;
-			if($this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+			if($this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 			$r = $this.zpp_inner.toiDistance;
 			return $r;
 		}(this)) + " ?inner: " + Std.string((function($this) {
 			var $r;
-			if($this.zpp_inner.next != null) throw "Error: This object has been disposed of and cannot be used";
+			if($this.zpp_inner.next != null) throw new js__$Boot_HaxeError("Error: This object has been disposed of and cannot be used");
 			$r = $this.zpp_inner.inner;
 			return $r;
 		}(this))) + " }";
 	}
-	,__class__: nape.geom.RayResult
+	,__class__: nape_geom_RayResult
 };
-nape.geom.RayResultIterator = function() {
+var nape_geom_RayResultIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_RayResultList.internal) throw "Error: Cannot instantiate " + "RayResult" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$RayResultList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "RayResult" + "Iterator derp!");
 };
-nape.geom.RayResultIterator.__name__ = true;
-nape.geom.RayResultIterator.get = function(list) {
+nape_geom_RayResultIterator.__name__ = true;
+nape_geom_RayResultIterator.get = function(list) {
 	var ret;
-	if(nape.geom.RayResultIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_RayResultList.internal = true;
-		var ret1 = new nape.geom.RayResultIterator();
-		zpp_nape.util.ZPP_RayResultList.internal = false;
+	if(nape_geom_RayResultIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$RayResultList.internal = true;
+		var ret1 = new nape_geom_RayResultIterator();
+		zpp_$nape_util_ZPP_$RayResultList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.geom.RayResultIterator.zpp_pool;
-		nape.geom.RayResultIterator.zpp_pool = r.zpp_next;
+		var r = nape_geom_RayResultIterator.zpp_pool;
+		nape_geom_RayResultIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1665,14 +1689,14 @@ nape.geom.RayResultIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.geom.RayResultIterator.prototype = {
+nape_geom_RayResultIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.geom.RayResultIterator.zpp_pool;
-			nape.geom.RayResultIterator.zpp_pool = this;
+			this.zpp_next = nape_geom_RayResultIterator.zpp_pool;
+			nape_geom_RayResultIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1681,13 +1705,13 @@ nape.geom.RayResultIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.geom.RayResultIterator
+	,__class__: nape_geom_RayResultIterator
 };
-nape.geom.RayResultList = function() {
+var nape_geom_RayResultList = function() {
 	this.zpp_inner = null;
 };
-nape.geom.RayResultList.__name__ = true;
-nape.geom.RayResultList.prototype = {
+nape_geom_RayResultList.__name__ = true;
+nape_geom_RayResultList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1698,7 +1722,7 @@ nape.geom.RayResultList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -1714,7 +1738,7 @@ nape.geom.RayResultList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.geom.RayResultIterator.get(this);
+		_g = nape_geom_RayResultIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -1725,47 +1749,47 @@ nape.geom.RayResultList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.geom.RayResultList
+	,__class__: nape_geom_RayResultList
 };
-nape.geom.Vec2 = function(x,y) {
+var nape_geom_Vec2 = function(x,y) {
 	if(y == null) y = 0;
 	if(x == null) x = 0;
 	this.zpp_pool = null;
 	this.zpp_inner = null;
-	if(x != x || y != y) throw "Error: Vec2 components cannot be NaN";
-	this.zpp_inner = zpp_nape.geom.ZPP_Vec2.get(x,y,null);
+	if(x != x || y != y) throw new js__$Boot_HaxeError("Error: Vec2 components cannot be NaN");
+	this.zpp_inner = zpp_$nape_geom_ZPP_$Vec2.get(x,y,null);
 	this.zpp_inner.outer = this;
 };
-nape.geom.Vec2.__name__ = true;
-nape.geom.Vec2.get = function(x,y,weak) {
+nape_geom_Vec2.__name__ = true;
+nape_geom_Vec2.get = function(x,y,weak) {
 	if(weak == null) weak = false;
 	if(y == null) y = 0;
 	if(x == null) x = 0;
-	if(x != x || y != y) throw "Error: Vec2 components cannot be NaN";
+	if(x != x || y != y) throw new js__$Boot_HaxeError("Error: Vec2 components cannot be NaN");
 	var ret;
-	if(zpp_nape.util.ZPP_PubPool.poolVec2 == null) ret = new nape.geom.Vec2(); else {
-		ret = zpp_nape.util.ZPP_PubPool.poolVec2;
-		zpp_nape.util.ZPP_PubPool.poolVec2 = ret.zpp_pool;
+	if(zpp_$nape_util_ZPP_$PubPool.poolVec2 == null) ret = new nape_geom_Vec2(); else {
+		ret = zpp_$nape_util_ZPP_$PubPool.poolVec2;
+		zpp_$nape_util_ZPP_$PubPool.poolVec2 = ret.zpp_pool;
 		ret.zpp_pool = null;
 		ret.zpp_disp = false;
-		if(ret == zpp_nape.util.ZPP_PubPool.nextVec2) zpp_nape.util.ZPP_PubPool.nextVec2 = null;
+		if(ret == zpp_$nape_util_ZPP_$PubPool.nextVec2) zpp_$nape_util_ZPP_$PubPool.nextVec2 = null;
 	}
 	if(ret.zpp_inner == null) {
-		ret.zpp_inner = zpp_nape.geom.ZPP_Vec2.get(x,y,null);
+		ret.zpp_inner = zpp_$nape_geom_ZPP_$Vec2.get(x,y,null);
 		ret.zpp_inner.outer = ret;
 	} else {
-		if(ret != null && ret.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(ret != null && ret.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		ret.zpp_inner.immutable();
-		if(x != x || y != y) throw "Error: Vec2 components cannot be NaN";
+		if(x != x || y != y) throw new js__$Boot_HaxeError("Error: Vec2 components cannot be NaN");
 		if(!((function($this) {
 			var $r;
-			if(ret != null && ret.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if(ret != null && ret.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			ret.zpp_inner.validate();
 			$r = ret.zpp_inner.x;
 			return $r;
 		}(this)) == x && (function($this) {
 			var $r;
-			if(ret != null && ret.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if(ret != null && ret.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			ret.zpp_inner.validate();
 			$r = ret.zpp_inner.y;
 			return $r;
@@ -1779,18 +1803,18 @@ nape.geom.Vec2.get = function(x,y,weak) {
 	ret.zpp_inner.weak = weak;
 	return ret;
 };
-nape.geom.Vec2.prototype = {
+nape_geom_Vec2.prototype = {
 	dispose: function() {
-		if(this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		this.zpp_inner.immutable();
-		if(this.zpp_inner._inuse) throw "Error: This Vec2 is not disposable";
+		if(this.zpp_inner._inuse) throw new js__$Boot_HaxeError("Error: This Vec2 is not disposable");
 		var inner = this.zpp_inner;
 		this.zpp_inner.outer = null;
 		this.zpp_inner = null;
 		var o = this;
 		o.zpp_pool = null;
-		if(zpp_nape.util.ZPP_PubPool.nextVec2 != null) zpp_nape.util.ZPP_PubPool.nextVec2.zpp_pool = o; else zpp_nape.util.ZPP_PubPool.poolVec2 = o;
-		zpp_nape.util.ZPP_PubPool.nextVec2 = o;
+		if(zpp_$nape_util_ZPP_$PubPool.nextVec2 != null) zpp_$nape_util_ZPP_$PubPool.nextVec2.zpp_pool = o; else zpp_$nape_util_ZPP_$PubPool.poolVec2 = o;
+		zpp_$nape_util_ZPP_$PubPool.nextVec2 = o;
 		o.zpp_disp = true;
 		var o1 = inner;
 		if(o1.outer != null) {
@@ -1800,32 +1824,32 @@ nape.geom.Vec2.prototype = {
 		o1._isimmutable = null;
 		o1._validate = null;
 		o1._invalidate = null;
-		o1.next = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-		zpp_nape.geom.ZPP_Vec2.zpp_pool = o1;
+		o1.next = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+		zpp_$nape_geom_ZPP_$Vec2.zpp_pool = o1;
 	}
 	,get_x: function() {
-		if(this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		this.zpp_inner.validate();
 		return this.zpp_inner.x;
 	}
 	,get_y: function() {
-		if(this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		this.zpp_inner.validate();
 		return this.zpp_inner.y;
 	}
 	,setxy: function(x,y) {
-		if(this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		this.zpp_inner.immutable();
-		if(x != x || y != y) throw "Error: Vec2 components cannot be NaN";
+		if(x != x || y != y) throw new js__$Boot_HaxeError("Error: Vec2 components cannot be NaN");
 		if(!((function($this) {
 			var $r;
-			if($this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if($this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			$this.zpp_inner.validate();
 			$r = $this.zpp_inner.x;
 			return $r;
 		}(this)) == x && (function($this) {
 			var $r;
-			if($this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if($this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			$this.zpp_inner.validate();
 			$r = $this.zpp_inner.y;
 			return $r;
@@ -1837,30 +1861,30 @@ nape.geom.Vec2.prototype = {
 		return this;
 	}
 	,toString: function() {
-		if(this.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		this.zpp_inner.validate();
 		return this.zpp_inner.toString();
 	}
-	,__class__: nape.geom.Vec2
+	,__class__: nape_geom_Vec2
 };
-nape.geom.Vec2Iterator = function() {
+var nape_geom_Vec2Iterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_Vec2List.internal) throw "Error: Cannot instantiate " + "Vec2" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$Vec2List.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Vec2" + "Iterator derp!");
 };
-nape.geom.Vec2Iterator.__name__ = true;
-nape.geom.Vec2Iterator.get = function(list) {
+nape_geom_Vec2Iterator.__name__ = true;
+nape_geom_Vec2Iterator.get = function(list) {
 	var ret;
-	if(nape.geom.Vec2Iterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_Vec2List.internal = true;
-		var ret1 = new nape.geom.Vec2Iterator();
-		zpp_nape.util.ZPP_Vec2List.internal = false;
+	if(nape_geom_Vec2Iterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$Vec2List.internal = true;
+		var ret1 = new nape_geom_Vec2Iterator();
+		zpp_$nape_util_ZPP_$Vec2List.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.geom.Vec2Iterator.zpp_pool;
-		nape.geom.Vec2Iterator.zpp_pool = r.zpp_next;
+		var r = nape_geom_Vec2Iterator.zpp_pool;
+		nape_geom_Vec2Iterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -1868,14 +1892,14 @@ nape.geom.Vec2Iterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.geom.Vec2Iterator.prototype = {
+nape_geom_Vec2Iterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.zpp_gl();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.geom.Vec2Iterator.zpp_pool;
-			nape.geom.Vec2Iterator.zpp_pool = this;
+			this.zpp_next = nape_geom_Vec2Iterator.zpp_pool;
+			nape_geom_Vec2Iterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -1884,15 +1908,15 @@ nape.geom.Vec2Iterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.geom.Vec2Iterator
+	,__class__: nape_geom_Vec2Iterator
 };
-nape.geom.Vec2List = function() {
+var nape_geom_Vec2List = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_Vec2List();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$Vec2List();
 	this.zpp_inner.outer = this;
 };
-nape.geom.Vec2List.__name__ = true;
-nape.geom.Vec2List.prototype = {
+nape_geom_Vec2List.__name__ = true;
+nape_geom_Vec2List.prototype = {
 	zpp_gl: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -1906,7 +1930,7 @@ nape.geom.Vec2List.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_vm();
-		if(index < 0 || index >= this.zpp_gl()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.zpp_gl()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.zpp_gl() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -1918,7 +1942,7 @@ nape.geom.Vec2List.prototype = {
 		return this.zpp_inner.at_ite.elt.wrapper();
 	}
 	,push: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Vec2" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Vec2" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_vm();
 		var cont;
@@ -1938,7 +1962,7 @@ nape.geom.Vec2List.prototype = {
 	}
 	,iterator: function() {
 		this.zpp_vm();
-		return nape.geom.Vec2Iterator.get(this);
+		return nape_geom_Vec2Iterator.get(this);
 	}
 	,toString: function() {
 		var ret = "[";
@@ -1954,102 +1978,102 @@ nape.geom.Vec2List.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.geom.Vec2List
+	,__class__: nape_geom_Vec2List
 };
-nape.geom.Vec3 = function() {
+var nape_geom_Vec3 = function() {
 	this.zpp_inner = null;
 };
-nape.geom.Vec3.__name__ = true;
-nape.geom.Vec3.prototype = {
+nape_geom_Vec3.__name__ = true;
+nape_geom_Vec3.prototype = {
 	toString: function() {
-		if(this.zpp_disp) throw "Error: " + "Vec3" + " has been disposed and cannot be used!";
+		if(this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec3" + " has been disposed and cannot be used!");
 		return "{ x: " + (function($this) {
 			var $r;
-			if($this.zpp_disp) throw "Error: " + "Vec3" + " has been disposed and cannot be used!";
+			if($this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec3" + " has been disposed and cannot be used!");
 			$this.zpp_inner.validate();
 			$r = $this.zpp_inner.x;
 			return $r;
 		}(this)) + " y: " + (function($this) {
 			var $r;
-			if($this.zpp_disp) throw "Error: " + "Vec3" + " has been disposed and cannot be used!";
+			if($this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec3" + " has been disposed and cannot be used!");
 			$this.zpp_inner.validate();
 			$r = $this.zpp_inner.y;
 			return $r;
 		}(this)) + " z: " + (function($this) {
 			var $r;
-			if($this.zpp_disp) throw "Error: " + "Vec3" + " has been disposed and cannot be used!";
+			if($this.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec3" + " has been disposed and cannot be used!");
 			$this.zpp_inner.validate();
 			$r = $this.zpp_inner.z;
 			return $r;
 		}(this)) + " }";
 	}
-	,__class__: nape.geom.Vec3
+	,__class__: nape_geom_Vec3
 };
-nape.geom.Winding = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "Winding" + " derp!";
+var nape_geom_Winding = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Winding" + " derp!");
 };
-nape.geom.Winding.__name__ = true;
-nape.geom.Winding.prototype = {
+nape_geom_Winding.__name__ = true;
+nape_geom_Winding.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.Winding_UNDEFINED == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.Winding_UNDEFINED = new nape.geom.Winding();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.Winding_UNDEFINED == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.Winding_UNDEFINED = new nape_geom_Winding();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.Winding_UNDEFINED;
+			$r = zpp_$nape_util_ZPP_$Flags.Winding_UNDEFINED;
 			return $r;
 		}(this))) return "UNDEFINED"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.Winding_CLOCKWISE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.Winding_CLOCKWISE = new nape.geom.Winding();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.Winding_CLOCKWISE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.Winding_CLOCKWISE = new nape_geom_Winding();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.Winding_CLOCKWISE;
+			$r = zpp_$nape_util_ZPP_$Flags.Winding_CLOCKWISE;
 			return $r;
 		}(this))) return "CLOCKWISE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.Winding_ANTICLOCKWISE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.Winding_ANTICLOCKWISE = new nape.geom.Winding();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.Winding_ANTICLOCKWISE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.Winding_ANTICLOCKWISE = new nape_geom_Winding();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.Winding_ANTICLOCKWISE;
+			$r = zpp_$nape_util_ZPP_$Flags.Winding_ANTICLOCKWISE;
 			return $r;
 		}(this))) return "ANTICLOCKWISE"; else return "";
 	}
-	,__class__: nape.geom.Winding
+	,__class__: nape_geom_Winding
 };
-nape.phys = {};
-nape.phys.Interactor = function() {
+var nape_phys_Interactor = function() {
 	this.zpp_inner_i = null;
-	throw "Error: Cannot instantiate an Interactor, only Shape/Body/Compound";
+	throw new js__$Boot_HaxeError("Error: Cannot instantiate an Interactor, only Shape/Body/Compound");
 };
-nape.phys.Interactor.__name__ = true;
-nape.phys.Interactor.prototype = {
+nape_phys_Interactor.__name__ = true;
+nape_phys_Interactor.prototype = {
 	toString: function() {
 		return "";
 	}
-	,__class__: nape.phys.Interactor
+	,__class__: nape_phys_Interactor
 };
-nape.phys.Body = function(type,position) {
+var nape_phys_Body = function(type,position) {
 	this.zpp_inner = null;
 	try {
-		nape.phys.Interactor.call(this);
+		nape_phys_Interactor.call(this);
 	} catch( e ) {
+		if (e instanceof js__$Boot_HaxeError) e = e.val;
 	}
-	this.zpp_inner = new zpp_nape.phys.ZPP_Body();
+	this.zpp_inner = new zpp_$nape_phys_ZPP_$Body();
 	this.zpp_inner.outer = this;
 	this.zpp_inner.outer_i = this;
 	this.zpp_inner_i = this.zpp_inner;
 	if(position != null) {
-		if(position != null && position.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-		if(position != null && position.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(position != null && position.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+		if(position != null && position.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		position.zpp_inner.validate();
 		this.zpp_inner.posx = position.zpp_inner.x;
-		if(position != null && position.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(position != null && position.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		position.zpp_inner.validate();
 		this.zpp_inner.posy = position.zpp_inner.y;
 	} else {
@@ -2058,12 +2082,12 @@ nape.phys.Body = function(type,position) {
 	}
 	this.set_type(type == null?(function($this) {
 		var $r;
-		if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-			zpp_nape.util.ZPP_Flags.internal = true;
-			zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-			zpp_nape.util.ZPP_Flags.internal = false;
+		if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+			zpp_$nape_util_ZPP_$Flags.internal = true;
+			zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+			zpp_$nape_util_ZPP_$Flags.internal = false;
 		}
-		$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+		$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
 		return $r;
 	}(this)):type);
 	if(position != null) {
@@ -2072,37 +2096,37 @@ nape.phys.Body = function(type,position) {
 			true;
 		} else false;
 	}
-	this.zpp_inner_i.insert_cbtype(zpp_nape.callbacks.ZPP_CbType.ANY_BODY.zpp_inner);
+	this.zpp_inner_i.insert_cbtype(zpp_$nape_callbacks_ZPP_$CbType.ANY_BODY.zpp_inner);
 };
-nape.phys.Body.__name__ = true;
-nape.phys.Body.__super__ = nape.phys.Interactor;
-nape.phys.Body.prototype = $extend(nape.phys.Interactor.prototype,{
+nape_phys_Body.__name__ = true;
+nape_phys_Body.__super__ = nape_phys_Interactor;
+nape_phys_Body.prototype = $extend(nape_phys_Interactor.prototype,{
 	set_type: function(type) {
 		this.zpp_inner.immutable_midstep("Body::type");
-		if(this.zpp_inner.world) throw "Error: Space::world is immutable";
-		if(zpp_nape.phys.ZPP_Body.types[this.zpp_inner.type] != type) {
-			if(type == null) throw "Error: Cannot use null BodyType";
+		if(this.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
+		if(zpp_$nape_phys_ZPP_$Body.types[this.zpp_inner.type] != type) {
+			if(type == null) throw new js__$Boot_HaxeError("Error: Cannot use null BodyType");
 			var ntype;
 			if(type == (function($this) {
 				var $r;
-				if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-					zpp_nape.util.ZPP_Flags.internal = true;
-					zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-					zpp_nape.util.ZPP_Flags.internal = false;
+				if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+					zpp_$nape_util_ZPP_$Flags.internal = true;
+					zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+					zpp_$nape_util_ZPP_$Flags.internal = false;
 				}
-				$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+				$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
 				return $r;
-			}(this))) ntype = zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC; else if(type == (function($this) {
+			}(this))) ntype = zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC; else if(type == (function($this) {
 				var $r;
-				if(zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC == null) {
-					zpp_nape.util.ZPP_Flags.internal = true;
-					zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC = new nape.phys.BodyType();
-					zpp_nape.util.ZPP_Flags.internal = false;
+				if(zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC == null) {
+					zpp_$nape_util_ZPP_$Flags.internal = true;
+					zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC = new nape_phys_BodyType();
+					zpp_$nape_util_ZPP_$Flags.internal = false;
 				}
-				$r = zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC;
+				$r = zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC;
 				return $r;
-			}(this))) ntype = zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC; else ntype = zpp_nape.util.ZPP_Flags.id_BodyType_STATIC;
-			if(ntype == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.zpp_inner.space != null) {
+			}(this))) ntype = zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC; else ntype = zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC;
+			if(ntype == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.zpp_inner.space != null) {
 				this.zpp_inner.velx = 0;
 				this.zpp_inner.vely = 0;
 				this.zpp_inner.angvel = 0;
@@ -2110,12 +2134,12 @@ nape.phys.Body.prototype = $extend(nape.phys.Interactor.prototype,{
 			this.zpp_inner.invalidate_type();
 			if(this.zpp_inner.space != null) this.zpp_inner.space.transmitType(this.zpp_inner,ntype); else this.zpp_inner.type = ntype;
 		}
-		return zpp_nape.phys.ZPP_Body.types[this.zpp_inner.type];
+		return zpp_$nape_phys_ZPP_$Body.types[this.zpp_inner.type];
 	}
 	,set_space: function(space) {
-		if(this.zpp_inner.compound != null) throw "Error: Cannot set the space of a Body belonging to a Compound, only the root Compound space can be set";
+		if(this.zpp_inner.compound != null) throw new js__$Boot_HaxeError("Error: Cannot set the space of a Body belonging to a Compound, only the root Compound space can be set");
 		this.zpp_inner.immutable_midstep("Body::space");
-		if(this.zpp_inner.world) throw "Error: Space::world is immutable";
+		if(this.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
 		if((this.zpp_inner.space == null?null:this.zpp_inner.space.outer) != space) {
 			if((this.zpp_inner.space == null?null:this.zpp_inner.space.outer) != null) this.zpp_inner.component.woken = false;
 			if((this.zpp_inner.space == null?null:this.zpp_inner.space.outer) != null) (this.zpp_inner.space == null?null:this.zpp_inner.space.outer).zpp_inner.wrap_bodies.remove(this);
@@ -2129,7 +2153,7 @@ nape.phys.Body.prototype = $extend(nape.phys.Interactor.prototype,{
 	}
 	,setShapeMaterials: function(material) {
 		this.zpp_inner.immutable_midstep("Body::setShapeMaterials()");
-		if(this.zpp_inner.world) throw "Error: Space::world is immutable";
+		if(this.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
 		var cx_ite = this.zpp_inner.shapes.head;
 		while(cx_ite != null) {
 			var s = cx_ite.elt;
@@ -2139,28 +2163,28 @@ nape.phys.Body.prototype = $extend(nape.phys.Interactor.prototype,{
 		return this;
 	}
 	,toString: function() {
-		return (this.zpp_inner.world?"(space::world":"(" + (this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC?"dynamic":this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC?"static":"kinematic")) + ")#" + this.zpp_inner_i.id;
+		return (this.zpp_inner.world?"(space::world":"(" + (this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC?"dynamic":this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC?"static":"kinematic")) + ")#" + this.zpp_inner_i.id;
 	}
-	,__class__: nape.phys.Body
+	,__class__: nape_phys_Body
 });
-nape.phys.BodyIterator = function() {
+var nape_phys_BodyIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_BodyList.internal) throw "Error: Cannot instantiate " + "Body" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$BodyList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Body" + "Iterator derp!");
 };
-nape.phys.BodyIterator.__name__ = true;
-nape.phys.BodyIterator.get = function(list) {
+nape_phys_BodyIterator.__name__ = true;
+nape_phys_BodyIterator.get = function(list) {
 	var ret;
-	if(nape.phys.BodyIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_BodyList.internal = true;
-		var ret1 = new nape.phys.BodyIterator();
-		zpp_nape.util.ZPP_BodyList.internal = false;
+	if(nape_phys_BodyIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$BodyList.internal = true;
+		var ret1 = new nape_phys_BodyIterator();
+		zpp_$nape_util_ZPP_$BodyList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.phys.BodyIterator.zpp_pool;
-		nape.phys.BodyIterator.zpp_pool = r.zpp_next;
+		var r = nape_phys_BodyIterator.zpp_pool;
+		nape_phys_BodyIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -2168,14 +2192,14 @@ nape.phys.BodyIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.phys.BodyIterator.prototype = {
+nape_phys_BodyIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.phys.BodyIterator.zpp_pool;
-			nape.phys.BodyIterator.zpp_pool = this;
+			this.zpp_next = nape_phys_BodyIterator.zpp_pool;
+			nape_phys_BodyIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -2184,15 +2208,15 @@ nape.phys.BodyIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.phys.BodyIterator
+	,__class__: nape_phys_BodyIterator
 };
-nape.phys.BodyList = function() {
+var nape_phys_BodyList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_BodyList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$BodyList();
 	this.zpp_inner.outer = this;
 };
-nape.phys.BodyList.__name__ = true;
-nape.phys.BodyList.prototype = {
+nape_phys_BodyList.__name__ = true;
+nape_phys_BodyList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -2203,7 +2227,7 @@ nape.phys.BodyList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -2215,7 +2239,7 @@ nape.phys.BodyList.prototype = {
 		return this.zpp_inner.at_ite.elt.outer;
 	}
 	,push: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Body" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Body" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var cont;
@@ -2231,7 +2255,7 @@ nape.phys.BodyList.prototype = {
 		return cont;
 	}
 	,unshift: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Body" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Body" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var cont;
@@ -2250,7 +2274,7 @@ nape.phys.BodyList.prototype = {
 		if(this.zpp_inner.reverse_flag) return this.push(obj); else return this.unshift(obj);
 	}
 	,remove: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Body" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Body" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var ret;
@@ -2276,7 +2300,7 @@ nape.phys.BodyList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.phys.BodyIterator.get(this);
+		_g = nape_phys_BodyIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -2287,74 +2311,74 @@ nape.phys.BodyList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.phys.BodyList
+	,__class__: nape_phys_BodyList
 };
-nape.phys.BodyType = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "BodyType" + " derp!";
+var nape_phys_BodyType = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "BodyType" + " derp!");
 };
-nape.phys.BodyType.__name__ = true;
-nape.phys.BodyType.prototype = {
+nape_phys_BodyType.__name__ = true;
+nape_phys_BodyType.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
 			return $r;
 		}(this))) return "STATIC"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
 			return $r;
 		}(this))) return "DYNAMIC"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC;
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC;
 			return $r;
 		}(this))) return "KINEMATIC"; else return "";
 	}
-	,__class__: nape.phys.BodyType
+	,__class__: nape_phys_BodyType
 };
-nape.phys.Compound = function() {
+var nape_phys_Compound = function() {
 	this.zpp_inner = null;
 };
-nape.phys.Compound.__name__ = true;
-nape.phys.Compound.__super__ = nape.phys.Interactor;
-nape.phys.Compound.prototype = $extend(nape.phys.Interactor.prototype,{
+nape_phys_Compound.__name__ = true;
+nape_phys_Compound.__super__ = nape_phys_Interactor;
+nape_phys_Compound.prototype = $extend(nape_phys_Interactor.prototype,{
 	toString: function() {
 		return "Compound" + this.zpp_inner_i.id;
 	}
-	,__class__: nape.phys.Compound
+	,__class__: nape_phys_Compound
 });
-nape.phys.CompoundIterator = function() {
+var nape_phys_CompoundIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_CompoundList.internal) throw "Error: Cannot instantiate " + "Compound" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$CompoundList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Compound" + "Iterator derp!");
 };
-nape.phys.CompoundIterator.__name__ = true;
-nape.phys.CompoundIterator.get = function(list) {
+nape_phys_CompoundIterator.__name__ = true;
+nape_phys_CompoundIterator.get = function(list) {
 	var ret;
-	if(nape.phys.CompoundIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_CompoundList.internal = true;
-		var ret1 = new nape.phys.CompoundIterator();
-		zpp_nape.util.ZPP_CompoundList.internal = false;
+	if(nape_phys_CompoundIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$CompoundList.internal = true;
+		var ret1 = new nape_phys_CompoundIterator();
+		zpp_$nape_util_ZPP_$CompoundList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.phys.CompoundIterator.zpp_pool;
-		nape.phys.CompoundIterator.zpp_pool = r.zpp_next;
+		var r = nape_phys_CompoundIterator.zpp_pool;
+		nape_phys_CompoundIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -2362,14 +2386,14 @@ nape.phys.CompoundIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.phys.CompoundIterator.prototype = {
+nape_phys_CompoundIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.phys.CompoundIterator.zpp_pool;
-			nape.phys.CompoundIterator.zpp_pool = this;
+			this.zpp_next = nape_phys_CompoundIterator.zpp_pool;
+			nape_phys_CompoundIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -2378,15 +2402,15 @@ nape.phys.CompoundIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.phys.CompoundIterator
+	,__class__: nape_phys_CompoundIterator
 };
-nape.phys.CompoundList = function() {
+var nape_phys_CompoundList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_CompoundList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$CompoundList();
 	this.zpp_inner.outer = this;
 };
-nape.phys.CompoundList.__name__ = true;
-nape.phys.CompoundList.prototype = {
+nape_phys_CompoundList.__name__ = true;
+nape_phys_CompoundList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -2397,7 +2421,7 @@ nape.phys.CompoundList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -2409,7 +2433,7 @@ nape.phys.CompoundList.prototype = {
 		return this.zpp_inner.at_ite.elt.outer;
 	}
 	,remove: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Compound" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Compound" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var ret;
@@ -2435,7 +2459,7 @@ nape.phys.CompoundList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.phys.CompoundIterator.get(this);
+		_g = nape_phys_CompoundIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -2446,101 +2470,101 @@ nape.phys.CompoundList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.phys.CompoundList
+	,__class__: nape_phys_CompoundList
 };
-nape.phys.FluidProperties = function() {
+var nape_phys_FluidProperties = function() {
 	this.zpp_inner = null;
 };
-nape.phys.FluidProperties.__name__ = true;
-nape.phys.FluidProperties.prototype = {
+nape_phys_FluidProperties.__name__ = true;
+nape_phys_FluidProperties.prototype = {
 	toString: function() {
 		return "{ density: " + this.zpp_inner.density * 1000 + " viscosity: " + this.zpp_inner.viscosity + " gravity: " + Std.string(this.zpp_inner.wrap_gravity) + " }";
 	}
-	,__class__: nape.phys.FluidProperties
+	,__class__: nape_phys_FluidProperties
 };
-nape.phys.GravMassMode = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "GravMassMode" + " derp!";
+var nape_phys_GravMassMode = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "GravMassMode" + " derp!");
 };
-nape.phys.GravMassMode.__name__ = true;
-nape.phys.GravMassMode.prototype = {
+nape_phys_GravMassMode.__name__ = true;
+nape_phys_GravMassMode.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.GravMassMode_DEFAULT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.GravMassMode_DEFAULT = new nape.phys.GravMassMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.GravMassMode_DEFAULT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.GravMassMode_DEFAULT = new nape_phys_GravMassMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.GravMassMode_DEFAULT;
+			$r = zpp_$nape_util_ZPP_$Flags.GravMassMode_DEFAULT;
 			return $r;
 		}(this))) return "DEFAULT"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.GravMassMode_FIXED == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.GravMassMode_FIXED = new nape.phys.GravMassMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.GravMassMode_FIXED == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.GravMassMode_FIXED = new nape_phys_GravMassMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.GravMassMode_FIXED;
+			$r = zpp_$nape_util_ZPP_$Flags.GravMassMode_FIXED;
 			return $r;
 		}(this))) return "FIXED"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.GravMassMode_SCALED == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.GravMassMode_SCALED = new nape.phys.GravMassMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.GravMassMode_SCALED == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.GravMassMode_SCALED = new nape_phys_GravMassMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.GravMassMode_SCALED;
+			$r = zpp_$nape_util_ZPP_$Flags.GravMassMode_SCALED;
 			return $r;
 		}(this))) return "SCALED"; else return "";
 	}
-	,__class__: nape.phys.GravMassMode
+	,__class__: nape_phys_GravMassMode
 };
-nape.phys.InertiaMode = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "InertiaMode" + " derp!";
+var nape_phys_InertiaMode = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "InertiaMode" + " derp!");
 };
-nape.phys.InertiaMode.__name__ = true;
-nape.phys.InertiaMode.prototype = {
+nape_phys_InertiaMode.__name__ = true;
+nape_phys_InertiaMode.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InertiaMode_DEFAULT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InertiaMode_DEFAULT = new nape.phys.InertiaMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InertiaMode_DEFAULT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InertiaMode_DEFAULT = new nape_phys_InertiaMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InertiaMode_DEFAULT;
+			$r = zpp_$nape_util_ZPP_$Flags.InertiaMode_DEFAULT;
 			return $r;
 		}(this))) return "DEFAULT"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.InertiaMode_FIXED == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.InertiaMode_FIXED = new nape.phys.InertiaMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.InertiaMode_FIXED == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.InertiaMode_FIXED = new nape_phys_InertiaMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.InertiaMode_FIXED;
+			$r = zpp_$nape_util_ZPP_$Flags.InertiaMode_FIXED;
 			return $r;
 		}(this))) return "FIXED"; else return "";
 	}
-	,__class__: nape.phys.InertiaMode
+	,__class__: nape_phys_InertiaMode
 };
-nape.phys.InteractorIterator = function() {
+var nape_phys_InteractorIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_InteractorList.internal) throw "Error: Cannot instantiate " + "Interactor" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$InteractorList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Interactor" + "Iterator derp!");
 };
-nape.phys.InteractorIterator.__name__ = true;
-nape.phys.InteractorIterator.get = function(list) {
+nape_phys_InteractorIterator.__name__ = true;
+nape_phys_InteractorIterator.get = function(list) {
 	var ret;
-	if(nape.phys.InteractorIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_InteractorList.internal = true;
-		var ret1 = new nape.phys.InteractorIterator();
-		zpp_nape.util.ZPP_InteractorList.internal = false;
+	if(nape_phys_InteractorIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$InteractorList.internal = true;
+		var ret1 = new nape_phys_InteractorIterator();
+		zpp_$nape_util_ZPP_$InteractorList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.phys.InteractorIterator.zpp_pool;
-		nape.phys.InteractorIterator.zpp_pool = r.zpp_next;
+		var r = nape_phys_InteractorIterator.zpp_pool;
+		nape_phys_InteractorIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -2548,14 +2572,14 @@ nape.phys.InteractorIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.phys.InteractorIterator.prototype = {
+nape_phys_InteractorIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.phys.InteractorIterator.zpp_pool;
-			nape.phys.InteractorIterator.zpp_pool = this;
+			this.zpp_next = nape_phys_InteractorIterator.zpp_pool;
+			nape_phys_InteractorIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -2564,13 +2588,13 @@ nape.phys.InteractorIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.phys.InteractorIterator
+	,__class__: nape_phys_InteractorIterator
 };
-nape.phys.InteractorList = function() {
+var nape_phys_InteractorList = function() {
 	this.zpp_inner = null;
 };
-nape.phys.InteractorList.__name__ = true;
-nape.phys.InteractorList.prototype = {
+nape_phys_InteractorList.__name__ = true;
+nape_phys_InteractorList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -2581,7 +2605,7 @@ nape.phys.InteractorList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -2597,7 +2621,7 @@ nape.phys.InteractorList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.phys.InteractorIterator.get(this);
+		_g = nape_phys_InteractorIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -2608,142 +2632,143 @@ nape.phys.InteractorList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.phys.InteractorList
+	,__class__: nape_phys_InteractorList
 };
-nape.phys.MassMode = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "MassMode" + " derp!";
+var nape_phys_MassMode = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "MassMode" + " derp!");
 };
-nape.phys.MassMode.__name__ = true;
-nape.phys.MassMode.prototype = {
+nape_phys_MassMode.__name__ = true;
+nape_phys_MassMode.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.MassMode_DEFAULT == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.MassMode_DEFAULT = new nape.phys.MassMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.MassMode_DEFAULT == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.MassMode_DEFAULT = new nape_phys_MassMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.MassMode_DEFAULT;
+			$r = zpp_$nape_util_ZPP_$Flags.MassMode_DEFAULT;
 			return $r;
 		}(this))) return "DEFAULT"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.MassMode_FIXED == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.MassMode_FIXED = new nape.phys.MassMode();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.MassMode_FIXED == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.MassMode_FIXED = new nape_phys_MassMode();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.MassMode_FIXED;
+			$r = zpp_$nape_util_ZPP_$Flags.MassMode_FIXED;
 			return $r;
 		}(this))) return "FIXED"; else return "";
 	}
-	,__class__: nape.phys.MassMode
+	,__class__: nape_phys_MassMode
 };
-nape.phys.Material = function(elasticity,dynamicFriction,staticFriction,density,rollingFriction) {
+var nape_phys_Material = function(elasticity,dynamicFriction,staticFriction,density,rollingFriction) {
 	if(rollingFriction == null) rollingFriction = 0.001;
 	if(density == null) density = 1;
 	if(staticFriction == null) staticFriction = 2.0;
 	if(dynamicFriction == null) dynamicFriction = 1.0;
 	if(elasticity == null) elasticity = 0.0;
 	this.zpp_inner = null;
-	if(zpp_nape.phys.ZPP_Material.zpp_pool == null) this.zpp_inner = new zpp_nape.phys.ZPP_Material(); else {
-		this.zpp_inner = zpp_nape.phys.ZPP_Material.zpp_pool;
-		zpp_nape.phys.ZPP_Material.zpp_pool = this.zpp_inner.next;
+	if(zpp_$nape_phys_ZPP_$Material.zpp_pool == null) this.zpp_inner = new zpp_$nape_phys_ZPP_$Material(); else {
+		this.zpp_inner = zpp_$nape_phys_ZPP_$Material.zpp_pool;
+		zpp_$nape_phys_ZPP_$Material.zpp_pool = this.zpp_inner.next;
 		this.zpp_inner.next = null;
 	}
 	null;
 	this.zpp_inner.outer = this;
 	if(elasticity != this.zpp_inner.elasticity) {
-		if(elasticity != elasticity) throw "Error: Material::" + "elasticity" + " cannot be NaN";
+		if(elasticity != elasticity) throw new js__$Boot_HaxeError("Error: Material::" + "elasticity" + " cannot be NaN");
 		this.zpp_inner.elasticity = elasticity / 1;
-		this.zpp_inner.invalidate(zpp_nape.phys.ZPP_Material.WAKE | zpp_nape.phys.ZPP_Material.ARBITERS);
+		this.zpp_inner.invalidate(zpp_$nape_phys_ZPP_$Material.WAKE | zpp_$nape_phys_ZPP_$Material.ARBITERS);
 	}
 	this.zpp_inner.elasticity;
 	if(dynamicFriction != this.zpp_inner.dynamicFriction) {
-		if(dynamicFriction != dynamicFriction) throw "Error: Material::" + "dynamicFriction" + " cannot be NaN";
-		if(dynamicFriction < 0) throw "Error: Material::" + "dynamicFriction" + " cannot be negative";
+		if(dynamicFriction != dynamicFriction) throw new js__$Boot_HaxeError("Error: Material::" + "dynamicFriction" + " cannot be NaN");
+		if(dynamicFriction < 0) throw new js__$Boot_HaxeError("Error: Material::" + "dynamicFriction" + " cannot be negative");
 		this.zpp_inner.dynamicFriction = dynamicFriction / 1;
-		this.zpp_inner.invalidate(zpp_nape.phys.ZPP_Material.WAKE | zpp_nape.phys.ZPP_Material.ANGDRAG | zpp_nape.phys.ZPP_Material.ARBITERS);
+		this.zpp_inner.invalidate(zpp_$nape_phys_ZPP_$Material.WAKE | zpp_$nape_phys_ZPP_$Material.ANGDRAG | zpp_$nape_phys_ZPP_$Material.ARBITERS);
 	}
 	this.zpp_inner.dynamicFriction;
 	if(staticFriction != this.zpp_inner.staticFriction) {
-		if(staticFriction != staticFriction) throw "Error: Material::" + "staticFriction" + " cannot be NaN";
-		if(staticFriction < 0) throw "Error: Material::" + "staticFriction" + " cannot be negative";
+		if(staticFriction != staticFriction) throw new js__$Boot_HaxeError("Error: Material::" + "staticFriction" + " cannot be NaN");
+		if(staticFriction < 0) throw new js__$Boot_HaxeError("Error: Material::" + "staticFriction" + " cannot be negative");
 		this.zpp_inner.staticFriction = staticFriction / 1;
-		this.zpp_inner.invalidate(zpp_nape.phys.ZPP_Material.WAKE | zpp_nape.phys.ZPP_Material.ARBITERS);
+		this.zpp_inner.invalidate(zpp_$nape_phys_ZPP_$Material.WAKE | zpp_$nape_phys_ZPP_$Material.ARBITERS);
 	}
 	this.zpp_inner.staticFriction;
 	if(density != this.zpp_inner.density * 1000) {
-		if(density != density) throw "Error: Material::" + "density" + " cannot be NaN";
-		if(density < 0) throw "Error: Material::density must be positive";
-		if(density < 0) throw "Error: Material::" + "density" + " cannot be negative";
+		if(density != density) throw new js__$Boot_HaxeError("Error: Material::" + "density" + " cannot be NaN");
+		if(density < 0) throw new js__$Boot_HaxeError("Error: Material::density must be positive");
+		if(density < 0) throw new js__$Boot_HaxeError("Error: Material::" + "density" + " cannot be negative");
 		this.zpp_inner.density = density / 1000;
-		this.zpp_inner.invalidate(zpp_nape.phys.ZPP_Material.WAKE | zpp_nape.phys.ZPP_Material.PROPS);
+		this.zpp_inner.invalidate(zpp_$nape_phys_ZPP_$Material.WAKE | zpp_$nape_phys_ZPP_$Material.PROPS);
 	}
 	this.zpp_inner.density * 1000;
 	if(rollingFriction != this.zpp_inner.rollingFriction) {
-		if(rollingFriction != rollingFriction) throw "Error: Material::" + "rollingFriction" + " cannot be NaN";
-		if(rollingFriction < 0) throw "Error: Material::" + "rollingFriction" + " cannot be negative";
+		if(rollingFriction != rollingFriction) throw new js__$Boot_HaxeError("Error: Material::" + "rollingFriction" + " cannot be NaN");
+		if(rollingFriction < 0) throw new js__$Boot_HaxeError("Error: Material::" + "rollingFriction" + " cannot be negative");
 		this.zpp_inner.rollingFriction = rollingFriction / 1;
-		this.zpp_inner.invalidate(zpp_nape.phys.ZPP_Material.WAKE | zpp_nape.phys.ZPP_Material.ARBITERS);
+		this.zpp_inner.invalidate(zpp_$nape_phys_ZPP_$Material.WAKE | zpp_$nape_phys_ZPP_$Material.ARBITERS);
 	}
 	this.zpp_inner.rollingFriction;
 };
-nape.phys.Material.__name__ = true;
-nape.phys.Material.wood = function() {
-	return new nape.phys.Material(0.4,0.2,0.38,0.7,0.005);
+nape_phys_Material.__name__ = true;
+nape_phys_Material.wood = function() {
+	return new nape_phys_Material(0.4,0.2,0.38,0.7,0.005);
 };
-nape.phys.Material.rubber = function() {
-	return new nape.phys.Material(0.8,1.0,1.4,1.5,0.01);
+nape_phys_Material.rubber = function() {
+	return new nape_phys_Material(0.8,1.0,1.4,1.5,0.01);
 };
-nape.phys.Material.prototype = {
+nape_phys_Material.prototype = {
 	toString: function() {
 		return "{ elasticity: " + this.zpp_inner.elasticity + " dynamicFriction: " + this.zpp_inner.dynamicFriction + " staticFriction: " + this.zpp_inner.staticFriction + " density: " + this.zpp_inner.density * 1000 + " rollingFriction: " + this.zpp_inner.rollingFriction + " }";
 	}
-	,__class__: nape.phys.Material
+	,__class__: nape_phys_Material
 };
-nape.shape = {};
-nape.shape.Shape = function() {
+var nape_shape_Shape = function() {
 	this.zpp_inner = null;
 	try {
-		nape.phys.Interactor.call(this);
+		nape_phys_Interactor.call(this);
 	} catch( e ) {
+		if (e instanceof js__$Boot_HaxeError) e = e.val;
 	}
-	throw "Error: Shape cannot be instantiated derp!";
+	throw new js__$Boot_HaxeError("Error: Shape cannot be instantiated derp!");
 };
-nape.shape.Shape.__name__ = true;
-nape.shape.Shape.__super__ = nape.phys.Interactor;
-nape.shape.Shape.prototype = $extend(nape.phys.Interactor.prototype,{
+nape_shape_Shape.__name__ = true;
+nape_shape_Shape.__super__ = nape_phys_Interactor;
+nape_shape_Shape.prototype = $extend(nape_phys_Interactor.prototype,{
 	set_material: function(material) {
 		this.zpp_inner.immutable_midstep("Shape::material");
-		if(material == null) throw "Error: Cannot assign null as Shape material";
+		if(material == null) throw new js__$Boot_HaxeError("Error: Cannot assign null as Shape material");
 		this.zpp_inner.setMaterial(material.zpp_inner);
 		return this.zpp_inner.material.wrapper();
 	}
 	,toString: function() {
 		var ret;
-		if(this.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) ret = "Circle"; else ret = "Polygon";
+		if(this.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) ret = "Circle"; else ret = "Polygon";
 		return ret + "#" + this.zpp_inner_i.id;
 	}
-	,__class__: nape.shape.Shape
+	,__class__: nape_shape_Shape
 });
-nape.shape.Circle = function(radius,localCOM,material,filter) {
+var nape_shape_Circle = function(radius,localCOM,material,filter) {
 	this.zpp_inner_zn = null;
 	try {
-		nape.shape.Shape.call(this);
+		nape_shape_Shape.call(this);
 	} catch( e ) {
+		if (e instanceof js__$Boot_HaxeError) e = e.val;
 	}
-	this.zpp_inner_zn = new zpp_nape.shape.ZPP_Circle();
+	this.zpp_inner_zn = new zpp_$nape_shape_ZPP_$Circle();
 	this.zpp_inner_zn.outer = this;
 	this.zpp_inner_zn.outer_zn = this;
 	this.zpp_inner = this.zpp_inner_zn;
 	this.zpp_inner_i = this.zpp_inner;
 	this.zpp_inner_i.outer_i = this;
 	this.zpp_inner.immutable_midstep("Circle::radius");
-	if(this.zpp_inner.body != null && this.zpp_inner.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.zpp_inner.body.space != null) throw "Error: Cannot modifiy radius of Circle contained in static object once added to space";
+	if(this.zpp_inner.body != null && this.zpp_inner.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.zpp_inner.body.space != null) throw new js__$Boot_HaxeError("Error: Cannot modifiy radius of Circle contained in static object once added to space");
 	if(radius != this.zpp_inner_zn.radius) {
-		if(radius != radius) throw "Error: Circle::radius cannot be NaN";
-		if(radius < nape.Config.epsilon) throw "Error: Circle::radius (" + radius + ") must be > Config.epsilon";
-		if(radius > 1e100) throw "Error: Circle::radius (" + radius + ") must be < PR(Const).FMAX";
+		if(radius != radius) throw new js__$Boot_HaxeError("Error: Circle::radius cannot be NaN");
+		if(radius < nape_Config.epsilon) throw new js__$Boot_HaxeError("Error: Circle::radius (" + radius + ") must be > Config.epsilon");
+		if(radius > 1e100) throw new js__$Boot_HaxeError("Error: Circle::radius (" + radius + ") must be < PR(Const).FMAX");
 		this.zpp_inner_zn.radius = radius;
 		this.zpp_inner_zn.invalidate_radius();
 	}
@@ -2752,11 +2777,11 @@ nape.shape.Circle = function(radius,localCOM,material,filter) {
 		this.zpp_inner.localCOMx = 0;
 		this.zpp_inner.localCOMy = 0;
 	} else {
-		if(localCOM != null && localCOM.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-		if(localCOM != null && localCOM.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(localCOM != null && localCOM.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+		if(localCOM != null && localCOM.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		localCOM.zpp_inner.validate();
 		this.zpp_inner.localCOMx = localCOM.zpp_inner.x;
-		if(localCOM != null && localCOM.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+		if(localCOM != null && localCOM.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 		localCOM.zpp_inner.validate();
 		this.zpp_inner.localCOMy = localCOM.zpp_inner.y;
 		if(localCOM.zpp_inner.weak) {
@@ -2765,44 +2790,44 @@ nape.shape.Circle = function(radius,localCOM,material,filter) {
 		} else false;
 	}
 	if(material == null) {
-		if(zpp_nape.phys.ZPP_Material.zpp_pool == null) this.zpp_inner.material = new zpp_nape.phys.ZPP_Material(); else {
-			this.zpp_inner.material = zpp_nape.phys.ZPP_Material.zpp_pool;
-			zpp_nape.phys.ZPP_Material.zpp_pool = this.zpp_inner.material.next;
+		if(zpp_$nape_phys_ZPP_$Material.zpp_pool == null) this.zpp_inner.material = new zpp_$nape_phys_ZPP_$Material(); else {
+			this.zpp_inner.material = zpp_$nape_phys_ZPP_$Material.zpp_pool;
+			zpp_$nape_phys_ZPP_$Material.zpp_pool = this.zpp_inner.material.next;
 			this.zpp_inner.material.next = null;
 		}
 		null;
 	} else {
 		this.zpp_inner.immutable_midstep("Shape::material");
-		if(material == null) throw "Error: Cannot assign null as Shape material";
+		if(material == null) throw new js__$Boot_HaxeError("Error: Cannot assign null as Shape material");
 		this.zpp_inner.setMaterial(material.zpp_inner);
 		this.zpp_inner.material.wrapper();
 	}
 	if(filter == null) {
-		if(zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool == null) this.zpp_inner.filter = new zpp_nape.dynamics.ZPP_InteractionFilter(); else {
-			this.zpp_inner.filter = zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool;
-			zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool = this.zpp_inner.filter.next;
+		if(zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool == null) this.zpp_inner.filter = new zpp_$nape_dynamics_ZPP_$InteractionFilter(); else {
+			this.zpp_inner.filter = zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool;
+			zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool = this.zpp_inner.filter.next;
 			this.zpp_inner.filter.next = null;
 		}
 		null;
 	} else {
 		this.zpp_inner.immutable_midstep("Shape::filter");
-		if(filter == null) throw "Error: Cannot assign null as Shape filter";
+		if(filter == null) throw new js__$Boot_HaxeError("Error: Cannot assign null as Shape filter");
 		this.zpp_inner.setFilter(filter.zpp_inner);
 		this.zpp_inner.filter.wrapper();
 	}
-	this.zpp_inner_i.insert_cbtype(zpp_nape.callbacks.ZPP_CbType.ANY_SHAPE.zpp_inner);
+	this.zpp_inner_i.insert_cbtype(zpp_$nape_callbacks_ZPP_$CbType.ANY_SHAPE.zpp_inner);
 };
-nape.shape.Circle.__name__ = true;
-nape.shape.Circle.__super__ = nape.shape.Shape;
-nape.shape.Circle.prototype = $extend(nape.shape.Shape.prototype,{
-	__class__: nape.shape.Circle
+nape_shape_Circle.__name__ = true;
+nape_shape_Circle.__super__ = nape_shape_Shape;
+nape_shape_Circle.prototype = $extend(nape_shape_Shape.prototype,{
+	__class__: nape_shape_Circle
 });
-nape.shape.Edge = function() {
+var nape_shape_Edge = function() {
 	this.zpp_inner = null;
-	if(!zpp_nape.shape.ZPP_Edge.internal) throw "Error: Cannot instantiate an Edge derp!";
+	if(!zpp_$nape_shape_ZPP_$Edge.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate an Edge derp!");
 };
-nape.shape.Edge.__name__ = true;
-nape.shape.Edge.prototype = {
+nape_shape_Edge.__name__ = true;
+nape_shape_Edge.prototype = {
 	toString: function() {
 		if(this.zpp_inner.polygon == null) return "Edge(object-pooled)"; else if(this.zpp_inner.polygon.body == null) {
 			this.zpp_inner.polygon.validate_laxi();
@@ -2812,26 +2837,26 @@ nape.shape.Edge.prototype = {
 			return "{ localNormal : " + ("{ x: " + this.zpp_inner.lnormx + " y: " + this.zpp_inner.lnormy + " }") + " worldNormal : " + ("{ x: " + this.zpp_inner.gnormx + " y: " + this.zpp_inner.gnormy + " }") + " }";
 		}
 	}
-	,__class__: nape.shape.Edge
+	,__class__: nape_shape_Edge
 };
-nape.shape.EdgeIterator = function() {
+var nape_shape_EdgeIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_EdgeList.internal) throw "Error: Cannot instantiate " + "Edge" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$EdgeList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Edge" + "Iterator derp!");
 };
-nape.shape.EdgeIterator.__name__ = true;
-nape.shape.EdgeIterator.get = function(list) {
+nape_shape_EdgeIterator.__name__ = true;
+nape_shape_EdgeIterator.get = function(list) {
 	var ret;
-	if(nape.shape.EdgeIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_EdgeList.internal = true;
-		var ret1 = new nape.shape.EdgeIterator();
-		zpp_nape.util.ZPP_EdgeList.internal = false;
+	if(nape_shape_EdgeIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$EdgeList.internal = true;
+		var ret1 = new nape_shape_EdgeIterator();
+		zpp_$nape_util_ZPP_$EdgeList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.shape.EdgeIterator.zpp_pool;
-		nape.shape.EdgeIterator.zpp_pool = r.zpp_next;
+		var r = nape_shape_EdgeIterator.zpp_pool;
+		nape_shape_EdgeIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -2839,14 +2864,14 @@ nape.shape.EdgeIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.shape.EdgeIterator.prototype = {
+nape_shape_EdgeIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.shape.EdgeIterator.zpp_pool;
-			nape.shape.EdgeIterator.zpp_pool = this;
+			this.zpp_next = nape_shape_EdgeIterator.zpp_pool;
+			nape_shape_EdgeIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -2855,13 +2880,13 @@ nape.shape.EdgeIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.shape.EdgeIterator
+	,__class__: nape_shape_EdgeIterator
 };
-nape.shape.EdgeList = function() {
+var nape_shape_EdgeList = function() {
 	this.zpp_inner = null;
 };
-nape.shape.EdgeList.__name__ = true;
-nape.shape.EdgeList.prototype = {
+nape_shape_EdgeList.__name__ = true;
+nape_shape_EdgeList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -2872,7 +2897,7 @@ nape.shape.EdgeList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) if(index == this.get_length() - 1) index = index; else index = this.get_length() - 2 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -2888,7 +2913,7 @@ nape.shape.EdgeList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.shape.EdgeIterator.get(this);
+		_g = nape_shape_EdgeIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -2899,16 +2924,17 @@ nape.shape.EdgeList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.shape.EdgeList
+	,__class__: nape_shape_EdgeList
 };
-nape.shape.Polygon = function(localVerts,material,filter) {
+var nape_shape_Polygon = function(localVerts,material,filter) {
 	this.zpp_inner_zn = null;
 	try {
-		nape.shape.Shape.call(this);
+		nape_shape_Shape.call(this);
 	} catch( e ) {
+		if (e instanceof js__$Boot_HaxeError) e = e.val;
 	}
-	if(localVerts == null) throw "Error: localVerts cannot be null";
-	this.zpp_inner_zn = new zpp_nape.shape.ZPP_Polygon();
+	if(localVerts == null) throw new js__$Boot_HaxeError("Error: localVerts cannot be null");
+	this.zpp_inner_zn = new zpp_$nape_shape_ZPP_$Polygon();
 	this.zpp_inner_zn.outer = this;
 	this.zpp_inner_zn.outer_zn = this;
 	this.zpp_inner = this.zpp_inner_zn;
@@ -2920,10 +2946,10 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 		while(_g < lv.length) {
 			var vite = lv[_g];
 			++_g;
-			if(vite == null) throw "Error: Array<Vec2> contains null objects";
-			if(!js.Boot.__instanceof(vite,nape.geom.Vec2)) throw "Error: Array<Vec2> contains non Vec2 objects";
+			if(vite == null) throw new js__$Boot_HaxeError("Error: Array<Vec2> contains null objects");
+			if(!js_Boot.__instanceof(vite,nape_geom_Vec2)) throw new js__$Boot_HaxeError("Error: Array<Vec2> contains non Vec2 objects");
 			var x = vite;
-			if(x != null && x.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if(x != null && x.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			((function($this) {
 				var $r;
 				if($this.zpp_inner_zn.wrap_lverts == null) $this.zpp_inner_zn.getlverts();
@@ -2931,16 +2957,16 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 				return $r;
 			}(this))).push((function($this) {
 				var $r;
-				if(x != null && x.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-				$r = nape.geom.Vec2.get((function($this) {
+				if(x != null && x.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+				$r = nape_geom_Vec2.get((function($this) {
 					var $r;
-					if(x != null && x.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+					if(x != null && x.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 					x.zpp_inner.validate();
 					$r = x.zpp_inner.x;
 					return $r;
 				}($this)),(function($this) {
 					var $r;
-					if(x != null && x.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+					if(x != null && x.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 					x.zpp_inner.validate();
 					$r = x.zpp_inner.y;
 					return $r;
@@ -2948,15 +2974,15 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 				return $r;
 			}(this)));
 		}
-	} else if(js.Boot.__instanceof(localVerts,nape.geom.Vec2List)) {
+	} else if(js_Boot.__instanceof(localVerts,nape_geom_Vec2List)) {
 		var lv1 = localVerts;
 		var _g1 = lv1.iterator();
 		while(_g1.hasNext()) {
 			var x1;
 			_g1.zpp_critical = false;
 			x1 = _g1.zpp_inner.at(_g1.zpp_i++);
-			if(x1 == null) throw "Error: Vec2List contains null objects";
-			if(x1 != null && x1.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+			if(x1 == null) throw new js__$Boot_HaxeError("Error: Vec2List contains null objects");
+			if(x1 != null && x1.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 			((function($this) {
 				var $r;
 				if($this.zpp_inner_zn.wrap_lverts == null) $this.zpp_inner_zn.getlverts();
@@ -2964,16 +2990,16 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 				return $r;
 			}(this))).push((function($this) {
 				var $r;
-				if(x1 != null && x1.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-				$r = nape.geom.Vec2.get((function($this) {
+				if(x1 != null && x1.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+				$r = nape_geom_Vec2.get((function($this) {
 					var $r;
-					if(x1 != null && x1.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+					if(x1 != null && x1.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 					x1.zpp_inner.validate();
 					$r = x1.zpp_inner.x;
 					return $r;
 				}($this)),(function($this) {
 					var $r;
-					if(x1 != null && x1.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+					if(x1 != null && x1.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 					x1.zpp_inner.validate();
 					$r = x1.zpp_inner.y;
 					return $r;
@@ -2981,14 +3007,14 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 				return $r;
 			}(this)));
 		}
-	} else if(js.Boot.__instanceof(localVerts,nape.geom.GeomPoly)) {
+	} else if(js_Boot.__instanceof(localVerts,nape_geom_GeomPoly)) {
 		var lv2 = localVerts;
-		if(lv2 != null && lv2.zpp_disp) throw "Error: " + "GeomPoly" + " has been disposed and cannot be used!";
+		if(lv2 != null && lv2.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "GeomPoly" + " has been disposed and cannot be used!");
 		var verts = lv2.zpp_inner.vertices;
 		if(verts != null) {
 			var vite1 = verts;
 			do {
-				var x2 = nape.geom.Vec2.get(vite1.x,vite1.y,null);
+				var x2 = nape_geom_Vec2.get(vite1.x,vite1.y,null);
 				vite1 = vite1.next;
 				((function($this) {
 					var $r;
@@ -2997,16 +3023,16 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 					return $r;
 				}(this))).push((function($this) {
 					var $r;
-					if(x2 != null && x2.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-					$r = nape.geom.Vec2.get((function($this) {
+					if(x2 != null && x2.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+					$r = nape_geom_Vec2.get((function($this) {
 						var $r;
-						if(x2 != null && x2.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+						if(x2 != null && x2.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 						x2.zpp_inner.validate();
 						$r = x2.zpp_inner.x;
 						return $r;
 					}($this)),(function($this) {
 						var $r;
-						if(x2 != null && x2.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
+						if(x2 != null && x2.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
 						x2.zpp_inner.validate();
 						$r = x2.zpp_inner.y;
 						return $r;
@@ -3016,7 +3042,7 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 				x2.dispose();
 			} while(vite1 != verts);
 		}
-	} else throw "Error: Invalid type for polygon object, should be Array<Vec2>, Vec2List, GeomPoly or for flash10+ flash.Vector<Vec2>";
+	} else throw new js__$Boot_HaxeError("Error: Invalid type for polygon object, should be Array<Vec2>, Vec2List, GeomPoly or for flash10+ flash.Vector<Vec2>");
 	if((localVerts instanceof Array) && localVerts.__enum__ == null) {
 		var lv3 = localVerts;
 		var i = 0;
@@ -3033,7 +3059,7 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 			}
 			i++;
 		}
-	} else if(js.Boot.__instanceof(localVerts,nape.geom.Vec2List)) {
+	} else if(js_Boot.__instanceof(localVerts,nape_geom_Vec2List)) {
 		var lv4 = localVerts;
 		if(lv4.zpp_inner._validate != null) lv4.zpp_inner._validate();
 		var ins = lv4.zpp_inner.inner;
@@ -3054,61 +3080,61 @@ nape.shape.Polygon = function(localVerts,material,filter) {
 		}
 	}
 	if(material == null) {
-		if(zpp_nape.phys.ZPP_Material.zpp_pool == null) this.zpp_inner.material = new zpp_nape.phys.ZPP_Material(); else {
-			this.zpp_inner.material = zpp_nape.phys.ZPP_Material.zpp_pool;
-			zpp_nape.phys.ZPP_Material.zpp_pool = this.zpp_inner.material.next;
+		if(zpp_$nape_phys_ZPP_$Material.zpp_pool == null) this.zpp_inner.material = new zpp_$nape_phys_ZPP_$Material(); else {
+			this.zpp_inner.material = zpp_$nape_phys_ZPP_$Material.zpp_pool;
+			zpp_$nape_phys_ZPP_$Material.zpp_pool = this.zpp_inner.material.next;
 			this.zpp_inner.material.next = null;
 		}
 		null;
 	} else {
 		this.zpp_inner.immutable_midstep("Shape::material");
-		if(material == null) throw "Error: Cannot assign null as Shape material";
+		if(material == null) throw new js__$Boot_HaxeError("Error: Cannot assign null as Shape material");
 		this.zpp_inner.setMaterial(material.zpp_inner);
 		this.zpp_inner.material.wrapper();
 	}
 	if(filter == null) {
-		if(zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool == null) this.zpp_inner.filter = new zpp_nape.dynamics.ZPP_InteractionFilter(); else {
-			this.zpp_inner.filter = zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool;
-			zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool = this.zpp_inner.filter.next;
+		if(zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool == null) this.zpp_inner.filter = new zpp_$nape_dynamics_ZPP_$InteractionFilter(); else {
+			this.zpp_inner.filter = zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool;
+			zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool = this.zpp_inner.filter.next;
 			this.zpp_inner.filter.next = null;
 		}
 		null;
 	} else {
 		this.zpp_inner.immutable_midstep("Shape::filter");
-		if(filter == null) throw "Error: Cannot assign null as Shape filter";
+		if(filter == null) throw new js__$Boot_HaxeError("Error: Cannot assign null as Shape filter");
 		this.zpp_inner.setFilter(filter.zpp_inner);
 		this.zpp_inner.filter.wrapper();
 	}
-	this.zpp_inner_i.insert_cbtype(zpp_nape.callbacks.ZPP_CbType.ANY_SHAPE.zpp_inner);
+	this.zpp_inner_i.insert_cbtype(zpp_$nape_callbacks_ZPP_$CbType.ANY_SHAPE.zpp_inner);
 };
-nape.shape.Polygon.__name__ = true;
-nape.shape.Polygon.rect = function(x,y,width,height,weak) {
+nape_shape_Polygon.__name__ = true;
+nape_shape_Polygon.rect = function(x,y,width,height,weak) {
 	if(weak == null) weak = false;
-	if(x != x || y != y || width != width || height != height) throw "Error: Polygon.rect cannot accept NaN arguments";
-	return [nape.geom.Vec2.get(x,y,weak),nape.geom.Vec2.get(x + width,y,weak),nape.geom.Vec2.get(x + width,y + height,weak),nape.geom.Vec2.get(x,y + height,weak)];
+	if(x != x || y != y || width != width || height != height) throw new js__$Boot_HaxeError("Error: Polygon.rect cannot accept NaN arguments");
+	return [nape_geom_Vec2.get(x,y,weak),nape_geom_Vec2.get(x + width,y,weak),nape_geom_Vec2.get(x + width,y + height,weak),nape_geom_Vec2.get(x,y + height,weak)];
 };
-nape.shape.Polygon.__super__ = nape.shape.Shape;
-nape.shape.Polygon.prototype = $extend(nape.shape.Shape.prototype,{
-	__class__: nape.shape.Polygon
+nape_shape_Polygon.__super__ = nape_shape_Shape;
+nape_shape_Polygon.prototype = $extend(nape_shape_Shape.prototype,{
+	__class__: nape_shape_Polygon
 });
-nape.shape.ShapeIterator = function() {
+var nape_shape_ShapeIterator = function() {
 	this.zpp_next = null;
 	this.zpp_critical = false;
 	this.zpp_i = 0;
 	this.zpp_inner = null;
-	if(!zpp_nape.util.ZPP_ShapeList.internal) throw "Error: Cannot instantiate " + "Shape" + "Iterator derp!";
+	if(!zpp_$nape_util_ZPP_$ShapeList.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Shape" + "Iterator derp!");
 };
-nape.shape.ShapeIterator.__name__ = true;
-nape.shape.ShapeIterator.get = function(list) {
+nape_shape_ShapeIterator.__name__ = true;
+nape_shape_ShapeIterator.get = function(list) {
 	var ret;
-	if(nape.shape.ShapeIterator.zpp_pool == null) {
-		zpp_nape.util.ZPP_ShapeList.internal = true;
-		var ret1 = new nape.shape.ShapeIterator();
-		zpp_nape.util.ZPP_ShapeList.internal = false;
+	if(nape_shape_ShapeIterator.zpp_pool == null) {
+		zpp_$nape_util_ZPP_$ShapeList.internal = true;
+		var ret1 = new nape_shape_ShapeIterator();
+		zpp_$nape_util_ZPP_$ShapeList.internal = false;
 		ret = ret1;
 	} else {
-		var r = nape.shape.ShapeIterator.zpp_pool;
-		nape.shape.ShapeIterator.zpp_pool = r.zpp_next;
+		var r = nape_shape_ShapeIterator.zpp_pool;
+		nape_shape_ShapeIterator.zpp_pool = r.zpp_next;
 		ret = r;
 	}
 	ret.zpp_i = 0;
@@ -3116,14 +3142,14 @@ nape.shape.ShapeIterator.get = function(list) {
 	ret.zpp_critical = false;
 	return ret;
 };
-nape.shape.ShapeIterator.prototype = {
+nape_shape_ShapeIterator.prototype = {
 	hasNext: function() {
 		this.zpp_inner.zpp_inner.valmod();
 		var length = this.zpp_inner.get_length();
 		this.zpp_critical = true;
 		if(this.zpp_i < length) return true; else {
-			this.zpp_next = nape.shape.ShapeIterator.zpp_pool;
-			nape.shape.ShapeIterator.zpp_pool = this;
+			this.zpp_next = nape_shape_ShapeIterator.zpp_pool;
+			nape_shape_ShapeIterator.zpp_pool = this;
 			this.zpp_inner = null;
 			return false;
 		}
@@ -3132,15 +3158,15 @@ nape.shape.ShapeIterator.prototype = {
 		this.zpp_critical = false;
 		return this.zpp_inner.at(this.zpp_i++);
 	}
-	,__class__: nape.shape.ShapeIterator
+	,__class__: nape_shape_ShapeIterator
 };
-nape.shape.ShapeList = function() {
+var nape_shape_ShapeList = function() {
 	this.zpp_inner = null;
-	this.zpp_inner = new zpp_nape.util.ZPP_ShapeList();
+	this.zpp_inner = new zpp_$nape_util_ZPP_$ShapeList();
 	this.zpp_inner.outer = this;
 };
-nape.shape.ShapeList.__name__ = true;
-nape.shape.ShapeList.prototype = {
+nape_shape_ShapeList.__name__ = true;
+nape_shape_ShapeList.prototype = {
 	get_length: function() {
 		this.zpp_inner.valmod();
 		if(this.zpp_inner.zip_length) {
@@ -3151,7 +3177,7 @@ nape.shape.ShapeList.prototype = {
 	}
 	,at: function(index) {
 		this.zpp_inner.valmod();
-		if(index < 0 || index >= this.get_length()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.get_length()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.get_length() - 1 - index;
 		if(index < this.zpp_inner.at_index || this.zpp_inner.at_ite == null) {
 			this.zpp_inner.at_index = index;
@@ -3163,7 +3189,7 @@ nape.shape.ShapeList.prototype = {
 		return this.zpp_inner.at_ite.elt.outer;
 	}
 	,push: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Shape" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Shape" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var cont;
@@ -3179,7 +3205,7 @@ nape.shape.ShapeList.prototype = {
 		return cont;
 	}
 	,unshift: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Shape" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Shape" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var cont;
@@ -3198,7 +3224,7 @@ nape.shape.ShapeList.prototype = {
 		if(this.zpp_inner.reverse_flag) return this.push(obj); else return this.unshift(obj);
 	}
 	,remove: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Shape" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Shape" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_inner.valmod();
 		var ret;
@@ -3224,7 +3250,7 @@ nape.shape.ShapeList.prototype = {
 		var fst = true;
 		var _g;
 		this.zpp_inner.valmod();
-		_g = nape.shape.ShapeIterator.get(this);
+		_g = nape_shape_ShapeIterator.get(this);
 		while(_g.hasNext()) {
 			var i;
 			_g.zpp_critical = false;
@@ -3235,115 +3261,114 @@ nape.shape.ShapeList.prototype = {
 		}
 		return ret + "]";
 	}
-	,__class__: nape.shape.ShapeList
+	,__class__: nape_shape_ShapeList
 };
-nape.shape.ShapeType = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "ShapeType" + " derp!";
+var nape_shape_ShapeType = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "ShapeType" + " derp!");
 };
-nape.shape.ShapeType.__name__ = true;
-nape.shape.ShapeType.prototype = {
+nape_shape_ShapeType.__name__ = true;
+nape_shape_ShapeType.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ShapeType_CIRCLE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ShapeType_CIRCLE = new nape.shape.ShapeType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ShapeType_CIRCLE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ShapeType_CIRCLE = new nape_shape_ShapeType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ShapeType_CIRCLE;
+			$r = zpp_$nape_util_ZPP_$Flags.ShapeType_CIRCLE;
 			return $r;
 		}(this))) return "CIRCLE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ShapeType_POLYGON == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ShapeType_POLYGON = new nape.shape.ShapeType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ShapeType_POLYGON == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ShapeType_POLYGON = new nape_shape_ShapeType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ShapeType_POLYGON;
+			$r = zpp_$nape_util_ZPP_$Flags.ShapeType_POLYGON;
 			return $r;
 		}(this))) return "POLYGON"; else return "";
 	}
-	,__class__: nape.shape.ShapeType
+	,__class__: nape_shape_ShapeType
 };
-nape.shape.ValidationResult = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "ValidationResult" + " derp!";
+var nape_shape_ValidationResult = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "ValidationResult" + " derp!");
 };
-nape.shape.ValidationResult.__name__ = true;
-nape.shape.ValidationResult.prototype = {
+nape_shape_ValidationResult.__name__ = true;
+nape_shape_ValidationResult.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ValidationResult_VALID == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ValidationResult_VALID = new nape.shape.ValidationResult();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID = new nape_shape_ValidationResult();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ValidationResult_VALID;
+			$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID;
 			return $r;
 		}(this))) return "VALID"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE = new nape.shape.ValidationResult();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE = new nape_shape_ValidationResult();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE;
+			$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE;
 			return $r;
 		}(this))) return "DEGENERATE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE = new nape.shape.ValidationResult();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE = new nape_shape_ValidationResult();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE;
+			$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE;
 			return $r;
 		}(this))) return "CONCAVE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING = new nape.shape.ValidationResult();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING = new nape_shape_ValidationResult();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING;
+			$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING;
 			return $r;
 		}(this))) return "SELF_INTERSECTING"; else return "";
 	}
-	,__class__: nape.shape.ValidationResult
+	,__class__: nape_shape_ValidationResult
 };
-nape.space = {};
-nape.space.Broadphase = function() {
-	if(!zpp_nape.util.ZPP_Flags.internal) throw "Error: Cannot instantiate " + "Broadphase" + " derp!";
+var nape_space_Broadphase = function() {
+	if(!zpp_$nape_util_ZPP_$Flags.internal) throw new js__$Boot_HaxeError("Error: Cannot instantiate " + "Broadphase" + " derp!");
 };
-nape.space.Broadphase.__name__ = true;
-nape.space.Broadphase.prototype = {
+nape_space_Broadphase.__name__ = true;
+nape_space_Broadphase.prototype = {
 	toString: function() {
 		if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE = new nape.space.Broadphase();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE = new nape_space_Broadphase();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE;
+			$r = zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE;
 			return $r;
 		}(this))) return "DYNAMIC_AABB_TREE"; else if(this == (function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE = new nape.space.Broadphase();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE = new nape_space_Broadphase();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE;
+			$r = zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE;
 			return $r;
 		}(this))) return "SWEEP_AND_PRUNE"; else return "";
 	}
-	,__class__: nape.space.Broadphase
+	,__class__: nape_space_Broadphase
 };
-nape.space.Space = function(gravity,broadphase) {
+var nape_space_Space = function(gravity,broadphase) {
 	this.zpp_inner = null;
-	if(gravity != null && gravity.zpp_disp) throw "Error: " + "Vec2" + " has been disposed and cannot be used!";
-	this.zpp_inner = new zpp_nape.space.ZPP_Space(gravity == null?null:gravity.zpp_inner,broadphase);
+	if(gravity != null && gravity.zpp_disp) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " has been disposed and cannot be used!");
+	this.zpp_inner = new zpp_$nape_space_ZPP_$Space(gravity == null?null:gravity.zpp_inner,broadphase);
 	this.zpp_inner.outer = this;
 	if(gravity != null) {
 		if(gravity.zpp_inner.weak) {
@@ -3352,28 +3377,25 @@ nape.space.Space = function(gravity,broadphase) {
 		} else false;
 	}
 };
-nape.space.Space.__name__ = true;
-nape.space.Space.prototype = {
+nape_space_Space.__name__ = true;
+nape_space_Space.prototype = {
 	step: function(deltaTime,velocityIterations,positionIterations) {
 		if(positionIterations == null) positionIterations = 10;
 		if(velocityIterations == null) velocityIterations = 10;
-		if(deltaTime != deltaTime) throw "Error: deltaTime cannot be NaN";
-		if(deltaTime <= 0) throw "Error: deltaTime must be strictly positive";
-		if(velocityIterations <= 0) throw "Error: must use atleast one velocity iteration";
-		if(positionIterations <= 0) throw "Error: must use atleast one position iteration";
+		if(deltaTime != deltaTime) throw new js__$Boot_HaxeError("Error: deltaTime cannot be NaN");
+		if(deltaTime <= 0) throw new js__$Boot_HaxeError("Error: deltaTime must be strictly positive");
+		if(velocityIterations <= 0) throw new js__$Boot_HaxeError("Error: must use atleast one velocity iteration");
+		if(positionIterations <= 0) throw new js__$Boot_HaxeError("Error: must use atleast one position iteration");
 		this.zpp_inner.step(deltaTime,velocityIterations,positionIterations);
 	}
-	,__class__: nape.space.Space
+	,__class__: nape_space_Space
 };
-var pixi = {};
-pixi.plugins = {};
-pixi.plugins.app = {};
-pixi.plugins.app.Application = function() {
+var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this._setDefaultValues();
 };
-pixi.plugins.app.Application.__name__ = true;
-pixi.plugins.app.Application.prototype = {
+pixi_plugins_app_Application.__name__ = true;
+pixi_plugins_app_Application.prototype = {
 	_setDefaultValues: function() {
 		this.pixelRatio = 1;
 		this.skipFrame = false;
@@ -3450,33 +3472,31 @@ pixi.plugins.app.Application.prototype = {
 			this._stats.begin();
 		}
 	}
-	,__class__: pixi.plugins.app.Application
+	,__class__: pixi_plugins_app_Application
 };
-var samples = {};
-samples.nape = {};
-samples.nape.Main = function() {
-	pixi.plugins.app.Application.call(this);
+var samples_nape_Main = function() {
+	pixi_plugins_app_Application.call(this);
 	this._init();
 	this._balls = [];
 	this._pballs = [];
 	this._setUpPhysics();
 	this.onUpdate = $bind(this,this._onUpdate);
-	var timer = new haxe.Timer(1000);
+	var timer = new haxe_Timer(1000);
 	timer.run = $bind(this,this._addBall);
 	this._addBall();
 };
-samples.nape.Main.__name__ = true;
-samples.nape.Main.main = function() {
-	new samples.nape.Main();
+samples_nape_Main.__name__ = true;
+samples_nape_Main.main = function() {
+	new samples_nape_Main();
 };
-samples.nape.Main.__super__ = pixi.plugins.app.Application;
-samples.nape.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
+samples_nape_Main.__super__ = pixi_plugins_app_Application;
+samples_nape_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 6724095;
 		this.autoResize = false;
 		this.width = 800;
 		this.height = 600;
-		pixi.plugins.app.Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this);
 	}
 	,_onUpdate: function(elapsedTime) {
 		this._space.step(0.0166666666666666664);
@@ -3490,20 +3510,20 @@ samples.nape.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		}
 	}
 	,_setUpPhysics: function() {
-		var gravity = nape.geom.Vec2.get(0,600,true);
-		this._space = new nape.space.Space(gravity);
-		this._floor = new nape.phys.Body((function($this) {
+		var gravity = nape_geom_Vec2.get(0,600,true);
+		this._space = new nape_space_Space(gravity);
+		this._floor = new nape_phys_Body((function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
 			return $r;
 		}(this)));
-		this._floor.setShapeMaterials(nape.phys.Material.wood());
-		this._floor.zpp_inner.wrap_shapes.add(new nape.shape.Polygon(nape.shape.Polygon.rect(0,595,800,1)));
+		this._floor.setShapeMaterials(nape_phys_Material.wood());
+		this._floor.zpp_inner.wrap_shapes.add(new nape_shape_Polygon(nape_shape_Polygon.rect(0,595,800,1)));
 		this._floor.set_space(this._space);
 	}
 	,_addBall: function() {
@@ -3511,26 +3531,26 @@ samples.nape.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 		ball.anchor.set(0.5,0.5);
 		this._balls.push(ball);
 		this._stage.addChild(ball);
-		var pball = new nape.phys.Body((function($this) {
+		var pball = new nape_phys_Body((function($this) {
 			var $r;
-			if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-				zpp_nape.util.ZPP_Flags.internal = true;
-				zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-				zpp_nape.util.ZPP_Flags.internal = false;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
 			}
-			$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
 			return $r;
 		}(this)));
-		pball.zpp_inner.wrap_shapes.add(new nape.shape.Circle(10));
+		pball.zpp_inner.wrap_shapes.add(new nape_shape_Circle(10));
 		((function($this) {
 			var $r;
 			if(pball.zpp_inner.wrap_pos == null) pball.zpp_inner.setupPosition();
 			$r = pball.zpp_inner.wrap_pos;
 			return $r;
 		}(this))).setxy(Std.random(800),0);
-		if(pball.zpp_inner.world) throw "Error: Space::world is immutable";
+		if(pball.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
 		if(pball.zpp_inner.angvel != 0) {
-			if(pball.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) throw "Error: A static object cannot be given a velocity";
+			if(pball.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) throw new js__$Boot_HaxeError("Error: A static object cannot be given a velocity");
 			pball.zpp_inner.angvel = 0;
 			pball.zpp_inner.wake();
 		}
@@ -3541,26 +3561,24 @@ samples.nape.Main.prototype = $extend(pixi.plugins.app.Application.prototype,{
 			pball.zpp_inner.invalidate_inertia();
 		}
 		!pball.zpp_inner.norotate;
-		pball.setShapeMaterials(nape.phys.Material.rubber());
+		pball.setShapeMaterials(nape_phys_Material.rubber());
 		pball.set_space(this._space);
 		this._pballs.push(pball);
 	}
-	,__class__: samples.nape.Main
+	,__class__: samples_nape_Main
 });
-var zpp_nape = {};
-zpp_nape.ZPP_ID = function() { };
-zpp_nape.ZPP_ID.__name__ = true;
-zpp_nape.ZPP_ID.Interactor = function() {
-	return zpp_nape.ZPP_ID._Interactor++;
+var zpp_$nape_ZPP_$ID = function() { };
+zpp_$nape_ZPP_$ID.__name__ = true;
+zpp_$nape_ZPP_$ID.Interactor = function() {
+	return zpp_$nape_ZPP_$ID._Interactor++;
 };
-zpp_nape.ZPP_ID.CbType = function() {
-	return zpp_nape.ZPP_ID._CbType++;
+zpp_$nape_ZPP_$ID.CbType = function() {
+	return zpp_$nape_ZPP_$ID._CbType++;
 };
-zpp_nape.ZPP_ID.CbSet = function() {
-	return zpp_nape.ZPP_ID._CbSet++;
+zpp_$nape_ZPP_$ID.CbSet = function() {
+	return zpp_$nape_ZPP_$ID._CbSet++;
 };
-zpp_nape.callbacks = {};
-zpp_nape.callbacks.ZPP_Callback = function() {
+var zpp_$nape_callbacks_ZPP_$Callback = function() {
 	this.constraint = null;
 	this.body = null;
 	this.pre_swapped = false;
@@ -3579,34 +3597,34 @@ zpp_nape.callbacks.ZPP_Callback = function() {
 	this.outer_body = null;
 	this.length = 0;
 };
-zpp_nape.callbacks.ZPP_Callback.__name__ = true;
-zpp_nape.callbacks.ZPP_Callback.prototype = {
+zpp_$nape_callbacks_ZPP_$Callback.__name__ = true;
+zpp_$nape_callbacks_ZPP_$Callback.prototype = {
 	wrapper_body: function() {
 		if(this.outer_body == null) {
-			zpp_nape.callbacks.ZPP_Callback.internal = true;
-			this.outer_body = new nape.callbacks.BodyCallback();
-			zpp_nape.callbacks.ZPP_Callback.internal = false;
+			zpp_$nape_callbacks_ZPP_$Callback.internal = true;
+			this.outer_body = new nape_callbacks_BodyCallback();
+			zpp_$nape_callbacks_ZPP_$Callback.internal = false;
 			this.outer_body.zpp_inner = this;
 		}
 		return this.outer_body;
 	}
 	,wrapper_con: function() {
 		if(this.outer_con == null) {
-			zpp_nape.callbacks.ZPP_Callback.internal = true;
-			this.outer_con = new nape.callbacks.ConstraintCallback();
-			zpp_nape.callbacks.ZPP_Callback.internal = false;
+			zpp_$nape_callbacks_ZPP_$Callback.internal = true;
+			this.outer_con = new nape_callbacks_ConstraintCallback();
+			zpp_$nape_callbacks_ZPP_$Callback.internal = false;
 			this.outer_con.zpp_inner = this;
 		}
 		return this.outer_con;
 	}
 	,wrapper_int: function() {
 		if(this.outer_int == null) {
-			zpp_nape.callbacks.ZPP_Callback.internal = true;
-			this.outer_int = new nape.callbacks.InteractionCallback();
-			zpp_nape.callbacks.ZPP_Callback.internal = false;
+			zpp_$nape_callbacks_ZPP_$Callback.internal = true;
+			this.outer_int = new nape_callbacks_InteractionCallback();
+			zpp_$nape_callbacks_ZPP_$Callback.internal = false;
 			this.outer_int.zpp_inner = this;
 		}
-		if(this.wrap_arbiters == null) this.wrap_arbiters = zpp_nape.util.ZPP_ArbiterList.get(this.set.arbiters,true); else this.wrap_arbiters.zpp_inner.inner = this.set.arbiters;
+		if(this.wrap_arbiters == null) this.wrap_arbiters = zpp_$nape_util_ZPP_$ArbiterList.get(this.set.arbiters,true); else this.wrap_arbiters.zpp_inner.inner = this.set.arbiters;
 		this.wrap_arbiters.zpp_inner.zip_length = true;
 		this.wrap_arbiters.zpp_inner.at_ite = null;
 		return this.outer_int;
@@ -3628,9 +3646,9 @@ zpp_nape.callbacks.ZPP_Callback.prototype = {
 	,empty: function() {
 		return this.next == null;
 	}
-	,__class__: zpp_nape.callbacks.ZPP_Callback
+	,__class__: zpp_$nape_callbacks_ZPP_$Callback
 };
-zpp_nape.callbacks.ZPP_CbSet = function() {
+var zpp_$nape_callbacks_ZPP_$CbSet = function() {
 	this.constraints = null;
 	this.interactors = null;
 	this.zip_conlisteners = false;
@@ -3645,20 +3663,20 @@ zpp_nape.callbacks.ZPP_CbSet = function() {
 	this.next = null;
 	this.count = 0;
 	this.cbTypes = null;
-	this.cbTypes = new zpp_nape.util.ZNPList_ZPP_CbType();
-	this.listeners = new zpp_nape.util.ZNPList_ZPP_InteractionListener();
+	this.cbTypes = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
+	this.listeners = new zpp_$nape_util_ZNPList_$ZPP_$InteractionListener();
 	this.zip_listeners = true;
-	this.bodylisteners = new zpp_nape.util.ZNPList_ZPP_BodyListener();
+	this.bodylisteners = new zpp_$nape_util_ZNPList_$ZPP_$BodyListener();
 	this.zip_bodylisteners = true;
-	this.conlisteners = new zpp_nape.util.ZNPList_ZPP_ConstraintListener();
+	this.conlisteners = new zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener();
 	this.zip_conlisteners = true;
-	this.constraints = new zpp_nape.util.ZNPList_ZPP_Constraint();
-	this.interactors = new zpp_nape.util.ZNPList_ZPP_Interactor();
-	this.id = zpp_nape.ZPP_ID.CbSet();
-	this.cbpairs = new zpp_nape.util.ZNPList_ZPP_CbSetPair();
+	this.constraints = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
+	this.interactors = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
+	this.id = zpp_$nape_ZPP_$ID.CbSet();
+	this.cbpairs = new zpp_$nape_util_ZNPList_$ZPP_$CbSetPair();
 };
-zpp_nape.callbacks.ZPP_CbSet.__name__ = true;
-zpp_nape.callbacks.ZPP_CbSet.setlt = function(a,b) {
+zpp_$nape_callbacks_ZPP_$CbSet.__name__ = true;
+zpp_$nape_callbacks_ZPP_$CbSet.setlt = function(a,b) {
 	var i = a.cbTypes.head;
 	var j = b.cbTypes.head;
 	while(i != null && j != null) {
@@ -3672,11 +3690,11 @@ zpp_nape.callbacks.ZPP_CbSet.setlt = function(a,b) {
 	}
 	return j != null && i == null;
 };
-zpp_nape.callbacks.ZPP_CbSet.get = function(cbTypes) {
+zpp_$nape_callbacks_ZPP_$CbSet.get = function(cbTypes) {
 	var ret;
-	if(zpp_nape.callbacks.ZPP_CbSet.zpp_pool == null) ret = new zpp_nape.callbacks.ZPP_CbSet(); else {
-		ret = zpp_nape.callbacks.ZPP_CbSet.zpp_pool;
-		zpp_nape.callbacks.ZPP_CbSet.zpp_pool = ret.next;
+	if(zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool == null) ret = new zpp_$nape_callbacks_ZPP_$CbSet(); else {
+		ret = zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool;
+		zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool = ret.next;
 		ret.next = null;
 	}
 	null;
@@ -3690,13 +3708,13 @@ zpp_nape.callbacks.ZPP_CbSet.get = function(cbTypes) {
 	}
 	return ret;
 };
-zpp_nape.callbacks.ZPP_CbSet.single_intersection = function(a,b,i) {
+zpp_$nape_callbacks_ZPP_$CbSet.single_intersection = function(a,b,i) {
 	return a.manager.pair(a,b).single_intersection(i);
 };
-zpp_nape.callbacks.ZPP_CbSet.find_all = function(a,b,event,cb) {
+zpp_$nape_callbacks_ZPP_$CbSet.find_all = function(a,b,event,cb) {
 	a.manager.pair(a,b).forall(event,cb);
 };
-zpp_nape.callbacks.ZPP_CbSet.prototype = {
+zpp_$nape_callbacks_ZPP_$CbSet.prototype = {
 	invalidate_pairs: function() {
 		var cx_ite = this.cbpairs.head;
 		while(cx_ite != null) {
@@ -3719,7 +3737,7 @@ zpp_nape.callbacks.ZPP_CbSet.prototype = {
 					cite = cite.next;
 					npre = nite;
 					nite = nite.next;
-				} else if(nite == null || zpp_nape.callbacks.ZPP_Listener.setlt(cx,nite.elt)) {
+				} else if(nite == null || zpp_$nape_callbacks_ZPP_$Listener.setlt(cx,nite.elt)) {
 					if(cx.space == this.manager.space) npre = this.listeners.inlined_insert(npre,cx);
 					cite = cite.next;
 				} else {
@@ -3744,7 +3762,7 @@ zpp_nape.callbacks.ZPP_CbSet.prototype = {
 					cite = cite.next;
 					npre = nite;
 					nite = nite.next;
-				} else if(nite == null || zpp_nape.callbacks.ZPP_Listener.setlt(cx,nite.elt)) {
+				} else if(nite == null || zpp_$nape_callbacks_ZPP_$Listener.setlt(cx,nite.elt)) {
 					if(!cx.options.excluded(this.cbTypes) && cx.space == this.manager.space) npre = this.bodylisteners.inlined_insert(npre,cx);
 					cite = cite.next;
 				} else {
@@ -3769,7 +3787,7 @@ zpp_nape.callbacks.ZPP_CbSet.prototype = {
 					cite = cite.next;
 					npre = nite;
 					nite = nite.next;
-				} else if(nite == null || zpp_nape.callbacks.ZPP_Listener.setlt(cx,nite.elt)) {
+				} else if(nite == null || zpp_$nape_callbacks_ZPP_$Listener.setlt(cx,nite.elt)) {
 					if(!cx.options.excluded(this.cbTypes) && cx.space == this.manager.space) npre = this.conlisteners.inlined_insert(npre,cx);
 					cite = cite.next;
 				} else {
@@ -3806,26 +3824,26 @@ zpp_nape.callbacks.ZPP_CbSet.prototype = {
 			cb.cbsets.remove(this);
 		}
 	}
-	,__class__: zpp_nape.callbacks.ZPP_CbSet
+	,__class__: zpp_$nape_callbacks_ZPP_$CbSet
 };
-zpp_nape.callbacks.ZPP_CbSetPair = function() {
+var zpp_$nape_callbacks_ZPP_$CbSetPair = function() {
 	this.listeners = null;
 	this.zip_listeners = false;
 	this.next = null;
 	this.b = null;
 	this.a = null;
-	this.listeners = new zpp_nape.util.ZNPList_ZPP_InteractionListener();
+	this.listeners = new zpp_$nape_util_ZNPList_$ZPP_$InteractionListener();
 };
-zpp_nape.callbacks.ZPP_CbSetPair.__name__ = true;
-zpp_nape.callbacks.ZPP_CbSetPair.get = function(a,b) {
+zpp_$nape_callbacks_ZPP_$CbSetPair.__name__ = true;
+zpp_$nape_callbacks_ZPP_$CbSetPair.get = function(a,b) {
 	var ret;
-	if(zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool == null) ret = new zpp_nape.callbacks.ZPP_CbSetPair(); else {
-		ret = zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool;
-		zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool = ret.next;
+	if(zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool == null) ret = new zpp_$nape_callbacks_ZPP_$CbSetPair(); else {
+		ret = zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool;
+		zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool = ret.next;
 		ret.next = null;
 	}
 	ret.zip_listeners = true;
-	if(zpp_nape.callbacks.ZPP_CbSet.setlt(a,b)) {
+	if(zpp_$nape_callbacks_ZPP_$CbSet.setlt(a,b)) {
 		ret.a = a;
 		ret.b = b;
 	} else {
@@ -3834,10 +3852,10 @@ zpp_nape.callbacks.ZPP_CbSetPair.get = function(a,b) {
 	}
 	return ret;
 };
-zpp_nape.callbacks.ZPP_CbSetPair.setlt = function(x,y) {
-	return zpp_nape.callbacks.ZPP_CbSet.setlt(x.a,y.a) || x.a == y.a && zpp_nape.callbacks.ZPP_CbSet.setlt(x.b,y.b);
+zpp_$nape_callbacks_ZPP_$CbSetPair.setlt = function(x,y) {
+	return zpp_$nape_callbacks_ZPP_$CbSet.setlt(x.a,y.a) || x.a == y.a && zpp_$nape_callbacks_ZPP_$CbSet.setlt(x.b,y.b);
 };
-zpp_nape.callbacks.ZPP_CbSetPair.prototype = {
+zpp_$nape_callbacks_ZPP_$CbSetPair.prototype = {
 	__validate: function() {
 		this.listeners.clear();
 		var aite = this.a.listeners.head;
@@ -3867,26 +3885,25 @@ zpp_nape.callbacks.ZPP_CbSetPair.prototype = {
 			cx_ite = cx_ite.next;
 		}
 	}
-	,__class__: zpp_nape.callbacks.ZPP_CbSetPair
+	,__class__: zpp_$nape_callbacks_ZPP_$CbSetPair
 };
-zpp_nape.util = {};
-zpp_nape.util.ZNPList_ZPP_InteractionListener = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$InteractionListener = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_InteractionListener.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_InteractionListener.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$InteractionListener.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$InteractionListener.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_InteractionListener(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -3901,9 +3918,9 @@ zpp_nape.util.ZNPList_ZPP_InteractionListener.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_InteractionListener(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -3925,8 +3942,8 @@ zpp_nape.util.ZNPList_ZPP_InteractionListener.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -3965,8 +3982,8 @@ zpp_nape.util.ZNPList_ZPP_InteractionListener.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_InteractionListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -3980,22 +3997,22 @@ zpp_nape.util.ZNPList_ZPP_InteractionListener.prototype = {
 		while(!(this.head == null)) this.inlined_pop();
 		this.pushmod = true;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_InteractionListener
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$InteractionListener
 };
-zpp_nape.util.ZNPList_ZPP_BodyListener = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$BodyListener = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_BodyListener.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_BodyListener.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$BodyListener.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$BodyListener.prototype = {
 	inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_BodyListener(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$BodyListener(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4017,8 +4034,8 @@ zpp_nape.util.ZNPList_ZPP_BodyListener.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4057,8 +4074,8 @@ zpp_nape.util.ZNPList_ZPP_BodyListener.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_BodyListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -4068,22 +4085,22 @@ zpp_nape.util.ZNPList_ZPP_BodyListener.prototype = {
 		while(!(this.head == null)) this.inlined_pop();
 		this.pushmod = true;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_BodyListener
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$BodyListener
 };
-zpp_nape.util.ZNPList_ZPP_ConstraintListener = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_ConstraintListener.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_ConstraintListener.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener.prototype = {
 	inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_ConstraintListener(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4105,8 +4122,8 @@ zpp_nape.util.ZNPList_ZPP_ConstraintListener.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4145,8 +4162,8 @@ zpp_nape.util.ZNPList_ZPP_ConstraintListener.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_ConstraintListener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -4156,25 +4173,25 @@ zpp_nape.util.ZNPList_ZPP_ConstraintListener.prototype = {
 		while(!(this.head == null)) this.inlined_pop();
 		this.pushmod = true;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_ConstraintListener
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener
 };
-zpp_nape.util.ZNPList_ZPP_Constraint = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Constraint = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Constraint.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Constraint.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Constraint.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Constraint.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Constraint(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Constraint(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4194,8 +4211,8 @@ zpp_nape.util.ZNPList_ZPP_Constraint.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4242,8 +4259,8 @@ zpp_nape.util.ZNPList_ZPP_Constraint.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Constraint.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Constraint.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -4254,25 +4271,25 @@ zpp_nape.util.ZNPList_ZPP_Constraint.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Constraint
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Constraint
 };
-zpp_nape.util.ZNPList_ZPP_Interactor = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Interactor = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Interactor.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Interactor.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Interactor.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Interactor.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Interactor(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Interactor(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4292,8 +4309,8 @@ zpp_nape.util.ZNPList_ZPP_Interactor.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4340,8 +4357,8 @@ zpp_nape.util.ZNPList_ZPP_Interactor.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Interactor.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Interactor.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -4356,25 +4373,25 @@ zpp_nape.util.ZNPList_ZPP_Interactor.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Interactor
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Interactor
 };
-zpp_nape.util.ZNPList_ZPP_CbSet = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$CbSet = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_CbSet.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_CbSet.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$CbSet.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$CbSet.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_CbSet(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$CbSet(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4394,8 +4411,8 @@ zpp_nape.util.ZNPList_ZPP_CbSet.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4442,32 +4459,32 @@ zpp_nape.util.ZNPList_ZPP_CbSet.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbSet.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbSet.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_CbSet
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$CbSet
 };
-zpp_nape.callbacks.ZPP_CbType = function() {
+var zpp_$nape_callbacks_ZPP_$CbType = function() {
 	this.conlisteners = null;
 	this.bodylisteners = null;
 	this.listeners = null;
 	this.cbsets = null;
 	this.id = 0;
 	this.outer = null;
-	this.id = zpp_nape.ZPP_ID.CbType();
-	this.listeners = new zpp_nape.util.ZNPList_ZPP_InteractionListener();
-	this.bodylisteners = new zpp_nape.util.ZNPList_ZPP_BodyListener();
-	this.conlisteners = new zpp_nape.util.ZNPList_ZPP_ConstraintListener();
-	this.constraints = new zpp_nape.util.ZNPList_ZPP_Constraint();
-	this.interactors = new zpp_nape.util.ZNPList_ZPP_Interactor();
-	this.cbsets = new zpp_nape.util.ZNPList_ZPP_CbSet();
+	this.id = zpp_$nape_ZPP_$ID.CbType();
+	this.listeners = new zpp_$nape_util_ZNPList_$ZPP_$InteractionListener();
+	this.bodylisteners = new zpp_$nape_util_ZNPList_$ZPP_$BodyListener();
+	this.conlisteners = new zpp_$nape_util_ZNPList_$ZPP_$ConstraintListener();
+	this.constraints = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
+	this.interactors = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
+	this.cbsets = new zpp_$nape_util_ZNPList_$ZPP_$CbSet();
 };
-zpp_nape.callbacks.ZPP_CbType.__name__ = true;
-zpp_nape.callbacks.ZPP_CbType.prototype = {
+zpp_$nape_callbacks_ZPP_$CbType.__name__ = true;
+zpp_$nape_callbacks_ZPP_$CbType.prototype = {
 	addint: function(x) {
 		var pre = null;
 		var cx_ite = this.listeners.head;
@@ -4529,11 +4546,11 @@ zpp_nape.callbacks.ZPP_CbType.prototype = {
 			cx_ite = cx_ite.next;
 		}
 	}
-	,__class__: zpp_nape.callbacks.ZPP_CbType
+	,__class__: zpp_$nape_callbacks_ZPP_$CbType
 };
-zpp_nape.util.ZPP_Flags = function() { };
-zpp_nape.util.ZPP_Flags.__name__ = true;
-zpp_nape.callbacks.ZPP_Listener = function() {
+var zpp_$nape_util_ZPP_$Flags = function() { };
+zpp_$nape_util_ZPP_$Flags.__name__ = true;
+var zpp_$nape_callbacks_ZPP_$Listener = function() {
 	this.space = null;
 	this.interaction = null;
 	this.constraint = null;
@@ -4544,25 +4561,25 @@ zpp_nape.callbacks.ZPP_Listener = function() {
 	this.id = 0;
 	this.outer = null;
 };
-zpp_nape.callbacks.ZPP_Listener.__name__ = true;
-zpp_nape.callbacks.ZPP_Listener.setlt = function(a,b) {
+zpp_$nape_callbacks_ZPP_$Listener.__name__ = true;
+zpp_$nape_callbacks_ZPP_$Listener.setlt = function(a,b) {
 	return a.precedence > b.precedence || a.precedence == b.precedence && a.id > b.id;
 };
-zpp_nape.callbacks.ZPP_Listener.prototype = {
+zpp_$nape_callbacks_ZPP_$Listener.prototype = {
 	addedToSpace: function() {
 	}
 	,removedFromSpace: function() {
 	}
-	,__class__: zpp_nape.callbacks.ZPP_Listener
+	,__class__: zpp_$nape_callbacks_ZPP_$Listener
 };
-zpp_nape.callbacks.ZPP_BodyListener = function() {
+var zpp_$nape_callbacks_ZPP_$BodyListener = function() {
 	this.handler = null;
 	this.options = null;
 	this.outer_zn = null;
 };
-zpp_nape.callbacks.ZPP_BodyListener.__name__ = true;
-zpp_nape.callbacks.ZPP_BodyListener.__super__ = zpp_nape.callbacks.ZPP_Listener;
-zpp_nape.callbacks.ZPP_BodyListener.prototype = $extend(zpp_nape.callbacks.ZPP_Listener.prototype,{
+zpp_$nape_callbacks_ZPP_$BodyListener.__name__ = true;
+zpp_$nape_callbacks_ZPP_$BodyListener.__super__ = zpp_$nape_callbacks_ZPP_$Listener;
+zpp_$nape_callbacks_ZPP_$BodyListener.prototype = $extend(zpp_$nape_callbacks_ZPP_$Listener.prototype,{
 	addedToSpace: function() {
 		this.options.handler = $bind(this,this.cbtype_change);
 		var cx_ite = this.options.includes.head;
@@ -4587,16 +4604,16 @@ zpp_nape.callbacks.ZPP_BodyListener.prototype = $extend(zpp_nape.callbacks.ZPP_L
 		this.options.effect_change(cb,included,added);
 		this.addedToSpace();
 	}
-	,__class__: zpp_nape.callbacks.ZPP_BodyListener
+	,__class__: zpp_$nape_callbacks_ZPP_$BodyListener
 });
-zpp_nape.callbacks.ZPP_ConstraintListener = function() {
+var zpp_$nape_callbacks_ZPP_$ConstraintListener = function() {
 	this.handler = null;
 	this.options = null;
 	this.outer_zn = null;
 };
-zpp_nape.callbacks.ZPP_ConstraintListener.__name__ = true;
-zpp_nape.callbacks.ZPP_ConstraintListener.__super__ = zpp_nape.callbacks.ZPP_Listener;
-zpp_nape.callbacks.ZPP_ConstraintListener.prototype = $extend(zpp_nape.callbacks.ZPP_Listener.prototype,{
+zpp_$nape_callbacks_ZPP_$ConstraintListener.__name__ = true;
+zpp_$nape_callbacks_ZPP_$ConstraintListener.__super__ = zpp_$nape_callbacks_ZPP_$Listener;
+zpp_$nape_callbacks_ZPP_$ConstraintListener.prototype = $extend(zpp_$nape_callbacks_ZPP_$Listener.prototype,{
 	addedToSpace: function() {
 		this.options.handler = $bind(this,this.cbtype_change);
 		var cx_ite = this.options.includes.head;
@@ -4621,22 +4638,22 @@ zpp_nape.callbacks.ZPP_ConstraintListener.prototype = $extend(zpp_nape.callbacks
 		this.options.effect_change(cb,included,added);
 		this.addedToSpace();
 	}
-	,__class__: zpp_nape.callbacks.ZPP_ConstraintListener
+	,__class__: zpp_$nape_callbacks_ZPP_$ConstraintListener
 });
-zpp_nape.util.ZNPList_ZPP_CbType = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$CbType = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_CbType.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_CbType.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$CbType.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$CbType.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_CbType(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$CbType(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4654,9 +4671,9 @@ zpp_nape.util.ZNPList_ZPP_CbType.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_CbType(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$CbType(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -4681,8 +4698,8 @@ zpp_nape.util.ZNPList_ZPP_CbType.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -4729,8 +4746,8 @@ zpp_nape.util.ZNPList_ZPP_CbType.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbType.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbType.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -4762,9 +4779,9 @@ zpp_nape.util.ZNPList_ZPP_CbType.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_CbType
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$CbType
 };
-zpp_nape.callbacks.ZPP_InteractionListener = function() {
+var zpp_$nape_callbacks_ZPP_$InteractionListener = function() {
 	this.handlerp = null;
 	this.pure = false;
 	this.allowSleepingCallbacks = false;
@@ -4775,13 +4792,13 @@ zpp_nape.callbacks.ZPP_InteractionListener = function() {
 	this.outer_znp = null;
 	this.outer_zni = null;
 };
-zpp_nape.callbacks.ZPP_InteractionListener.__name__ = true;
-zpp_nape.callbacks.ZPP_InteractionListener.__super__ = zpp_nape.callbacks.ZPP_Listener;
-zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callbacks.ZPP_Listener.prototype,{
+zpp_$nape_callbacks_ZPP_$InteractionListener.__name__ = true;
+zpp_$nape_callbacks_ZPP_$InteractionListener.__super__ = zpp_$nape_callbacks_ZPP_$Listener;
+zpp_$nape_callbacks_ZPP_$InteractionListener.prototype = $extend(zpp_$nape_callbacks_ZPP_$Listener.prototype,{
 	CbSetset: function(A,B,lambda) {
-		var U = zpp_nape.callbacks.ZPP_InteractionListener.UCbSet;
-		var V = zpp_nape.callbacks.ZPP_InteractionListener.VCbSet;
-		var W = zpp_nape.callbacks.ZPP_InteractionListener.WCbSet;
+		var U = zpp_$nape_callbacks_ZPP_$InteractionListener.UCbSet;
+		var V = zpp_$nape_callbacks_ZPP_$InteractionListener.VCbSet;
+		var W = zpp_$nape_callbacks_ZPP_$InteractionListener.WCbSet;
 		var aite = A.head;
 		var bite = B.head;
 		while(aite != null && bite != null) {
@@ -4791,7 +4808,7 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 				W.inlined_add(a);
 				aite = aite.next;
 				bite = bite.next;
-			} else if(zpp_nape.callbacks.ZPP_CbSet.setlt(a,b)) {
+			} else if(zpp_$nape_callbacks_ZPP_$CbSet.setlt(a,b)) {
 				U.inlined_add(a);
 				aite = aite.next;
 			} else {
@@ -4837,9 +4854,9 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 		}
 	}
 	,CbTypeset: function(A,B,lambda) {
-		var U = zpp_nape.callbacks.ZPP_InteractionListener.UCbType;
-		var V = zpp_nape.callbacks.ZPP_InteractionListener.VCbType;
-		var W = zpp_nape.callbacks.ZPP_InteractionListener.WCbType;
+		var U = zpp_$nape_callbacks_ZPP_$InteractionListener.UCbType;
+		var V = zpp_$nape_callbacks_ZPP_$InteractionListener.VCbType;
+		var W = zpp_$nape_callbacks_ZPP_$InteractionListener.WCbType;
 		var aite = A.head;
 		var bite = B.head;
 		while(aite != null && bite != null) {
@@ -4897,18 +4914,18 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 	,with_uniquesets: function(fresh) {
 		var _g = this;
 		var set;
-		if(zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool == null) set = new zpp_nape.util.ZPP_Set_ZPP_CbSetPair(); else {
-			set = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-			zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = set.next;
+		if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool == null) set = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair(); else {
+			set = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+			zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = set.next;
 			set.next = null;
 		}
 		null;
-		set.lt = zpp_nape.callbacks.ZPP_CbSetPair.setlt;
+		set.lt = zpp_$nape_callbacks_ZPP_$CbSetPair.setlt;
 		this.CbTypeset(this.options1.includes,this.options2.includes,function(a,b) {
 			_g.CbSetset(a.cbsets,b.cbsets,function(a1,b1) {
 				a1.validate();
 				b1.validate();
-				if(zpp_nape.callbacks.ZPP_CbSet.single_intersection(a1,b1,_g)) set.try_insert(zpp_nape.callbacks.ZPP_CbSetPair.get(a1,b1));
+				if(zpp_$nape_callbacks_ZPP_$CbSet.single_intersection(a1,b1,_g)) set.try_insert(zpp_$nape_callbacks_ZPP_$CbSetPair.get(a1,b1));
 			});
 		});
 		set.clear_with(function(pair) {
@@ -4916,15 +4933,15 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 			var o = pair;
 			o.a = o.b = null;
 			o.listeners.clear();
-			o.next = zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool;
-			zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool = o;
+			o.next = zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool;
+			zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool = o;
 		});
 		var o1 = set;
 		o1.data = null;
 		o1.lt = null;
 		o1.swapped = null;
-		o1.next = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-		zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = o1;
+		o1.next = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+		zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = o1;
 	}
 	,with_union: function(lambda) {
 		var ite1 = this.options1.includes.head;
@@ -4955,7 +4972,7 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 	}
 	,addedToSpace: function() {
 		var _g = this;
-		var pre = this.type == zpp_nape.util.ZPP_Flags.id_ListenerType_PRE;
+		var pre = this.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_PRE;
 		this.with_union(function(cb) {
 			cb.addint(_g);
 			if(pre) {
@@ -4974,7 +4991,7 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 	,removedFromSpace: function() {
 		var _g = this;
 		this.with_uniquesets(false);
-		var pre = this.type == zpp_nape.util.ZPP_Flags.id_ListenerType_PRE;
+		var pre = this.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_PRE;
 		this.with_union(function(cb) {
 			cb.listeners.remove(_g);
 			cb.invalidateint();
@@ -5002,9 +5019,9 @@ zpp_nape.callbacks.ZPP_InteractionListener.prototype = $extend(zpp_nape.callback
 		this.addedToSpace();
 		null;
 	}
-	,__class__: zpp_nape.callbacks.ZPP_InteractionListener
+	,__class__: zpp_$nape_callbacks_ZPP_$InteractionListener
 });
-zpp_nape.callbacks.ZPP_OptionType = function() {
+var zpp_$nape_callbacks_ZPP_$OptionType = function() {
 	this.wrap_excludes = null;
 	this.wrap_includes = null;
 	this.excludes = null;
@@ -5012,13 +5029,13 @@ zpp_nape.callbacks.ZPP_OptionType = function() {
 	this.handler = null;
 	this.outer = null;
 };
-zpp_nape.callbacks.ZPP_OptionType.__name__ = true;
-zpp_nape.callbacks.ZPP_OptionType.prototype = {
+zpp_$nape_callbacks_ZPP_$OptionType.__name__ = true;
+zpp_$nape_callbacks_ZPP_$OptionType.prototype = {
 	setup_includes: function() {
-		this.wrap_includes = zpp_nape.util.ZPP_CbTypeList.get(this.includes,true);
+		this.wrap_includes = zpp_$nape_util_ZPP_$CbTypeList.get(this.includes,true);
 	}
 	,setup_excludes: function() {
-		this.wrap_excludes = zpp_nape.util.ZPP_CbTypeList.get(this.excludes,true);
+		this.wrap_excludes = zpp_$nape_util_ZPP_$CbTypeList.get(this.excludes,true);
 	}
 	,excluded: function(xs) {
 		return this.nonemptyintersection(xs,this.excludes);
@@ -5065,10 +5082,9 @@ zpp_nape.callbacks.ZPP_OptionType.prototype = {
 			this.excludes.inlined_insert(pre1,val);
 		} else this.excludes.remove(val);
 	}
-	,__class__: zpp_nape.callbacks.ZPP_OptionType
+	,__class__: zpp_$nape_callbacks_ZPP_$OptionType
 };
-zpp_nape.constraint = {};
-zpp_nape.constraint.ZPP_Constraint = function() {
+var zpp_$nape_constraint_ZPP_$Constraint = function() {
 	this.cbSet = null;
 	this.cbTypes = null;
 	this.__velocity = false;
@@ -5081,8 +5097,8 @@ zpp_nape.constraint.ZPP_Constraint = function() {
 	this.compound = null;
 	this.outer = null;
 };
-zpp_nape.constraint.ZPP_Constraint.__name__ = true;
-zpp_nape.constraint.ZPP_Constraint.prototype = {
+zpp_$nape_constraint_ZPP_$Constraint.__name__ = true;
+zpp_$nape_constraint_ZPP_$Constraint.prototype = {
 	alloc_cbSet: function() {
 		if((this.cbSet = this.space.cbsets.get(this.cbTypes)) != null) {
 			this.cbSet.count++;
@@ -5096,8 +5112,8 @@ zpp_nape.constraint.ZPP_Constraint.prototype = {
 				this.space.cbsets.remove(this.cbSet);
 				var o = this.cbSet;
 				o.free();
-				o.next = zpp_nape.callbacks.ZPP_CbSet.zpp_pool;
-				zpp_nape.callbacks.ZPP_CbSet.zpp_pool = o;
+				o.next = zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool;
+				zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool = o;
 			}
 			this.cbSet = null;
 		}
@@ -5124,9 +5140,9 @@ zpp_nape.constraint.ZPP_Constraint.prototype = {
 	}
 	,activeInSpace: function() {
 		this.alloc_cbSet();
-		if(zpp_nape.space.ZPP_Component.zpp_pool == null) this.component = new zpp_nape.space.ZPP_Component(); else {
-			this.component = zpp_nape.space.ZPP_Component.zpp_pool;
-			zpp_nape.space.ZPP_Component.zpp_pool = this.component.next;
+		if(zpp_$nape_space_ZPP_$Component.zpp_pool == null) this.component = new zpp_$nape_space_ZPP_$Component(); else {
+			this.component = zpp_$nape_space_ZPP_$Component.zpp_pool;
+			zpp_$nape_space_ZPP_$Component.zpp_pool = this.component.next;
 			this.component.next = null;
 		}
 		null;
@@ -5139,8 +5155,8 @@ zpp_nape.constraint.ZPP_Constraint.prototype = {
 		o.body = null;
 		o.constraint = null;
 		null;
-		o.next = zpp_nape.space.ZPP_Component.zpp_pool;
-		zpp_nape.space.ZPP_Component.zpp_pool = o;
+		o.next = zpp_$nape_space_ZPP_$Component.zpp_pool;
+		zpp_$nape_space_ZPP_$Component.zpp_pool = o;
 		this.component = null;
 	}
 	,activeBodies: function() {
@@ -5171,10 +5187,9 @@ zpp_nape.constraint.ZPP_Constraint.prototype = {
 	,applyImpulsePos: function() {
 		return false;
 	}
-	,__class__: zpp_nape.constraint.ZPP_Constraint
+	,__class__: zpp_$nape_constraint_ZPP_$Constraint
 };
-zpp_nape.dynamics = {};
-zpp_nape.dynamics.ZPP_Arbiter = function() {
+var zpp_$nape_dynamics_ZPP_$Arbiter = function() {
 	this.sensorarb = null;
 	this.fluidarb = null;
 	this.colarb = null;
@@ -5202,34 +5217,34 @@ zpp_nape.dynamics.ZPP_Arbiter = function() {
 	this.id = 0;
 	this.outer = null;
 };
-zpp_nape.dynamics.ZPP_Arbiter.__name__ = true;
-zpp_nape.dynamics.ZPP_Arbiter.prototype = {
+zpp_$nape_dynamics_ZPP_$Arbiter.__name__ = true;
+zpp_$nape_dynamics_ZPP_$Arbiter.prototype = {
 	wrapper: function() {
 		if(this.outer == null) {
-			zpp_nape.dynamics.ZPP_Arbiter.internal = true;
-			if(this.type == zpp_nape.dynamics.ZPP_Arbiter.COL) {
-				this.colarb.outer_zn = new nape.dynamics.CollisionArbiter();
+			zpp_$nape_dynamics_ZPP_$Arbiter.internal = true;
+			if(this.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL) {
+				this.colarb.outer_zn = new nape_dynamics_CollisionArbiter();
 				this.outer = this.colarb.outer_zn;
-			} else if(this.type == zpp_nape.dynamics.ZPP_Arbiter.FLUID) {
-				this.fluidarb.outer_zn = new nape.dynamics.FluidArbiter();
+			} else if(this.type == zpp_$nape_dynamics_ZPP_$Arbiter.FLUID) {
+				this.fluidarb.outer_zn = new nape_dynamics_FluidArbiter();
 				this.outer = this.fluidarb.outer_zn;
-			} else this.outer = new nape.dynamics.Arbiter();
+			} else this.outer = new nape_dynamics_Arbiter();
 			this.outer.zpp_inner = this;
-			zpp_nape.dynamics.ZPP_Arbiter.internal = false;
+			zpp_$nape_dynamics_ZPP_$Arbiter.internal = false;
 		}
 		return this.outer;
 	}
-	,__class__: zpp_nape.dynamics.ZPP_Arbiter
+	,__class__: zpp_$nape_dynamics_ZPP_$Arbiter
 };
-zpp_nape.dynamics.ZPP_SensorArbiter = function() {
+var zpp_$nape_dynamics_ZPP_$SensorArbiter = function() {
 	this.next = null;
-	zpp_nape.dynamics.ZPP_Arbiter.call(this);
-	this.type = zpp_nape.dynamics.ZPP_Arbiter.SENSOR;
+	zpp_$nape_dynamics_ZPP_$Arbiter.call(this);
+	this.type = zpp_$nape_dynamics_ZPP_$Arbiter.SENSOR;
 	this.sensorarb = this;
 };
-zpp_nape.dynamics.ZPP_SensorArbiter.__name__ = true;
-zpp_nape.dynamics.ZPP_SensorArbiter.__super__ = zpp_nape.dynamics.ZPP_Arbiter;
-zpp_nape.dynamics.ZPP_SensorArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbiter.prototype,{
+zpp_$nape_dynamics_ZPP_$SensorArbiter.__name__ = true;
+zpp_$nape_dynamics_ZPP_$SensorArbiter.__super__ = zpp_$nape_dynamics_ZPP_$Arbiter;
+zpp_$nape_dynamics_ZPP_$SensorArbiter.prototype = $extend(zpp_$nape_dynamics_ZPP_$Arbiter.prototype,{
 	retire: function() {
 		if(!this.cleared) {
 			this.b1.arbiters.inlined_try_remove(this);
@@ -5243,12 +5258,12 @@ zpp_nape.dynamics.ZPP_SensorArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Ar
 		this.active = false;
 		this.intchange = false;
 		var o = this;
-		o.next = zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool;
-		zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool = o;
+		o.next = zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool;
+		zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool = o;
 	}
-	,__class__: zpp_nape.dynamics.ZPP_SensorArbiter
+	,__class__: zpp_$nape_dynamics_ZPP_$SensorArbiter
 });
-zpp_nape.dynamics.ZPP_FluidArbiter = function() {
+var zpp_$nape_dynamics_ZPP_$FluidArbiter = function() {
 	this.pre_dt = 0.0;
 	this.mutable = false;
 	this.wrap_position = null;
@@ -5275,16 +5290,16 @@ zpp_nape.dynamics.ZPP_FluidArbiter = function() {
 	this.centroidx = 0.0;
 	this.next = null;
 	this.outer_zn = null;
-	zpp_nape.dynamics.ZPP_Arbiter.call(this);
-	this.type = zpp_nape.dynamics.ZPP_Arbiter.FLUID;
+	zpp_$nape_dynamics_ZPP_$Arbiter.call(this);
+	this.type = zpp_$nape_dynamics_ZPP_$Arbiter.FLUID;
 	this.fluidarb = this;
 	this.buoyx = 0;
 	this.buoyy = 0;
 	this.pre_dt = -1.0;
 };
-zpp_nape.dynamics.ZPP_FluidArbiter.__name__ = true;
-zpp_nape.dynamics.ZPP_FluidArbiter.__super__ = zpp_nape.dynamics.ZPP_Arbiter;
-zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbiter.prototype,{
+zpp_$nape_dynamics_ZPP_$FluidArbiter.__name__ = true;
+zpp_$nape_dynamics_ZPP_$FluidArbiter.__super__ = zpp_$nape_dynamics_ZPP_$Arbiter;
+zpp_$nape_dynamics_ZPP_$FluidArbiter.prototype = $extend(zpp_$nape_dynamics_ZPP_$Arbiter.prototype,{
 	retire: function() {
 		if(!this.cleared) {
 			this.b1.arbiters.inlined_try_remove(this);
@@ -5298,8 +5313,8 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 		this.active = false;
 		this.intchange = false;
 		var o = this;
-		o.next = zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool;
-		zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool = o;
+		o.next = zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool;
+		zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool = o;
 		this.pre_dt = -1.0;
 	}
 	,preStep: function(s,dt) {
@@ -5375,13 +5390,13 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 		buoyy *= t7;
 		this.buoyx = buoyx;
 		this.buoyy = buoyy;
-		if(this.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+		if(this.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 			var t8 = this.b1.imass;
 			this.b1.velx -= buoyx * t8;
 			this.b1.vely -= buoyy * t8;
 			this.b1.angvel -= (buoyy * this.r1x - buoyx * this.r1y) * this.b1.iinertia;
 		}
-		if(this.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+		if(this.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 			var t9 = this.b2.imass;
 			this.b2.velx += buoyx * t9;
 			this.b2.vely += buoyy * t9;
@@ -5420,7 +5435,7 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 			}
 			var vrnx = this.b2.velx + this.b2.kinvelx - this.r2y * (this.b2.angvel + this.b2.kinangvel) - (this.b1.velx + this.b1.kinvelx - this.r1y * (this.b2.angvel + this.b2.kinangvel));
 			var vrny = this.b2.vely + this.b2.kinvely + this.r2x * (this.b2.angvel + this.b2.kinangvel) - (this.b1.vely + this.b1.kinvely + this.r1x * (this.b1.angvel + this.b1.kinangvel));
-			if(vrnx * vrnx + vrny * vrny < nape.Config.epsilon * nape.Config.epsilon) {
+			if(vrnx * vrnx + vrny * vrny < nape_Config.epsilon * nape_Config.epsilon) {
 			} else {
 				var d = vrnx * vrnx + vrny * vrny;
 				var imag = 1.0 / Math.sqrt(d);
@@ -5433,7 +5448,7 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 			var tViscosity1 = 0.0;
 			if(this.ws1.fluidEnabled) {
 				var f = -this.ws1.fluidProperties.viscosity * this.overlap / this.ws2.area;
-				if(this.ws2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) tViscosity1 -= f * this.ws2.circle.radius * nape.Config.fluidLinearDrag / (2 * this.ws2.circle.radius * Math.PI); else {
+				if(this.ws2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) tViscosity1 -= f * this.ws2.circle.radius * nape_Config.fluidLinearDrag / (2 * this.ws2.circle.radius * Math.PI); else {
 					var poly = this.ws2.polygon;
 					var bord = 0.0;
 					var acc = 0.0;
@@ -5442,8 +5457,8 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 						var ex = cx_ite.elt;
 						bord += ex.length;
 						var fact = f * ex.length * (ex.gnormx * this.nx + ex.gnormy * this.ny);
-						if(fact > 0) fact = fact *= -nape.Config.fluidVacuumDrag;
-						acc -= fact * 0.5 * nape.Config.fluidLinearDrag;
+						if(fact > 0) fact = fact *= -nape_Config.fluidVacuumDrag;
+						acc -= fact * 0.5 * nape_Config.fluidLinearDrag;
 						cx_ite = cx_ite.next;
 					}
 					tViscosity1 += acc / bord;
@@ -5451,7 +5466,7 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 			}
 			if(this.ws2.fluidEnabled) {
 				var f1 = -this.ws2.fluidProperties.viscosity * this.overlap / this.ws1.area;
-				if(this.ws1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) tViscosity1 -= f1 * this.ws1.circle.radius * nape.Config.fluidLinearDrag / (2 * this.ws1.circle.radius * Math.PI); else {
+				if(this.ws1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) tViscosity1 -= f1 * this.ws1.circle.radius * nape_Config.fluidLinearDrag / (2 * this.ws1.circle.radius * Math.PI); else {
 					var poly1 = this.ws1.polygon;
 					var bord1 = 0.0;
 					var acc1 = 0.0;
@@ -5460,8 +5475,8 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 						var ex1 = cx_ite1.elt;
 						bord1 += ex1.length;
 						var fact1 = f1 * ex1.length * (ex1.gnormx * this.nx + ex1.gnormy * this.ny);
-						if(fact1 > 0) fact1 = fact1 *= -nape.Config.fluidVacuumDrag;
-						acc1 -= fact1 * 0.5 * nape.Config.fluidLinearDrag;
+						if(fact1 > 0) fact1 = fact1 *= -nape_Config.fluidVacuumDrag;
+						acc1 -= fact1 * 0.5 * nape_Config.fluidLinearDrag;
 						cx_ite1 = cx_ite1.next;
 					}
 					tViscosity1 += acc1 / bord1;
@@ -5580,9 +5595,9 @@ zpp_nape.dynamics.ZPP_FluidArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arb
 			this.b2.angvel += j_damp * this.b2.iinertia;
 		}
 	}
-	,__class__: zpp_nape.dynamics.ZPP_FluidArbiter
+	,__class__: zpp_$nape_dynamics_ZPP_$FluidArbiter
 });
-zpp_nape.dynamics.ZPP_ColArbiter = function() {
+var zpp_$nape_dynamics_ZPP_$ColArbiter = function() {
 	this.pre_dt = 0.0;
 	this.mutable = false;
 	this.stat = false;
@@ -5641,16 +5656,16 @@ zpp_nape.dynamics.ZPP_ColArbiter = function() {
 	this.stat_fric = 0.0;
 	this.dyn_fric = 0.0;
 	this.outer_zn = null;
-	zpp_nape.dynamics.ZPP_Arbiter.call(this);
+	zpp_$nape_dynamics_ZPP_$Arbiter.call(this);
 	this.pre_dt = -1.0;
-	this.contacts = new zpp_nape.dynamics.ZPP_Contact();
-	this.innards = new zpp_nape.dynamics.ZPP_IContact();
-	this.type = zpp_nape.dynamics.ZPP_Arbiter.COL;
+	this.contacts = new zpp_$nape_dynamics_ZPP_$Contact();
+	this.innards = new zpp_$nape_dynamics_ZPP_$IContact();
+	this.type = zpp_$nape_dynamics_ZPP_$Arbiter.COL;
 	this.colarb = this;
 };
-zpp_nape.dynamics.ZPP_ColArbiter.__name__ = true;
-zpp_nape.dynamics.ZPP_ColArbiter.__super__ = zpp_nape.dynamics.ZPP_Arbiter;
-zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbiter.prototype,{
+zpp_$nape_dynamics_ZPP_$ColArbiter.__name__ = true;
+zpp_$nape_dynamics_ZPP_$ColArbiter.__super__ = zpp_$nape_dynamics_ZPP_$Arbiter;
+zpp_$nape_dynamics_ZPP_$ColArbiter.prototype = $extend(zpp_$nape_dynamics_ZPP_$Arbiter.prototype,{
 	injectContact: function(px,py,nx,ny,dist,hash,posOnly) {
 		if(posOnly == null) posOnly = false;
 		var c = null;
@@ -5664,9 +5679,9 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 			cx_ite = cx_ite.next;
 		}
 		if(c == null) {
-			if(zpp_nape.dynamics.ZPP_Contact.zpp_pool == null) c = new zpp_nape.dynamics.ZPP_Contact(); else {
-				c = zpp_nape.dynamics.ZPP_Contact.zpp_pool;
-				zpp_nape.dynamics.ZPP_Contact.zpp_pool = c.next;
+			if(zpp_$nape_dynamics_ZPP_$Contact.zpp_pool == null) c = new zpp_$nape_dynamics_ZPP_$Contact(); else {
+				c = zpp_$nape_dynamics_ZPP_$Contact.zpp_pool;
+				zpp_$nape_dynamics_ZPP_$Contact.zpp_pool = c.next;
 				c.next = null;
 			}
 			null;
@@ -5703,8 +5718,8 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		while(!(this.contacts.next == null)) {
 			var o = this.contacts.inlined_pop_unsafe();
 			o.arbiter = null;
-			o.next = zpp_nape.dynamics.ZPP_Contact.zpp_pool;
-			zpp_nape.dynamics.ZPP_Contact.zpp_pool = o;
+			o.next = zpp_$nape_dynamics_ZPP_$Contact.zpp_pool;
+			zpp_$nape_dynamics_ZPP_$Contact.zpp_pool = o;
 			this.innards.inlined_pop();
 		}
 		var o1 = this;
@@ -5713,8 +5728,8 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		o1.userdef_restitution = false;
 		o1.userdef_rfric = false;
 		o1.__ref_edge1 = o1.__ref_edge2 = null;
-		o1.next = zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool;
-		zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool = o1;
+		o1.next = zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool;
+		zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool = o1;
 		this.pre_dt = -1.0;
 	}
 	,cleanupContacts: function() {
@@ -5726,13 +5741,13 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		var cx_ite = this.contacts.next;
 		while(cx_ite != null) {
 			var c = cx_ite;
-			if(c.stamp + nape.Config.arbiterExpirationDelay < this.stamp) {
+			if(c.stamp + nape_Config.arbiterExpirationDelay < this.stamp) {
 				cx_ite = this.contacts.inlined_erase(pre);
 				cx_itei = this.innards.inlined_erase(prei);
 				var o = c;
 				o.arbiter = null;
-				o.next = zpp_nape.dynamics.ZPP_Contact.zpp_pool;
-				zpp_nape.dynamics.ZPP_Contact.zpp_pool = o;
+				o.next = zpp_$nape_dynamics_ZPP_$Contact.zpp_pool;
+				zpp_$nape_dynamics_ZPP_$Contact.zpp_pool = o;
 				continue;
 			}
 			var ci = c.inner;
@@ -5774,7 +5789,7 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		if(this.invalidated) {
 			this.invalidated = false;
 			if(!this.userdef_restitution) {
-				if(this.s1.material.elasticity <= Math.NEGATIVE_INFINITY || this.s2.material.elasticity <= Math.NEGATIVE_INFINITY) this.restitution = 0; else if(this.s1.material.elasticity >= Math.POSITIVE_INFINITY || this.s2.material.elasticity >= Math.POSITIVE_INFINITY) this.restitution = 1; else this.restitution = (this.s1.material.elasticity + this.s2.material.elasticity) / 2;
+				if(this.s1.material.elasticity <= -Infinity || this.s2.material.elasticity <= -Infinity) this.restitution = 0; else if(this.s1.material.elasticity >= Infinity || this.s2.material.elasticity >= Infinity) this.restitution = 1; else this.restitution = (this.s1.material.elasticity + this.s2.material.elasticity) / 2;
 				if(this.restitution < 0) this.restitution = 0;
 				if(this.restitution > 1) this.restitution = 1;
 			}
@@ -5788,11 +5803,11 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		var mass_sum = this.b1.smass + this.b2.smass;
 		this.hc2 = false;
 		var fst = true;
-		var statType = !(this.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) || !(this.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC);
+		var statType = !(this.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) || !(this.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC);
 		var bias;
 		if(statType) {
-			if(this.continuous) bias = nape.Config.contactContinuousStaticBiasCoef; else bias = nape.Config.contactStaticBiasCoef;
-		} else if(this.continuous) bias = nape.Config.contactContinuousBiasCoef; else bias = nape.Config.contactBiasCoef;
+			if(this.continuous) bias = nape_Config.contactContinuousStaticBiasCoef; else bias = nape_Config.contactStaticBiasCoef;
+		} else if(this.continuous) bias = nape_Config.contactContinuousBiasCoef; else bias = nape_Config.contactBiasCoef;
 		this.biasCoef = bias;
 		this.continuous = false;
 		var pre = null;
@@ -5801,13 +5816,13 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 		var cx_ite = this.contacts.next;
 		while(cx_ite != null) {
 			var c = cx_ite;
-			if(c.stamp + nape.Config.arbiterExpirationDelay < this.stamp) {
+			if(c.stamp + nape_Config.arbiterExpirationDelay < this.stamp) {
 				cx_ite = this.contacts.inlined_erase(pre);
 				cx_itei = this.innards.inlined_erase(prei);
 				var o = c;
 				o.arbiter = null;
-				o.next = zpp_nape.dynamics.ZPP_Contact.zpp_pool;
-				zpp_nape.dynamics.ZPP_Contact.zpp_pool = o;
+				o.next = zpp_$nape_dynamics_ZPP_$Contact.zpp_pool;
+				zpp_$nape_dynamics_ZPP_$Contact.zpp_pool = o;
 				continue;
 			}
 			var ci = c.inner;
@@ -5827,12 +5842,12 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 				ci.r2y = c.py - this.b2.posy;
 				ci.r1x = c.px - this.b1.posx;
 				ci.r1y = c.py - this.b1.posy;
-				var kt = mass_sum + this.b2.sinertia * zpp_nape.util.ZPP_Math.sqr(ci.r2x * this.nx + ci.r2y * this.ny);
-				kt += this.b1.sinertia * zpp_nape.util.ZPP_Math.sqr(ci.r1x * this.nx + ci.r1y * this.ny);
-				if(kt < nape.Config.epsilon * nape.Config.epsilon) ci.tMass = 0; else ci.tMass = 1.0 / kt;
-				var nt = mass_sum + this.b2.sinertia * zpp_nape.util.ZPP_Math.sqr(this.ny * ci.r2x - this.nx * ci.r2y);
-				nt += this.b1.sinertia * zpp_nape.util.ZPP_Math.sqr(this.ny * ci.r1x - this.nx * ci.r1y);
-				if(nt < nape.Config.epsilon * nape.Config.epsilon) ci.nMass = 0; else ci.nMass = 1.0 / nt;
+				var kt = mass_sum + this.b2.sinertia * zpp_$nape_util_ZPP_$Math.sqr(ci.r2x * this.nx + ci.r2y * this.ny);
+				kt += this.b1.sinertia * zpp_$nape_util_ZPP_$Math.sqr(ci.r1x * this.nx + ci.r1y * this.ny);
+				if(kt < nape_Config.epsilon * nape_Config.epsilon) ci.tMass = 0; else ci.tMass = 1.0 / kt;
+				var nt = mass_sum + this.b2.sinertia * zpp_$nape_util_ZPP_$Math.sqr(this.ny * ci.r2x - this.nx * ci.r2y);
+				nt += this.b1.sinertia * zpp_$nape_util_ZPP_$Math.sqr(this.ny * ci.r1x - this.nx * ci.r1y);
+				if(nt < nape_Config.epsilon * nape_Config.epsilon) ci.nMass = 0; else ci.nMass = 1.0 / nt;
 				var vrx = 0.0;
 				var vry = 0.0;
 				var ang = this.b2.angvel + this.b2.kinangvel;
@@ -5844,9 +5859,9 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 				var vdot = this.nx * vrx + this.ny * vry;
 				c.elasticity = this.restitution;
 				ci.bounce = vdot * c.elasticity;
-				if(ci.bounce > -nape.Config.elasticThreshold) ci.bounce = 0;
+				if(ci.bounce > -nape_Config.elasticThreshold) ci.bounce = 0;
 				vdot = vry * this.nx - vrx * this.ny;
-				var thr = nape.Config.staticFrictionThreshold;
+				var thr = nape_Config.staticFrictionThreshold;
 				if(vdot * vdot > thr * thr) ci.friction = this.dyn_fric; else ci.friction = this.stat_fric;
 				ci.jnAcc *= dtratio;
 				ci.jtAcc *= dtratio;
@@ -5890,7 +5905,7 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 			this.kMassb = mass_sum + this.b1.sinertia * this.rn1a * this.rn2a + this.b2.sinertia * this.rn1b * this.rn2b;
 			this.kMassc = mass_sum + this.b1.sinertia * this.rn2a * this.rn2a + this.b2.sinertia * this.rn2b * this.rn2b;
 			var norm = this.kMassa * this.kMassa + 2 * this.kMassb * this.kMassb + this.kMassc * this.kMassc;
-			if(norm < nape.Config.illConditionedThreshold * (this.kMassa * this.kMassc - this.kMassb * this.kMassb)) {
+			if(norm < nape_Config.illConditionedThreshold * (this.kMassa * this.kMassc - this.kMassb * this.kMassb)) {
 				this.Ka = this.kMassa;
 				this.Kb = this.kMassb;
 				this.Kc = this.kMassc;
@@ -6110,7 +6125,7 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 			dx1 = r2x - r1x;
 			dy1 = r2y - r1y;
 			var dl = Math.sqrt(dx1 * dx1 + dy1 * dy1);
-			var r = this.radius - nape.Config.collisionSlop;
+			var r = this.radius - nape_Config.collisionSlop;
 			var err = dl - r;
 			if(dx1 * this.nx + dy1 * this.ny < 0) {
 				dx1 = -dx1;
@@ -6118,8 +6133,8 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 				err -= this.radius;
 			}
 			if(err < 0) {
-				if(dl < nape.Config.epsilon) {
-					if(this.b1.smass != 0.0) this.b1.posx += nape.Config.epsilon * 10; else this.b2.posx += nape.Config.epsilon * 10;
+				if(dl < nape_Config.epsilon) {
+					if(this.b1.smass != 0.0) this.b1.posx += nape_Config.epsilon * 10; else this.b2.posx += nape_Config.epsilon * 10;
 				} else {
 					var t2 = 1.0 / dl;
 					dx1 *= t2;
@@ -6194,11 +6209,11 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 				}
 			}
 			var err1 = clip1x * gnormx + clip1y * gnormy - gproj - this.radius;
-			err1 += nape.Config.collisionSlop;
+			err1 += nape_Config.collisionSlop;
 			var err2 = 0.0;
 			if(this.hpc2) {
 				err2 = clip2x * gnormx + clip2y * gnormy - gproj - this.radius;
-				err2 += nape.Config.collisionSlop;
+				err2 += nape_Config.collisionSlop;
 			}
 			if(err1 < 0 || err2 < 0) {
 				if(this.rev) {
@@ -6319,9 +6334,9 @@ zpp_nape.dynamics.ZPP_ColArbiter.prototype = $extend(zpp_nape.dynamics.ZPP_Arbit
 			}
 		}
 	}
-	,__class__: zpp_nape.dynamics.ZPP_ColArbiter
+	,__class__: zpp_$nape_dynamics_ZPP_$ColArbiter
 });
-zpp_nape.dynamics.ZPP_Contact = function() {
+var zpp_$nape_dynamics_ZPP_$Contact = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
@@ -6339,15 +6354,15 @@ zpp_nape.dynamics.ZPP_Contact = function() {
 	this.py = 0.0;
 	this.px = 0.0;
 	this.outer = null;
-	this.inner = new zpp_nape.dynamics.ZPP_IContact();
+	this.inner = new zpp_$nape_dynamics_ZPP_$IContact();
 };
-zpp_nape.dynamics.ZPP_Contact.__name__ = true;
-zpp_nape.dynamics.ZPP_Contact.prototype = {
+zpp_$nape_dynamics_ZPP_$Contact.__name__ = true;
+zpp_$nape_dynamics_ZPP_$Contact.prototype = {
 	wrapper: function() {
 		if(this.outer == null) {
-			zpp_nape.dynamics.ZPP_Contact.internal = true;
-			this.outer = new nape.dynamics.Contact();
-			zpp_nape.dynamics.ZPP_Contact.internal = false;
+			zpp_$nape_dynamics_ZPP_$Contact.internal = true;
+			this.outer = new nape_dynamics_Contact();
+			zpp_$nape_dynamics_ZPP_$Contact.internal = false;
 			this.outer.zpp_inner = this;
 		}
 		return this.outer;
@@ -6398,9 +6413,9 @@ zpp_nape.dynamics.ZPP_Contact.prototype = {
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.dynamics.ZPP_Contact
+	,__class__: zpp_$nape_dynamics_ZPP_$Contact
 };
-zpp_nape.dynamics.ZPP_IContact = function() {
+var zpp_$nape_dynamics_ZPP_$IContact = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
@@ -6421,8 +6436,8 @@ zpp_nape.dynamics.ZPP_IContact = function() {
 	this.r1y = 0.0;
 	this.r1x = 0.0;
 };
-zpp_nape.dynamics.ZPP_IContact.__name__ = true;
-zpp_nape.dynamics.ZPP_IContact.prototype = {
+zpp_$nape_dynamics_ZPP_$IContact.__name__ = true;
+zpp_$nape_dynamics_ZPP_$IContact.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
@@ -6464,9 +6479,9 @@ zpp_nape.dynamics.ZPP_IContact.prototype = {
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.dynamics.ZPP_IContact
+	,__class__: zpp_$nape_dynamics_ZPP_$IContact
 };
-zpp_nape.dynamics.ZPP_InteractionFilter = function() {
+var zpp_$nape_dynamics_ZPP_$InteractionFilter = function() {
 	this.fluidMask = 0;
 	this.fluidGroup = 0;
 	this.sensorMask = 0;
@@ -6476,19 +6491,19 @@ zpp_nape.dynamics.ZPP_InteractionFilter = function() {
 	this.shapes = null;
 	this.outer = null;
 	this.next = null;
-	this.shapes = new zpp_nape.util.ZNPList_ZPP_Shape();
+	this.shapes = new zpp_$nape_util_ZNPList_$ZPP_$Shape();
 	this.collisionGroup = this.sensorGroup = this.fluidGroup = 1;
 	this.collisionMask = this.sensorMask = this.fluidMask = -1;
 };
-zpp_nape.dynamics.ZPP_InteractionFilter.__name__ = true;
-zpp_nape.dynamics.ZPP_InteractionFilter.prototype = {
+zpp_$nape_dynamics_ZPP_$InteractionFilter.__name__ = true;
+zpp_$nape_dynamics_ZPP_$InteractionFilter.prototype = {
 	wrapper: function() {
 		if(this.outer == null) {
-			this.outer = new nape.dynamics.InteractionFilter();
+			this.outer = new nape_dynamics_InteractionFilter();
 			var o = this.outer.zpp_inner;
 			o.outer = null;
-			o.next = zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool;
-			zpp_nape.dynamics.ZPP_InteractionFilter.zpp_pool = o;
+			o.next = zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool;
+			zpp_$nape_dynamics_ZPP_$InteractionFilter.zpp_pool = o;
 			this.outer.zpp_inner = this;
 		}
 		return this.outer;
@@ -6510,21 +6525,20 @@ zpp_nape.dynamics.ZPP_InteractionFilter.prototype = {
 			cx_ite = cx_ite.next;
 		}
 	}
-	,__class__: zpp_nape.dynamics.ZPP_InteractionFilter
+	,__class__: zpp_$nape_dynamics_ZPP_$InteractionFilter
 };
-zpp_nape.dynamics.ZPP_InteractionGroup = function() {
+var zpp_$nape_dynamics_ZPP_$InteractionGroup = function() {
 	this.depth = 0;
 	this.interactors = null;
 	this.group = null;
 	this.ignore = false;
 	this.outer = null;
 };
-zpp_nape.dynamics.ZPP_InteractionGroup.__name__ = true;
-zpp_nape.dynamics.ZPP_InteractionGroup.prototype = {
-	__class__: zpp_nape.dynamics.ZPP_InteractionGroup
+zpp_$nape_dynamics_ZPP_$InteractionGroup.__name__ = true;
+zpp_$nape_dynamics_ZPP_$InteractionGroup.prototype = {
+	__class__: zpp_$nape_dynamics_ZPP_$InteractionGroup
 };
-zpp_nape.geom = {};
-zpp_nape.geom.ZPP_AABB = function() {
+var zpp_$nape_geom_ZPP_$AABB = function() {
 	this.wrap_max = null;
 	this.maxy = 0.0;
 	this.maxx = 0.0;
@@ -6537,12 +6551,12 @@ zpp_nape.geom.ZPP_AABB = function() {
 	this._validate = null;
 	this._invalidate = null;
 };
-zpp_nape.geom.ZPP_AABB.__name__ = true;
-zpp_nape.geom.ZPP_AABB.get = function(minx,miny,maxx,maxy) {
+zpp_$nape_geom_ZPP_$AABB.__name__ = true;
+zpp_$nape_geom_ZPP_$AABB.get = function(minx,miny,maxx,maxy) {
 	var ret;
-	if(zpp_nape.geom.ZPP_AABB.zpp_pool == null) ret = new zpp_nape.geom.ZPP_AABB(); else {
-		ret = zpp_nape.geom.ZPP_AABB.zpp_pool;
-		zpp_nape.geom.ZPP_AABB.zpp_pool = ret.next;
+	if(zpp_$nape_geom_ZPP_$AABB.zpp_pool == null) ret = new zpp_$nape_geom_ZPP_$AABB(); else {
+		ret = zpp_$nape_geom_ZPP_$AABB.zpp_pool;
+		zpp_$nape_geom_ZPP_$AABB.zpp_pool = ret.next;
 		ret.next = null;
 	}
 	null;
@@ -6552,7 +6566,7 @@ zpp_nape.geom.ZPP_AABB.get = function(minx,miny,maxx,maxy) {
 	ret.maxy = maxy;
 	return ret;
 };
-zpp_nape.geom.ZPP_AABB.prototype = {
+zpp_$nape_geom_ZPP_$AABB.prototype = {
 	validate: function() {
 		if(this._validate != null) this._validate();
 	}
@@ -6589,25 +6603,25 @@ zpp_nape.geom.ZPP_AABB.prototype = {
 	,toString: function() {
 		return "{ x: " + this.minx + " y: " + this.miny + " w: " + (this.maxx - this.minx) + " h: " + (this.maxy - this.miny) + " }";
 	}
-	,__class__: zpp_nape.geom.ZPP_AABB
+	,__class__: zpp_$nape_geom_ZPP_$AABB
 };
-zpp_nape.util.ZNPList_ZPP_Vec2 = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Vec2 = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Vec2.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Vec2.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Vec2.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Vec2.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Vec2(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Vec2(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -6625,9 +6639,9 @@ zpp_nape.util.ZNPList_ZPP_Vec2.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Vec2(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Vec2(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -6652,8 +6666,8 @@ zpp_nape.util.ZNPList_ZPP_Vec2.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -6685,8 +6699,8 @@ zpp_nape.util.ZNPList_ZPP_Vec2.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Vec2.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Vec2.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -6701,13 +6715,13 @@ zpp_nape.util.ZNPList_ZPP_Vec2.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Vec2
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Vec2
 };
-zpp_nape.geom.ZPP_Collide = function() { };
-zpp_nape.geom.ZPP_Collide.__name__ = true;
-zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
-	if(s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
-		if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+var zpp_$nape_geom_ZPP_$Collide = function() { };
+zpp_$nape_geom_ZPP_$Collide.__name__ = true;
+zpp_$nape_geom_ZPP_$Collide.contactCollide = function(s1,s2,arb,rev) {
+	if(s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
+		if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 			var cont = true;
 			var max = -1e+100;
 			var maxmin = -1e+100;
@@ -6807,14 +6821,14 @@ zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
 					var d1 = ax2.gnormy * c1x - ax2.gnormx * c1y;
 					var den = 1 / (d1 - d0);
 					var t = (-ax2.tp1 - d0) * den;
-					if(t > nape.Config.epsilon) {
-						var t1 = t;
-						c0x += dvx * t1;
-						c0y += dvy * t1;
+					if(t > nape_Config.epsilon) {
+						var t2 = t;
+						c0x += dvx * t2;
+						c0y += dvy * t2;
 					}
-					var t2 = (-ax2.tp0 - d1) * den;
-					if(t2 < -nape.Config.epsilon) {
-						var t3 = t2;
+					var t1 = (-ax2.tp0 - d1) * den;
+					if(t1 < -nape_Config.epsilon) {
+						var t3 = t1;
 						c1x += dvx * t3;
 						c1y += dvy * t3;
 					}
@@ -6895,10 +6909,10 @@ zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
 					px = v0.x - s1.circle.worldCOMx;
 					py = v0.y - s1.circle.worldCOMy;
 					var distSqr = px * px + py * py;
-					if(distSqr > minDist * minDist) co = null; else if(distSqr < nape.Config.epsilon * nape.Config.epsilon) co = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist,0,null); else {
+					if(distSqr > minDist * minDist) co = null; else if(distSqr < nape_Config.epsilon * nape_Config.epsilon) co = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist,0,null); else {
 						var invDist = 1.0 / Math.sqrt(distSqr);
 						var dist1;
-						if(invDist < nape.Config.epsilon) dist1 = 1e100; else dist1 = 1.0 / invDist;
+						if(invDist < nape_Config.epsilon) dist1 = 1e100; else dist1 = 1.0 / invDist;
 						var df = 0.5 + (s1.circle.radius - 0.5 * minDist) * invDist;
 						if(rev) co = arb.injectContact(s1.circle.worldCOMx + px * df,s1.circle.worldCOMy + py * df,-px * invDist,-py * invDist,dist1 - minDist,0,null); else co = arb.injectContact(s1.circle.worldCOMx + px * df,s1.circle.worldCOMy + py * df,px * invDist,py * invDist,dist1 - minDist,0,null);
 					}
@@ -6933,10 +6947,10 @@ zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
 					px1 = v11.x - s1.circle.worldCOMx;
 					py1 = v11.y - s1.circle.worldCOMy;
 					var distSqr1 = px1 * px1 + py1 * py1;
-					if(distSqr1 > minDist1 * minDist1) co1 = null; else if(distSqr1 < nape.Config.epsilon * nape.Config.epsilon) co1 = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist1,0,null); else {
+					if(distSqr1 > minDist1 * minDist1) co1 = null; else if(distSqr1 < nape_Config.epsilon * nape_Config.epsilon) co1 = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist1,0,null); else {
 						var invDist1 = 1.0 / Math.sqrt(distSqr1);
 						var dist2;
-						if(invDist1 < nape.Config.epsilon) dist2 = 1e100; else dist2 = 1.0 / invDist1;
+						if(invDist1 < nape_Config.epsilon) dist2 = 1e100; else dist2 = 1.0 / invDist1;
 						var df1 = 0.5 + (s1.circle.radius - 0.5 * minDist1) * invDist1;
 						if(rev) co1 = arb.injectContact(s1.circle.worldCOMx + px1 * df1,s1.circle.worldCOMy + py1 * df1,-px1 * invDist1,-py1 * invDist1,dist2 - minDist1,0,null); else co1 = arb.injectContact(s1.circle.worldCOMx + px1 * df1,s1.circle.worldCOMy + py1 * df1,px1 * invDist1,py1 * invDist1,dist2 - minDist1,0,null);
 					}
@@ -6997,10 +7011,10 @@ zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
 		px3 = s2.circle.worldCOMx - s1.circle.worldCOMx;
 		py3 = s2.circle.worldCOMy - s1.circle.worldCOMy;
 		var distSqr2 = px3 * px3 + py3 * py3;
-		if(distSqr2 > minDist2 * minDist2) co2 = null; else if(distSqr2 < nape.Config.epsilon * nape.Config.epsilon) co2 = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist2,0,null); else {
+		if(distSqr2 > minDist2 * minDist2) co2 = null; else if(distSqr2 < nape_Config.epsilon * nape_Config.epsilon) co2 = arb.injectContact(s1.circle.worldCOMx,s1.circle.worldCOMy,1,0,-minDist2,0,null); else {
 			var invDist2 = 1.0 / Math.sqrt(distSqr2);
 			var dist3;
-			if(invDist2 < nape.Config.epsilon) dist3 = 1e100; else dist3 = 1.0 / invDist2;
+			if(invDist2 < nape_Config.epsilon) dist3 = 1e100; else dist3 = 1.0 / invDist2;
 			var df2 = 0.5 + (s1.circle.radius - 0.5 * minDist2) * invDist2;
 			if(rev) co2 = arb.injectContact(s1.circle.worldCOMx + px3 * df2,s1.circle.worldCOMy + py3 * df2,-px3 * invDist2,-py3 * invDist2,dist3 - minDist2,0,null); else co2 = arb.injectContact(s1.circle.worldCOMx + px3 * df2,s1.circle.worldCOMy + py3 * df2,px3 * invDist2,py3 * invDist2,dist3 - minDist2,0,null);
 		}
@@ -7023,16 +7037,16 @@ zpp_nape.geom.ZPP_Collide.contactCollide = function(s1,s2,arb,rev) {
 		} else return false;
 	}
 };
-zpp_nape.geom.ZPP_Collide.testCollide_safe = function(s1,s2) {
-	if(s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) {
+zpp_$nape_geom_ZPP_$Collide.testCollide_safe = function(s1,s2) {
+	if(s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) {
 		var t = s1;
 		s1 = s2;
 		s2 = t;
 	}
-	return zpp_nape.geom.ZPP_Collide.testCollide(s1,s2);
+	return zpp_$nape_geom_ZPP_$Collide.testCollide(s1,s2);
 };
-zpp_nape.geom.ZPP_Collide.testCollide = function(s1,s2) {
-	if(s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+zpp_$nape_geom_ZPP_$Collide.testCollide = function(s1,s2) {
+	if(s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 		var cont = true;
 		var cx_ite = s1.polygon.edges.head;
 		while(cx_ite != null) {
@@ -7128,10 +7142,10 @@ zpp_nape.geom.ZPP_Collide.testCollide = function(s1,s2) {
 		return distSqr2 <= minDist2 * minDist2;
 	}
 };
-zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
-	if(s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
-		var out1 = new Array();
-		var out2 = new Array();
+zpp_$nape_geom_ZPP_$Collide.flowCollide = function(s1,s2,arb) {
+	if(s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
+		var out1 = [];
+		var out2 = [];
 		var cont = true;
 		var total = true;
 		var cx_ite = s1.polygon.edges.head;
@@ -7144,7 +7158,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 				var v = cx_ite1;
 				var k = ax.gnormx * v.x + ax.gnormy * v.y;
 				if(k < min) min = k;
-				if(k >= ax.gprojection + nape.Config.epsilon) {
+				if(k >= ax.gprojection + nape_Config.epsilon) {
 					out2[ind] = true;
 					total = false;
 				}
@@ -7177,7 +7191,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 					var v1 = cx_ite3;
 					var k1 = ax1.gnormx * v1.x + ax1.gnormy * v1.y;
 					if(k1 < min1) min1 = k1;
-					if(k1 >= ax1.gprojection + nape.Config.epsilon) {
+					if(k1 >= ax1.gprojection + nape_Config.epsilon) {
 						out1[ind1] = true;
 						total = false;
 					}
@@ -7199,8 +7213,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 				null;
 				return true;
 			} else if(cont) {
-				while(!(zpp_nape.geom.ZPP_Collide.flowpoly.head == null)) {
-					var p = zpp_nape.geom.ZPP_Collide.flowpoly.pop_unsafe();
+				while(!(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null)) {
+					var p = zpp_$nape_geom_ZPP_$Collide.flowpoly.pop_unsafe();
 					if(!p._inuse) {
 						var o = p;
 						if(o.outer != null) {
@@ -7210,8 +7224,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						o._isimmutable = null;
 						o._validate = null;
 						o._invalidate = null;
-						o.next = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-						zpp_nape.geom.ZPP_Vec2.zpp_pool = o;
+						o.next = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+						zpp_$nape_geom_ZPP_$Vec2.zpp_pool = o;
 					}
 				}
 				var fst_vert = null;
@@ -7242,15 +7256,15 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						} else ite1 = ite1.next;
 					}
 					if(ite1 == null) ite1 = s1.polygon.gverts.next; else {
-						zpp_nape.geom.ZPP_Collide.flowpoly.add(ite1);
-						fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						zpp_$nape_geom_ZPP_$Collide.flowpoly.add(ite1);
+						fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 					}
 				} else {
-					zpp_nape.geom.ZPP_Collide.flowpoly.add(ite2);
-					fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+					zpp_$nape_geom_ZPP_$Collide.flowpoly.add(ite2);
+					fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 				}
 				var cnt = 1;
-				if(zpp_nape.geom.ZPP_Collide.flowpoly.head == null) {
+				if(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null) {
 					var cx_cont = true;
 					var cx_itei = s1.polygon.gverts.next;
 					var u = cx_itei;
@@ -7286,14 +7300,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy = b.y - a.y;
 								}
 								var den = _vy * _qx - _vx * _qy;
-								$r = den * den > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den * den > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den = 1 / den;
 									var txx = (_qy * _sx - _qx * _sy) * den;
-									$r = txx > nape.Config.epsilon && txx < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx > nape_Config.epsilon && txx < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx = (_vy * _sx - _vx * _sy) * den;
-										$r = sxx > nape.Config.epsilon && sxx < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx > nape_Config.epsilon && sxx < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t = txx;
 											$r = true;
@@ -7339,14 +7353,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy1 = b1.y - a.y;
 								}
 								var den1 = _vy1 * _qx1 - _vx1 * _qy1;
-								$r = den1 * den1 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den1 * den1 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den1 = 1 / den1;
 									var txx1 = (_qy1 * _sx1 - _qx1 * _sy1) * den1;
-									$r = txx1 > nape.Config.epsilon && txx1 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx1 > nape_Config.epsilon && txx1 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx1 = (_vy1 * _sx1 - _vx1 * _sy1) * den1;
-										$r = sxx1 > nape.Config.epsilon && sxx1 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx1 > nape_Config.epsilon && sxx1 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t1 = txx1;
 											$r = true;
@@ -7370,8 +7384,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 							var T = min2;
 							cx = u.x + (v2.x - u.x) * T;
 							cy = u.y + (v2.y - u.y) * T;
-							fst_vert = zpp_nape.geom.ZPP_Vec2.get(cx,cy,null);
-							zpp_nape.geom.ZPP_Collide.flowpoly.add(fst_vert);
+							fst_vert = zpp_$nape_geom_ZPP_$Vec2.get(cx,cy,null);
+							zpp_$nape_geom_ZPP_$Collide.flowpoly.add(fst_vert);
 							poly1 = true;
 							ite1 = cx_itei;
 							cx_cont = false;
@@ -7413,14 +7427,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy2 = b2.y - a1.y;
 								}
 								var den2 = _vy2 * _qx2 - _vx2 * _qy2;
-								$r = den2 * den2 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den2 * den2 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den2 = 1 / den2;
 									var txx2 = (_qy2 * _sx2 - _qx2 * _sy2) * den2;
-									$r = txx2 > nape.Config.epsilon && txx2 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx2 > nape_Config.epsilon && txx2 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx2 = (_vy2 * _sx2 - _vx2 * _sy2) * den2;
-										$r = sxx2 > nape.Config.epsilon && sxx2 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx2 > nape_Config.epsilon && sxx2 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t2 = txx2;
 											$r = true;
@@ -7466,14 +7480,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy3 = b3.y - a1.y;
 								}
 								var den3 = _vy3 * _qx3 - _vx3 * _qy3;
-								$r = den3 * den3 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den3 * den3 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den3 = 1 / den3;
 									var txx3 = (_qy3 * _sx3 - _qx3 * _sy3) * den3;
-									$r = txx3 > nape.Config.epsilon && txx3 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx3 > nape_Config.epsilon && txx3 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx3 = (_vy3 * _sx3 - _vx3 * _sy3) * den3;
-										$r = sxx3 > nape.Config.epsilon && sxx3 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx3 > nape_Config.epsilon && sxx3 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t3 = txx3;
 											$r = true;
@@ -7497,8 +7511,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 							var T1 = min3;
 							cx1 = u.x + (v3.x - u.x) * T1;
 							cy1 = u.y + (v3.y - u.y) * T1;
-							fst_vert = zpp_nape.geom.ZPP_Vec2.get(cx1,cy1,null);
-							zpp_nape.geom.ZPP_Collide.flowpoly.add(fst_vert);
+							fst_vert = zpp_$nape_geom_ZPP_$Vec2.get(cx1,cy1,null);
+							zpp_$nape_geom_ZPP_$Collide.flowpoly.add(fst_vert);
 							poly1 = true;
 							ite1 = cx_itei;
 							break;
@@ -7515,12 +7529,12 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 					}
 					if(!out1[ind11]) {
 						var ex = ite1;
-						if(fst_vert != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(ex.x,ex.y,fst_vert.x,fst_vert.y) < nape.Config.epsilon) break;
-						zpp_nape.geom.ZPP_Collide.flowpoly.add(ex);
-						if(fst_vert == null) fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						if(fst_vert != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(ex.x,ex.y,fst_vert.x,fst_vert.y) < nape_Config.epsilon) break;
+						zpp_$nape_geom_ZPP_$Collide.flowpoly.add(ex);
+						if(fst_vert == null) fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						cnt = 1;
 					} else {
-						var a2 = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						var a2 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						var b4 = ite1;
 						var u1 = ite2;
 						var itm = ite2.next;
@@ -7532,7 +7546,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						var beg_ite = itm;
 						var cx_ite4 = itm;
 						do {
-							var v4 = cx_ite4;
+							var v5 = cx_ite4;
 							var t4 = 0.0;
 							if((function($this) {
 								var $r;
@@ -7545,8 +7559,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								var _vx4 = 0.0;
 								var _vy4 = 0.0;
 								{
-									_vx4 = v4.x - u1.x;
-									_vy4 = v4.y - u1.y;
+									_vx4 = v5.x - u1.x;
+									_vy4 = v5.y - u1.y;
 								}
 								var _qx4 = 0.0;
 								var _qy4 = 0.0;
@@ -7555,14 +7569,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy4 = b4.y - a2.y;
 								}
 								var den4 = _vy4 * _qx4 - _vx4 * _qy4;
-								$r = den4 * den4 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den4 * den4 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den4 = 1 / den4;
 									var txx4 = (_qy4 * _sx4 - _qx4 * _sy4) * den4;
-									$r = txx4 > nape.Config.epsilon && txx4 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx4 > nape_Config.epsilon && txx4 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx4 = (_vy4 * _sx4 - _vx4 * _sy4) * den4;
-										$r = sxx4 > nape.Config.epsilon && sxx4 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx4 > nape_Config.epsilon && sxx4 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t4 = txx4;
 											$r = true;
@@ -7584,7 +7598,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									} else max = t4;
 								}
 							}
-							u1 = v4;
+							u1 = v5;
 							ite2 = cx_ite4;
 							ind2++;
 							if(ind2 >= s2.polygon.edgeCnt) ind2 = 0;
@@ -7592,7 +7606,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 							if(cx_ite4 == null) cx_ite4 = s2.polygon.gverts.next;
 						} while(false);
 						while(cx_ite4 != beg_ite) {
-							var v5 = cx_ite4;
+							var v6 = cx_ite4;
 							var t5 = 0.0;
 							if((function($this) {
 								var $r;
@@ -7605,8 +7619,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								var _vx5 = 0.0;
 								var _vy5 = 0.0;
 								{
-									_vx5 = v5.x - u1.x;
-									_vy5 = v5.y - u1.y;
+									_vx5 = v6.x - u1.x;
+									_vy5 = v6.y - u1.y;
 								}
 								var _qx5 = 0.0;
 								var _qy5 = 0.0;
@@ -7615,14 +7629,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy5 = b4.y - a2.y;
 								}
 								var den5 = _vy5 * _qx5 - _vx5 * _qy5;
-								$r = den5 * den5 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den5 * den5 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den5 = 1 / den5;
 									var txx5 = (_qy5 * _sx5 - _qx5 * _sy5) * den5;
-									$r = txx5 > nape.Config.epsilon && txx5 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx5 > nape_Config.epsilon && txx5 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx5 = (_vy5 * _sx5 - _vx5 * _sy5) * den5;
-										$r = sxx5 > nape.Config.epsilon && sxx5 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx5 > nape_Config.epsilon && sxx5 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t5 = txx5;
 											$r = true;
@@ -7644,7 +7658,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									} else max = t5;
 								}
 							}
-							u1 = v5;
+							u1 = v6;
 							ite2 = cx_ite4;
 							ind2++;
 							if(ind2 >= s2.polygon.edgeCnt) ind2 = 0;
@@ -7655,15 +7669,15 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						var u2 = itmo;
 						var itm2 = itmo.next;
 						if(itm2 == null) itm2 = s2.polygon.gverts.next;
-						var v6 = itm2;
+						var v4 = itm2;
 						var cx2 = 0.0;
 						var cy2 = 0.0;
 						var T2 = max;
-						cx2 = u2.x + (v6.x - u2.x) * T2;
-						cy2 = u2.y + (v6.y - u2.y) * T2;
-						if(fst_vert != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(cx2,cy2,fst_vert.x,fst_vert.y) < nape.Config.epsilon) break;
-						zpp_nape.geom.ZPP_Collide.flowpoly.add(zpp_nape.geom.ZPP_Vec2.get(cx2,cy2,null));
-						if(fst_vert == null) fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						cx2 = u2.x + (v4.x - u2.x) * T2;
+						cy2 = u2.y + (v4.y - u2.y) * T2;
+						if(fst_vert != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(cx2,cy2,fst_vert.x,fst_vert.y) < nape_Config.epsilon) break;
+						zpp_$nape_geom_ZPP_$Collide.flowpoly.add(zpp_$nape_geom_ZPP_$Vec2.get(cx2,cy2,null));
+						if(fst_vert == null) fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						ite2 = itmo;
 						ind2 = indo;
 						poly1 = !poly1;
@@ -7678,12 +7692,12 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 					}
 					if(!out2[ind2]) {
 						var ex1 = ite2;
-						if(fst_vert != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(ex1.x,ex1.y,fst_vert.x,fst_vert.y) < nape.Config.epsilon) break;
-						zpp_nape.geom.ZPP_Collide.flowpoly.add(ex1);
-						if(fst_vert == null) fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						if(fst_vert != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(ex1.x,ex1.y,fst_vert.x,fst_vert.y) < nape_Config.epsilon) break;
+						zpp_$nape_geom_ZPP_$Collide.flowpoly.add(ex1);
+						if(fst_vert == null) fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						cnt = 1;
 					} else {
-						var a3 = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						var a3 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						var b5 = ite2;
 						var u3 = ite1;
 						var itm1 = ite1.next;
@@ -7695,7 +7709,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						var beg_ite1 = itm1;
 						var cx_ite5 = itm1;
 						do {
-							var v7 = cx_ite5;
+							var v8 = cx_ite5;
 							var t6 = 0.0;
 							if((function($this) {
 								var $r;
@@ -7708,8 +7722,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								var _vx6 = 0.0;
 								var _vy6 = 0.0;
 								{
-									_vx6 = v7.x - u3.x;
-									_vy6 = v7.y - u3.y;
+									_vx6 = v8.x - u3.x;
+									_vy6 = v8.y - u3.y;
 								}
 								var _qx6 = 0.0;
 								var _qy6 = 0.0;
@@ -7718,14 +7732,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy6 = b5.y - a3.y;
 								}
 								var den6 = _vy6 * _qx6 - _vx6 * _qy6;
-								$r = den6 * den6 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den6 * den6 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den6 = 1 / den6;
 									var txx6 = (_qy6 * _sx6 - _qx6 * _sy6) * den6;
-									$r = txx6 > nape.Config.epsilon && txx6 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx6 > nape_Config.epsilon && txx6 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx6 = (_vy6 * _sx6 - _vx6 * _sy6) * den6;
-										$r = sxx6 > nape.Config.epsilon && sxx6 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx6 > nape_Config.epsilon && sxx6 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t6 = txx6;
 											$r = true;
@@ -7747,7 +7761,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									} else max1 = t6;
 								}
 							}
-							u3 = v7;
+							u3 = v8;
 							ite1 = cx_ite5;
 							ind11++;
 							if(ind11 >= s1.polygon.edgeCnt) ind11 = 0;
@@ -7755,7 +7769,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 							if(cx_ite5 == null) cx_ite5 = s1.polygon.gverts.next;
 						} while(false);
 						while(cx_ite5 != beg_ite1) {
-							var v8 = cx_ite5;
+							var v9 = cx_ite5;
 							var t7 = 0.0;
 							if((function($this) {
 								var $r;
@@ -7768,8 +7782,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								var _vx7 = 0.0;
 								var _vy7 = 0.0;
 								{
-									_vx7 = v8.x - u3.x;
-									_vy7 = v8.y - u3.y;
+									_vx7 = v9.x - u3.x;
+									_vy7 = v9.y - u3.y;
 								}
 								var _qx7 = 0.0;
 								var _qy7 = 0.0;
@@ -7778,14 +7792,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									_qy7 = b5.y - a3.y;
 								}
 								var den7 = _vy7 * _qx7 - _vx7 * _qy7;
-								$r = den7 * den7 > nape.Config.epsilon * nape.Config.epsilon?(function($this) {
+								$r = den7 * den7 > nape_Config.epsilon * nape_Config.epsilon?(function($this) {
 									var $r;
 									den7 = 1 / den7;
 									var txx7 = (_qy7 * _sx7 - _qx7 * _sy7) * den7;
-									$r = txx7 > nape.Config.epsilon && txx7 < 1 - nape.Config.epsilon?(function($this) {
+									$r = txx7 > nape_Config.epsilon && txx7 < 1 - nape_Config.epsilon?(function($this) {
 										var $r;
 										var sxx7 = (_vy7 * _sx7 - _vx7 * _sy7) * den7;
-										$r = sxx7 > nape.Config.epsilon && sxx7 < 1 - nape.Config.epsilon?(function($this) {
+										$r = sxx7 > nape_Config.epsilon && sxx7 < 1 - nape_Config.epsilon?(function($this) {
 											var $r;
 											t7 = txx7;
 											$r = true;
@@ -7807,7 +7821,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 									} else max1 = t7;
 								}
 							}
-							u3 = v8;
+							u3 = v9;
 							ite1 = cx_ite5;
 							ind11++;
 							if(ind11 >= s1.polygon.edgeCnt) ind11 = 0;
@@ -7818,57 +7832,57 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						var u4 = itmo1;
 						var itm21 = itmo1.next;
 						if(itm21 == null) itm21 = s1.polygon.gverts.next;
-						var v9 = itm21;
+						var v7 = itm21;
 						var cx3 = 0.0;
 						var cy3 = 0.0;
 						var T3 = max1;
-						cx3 = u4.x + (v9.x - u4.x) * T3;
-						cy3 = u4.y + (v9.y - u4.y) * T3;
-						if(fst_vert != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(cx3,cy3,fst_vert.x,fst_vert.y) < nape.Config.epsilon) break;
-						zpp_nape.geom.ZPP_Collide.flowpoly.add(zpp_nape.geom.ZPP_Vec2.get(cx3,cy3,null));
-						if(fst_vert == null) fst_vert = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+						cx3 = u4.x + (v7.x - u4.x) * T3;
+						cy3 = u4.y + (v7.y - u4.y) * T3;
+						if(fst_vert != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(cx3,cy3,fst_vert.x,fst_vert.y) < nape_Config.epsilon) break;
+						zpp_$nape_geom_ZPP_$Collide.flowpoly.add(zpp_$nape_geom_ZPP_$Vec2.get(cx3,cy3,null));
+						if(fst_vert == null) fst_vert = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 						ite1 = itmo1;
 						ind11 = indo1;
 						poly1 = !poly1;
 						cnt = 2;
 					}
 				}
-				if(zpp_nape.geom.ZPP_Collide.flowpoly.head != null && zpp_nape.geom.ZPP_Collide.flowpoly.head.next != null && zpp_nape.geom.ZPP_Collide.flowpoly.head.next.next != null) {
+				if(zpp_$nape_geom_ZPP_$Collide.flowpoly.head != null && zpp_$nape_geom_ZPP_$Collide.flowpoly.head.next != null && zpp_$nape_geom_ZPP_$Collide.flowpoly.head.next.next != null) {
 					var area = 0.0;
 					var COMx = 0.0;
 					var COMy = 0.0;
 					COMx = 0;
 					COMy = 0;
 					area = 0.0;
-					var cx_ite6 = zpp_nape.geom.ZPP_Collide.flowpoly.head;
+					var cx_ite6 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head;
 					var u5 = cx_ite6.elt;
 					cx_ite6 = cx_ite6.next;
 					var v10 = cx_ite6.elt;
 					cx_ite6 = cx_ite6.next;
 					while(cx_ite6 != null) {
-						var w = cx_ite6.elt;
-						area += v10.x * (w.y - u5.y);
-						var cf = w.y * v10.x - w.x * v10.y;
-						COMx += (v10.x + w.x) * cf;
-						COMy += (v10.y + w.y) * cf;
+						var w2 = cx_ite6.elt;
+						area += v10.x * (w2.y - u5.y);
+						var cf = w2.y * v10.x - w2.x * v10.y;
+						COMx += (v10.x + w2.x) * cf;
+						COMy += (v10.y + w2.y) * cf;
 						u5 = v10;
-						v10 = w;
+						v10 = w2;
 						cx_ite6 = cx_ite6.next;
 					}
-					cx_ite6 = zpp_nape.geom.ZPP_Collide.flowpoly.head;
+					cx_ite6 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head;
+					var w = cx_ite6.elt;
+					area += v10.x * (w.y - u5.y);
+					var cf1 = w.y * v10.x - w.x * v10.y;
+					COMx += (v10.x + w.x) * cf1;
+					COMy += (v10.y + w.y) * cf1;
+					u5 = v10;
+					v10 = w;
+					cx_ite6 = cx_ite6.next;
 					var w1 = cx_ite6.elt;
 					area += v10.x * (w1.y - u5.y);
-					var cf1 = w1.y * v10.x - w1.x * v10.y;
-					COMx += (v10.x + w1.x) * cf1;
-					COMy += (v10.y + w1.y) * cf1;
-					u5 = v10;
-					v10 = w1;
-					cx_ite6 = cx_ite6.next;
-					var w2 = cx_ite6.elt;
-					area += v10.x * (w2.y - u5.y);
-					var cf2 = w2.y * v10.x - w2.x * v10.y;
-					COMx += (v10.x + w2.x) * cf2;
-					COMy += (v10.y + w2.y) * cf2;
+					var cf2 = w1.y * v10.x - w1.x * v10.y;
+					COMx += (v10.x + w1.x) * cf2;
+					COMy += (v10.y + w1.y) * cf2;
 					area *= 0.5;
 					var ia = 1 / (6 * area);
 					var t8 = ia;
@@ -7883,7 +7897,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 			} else return false;
 		} else return false;
 	} else {
-		var inte = new Array();
+		var inte = [];
 		var total1 = true;
 		var a0 = null;
 		var vi = null;
@@ -7898,7 +7912,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 			if(dist > a4.gprojection + s1.circle.radius) {
 				cont1 = false;
 				break;
-			} else if(dist + s1.circle.radius > a4.gprojection + nape.Config.epsilon) {
+			} else if(dist + s1.circle.radius > a4.gprojection + nape_Config.epsilon) {
 				total1 = false;
 				inte[ind3] = true;
 			}
@@ -7949,7 +7963,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 					$r = distSqr1 <= minDist1 * minDist1;
 					return $r;
 				}(this)):true) {
-					var ins = new Array();
+					var ins = [];
 					var ind4 = 0;
 					var total2 = true;
 					var vi1 = null;
@@ -7957,7 +7971,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 					var cx_ite8 = s2.polygon.gverts.next;
 					while(cx_ite8 != null) {
 						var v12 = cx_ite8;
-						var dist1 = zpp_nape.geom.ZPP_VecMath.vec_dsq(v12.x,v12.y,s1.circle.worldCOMx,s1.circle.worldCOMy);
+						var dist1 = zpp_$nape_geom_ZPP_$VecMath.vec_dsq(v12.x,v12.y,s1.circle.worldCOMx,s1.circle.worldCOMy);
 						if(!(ins[ind4] = dist1 <= s1.circle.radius * s1.circle.radius)) total2 = false; else {
 							vind = ind4;
 							vi1 = cx_ite8;
@@ -7973,8 +7987,8 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 						null;
 						return true;
 					} else {
-						while(!(zpp_nape.geom.ZPP_Collide.flowpoly.head == null)) {
-							var p1 = zpp_nape.geom.ZPP_Collide.flowpoly.pop_unsafe();
+						while(!(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null)) {
+							var p1 = zpp_$nape_geom_ZPP_$Collide.flowpoly.pop_unsafe();
 							if(!p1._inuse) {
 								var o1 = p1;
 								if(o1.outer != null) {
@@ -7984,27 +7998,27 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								o1._isimmutable = null;
 								o1._validate = null;
 								o1._invalidate = null;
-								o1.next = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-								zpp_nape.geom.ZPP_Vec2.zpp_pool = o1;
+								o1.next = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+								zpp_$nape_geom_ZPP_$Vec2.zpp_pool = o1;
 							}
 						}
-						zpp_nape.geom.ZPP_Collide.flowsegs.clear();
+						zpp_$nape_geom_ZPP_$Collide.flowsegs.clear();
 						var fst_vert1 = null;
 						var state = 1;
 						if(vi1 == null) {
 							vi1 = s2.polygon.gverts.next;
 							state = 2;
-						} else zpp_nape.geom.ZPP_Collide.flowpoly.add(fst_vert1 = vi1);
+						} else zpp_$nape_geom_ZPP_$Collide.flowpoly.add(fst_vert1 = vi1);
 						while(state != 0) if(state == 1) {
 							vi1 = vi1.next;
 							if(vi1 == null) vi1 = s2.polygon.gverts.next;
 							vind++;
 							if(vind >= s2.polygon.edgeCnt) vind = 0;
 							if(ins[vind]) {
-								if(zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,vi1.x,vi1.y) < nape.Config.epsilon) break;
-								zpp_nape.geom.ZPP_Collide.flowpoly.add(vi1);
+								if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,vi1.x,vi1.y) < nape_Config.epsilon) break;
+								zpp_$nape_geom_ZPP_$Collide.flowpoly.add(vi1);
 							} else {
-								var u6 = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+								var u6 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 								var v13 = vi1;
 								var tval;
 								var vx = 0.0;
@@ -8021,14 +8035,14 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								var D = Math.sqrt(B * B - 4 * A * C);
 								A = 1 / (2 * A);
 								var t9 = (-B - D) * A;
-								if(t9 < nape.Config.epsilon) tval = (-B + D) * A; else tval = t9;
+								if(t9 < nape_Config.epsilon) tval = (-B + D) * A; else tval = t9;
 								var cx4 = 0.0;
 								var cy4 = 0.0;
 								var T4 = tval;
 								cx4 = u6.x + (v13.x - u6.x) * T4;
 								cy4 = u6.y + (v13.y - u6.y) * T4;
-								if(zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx4,cy4) < nape.Config.epsilon) break;
-								zpp_nape.geom.ZPP_Collide.flowpoly.add(zpp_nape.geom.ZPP_Vec2.get(cx4,cy4,null));
+								if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx4,cy4) < nape_Config.epsilon) break;
+								zpp_$nape_geom_ZPP_$Collide.flowpoly.add(zpp_$nape_geom_ZPP_$Vec2.get(cx4,cy4,null));
 								state = 2;
 							}
 						} else if(state == 2) {
@@ -8059,21 +8073,21 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 										var D1 = Math.sqrt(B1 * B1 - 4 * A1 * C1);
 										A1 = 1 / (2 * A1);
 										var t10 = (-B1 - D1) * A1;
-										if(t10 < nape.Config.epsilon) tval1 = (-B1 + D1) * A1; else tval1 = t10;
+										if(t10 < nape_Config.epsilon) tval1 = (-B1 + D1) * A1; else tval1 = t10;
 										var cx5 = 0.0;
 										var cy5 = 0.0;
 										var T5 = tval1;
 										cx5 = u7.x + (v14.x - u7.x) * T5;
 										cy5 = u7.y + (v14.y - u7.y) * T5;
-										if(zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx5,cy5) < nape.Config.epsilon) {
+										if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx5,cy5) < nape_Config.epsilon) {
 											state = 0;
 											cx_ite9 = beg_ite2;
 											break;
 										}
-										var cp = zpp_nape.geom.ZPP_Vec2.get(cx5,cy5,null);
-										zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.elt);
-										zpp_nape.geom.ZPP_Collide.flowsegs.add(cp);
-										zpp_nape.geom.ZPP_Collide.flowpoly.add(cp);
+										var cp = zpp_$nape_geom_ZPP_$Vec2.get(cx5,cy5,null);
+										zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt);
+										zpp_$nape_geom_ZPP_$Collide.flowsegs.add(cp);
+										zpp_$nape_geom_ZPP_$Collide.flowpoly.add(cp);
 										state = 1;
 										cx_ite9 = beg_ite2;
 										break;
@@ -8093,7 +8107,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 										var B2 = 2 * (qx2 * vx2 + qy2 * vy2);
 										var C2 = qx2 * qx2 + qy2 * qy2 - s1.circle.radius * s1.circle.radius;
 										var D2 = B2 * B2 - 4 * A2 * C2;
-										if(D2 * D2 < nape.Config.epsilon) {
+										if(D2 * D2 < nape_Config.epsilon) {
 											if(D2 < 0) t0 = 10.0; else t0 = t11 = -B2 / (2 * A2);
 											two = false;
 										} else {
@@ -8103,31 +8117,31 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 											t11 = (-B2 + D2) * A2;
 											two = true;
 										}
-										if(t0 < 1 - nape.Config.epsilon && t11 > nape.Config.epsilon) {
+										if(t0 < 1 - nape_Config.epsilon && t11 > nape_Config.epsilon) {
 											var cx6 = 0.0;
 											var cy6 = 0.0;
 											var T6 = t0;
 											cx6 = u7.x + (v14.x - u7.x) * T6;
 											cy6 = u7.y + (v14.y - u7.y) * T6;
-											if(fst_vert1 != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx6,cy6) < nape.Config.epsilon) {
+											if(fst_vert1 != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx6,cy6) < nape_Config.epsilon) {
 												state = 0;
 												cx_ite9 = beg_ite2;
 												break;
 											}
-											var cp1 = zpp_nape.geom.ZPP_Vec2.get(cx6,cy6,null);
-											if(!(zpp_nape.geom.ZPP_Collide.flowpoly.head == null)) {
-												zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.elt);
-												zpp_nape.geom.ZPP_Collide.flowsegs.add(cp1);
+											var cp1 = zpp_$nape_geom_ZPP_$Vec2.get(cx6,cy6,null);
+											if(!(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null)) {
+												zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt);
+												zpp_$nape_geom_ZPP_$Collide.flowsegs.add(cp1);
 											}
-											zpp_nape.geom.ZPP_Collide.flowpoly.add(cp1);
-											if(fst_vert1 == null) fst_vert1 = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+											zpp_$nape_geom_ZPP_$Collide.flowpoly.add(cp1);
+											if(fst_vert1 == null) fst_vert1 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 											if(two) {
 												var cx7 = 0.0;
 												var cy7 = 0.0;
 												var T7 = t11;
 												cx7 = u7.x + (v14.x - u7.x) * T7;
 												cy7 = u7.y + (v14.y - u7.y) * T7;
-												zpp_nape.geom.ZPP_Collide.flowpoly.add(zpp_nape.geom.ZPP_Vec2.get(cx7,cy7,null));
+												zpp_$nape_geom_ZPP_$Collide.flowpoly.add(zpp_$nape_geom_ZPP_$Vec2.get(cx7,cy7,null));
 											}
 										}
 									}
@@ -8159,21 +8173,21 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 										var D3 = Math.sqrt(B3 * B3 - 4 * A3 * C3);
 										A3 = 1 / (2 * A3);
 										var t12 = (-B3 - D3) * A3;
-										if(t12 < nape.Config.epsilon) tval2 = (-B3 + D3) * A3; else tval2 = t12;
+										if(t12 < nape_Config.epsilon) tval2 = (-B3 + D3) * A3; else tval2 = t12;
 										var cx8 = 0.0;
 										var cy8 = 0.0;
 										var T8 = tval2;
 										cx8 = u7.x + (v15.x - u7.x) * T8;
 										cy8 = u7.y + (v15.y - u7.y) * T8;
-										if(zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx8,cy8) < nape.Config.epsilon) {
+										if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx8,cy8) < nape_Config.epsilon) {
 											state = 0;
 											cx_ite9 = beg_ite2;
 											break;
 										}
-										var cp2 = zpp_nape.geom.ZPP_Vec2.get(cx8,cy8,null);
-										zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.elt);
-										zpp_nape.geom.ZPP_Collide.flowsegs.add(cp2);
-										zpp_nape.geom.ZPP_Collide.flowpoly.add(cp2);
+										var cp2 = zpp_$nape_geom_ZPP_$Vec2.get(cx8,cy8,null);
+										zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt);
+										zpp_$nape_geom_ZPP_$Collide.flowsegs.add(cp2);
+										zpp_$nape_geom_ZPP_$Collide.flowpoly.add(cp2);
 										state = 1;
 										cx_ite9 = beg_ite2;
 										break;
@@ -8193,7 +8207,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 										var B4 = 2 * (qx4 * vx4 + qy4 * vy4);
 										var C4 = qx4 * qx4 + qy4 * qy4 - s1.circle.radius * s1.circle.radius;
 										var D4 = B4 * B4 - 4 * A4 * C4;
-										if(D4 * D4 < nape.Config.epsilon) {
+										if(D4 * D4 < nape_Config.epsilon) {
 											if(D4 < 0) t01 = 10.0; else t01 = t13 = -B4 / (2 * A4);
 											two1 = false;
 										} else {
@@ -8203,31 +8217,31 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 											t13 = (-B4 + D4) * A4;
 											two1 = true;
 										}
-										if(t01 < 1 - nape.Config.epsilon && t13 > nape.Config.epsilon) {
+										if(t01 < 1 - nape_Config.epsilon && t13 > nape_Config.epsilon) {
 											var cx9 = 0.0;
 											var cy9 = 0.0;
 											var T9 = t01;
 											cx9 = u7.x + (v15.x - u7.x) * T9;
 											cy9 = u7.y + (v15.y - u7.y) * T9;
-											if(fst_vert1 != null && zpp_nape.geom.ZPP_VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx9,cy9) < nape.Config.epsilon) {
+											if(fst_vert1 != null && zpp_$nape_geom_ZPP_$VecMath.vec_dsq(fst_vert1.x,fst_vert1.y,cx9,cy9) < nape_Config.epsilon) {
 												state = 0;
 												cx_ite9 = beg_ite2;
 												break;
 											}
-											var cp3 = zpp_nape.geom.ZPP_Vec2.get(cx9,cy9,null);
-											if(!(zpp_nape.geom.ZPP_Collide.flowpoly.head == null)) {
-												zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.elt);
-												zpp_nape.geom.ZPP_Collide.flowsegs.add(cp3);
+											var cp3 = zpp_$nape_geom_ZPP_$Vec2.get(cx9,cy9,null);
+											if(!(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null)) {
+												zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt);
+												zpp_$nape_geom_ZPP_$Collide.flowsegs.add(cp3);
 											}
-											zpp_nape.geom.ZPP_Collide.flowpoly.add(cp3);
-											if(fst_vert1 == null) fst_vert1 = zpp_nape.geom.ZPP_Collide.flowpoly.head.elt;
+											zpp_$nape_geom_ZPP_$Collide.flowpoly.add(cp3);
+											if(fst_vert1 == null) fst_vert1 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt;
 											if(two1) {
 												var cx10 = 0.0;
 												var cy10 = 0.0;
 												var T10 = t13;
 												cx10 = u7.x + (v15.x - u7.x) * T10;
 												cy10 = u7.y + (v15.y - u7.y) * T10;
-												zpp_nape.geom.ZPP_Collide.flowpoly.add(zpp_nape.geom.ZPP_Vec2.get(cx10,cy10,null));
+												zpp_$nape_geom_ZPP_$Collide.flowpoly.add(zpp_$nape_geom_ZPP_$Vec2.get(cx10,cy10,null));
 											}
 										}
 									}
@@ -8239,7 +8253,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								if(cx_ite9 == null) cx_ite9 = s2.polygon.gverts.next;
 							}
 						}
-						if(zpp_nape.geom.ZPP_Collide.flowpoly.head == null) return false; else if(zpp_nape.geom.ZPP_Collide.flowpoly.head.next == null) {
+						if(zpp_$nape_geom_ZPP_$Collide.flowpoly.head == null) return false; else if(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.next == null) {
 							var all = true;
 							var cx_ite10 = s2.polygon.edges.head;
 							while(cx_ite10 != null) {
@@ -8262,42 +8276,42 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 							var COMx1 = 0;
 							var COMy1 = 0;
 							var area1 = 0.0;
-							if(zpp_nape.geom.ZPP_Collide.flowpoly.head.next.next != null) {
+							if(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.next.next != null) {
 								var parea = 0.0;
 								var pCOMx = 0.0;
 								var pCOMy = 0.0;
 								pCOMx = 0;
 								pCOMy = 0;
 								parea = 0.0;
-								var cx_ite11 = zpp_nape.geom.ZPP_Collide.flowpoly.head;
+								var cx_ite11 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head;
 								var u8 = cx_ite11.elt;
 								cx_ite11 = cx_ite11.next;
 								var v16 = cx_ite11.elt;
 								cx_ite11 = cx_ite11.next;
 								while(cx_ite11 != null) {
-									var w3 = cx_ite11.elt;
-									parea += v16.x * (w3.y - u8.y);
-									var cf3 = w3.y * v16.x - w3.x * v16.y;
-									pCOMx += (v16.x + w3.x) * cf3;
-									pCOMy += (v16.y + w3.y) * cf3;
+									var w5 = cx_ite11.elt;
+									parea += v16.x * (w5.y - u8.y);
+									var cf3 = w5.y * v16.x - w5.x * v16.y;
+									pCOMx += (v16.x + w5.x) * cf3;
+									pCOMy += (v16.y + w5.y) * cf3;
 									u8 = v16;
-									v16 = w3;
+									v16 = w5;
 									cx_ite11 = cx_ite11.next;
 								}
-								cx_ite11 = zpp_nape.geom.ZPP_Collide.flowpoly.head;
+								cx_ite11 = zpp_$nape_geom_ZPP_$Collide.flowpoly.head;
+								var w3 = cx_ite11.elt;
+								parea += v16.x * (w3.y - u8.y);
+								var cf4 = w3.y * v16.x - w3.x * v16.y;
+								pCOMx += (v16.x + w3.x) * cf4;
+								pCOMy += (v16.y + w3.y) * cf4;
+								u8 = v16;
+								v16 = w3;
+								cx_ite11 = cx_ite11.next;
 								var w4 = cx_ite11.elt;
 								parea += v16.x * (w4.y - u8.y);
-								var cf4 = w4.y * v16.x - w4.x * v16.y;
-								pCOMx += (v16.x + w4.x) * cf4;
-								pCOMy += (v16.y + w4.y) * cf4;
-								u8 = v16;
-								v16 = w4;
-								cx_ite11 = cx_ite11.next;
-								var w5 = cx_ite11.elt;
-								parea += v16.x * (w5.y - u8.y);
-								var cf5 = w5.y * v16.x - w5.x * v16.y;
-								pCOMx += (v16.x + w5.x) * cf5;
-								pCOMy += (v16.y + w5.y) * cf5;
+								var cf5 = w4.y * v16.x - w4.x * v16.y;
+								pCOMx += (v16.x + w4.x) * cf5;
+								pCOMy += (v16.y + w4.y) * cf5;
 								parea *= 0.5;
 								var ia1 = 1 / (6 * parea);
 								var t14 = ia1;
@@ -8308,12 +8322,12 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 								COMy1 += pCOMy * t15;
 								area1 -= parea;
 							} else {
-								zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.elt);
-								zpp_nape.geom.ZPP_Collide.flowsegs.add(zpp_nape.geom.ZPP_Collide.flowpoly.head.next.elt);
+								zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.elt);
+								zpp_$nape_geom_ZPP_$Collide.flowsegs.add(zpp_$nape_geom_ZPP_$Collide.flowpoly.head.next.elt);
 							}
-							while(!(zpp_nape.geom.ZPP_Collide.flowsegs.head == null)) {
-								var u9 = zpp_nape.geom.ZPP_Collide.flowsegs.pop_unsafe();
-								var v17 = zpp_nape.geom.ZPP_Collide.flowsegs.pop_unsafe();
+							while(!(zpp_$nape_geom_ZPP_$Collide.flowsegs.head == null)) {
+								var u9 = zpp_$nape_geom_ZPP_$Collide.flowsegs.pop_unsafe();
+								var v17 = zpp_$nape_geom_ZPP_$Collide.flowsegs.pop_unsafe();
 								var dx = 0.0;
 								var dy = 0.0;
 								dx = v17.x - u9.x;
@@ -8381,7 +8395,7 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 		deltay = c2.worldCOMy - c1.worldCOMy;
 		var cr = c1.radius + c2.radius;
 		var ds = deltax * deltax + deltay * deltay;
-		if(ds > cr * cr) return false; else if(ds < nape.Config.epsilon * nape.Config.epsilon) {
+		if(ds > cr * cr) return false; else if(ds < nape_Config.epsilon * nape_Config.epsilon) {
 			if(c1.radius < c2.radius) {
 				arb.overlap = c1.area;
 				arb.centroidx = c1.worldCOMx;
@@ -8439,34 +8453,34 @@ zpp_nape.geom.ZPP_Collide.flowCollide = function(s1,s2,arb) {
 		}
 	}
 };
-zpp_nape.geom.ZPP_ConvexRayResult = function() {
+var zpp_$nape_geom_ZPP_$ConvexRayResult = function() {
 	this.toiDistance = 0.0;
 	this.next = null;
 	this.inner = false;
 	this.shape = null;
 };
-zpp_nape.geom.ZPP_ConvexRayResult.__name__ = true;
-zpp_nape.geom.ZPP_ConvexRayResult.prototype = {
-	__class__: zpp_nape.geom.ZPP_ConvexRayResult
+zpp_$nape_geom_ZPP_$ConvexRayResult.__name__ = true;
+zpp_$nape_geom_ZPP_$ConvexRayResult.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$ConvexRayResult
 };
-zpp_nape.geom.ZPP_GeomVert = function() {
+var zpp_$nape_geom_ZPP_$GeomVert = function() {
 	this.next = null;
 	this.y = 0.0;
 	this.x = 0.0;
 };
-zpp_nape.geom.ZPP_GeomVert.__name__ = true;
-zpp_nape.geom.ZPP_GeomVert.prototype = {
-	__class__: zpp_nape.geom.ZPP_GeomVert
+zpp_$nape_geom_ZPP_$GeomVert.__name__ = true;
+zpp_$nape_geom_ZPP_$GeomVert.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$GeomVert
 };
-zpp_nape.geom.ZPP_GeomPoly = function() {
+var zpp_$nape_geom_ZPP_$GeomPoly = function() {
 	this.vertices = null;
 	this.outer = null;
 };
-zpp_nape.geom.ZPP_GeomPoly.__name__ = true;
-zpp_nape.geom.ZPP_GeomPoly.prototype = {
-	__class__: zpp_nape.geom.ZPP_GeomPoly
+zpp_$nape_geom_ZPP_$GeomPoly.__name__ = true;
+zpp_$nape_geom_ZPP_$GeomPoly.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$GeomPoly
 };
-zpp_nape.geom.ZPP_Mat23 = function() {
+var zpp_$nape_geom_ZPP_$Mat23 = function() {
 	this.ty = 0.0;
 	this.tx = 0.0;
 	this.d = 0.0;
@@ -8474,20 +8488,20 @@ zpp_nape.geom.ZPP_Mat23 = function() {
 	this.b = 0.0;
 	this.a = 0.0;
 };
-zpp_nape.geom.ZPP_Mat23.__name__ = true;
-zpp_nape.geom.ZPP_Mat23.prototype = {
-	__class__: zpp_nape.geom.ZPP_Mat23
+zpp_$nape_geom_ZPP_$Mat23.__name__ = true;
+zpp_$nape_geom_ZPP_$Mat23.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$Mat23
 };
-zpp_nape.geom.ZPP_MatMN = function() {
+var zpp_$nape_geom_ZPP_$MatMN = function() {
 	this.x = null;
 	this.n = 0;
 	this.m = 0;
 };
-zpp_nape.geom.ZPP_MatMN.__name__ = true;
-zpp_nape.geom.ZPP_MatMN.prototype = {
-	__class__: zpp_nape.geom.ZPP_MatMN
+zpp_$nape_geom_ZPP_$MatMN.__name__ = true;
+zpp_$nape_geom_ZPP_$MatMN.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$MatMN
 };
-zpp_nape.geom.ZPP_ToiEvent = function() {
+var zpp_$nape_geom_ZPP_$ToiEvent = function() {
 	this.kinematic = false;
 	this.failed = false;
 	this.slipped = false;
@@ -8501,17 +8515,17 @@ zpp_nape.geom.ZPP_ToiEvent = function() {
 	this.s1 = null;
 	this.toi = 0.0;
 	this.next = null;
-	this.c1 = new zpp_nape.geom.ZPP_Vec2();
-	this.c2 = new zpp_nape.geom.ZPP_Vec2();
-	this.axis = new zpp_nape.geom.ZPP_Vec2();
+	this.c1 = new zpp_$nape_geom_ZPP_$Vec2();
+	this.c2 = new zpp_$nape_geom_ZPP_$Vec2();
+	this.axis = new zpp_$nape_geom_ZPP_$Vec2();
 };
-zpp_nape.geom.ZPP_ToiEvent.__name__ = true;
-zpp_nape.geom.ZPP_ToiEvent.prototype = {
-	__class__: zpp_nape.geom.ZPP_ToiEvent
+zpp_$nape_geom_ZPP_$ToiEvent.__name__ = true;
+zpp_$nape_geom_ZPP_$ToiEvent.prototype = {
+	__class__: zpp_$nape_geom_ZPP_$ToiEvent
 };
-zpp_nape.geom.ZPP_SweepDistance = function() { };
-zpp_nape.geom.ZPP_SweepDistance.__name__ = true;
-zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,negRadius,userAPI) {
+var zpp_$nape_geom_ZPP_$SweepDistance = function() { };
+zpp_$nape_geom_ZPP_$SweepDistance.__name__ = true;
+zpp_$nape_geom_ZPP_$SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,negRadius,userAPI) {
 	if(userAPI == null) userAPI = false;
 	var s1 = toi.s1;
 	var s2 = toi.s2;
@@ -8526,7 +8540,7 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 	var ang2 = b2.angvel;
 	if(ang2 < 0) ang2 = -ang2;
 	var angBias = s1.sweepCoef * ang1 + s2.sweepCoef * ang2;
-	if(!userAPI && !toi.kinematic && deltax * deltax + deltay * deltay < nape.Config.dynamicSweepLinearThreshold * nape.Config.dynamicSweepLinearThreshold && angBias < nape.Config.dynamicSweepAngularThreshold) {
+	if(!userAPI && !toi.kinematic && deltax * deltax + deltay * deltay < nape_Config.dynamicSweepLinearThreshold * nape_Config.dynamicSweepLinearThreshold && angBias < nape_Config.dynamicSweepAngularThreshold) {
 		toi.toi = -1;
 		toi.failed = true;
 		return;
@@ -8541,9 +8555,9 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 		b1.sweepValidate(s1);
 		b2.sweepIntegrate(curTOI * timeStep);
 		b2.sweepValidate(s2);
-		var sep = zpp_nape.geom.ZPP_SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
+		var sep = zpp_$nape_geom_ZPP_$SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
 		var dot = deltax * axis.x + deltay * axis.y;
-		if(sep < nape.Config.distanceThresholdCCD) {
+		if(sep < nape_Config.distanceThresholdCCD) {
 			if(userAPI) break;
 			var d1x = 0.0;
 			var d1y = 0.0;
@@ -8555,7 +8569,7 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 			d2y = c2.y - b2.posy;
 			var proj = dot - b1.sweep_angvel * (axis.y * d1x - axis.x * d1y) + b2.sweep_angvel * (axis.y * d2x - axis.x * d2y);
 			if(proj > 0) toi.slipped = true;
-			if(proj <= 0 || sep < nape.Config.distanceThresholdCCD * 0.5) break;
+			if(proj <= 0 || sep < nape_Config.distanceThresholdCCD * 0.5) break;
 		}
 		var denom = (angBias - dot) * timeStep;
 		if(denom <= 0) {
@@ -8571,9 +8585,9 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 			b1.sweepValidate(s1);
 			b2.sweepIntegrate(curTOI * timeStep);
 			b2.sweepValidate(s2);
-			var sep1 = zpp_nape.geom.ZPP_SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
+			var sep1 = zpp_$nape_geom_ZPP_$SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
 			var dot1 = deltax * axis.x + deltay * axis.y;
-			if(sep1 < nape.Config.distanceThresholdCCD) {
+			if(sep1 < nape_Config.distanceThresholdCCD) {
 				if(userAPI) break;
 				var d1x1 = 0.0;
 				var d1y1 = 0.0;
@@ -8585,7 +8599,7 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 				d2y1 = c2.y - b2.posy;
 				var proj1 = dot1 - b1.sweep_angvel * (axis.y * d1x1 - axis.x * d1y1) + b2.sweep_angvel * (axis.y * d2x1 - axis.x * d2y1);
 				if(proj1 > 0) toi.slipped = true;
-				if(proj1 <= 0 || sep1 < nape.Config.distanceThresholdCCD * 0.5) break;
+				if(proj1 <= 0 || sep1 < nape_Config.distanceThresholdCCD * 0.5) break;
 			}
 			curTOI = -1;
 			break;
@@ -8597,7 +8611,7 @@ zpp_nape.geom.ZPP_SweepDistance.dynamicSweep = function(toi,timeStep,lowerBound,
 	}
 	toi.toi = curTOI;
 };
-zpp_nape.geom.ZPP_SweepDistance.staticSweep = function(toi,timeStep,lowerBound,negRadius) {
+zpp_$nape_geom_ZPP_$SweepDistance.staticSweep = function(toi,timeStep,lowerBound,negRadius) {
 	var s1 = toi.s1;
 	var s2 = toi.s2;
 	var b1 = s1.body;
@@ -8617,16 +8631,16 @@ zpp_nape.geom.ZPP_SweepDistance.staticSweep = function(toi,timeStep,lowerBound,n
 	while(true) {
 		b1.sweepIntegrate(curTOI * timeStep);
 		b1.sweepValidate(s1);
-		var sep = zpp_nape.geom.ZPP_SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
+		var sep = zpp_$nape_geom_ZPP_$SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
 		var dot = deltax * axis.x + deltay * axis.y;
-		if(sep < nape.Config.distanceThresholdCCD) {
+		if(sep < nape_Config.distanceThresholdCCD) {
 			var d1x = 0.0;
 			var d1y = 0.0;
 			d1x = c1.x - b1.posx;
 			d1y = c1.y - b1.posy;
 			var proj = dot - b1.sweep_angvel * (axis.y * d1x - axis.x * d1y);
 			if(proj > 0) toi.slipped = true;
-			if(proj <= 0 || sep < nape.Config.distanceThresholdCCD * 0.5) break;
+			if(proj <= 0 || sep < nape_Config.distanceThresholdCCD * 0.5) break;
 		}
 		var denom = (angBias - dot) * timeStep;
 		if(denom <= 0) {
@@ -8640,16 +8654,16 @@ zpp_nape.geom.ZPP_SweepDistance.staticSweep = function(toi,timeStep,lowerBound,n
 			curTOI = 1;
 			b1.sweepIntegrate(curTOI * timeStep);
 			b1.sweepValidate(s1);
-			var sep1 = zpp_nape.geom.ZPP_SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
+			var sep1 = zpp_$nape_geom_ZPP_$SweepDistance.distance(s1,s2,c1,c2,axis,null) + negRadius;
 			var dot1 = deltax * axis.x + deltay * axis.y;
-			if(sep1 < nape.Config.distanceThresholdCCD) {
+			if(sep1 < nape_Config.distanceThresholdCCD) {
 				var d1x1 = 0.0;
 				var d1y1 = 0.0;
 				d1x1 = c1.x - b1.posx;
 				d1y1 = c1.y - b1.posy;
 				var proj1 = dot1 - b1.sweep_angvel * (axis.y * d1x1 - axis.x * d1y1);
 				if(proj1 > 0) toi.slipped = true;
-				if(proj1 <= 0 || sep1 < nape.Config.distanceThresholdCCD * 0.5) break;
+				if(proj1 <= 0 || sep1 < nape_Config.distanceThresholdCCD * 0.5) break;
 			}
 			curTOI = -1;
 			break;
@@ -8661,9 +8675,9 @@ zpp_nape.geom.ZPP_SweepDistance.staticSweep = function(toi,timeStep,lowerBound,n
 	}
 	toi.toi = curTOI;
 };
-zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound) {
+zpp_$nape_geom_ZPP_$SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound) {
 	if(upperBound == null) upperBound = 1e100;
-	if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE && s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) {
+	if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE && s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) {
 		var c1 = s1.circle;
 		var c2 = s2.circle;
 		var dist;
@@ -8694,7 +8708,7 @@ zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound)
 		return dist;
 	} else {
 		var swapped = false;
-		if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE && s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+		if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE && s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 			var tmp = s1;
 			s1 = s2;
 			s2 = tmp;
@@ -8703,7 +8717,7 @@ zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound)
 			w2 = tmp2;
 			swapped = true;
 		}
-		if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON && s2.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) {
+		if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON && s2.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) {
 			var poly = s1.polygon;
 			var circle = s2.circle;
 			var best = -1e+100;
@@ -8942,10 +8956,10 @@ zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound)
 						var t15 = s21;
 						g2x = q0.x + qx * t15;
 						g2y = q0.y + qy * t15;
-						var d1 = zpp_nape.geom.ZPP_VecMath.vec_dsq(f1x,f1y,q0.x,q0.y);
-						var d2 = zpp_nape.geom.ZPP_VecMath.vec_dsq(f2x,f2y,q11.x,q11.y);
-						var e1 = zpp_nape.geom.ZPP_VecMath.vec_dsq(g1x,g1y,v01.x,v01.y);
-						var e2 = zpp_nape.geom.ZPP_VecMath.vec_dsq(g2x,g2y,v11.x,v11.y);
+						var d1 = zpp_$nape_geom_ZPP_$VecMath.vec_dsq(f1x,f1y,q0.x,q0.y);
+						var d2 = zpp_$nape_geom_ZPP_$VecMath.vec_dsq(f2x,f2y,q11.x,q11.y);
+						var e1 = zpp_$nape_geom_ZPP_$VecMath.vec_dsq(g1x,g1y,v01.x,v01.y);
+						var e2 = zpp_$nape_geom_ZPP_$VecMath.vec_dsq(g2x,g2y,v11.x,v11.y);
 						var minfx = 0.0;
 						var minfy = 0.0;
 						var minq = null;
@@ -9014,14 +9028,14 @@ zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound)
 						var d11 = ax.gnormy * c1x - ax.gnormx * c1y;
 						var den = 1 / (d11 - d0);
 						var t17 = (-ax.tp1 - d0) * den;
-						if(t17 > nape.Config.epsilon) {
-							var t18 = t17;
-							c0x += dvx * t18;
-							c0y += dvy * t18;
+						if(t17 > nape_Config.epsilon) {
+							var t19 = t17;
+							c0x += dvx * t19;
+							c0y += dvy * t19;
 						}
-						var t19 = (-ax.tp0 - d11) * den;
-						if(t19 < -nape.Config.epsilon) {
-							var t20 = t19;
+						var t18 = (-ax.tp0 - d11) * den;
+						if(t18 < -nape_Config.epsilon) {
+							var t20 = t18;
 							c1x += dvx * t20;
 							c1y += dvy * t20;
 						}
@@ -9048,7 +9062,7 @@ zpp_nape.geom.ZPP_SweepDistance.distance = function(s1,s2,w1,w2,axis,upperBound)
 		}
 	}
 };
-zpp_nape.geom.ZPP_Vec2 = function() {
+var zpp_$nape_geom_ZPP_$Vec2 = function() {
 	this.y = 0.0;
 	this.x = 0.0;
 	this.length = 0;
@@ -9063,13 +9077,13 @@ zpp_nape.geom.ZPP_Vec2 = function() {
 	this._validate = null;
 	this._invalidate = null;
 };
-zpp_nape.geom.ZPP_Vec2.__name__ = true;
-zpp_nape.geom.ZPP_Vec2.get = function(x,y,immutable) {
+zpp_$nape_geom_ZPP_$Vec2.__name__ = true;
+zpp_$nape_geom_ZPP_$Vec2.get = function(x,y,immutable) {
 	if(immutable == null) immutable = false;
 	var ret;
-	if(zpp_nape.geom.ZPP_Vec2.zpp_pool == null) ret = new zpp_nape.geom.ZPP_Vec2(); else {
-		ret = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-		zpp_nape.geom.ZPP_Vec2.zpp_pool = ret.next;
+	if(zpp_$nape_geom_ZPP_$Vec2.zpp_pool == null) ret = new zpp_$nape_geom_ZPP_$Vec2(); else {
+		ret = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+		zpp_$nape_geom_ZPP_$Vec2.zpp_pool = ret.next;
 		ret.next = null;
 	}
 	ret.weak = false;
@@ -9078,7 +9092,7 @@ zpp_nape.geom.ZPP_Vec2.get = function(x,y,immutable) {
 	ret.y = y;
 	return ret;
 };
-zpp_nape.geom.ZPP_Vec2.prototype = {
+zpp_$nape_geom_ZPP_$Vec2.prototype = {
 	validate: function() {
 		if(this._validate != null) this._validate();
 	}
@@ -9086,12 +9100,12 @@ zpp_nape.geom.ZPP_Vec2.prototype = {
 		if(this._invalidate != null) this._invalidate(this);
 	}
 	,immutable: function() {
-		if(this._immutable) throw "Error: Vec2 is immutable";
+		if(this._immutable) throw new js__$Boot_HaxeError("Error: Vec2 is immutable");
 		if(this._isimmutable != null) this._isimmutable();
 	}
 	,wrapper: function() {
 		if(this.outer == null) {
-			this.outer = new nape.geom.Vec2();
+			this.outer = new nape_geom_Vec2();
 			var o = this.outer.zpp_inner;
 			if(o.outer != null) {
 				o.outer.zpp_inner = null;
@@ -9100,8 +9114,8 @@ zpp_nape.geom.ZPP_Vec2.prototype = {
 			o._isimmutable = null;
 			o._validate = null;
 			o._invalidate = null;
-			o.next = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-			zpp_nape.geom.ZPP_Vec2.zpp_pool = o;
+			o.next = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+			zpp_$nape_geom_ZPP_$Vec2.zpp_pool = o;
 			this.outer.zpp_inner = this;
 		}
 		return this.outer;
@@ -9181,32 +9195,31 @@ zpp_nape.geom.ZPP_Vec2.prototype = {
 	,toString: function() {
 		return "{ x: " + this.x + " y: " + this.y + " }";
 	}
-	,__class__: zpp_nape.geom.ZPP_Vec2
+	,__class__: zpp_$nape_geom_ZPP_$Vec2
 };
-zpp_nape.geom.ZPP_Vec3 = function() {
+var zpp_$nape_geom_ZPP_$Vec3 = function() {
 	this._validate = null;
 	this.z = 0.0;
 	this.y = 0.0;
 	this.x = 0.0;
 };
-zpp_nape.geom.ZPP_Vec3.__name__ = true;
-zpp_nape.geom.ZPP_Vec3.prototype = {
+zpp_$nape_geom_ZPP_$Vec3.__name__ = true;
+zpp_$nape_geom_ZPP_$Vec3.prototype = {
 	validate: function() {
 		if(this._validate != null) this._validate();
 	}
-	,__class__: zpp_nape.geom.ZPP_Vec3
+	,__class__: zpp_$nape_geom_ZPP_$Vec3
 };
-zpp_nape.geom.ZPP_VecMath = function() { };
-zpp_nape.geom.ZPP_VecMath.__name__ = true;
-zpp_nape.geom.ZPP_VecMath.vec_dsq = function(ax,ay,bx,by) {
+var zpp_$nape_geom_ZPP_$VecMath = function() { };
+zpp_$nape_geom_ZPP_$VecMath.__name__ = true;
+zpp_$nape_geom_ZPP_$VecMath.vec_dsq = function(ax,ay,bx,by) {
 	var dx = 0.0;
 	var dy = 0.0;
 	dx = ax - bx;
 	dy = ay - by;
 	return dx * dx + dy * dy;
 };
-zpp_nape.phys = {};
-zpp_nape.phys.ZPP_Interactor = function() {
+var zpp_$nape_phys_ZPP_$Interactor = function() {
 	this.cbSet = null;
 	this.cbTypes = null;
 	this.group = null;
@@ -9216,12 +9229,12 @@ zpp_nape.phys.ZPP_Interactor = function() {
 	this.ishape = null;
 	this.id = 0;
 	this.outer_i = null;
-	this.id = zpp_nape.ZPP_ID.Interactor();
-	this.cbsets = new zpp_nape.util.ZNPList_ZPP_CallbackSet();
-	this.cbTypes = new zpp_nape.util.ZNPList_ZPP_CbType();
+	this.id = zpp_$nape_ZPP_$ID.Interactor();
+	this.cbsets = new zpp_$nape_util_ZNPList_$ZPP_$CallbackSet();
+	this.cbTypes = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
 };
-zpp_nape.phys.ZPP_Interactor.__name__ = true;
-zpp_nape.phys.ZPP_Interactor.get = function(i1,i2) {
+zpp_$nape_phys_ZPP_$Interactor.__name__ = true;
+zpp_$nape_phys_ZPP_$Interactor.get = function(i1,i2) {
 	var id;
 	if(i1.id < i2.id) id = i1.id; else id = i2.id;
 	var di;
@@ -9240,7 +9253,7 @@ zpp_nape.phys.ZPP_Interactor.get = function(i1,i2) {
 	}
 	return ret;
 };
-zpp_nape.phys.ZPP_Interactor.int_callback = function(set,x,cb) {
+zpp_$nape_phys_ZPP_$Interactor.int_callback = function(set,x,cb) {
 	var o1 = set.int1;
 	var o2 = set.int2;
 	if(x.options1.compatible(o1.cbTypes) && x.options2.compatible(o2.cbTypes)) {
@@ -9251,7 +9264,7 @@ zpp_nape.phys.ZPP_Interactor.int_callback = function(set,x,cb) {
 		cb.int2 = o1;
 	}
 };
-zpp_nape.phys.ZPP_Interactor.prototype = {
+zpp_$nape_phys_ZPP_$Interactor.prototype = {
 	__iaddedToSpace: function() {
 		if(this.group != null) this.group.interactors.add(this);
 		var cx_ite = this.cbTypes.head;
@@ -9333,8 +9346,8 @@ zpp_nape.phys.ZPP_Interactor.prototype = {
 				space.cbsets.remove(this.cbSet);
 				var o = this.cbSet;
 				o.free();
-				o.next = zpp_nape.callbacks.ZPP_CbSet.zpp_pool;
-				zpp_nape.callbacks.ZPP_CbSet.zpp_pool = o;
+				o.next = zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool;
+				zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool = o;
 			}
 			this.cbSet = null;
 		}
@@ -9347,9 +9360,9 @@ zpp_nape.phys.ZPP_Interactor.prototype = {
 		while(cur != null && cur.group == null) if(cur.ishape != null) cur = cur.ishape.body; else if(cur.icompound != null) cur = cur.icompound.compound; else cur = cur.ibody.compound;
 		if(cur == null) return null; else return cur.group;
 	}
-	,__class__: zpp_nape.phys.ZPP_Interactor
+	,__class__: zpp_$nape_phys_ZPP_$Interactor
 };
-zpp_nape.phys.ZPP_Body = function() {
+var zpp_$nape_phys_ZPP_$Body = function() {
 	this.wrap_worldCOM = null;
 	this.wrap_localCOM = null;
 	this.zip_worldCOM = false;
@@ -9417,7 +9430,7 @@ zpp_nape.phys.ZPP_Body = function() {
 	this.type = 0;
 	this.world = false;
 	this.outer = null;
-	zpp_nape.phys.ZPP_Interactor.call(this);
+	zpp_$nape_phys_ZPP_$Interactor.call(this);
 	this.ibody = this;
 	this.world = false;
 	this.bulletEnabled = false;
@@ -9439,42 +9452,42 @@ zpp_nape.phys.ZPP_Body = function() {
 	this.forcex = 0;
 	this.forcey = 0;
 	this.torque = this.angvel = this.kinangvel = 0;
-	this.pre_posx = Math.POSITIVE_INFINITY;
-	this.pre_posy = Math.POSITIVE_INFINITY;
-	this.pre_rot = Math.POSITIVE_INFINITY;
+	this.pre_posx = Infinity;
+	this.pre_posy = Infinity;
+	this.pre_rot = Infinity;
 	this.localCOMx = 0;
 	this.localCOMy = 0;
 	this.worldCOMx = 0;
 	this.worldCOMy = 0;
 	this.zip_aabb = true;
-	this.aabb = zpp_nape.geom.ZPP_AABB.get(0,0,0,0);
+	this.aabb = zpp_$nape_geom_ZPP_$AABB.get(0,0,0,0);
 	this.aabb._immutable = true;
 	var me = this;
 	this.aabb._validate = $bind(this,this.aabb_validate);
-	this.massMode = zpp_nape.util.ZPP_Flags.id_MassMode_DEFAULT;
-	this.gravMassMode = zpp_nape.util.ZPP_Flags.id_GravMassMode_DEFAULT;
+	this.massMode = zpp_$nape_util_ZPP_$Flags.id_MassMode_DEFAULT;
+	this.gravMassMode = zpp_$nape_util_ZPP_$Flags.id_GravMassMode_DEFAULT;
 	this.gravMassScale = 1.0;
-	this.inertiaMode = zpp_nape.util.ZPP_Flags.id_InertiaMode_DEFAULT;
-	this.arbiters = new zpp_nape.util.ZNPList_ZPP_Arbiter();
-	this.constraints = new zpp_nape.util.ZNPList_ZPP_Constraint();
-	this.shapes = new zpp_nape.util.ZNPList_ZPP_Shape();
-	this.wrap_shapes = zpp_nape.util.ZPP_ShapeList.get(this.shapes);
+	this.inertiaMode = zpp_$nape_util_ZPP_$Flags.id_InertiaMode_DEFAULT;
+	this.arbiters = new zpp_$nape_util_ZNPList_$ZPP_$Arbiter();
+	this.constraints = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
+	this.shapes = new zpp_$nape_util_ZNPList_$ZPP_$Shape();
+	this.wrap_shapes = zpp_$nape_util_ZPP_$ShapeList.get(this.shapes);
 	this.wrap_shapes.zpp_inner.adder = $bind(this,this.shapes_adder);
 	this.wrap_shapes.zpp_inner.subber = $bind(this,this.shapes_subber);
 	this.wrap_shapes.zpp_inner._invalidate = $bind(this,this.shapes_invalidate);
 	this.wrap_shapes.zpp_inner._modifiable = $bind(this,this.shapes_modifiable);
 	this.kinematicDelaySleep = false;
 };
-zpp_nape.phys.ZPP_Body.__name__ = true;
-zpp_nape.phys.ZPP_Body.__static = function() {
-	var ret = new nape.phys.Body((function($this) {
+zpp_$nape_phys_ZPP_$Body.__name__ = true;
+zpp_$nape_phys_ZPP_$Body.__static = function() {
+	var ret = new nape_phys_Body((function($this) {
 		var $r;
-		if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
-			zpp_nape.util.ZPP_Flags.internal = true;
-			zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
-			zpp_nape.util.ZPP_Flags.internal = false;
+		if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
+			zpp_$nape_util_ZPP_$Flags.internal = true;
+			zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
+			zpp_$nape_util_ZPP_$Flags.internal = false;
 		}
-		$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
+		$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
 		return $r;
 	}(this)));
 	var si = ret.zpp_inner;
@@ -9485,8 +9498,8 @@ zpp_nape.phys.ZPP_Body.__static = function() {
 	si.cbTypes.clear();
 	return ret;
 };
-zpp_nape.phys.ZPP_Body.__super__ = zpp_nape.phys.ZPP_Interactor;
-zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototype,{
+zpp_$nape_phys_ZPP_$Body.__super__ = zpp_$nape_phys_ZPP_$Interactor;
+zpp_$nape_phys_ZPP_$Body.prototype = $extend(zpp_$nape_phys_ZPP_$Interactor.prototype,{
 	invalidate_type: function() {
 		this.invalidate_mass();
 		this.invalidate_inertia();
@@ -9499,17 +9512,17 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		this.invalidate_inertia();
 	}
 	,atRest: function(dt) {
-		if(!(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC)) return this.component.sleeping; else {
-			var linSq = nape.Config.linearSleepThreshold;
+		if(!(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC)) return this.component.sleeping; else {
+			var linSq = nape_Config.linearSleepThreshold;
 			linSq *= linSq;
 			var cansleep;
-			if(this.velx * this.velx + this.vely * this.vely > linSq) cansleep = false; else if(zpp_nape.geom.ZPP_VecMath.vec_dsq(this.posx,this.posy,this.pre_posx,this.pre_posy) > 0.25 * linSq * dt * dt) cansleep = false; else {
+			if(this.velx * this.velx + this.vely * this.vely > linSq) cansleep = false; else if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(this.posx,this.posy,this.pre_posx,this.pre_posy) > 0.25 * linSq * dt * dt) cansleep = false; else {
 				var dx = 0.0;
 				var dy = 0.0;
 				dx = this.aabb.maxx - this.aabb.minx;
 				dy = this.aabb.maxy - this.aabb.miny;
 				var idl = dx * dx + dy * dy;
-				var angSq = nape.Config.angularSleepThreshold;
+				var angSq = nape_Config.angularSleepThreshold;
 				angSq *= angSq;
 				if(4 * this.angvel * this.angvel * idl > angSq) cansleep = false; else {
 					var dr = this.rot - this.pre_rot;
@@ -9517,7 +9530,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 				}
 			}
 			if(!cansleep) this.component.waket = this.space.stamp;
-			return this.component.waket + nape.Config.sleepDelay < this.space.stamp;
+			return this.component.waket + nape_Config.sleepDelay < this.space.stamp;
 		}
 	}
 	,refreshArbiters: function() {
@@ -9539,7 +9552,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		}
 	}
 	,sweepValidate: function(s) {
-		if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) {
+		if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) {
 			s.worldCOMx = this.posx + (this.axisy * s.localCOMx - this.axisx * s.localCOMy);
 			s.worldCOMy = this.posy + (s.localCOMx * this.axisx + s.localCOMy * this.axisy);
 		} else {
@@ -9559,32 +9572,32 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 			var u = cx_ite1;
 			cx_ite1 = cx_ite1.next;
 			while(cx_ite1 != null) {
-				var v = cx_ite1;
+				var v1 = cx_ite1;
 				var e = ite.elt;
 				ite = ite.next;
 				e.gnormx = this.axisy * e.lnormx - this.axisx * e.lnormy;
 				e.gnormy = e.lnormx * this.axisx + e.lnormy * this.axisy;
 				e.gprojection = this.posx * e.gnormx + this.posy * e.gnormy + e.lprojection;
 				e.tp0 = u.y * e.gnormx - u.x * e.gnormy;
-				e.tp1 = v.y * e.gnormx - v.x * e.gnormy;
-				u = v;
+				e.tp1 = v1.y * e.gnormx - v1.x * e.gnormy;
+				u = v1;
 				cx_ite1 = cx_ite1.next;
 			}
-			var v1 = p.gverts.next;
+			var v = p.gverts.next;
 			var e1 = ite.elt;
 			ite = ite.next;
 			e1.gnormx = this.axisy * e1.lnormx - this.axisx * e1.lnormy;
 			e1.gnormy = e1.lnormx * this.axisx + e1.lnormy * this.axisy;
 			e1.gprojection = this.posx * e1.gnormx + this.posy * e1.gnormy + e1.lprojection;
 			e1.tp0 = u.y * e1.gnormx - u.x * e1.gnormy;
-			e1.tp1 = v1.y * e1.gnormx - v1.x * e1.gnormy;
+			e1.tp1 = v.y * e1.gnormx - v.x * e1.gnormy;
 		}
 	}
 	,invalidate_pos: function() {
 		var cx_ite = this.shapes.head;
 		while(cx_ite != null) {
 			var s = cx_ite.elt;
-			if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+			if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 				s.polygon.invalidate_gverts();
 				s.polygon.invalidate_gaxi();
 			}
@@ -9595,7 +9608,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 	}
 	,pos_invalidate: function(pos) {
 		this.immutable_midstep("Body::position");
-		if(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.space != null) throw "Error: Cannot move a static object once inside a Space";
+		if(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.space != null) throw new js__$Boot_HaxeError("Error: Cannot move a static object once inside a Space");
 		if(!(this.posx == pos.x && this.posy == pos.y)) {
 			this.posx = pos.x;
 			this.posy = pos.y;
@@ -9608,7 +9621,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		this.wrap_pos.zpp_inner.y = this.posy;
 	}
 	,setupPosition: function() {
-		this.wrap_pos = nape.geom.Vec2.get(this.posx,this.posy,null);
+		this.wrap_pos = nape_geom_Vec2.get(this.posx,this.posy,null);
 		this.wrap_pos.zpp_inner._inuse = true;
 		if(this.world) this.wrap_pos.zpp_inner._immutable = true; else {
 			this.wrap_pos.zpp_inner._invalidate = $bind(this,this.pos_invalidate);
@@ -9620,7 +9633,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		var cx_ite = this.shapes.head;
 		while(cx_ite != null) {
 			var s = cx_ite.elt;
-			if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+			if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 				s.polygon.invalidate_gverts();
 				s.polygon.invalidate_gaxi();
 			}
@@ -9658,9 +9671,9 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 	}
 	,validate_mass: function() {
 		var exist = false;
-		if(this.zip_mass || this.massMode == zpp_nape.util.ZPP_Flags.id_MassMode_DEFAULT && exist) {
+		if(this.zip_mass || this.massMode == zpp_$nape_util_ZPP_$Flags.id_MassMode_DEFAULT && exist) {
 			this.zip_mass = false;
-			if(this.massMode == zpp_nape.util.ZPP_Flags.id_MassMode_DEFAULT) {
+			if(this.massMode == zpp_$nape_util_ZPP_$Flags.id_MassMode_DEFAULT) {
 				this.cmass = 0;
 				var cx_ite = this.shapes.head;
 				while(cx_ite != null) {
@@ -9671,29 +9684,29 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 					cx_ite = cx_ite.next;
 				}
 			}
-			if(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && !this.nomove) {
+			if(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && !this.nomove) {
 				this.mass = this.cmass;
 				this.imass = this.smass = 1.0 / this.mass;
 			} else {
-				this.mass = Math.POSITIVE_INFINITY;
+				this.mass = Infinity;
 				this.imass = this.smass = 0.0;
 			}
 			if(exist) this.invalidate_inertia();
 		}
 	}
 	,invalidate_gravMass: function() {
-		if(this.gravMassMode != zpp_nape.util.ZPP_Flags.id_GravMassMode_FIXED) this.zip_gravMass = true;
-		if(this.gravMassMode != zpp_nape.util.ZPP_Flags.id_GravMassMode_SCALED) this.zip_gravMassScale = true;
+		if(this.gravMassMode != zpp_$nape_util_ZPP_$Flags.id_GravMassMode_FIXED) this.zip_gravMass = true;
+		if(this.gravMassMode != zpp_$nape_util_ZPP_$Flags.id_GravMassMode_SCALED) this.zip_gravMassScale = true;
 		this.wake();
 	}
 	,validate_gravMass: function() {
 		if(this.zip_gravMass) {
 			this.zip_gravMass = false;
 			this.validate_mass();
-			if(this.gravMassMode == zpp_nape.util.ZPP_Flags.id_GravMassMode_DEFAULT) {
+			if(this.gravMassMode == zpp_$nape_util_ZPP_$Flags.id_GravMassMode_DEFAULT) {
 				this.validate_mass();
 				this.gravMass = this.cmass;
-			} else if(this.gravMassMode == zpp_nape.util.ZPP_Flags.id_GravMassMode_SCALED) {
+			} else if(this.gravMassMode == zpp_$nape_util_ZPP_$Flags.id_GravMassMode_SCALED) {
 				this.validate_mass();
 				this.gravMass = this.cmass * this.gravMassScale;
 			}
@@ -9705,9 +9718,9 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 	}
 	,validate_inertia: function() {
 		var exist = false;
-		if(this.zip_inertia || this.inertiaMode == zpp_nape.util.ZPP_Flags.id_InertiaMode_DEFAULT && exist) {
+		if(this.zip_inertia || this.inertiaMode == zpp_$nape_util_ZPP_$Flags.id_InertiaMode_DEFAULT && exist) {
 			this.zip_inertia = false;
-			if(this.inertiaMode == zpp_nape.util.ZPP_Flags.id_InertiaMode_DEFAULT) {
+			if(this.inertiaMode == zpp_$nape_util_ZPP_$Flags.id_InertiaMode_DEFAULT) {
 				this.cinertia = 0;
 				var cx_ite = this.shapes.head;
 				while(cx_ite != null) {
@@ -9718,31 +9731,31 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 					cx_ite = cx_ite.next;
 				}
 			}
-			if(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && !this.norotate) {
+			if(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && !this.norotate) {
 				this.inertia = this.cinertia;
 				this.sinertia = this.iinertia = 1.0 / this.inertia;
 			} else {
-				this.inertia = Math.POSITIVE_INFINITY;
+				this.inertia = Infinity;
 				this.sinertia = this.iinertia = 0;
 			}
 			if(exist) this.invalidate_inertia();
 		}
 	}
 	,validate_aabb: function() {
-		if(this.shapes.head == null) throw "Error: Body bounds only makes sense if it contains shapes";
+		if(this.shapes.head == null) throw new js__$Boot_HaxeError("Error: Body bounds only makes sense if it contains shapes");
 		if(this.zip_aabb) {
 			this.zip_aabb = false;
-			this.aabb.minx = Math.POSITIVE_INFINITY;
-			this.aabb.miny = Math.POSITIVE_INFINITY;
-			this.aabb.maxx = Math.NEGATIVE_INFINITY;
-			this.aabb.maxy = Math.NEGATIVE_INFINITY;
+			this.aabb.minx = Infinity;
+			this.aabb.miny = Infinity;
+			this.aabb.maxx = -Infinity;
+			this.aabb.maxy = -Infinity;
 			var cx_ite = this.shapes.head;
 			while(cx_ite != null) {
 				var s = cx_ite.elt;
 				if(s.zip_aabb) {
 					if(s.body != null) {
 						s.zip_aabb = false;
-						if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) s.circle.__validate_aabb(); else s.polygon.__validate_aabb();
+						if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) s.circle.__validate_aabb(); else s.polygon.__validate_aabb();
 					}
 				}
 				this.aabb.combine(s.aabb);
@@ -9765,7 +9778,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 				var s = cx_ite.elt;
 				if(s.zip_localCOM) {
 					s.zip_localCOM = false;
-					if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) s.polygon.__validate_localCOM();
+					if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) s.polygon.__validate_localCOM();
 					if(s.wrap_localCOM != null) {
 						s.wrap_localCOM.zpp_inner.x = s.localCOMx;
 						s.wrap_localCOM.zpp_inner.y = s.localCOMy;
@@ -9787,14 +9800,14 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 				this.wrap_localCOM.zpp_inner.x = this.localCOMx;
 				this.wrap_localCOM.zpp_inner.y = this.localCOMy;
 			}
-			if(this.zip_mass && this.massMode == zpp_nape.util.ZPP_Flags.id_MassMode_DEFAULT) {
+			if(this.zip_mass && this.massMode == zpp_$nape_util_ZPP_$Flags.id_MassMode_DEFAULT) {
 				this.zip_mass = false;
 				this.cmass = msum;
-				if(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+				if(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 					this.mass = this.cmass;
 					this.imass = this.smass = 1.0 / this.mass;
 				} else {
-					this.mass = Math.POSITIVE_INFINITY;
+					this.mass = Infinity;
 					this.imass = this.smass = 0.0;
 				}
 			}
@@ -9819,10 +9832,10 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		}
 	}
 	,__immutable_midstep: function(name) {
-		if(this.space != null && this.space.midstep) throw "Error: " + name + " cannot be set during a space step()";
+		if(this.space != null && this.space.midstep) throw new js__$Boot_HaxeError("Error: " + name + " cannot be set during a space step()");
 	}
 	,aabb_validate: function() {
-		if(this.shapes.head == null) throw "Error: bounds only makes sense when Body has shapes";
+		if(this.shapes.head == null) throw new js__$Boot_HaxeError("Error: bounds only makes sense when Body has shapes");
 		this.validate_aabb();
 	}
 	,shapes_adder: function(s) {
@@ -9831,7 +9844,7 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 			s.zpp_inner.body = this;
 			s.zpp_inner.addedToBody();
 			if(this.space != null) this.space.added_shape(s.zpp_inner,null);
-			if(s.zpp_inner.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+			if(s.zpp_inner.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 				s.zpp_inner.polygon.invalidate_gaxi();
 				s.zpp_inner.polygon.invalidate_gverts();
 			}
@@ -9848,12 +9861,12 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 	}
 	,shapes_modifiable: function() {
 		this.immutable_midstep("Body::shapes");
-		if(this.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.space != null) throw "Error: Cannot modifiy shapes of static object once added to Space";
+		if(this.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.space != null) throw new js__$Boot_HaxeError("Error: Cannot modifiy shapes of static object once added to Space");
 	}
 	,addedToSpace: function() {
-		if(zpp_nape.space.ZPP_Component.zpp_pool == null) this.component = new zpp_nape.space.ZPP_Component(); else {
-			this.component = zpp_nape.space.ZPP_Component.zpp_pool;
-			zpp_nape.space.ZPP_Component.zpp_pool = this.component.next;
+		if(zpp_$nape_space_ZPP_$Component.zpp_pool == null) this.component = new zpp_$nape_space_ZPP_$Component(); else {
+			this.component = zpp_$nape_space_ZPP_$Component.zpp_pool;
+			zpp_$nape_space_ZPP_$Component.zpp_pool = this.component.next;
 			this.component.next = null;
 		}
 		null;
@@ -9878,14 +9891,14 @@ zpp_nape.phys.ZPP_Body.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototyp
 		o.body = null;
 		o.constraint = null;
 		null;
-		o.next = zpp_nape.space.ZPP_Component.zpp_pool;
-		zpp_nape.space.ZPP_Component.zpp_pool = o;
+		o.next = zpp_$nape_space_ZPP_$Component.zpp_pool;
+		zpp_$nape_space_ZPP_$Component.zpp_pool = o;
 		this.component = null;
 		this.__iremovedFromSpace();
 	}
-	,__class__: zpp_nape.phys.ZPP_Body
+	,__class__: zpp_$nape_phys_ZPP_$Body
 });
-zpp_nape.phys.ZPP_Compound = function() {
+var zpp_$nape_phys_ZPP_$Compound = function() {
 	this.space = null;
 	this.compound = null;
 	this.depth = 0;
@@ -9895,11 +9908,11 @@ zpp_nape.phys.ZPP_Compound = function() {
 	this.bodies = null;
 	this.outer = null;
 };
-zpp_nape.phys.ZPP_Compound.__name__ = true;
-zpp_nape.phys.ZPP_Compound.__super__ = zpp_nape.phys.ZPP_Interactor;
-zpp_nape.phys.ZPP_Compound.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototype,{
+zpp_$nape_phys_ZPP_$Compound.__name__ = true;
+zpp_$nape_phys_ZPP_$Compound.__super__ = zpp_$nape_phys_ZPP_$Interactor;
+zpp_$nape_phys_ZPP_$Compound.prototype = $extend(zpp_$nape_phys_ZPP_$Interactor.prototype,{
 	__imutable_midstep: function(name) {
-		if(this.space != null && this.space.midstep) throw "Error: " + name + " cannot be set during space step()";
+		if(this.space != null && this.space.midstep) throw new js__$Boot_HaxeError("Error: " + name + " cannot be set during space step()");
 	}
 	,addedToSpace: function() {
 		this.__iaddedToSpace();
@@ -9907,9 +9920,9 @@ zpp_nape.phys.ZPP_Compound.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prot
 	,removedFromSpace: function() {
 		this.__iremovedFromSpace();
 	}
-	,__class__: zpp_nape.phys.ZPP_Compound
+	,__class__: zpp_$nape_phys_ZPP_$Compound
 });
-zpp_nape.phys.ZPP_FluidProperties = function() {
+var zpp_$nape_phys_ZPP_$FluidProperties = function() {
 	this.wrap_gravity = null;
 	this.gravityy = 0.0;
 	this.gravityx = 0.0;
@@ -9917,11 +9930,11 @@ zpp_nape.phys.ZPP_FluidProperties = function() {
 	this.viscosity = 0.0;
 	this.shapes = null;
 };
-zpp_nape.phys.ZPP_FluidProperties.__name__ = true;
-zpp_nape.phys.ZPP_FluidProperties.prototype = {
-	__class__: zpp_nape.phys.ZPP_FluidProperties
+zpp_$nape_phys_ZPP_$FluidProperties.__name__ = true;
+zpp_$nape_phys_ZPP_$FluidProperties.prototype = {
+	__class__: zpp_$nape_phys_ZPP_$FluidProperties
 };
-zpp_nape.phys.ZPP_Material = function() {
+var zpp_$nape_phys_ZPP_$Material = function() {
 	this.rollingFriction = 0.0;
 	this.elasticity = 0.0;
 	this.density = 0.0;
@@ -9930,22 +9943,22 @@ zpp_nape.phys.ZPP_Material = function() {
 	this.shapes = null;
 	this.outer = null;
 	this.next = null;
-	this.shapes = new zpp_nape.util.ZNPList_ZPP_Shape();
+	this.shapes = new zpp_$nape_util_ZNPList_$ZPP_$Shape();
 	this.elasticity = 0;
 	this.dynamicFriction = 1;
 	this.staticFriction = 2;
 	this.density = 0.001;
 	this.rollingFriction = 0.01;
 };
-zpp_nape.phys.ZPP_Material.__name__ = true;
-zpp_nape.phys.ZPP_Material.prototype = {
+zpp_$nape_phys_ZPP_$Material.__name__ = true;
+zpp_$nape_phys_ZPP_$Material.prototype = {
 	wrapper: function() {
 		if(this.outer == null) {
-			this.outer = new nape.phys.Material();
+			this.outer = new nape_phys_Material();
 			var o = this.outer.zpp_inner;
 			o.outer = null;
-			o.next = zpp_nape.phys.ZPP_Material.zpp_pool;
-			zpp_nape.phys.ZPP_Material.zpp_pool = o;
+			o.next = zpp_$nape_phys_ZPP_$Material.zpp_pool;
+			zpp_$nape_phys_ZPP_$Material.zpp_pool = o;
 			this.outer.zpp_inner = this;
 		}
 		return this.outer;
@@ -9965,10 +9978,9 @@ zpp_nape.phys.ZPP_Material.prototype = {
 			cx_ite = cx_ite.next;
 		}
 	}
-	,__class__: zpp_nape.phys.ZPP_Material
+	,__class__: zpp_$nape_phys_ZPP_$Material
 };
-zpp_nape.shape = {};
-zpp_nape.shape.ZPP_Shape = function(type) {
+var zpp_$nape_shape_ZPP_$Shape = function(type) {
 	this.zip_aabb = false;
 	this.aabb = null;
 	this.pairs = null;
@@ -10000,11 +10012,11 @@ zpp_nape.shape.ZPP_Shape = function(type) {
 	this.type = 0;
 	this.body = null;
 	this.outer = null;
-	zpp_nape.phys.ZPP_Interactor.call(this);
-	this.pairs = new zpp_nape.util.ZNPList_ZPP_AABBPair();
+	zpp_$nape_phys_ZPP_$Interactor.call(this);
+	this.pairs = new zpp_$nape_util_ZNPList_$ZPP_$AABBPair();
 	this.ishape = this;
 	this.type = type;
-	this.aabb = zpp_nape.geom.ZPP_AABB.get(0,0,0,0);
+	this.aabb = zpp_$nape_geom_ZPP_$AABB.get(0,0,0,0);
 	this.aabb._immutable = true;
 	var me = this;
 	this.aabb._validate = $bind(this,this.aabb_validate);
@@ -10017,29 +10029,29 @@ zpp_nape.shape.ZPP_Shape = function(type) {
 	this.sensorEnabled = false;
 	this.fluidProperties = null;
 	this.body = null;
-	this.refmaterial = new zpp_nape.phys.ZPP_Material();
+	this.refmaterial = new zpp_$nape_phys_ZPP_$Material();
 	this.sweepRadius = this.sweepCoef = 0;
 };
-zpp_nape.shape.ZPP_Shape.__name__ = true;
-zpp_nape.shape.ZPP_Shape.__super__ = zpp_nape.phys.ZPP_Interactor;
-zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.prototype,{
+zpp_$nape_shape_ZPP_$Shape.__name__ = true;
+zpp_$nape_shape_ZPP_$Shape.__super__ = zpp_$nape_phys_ZPP_$Interactor;
+zpp_$nape_shape_ZPP_$Shape.prototype = $extend(zpp_$nape_phys_ZPP_$Interactor.prototype,{
 	validate_sweepRadius: function() {
 		if(this.zip_sweepRadius) {
 			this.zip_sweepRadius = false;
-			if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) this.circle.__validate_sweepRadius(); else this.polygon.__validate_sweepRadius();
+			if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) this.circle.__validate_sweepRadius(); else this.polygon.__validate_sweepRadius();
 		}
 	}
 	,validate_area_inertia: function() {
 		if(this.zip_area_inertia) {
 			this.zip_area_inertia = false;
-			if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) this.circle.__validate_area_inertia(); else this.polygon.__validate_area_inertia();
+			if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) this.circle.__validate_area_inertia(); else this.polygon.__validate_area_inertia();
 		}
 	}
 	,validate_angDrag: function() {
 		if(this.zip_angDrag || this.refmaterial.dynamicFriction != this.material.dynamicFriction) {
 			this.zip_angDrag = false;
 			this.refmaterial.dynamicFriction = this.material.dynamicFriction;
-			if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) this.circle.__validate_angDrag(); else this.polygon.__validate_angDrag();
+			if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) this.circle.__validate_angDrag(); else this.polygon.__validate_angDrag();
 		}
 	}
 	,validate_worldCOM: function() {
@@ -10048,7 +10060,7 @@ zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.protot
 				this.zip_worldCOM = false;
 				if(this.zip_localCOM) {
 					this.zip_localCOM = false;
-					if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) this.polygon.__validate_localCOM();
+					if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) this.polygon.__validate_localCOM();
 					if(this.wrap_localCOM != null) {
 						this.wrap_localCOM.zpp_inner.x = this.localCOMx;
 						this.wrap_localCOM.zpp_inner.y = this.localCOMy;
@@ -10074,7 +10086,7 @@ zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.protot
 	,invalidate_localCOM: function() {
 		this.zip_localCOM = true;
 		this.invalidate_area_inertia();
-		if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) this.zip_sweepRadius = true;
+		if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) this.zip_sweepRadius = true;
 		this.invalidate_angDrag();
 		this.invalidate_worldCOM();
 		if(this.body != null) this.body.invalidate_localCOM();
@@ -10085,29 +10097,29 @@ zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.protot
 		if(this.body != null) this.body.zip_aabb = true;
 	}
 	,invalidate_material: function(flags) {
-		if((flags & zpp_nape.phys.ZPP_Material.WAKE) != 0) this.wake();
-		if((flags & zpp_nape.phys.ZPP_Material.ARBITERS) != 0) {
+		if((flags & zpp_$nape_phys_ZPP_$Material.WAKE) != 0) this.wake();
+		if((flags & zpp_$nape_phys_ZPP_$Material.ARBITERS) != 0) {
 			if(this.body != null) this.body.refreshArbiters();
 		}
-		if((flags & zpp_nape.phys.ZPP_Material.PROPS) != 0) {
+		if((flags & zpp_$nape_phys_ZPP_$Material.PROPS) != 0) {
 			if(this.body != null) {
 				this.body.invalidate_localCOM();
 				this.body.invalidate_mass();
 				this.body.invalidate_inertia();
 			}
 		}
-		if((flags & zpp_nape.phys.ZPP_Material.ANGDRAG) != 0) this.invalidate_angDrag();
+		if((flags & zpp_$nape_phys_ZPP_$Material.ANGDRAG) != 0) this.invalidate_angDrag();
 		this.refmaterial.set(this.material);
 	}
 	,invalidate_filter: function() {
 		this.wake();
 	}
 	,aabb_validate: function() {
-		if(this.body == null) throw "Error: bounds only makes sense when Shape belongs to a Body";
+		if(this.body == null) throw new js__$Boot_HaxeError("Error: bounds only makes sense when Shape belongs to a Body");
 		if(this.zip_aabb) {
 			if(this.body != null) {
 				this.zip_aabb = false;
-				if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) this.circle.__validate_aabb(); else this.polygon.__validate_aabb();
+				if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) this.circle.__validate_aabb(); else this.polygon.__validate_aabb();
 			}
 		}
 	}
@@ -10133,7 +10145,7 @@ zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.protot
 		}
 	}
 	,__immutable_midstep: function(name) {
-		if(this.body != null && this.body.space != null && this.body.space.midstep) throw "Error: " + name + " cannot be set during a space step()";
+		if(this.body != null && this.body.space != null && this.body.space.midstep) throw new js__$Boot_HaxeError("Error: " + name + " cannot be set during a space step()");
 	}
 	,addedToBody: function() {
 		this.invalidate_worldCOM();
@@ -10154,18 +10166,18 @@ zpp_nape.shape.ZPP_Shape.prototype = $extend(zpp_nape.phys.ZPP_Interactor.protot
 		this.filter.shapes.remove(this);
 		if(this.fluidProperties != null) this.fluidProperties.shapes.remove(this);
 	}
-	,__class__: zpp_nape.shape.ZPP_Shape
+	,__class__: zpp_$nape_shape_ZPP_$Shape
 });
-zpp_nape.shape.ZPP_Circle = function() {
+var zpp_$nape_shape_ZPP_$Circle = function() {
 	this.radius = 0.0;
 	this.outer_zn = null;
-	zpp_nape.shape.ZPP_Shape.call(this,zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE);
+	zpp_$nape_shape_ZPP_$Shape.call(this,zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE);
 	this.circle = this;
 	this.zip_localCOM = false;
 };
-zpp_nape.shape.ZPP_Circle.__name__ = true;
-zpp_nape.shape.ZPP_Circle.__super__ = zpp_nape.shape.ZPP_Shape;
-zpp_nape.shape.ZPP_Circle.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototype,{
+zpp_$nape_shape_ZPP_$Circle.__name__ = true;
+zpp_$nape_shape_ZPP_$Circle.__super__ = zpp_$nape_shape_ZPP_$Shape;
+zpp_$nape_shape_ZPP_$Circle.prototype = $extend(zpp_$nape_shape_ZPP_$Shape.prototype,{
 	invalidate_radius: function() {
 		this.invalidate_area_inertia();
 		this.invalidate_angDrag();
@@ -10179,7 +10191,7 @@ zpp_nape.shape.ZPP_Circle.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototype
 				this.zip_worldCOM = false;
 				if(this.zip_localCOM) {
 					this.zip_localCOM = false;
-					if(this.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) this.polygon.__validate_localCOM();
+					if(this.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) this.polygon.__validate_localCOM();
 					if(this.wrap_localCOM != null) {
 						this.wrap_localCOM.zpp_inner.x = this.localCOMx;
 						this.wrap_localCOM.zpp_inner.y = this.localCOMy;
@@ -10217,13 +10229,13 @@ zpp_nape.shape.ZPP_Circle.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototype
 	,__validate_angDrag: function() {
 		var lc = this.localCOMx * this.localCOMx + this.localCOMy * this.localCOMy;
 		var r2 = this.radius * this.radius;
-		var skin = this.material.dynamicFriction * nape.Config.fluidAngularDragFriction;
-		this.angDrag = (lc + 2 * r2) * skin + 0.5 * nape.Config.fluidAngularDrag * (1 + nape.Config.fluidVacuumDrag) * lc;
+		var skin = this.material.dynamicFriction * nape_Config.fluidAngularDragFriction;
+		this.angDrag = (lc + 2 * r2) * skin + 0.5 * nape_Config.fluidAngularDrag * (1 + nape_Config.fluidVacuumDrag) * lc;
 		this.angDrag /= 2 * (lc + 0.5 * r2);
 	}
-	,__class__: zpp_nape.shape.ZPP_Circle
+	,__class__: zpp_$nape_shape_ZPP_$Circle
 });
-zpp_nape.shape.ZPP_Edge = function() {
+var zpp_$nape_shape_ZPP_$Edge = function() {
 	this.tp1 = 0.0;
 	this.tp0 = 0.0;
 	this.gp1 = null;
@@ -10250,20 +10262,20 @@ zpp_nape.shape.ZPP_Edge = function() {
 	this.lprojection = 0;
 	this.gprojection = 0;
 };
-zpp_nape.shape.ZPP_Edge.__name__ = true;
-zpp_nape.shape.ZPP_Edge.prototype = {
+zpp_$nape_shape_ZPP_$Edge.__name__ = true;
+zpp_$nape_shape_ZPP_$Edge.prototype = {
 	wrapper: function() {
 		if(this.outer == null) {
-			zpp_nape.shape.ZPP_Edge.internal = true;
-			this.outer = new nape.shape.Edge();
-			zpp_nape.shape.ZPP_Edge.internal = false;
+			zpp_$nape_shape_ZPP_$Edge.internal = true;
+			this.outer = new nape_shape_Edge();
+			zpp_$nape_shape_ZPP_$Edge.internal = false;
 			this.outer.zpp_inner = this;
 		}
 		return this.outer;
 	}
-	,__class__: zpp_nape.shape.ZPP_Edge
+	,__class__: zpp_$nape_shape_ZPP_$Edge
 };
-zpp_nape.shape.ZPP_Polygon = function() {
+var zpp_$nape_shape_ZPP_$Polygon = function() {
 	this.zip_sanitation = false;
 	this.zip_valid = false;
 	this.zip_gaxi = false;
@@ -10279,24 +10291,24 @@ zpp_nape.shape.ZPP_Polygon = function() {
 	this.wrap_lverts = null;
 	this.lverts = null;
 	this.outer_zn = null;
-	zpp_nape.shape.ZPP_Shape.call(this,zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON);
+	zpp_$nape_shape_ZPP_$Shape.call(this,zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON);
 	this.polygon = this;
-	this.lverts = new zpp_nape.geom.ZPP_Vec2();
-	this.gverts = new zpp_nape.geom.ZPP_Vec2();
-	this.edges = new zpp_nape.util.ZNPList_ZPP_Edge();
+	this.lverts = new zpp_$nape_geom_ZPP_$Vec2();
+	this.gverts = new zpp_$nape_geom_ZPP_$Vec2();
+	this.edges = new zpp_$nape_util_ZNPList_$ZPP_$Edge();
 	this.edgeCnt = 0;
 };
-zpp_nape.shape.ZPP_Polygon.__name__ = true;
-zpp_nape.shape.ZPP_Polygon.__super__ = zpp_nape.shape.ZPP_Shape;
-zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototype,{
+zpp_$nape_shape_ZPP_$Polygon.__name__ = true;
+zpp_$nape_shape_ZPP_$Polygon.__super__ = zpp_$nape_shape_ZPP_$Shape;
+zpp_$nape_shape_ZPP_$Polygon.prototype = $extend(zpp_$nape_shape_ZPP_$Shape.prototype,{
 	lverts_pa_invalidate: function(x) {
 		this.invalidate_lverts();
 	}
 	,lverts_pa_immutable: function() {
-		if(this.body != null && this.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.body.space != null) throw "Error: Cannot modify local vertex of Polygon added to a static body whilst within a Space";
+		if(this.body != null && this.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.body.space != null) throw new js__$Boot_HaxeError("Error: Cannot modify local vertex of Polygon added to a static body whilst within a Space");
 	}
 	,gverts_pa_validate: function() {
-		if(this.body == null) throw "Error: World vertex only makes sense when Polygon is contained in a rigid body";
+		if(this.body == null) throw new js__$Boot_HaxeError("Error: World vertex only makes sense when Polygon is contained in a rigid body");
 		this.validate_gverts();
 	}
 	,lverts_post_adder: function(x) {
@@ -10313,23 +10325,23 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			}
 			cx_ite = cx_ite.next;
 		}
-		var vec = zpp_nape.geom.ZPP_Vec2.get(0,0,true);
+		var vec = zpp_$nape_geom_ZPP_$Vec2.get(0,0,true);
 		this.gverts.insert(ite,vec);
 		if(this.lverts.next.next != null) {
 			if(this.lverts.next.next.next == null) {
 				var ed;
-				if(zpp_nape.shape.ZPP_Edge.zpp_pool == null) ed = new zpp_nape.shape.ZPP_Edge(); else {
-					ed = zpp_nape.shape.ZPP_Edge.zpp_pool;
-					zpp_nape.shape.ZPP_Edge.zpp_pool = ed.next;
+				if(zpp_$nape_shape_ZPP_$Edge.zpp_pool == null) ed = new zpp_$nape_shape_ZPP_$Edge(); else {
+					ed = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+					zpp_$nape_shape_ZPP_$Edge.zpp_pool = ed.next;
 					ed.next = null;
 				}
 				null;
 				ed.polygon = this;
 				this.edges.add(ed);
 				var ed1;
-				if(zpp_nape.shape.ZPP_Edge.zpp_pool == null) ed1 = new zpp_nape.shape.ZPP_Edge(); else {
-					ed1 = zpp_nape.shape.ZPP_Edge.zpp_pool;
-					zpp_nape.shape.ZPP_Edge.zpp_pool = ed1.next;
+				if(zpp_$nape_shape_ZPP_$Edge.zpp_pool == null) ed1 = new zpp_$nape_shape_ZPP_$Edge(); else {
+					ed1 = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+					zpp_$nape_shape_ZPP_$Edge.zpp_pool = ed1.next;
 					ed1.next = null;
 				}
 				null;
@@ -10338,9 +10350,9 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				this.edgeCnt += 2;
 			} else {
 				var ed2;
-				if(zpp_nape.shape.ZPP_Edge.zpp_pool == null) ed2 = new zpp_nape.shape.ZPP_Edge(); else {
-					ed2 = zpp_nape.shape.ZPP_Edge.zpp_pool;
-					zpp_nape.shape.ZPP_Edge.zpp_pool = ed2.next;
+				if(zpp_$nape_shape_ZPP_$Edge.zpp_pool == null) ed2 = new zpp_$nape_shape_ZPP_$Edge(); else {
+					ed2 = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+					zpp_$nape_shape_ZPP_$Edge.zpp_pool = ed2.next;
 					ed2.next = null;
 				}
 				null;
@@ -10362,11 +10374,11 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 	}
 	,lverts_modifiable: function() {
 		this.immutable_midstep("Polygon::localVerts");
-		if(this.body != null && this.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && this.body.space != null) throw "Error: Cannot modifiy shapes of static object once added to Space";
+		if(this.body != null && this.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && this.body.space != null) throw new js__$Boot_HaxeError("Error: Cannot modifiy shapes of static object once added to Space");
 	}
 	,getlverts: function() {
 		var me = this;
-		this.wrap_lverts = zpp_nape.util.ZPP_MixVec2List.get(this.lverts);
+		this.wrap_lverts = zpp_$nape_util_ZPP_$MixVec2List.get(this.lverts);
 		this.wrap_lverts.zpp_inner.post_adder = $bind(this,this.lverts_post_adder);
 		this.wrap_lverts.zpp_inner.subber = $bind(this,this.lverts_subber);
 		this.wrap_lverts.zpp_inner._invalidate = $bind(this,this.lverts_invalidate);
@@ -10407,24 +10419,24 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			}
 			if(this.lverts.length < 3) return (function($this) {
 				var $r;
-				if(zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE == null) {
-					zpp_nape.util.ZPP_Flags.internal = true;
-					zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE = new nape.shape.ValidationResult();
-					zpp_nape.util.ZPP_Flags.internal = false;
+				if(zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE == null) {
+					zpp_$nape_util_ZPP_$Flags.internal = true;
+					zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE = new nape_shape_ValidationResult();
+					zpp_$nape_util_ZPP_$Flags.internal = false;
 				}
-				$r = $this.validation = zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE;
+				$r = $this.validation = zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE;
 				return $r;
 			}(this)); else {
 				this.validate_lverts();
 				this.validate_area_inertia();
-				if(this.area < nape.Config.epsilon) return (function($this) {
+				if(this.area < nape_Config.epsilon) return (function($this) {
 					var $r;
-					if(zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE == null) {
-						zpp_nape.util.ZPP_Flags.internal = true;
-						zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE = new nape.shape.ValidationResult();
-						zpp_nape.util.ZPP_Flags.internal = false;
+					if(zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE == null) {
+						zpp_$nape_util_ZPP_$Flags.internal = true;
+						zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE = new nape_shape_ValidationResult();
+						zpp_$nape_util_ZPP_$Flags.internal = false;
 					}
-					$r = $this.validation = zpp_nape.util.ZPP_Flags.ValidationResult_DEGENERATE;
+					$r = $this.validation = zpp_$nape_util_ZPP_$Flags.ValidationResult_DEGENERATE;
 					return $r;
 				}(this)); else {
 					var neg = false;
@@ -10446,7 +10458,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 						bx = v.x - u.x;
 						by = v.y - u.y;
 						var dot = by * ax - bx * ay;
-						if(dot > nape.Config.epsilon) pos = true; else if(dot < -nape.Config.epsilon) neg = true;
+						if(dot > nape_Config.epsilon) pos = true; else if(dot < -nape_Config.epsilon) neg = true;
 						if(pos && neg) {
 							cx_cont = false;
 							break;
@@ -10468,7 +10480,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 							bx1 = v.x - u.x;
 							by1 = v.y - u.y;
 							var dot1 = by1 * ax1 - bx1 * ay1;
-							if(dot1 > nape.Config.epsilon) pos = true; else if(dot1 < -nape.Config.epsilon) neg = true;
+							if(dot1 > nape_Config.epsilon) pos = true; else if(dot1 < -nape_Config.epsilon) neg = true;
 							if(pos && neg) {
 								cx_cont = false;
 								break;
@@ -10489,19 +10501,19 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 								bx2 = v.x - u.x;
 								by2 = v.y - u.y;
 								var dot2 = by2 * ax2 - bx2 * ay2;
-								if(dot2 > nape.Config.epsilon) pos = true; else if(dot2 < -nape.Config.epsilon) neg = true;
+								if(dot2 > nape_Config.epsilon) pos = true; else if(dot2 < -nape_Config.epsilon) neg = true;
 								if(pos && neg) break;
 							} while(false);
 						}
 					}
 					if(pos && neg) return (function($this) {
 						var $r;
-						if(zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE == null) {
-							zpp_nape.util.ZPP_Flags.internal = true;
-							zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE = new nape.shape.ValidationResult();
-							zpp_nape.util.ZPP_Flags.internal = false;
+						if(zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE == null) {
+							zpp_$nape_util_ZPP_$Flags.internal = true;
+							zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE = new nape_shape_ValidationResult();
+							zpp_$nape_util_ZPP_$Flags.internal = false;
 						}
-						$r = $this.validation = zpp_nape.util.ZPP_Flags.ValidationResult_CONCAVE;
+						$r = $this.validation = zpp_$nape_util_ZPP_$Flags.ValidationResult_CONCAVE;
 						return $r;
 					}(this)); else {
 						var cont = true;
@@ -10539,12 +10551,12 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 								qx = b.x - a.x;
 								qy = b.y - a.y;
 								var den = vy * qx - vx * qy;
-								if(den * den > nape.Config.epsilon) {
+								if(den * den > nape_Config.epsilon) {
 									den = 1 / den;
 									var t = (qy * sx - qx * sy) * den;
-									if(t > nape.Config.epsilon && t < 1 - nape.Config.epsilon) {
+									if(t > nape_Config.epsilon && t < 1 - nape_Config.epsilon) {
 										var s = (vy * sx - vx * sy) * den;
-										if(s > nape.Config.epsilon && s < 1 - nape.Config.epsilon) {
+										if(s > nape_Config.epsilon && s < 1 - nape_Config.epsilon) {
 											cont = false;
 											cx_cont2 = false;
 											break;
@@ -10570,12 +10582,12 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 								qx1 = b1.x - a.x;
 								qy1 = b1.y - a.y;
 								var den1 = vy1 * qx1 - vx1 * qy1;
-								if(den1 * den1 > nape.Config.epsilon) {
+								if(den1 * den1 > nape_Config.epsilon) {
 									den1 = 1 / den1;
 									var t1 = (qy1 * sx1 - qx1 * sy1) * den1;
-									if(t1 > nape.Config.epsilon && t1 < 1 - nape.Config.epsilon) {
+									if(t1 > nape_Config.epsilon && t1 < 1 - nape_Config.epsilon) {
 										var s1 = (vy1 * sx1 - vx1 * sy1) * den1;
-										if(s1 > nape.Config.epsilon && s1 < 1 - nape.Config.epsilon) {
+										if(s1 > nape_Config.epsilon && s1 < 1 - nape_Config.epsilon) {
 											cont = false;
 											break;
 										}
@@ -10612,12 +10624,12 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 								qx2 = b2.x - a1.x;
 								qy2 = b2.y - a1.y;
 								var den2 = vy2 * qx2 - vx2 * qy2;
-								if(den2 * den2 > nape.Config.epsilon) {
+								if(den2 * den2 > nape_Config.epsilon) {
 									den2 = 1 / den2;
 									var t2 = (qy2 * sx2 - qx2 * sy2) * den2;
-									if(t2 > nape.Config.epsilon && t2 < 1 - nape.Config.epsilon) {
+									if(t2 > nape_Config.epsilon && t2 < 1 - nape_Config.epsilon) {
 										var s2 = (vy2 * sx2 - vx2 * sy2) * den2;
-										if(s2 > nape.Config.epsilon && s2 < 1 - nape.Config.epsilon) {
+										if(s2 > nape_Config.epsilon && s2 < 1 - nape_Config.epsilon) {
 											cont = false;
 											cx_cont3 = false;
 											break;
@@ -10643,12 +10655,12 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 								qx3 = b3.x - a1.x;
 								qy3 = b3.y - a1.y;
 								var den3 = vy3 * qx3 - vx3 * qy3;
-								if(den3 * den3 > nape.Config.epsilon) {
+								if(den3 * den3 > nape_Config.epsilon) {
 									den3 = 1 / den3;
 									var t3 = (qy3 * sx3 - qx3 * sy3) * den3;
-									if(t3 > nape.Config.epsilon && t3 < 1 - nape.Config.epsilon) {
+									if(t3 > nape_Config.epsilon && t3 < 1 - nape_Config.epsilon) {
 										var s3 = (vy3 * sx3 - vx3 * sy3) * den3;
-										if(s3 > nape.Config.epsilon && s3 < 1 - nape.Config.epsilon) {
+										if(s3 > nape_Config.epsilon && s3 < 1 - nape_Config.epsilon) {
 											cont = false;
 											break;
 										}
@@ -10658,21 +10670,21 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 						} while(false);
 						if(!cont) return (function($this) {
 							var $r;
-							if(zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING == null) {
-								zpp_nape.util.ZPP_Flags.internal = true;
-								zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING = new nape.shape.ValidationResult();
-								zpp_nape.util.ZPP_Flags.internal = false;
+							if(zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING == null) {
+								zpp_$nape_util_ZPP_$Flags.internal = true;
+								zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING = new nape_shape_ValidationResult();
+								zpp_$nape_util_ZPP_$Flags.internal = false;
 							}
-							$r = $this.validation = zpp_nape.util.ZPP_Flags.ValidationResult_SELF_INTERSECTING;
+							$r = $this.validation = zpp_$nape_util_ZPP_$Flags.ValidationResult_SELF_INTERSECTING;
 							return $r;
 						}(this)); else return (function($this) {
 							var $r;
-							if(zpp_nape.util.ZPP_Flags.ValidationResult_VALID == null) {
-								zpp_nape.util.ZPP_Flags.internal = true;
-								zpp_nape.util.ZPP_Flags.ValidationResult_VALID = new nape.shape.ValidationResult();
-								zpp_nape.util.ZPP_Flags.internal = false;
+							if(zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID == null) {
+								zpp_$nape_util_ZPP_$Flags.internal = true;
+								zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID = new nape_shape_ValidationResult();
+								zpp_$nape_util_ZPP_$Flags.internal = false;
 							}
-							$r = $this.validation = zpp_nape.util.ZPP_Flags.ValidationResult_VALID;
+							$r = $this.validation = zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID;
 							return $r;
 						}(this));
 					}
@@ -10715,19 +10727,19 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 		o._isimmutable = null;
 		o._validate = null;
 		o._invalidate = null;
-		o.next = zpp_nape.geom.ZPP_Vec2.zpp_pool;
-		zpp_nape.geom.ZPP_Vec2.zpp_pool = o;
+		o.next = zpp_$nape_geom_ZPP_$Vec2.zpp_pool;
+		zpp_$nape_geom_ZPP_$Vec2.zpp_pool = o;
 		if(this.edgeCnt == 2) {
 			var rem1 = this.edges.pop_unsafe();
 			var o1 = rem1;
 			o1.polygon = null;
-			o1.next = zpp_nape.shape.ZPP_Edge.zpp_pool;
-			zpp_nape.shape.ZPP_Edge.zpp_pool = o1;
+			o1.next = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+			zpp_$nape_shape_ZPP_$Edge.zpp_pool = o1;
 			rem1 = this.edges.pop_unsafe();
 			var o2 = rem1;
 			o2.polygon = null;
-			o2.next = zpp_nape.shape.ZPP_Edge.zpp_pool;
-			zpp_nape.shape.ZPP_Edge.zpp_pool = o2;
+			o2.next = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+			zpp_$nape_shape_ZPP_$Edge.zpp_pool = o2;
 			this.edgeCnt = 0;
 		} else if(this.edgeCnt != 0) {
 			var rem2;
@@ -10735,8 +10747,8 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			this.edges.erase(ite2);
 			var o3 = rem2;
 			o3.polygon = null;
-			o3.next = zpp_nape.shape.ZPP_Edge.zpp_pool;
-			zpp_nape.shape.ZPP_Edge.zpp_pool = o3;
+			o3.next = zpp_$nape_shape_ZPP_$Edge.zpp_pool;
+			zpp_$nape_shape_ZPP_$Edge.zpp_pool = o3;
 			this.edgeCnt--;
 		}
 	}
@@ -10757,7 +10769,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			if(cur.next == null) nxt = this.lverts.next; else nxt = cur.next;
 			var u = cur;
 			var v = nxt;
-			if(zpp_nape.geom.ZPP_VecMath.vec_dsq(u.x,u.y,v.x,v.y) < nape.Config.epsilon * nape.Config.epsilon) {
+			if(zpp_$nape_geom_ZPP_$VecMath.vec_dsq(u.x,u.y,v.x,v.y) < nape_Config.epsilon * nape_Config.epsilon) {
 				this.cleanup_lvert(cur);
 				cur = this.lverts.erase(pre);
 			} else {
@@ -10787,7 +10799,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				bx = w.x - v1.x;
 				by = w.y - v1.y;
 				var crs = by * ax - bx * ay;
-				if(crs * crs >= nape.Config.epsilon * nape.Config.epsilon) pre1 = pre1.next; else {
+				if(crs * crs >= nape_Config.epsilon * nape_Config.epsilon) pre1 = pre1.next; else {
 					this.cleanup_lvert(cur1);
 					this.lverts.erase(pre1.next == null?null:pre1);
 					removed = true;
@@ -10817,15 +10829,15 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			var u = cx_ite;
 			cx_ite = cx_ite.next;
 			while(cx_ite != null) {
-				var v = cx_ite;
+				var v1 = cx_ite;
 				var edge = ite.elt;
 				ite = ite.next;
 				edge.lp0 = u;
-				edge.lp1 = v;
+				edge.lp1 = v1;
 				var dx = 0.0;
 				var dy = 0.0;
-				dx = u.x - v.x;
-				dy = u.y - v.y;
+				dx = u.x - v1.x;
+				dy = u.y - v1.y;
 				var l = Math.sqrt(dx * dx + dy * dy);
 				edge.length = l;
 				var t = 1.0 / l;
@@ -10841,18 +10853,18 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 					edge.wrap_lnorm.zpp_inner.x = dx;
 					edge.wrap_lnorm.zpp_inner.y = dy;
 				}
-				u = v;
+				u = v1;
 				cx_ite = cx_ite.next;
 			}
-			var v1 = this.lverts.next;
+			var v = this.lverts.next;
 			var edge1 = ite.elt;
 			ite = ite.next;
 			edge1.lp0 = u;
-			edge1.lp1 = v1;
+			edge1.lp1 = v;
 			var dx1 = 0.0;
 			var dy1 = 0.0;
-			dx1 = u.x - v1.x;
-			dy1 = u.y - v1.y;
+			dx1 = u.x - v.x;
+			dy1 = u.y - v.y;
 			var l1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
 			edge1.length = l1;
 			var t2 = 1.0 / l1;
@@ -10901,11 +10913,11 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				var u = cx_ite;
 				cx_ite = cx_ite.next;
 				while(cx_ite != null) {
-					var v = cx_ite;
+					var v1 = cx_ite;
 					var e = ite.elt;
 					ite = ite.next;
 					e.gp0 = u;
-					e.gp1 = v;
+					e.gp1 = v1;
 					e.gnormx = this.body.axisy * e.lnormx - this.body.axisx * e.lnormy;
 					e.gnormy = e.lnormx * this.body.axisx + e.lnormy * this.body.axisy;
 					e.gprojection = this.body.posx * e.gnormx + this.body.posy * e.gnormy + e.lprojection;
@@ -10915,14 +10927,14 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 					}
 					e.tp0 = e.gp0.y * e.gnormx - e.gp0.x * e.gnormy;
 					e.tp1 = e.gp1.y * e.gnormx - e.gp1.x * e.gnormy;
-					u = v;
+					u = v1;
 					cx_ite = cx_ite.next;
 				}
-				var v1 = this.gverts.next;
+				var v = this.gverts.next;
 				var e1 = ite.elt;
 				ite = ite.next;
 				e1.gp0 = u;
-				e1.gp1 = v1;
+				e1.gp1 = v;
 				e1.gnormx = this.body.axisy * e1.lnormx - this.body.axisx * e1.lnormy;
 				e1.gnormy = e1.lnormx * this.body.axisx + e1.lnormy * this.body.axisy;
 				e1.gprojection = this.body.posx * e1.gnormx + this.body.posy * e1.gnormy + e1.lprojection;
@@ -10937,7 +10949,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 	}
 	,__validate_aabb: function() {
 		this.validate_gverts();
-		if(this.lverts.next == null) throw "Error: An empty polygon has no meaningful bounds";
+		if(this.lverts.next == null) throw new js__$Boot_HaxeError("Error: An empty polygon has no meaningful bounds");
 		var p0 = this.gverts.next;
 		this.aabb.minx = p0.x;
 		this.aabb.miny = p0.y;
@@ -11016,32 +11028,32 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			var v = cx_ite;
 			cx_ite = cx_ite.next;
 			while(cx_ite != null) {
-				var w = cx_ite;
+				var w2 = cx_ite;
 				var a = v.y * u.x - v.x * u.y;
 				var b = v.x * v.x + v.y * v.y + (v.x * u.x + v.y * u.y) + (u.x * u.x + u.y * u.y);
 				s1 += a * b;
 				s2 += a;
-				this.area += v.x * (w.y - u.y);
+				this.area += v.x * (w2.y - u.y);
 				u = v;
-				v = w;
+				v = w2;
 				cx_ite = cx_ite.next;
 			}
 			cx_ite = this.lverts.next;
-			var w1 = cx_ite;
+			var w = cx_ite;
 			var a1 = v.y * u.x - v.x * u.y;
 			var b1 = v.x * v.x + v.y * v.y + (v.x * u.x + v.y * u.y) + (u.x * u.x + u.y * u.y);
 			s1 += a1 * b1;
 			s2 += a1;
-			this.area += v.x * (w1.y - u.y);
+			this.area += v.x * (w.y - u.y);
 			u = v;
-			v = w1;
+			v = w;
 			cx_ite = cx_ite.next;
-			var w2 = cx_ite;
+			var w1 = cx_ite;
 			var a2 = v.y * u.x - v.x * u.y;
 			var b2 = v.x * v.x + v.y * v.y + (v.x * u.x + v.y * u.y) + (u.x * u.x + u.y * u.y);
 			s1 += a2 * b2;
 			s2 += a2;
-			this.area += v.x * (w2.y - u.y);
+			this.area += v.x * (w1.y - u.y);
 			this.inertia = s1 / (6 * s2);
 			this.area *= 0.5;
 			if(this.area < 0) {
@@ -11051,7 +11063,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 		}
 	}
 	,__validate_angDrag: function() {
-		if(this.lverts.length < 3) throw "Error: Polygon's with less than 3 vertices have no meaningful angDrag";
+		if(this.lverts.length < 3) throw new js__$Boot_HaxeError("Error: Polygon's with less than 3 vertices have no meaningful angDrag");
 		this.validate_area_inertia();
 		this.validate_laxi();
 		var accum = 0.0;
@@ -11070,7 +11082,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			var dy = 0.0;
 			dx = v.x - u.x;
 			dy = v.y - u.y;
-			accum += edge.length * nape.Config.fluidAngularDragFriction * this.material.dynamicFriction * edge.lprojection * edge.lprojection;
+			accum += edge.length * nape_Config.fluidAngularDragFriction * this.material.dynamicFriction * edge.lprojection * edge.lprojection;
 			var t = -(u.y * edge.lnormx - u.x * edge.lnormy) / (dy * edge.lnormx - dx * edge.lnormy);
 			if(t > 0) {
 				var ta;
@@ -11085,7 +11097,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				var dota = edge.lnormy * u.x - edge.lnormx * u.y;
 				var dotb = edge.lnormy * cx - edge.lnormx * cy;
 				var dots = (dotb * dotb * dotb - dota * dota * dota) / (3 * (dotb - dota));
-				accum += dots * ta * edge.length * nape.Config.fluidAngularDrag;
+				accum += dots * ta * edge.length * nape_Config.fluidAngularDrag;
 			}
 			if(t < 1) {
 				var tb;
@@ -11100,7 +11112,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				var dota1 = edge.lnormy * cx1 - edge.lnormx * cy1;
 				var dotb1 = edge.lnormy * v.x - edge.lnormx * v.y;
 				var dots1 = (dotb1 * dotb1 * dotb1 - dota1 * dota1 * dota1) / (3 * (dotb1 - dota1));
-				accum += dots1 * nape.Config.fluidVacuumDrag * (1 - tb) * edge.length * nape.Config.fluidAngularDrag;
+				accum += dots1 * nape_Config.fluidVacuumDrag * (1 - tb) * edge.length * nape_Config.fluidAngularDrag;
 			}
 			cx_itei = cx_itej;
 			u = v;
@@ -11116,7 +11128,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			var dy1 = 0.0;
 			dx1 = v1.x - u.x;
 			dy1 = v1.y - u.y;
-			accum += edge1.length * nape.Config.fluidAngularDragFriction * this.material.dynamicFriction * edge1.lprojection * edge1.lprojection;
+			accum += edge1.length * nape_Config.fluidAngularDragFriction * this.material.dynamicFriction * edge1.lprojection * edge1.lprojection;
 			var t3 = -(u.y * edge1.lnormx - u.x * edge1.lnormy) / (dy1 * edge1.lnormx - dx1 * edge1.lnormy);
 			if(t3 > 0) {
 				var ta1;
@@ -11131,7 +11143,7 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				var dota2 = edge1.lnormy * u.x - edge1.lnormx * u.y;
 				var dotb2 = edge1.lnormy * cx2 - edge1.lnormx * cy2;
 				var dots2 = (dotb2 * dotb2 * dotb2 - dota2 * dota2 * dota2) / (3 * (dotb2 - dota2));
-				accum += dots2 * ta1 * edge1.length * nape.Config.fluidAngularDrag;
+				accum += dots2 * ta1 * edge1.length * nape_Config.fluidAngularDrag;
 			}
 			if(t3 < 1) {
 				var tb1;
@@ -11146,13 +11158,13 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 				var dota3 = edge1.lnormy * cx3 - edge1.lnormx * cy3;
 				var dotb3 = edge1.lnormy * v1.x - edge1.lnormx * v1.y;
 				var dots3 = (dotb3 * dotb3 * dotb3 - dota3 * dota3 * dota3) / (3 * (dotb3 - dota3));
-				accum += dots3 * nape.Config.fluidVacuumDrag * (1 - tb1) * edge1.length * nape.Config.fluidAngularDrag;
+				accum += dots3 * nape_Config.fluidVacuumDrag * (1 - tb1) * edge1.length * nape_Config.fluidAngularDrag;
 			}
 		} while(false);
 		this.angDrag = accum / (this.inertia * perim);
 	}
 	,__validate_localCOM: function() {
-		if(this.lverts.next == null) throw "Error: An empty polygon has no meaningful localCOM";
+		if(this.lverts.next == null) throw new js__$Boot_HaxeError("Error: An empty polygon has no meaningful localCOM");
 		if(this.lverts.next.next == null) {
 			this.localCOMx = this.lverts.next.x;
 			this.localCOMy = this.lverts.next.y;
@@ -11175,46 +11187,45 @@ zpp_nape.shape.ZPP_Polygon.prototype = $extend(zpp_nape.shape.ZPP_Shape.prototyp
 			var v = cx_ite;
 			cx_ite = cx_ite.next;
 			while(cx_ite != null) {
-				var w = cx_ite;
-				area += v.x * (w.y - u.y);
-				var cf = w.y * v.x - w.x * v.y;
-				this.localCOMx += (v.x + w.x) * cf;
-				this.localCOMy += (v.y + w.y) * cf;
+				var w2 = cx_ite;
+				area += v.x * (w2.y - u.y);
+				var cf = w2.y * v.x - w2.x * v.y;
+				this.localCOMx += (v.x + w2.x) * cf;
+				this.localCOMy += (v.y + w2.y) * cf;
 				u = v;
-				v = w;
+				v = w2;
 				cx_ite = cx_ite.next;
 			}
 			cx_ite = this.lverts.next;
+			var w = cx_ite;
+			area += v.x * (w.y - u.y);
+			var cf1 = w.y * v.x - w.x * v.y;
+			this.localCOMx += (v.x + w.x) * cf1;
+			this.localCOMy += (v.y + w.y) * cf1;
+			u = v;
+			v = w;
+			cx_ite = cx_ite.next;
 			var w1 = cx_ite;
 			area += v.x * (w1.y - u.y);
-			var cf1 = w1.y * v.x - w1.x * v.y;
-			this.localCOMx += (v.x + w1.x) * cf1;
-			this.localCOMy += (v.y + w1.y) * cf1;
-			u = v;
-			v = w1;
-			cx_ite = cx_ite.next;
-			var w2 = cx_ite;
-			area += v.x * (w2.y - u.y);
-			var cf2 = w2.y * v.x - w2.x * v.y;
-			this.localCOMx += (v.x + w2.x) * cf2;
-			this.localCOMy += (v.y + w2.y) * cf2;
+			var cf2 = w1.y * v.x - w1.x * v.y;
+			this.localCOMx += (v.x + w1.x) * cf2;
+			this.localCOMy += (v.y + w1.y) * cf2;
 			area = 1 / (3 * area);
 			var t2 = area;
 			this.localCOMx *= t2;
 			this.localCOMy *= t2;
 		}
 	}
-	,__class__: zpp_nape.shape.ZPP_Polygon
+	,__class__: zpp_$nape_shape_ZPP_$Polygon
 });
-zpp_nape.space = {};
-zpp_nape.space.ZPP_Broadphase = function() {
+var zpp_$nape_space_ZPP_$Broadphase = function() {
 	this.dynab = null;
 	this.sweep = null;
 	this.is_sweep = false;
 	this.space = null;
 };
-zpp_nape.space.ZPP_Broadphase.__name__ = true;
-zpp_nape.space.ZPP_Broadphase.prototype = {
+zpp_$nape_space_ZPP_$Broadphase.__name__ = true;
+zpp_$nape_space_ZPP_$Broadphase.prototype = {
 	insert: function(shape) {
 		if(this.is_sweep) this.sweep.__insert(shape); else this.dynab.__insert(shape);
 	}
@@ -11227,7 +11238,7 @@ zpp_nape.space.ZPP_Broadphase.prototype = {
 				if(shape.zip_aabb) {
 					if(shape.body != null) {
 						shape.zip_aabb = false;
-						if(shape.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
+						if(shape.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
 					}
 				}
 			}
@@ -11235,9 +11246,9 @@ zpp_nape.space.ZPP_Broadphase.prototype = {
 	}
 	,broadphase: function(space,discrete) {
 	}
-	,__class__: zpp_nape.space.ZPP_Broadphase
+	,__class__: zpp_$nape_space_ZPP_$Broadphase
 };
-zpp_nape.space.ZPP_AABBNode = function() {
+var zpp_$nape_space_ZPP_$AABBNode = function() {
 	this.first_sync = false;
 	this.synced = false;
 	this.snext = null;
@@ -11253,8 +11264,8 @@ zpp_nape.space.ZPP_AABBNode = function() {
 	this.aabb = null;
 	this.height = -1;
 };
-zpp_nape.space.ZPP_AABBNode.__name__ = true;
-zpp_nape.space.ZPP_AABBNode.prototype = {
+zpp_$nape_space_ZPP_$AABBNode.__name__ = true;
+zpp_$nape_space_ZPP_$AABBNode.prototype = {
 	free: function() {
 		this.height = -1;
 		var o = this.aabb;
@@ -11265,16 +11276,16 @@ zpp_nape.space.ZPP_AABBNode.prototype = {
 		o.wrap_min = o.wrap_max = null;
 		o._invalidate = null;
 		o._validate = null;
-		o.next = zpp_nape.geom.ZPP_AABB.zpp_pool;
-		zpp_nape.geom.ZPP_AABB.zpp_pool = o;
+		o.next = zpp_$nape_geom_ZPP_$AABB.zpp_pool;
+		zpp_$nape_geom_ZPP_$AABB.zpp_pool = o;
 		this.child1 = this.child2 = this.parent = null;
 		this.next = null;
 		this.snext = null;
 		this.mnext = null;
 	}
-	,__class__: zpp_nape.space.ZPP_AABBNode
+	,__class__: zpp_$nape_space_ZPP_$AABBNode
 };
-zpp_nape.space.ZPP_AABBPair = function() {
+var zpp_$nape_space_ZPP_$AABBPair = function() {
 	this.next = null;
 	this.arb = null;
 	this.di = 0;
@@ -11284,15 +11295,15 @@ zpp_nape.space.ZPP_AABBPair = function() {
 	this.n2 = null;
 	this.n1 = null;
 };
-zpp_nape.space.ZPP_AABBPair.__name__ = true;
-zpp_nape.space.ZPP_AABBPair.prototype = {
-	__class__: zpp_nape.space.ZPP_AABBPair
+zpp_$nape_space_ZPP_$AABBPair.__name__ = true;
+zpp_$nape_space_ZPP_$AABBPair.prototype = {
+	__class__: zpp_$nape_space_ZPP_$AABBPair
 };
-zpp_nape.space.ZPP_AABBTree = function() {
+var zpp_$nape_space_ZPP_$AABBTree = function() {
 	this.root = null;
 };
-zpp_nape.space.ZPP_AABBTree.__name__ = true;
-zpp_nape.space.ZPP_AABBTree.prototype = {
+zpp_$nape_space_ZPP_$AABBTree.__name__ = true;
+zpp_$nape_space_ZPP_$AABBTree.prototype = {
 	inlined_insertLeaf: function(leaf) {
 		if(this.root == null) {
 			this.root = leaf;
@@ -11304,22 +11315,22 @@ zpp_nape.space.ZPP_AABBTree.prototype = {
 				var child1 = node.child1;
 				var child2 = node.child2;
 				var area = node.aabb.perimeter();
-				zpp_nape.space.ZPP_AABBTree.tmpaabb.setCombine(node.aabb,leafaabb);
-				var carea = zpp_nape.space.ZPP_AABBTree.tmpaabb.perimeter();
+				zpp_$nape_space_ZPP_$AABBTree.tmpaabb.setCombine(node.aabb,leafaabb);
+				var carea = zpp_$nape_space_ZPP_$AABBTree.tmpaabb.perimeter();
 				var cost = 2 * carea;
 				var icost = 2 * (carea - area);
 				var cost1;
-				zpp_nape.space.ZPP_AABBTree.tmpaabb.setCombine(leafaabb,child1.aabb);
-				if(child1.child1 == null) cost1 = zpp_nape.space.ZPP_AABBTree.tmpaabb.perimeter() + icost; else {
+				zpp_$nape_space_ZPP_$AABBTree.tmpaabb.setCombine(leafaabb,child1.aabb);
+				if(child1.child1 == null) cost1 = zpp_$nape_space_ZPP_$AABBTree.tmpaabb.perimeter() + icost; else {
 					var oarea = child1.aabb.perimeter();
-					var narea = zpp_nape.space.ZPP_AABBTree.tmpaabb.perimeter();
+					var narea = zpp_$nape_space_ZPP_$AABBTree.tmpaabb.perimeter();
 					cost1 = narea - oarea + icost;
 				}
 				var cost2;
-				zpp_nape.space.ZPP_AABBTree.tmpaabb.setCombine(leafaabb,child2.aabb);
-				if(child2.child1 == null) cost2 = zpp_nape.space.ZPP_AABBTree.tmpaabb.perimeter() + icost; else {
+				zpp_$nape_space_ZPP_$AABBTree.tmpaabb.setCombine(leafaabb,child2.aabb);
+				if(child2.child1 == null) cost2 = zpp_$nape_space_ZPP_$AABBTree.tmpaabb.perimeter() + icost; else {
 					var oarea1 = child2.aabb.perimeter();
-					var narea1 = zpp_nape.space.ZPP_AABBTree.tmpaabb.perimeter();
+					var narea1 = zpp_$nape_space_ZPP_$AABBTree.tmpaabb.perimeter();
 					cost2 = narea1 - oarea1 + icost;
 				}
 				if(cost < cost1 && cost < cost2) break; else if(cost1 < cost2) node = child1; else node = child2;
@@ -11327,14 +11338,14 @@ zpp_nape.space.ZPP_AABBTree.prototype = {
 			var sibling = node;
 			var oparent = sibling.parent;
 			var nparent;
-			if(zpp_nape.space.ZPP_AABBNode.zpp_pool == null) nparent = new zpp_nape.space.ZPP_AABBNode(); else {
-				nparent = zpp_nape.space.ZPP_AABBNode.zpp_pool;
-				zpp_nape.space.ZPP_AABBNode.zpp_pool = nparent.next;
+			if(zpp_$nape_space_ZPP_$AABBNode.zpp_pool == null) nparent = new zpp_$nape_space_ZPP_$AABBNode(); else {
+				nparent = zpp_$nape_space_ZPP_$AABBNode.zpp_pool;
+				zpp_$nape_space_ZPP_$AABBNode.zpp_pool = nparent.next;
 				nparent.next = null;
 			}
-			if(zpp_nape.geom.ZPP_AABB.zpp_pool == null) nparent.aabb = new zpp_nape.geom.ZPP_AABB(); else {
-				nparent.aabb = zpp_nape.geom.ZPP_AABB.zpp_pool;
-				zpp_nape.geom.ZPP_AABB.zpp_pool = nparent.aabb.next;
+			if(zpp_$nape_geom_ZPP_$AABB.zpp_pool == null) nparent.aabb = new zpp_$nape_geom_ZPP_$AABB(); else {
+				nparent.aabb = zpp_$nape_geom_ZPP_$AABB.zpp_pool;
+				zpp_$nape_geom_ZPP_$AABB.zpp_pool = nparent.aabb.next;
 				nparent.aabb.next = null;
 			}
 			null;
@@ -11391,8 +11402,8 @@ zpp_nape.space.ZPP_AABBTree.prototype = {
 				sibling.parent = gparent;
 				var o = parent;
 				o.free();
-				o.next = zpp_nape.space.ZPP_AABBNode.zpp_pool;
-				zpp_nape.space.ZPP_AABBNode.zpp_pool = o;
+				o.next = zpp_$nape_space_ZPP_$AABBNode.zpp_pool;
+				zpp_$nape_space_ZPP_$AABBNode.zpp_pool = o;
 				var node = gparent;
 				while(node != null) {
 					node = this.balance(node);
@@ -11413,8 +11424,8 @@ zpp_nape.space.ZPP_AABBTree.prototype = {
 				sibling.parent = null;
 				var o1 = parent;
 				o1.free();
-				o1.next = zpp_nape.space.ZPP_AABBNode.zpp_pool;
-				zpp_nape.space.ZPP_AABBNode.zpp_pool = o1;
+				o1.next = zpp_$nape_space_ZPP_$AABBNode.zpp_pool;
+				zpp_$nape_space_ZPP_$AABBNode.zpp_pool = o1;
 			}
 		}
 	}
@@ -11528,34 +11539,34 @@ zpp_nape.space.ZPP_AABBTree.prototype = {
 			} else return a;
 		}
 	}
-	,__class__: zpp_nape.space.ZPP_AABBTree
+	,__class__: zpp_$nape_space_ZPP_$AABBTree
 };
-zpp_nape.space.ZPP_DynAABBPhase = function(space) {
+var zpp_$nape_space_ZPP_$DynAABBPhase = function(space) {
 	this.moves = null;
 	this.syncs = null;
 	this.pairs = null;
 	this.dtree = null;
 	this.stree = null;
-	zpp_nape.space.ZPP_Broadphase.call(this);
+	zpp_$nape_space_ZPP_$Broadphase.call(this);
 	this.space = space;
 	this.is_sweep = false;
 	this.dynab = this;
-	this.stree = new zpp_nape.space.ZPP_AABBTree();
-	this.dtree = new zpp_nape.space.ZPP_AABBTree();
+	this.stree = new zpp_$nape_space_ZPP_$AABBTree();
+	this.dtree = new zpp_$nape_space_ZPP_$AABBTree();
 };
-zpp_nape.space.ZPP_DynAABBPhase.__name__ = true;
-zpp_nape.space.ZPP_DynAABBPhase.__super__ = zpp_nape.space.ZPP_Broadphase;
-zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.prototype,{
+zpp_$nape_space_ZPP_$DynAABBPhase.__name__ = true;
+zpp_$nape_space_ZPP_$DynAABBPhase.__super__ = zpp_$nape_space_ZPP_$Broadphase;
+zpp_$nape_space_ZPP_$DynAABBPhase.prototype = $extend(zpp_$nape_space_ZPP_$Broadphase.prototype,{
 	__insert: function(shape) {
 		var node;
-		if(zpp_nape.space.ZPP_AABBNode.zpp_pool == null) node = new zpp_nape.space.ZPP_AABBNode(); else {
-			node = zpp_nape.space.ZPP_AABBNode.zpp_pool;
-			zpp_nape.space.ZPP_AABBNode.zpp_pool = node.next;
+		if(zpp_$nape_space_ZPP_$AABBNode.zpp_pool == null) node = new zpp_$nape_space_ZPP_$AABBNode(); else {
+			node = zpp_$nape_space_ZPP_$AABBNode.zpp_pool;
+			zpp_$nape_space_ZPP_$AABBNode.zpp_pool = node.next;
 			node.next = null;
 		}
-		if(zpp_nape.geom.ZPP_AABB.zpp_pool == null) node.aabb = new zpp_nape.geom.ZPP_AABB(); else {
-			node.aabb = zpp_nape.geom.ZPP_AABB.zpp_pool;
-			zpp_nape.geom.ZPP_AABB.zpp_pool = node.aabb.next;
+		if(zpp_$nape_geom_ZPP_$AABB.zpp_pool == null) node.aabb = new zpp_$nape_geom_ZPP_$AABB(); else {
+			node.aabb = zpp_$nape_geom_ZPP_$AABB.zpp_pool;
+			zpp_$nape_geom_ZPP_$AABB.zpp_pool = node.aabb.next;
 			node.aabb.next = null;
 		}
 		null;
@@ -11576,49 +11587,49 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 		}
 		shape.node = null;
 		if(node.synced) {
-			var pre = null;
-			var cur = this.syncs;
-			while(cur != null) {
-				if(cur == node) break;
-				pre = cur;
-				cur = cur.snext;
-			}
-			if(pre == null) this.syncs = cur.snext; else pre.snext = cur.snext;
-			cur.snext = null;
-			node.synced = false;
-		}
-		if(node.moved) {
 			var pre1 = null;
-			var cur1 = this.moves;
+			var cur1 = this.syncs;
 			while(cur1 != null) {
 				if(cur1 == node) break;
 				pre1 = cur1;
-				cur1 = cur1.mnext;
+				cur1 = cur1.snext;
 			}
-			if(pre1 == null) this.moves = cur1.mnext; else pre1.mnext = cur1.mnext;
-			cur1.mnext = null;
+			if(pre1 == null) this.syncs = cur1.snext; else pre1.snext = cur1.snext;
+			cur1.snext = null;
+			node.synced = false;
+		}
+		if(node.moved) {
+			var pre2 = null;
+			var cur2 = this.moves;
+			while(cur2 != null) {
+				if(cur2 == node) break;
+				pre2 = cur2;
+				cur2 = cur2.mnext;
+			}
+			if(pre2 == null) this.moves = cur2.mnext; else pre2.mnext = cur2.mnext;
+			cur2.mnext = null;
 			node.moved = false;
 		}
-		var pre2 = null;
-		var cur2 = this.pairs;
-		while(cur2 != null) {
-			var nxt = cur2.next;
-			if(cur2.n1 == node || cur2.n2 == node) {
-				if(pre2 == null) this.pairs = nxt; else pre2.next = nxt;
-				if(cur2.arb != null) cur2.arb.pair = null;
-				cur2.arb = null;
-				cur2.n1.shape.pairs.remove(cur2);
-				cur2.n2.shape.pairs.remove(cur2);
-				var o = cur2;
+		var pre = null;
+		var cur = this.pairs;
+		while(cur != null) {
+			var nxt = cur.next;
+			if(cur.n1 == node || cur.n2 == node) {
+				if(pre == null) this.pairs = nxt; else pre.next = nxt;
+				if(cur.arb != null) cur.arb.pair = null;
+				cur.arb = null;
+				cur.n1.shape.pairs.remove(cur);
+				cur.n2.shape.pairs.remove(cur);
+				var o = cur;
 				o.n1 = o.n2 = null;
 				o.sleeping = false;
-				o.next = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-				zpp_nape.space.ZPP_AABBPair.zpp_pool = o;
-				cur2 = nxt;
+				o.next = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+				zpp_$nape_space_ZPP_$AABBPair.zpp_pool = o;
+				cur = nxt;
 				continue;
 			}
-			pre2 = cur2;
-			cur2 = nxt;
+			pre = cur;
+			cur = nxt;
 		}
 		while(!(shape.pairs.head == null)) {
 			var cur3 = shape.pairs.pop_unsafe();
@@ -11628,13 +11639,13 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 			var o1 = cur3;
 			o1.n1 = o1.n2 = null;
 			o1.sleeping = false;
-			o1.next = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-			zpp_nape.space.ZPP_AABBPair.zpp_pool = o1;
+			o1.next = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+			zpp_$nape_space_ZPP_$AABBPair.zpp_pool = o1;
 		}
 		var o2 = node;
 		o2.free();
-		o2.next = zpp_nape.space.ZPP_AABBNode.zpp_pool;
-		zpp_nape.space.ZPP_AABBNode.zpp_pool = o2;
+		o2.next = zpp_$nape_space_ZPP_$AABBNode.zpp_pool;
+		zpp_$nape_space_ZPP_$AABBNode.zpp_pool = o2;
 	}
 	,__sync: function(shape) {
 		var node = shape.node;
@@ -11643,12 +11654,12 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				if(shape.zip_aabb) {
 					if(shape.body != null) {
 						shape.zip_aabb = false;
-						if(shape.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
+						if(shape.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
 					}
 				}
 			}
 			var sync;
-			sync = node.dyn != (shape.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC?false:!shape.body.component.sleeping) || !node.aabb.contains(shape.aabb);
+			sync = node.dyn != (shape.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC?false:!shape.body.component.sleeping) || !node.aabb.contains(shape.aabb);
 			if(sync) {
 				node.synced = true;
 				node.snext = this.syncs;
@@ -11661,23 +11672,23 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 		while(node != null) {
 			var shape = node.shape;
 			if(!node.first_sync) {
-				var tree;
-				if(node.dyn) tree = this.dtree; else tree = this.stree;
-				tree.inlined_removeLeaf(node);
+				var tree1;
+				if(node.dyn) tree1 = this.dtree; else tree1 = this.stree;
+				tree1.inlined_removeLeaf(node);
 			} else node.first_sync = false;
 			var aabb = node.aabb;
 			if(!space.continuous) {
 				if(shape.zip_aabb) {
 					if(shape.body != null) {
 						shape.zip_aabb = false;
-						if(shape.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
+						if(shape.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) shape.circle.__validate_aabb(); else shape.polygon.__validate_aabb();
 					}
 				}
 			}
 			aabb.setExpand(shape.aabb,3.0);
-			var tree1;
-			if(shape.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC?node.dyn = false:node.dyn = !shape.body.component.sleeping) tree1 = this.dtree; else tree1 = this.stree;
-			tree1.inlined_insertLeaf(node);
+			var tree;
+			if(shape.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC?node.dyn = false:node.dyn = !shape.body.component.sleeping) tree = this.dtree; else tree = this.stree;
+			tree.inlined_insertLeaf(node);
 			node.synced = false;
 			node = node.snext;
 		}
@@ -11707,7 +11718,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				if(node1 == leaf) continue;
 				if(node1.child1 == null) {
 					var shape1 = node1.shape;
-					if(shape1.body != lshape.body && !(shape1.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && lshape.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+					if(shape1.body != lshape.body && !(shape1.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && lshape.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 						if(ab.intersect(node1.aabb)) {
 							var id;
 							var di;
@@ -11739,9 +11750,9 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 								}
 								continue;
 							}
-							if(zpp_nape.space.ZPP_AABBPair.zpp_pool == null) p = new zpp_nape.space.ZPP_AABBPair(); else {
-								p = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-								zpp_nape.space.ZPP_AABBPair.zpp_pool = p.next;
+							if(zpp_$nape_space_ZPP_$AABBPair.zpp_pool == null) p = new zpp_$nape_space_ZPP_$AABBPair(); else {
+								p = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+								zpp_$nape_space_ZPP_$AABBPair.zpp_pool = p.next;
 								p.next = null;
 							}
 							null;
@@ -11780,7 +11791,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				if(node2 == leaf) continue;
 				if(node2.child1 == null) {
 					var shape2 = node2.shape;
-					if(shape2.body != lshape.body && !(shape2.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && lshape.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+					if(shape2.body != lshape.body && !(shape2.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && lshape.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 						if(ab.intersect(node2.aabb)) {
 							var id1;
 							var di1;
@@ -11812,9 +11823,9 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 								}
 								continue;
 							}
-							if(zpp_nape.space.ZPP_AABBPair.zpp_pool == null) p1 = new zpp_nape.space.ZPP_AABBPair(); else {
-								p1 = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-								zpp_nape.space.ZPP_AABBPair.zpp_pool = p1.next;
+							if(zpp_$nape_space_ZPP_$AABBPair.zpp_pool == null) p1 = new zpp_$nape_space_ZPP_$AABBPair(); else {
+								p1 = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+								zpp_$nape_space_ZPP_$AABBPair.zpp_pool = p1.next;
 								p1.next = null;
 							}
 							null;
@@ -11866,7 +11877,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				if(node3 == leaf1) continue;
 				if(node3.child1 == null) {
 					var shape3 = node3.shape;
-					if(shape3.body != lshape1.body && !(shape3.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && lshape1.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+					if(shape3.body != lshape1.body && !(shape3.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && lshape1.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 						if(ab1.intersect(node3.aabb)) {
 							var id2;
 							var di2;
@@ -11898,9 +11909,9 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 								}
 								continue;
 							}
-							if(zpp_nape.space.ZPP_AABBPair.zpp_pool == null) p2 = new zpp_nape.space.ZPP_AABBPair(); else {
-								p2 = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-								zpp_nape.space.ZPP_AABBPair.zpp_pool = p2.next;
+							if(zpp_$nape_space_ZPP_$AABBPair.zpp_pool == null) p2 = new zpp_$nape_space_ZPP_$AABBPair(); else {
+								p2 = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+								zpp_$nape_space_ZPP_$AABBPair.zpp_pool = p2.next;
 								p2.next = null;
 							}
 							null;
@@ -11939,7 +11950,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				if(node4 == leaf1) continue;
 				if(node4.child1 == null) {
 					var shape4 = node4.shape;
-					if(shape4.body != lshape1.body && !(shape4.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && lshape1.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+					if(shape4.body != lshape1.body && !(shape4.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && lshape1.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 						if(ab1.intersect(node4.aabb)) {
 							var id3;
 							var di3;
@@ -11971,9 +11982,9 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 								}
 								continue;
 							}
-							if(zpp_nape.space.ZPP_AABBPair.zpp_pool == null) p3 = new zpp_nape.space.ZPP_AABBPair(); else {
-								p3 = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-								zpp_nape.space.ZPP_AABBPair.zpp_pool = p3.next;
+							if(zpp_$nape_space_ZPP_$AABBPair.zpp_pool == null) p3 = new zpp_$nape_space_ZPP_$AABBPair(); else {
+								p3 = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+								zpp_$nape_space_ZPP_$AABBPair.zpp_pool = p3.next;
 								p3.next = null;
 							}
 							null;
@@ -12013,8 +12024,8 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 				var o = cur;
 				o.n1 = o.n2 = null;
 				o.sleeping = false;
-				o.next = zpp_nape.space.ZPP_AABBPair.zpp_pool;
-				zpp_nape.space.ZPP_AABBPair.zpp_pool = o;
+				o.next = zpp_$nape_space_ZPP_$AABBPair.zpp_pool;
+				zpp_$nape_space_ZPP_$AABBPair.zpp_pool = o;
 				cur = nxt;
 				continue;
 			}
@@ -12023,7 +12034,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 			var s21 = cur.n2.shape;
 			var b2 = s21.body;
 			if(!cur.first) {
-				if((b1.component.sleeping || b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) && (b2.component.sleeping || b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+				if((b1.component.sleeping || b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) && (b2.component.sleeping || b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 					cur.sleeping = true;
 					if(pre == null) this.pairs = cur.next; else pre.next = cur.next;
 					cur = cur.next;
@@ -12033,7 +12044,7 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 			cur.first = false;
 			if(s11.aabb.intersect(s21.aabb)) {
 				var oarb = cur.arb;
-				if(discrete) cur.arb = space.narrowPhase(s11,s21,!(b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC),cur.arb,false); else cur.arb = space.continuousEvent(s11,s21,!(b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC),cur.arb,false);
+				if(discrete) cur.arb = space.narrowPhase(s11,s21,!(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC),cur.arb,false); else cur.arb = space.continuousEvent(s11,s21,!(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC),cur.arb,false);
 				if(cur.arb == null) {
 					if(oarb != null) oarb.pair = null;
 				} else cur.arb.pair = cur;
@@ -12042,9 +12053,9 @@ zpp_nape.space.ZPP_DynAABBPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphas
 			cur = cur.next;
 		}
 	}
-	,__class__: zpp_nape.space.ZPP_DynAABBPhase
+	,__class__: zpp_$nape_space_ZPP_$DynAABBPhase
 });
-zpp_nape.space.ZPP_Island = function() {
+var zpp_$nape_space_ZPP_$Island = function() {
 	this.waket = 0;
 	this.sleep = false;
 	this.comps = null;
@@ -12053,10 +12064,10 @@ zpp_nape.space.ZPP_Island = function() {
 	this.modified = false;
 	this._inuse = false;
 	this.next = null;
-	this.comps = new zpp_nape.util.ZNPList_ZPP_Component();
+	this.comps = new zpp_$nape_util_ZNPList_$ZPP_$Component();
 };
-zpp_nape.space.ZPP_Island.__name__ = true;
-zpp_nape.space.ZPP_Island.prototype = {
+zpp_$nape_space_ZPP_$Island.__name__ = true;
+zpp_$nape_space_ZPP_$Island.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		o._inuse = true;
@@ -12083,9 +12094,9 @@ zpp_nape.space.ZPP_Island.prototype = {
 		this.pop();
 		return ret;
 	}
-	,__class__: zpp_nape.space.ZPP_Island
+	,__class__: zpp_$nape_space_ZPP_$Island
 };
-zpp_nape.space.ZPP_Component = function() {
+var zpp_$nape_space_ZPP_$Component = function() {
 	this.woken = false;
 	this.waket = 0;
 	this.sleeping = false;
@@ -12102,11 +12113,11 @@ zpp_nape.space.ZPP_Component = function() {
 	this.rank = 0;
 	this.woken = false;
 };
-zpp_nape.space.ZPP_Component.__name__ = true;
-zpp_nape.space.ZPP_Component.prototype = {
-	__class__: zpp_nape.space.ZPP_Component
+zpp_$nape_space_ZPP_$Component.__name__ = true;
+zpp_$nape_space_ZPP_$Component.prototype = {
+	__class__: zpp_$nape_space_ZPP_$Component
 };
-zpp_nape.space.ZPP_CallbackSet = function() {
+var zpp_$nape_space_ZPP_$CallbackSet = function() {
 	this.lazydel = false;
 	this.freed = false;
 	this.length = 0;
@@ -12118,23 +12129,23 @@ zpp_nape.space.ZPP_CallbackSet = function() {
 	this.int1 = null;
 	this.di = 0;
 	this.id = 0;
-	this.arbiters = new zpp_nape.util.ZNPList_ZPP_Arbiter();
+	this.arbiters = new zpp_$nape_util_ZNPList_$ZPP_$Arbiter();
 };
-zpp_nape.space.ZPP_CallbackSet.__name__ = true;
-zpp_nape.space.ZPP_CallbackSet.get = function(i1,i2) {
+zpp_$nape_space_ZPP_$CallbackSet.__name__ = true;
+zpp_$nape_space_ZPP_$CallbackSet.get = function(i1,i2) {
 	var ret;
-	if(zpp_nape.space.ZPP_CallbackSet.zpp_pool == null) ret = new zpp_nape.space.ZPP_CallbackSet(); else {
-		ret = zpp_nape.space.ZPP_CallbackSet.zpp_pool;
-		zpp_nape.space.ZPP_CallbackSet.zpp_pool = ret.next;
+	if(zpp_$nape_space_ZPP_$CallbackSet.zpp_pool == null) ret = new zpp_$nape_space_ZPP_$CallbackSet(); else {
+		ret = zpp_$nape_space_ZPP_$CallbackSet.zpp_pool;
+		zpp_$nape_space_ZPP_$CallbackSet.zpp_pool = ret.next;
 		ret.next = null;
 	}
 	ret.freed = false;
 	ret.lazydel = false;
-	ret.COLLISIONstate = zpp_nape.util.ZPP_Flags.id_PreFlag_ACCEPT;
+	ret.COLLISIONstate = zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT;
 	ret.COLLISIONstamp = 0;
-	ret.SENSORstate = zpp_nape.util.ZPP_Flags.id_PreFlag_ACCEPT;
+	ret.SENSORstate = zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT;
 	ret.SENSORstamp = 0;
-	ret.FLUIDstate = zpp_nape.util.ZPP_Flags.id_PreFlag_ACCEPT;
+	ret.FLUIDstate = zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT;
 	ret.FLUIDstamp = 0;
 	if(i1.id < i2.id) {
 		ret.int1 = i1;
@@ -12147,7 +12158,7 @@ zpp_nape.space.ZPP_CallbackSet.get = function(i1,i2) {
 	ret.di = ret.int2.id;
 	return ret;
 };
-zpp_nape.space.ZPP_CallbackSet.prototype = {
+zpp_$nape_space_ZPP_$CallbackSet.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		o._inuse = true;
@@ -12215,28 +12226,28 @@ zpp_nape.space.ZPP_CallbackSet.prototype = {
 		}
 		return ret;
 	}
-	,__class__: zpp_nape.space.ZPP_CallbackSet
+	,__class__: zpp_$nape_space_ZPP_$CallbackSet
 };
-zpp_nape.space.ZPP_CbSetManager = function(space) {
+var zpp_$nape_space_ZPP_$CbSetManager = function(space) {
 	this.space = null;
 	this.cbsets = null;
-	if(zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool == null) this.cbsets = new zpp_nape.util.ZPP_Set_ZPP_CbSet(); else {
-		this.cbsets = zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool;
-		zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool = this.cbsets.next;
+	if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool == null) this.cbsets = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet(); else {
+		this.cbsets = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool;
+		zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool = this.cbsets.next;
 		this.cbsets.next = null;
 	}
 	null;
-	this.cbsets.lt = zpp_nape.callbacks.ZPP_CbSet.setlt;
+	this.cbsets.lt = zpp_$nape_callbacks_ZPP_$CbSet.setlt;
 	this.space = space;
 };
-zpp_nape.space.ZPP_CbSetManager.__name__ = true;
-zpp_nape.space.ZPP_CbSetManager.prototype = {
+zpp_$nape_space_ZPP_$CbSetManager.__name__ = true;
+zpp_$nape_space_ZPP_$CbSetManager.prototype = {
 	get: function(cbTypes) {
 		if(cbTypes.head == null) return null;
 		var fake;
-		if(zpp_nape.callbacks.ZPP_CbSet.zpp_pool == null) fake = new zpp_nape.callbacks.ZPP_CbSet(); else {
-			fake = zpp_nape.callbacks.ZPP_CbSet.zpp_pool;
-			zpp_nape.callbacks.ZPP_CbSet.zpp_pool = fake.next;
+		if(zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool == null) fake = new zpp_$nape_callbacks_ZPP_$CbSet(); else {
+			fake = zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool;
+			zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool = fake.next;
 			fake.next = null;
 		}
 		null;
@@ -12245,7 +12256,7 @@ zpp_nape.space.ZPP_CbSetManager.prototype = {
 		var res = this.cbsets.find_weak(fake);
 		var ret;
 		if(res != null) ret = res.data; else {
-			var set = zpp_nape.callbacks.ZPP_CbSet.get(cbTypes);
+			var set = zpp_$nape_callbacks_ZPP_$CbSet.get(cbTypes);
 			this.cbsets.insert(set);
 			set.manager = this;
 			ret = set;
@@ -12253,8 +12264,8 @@ zpp_nape.space.ZPP_CbSetManager.prototype = {
 		fake.cbTypes = faketypes;
 		var o = fake;
 		o.free();
-		o.next = zpp_nape.callbacks.ZPP_CbSet.zpp_pool;
-		zpp_nape.callbacks.ZPP_CbSet.zpp_pool = o;
+		o.next = zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool;
+		zpp_$nape_callbacks_ZPP_$CbSet.zpp_pool = o;
 		return ret;
 	}
 	,remove: function(set) {
@@ -12267,8 +12278,8 @@ zpp_nape.space.ZPP_CbSetManager.prototype = {
 			var o = pair;
 			o.a = o.b = null;
 			o.listeners.clear();
-			o.next = zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool;
-			zpp_nape.callbacks.ZPP_CbSetPair.zpp_pool = o;
+			o.next = zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool;
+			zpp_$nape_callbacks_ZPP_$CbSetPair.zpp_pool = o;
 		}
 		set.manager = null;
 	}
@@ -12303,7 +12314,7 @@ zpp_nape.space.ZPP_CbSetManager.prototype = {
 			cx_ite = cx_ite.next;
 		}
 		if(ret == null) {
-			ret = zpp_nape.callbacks.ZPP_CbSetPair.get(a,b);
+			ret = zpp_$nape_callbacks_ZPP_$CbSetPair.get(a,b);
 			a.cbpairs.add(ret);
 			if(b != a) b.cbpairs.add(ret);
 		}
@@ -12313,9 +12324,9 @@ zpp_nape.space.ZPP_CbSetManager.prototype = {
 		}
 		return ret;
 	}
-	,__class__: zpp_nape.space.ZPP_CbSetManager
+	,__class__: zpp_$nape_space_ZPP_$CbSetManager
 };
-zpp_nape.space.ZPP_Space = function(gravity,broadphase) {
+var zpp_$nape_space_ZPP_$Space = function(gravity,broadphase) {
 	this.prelisteners = null;
 	this.precb = null;
 	this.continuous = false;
@@ -12354,34 +12365,34 @@ zpp_nape.space.ZPP_Space = function(gravity,broadphase) {
 	this.gravityy = 0.0;
 	this.gravityx = 0.0;
 	this.outer = null;
-	this.toiEvents = new zpp_nape.util.ZNPList_ZPP_ToiEvent();
+	this.toiEvents = new zpp_$nape_util_ZNPList_$ZPP_$ToiEvent();
 	this.global_lin_drag = 0.015;
 	this.global_ang_drag = 0.015;
-	zpp_nape.callbacks.ZPP_Callback.internal = true;
-	this.precb = new nape.callbacks.PreCallback();
-	this.precb.zpp_inner = new zpp_nape.callbacks.ZPP_Callback();
-	zpp_nape.callbacks.ZPP_Callback.internal = false;
+	zpp_$nape_callbacks_ZPP_$Callback.internal = true;
+	this.precb = new nape_callbacks_PreCallback();
+	this.precb.zpp_inner = new zpp_$nape_callbacks_ZPP_$Callback();
+	zpp_$nape_callbacks_ZPP_$Callback.internal = false;
 	this.sortcontacts = true;
 	this.pre_dt = 0.0;
 	if(broadphase == null || broadphase == (function($this) {
 		var $r;
-		if(zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE == null) {
-			zpp_nape.util.ZPP_Flags.internal = true;
-			zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE = new nape.space.Broadphase();
-			zpp_nape.util.ZPP_Flags.internal = false;
+		if(zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE == null) {
+			zpp_$nape_util_ZPP_$Flags.internal = true;
+			zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE = new nape_space_Broadphase();
+			zpp_$nape_util_ZPP_$Flags.internal = false;
 		}
-		$r = zpp_nape.util.ZPP_Flags.Broadphase_DYNAMIC_AABB_TREE;
+		$r = zpp_$nape_util_ZPP_$Flags.Broadphase_DYNAMIC_AABB_TREE;
 		return $r;
-	}(this))) this.bphase = new zpp_nape.space.ZPP_DynAABBPhase(this); else if(broadphase == (function($this) {
+	}(this))) this.bphase = new zpp_$nape_space_ZPP_$DynAABBPhase(this); else if(broadphase == (function($this) {
 		var $r;
-		if(zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE == null) {
-			zpp_nape.util.ZPP_Flags.internal = true;
-			zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE = new nape.space.Broadphase();
-			zpp_nape.util.ZPP_Flags.internal = false;
+		if(zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE == null) {
+			zpp_$nape_util_ZPP_$Flags.internal = true;
+			zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE = new nape_space_Broadphase();
+			zpp_$nape_util_ZPP_$Flags.internal = false;
 		}
-		$r = zpp_nape.util.ZPP_Flags.Broadphase_SWEEP_AND_PRUNE;
+		$r = zpp_$nape_util_ZPP_$Flags.Broadphase_SWEEP_AND_PRUNE;
 		return $r;
-	}(this))) this.bphase = new zpp_nape.space.ZPP_SweepPhase(this);
+	}(this))) this.bphase = new zpp_$nape_space_ZPP_$SweepPhase(this);
 	this.time = 0.0;
 	var me = this;
 	if(gravity != null) {
@@ -12391,51 +12402,51 @@ zpp_nape.space.ZPP_Space = function(gravity,broadphase) {
 		this.gravityx = 0;
 		this.gravityy = 0;
 	}
-	this.bodies = new zpp_nape.util.ZNPList_ZPP_Body();
-	this.wrap_bodies = zpp_nape.util.ZPP_BodyList.get(this.bodies);
+	this.bodies = new zpp_$nape_util_ZNPList_$ZPP_$Body();
+	this.wrap_bodies = zpp_$nape_util_ZPP_$BodyList.get(this.bodies);
 	this.wrap_bodies.zpp_inner.adder = $bind(this,this.bodies_adder);
 	this.wrap_bodies.zpp_inner.subber = $bind(this,this.bodies_subber);
 	this.wrap_bodies.zpp_inner._modifiable = $bind(this,this.bodies_modifiable);
-	this.compounds = new zpp_nape.util.ZNPList_ZPP_Compound();
-	this.wrap_compounds = zpp_nape.util.ZPP_CompoundList.get(this.compounds);
+	this.compounds = new zpp_$nape_util_ZNPList_$ZPP_$Compound();
+	this.wrap_compounds = zpp_$nape_util_ZPP_$CompoundList.get(this.compounds);
 	this.wrap_compounds.zpp_inner.adder = $bind(this,this.compounds_adder);
 	this.wrap_compounds.zpp_inner.subber = $bind(this,this.compounds_subber);
 	this.wrap_compounds.zpp_inner._modifiable = $bind(this,this.compounds_modifiable);
-	this.kinematics = new zpp_nape.util.ZNPList_ZPP_Body();
-	this.c_arbiters_true = new zpp_nape.util.ZNPList_ZPP_ColArbiter();
-	this.c_arbiters_false = new zpp_nape.util.ZNPList_ZPP_ColArbiter();
-	this.f_arbiters = new zpp_nape.util.ZNPList_ZPP_FluidArbiter();
-	this.s_arbiters = new zpp_nape.util.ZNPList_ZPP_SensorArbiter();
-	this.islands = new zpp_nape.space.ZPP_Island();
-	this.live = new zpp_nape.util.ZNPList_ZPP_Body();
-	this.wrap_live = zpp_nape.util.ZPP_BodyList.get(this.live,true);
-	this.staticsleep = new zpp_nape.util.ZNPList_ZPP_Body();
-	this.constraints = new zpp_nape.util.ZNPList_ZPP_Constraint();
-	this.wrap_constraints = zpp_nape.util.ZPP_ConstraintList.get(this.constraints);
+	this.kinematics = new zpp_$nape_util_ZNPList_$ZPP_$Body();
+	this.c_arbiters_true = new zpp_$nape_util_ZNPList_$ZPP_$ColArbiter();
+	this.c_arbiters_false = new zpp_$nape_util_ZNPList_$ZPP_$ColArbiter();
+	this.f_arbiters = new zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter();
+	this.s_arbiters = new zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter();
+	this.islands = new zpp_$nape_space_ZPP_$Island();
+	this.live = new zpp_$nape_util_ZNPList_$ZPP_$Body();
+	this.wrap_live = zpp_$nape_util_ZPP_$BodyList.get(this.live,true);
+	this.staticsleep = new zpp_$nape_util_ZNPList_$ZPP_$Body();
+	this.constraints = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
+	this.wrap_constraints = zpp_$nape_util_ZPP_$ConstraintList.get(this.constraints);
 	this.wrap_constraints.zpp_inner.adder = $bind(this,this.constraints_adder);
 	this.wrap_constraints.zpp_inner.subber = $bind(this,this.constraints_subber);
 	this.wrap_constraints.zpp_inner._modifiable = $bind(this,this.constraints_modifiable);
-	this.live_constraints = new zpp_nape.util.ZNPList_ZPP_Constraint();
-	this.wrap_livecon = zpp_nape.util.ZPP_ConstraintList.get(this.live_constraints,true);
-	this.__static = zpp_nape.phys.ZPP_Body.__static();
+	this.live_constraints = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
+	this.wrap_livecon = zpp_$nape_util_ZPP_$ConstraintList.get(this.live_constraints,true);
+	this.__static = zpp_$nape_phys_ZPP_$Body.__static();
 	this.__static.zpp_inner.space = this;
-	this.callbacks = new zpp_nape.callbacks.ZPP_Callback();
+	this.callbacks = new zpp_$nape_callbacks_ZPP_$Callback();
 	this.midstep = false;
-	this.listeners = new zpp_nape.util.ZNPList_ZPP_Listener();
-	this.wrap_listeners = zpp_nape.util.ZPP_ListenerList.get(this.listeners);
+	this.listeners = new zpp_$nape_util_ZNPList_$ZPP_$Listener();
+	this.wrap_listeners = zpp_$nape_util_ZPP_$ListenerList.get(this.listeners);
 	this.wrap_listeners.zpp_inner.adder = $bind(this,this.listeners_adder);
 	this.wrap_listeners.zpp_inner.subber = $bind(this,this.listeners_subber);
 	this.wrap_listeners.zpp_inner._modifiable = $bind(this,this.listeners_modifiable);
-	this.callbackset_list = new zpp_nape.space.ZPP_CallbackSet();
-	this.mrca1 = new zpp_nape.util.ZNPList_ZPP_Interactor();
-	this.mrca2 = new zpp_nape.util.ZNPList_ZPP_Interactor();
-	this.prelisteners = new zpp_nape.util.ZNPList_ZPP_InteractionListener();
-	this.cbsets = new zpp_nape.space.ZPP_CbSetManager(this);
+	this.callbackset_list = new zpp_$nape_space_ZPP_$CallbackSet();
+	this.mrca1 = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
+	this.mrca2 = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
+	this.prelisteners = new zpp_$nape_util_ZNPList_$ZPP_$InteractionListener();
+	this.cbsets = new zpp_$nape_space_ZPP_$CbSetManager(this);
 };
-zpp_nape.space.ZPP_Space.__name__ = true;
-zpp_nape.space.ZPP_Space.prototype = {
+zpp_$nape_space_ZPP_$Space.__name__ = true;
+zpp_$nape_space_ZPP_$Space.prototype = {
 	bodies_adder: function(x) {
-		if(x.zpp_inner.compound != null) throw "Error: Cannot set the space of a Body belonging to a Compound, only the root Compound space can be set";
+		if(x.zpp_inner.compound != null) throw new js__$Boot_HaxeError("Error: Cannot set the space of a Body belonging to a Compound, only the root Compound space can be set");
 		if(x.zpp_inner.space != this) {
 			if(x.zpp_inner.space != null) x.zpp_inner.space.outer.zpp_inner.wrap_bodies.remove(x);
 			this.addBody(x.zpp_inner);
@@ -12446,10 +12457,10 @@ zpp_nape.space.ZPP_Space.prototype = {
 		this.remBody(x.zpp_inner);
 	}
 	,bodies_modifiable: function() {
-		if(this.midstep) throw "Error: Space::bodies cannot be set during space step()";
+		if(this.midstep) throw new js__$Boot_HaxeError("Error: Space::bodies cannot be set during space step()");
 	}
 	,compounds_adder: function(x) {
-		if(x.zpp_inner.compound != null) throw "Error: Cannot set the space of an inner Compound, only the root Compound space can be set";
+		if(x.zpp_inner.compound != null) throw new js__$Boot_HaxeError("Error: Cannot set the space of an inner Compound, only the root Compound space can be set");
 		if(x.zpp_inner.space != this) {
 			if(x.zpp_inner.space != null) x.zpp_inner.space.wrap_compounds.remove(x);
 			this.addCompound(x.zpp_inner);
@@ -12460,10 +12471,10 @@ zpp_nape.space.ZPP_Space.prototype = {
 		this.remCompound(x.zpp_inner);
 	}
 	,compounds_modifiable: function() {
-		if(this.midstep) throw "Error: Space::compounds cannot be set during space step()";
+		if(this.midstep) throw new js__$Boot_HaxeError("Error: Space::compounds cannot be set during space step()");
 	}
 	,constraints_adder: function(x) {
-		if(x.zpp_inner.compound != null) throw "Error: Cannot set the space of a Constraint belonging to a Compound, only the root Compound space can be set";
+		if(x.zpp_inner.compound != null) throw new js__$Boot_HaxeError("Error: Cannot set the space of a Constraint belonging to a Compound, only the root Compound space can be set");
 		if(x.zpp_inner.space != this) {
 			if(x.zpp_inner.space != null) x.zpp_inner.space.outer.zpp_inner.wrap_constraints.remove(x);
 			this.addConstraint(x.zpp_inner);
@@ -12474,7 +12485,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		this.remConstraint(x.zpp_inner);
 	}
 	,constraints_modifiable: function() {
-		if(this.midstep) throw "Error: Space::constraints cannot be set during space step()";
+		if(this.midstep) throw new js__$Boot_HaxeError("Error: Space::constraints cannot be set during space step()");
 	}
 	,listeners_adder: function(x) {
 		if(x.zpp_inner.space != this) {
@@ -12487,7 +12498,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		this.remListener(x.zpp_inner);
 	}
 	,listeners_modifiable: function() {
-		if(this.midstep) throw "Error: Space::listeners cannot be set during space step()";
+		if(this.midstep) throw new js__$Boot_HaxeError("Error: Space::listeners cannot be set during space step()");
 	}
 	,addListener: function(x) {
 		x.space = this;
@@ -12513,21 +12524,21 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var o = p;
 		if(!o.world) {
 			o.component.waket = this.stamp + (this.midstep?0:1);
-			if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+			if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 			if(o.component.sleeping) this.really_wake(o,false);
 		}
-		if(p.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) this.live.remove(p); else if(p.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) {
+		if(p.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) this.live.remove(p); else if(p.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) {
 			this.kinematics.remove(p);
 			this.staticsleep.remove(p);
-		} else if(p.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) this.staticsleep.remove(p);
+		} else if(p.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) this.staticsleep.remove(p);
 		p.type = new_type;
-		if(p.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) this.kinematics.add(p);
-		if(p.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) this.static_validation(p);
+		if(p.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) this.kinematics.add(p);
+		if(p.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) this.static_validation(p);
 		p.component.sleeping = true;
 		var o1 = p;
 		if(!o1.world) {
 			o1.component.waket = this.stamp + (this.midstep?0:1);
-			if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+			if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 			if(o1.component.sleeping) this.really_wake(o1,true);
 		}
 	}
@@ -12537,7 +12548,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var o = s.body;
 			if(!o.world) {
 				o.component.waket = this.stamp + (this.midstep?0:1);
-				if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+				if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 				if(o.component.sleeping) this.really_wake(o,false);
 			}
 		}
@@ -12571,15 +12582,15 @@ zpp_nape.space.ZPP_Space.prototype = {
 								cx_ite2 = cx_ite2.next;
 								continue;
 							}
-							var callbackset = [zpp_nape.phys.ZPP_Interactor.get(i1,i2)];
+							var callbackset = [zpp_$nape_phys_ZPP_$Interactor.get(i1,i2)];
 							callbackset[0].remove_arb(xarb[0]);
 							xarb[0].present--;
-							cb1.manager.pair(cb1,cb2).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_END,(function(callbackset,xarb) {
+							cb1.manager.pair(cb1,cb2).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_END,(function(callbackset,xarb) {
 								return function(listener) {
 									if((listener.itype & xarb[0].type) != 0 && callbackset[0].empty_arb(listener.itype)) {
 										var cb = _g.push_callback(listener);
-										cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_END;
-										zpp_nape.phys.ZPP_Interactor.int_callback(callbackset[0],listener,cb);
+										cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_END;
+										zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset[0],listener,cb);
 										cb.set = callbackset[0];
 									}
 								};
@@ -12590,19 +12601,19 @@ zpp_nape.space.ZPP_Space.prototype = {
 						cx_ite1 = cx_ite1.next;
 					}
 				}
-				if(xarb[0].b1 != body && xarb[0].b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+				if(xarb[0].b1 != body && xarb[0].b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 					var o = xarb[0].b1;
 					if(!o.world) {
 						o.component.waket = this.stamp + (this.midstep?0:1);
-						if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+						if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 						if(o.component.sleeping) this.really_wake(o,false);
 					}
 				}
-				if(xarb[0].b2 != body && xarb[0].b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+				if(xarb[0].b2 != body && xarb[0].b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 					var o1 = xarb[0].b2;
 					if(!o1.world) {
 						o1.component.waket = this.stamp + (this.midstep?0:1);
-						if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+						if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 						if(o1.component.sleeping) this.really_wake(o1,false);
 					}
 				}
@@ -12692,7 +12703,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var o = body;
 		if(!o.world) {
 			o.component.waket = this.stamp + (this.midstep?0:1);
-			if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+			if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 			if(o.component.sleeping) this.really_wake(o,true);
 		}
 		var cx_ite = body.shapes.head;
@@ -12701,37 +12712,37 @@ zpp_nape.space.ZPP_Space.prototype = {
 			this.added_shape(shape,true);
 			cx_ite = cx_ite.next;
 		}
-		if(body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) {
+		if(body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) {
 			this.static_validation(body);
-		} else if(body.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+		} else if(body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 		} else {
-			if(flag != zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) this.kinematics.add(body);
+			if(flag != zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) this.kinematics.add(body);
 		}
 	}
 	,remBody: function(body,flag) {
 		if(flag == null) flag = -1;
-		if(body.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) {
+		if(body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) {
 			var o = body;
 			if(!o.world) {
 				o.component.waket = this.stamp + (this.midstep?0:1);
-				if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+				if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 				if(o.component.sleeping) this.really_wake(o,true);
 			}
 			this.staticsleep.remove(body);
-		} else if(body.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+		} else if(body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 			var o1 = body;
 			if(!o1.world) {
 				o1.component.waket = this.stamp + (this.midstep?0:1);
-				if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+				if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 				if(o1.component.sleeping) this.really_wake(o1,true);
 			}
 			this.live.remove(body);
 		} else {
-			if(flag != zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) this.kinematics.remove(body);
+			if(flag != zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) this.kinematics.remove(body);
 			var o2 = body;
 			if(!o2.world) {
 				o2.component.waket = this.stamp + (this.midstep?0:1);
-				if(o2.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
+				if(o2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
 				if(o2.component.sleeping) this.really_wake(o2,true);
 			}
 			this.staticsleep.remove(body);
@@ -12747,9 +12758,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 	}
 	,push_callback: function(i) {
 		var cb;
-		if(zpp_nape.callbacks.ZPP_Callback.zpp_pool == null) cb = new zpp_nape.callbacks.ZPP_Callback(); else {
-			cb = zpp_nape.callbacks.ZPP_Callback.zpp_pool;
-			zpp_nape.callbacks.ZPP_Callback.zpp_pool = cb.next;
+		if(zpp_$nape_callbacks_ZPP_$Callback.zpp_pool == null) cb = new zpp_$nape_callbacks_ZPP_$Callback(); else {
+			cb = zpp_$nape_callbacks_ZPP_$Callback.zpp_pool;
+			zpp_$nape_callbacks_ZPP_$Callback.zpp_pool = cb.next;
 			cb.next = null;
 		}
 		null;
@@ -12759,7 +12770,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 	}
 	,step: function(deltaTime,velocityIterations,positionIterations) {
 		var _g = this;
-		if(this.midstep) throw "Error: ... REALLY?? you're going to call space.step() inside of space.step()? COME ON!!";
+		if(this.midstep) throw new js__$Boot_HaxeError("Error: ... REALLY?? you're going to call space.step() inside of space.step()? COME ON!!");
 		this.time += deltaTime;
 		this.pre_dt = deltaTime;
 		this.midstep = true;
@@ -12869,7 +12880,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var cx_ite4 = this.staticsleep.head;
 		while(cx_ite4 != null) {
 			var b = cx_ite4.elt;
-			if(!(b.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) || b.velx == 0 && b.vely == 0 && b.angvel == 0) {
+			if(!(b.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) || b.velx == 0 && b.vely == 0 && b.angvel == 0) {
 				if(b.kinematicDelaySleep) {
 					b.kinematicDelaySleep = false;
 					cx_ite4 = cx_ite4.next;
@@ -12897,17 +12908,17 @@ zpp_nape.space.ZPP_Space.prototype = {
 				o.id = o.di = -1;
 				o.freed = true;
 				null;
-				o.next = zpp_nape.space.ZPP_CallbackSet.zpp_pool;
-				zpp_nape.space.ZPP_CallbackSet.zpp_pool = o;
+				o.next = zpp_$nape_space_ZPP_$CallbackSet.zpp_pool;
+				zpp_$nape_space_ZPP_$CallbackSet.zpp_pool = o;
 				continue;
 			}
 			var sleeping = [set[0].sleeping()];
-			zpp_nape.callbacks.ZPP_CbSet.find_all(set[0].int1.cbSet,set[0].int2.cbSet,zpp_nape.util.ZPP_Flags.id_CbEvent_ONGOING,(function(sleeping,set) {
+			zpp_$nape_callbacks_ZPP_$CbSet.find_all(set[0].int1.cbSet,set[0].int2.cbSet,zpp_$nape_util_ZPP_$Flags.id_CbEvent_ONGOING,(function(sleeping,set) {
 				return function(x) {
 					if((!sleeping[0] || x.allowSleepingCallbacks) && !set[0].empty_arb(x.itype)) {
 						var cb = _g.push_callback(x);
-						cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_ONGOING;
-						zpp_nape.phys.ZPP_Interactor.int_callback(set[0],x,cb);
+						cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_ONGOING;
+						zpp_$nape_phys_ZPP_$Interactor.int_callback(set[0],x,cb);
 						cb.set = set[0];
 					}
 				};
@@ -12917,13 +12928,13 @@ zpp_nape.space.ZPP_Space.prototype = {
 		}
 		while(!this.callbacks.empty()) {
 			var cb1 = this.callbacks.pop();
-			if(cb1.listener.type == zpp_nape.util.ZPP_Flags.id_ListenerType_BODY) {
+			if(cb1.listener.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_BODY) {
 				var o1 = cb1.listener.body;
 				o1.handler(cb1.wrapper_body());
-			} else if(cb1.listener.type == zpp_nape.util.ZPP_Flags.id_ListenerType_CONSTRAINT) {
+			} else if(cb1.listener.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_CONSTRAINT) {
 				var o2 = cb1.listener.constraint;
 				o2.handler(cb1.wrapper_con());
-			} else if(cb1.listener.type == zpp_nape.util.ZPP_Flags.id_ListenerType_INTERACTION) {
+			} else if(cb1.listener.type == zpp_$nape_util_ZPP_$Flags.id_ListenerType_INTERACTION) {
 				var o3 = cb1.listener.interaction;
 				o3.handleri(cb1.wrapper_int());
 			}
@@ -12934,8 +12945,8 @@ zpp_nape.space.ZPP_Space.prototype = {
 			o4.listener = null;
 			if(o4.wrap_arbiters != null) o4.wrap_arbiters.zpp_inner.inner = null;
 			o4.set = null;
-			o4.next = zpp_nape.callbacks.ZPP_Callback.zpp_pool;
-			zpp_nape.callbacks.ZPP_Callback.zpp_pool = o4;
+			o4.next = zpp_$nape_callbacks_ZPP_$Callback.zpp_pool;
+			zpp_$nape_callbacks_ZPP_$Callback.zpp_pool = o4;
 		}
 	}
 	,continuousCollisions: function(deltaTime) {
@@ -12951,21 +12962,21 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite = this.toiEvents.head;
 			while(cx_ite != null) {
 				var toi = cx_ite.elt;
-				var b1 = toi.s1.body;
-				var b2 = toi.s2.body;
-				if(b1.sweepFrozen && b2.sweepFrozen) {
-					if(toi.toi != 0 && zpp_nape.geom.ZPP_Collide.testCollide_safe(toi.s1,toi.s2)) toi.toi = 0; else {
+				var b11 = toi.s1.body;
+				var b21 = toi.s2.body;
+				if(b11.sweepFrozen && b21.sweepFrozen) {
+					if(toi.toi != 0 && zpp_$nape_geom_ZPP_$Collide.testCollide_safe(toi.s1,toi.s2)) toi.toi = 0; else {
 						cx_ite = this.toiEvents.erase(pre);
 						var o = toi;
-						o.next = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-						zpp_nape.geom.ZPP_ToiEvent.zpp_pool = o;
+						o.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+						zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o;
 						continue;
 					}
 				}
-				if(toi.frozen1 != b1.sweepFrozen || toi.frozen2 != b2.sweepFrozen) {
+				if(toi.frozen1 != b11.sweepFrozen || toi.frozen2 != b21.sweepFrozen) {
 					if(!toi.kinematic) {
-						toi.frozen1 = b1.sweepFrozen;
-						toi.frozen2 = b2.sweepFrozen;
+						toi.frozen1 = b11.sweepFrozen;
+						toi.frozen2 = b21.sweepFrozen;
 						if(toi.frozen1) {
 							var tmp = toi.s1;
 							toi.s1 = toi.s2;
@@ -12973,19 +12984,19 @@ zpp_nape.space.ZPP_Space.prototype = {
 							toi.frozen1 = false;
 							toi.frozen2 = true;
 						}
-						zpp_nape.geom.ZPP_SweepDistance.staticSweep(toi,deltaTime,0,nape.Config.collisionSlopCCD);
+						zpp_$nape_geom_ZPP_$SweepDistance.staticSweep(toi,deltaTime,0,nape_Config.collisionSlopCCD);
 						if(toi.toi < 0) {
 							cx_ite = this.toiEvents.erase(pre);
 							var o1 = toi;
-							o1.next = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-							zpp_nape.geom.ZPP_ToiEvent.zpp_pool = o1;
+							o1.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+							zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o1;
 							continue;
 						}
 					} else {
 						cx_ite = this.toiEvents.erase(pre);
 						var o2 = toi;
-						o2.next = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-						zpp_nape.geom.ZPP_ToiEvent.zpp_pool = o2;
+						o2.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+						zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o2;
 						continue;
 					}
 				}
@@ -13001,15 +13012,15 @@ zpp_nape.space.ZPP_Space.prototype = {
 			if(minTOI == null) break;
 			this.toiEvents.erase(preMin);
 			curTimeAlpha = minTOI.toi;
-			var b11 = minTOI.s1.body;
-			var b21 = minTOI.s2.body;
-			if(!b11.sweepFrozen) {
-				b11.sweepIntegrate(curTimeAlpha * deltaTime);
-				b11.sweepValidate(minTOI.s1);
+			var b1 = minTOI.s1.body;
+			var b2 = minTOI.s2.body;
+			if(!b1.sweepFrozen) {
+				b1.sweepIntegrate(curTimeAlpha * deltaTime);
+				b1.sweepValidate(minTOI.s1);
 			}
-			if(!b21.sweepFrozen) {
-				b21.sweepIntegrate(curTimeAlpha * deltaTime);
-				b21.sweepValidate(minTOI.s2);
+			if(!b2.sweepFrozen) {
+				b2.sweepIntegrate(curTimeAlpha * deltaTime);
+				b2.sweepValidate(minTOI.s2);
 			}
 			var wasnull = minTOI.arbiter == null;
 			var arb = this.narrowPhase(minTOI.s1,minTOI.s2,true,minTOI.arbiter,true);
@@ -13019,32 +13030,32 @@ zpp_nape.space.ZPP_Space.prototype = {
 					minTOI.arbiter.pair = null;
 				}
 			} else if(!this.presteparb(arb,deltaTime,true)) {
-				if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.COL && (arb.active && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0)) {
+				if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL && (arb.active && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0)) {
 					arb.colarb.warmStart();
 					arb.colarb.applyImpulseVel();
 					arb.colarb.applyImpulseVel();
 					arb.colarb.applyImpulseVel();
 					arb.colarb.applyImpulseVel();
-					b11.sweep_angvel = b11.angvel % MAX_VEL;
-					b21.sweep_angvel = b21.angvel % MAX_VEL;
+					b1.sweep_angvel = b1.angvel % MAX_VEL;
+					b2.sweep_angvel = b2.angvel % MAX_VEL;
 				}
 			}
-			if(arb != null && (arb.active && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) && arb.type == zpp_nape.dynamics.ZPP_Arbiter.COL) {
-				if(!b11.sweepFrozen && !(b11.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC)) {
-					b11.sweepFrozen = true;
-					if(minTOI.failed) b11.angvel = b11.sweep_angvel = 0; else if(minTOI.slipped) b11.angvel = b11.sweep_angvel *= nape.Config.angularCCDSlipScale; else b11.angvel = b11.sweep_angvel;
+			if(arb != null && (arb.active && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) && arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL) {
+				if(!b1.sweepFrozen && !(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC)) {
+					b1.sweepFrozen = true;
+					if(minTOI.failed) b1.angvel = b1.sweep_angvel = 0; else if(minTOI.slipped) b1.angvel = b1.sweep_angvel *= nape_Config.angularCCDSlipScale; else b1.angvel = b1.sweep_angvel;
 				}
-				if(!b21.sweepFrozen && !(b21.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC)) {
-					b21.sweepFrozen = true;
-					if(minTOI.failed) b21.angvel = b21.sweep_angvel = 0; else if(minTOI.slipped) b21.angvel = b21.sweep_angvel *= nape.Config.angularCCDSlipScale; else b21.angvel = b21.sweep_angvel;
+				if(!b2.sweepFrozen && !(b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC)) {
+					b2.sweepFrozen = true;
+					if(minTOI.failed) b2.angvel = b2.sweep_angvel = 0; else if(minTOI.slipped) b2.angvel = b2.sweep_angvel *= nape_Config.angularCCDSlipScale; else b2.angvel = b2.sweep_angvel;
 				}
 			}
 		}
 		while(!(this.toiEvents.head == null)) {
 			var toi1 = this.toiEvents.pop_unsafe();
 			var o3 = toi1;
-			o3.next = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-			zpp_nape.geom.ZPP_ToiEvent.zpp_pool = o3;
+			o3.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+			zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o3;
 		}
 		var cx_ite1 = this.kinematics.head;
 		while(cx_ite1 != null) {
@@ -13069,17 +13080,17 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var b2 = s2.body;
 		if(stat || b1.bullet || b2.bullet) {
 			var toi;
-			if(zpp_nape.geom.ZPP_ToiEvent.zpp_pool == null) toi = new zpp_nape.geom.ZPP_ToiEvent(); else {
-				toi = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-				zpp_nape.geom.ZPP_ToiEvent.zpp_pool = toi.next;
+			if(zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool == null) toi = new zpp_$nape_geom_ZPP_$ToiEvent(); else {
+				toi = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+				zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = toi.next;
 				toi.next = null;
 			}
 			toi.failed = false;
 			toi.s1 = toi.s2 = null;
 			toi.arbiter = null;
-			var kin = b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC || b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC;
+			var kin = b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC || b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC;
 			if(stat && !kin) {
-				if(!(s1.body.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC)) {
+				if(!(s1.body.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC)) {
 					toi.s2 = s1;
 					toi.s1 = s2;
 				} else {
@@ -13087,7 +13098,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 					toi.s2 = s2;
 				}
 				toi.kinematic = false;
-				zpp_nape.geom.ZPP_SweepDistance.staticSweep(toi,this.pre_dt,0,nape.Config.collisionSlopCCD);
+				zpp_$nape_geom_ZPP_$SweepDistance.staticSweep(toi,this.pre_dt,0,nape_Config.collisionSlopCCD);
 			} else {
 				toi.s1 = s1;
 				toi.s2 = s2;
@@ -13100,13 +13111,13 @@ zpp_nape.space.ZPP_Space.prototype = {
 						toi.frozen1 = false;
 						toi.frozen2 = true;
 					}
-					zpp_nape.geom.ZPP_SweepDistance.staticSweep(toi,this.pre_dt,0,nape.Config.collisionSlopCCD);
-				} else zpp_nape.geom.ZPP_SweepDistance.dynamicSweep(toi,this.pre_dt,0,nape.Config.collisionSlopCCD);
+					zpp_$nape_geom_ZPP_$SweepDistance.staticSweep(toi,this.pre_dt,0,nape_Config.collisionSlopCCD);
+				} else zpp_$nape_geom_ZPP_$SweepDistance.dynamicSweep(toi,this.pre_dt,0,nape_Config.collisionSlopCCD);
 			}
 			if(stat && toi.toi < 0 || toi.failed) {
 				var o = toi;
-				o.next = zpp_nape.geom.ZPP_ToiEvent.zpp_pool;
-				zpp_nape.geom.ZPP_ToiEvent.zpp_pool = o;
+				o.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+				zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o;
 			} else {
 				this.toiEvents.add(toi);
 				toi.frozen1 = toi.s1.body.sweepFrozen;
@@ -13117,17 +13128,17 @@ zpp_nape.space.ZPP_Space.prototype = {
 		return in_arb;
 	}
 	,bodyCbWake: function(b) {
-		if(b.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && b.cbSet != null) {
+		if(b.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && b.cbSet != null) {
 			if(this.midstep) {
 				var cx_ite = b.cbSet.bodylisteners.head;
 				while(cx_ite != null) {
 					var i = cx_ite.elt;
-					if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE) {
+					if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE) {
 						cx_ite = cx_ite.next;
 						continue;
 					}
 					var cb = this.push_callback(i);
-					cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE;
+					cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE;
 					cb.body = b;
 					cx_ite = cx_ite.next;
 				}
@@ -13135,16 +13146,16 @@ zpp_nape.space.ZPP_Space.prototype = {
 		}
 	}
 	,bodyCbSleep: function(b) {
-		if(b.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && b.cbSet != null) {
+		if(b.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && b.cbSet != null) {
 			var cx_ite = b.cbSet.bodylisteners.head;
 			while(cx_ite != null) {
 				var i = cx_ite.elt;
-				if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_SLEEP) {
+				if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP) {
 					cx_ite = cx_ite.next;
 					continue;
 				}
 				var cb = this.push_callback(i);
-				cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_SLEEP;
+				cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP;
 				cb.body = b;
 				cx_ite = cx_ite.next;
 			}
@@ -13156,12 +13167,12 @@ zpp_nape.space.ZPP_Space.prototype = {
 				var cx_ite = con.cbSet.conlisteners.head;
 				while(cx_ite != null) {
 					var i = cx_ite.elt;
-					if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE) {
+					if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE) {
 						cx_ite = cx_ite.next;
 						continue;
 					}
 					var cb = this.push_callback(i);
-					cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE;
+					cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE;
 					cb.constraint = con;
 					cx_ite = cx_ite.next;
 				}
@@ -13173,12 +13184,12 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite = con.cbSet.conlisteners.head;
 			while(cx_ite != null) {
 				var i = cx_ite.elt;
-				if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_SLEEP) {
+				if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP) {
 					cx_ite = cx_ite.next;
 					continue;
 				}
 				var cb = this.push_callback(i);
-				cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_SLEEP;
+				cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP;
 				cb.constraint = con;
 				cx_ite = cx_ite.next;
 			}
@@ -13189,19 +13200,19 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite = con.cbSet.conlisteners.head;
 			while(cx_ite != null) {
 				var i = cx_ite.elt;
-				if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_BREAK) {
+				if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_BREAK) {
 					cx_ite = cx_ite.next;
 					continue;
 				}
 				var cb = this.push_callback(i);
-				cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_BREAK;
+				cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_BREAK;
 				cb.constraint = con;
 				cx_ite = cx_ite.next;
 			}
 		}
 	}
 	,nullListenerType: function(cb1,cb2) {
-		var stack = new zpp_nape.util.ZNPList_ZPP_Interactor();
+		var stack = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
 		var cx_ite = cb1.interactors.head;
 		while(cx_ite != null) {
 			var i = cx_ite.elt;
@@ -13263,7 +13274,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 								cx_ite6 = cx_ite6.next;
 								continue;
 							}
-							var callbackset = zpp_nape.phys.ZPP_Interactor.get(i11,i21);
+							var callbackset = zpp_$nape_phys_ZPP_$Interactor.get(i11,i21);
 							if(callbackset != null) {
 								while(!(callbackset.arbiters.head == null)) {
 									var arb = callbackset.arbiters.pop_unsafe();
@@ -13323,7 +13334,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 							cx_ite4 = cx_ite4.next;
 							continue;
 						}
-						var callbackset = zpp_nape.phys.ZPP_Interactor.get(i1,i2);
+						var callbackset = zpp_$nape_phys_ZPP_$Interactor.get(i1,i2);
 						if(callbackset != null) {
 							xarb.present--;
 							callbackset.remove_arb(xarb);
@@ -13338,7 +13349,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		}
 	}
 	,freshListenerType: function(cb1,cb2) {
-		var stack = new zpp_nape.util.ZNPList_ZPP_Interactor();
+		var stack = new zpp_$nape_util_ZNPList_$ZPP_$Interactor();
 		var cx_ite = cb1.interactors.head;
 		while(cx_ite != null) {
 			var i = cx_ite.elt;
@@ -13400,9 +13411,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 								cx_ite6 = cx_ite6.next;
 								continue;
 							}
-							var callbackset = zpp_nape.phys.ZPP_Interactor.get(i11,i21);
+							var callbackset = zpp_$nape_phys_ZPP_$Interactor.get(i11,i21);
 							if(callbackset == null) {
-								callbackset = zpp_nape.space.ZPP_CallbackSet.get(i11,i21);
+								callbackset = zpp_$nape_space_ZPP_$CallbackSet.get(i11,i21);
 								this.add_callbackset(callbackset);
 							}
 							if(!callbackset.arbiters.inlined_has(xarb)?(function($this) {
@@ -13468,9 +13479,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 						cb1.validate();
 						cb2.validate();
 						if(!cb1.manager.pair(cb1,cb2).empty_intersection()) {
-							var callbackset = zpp_nape.phys.ZPP_Interactor.get(i1,i2);
+							var callbackset = zpp_$nape_phys_ZPP_$Interactor.get(i1,i2);
 							if(callbackset == null) {
-								callbackset = zpp_nape.space.ZPP_CallbackSet.get(i1,i2);
+								callbackset = zpp_$nape_space_ZPP_$CallbackSet.get(i1,i2);
 								this.add_callbackset(callbackset);
 							}
 							if(!callbackset.arbiters.inlined_has(xarb)?(function($this) {
@@ -13495,7 +13506,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var o = y;
 			if(!o.world) {
 				o.component.waket = this.stamp + (this.midstep?0:1);
-				if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+				if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 				if(o.component.sleeping) this.really_wake(o,false);
 			}
 			cx_ite = cx_ite.next;
@@ -13526,10 +13537,10 @@ zpp_nape.space.ZPP_Space.prototype = {
 					if(arb.sleeping) {
 						arb.sleeping = false;
 						arb.up_stamp += this.stamp - arb.sleep_stamp;
-						if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.COL) {
+						if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL) {
 							var carb = arb.colarb;
 							if(carb.stat) this.c_arbiters_true.inlined_add(carb); else this.c_arbiters_false.inlined_add(carb);
-						} else if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.FLUID) this.f_arbiters.inlined_add(arb.fluidarb); else this.s_arbiters.inlined_add(arb.sensorarb);
+						} else if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.FLUID) this.f_arbiters.inlined_add(arb.fluidarb); else this.s_arbiters.inlined_add(arb.sensorarb);
 					}
 					cx_ite = cx_ite.next;
 				}
@@ -13538,7 +13549,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 				c.island = null;
 				c.parent = c;
 				c.rank = 0;
-				if(!(b.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+				if(!(b.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 					var cx_ite1 = b.shapes.head;
 					while(cx_ite1 != null) {
 						var shape = cx_ite1.elt;
@@ -13557,15 +13568,15 @@ zpp_nape.space.ZPP_Space.prototype = {
 			}
 		}
 		var o = i;
-		o.next = zpp_nape.space.ZPP_Island.zpp_pool;
-		zpp_nape.space.ZPP_Island.zpp_pool = o;
+		o.next = zpp_$nape_space_ZPP_$Island.zpp_pool;
+		zpp_$nape_space_ZPP_$Island.zpp_pool = o;
 	}
 	,non_inlined_wake: function(o,fst) {
 		if(fst == null) fst = false;
 		var o1 = o;
 		if(!o1.world) {
 			o1.component.waket = this.stamp + (this.midstep?0:1);
-			if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+			if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 			if(o1.component.sleeping) this.really_wake(o1,fst);
 		}
 	}
@@ -13573,7 +13584,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		if(fst == null) fst = false;
 		if(o.component.island == null) {
 			o.component.sleeping = false;
-			if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC || o.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) this.staticsleep.inlined_add(o); else this.live.inlined_add(o);
+			if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC || o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) this.staticsleep.inlined_add(o); else this.live.inlined_add(o);
 			var cx_ite = o.constraints.head;
 			while(cx_ite != null) {
 				var con = cx_ite.elt;
@@ -13586,33 +13597,33 @@ zpp_nape.space.ZPP_Space.prototype = {
 				if(arb.sleeping) {
 					arb.sleeping = false;
 					arb.up_stamp += this.stamp + (this.midstep?0:1) - arb.sleep_stamp;
-					if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.COL) {
+					if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL) {
 						var carb = arb.colarb;
 						if(carb.stat) this.c_arbiters_true.inlined_add(carb); else this.c_arbiters_false.inlined_add(carb);
-					} else if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.FLUID) this.f_arbiters.inlined_add(arb.fluidarb); else this.s_arbiters.inlined_add(arb.sensorarb);
+					} else if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.FLUID) this.f_arbiters.inlined_add(arb.fluidarb); else this.s_arbiters.inlined_add(arb.sensorarb);
 				}
-				if(arb.type != zpp_nape.dynamics.ZPP_Arbiter.SENSOR && !arb.cleared && arb.up_stamp >= this.stamp && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-					if(arb.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb.b1.component.sleeping) {
+				if(arb.type != zpp_$nape_dynamics_ZPP_$Arbiter.SENSOR && !arb.cleared && arb.up_stamp >= this.stamp && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+					if(arb.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb.b1.component.sleeping) {
 						var o1 = arb.b1;
 						if(!o1.world) {
 							o1.component.waket = this.stamp + (this.midstep?0:1);
-							if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+							if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 							if(o1.component.sleeping) this.really_wake(o1,false);
 						}
 					}
-					if(arb.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb.b2.component.sleeping) {
+					if(arb.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb.b2.component.sleeping) {
 						var o2 = arb.b2;
 						if(!o2.world) {
 							o2.component.waket = this.stamp + (this.midstep?0:1);
-							if(o2.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
+							if(o2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
 							if(o2.component.sleeping) this.really_wake(o2,false);
 						}
 					}
 				}
 				cx_ite1 = cx_ite1.next;
 			}
-			if(!fst && o.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) this.bodyCbWake(o);
-			if(!fst && !this.bphase.is_sweep && !(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
+			if(!fst && o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) this.bodyCbWake(o);
+			if(!fst && !this.bphase.is_sweep && !(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
 				var cx_ite2 = o.shapes.head;
 				while(cx_ite2 != null) {
 					var shape = cx_ite2.elt;
@@ -13641,8 +13652,8 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var cx_ite = this.c_arbiters_false.head;
 		while(cx_ite != null) {
 			var arb = cx_ite.elt;
-			if(!arb.cleared && arb.up_stamp == this.stamp && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-				if(arb.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+			if(!arb.cleared && arb.up_stamp == this.stamp && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+				if(arb.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 					var xr;
 					if(arb.b1.component == arb.b1.component.parent) xr = arb.b1.component; else {
 						var obj = arb.b1.component;
@@ -13690,8 +13701,8 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var cx_ite1 = this.f_arbiters.head;
 		while(cx_ite1 != null) {
 			var arb1 = cx_ite1.elt;
-			if(!arb1.cleared && arb1.up_stamp == this.stamp && (arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-				if(arb1.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb1.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
+			if(!arb1.cleared && arb1.up_stamp == this.stamp && (arb1.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+				if(arb1.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb1.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
 					var xr1;
 					if(arb1.b1.component == arb1.b1.component.parent) xr1 = arb1.b1.component; else {
 						var obj2 = arb1.b1.component;
@@ -13763,9 +13774,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 				root = obj4;
 			}
 			if(root.island == null) {
-				if(zpp_nape.space.ZPP_Island.zpp_pool == null) root.island = new zpp_nape.space.ZPP_Island(); else {
-					root.island = zpp_nape.space.ZPP_Island.zpp_pool;
-					zpp_nape.space.ZPP_Island.zpp_pool = root.island.next;
+				if(zpp_$nape_space_ZPP_$Island.zpp_pool == null) root.island = new zpp_$nape_space_ZPP_$Island(); else {
+					root.island = zpp_$nape_space_ZPP_$Island.zpp_pool;
+					zpp_$nape_space_ZPP_$Island.zpp_pool = root.island.next;
 					root.island.next = null;
 				}
 				root.island.waket = 0;
@@ -13839,8 +13850,8 @@ zpp_nape.space.ZPP_Space.prototype = {
 					c1.rank = 0;
 				}
 				var o2 = i;
-				o2.next = zpp_nape.space.ZPP_Island.zpp_pool;
-				zpp_nape.space.ZPP_Island.zpp_pool = o2;
+				o2.next = zpp_$nape_space_ZPP_$Island.zpp_pool;
+				zpp_$nape_space_ZPP_$Island.zpp_pool = o2;
 			}
 		}
 	}
@@ -13949,23 +13960,23 @@ zpp_nape.space.ZPP_Space.prototype = {
 		if(!(body.shapes.head == null)) body.validate_aabb();
 		body.validate_mass();
 		body.validate_inertia();
-		if(body.velx != 0 || body.vely != 0 || body.angvel != 0) throw "Error: Static body cannot have any real velocity, only kinematic or surface velocities";
+		if(body.velx != 0 || body.vely != 0 || body.angvel != 0) throw new js__$Boot_HaxeError("Error: Static body cannot have any real velocity, only kinematic or surface velocities");
 		var cx_ite = body.shapes.head;
 		while(cx_ite != null) {
 			var s = cx_ite.elt;
-			if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+			if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 				s.polygon.splice_collinear();
 				var res = s.polygon.valid();
 				if(res != (function($this) {
 					var $r;
-					if(zpp_nape.util.ZPP_Flags.ValidationResult_VALID == null) {
-						zpp_nape.util.ZPP_Flags.internal = true;
-						zpp_nape.util.ZPP_Flags.ValidationResult_VALID = new nape.shape.ValidationResult();
-						zpp_nape.util.ZPP_Flags.internal = false;
+					if(zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID == null) {
+						zpp_$nape_util_ZPP_$Flags.internal = true;
+						zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID = new nape_shape_ValidationResult();
+						zpp_$nape_util_ZPP_$Flags.internal = false;
 					}
-					$r = zpp_nape.util.ZPP_Flags.ValidationResult_VALID;
+					$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID;
 					return $r;
-				}(this))) throw "Error: Cannot simulate with an invalid Polygon : " + s.polygon.outer.toString() + " is invalid : " + res.toString();
+				}(this))) throw new js__$Boot_HaxeError("Error: Cannot simulate with an invalid Polygon : " + s.polygon.outer.toString() + " is invalid : " + res.toString());
 				s.polygon.validate_gaxi();
 			}
 			cx_ite = cx_ite.next;
@@ -13981,19 +13992,19 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite1 = cur.shapes.head;
 			while(cx_ite1 != null) {
 				var s = cx_ite1.elt;
-				if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+				if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 					s.polygon.splice_collinear();
 					var res = s.polygon.valid();
 					if(res != (function($this) {
 						var $r;
-						if(zpp_nape.util.ZPP_Flags.ValidationResult_VALID == null) {
-							zpp_nape.util.ZPP_Flags.internal = true;
-							zpp_nape.util.ZPP_Flags.ValidationResult_VALID = new nape.shape.ValidationResult();
-							zpp_nape.util.ZPP_Flags.internal = false;
+						if(zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID == null) {
+							zpp_$nape_util_ZPP_$Flags.internal = true;
+							zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID = new nape_shape_ValidationResult();
+							zpp_$nape_util_ZPP_$Flags.internal = false;
 						}
-						$r = zpp_nape.util.ZPP_Flags.ValidationResult_VALID;
+						$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID;
 						return $r;
-					}(this))) throw "Error: Cannot simulate with an invalid Polygon : " + s.polygon.outer.toString() + " is invalid : " + res.toString();
+					}(this))) throw new js__$Boot_HaxeError("Error: Cannot simulate with an invalid Polygon : " + s.polygon.outer.toString() + " is invalid : " + res.toString());
 					s.polygon.validate_gaxi();
 				}
 				s.validate_sweepRadius();
@@ -14013,18 +14024,18 @@ zpp_nape.space.ZPP_Space.prototype = {
 				cur.axisy = Math.cos(cur.rot);
 				null;
 			}
-			if(!cur.nomove && cur.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur.mass == 0) throw "Error: Dynamic Body cannot be simulated with 0 mass unless allowMovement is false";
-			if(!cur.norotate && cur.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur.inertia == 0) throw "Error: Dynamic Body cannot be simulated with 0 inertia unless allowRotation is false";
+			if(!cur.nomove && cur.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur.mass == 0) throw new js__$Boot_HaxeError("Error: Dynamic Body cannot be simulated with 0 mass unless allowMovement is false");
+			if(!cur.norotate && cur.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur.inertia == 0) throw new js__$Boot_HaxeError("Error: Dynamic Body cannot be simulated with 0 inertia unless allowRotation is false");
 			if(cur.component.woken && cur.cbSet != null) {
 				var cx_ite2 = cur.cbSet.bodylisteners.head;
 				while(cx_ite2 != null) {
 					var i = cx_ite2.elt;
-					if(i.event != zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE) {
+					if(i.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE) {
 						cx_ite2 = cx_ite2.next;
 						continue;
 					}
 					var cb = this.push_callback(i);
-					cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE;
+					cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE;
 					cb.body = cur;
 					cx_ite2 = cx_ite2.next;
 				}
@@ -14045,19 +14056,19 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite5 = cur1.shapes.head;
 			while(cx_ite5 != null) {
 				var s1 = cx_ite5.elt;
-				if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON) {
+				if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON) {
 					s1.polygon.splice_collinear();
 					var res1 = s1.polygon.valid();
 					if(res1 != (function($this) {
 						var $r;
-						if(zpp_nape.util.ZPP_Flags.ValidationResult_VALID == null) {
-							zpp_nape.util.ZPP_Flags.internal = true;
-							zpp_nape.util.ZPP_Flags.ValidationResult_VALID = new nape.shape.ValidationResult();
-							zpp_nape.util.ZPP_Flags.internal = false;
+						if(zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID == null) {
+							zpp_$nape_util_ZPP_$Flags.internal = true;
+							zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID = new nape_shape_ValidationResult();
+							zpp_$nape_util_ZPP_$Flags.internal = false;
 						}
-						$r = zpp_nape.util.ZPP_Flags.ValidationResult_VALID;
+						$r = zpp_$nape_util_ZPP_$Flags.ValidationResult_VALID;
 						return $r;
-					}(this))) throw "Error: Cannot simulate with an invalid Polygon : " + s1.polygon.outer.toString() + " is invalid : " + res1.toString();
+					}(this))) throw new js__$Boot_HaxeError("Error: Cannot simulate with an invalid Polygon : " + s1.polygon.outer.toString() + " is invalid : " + res1.toString());
 					s1.polygon.validate_gaxi();
 				}
 				s1.validate_sweepRadius();
@@ -14077,8 +14088,8 @@ zpp_nape.space.ZPP_Space.prototype = {
 				cur1.axisy = Math.cos(cur1.rot);
 				null;
 			}
-			if(!cur1.nomove && cur1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur1.mass == 0) throw "Error: Dynamic Body cannot be simulated with 0 mass unless allowMovement is false";
-			if(!cur1.norotate && cur1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur1.inertia == 0) throw "Error: Dynamic Body cannot be simulated with 0 inertia unless allowRotation is false";
+			if(!cur1.nomove && cur1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur1.mass == 0) throw new js__$Boot_HaxeError("Error: Dynamic Body cannot be simulated with 0 mass unless allowMovement is false");
+			if(!cur1.norotate && cur1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur1.inertia == 0) throw new js__$Boot_HaxeError("Error: Dynamic Body cannot be simulated with 0 inertia unless allowRotation is false");
 			var cx_ite6 = cur1.shapes.head;
 			while(cx_ite6 != null) {
 				var shape1 = cx_ite6.elt;
@@ -14096,12 +14107,12 @@ zpp_nape.space.ZPP_Space.prototype = {
 					var cx_ite8 = con.cbSet.conlisteners.head;
 					while(cx_ite8 != null) {
 						var i1 = cx_ite8.elt;
-						if(i1.event != zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE) {
+						if(i1.event != zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE) {
 							cx_ite8 = cx_ite8.next;
 							continue;
 						}
 						var cb1 = this.push_callback(i1);
-						cb1.event = zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE;
+						cb1.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE;
 						cb1.constraint = con;
 						cx_ite8 = cx_ite8.next;
 					}
@@ -14147,9 +14158,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 			cur.sweep_angvel = cur.angvel % MAX_VEL;
 			cur.sweepIntegrate(dt);
 			if(!cur.disableCCD) {
-				var linThreshold = nape.Config.staticCCDLinearThreshold * cur.sweepRadius;
-				var angThreshold = nape.Config.staticCCDAngularThreshold;
-				if((cur.velx * cur.velx + cur.vely * cur.vely) * dt * dt > linThreshold * linThreshold || cur.angvel * cur.angvel * dt * dt > angThreshold * angThreshold || cur.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) {
+				var linThreshold = nape_Config.staticCCDLinearThreshold * cur.sweepRadius;
+				var angThreshold = nape_Config.staticCCDAngularThreshold;
+				if((cur.velx * cur.velx + cur.vely * cur.vely) * dt * dt > linThreshold * linThreshold || cur.angvel * cur.angvel * dt * dt > angThreshold * angThreshold || cur.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) {
 					var angvel = cur.sweep_angvel;
 					if(angvel < 0) angvel = -angvel;
 					var iangvel = 1 / angvel;
@@ -14165,7 +14176,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						if(count > 8) count = 8;
 						var anginc = angvel * dt / count;
 						cur.sweepIntegrate(dt);
-						if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) s.circle._force_validate_aabb(); else s.polygon._force_validate_aabb();
+						if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) s.circle._force_validate_aabb(); else s.polygon._force_validate_aabb();
 						if(minx < aabb.minx) aabb.minx = minx; else minx = aabb.minx;
 						if(miny < aabb.miny) aabb.miny = miny; else miny = aabb.miny;
 						if(maxx > aabb.maxx) aabb.maxx = maxx; else maxx = aabb.maxx;
@@ -14174,7 +14185,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						while(_g < count) {
 							var i = _g++;
 							cur.sweepIntegrate(anginc * i * iangvel);
-							if(s.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) s.circle._force_validate_aabb(); else s.polygon._force_validate_aabb();
+							if(s.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) s.circle._force_validate_aabb(); else s.polygon._force_validate_aabb();
 							if(minx < aabb.minx) aabb.minx = minx; else minx = aabb.minx;
 							if(miny < aabb.miny) aabb.miny = miny; else miny = aabb.miny;
 							if(maxx > aabb.maxx) aabb.maxx = maxx; else maxx = aabb.maxx;
@@ -14184,9 +14195,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 						cx_ite1 = cx_ite1.next;
 					}
 					cur.sweepFrozen = false;
-					if(cur.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur.bulletEnabled) {
-						var linThreshold2 = nape.Config.bulletCCDLinearThreshold * cur.sweepRadius;
-						var angThreshold2 = nape.Config.bulletCCDAngularThreshold;
+					if(cur.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur.bulletEnabled) {
+						var linThreshold2 = nape_Config.bulletCCDLinearThreshold * cur.sweepRadius;
+						var angThreshold2 = nape_Config.bulletCCDAngularThreshold;
 						if((cur.velx * cur.velx + cur.vely * cur.vely) * dt * dt > linThreshold2 * linThreshold2 || cur.angvel * cur.angvel * dt * dt > angThreshold2 * angThreshold2) cur.bullet = true;
 					}
 				} else {
@@ -14209,9 +14220,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 			cur1.sweep_angvel = cur1.angvel % MAX_VEL;
 			cur1.sweepIntegrate(dt);
 			if(!cur1.disableCCD) {
-				var linThreshold1 = nape.Config.staticCCDLinearThreshold * cur1.sweepRadius;
-				var angThreshold1 = nape.Config.staticCCDAngularThreshold;
-				if((cur1.velx * cur1.velx + cur1.vely * cur1.vely) * dt * dt > linThreshold1 * linThreshold1 || cur1.angvel * cur1.angvel * dt * dt > angThreshold1 * angThreshold1 || cur1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) {
+				var linThreshold1 = nape_Config.staticCCDLinearThreshold * cur1.sweepRadius;
+				var angThreshold1 = nape_Config.staticCCDAngularThreshold;
+				if((cur1.velx * cur1.velx + cur1.vely * cur1.vely) * dt * dt > linThreshold1 * linThreshold1 || cur1.angvel * cur1.angvel * dt * dt > angThreshold1 * angThreshold1 || cur1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) {
 					var angvel1 = cur1.sweep_angvel;
 					if(angvel1 < 0) angvel1 = -angvel1;
 					var iangvel1 = 1 / angvel1;
@@ -14227,7 +14238,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						if(count1 > 8) count1 = 8;
 						var anginc1 = angvel1 * dt / count1;
 						cur1.sweepIntegrate(dt);
-						if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) s1.circle._force_validate_aabb(); else s1.polygon._force_validate_aabb();
+						if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) s1.circle._force_validate_aabb(); else s1.polygon._force_validate_aabb();
 						if(minx1 < aabb1.minx) aabb1.minx = minx1; else minx1 = aabb1.minx;
 						if(miny1 < aabb1.miny) aabb1.miny = miny1; else miny1 = aabb1.miny;
 						if(maxx1 > aabb1.maxx) aabb1.maxx = maxx1; else maxx1 = aabb1.maxx;
@@ -14236,7 +14247,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 						while(_g1 < count1) {
 							var i1 = _g1++;
 							cur1.sweepIntegrate(anginc1 * i1 * iangvel1);
-							if(s1.type == zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE) s1.circle._force_validate_aabb(); else s1.polygon._force_validate_aabb();
+							if(s1.type == zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE) s1.circle._force_validate_aabb(); else s1.polygon._force_validate_aabb();
 							if(minx1 < aabb1.minx) aabb1.minx = minx1; else minx1 = aabb1.minx;
 							if(miny1 < aabb1.miny) aabb1.miny = miny1; else miny1 = aabb1.miny;
 							if(maxx1 > aabb1.maxx) aabb1.maxx = maxx1; else maxx1 = aabb1.maxx;
@@ -14246,9 +14257,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 						cx_ite3 = cx_ite3.next;
 					}
 					cur1.sweepFrozen = false;
-					if(cur1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && cur1.bulletEnabled) {
-						var linThreshold21 = nape.Config.bulletCCDLinearThreshold * cur1.sweepRadius;
-						var angThreshold21 = nape.Config.bulletCCDAngularThreshold;
+					if(cur1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && cur1.bulletEnabled) {
+						var linThreshold21 = nape_Config.bulletCCDLinearThreshold * cur1.sweepRadius;
+						var angThreshold21 = nape_Config.bulletCCDAngularThreshold;
 						if((cur1.velx * cur1.velx + cur1.vely * cur1.vely) * dt * dt > linThreshold21 * linThreshold21 || cur1.angvel * cur1.angvel * dt * dt > angThreshold21 * angThreshold21) cur1.bullet = true;
 					}
 				} else {
@@ -14288,18 +14299,18 @@ zpp_nape.space.ZPP_Space.prototype = {
 							cx_ite1 = cx_ite1.next;
 							continue;
 						}
-						var callbackset = [zpp_nape.phys.ZPP_Interactor.get(i1,i2)];
+						var callbackset = [zpp_$nape_phys_ZPP_$Interactor.get(i1,i2)];
 						if(begcb || arb.intchange) {
 							if(callbackset[0] == null) {
-								callbackset[0] = zpp_nape.space.ZPP_CallbackSet.get(i1,i2);
+								callbackset[0] = zpp_$nape_space_ZPP_$CallbackSet.get(i1,i2);
 								this.add_callbackset(callbackset[0]);
 							}
-							cb1.manager.pair(cb1,cb2).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_BEGIN,(function(callbackset) {
+							cb1.manager.pair(cb1,cb2).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_BEGIN,(function(callbackset) {
 								return function(listener) {
 									if((listener.itype & arb.type) != 0 && callbackset[0].empty_arb(listener.itype)) {
 										var cb = _g.push_callback(listener);
-										cb.event = zpp_nape.util.ZPP_Flags.id_CbEvent_BEGIN;
-										zpp_nape.phys.ZPP_Interactor.int_callback(callbackset[0],listener,cb);
+										cb.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_BEGIN;
+										zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset[0],listener,cb);
 										cb.set = callbackset[0];
 									}
 								};
@@ -14313,12 +14324,12 @@ zpp_nape.space.ZPP_Space.prototype = {
 						} else {
 							arb.present--;
 							callbackset[0].remove_arb(arb);
-							cb1.manager.pair(cb1,cb2).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_END,(function(callbackset) {
+							cb1.manager.pair(cb1,cb2).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_END,(function(callbackset) {
 								return function(listener1) {
 									if((listener1.itype & arb.type) != 0 && callbackset[0].empty_arb(listener1.itype)) {
 										var cb3 = _g.push_callback(listener1);
-										cb3.event = zpp_nape.util.ZPP_Flags.id_CbEvent_END;
-										zpp_nape.phys.ZPP_Interactor.int_callback(callbackset[0],listener1,cb3);
+										cb3.event = zpp_$nape_util_ZPP_$Flags.id_CbEvent_END;
+										zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset[0],listener1,cb3);
 										cb3.set = callbackset[0];
 									}
 								};
@@ -14333,14 +14344,14 @@ zpp_nape.space.ZPP_Space.prototype = {
 			arb.fresh = false;
 			arb.intchange = false;
 		}
-		if(arb.cleared || arb.up_stamp + (arb.type == zpp_nape.dynamics.ZPP_Arbiter.COL?nape.Config.arbiterExpirationDelay:0) < this.stamp) {
-			if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.SENSOR) arb.sensorarb.retire(); else if(arb.type == zpp_nape.dynamics.ZPP_Arbiter.FLUID) arb.fluidarb.retire(); else arb.colarb.retire();
+		if(arb.cleared || arb.up_stamp + (arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.COL?nape_Config.arbiterExpirationDelay:0) < this.stamp) {
+			if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.SENSOR) arb.sensorarb.retire(); else if(arb.type == zpp_$nape_dynamics_ZPP_$Arbiter.FLUID) arb.fluidarb.retire(); else arb.colarb.retire();
 			return true;
 		}
 		var pact = arb.active;
 		arb.active = arb.presentable = arb.up_stamp == this.stamp;
-		if((arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-			if(arb.active && arb.type != zpp_nape.dynamics.ZPP_Arbiter.SENSOR) {
+		if((arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+			if(arb.active && arb.type != zpp_$nape_dynamics_ZPP_$Arbiter.SENSOR) {
 				if(arb.colarb != null) {
 					if(arb.colarb.preStep(dt)) arb.active = false;
 				} else arb.fluidarb.preStep(this,dt);
@@ -14475,7 +14486,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		var cx_ite = this.f_arbiters.head;
 		while(cx_ite != null) {
 			var arb = cx_ite.elt;
-			if(arb.active && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) arb.warmStart();
+			if(arb.active && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) arb.warmStart();
 			cx_ite = cx_ite.next;
 		}
 		var arbi = this.c_arbiters_false.head;
@@ -14486,7 +14497,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 		}
 		while(arbi != null) {
 			var arb1 = arbi.elt;
-			if(arb1.active && (arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) arb1.warmStart();
+			if(arb1.active && (arb1.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) arb1.warmStart();
 			arbi = arbi.next;
 			if(fst && arbi == null) {
 				arbi = this.c_arbiters_true.head;
@@ -14507,7 +14518,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 			var cx_ite = this.f_arbiters.head;
 			while(cx_ite != null) {
 				var arb = cx_ite.elt;
-				if(arb.active && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) arb.applyImpulseVel();
+				if(arb.active && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) arb.applyImpulseVel();
 				cx_ite = cx_ite.next;
 			}
 			var pre = null;
@@ -14538,7 +14549,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 			}
 			while(arbi != null) {
 				var arb1 = arbi.elt;
-				if(arb1.active && (arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) arb1.applyImpulseVel();
+				if(arb1.active && (arb1.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) arb1.applyImpulseVel();
 				arbi = arbi.next;
 				if(fst && arbi == null) {
 					arbi = this.c_arbiters_true.head;
@@ -14581,7 +14592,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 			}
 			while(arbi != null) {
 				var arb = arbi.elt;
-				if(arb.active && (arb.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) arb.applyImpulsePos();
+				if(arb.active && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) arb.applyImpulsePos();
 				arbi = arbi.next;
 				if(fst && arbi == null) {
 					arbi = this.c_arbiters_true.head;
@@ -14656,9 +14667,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 					if(b1.arbiters.length < b2.arbiters.length) b = b1; else b = b2;
 					var cx_ite = b.arbiters.head;
 					while(cx_ite != null) {
-						var arb = cx_ite.elt;
-						if(arb.id == sa.id && arb.di == sb.id) {
-							ret1 = arb;
+						var arb1 = cx_ite.elt;
+						if(arb1.id == sa.id && arb1.di == sb.id) {
+							ret1 = arb1;
 							break;
 						}
 						cx_ite = cx_ite.next;
@@ -14666,13 +14677,13 @@ zpp_nape.space.ZPP_Space.prototype = {
 					xarb = ret1;
 				} else xarb = in_arb;
 				var first = xarb == null;
-				var arb1;
+				var arb;
 				var swapped = false;
 				if(first) {
-					if(zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool == null) arb1 = new zpp_nape.dynamics.ZPP_FluidArbiter(); else {
-						arb1 = zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool = arb1.next;
-						arb1.next = null;
+					if(zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool == null) arb = new zpp_$nape_dynamics_ZPP_$FluidArbiter(); else {
+						arb = zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool = arb.next;
+						arb.next = null;
 					}
 					null;
 				} else if(xarb.fluidarb == null) {
@@ -14685,51 +14696,51 @@ zpp_nape.space.ZPP_Space.prototype = {
 					}
 					xarb.active = false;
 					this.f_arbiters.modified = true;
-					if(zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool == null) arb1 = new zpp_nape.dynamics.ZPP_FluidArbiter(); else {
-						arb1 = zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool = arb1.next;
-						arb1.next = null;
+					if(zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool == null) arb = new zpp_$nape_dynamics_ZPP_$FluidArbiter(); else {
+						arb = zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool = arb.next;
+						arb.next = null;
 					}
 					null;
-					arb1.intchange = true;
+					arb.intchange = true;
 					first = true;
 					swapped = true;
-				} else arb1 = xarb.fluidarb;
-				var inttype = zpp_nape.util.ZPP_Flags.id_InteractionType_FLUID;
-				if(first || arb1.stamp != this.stamp || continuous) {
-					arb1.stamp = this.stamp;
-					if(zpp_nape.geom.ZPP_Collide.flowCollide(sa,sb,arb1)) {
+				} else arb = xarb.fluidarb;
+				var inttype = zpp_$nape_util_ZPP_$Flags.id_InteractionType_FLUID;
+				if(first || arb.stamp != this.stamp || continuous) {
+					arb.stamp = this.stamp;
+					if(zpp_$nape_geom_ZPP_$Collide.flowCollide(sa,sb,arb)) {
 						if(first) {
-							arb1.b1 = s1.body;
-							arb1.ws1 = s1;
-							arb1.b2 = s2.body;
-							arb1.ws2 = s2;
-							arb1.id = sa.id;
-							arb1.di = sb.id;
-							arb1.b1.arbiters.inlined_add(arb1);
-							arb1.b2.arbiters.inlined_add(arb1);
-							arb1.active = true;
-							arb1.present = 0;
-							arb1.cleared = false;
-							arb1.sleeping = false;
-							arb1.fresh = false;
-							arb1.presentable = false;
-							arb1.nx = 0;
-							arb1.ny = 1;
-							arb1.dampx = 0;
-							arb1.dampy = 0;
-							arb1.adamp = 0.0;
-							this.f_arbiters.inlined_add(arb1);
-							arb1.fresh = !swapped;
-						} else arb1.fresh = arb1.up_stamp < this.stamp - 1 || arb1.endGenerated == this.stamp && continuous;
-						arb1.up_stamp = arb1.stamp;
-						if(arb1.fresh || (arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-							arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
+							arb.b1 = s1.body;
+							arb.ws1 = s1;
+							arb.b2 = s2.body;
+							arb.ws2 = s2;
+							arb.id = sa.id;
+							arb.di = sb.id;
+							arb.b1.arbiters.inlined_add(arb);
+							arb.b2.arbiters.inlined_add(arb);
+							arb.active = true;
+							arb.present = 0;
+							arb.cleared = false;
+							arb.sleeping = false;
+							arb.fresh = false;
+							arb.presentable = false;
+							arb.nx = 0;
+							arb.ny = 1;
+							arb.dampx = 0;
+							arb.dampy = 0;
+							arb.adamp = 0.0;
+							this.f_arbiters.inlined_add(arb);
+							arb.fresh = !swapped;
+						} else arb.fresh = arb.up_stamp < this.stamp - 1 || arb.endGenerated == this.stamp && continuous;
+						arb.up_stamp = arb.stamp;
+						if(arb.fresh || (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+							arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
 							var anyimpure = false;
 							var arbs1;
-							if(arb1.ws1.id > arb1.ws2.id) arbs1 = arb1.ws2; else arbs1 = arb1.ws1;
+							if(arb.ws1.id > arb.ws2.id) arbs1 = arb.ws2; else arbs1 = arb.ws1;
 							var arbs2;
-							if(arb1.ws1.id > arb1.ws2.id) arbs2 = arb1.ws1; else arbs2 = arb1.ws2;
+							if(arb.ws1.id > arb.ws2.id) arbs2 = arb.ws1; else arbs2 = arb.ws2;
 							this.inlined_MRCA_chains(arbs1,arbs2);
 							var cx_ite1 = this.mrca1.head;
 							while(cx_ite1 != null) {
@@ -14747,7 +14758,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 									var ncallbackset = null;
 									this.prelisteners.inlined_clear();
 									var lite = [null];
-									cb1.manager.pair(cb1,cb2).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_PRE,(function(lite) {
+									cb1.manager.pair(cb1,cb2).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_PRE,(function(lite) {
 										return function(listener) {
 											if((listener.itype & inttype) != 0) {
 												lite[0] = _g.prelisteners.inlined_insert(lite[0],listener);
@@ -14759,18 +14770,18 @@ zpp_nape.space.ZPP_Space.prototype = {
 										cx_ite2 = cx_ite2.next;
 										continue;
 									}
-									callbackset = zpp_nape.phys.ZPP_Interactor.get(i1,i2);
+									callbackset = zpp_$nape_phys_ZPP_$Interactor.get(i1,i2);
 									if(callbackset == null) {
-										ncallbackset = zpp_nape.space.ZPP_CallbackSet.get(i1,i2);
+										ncallbackset = zpp_$nape_space_ZPP_$CallbackSet.get(i1,i2);
 										this.add_callbackset(ncallbackset);
 									}
-									if(callbackset == null || (callbackset.FLUIDstamp != this.stamp || continuous) && (callbackset.FLUIDstate & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
+									if(callbackset == null || (callbackset.FLUIDstamp != this.stamp || continuous) && (callbackset.FLUIDstate & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
 										if(ncallbackset != null) callbackset = ncallbackset;
 										if(callbackset != null) {
 											var cx_ite3 = this.prelisteners.head;
 											while(cx_ite3 != null) {
 												var listener1 = cx_ite3.elt;
-												if(listener1.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
+												if(listener1.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
 													callbackset.COLLISIONstamp = this.stamp;
 													callbackset.SENSORstamp = this.stamp;
 													callbackset.FLUIDstamp = this.stamp;
@@ -14778,121 +14789,121 @@ zpp_nape.space.ZPP_Space.prototype = {
 												cx_ite3 = cx_ite3.next;
 											}
 										}
-										arb1.mutable = true;
-										if(arb1.wrap_position != null) arb1.wrap_position.zpp_inner._immutable = false;
-										var pact = arb1.active;
-										arb1.active = true;
+										arb.mutable = true;
+										if(arb.wrap_position != null) arb.wrap_position.zpp_inner._immutable = false;
+										var pact = arb.active;
+										arb.active = true;
 										var emptycontacts = false;
-										this.precb.zpp_inner.pre_arbiter = arb1;
+										this.precb.zpp_inner.pre_arbiter = arb;
 										this.precb.zpp_inner.set = callbackset;
 										var cx_ite4 = this.prelisteners.head;
 										while(cx_ite4 != null) {
 											var listener2 = cx_ite4.elt;
 											this.precb.zpp_inner.listener = listener2;
-											zpp_nape.phys.ZPP_Interactor.int_callback(callbackset,listener2,this.precb.zpp_inner);
+											zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset,listener2,this.precb.zpp_inner);
 											this.precb.zpp_inner.pre_swapped = i1 != this.precb.zpp_inner.int1;
 											var ret2 = listener2.handlerp(this.precb);
 											if(ret2 != null) if(ret2 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT;
 												return $r;
-											}(this))) arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else if(ret2 == (function($this) {
+											}(this))) arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else if(ret2 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE;
 												return $r;
-											}(this))) arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT; else if(ret2 == (function($this) {
+											}(this))) arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT; else if(ret2 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_IGNORE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_IGNORE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE;
 												return $r;
-											}(this))) arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE;
+											}(this))) arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE;
 											cx_ite4 = cx_ite4.next;
 										}
-										arb1.mutable = false;
-										if(arb1.wrap_position != null) arb1.wrap_position.zpp_inner._immutable = true;
-										arb1.active = pact;
+										arb.mutable = false;
+										if(arb.wrap_position != null) arb.wrap_position.zpp_inner._immutable = true;
+										arb.active = pact;
 										if(callbackset != null) {
 											var cx_ite5 = this.prelisteners.head;
 											while(cx_ite5 != null) {
 												var listener3 = cx_ite5.elt;
-												if(listener3.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
-													callbackset.COLLISIONstate = arb1.immState;
-													callbackset.SENSORstate = arb1.immState;
-													callbackset.FLUIDstate = arb1.immState;
-												} else callbackset.FLUIDstate = arb1.immState;
+												if(listener3.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
+													callbackset.COLLISIONstate = arb.immState;
+													callbackset.SENSORstate = arb.immState;
+													callbackset.FLUIDstate = arb.immState;
+												} else callbackset.FLUIDstate = arb.immState;
 												cx_ite5 = cx_ite5.next;
 											}
 										}
 									} else if(callbackset == null) {
-										if((arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) arb1.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
-									} else arb1.immState = callbackset.FLUIDstate;
+										if((arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) arb.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
+									} else arb.immState = callbackset.FLUIDstate;
 									cx_ite2 = cx_ite2.next;
 								}
 								cx_ite1 = cx_ite1.next;
 							}
-							if(anyimpure && (arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-								if(arb1.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
-									var o = arb1.b1;
+							if(anyimpure && (arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+								if(arb.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
+									var o = arb.b1;
 									if(!o.world) {
 										o.component.waket = this.stamp + (this.midstep?0:1);
-										if(o.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
+										if(o.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o.kinematicDelaySleep = true;
 										if(o.component.sleeping) this.really_wake(o,false);
 									}
 								}
-								if(arb1.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
-									var o1 = arb1.b2;
+								if(arb.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
+									var o1 = arb.b2;
 									if(!o1.world) {
 										o1.component.waket = this.stamp + (this.midstep?0:1);
-										if(o1.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
+										if(o1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o1.kinematicDelaySleep = true;
 										if(o1.component.sleeping) this.really_wake(o1,false);
 									}
 								}
 							}
 						}
-						if((arb1.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-							if(arb1.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb1.b1.component.sleeping) {
-								var o2 = arb1.b1;
+						if((arb.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+							if(arb.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb.b1.component.sleeping) {
+								var o2 = arb.b1;
 								if(!o2.world) {
 									o2.component.waket = this.stamp + (this.midstep?0:1);
-									if(o2.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
+									if(o2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o2.kinematicDelaySleep = true;
 									if(o2.component.sleeping) this.really_wake(o2,false);
 								}
 							}
-							if(arb1.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb1.b2.component.sleeping) {
-								var o3 = arb1.b2;
+							if(arb.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb.b2.component.sleeping) {
+								var o3 = arb.b2;
 								if(!o3.world) {
 									o3.component.waket = this.stamp + (this.midstep?0:1);
-									if(o3.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o3.kinematicDelaySleep = true;
+									if(o3.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o3.kinematicDelaySleep = true;
 									if(o3.component.sleeping) this.really_wake(o3,false);
 								}
 							}
 						}
-						if(arb1.sleeping) {
-							arb1.sleeping = false;
-							this.f_arbiters.inlined_add(arb1);
+						if(arb.sleeping) {
+							arb.sleeping = false;
+							this.f_arbiters.inlined_add(arb);
 						}
-						ret = arb1;
+						ret = arb;
 					} else if(first) {
-						var o4 = arb1;
-						o4.next = zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_FluidArbiter.zpp_pool = o4;
+						var o4 = arb;
+						o4.next = zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$FluidArbiter.zpp_pool = o4;
 						ret = null;
-					} else ret = arb1;
-				} else ret = arb1;
+					} else ret = arb;
+				} else ret = arb;
 			} else if(itype == 1) {
 				var carbs;
 				if(stat) carbs = this.c_arbiters_true; else carbs = this.c_arbiters_false;
@@ -14903,9 +14914,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 					if(b1.arbiters.length < b2.arbiters.length) b3 = b1; else b3 = b2;
 					var cx_ite6 = b3.arbiters.head;
 					while(cx_ite6 != null) {
-						var arb2 = cx_ite6.elt;
-						if(arb2.id == sa.id && arb2.di == sb.id) {
-							ret3 = arb2;
+						var arb3 = cx_ite6.elt;
+						if(arb3.id == sa.id && arb3.di == sb.id) {
+							ret3 = arb3;
 							break;
 						}
 						cx_ite6 = cx_ite6.next;
@@ -14913,16 +14924,16 @@ zpp_nape.space.ZPP_Space.prototype = {
 					xarb1 = ret3;
 				} else xarb1 = in_arb;
 				var first1 = xarb1 == null;
-				var arb3;
+				var arb2;
 				var swapped1 = false;
 				if(first1) {
-					if(zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool == null) arb3 = new zpp_nape.dynamics.ZPP_ColArbiter(); else {
-						arb3 = zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool = arb3.next;
-						arb3.next = null;
+					if(zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool == null) arb2 = new zpp_$nape_dynamics_ZPP_$ColArbiter(); else {
+						arb2 = zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool = arb2.next;
+						arb2.next = null;
 					}
 					null;
-					arb3.stat = stat;
+					arb2.stat = stat;
 				} else if(xarb1.colarb == null) {
 					xarb1.cleared = true;
 					xarb1.b1.arbiters.inlined_try_remove(xarb1);
@@ -14933,67 +14944,67 @@ zpp_nape.space.ZPP_Space.prototype = {
 					}
 					xarb1.active = false;
 					this.f_arbiters.modified = true;
-					if(zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool == null) arb3 = new zpp_nape.dynamics.ZPP_ColArbiter(); else {
-						arb3 = zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool = arb3.next;
-						arb3.next = null;
+					if(zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool == null) arb2 = new zpp_$nape_dynamics_ZPP_$ColArbiter(); else {
+						arb2 = zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool = arb2.next;
+						arb2.next = null;
 					}
 					null;
-					arb3.intchange = true;
-					arb3.stat = stat;
+					arb2.intchange = true;
+					arb2.stat = stat;
 					first1 = true;
 					swapped1 = true;
 				} else {
-					arb3 = xarb1.colarb;
-					reverse = sa != arb3.s1;
-					if(arb3.stat != stat) {
-						arb3.stat = stat;
-						if(!arb3.sleeping) {
-							(stat?this.c_arbiters_false:this.c_arbiters_true).remove(arb3);
-							carbs.add(arb3);
+					arb2 = xarb1.colarb;
+					reverse = sa != arb2.s1;
+					if(arb2.stat != stat) {
+						arb2.stat = stat;
+						if(!arb2.sleeping) {
+							(stat?this.c_arbiters_false:this.c_arbiters_true).remove(arb2);
+							carbs.add(arb2);
 						}
 					}
 				}
-				var inttype1 = zpp_nape.util.ZPP_Flags.id_InteractionType_COLLISION;
-				if(first1 || arb3.stamp != this.stamp || continuous) {
-					arb3.stamp = this.stamp;
-					if(zpp_nape.geom.ZPP_Collide.contactCollide(sa,sb,arb3,reverse)) {
+				var inttype1 = zpp_$nape_util_ZPP_$Flags.id_InteractionType_COLLISION;
+				if(first1 || arb2.stamp != this.stamp || continuous) {
+					arb2.stamp = this.stamp;
+					if(zpp_$nape_geom_ZPP_$Collide.contactCollide(sa,sb,arb2,reverse)) {
 						if(first1) {
-							arb3.b1 = s1.body;
-							arb3.ws1 = s1;
-							arb3.b2 = s2.body;
-							arb3.ws2 = s2;
-							arb3.id = sa.id;
-							arb3.di = sb.id;
-							arb3.b1.arbiters.inlined_add(arb3);
-							arb3.b2.arbiters.inlined_add(arb3);
-							arb3.active = true;
-							arb3.present = 0;
-							arb3.cleared = false;
-							arb3.sleeping = false;
-							arb3.fresh = false;
-							arb3.presentable = false;
-							arb3.s1 = s1;
-							arb3.s2 = s2;
-							if(!arb3.userdef_restitution) {
-								if(arb3.s1.material.elasticity <= Math.NEGATIVE_INFINITY || arb3.s2.material.elasticity <= Math.NEGATIVE_INFINITY) arb3.restitution = 0; else if(arb3.s1.material.elasticity >= Math.POSITIVE_INFINITY || arb3.s2.material.elasticity >= Math.POSITIVE_INFINITY) arb3.restitution = 1; else arb3.restitution = (arb3.s1.material.elasticity + arb3.s2.material.elasticity) / 2;
-								if(arb3.restitution < 0) arb3.restitution = 0;
-								if(arb3.restitution > 1) arb3.restitution = 1;
+							arb2.b1 = s1.body;
+							arb2.ws1 = s1;
+							arb2.b2 = s2.body;
+							arb2.ws2 = s2;
+							arb2.id = sa.id;
+							arb2.di = sb.id;
+							arb2.b1.arbiters.inlined_add(arb2);
+							arb2.b2.arbiters.inlined_add(arb2);
+							arb2.active = true;
+							arb2.present = 0;
+							arb2.cleared = false;
+							arb2.sleeping = false;
+							arb2.fresh = false;
+							arb2.presentable = false;
+							arb2.s1 = s1;
+							arb2.s2 = s2;
+							if(!arb2.userdef_restitution) {
+								if(arb2.s1.material.elasticity <= -Infinity || arb2.s2.material.elasticity <= -Infinity) arb2.restitution = 0; else if(arb2.s1.material.elasticity >= Infinity || arb2.s2.material.elasticity >= Infinity) arb2.restitution = 1; else arb2.restitution = (arb2.s1.material.elasticity + arb2.s2.material.elasticity) / 2;
+								if(arb2.restitution < 0) arb2.restitution = 0;
+								if(arb2.restitution > 1) arb2.restitution = 1;
 							}
-							if(!arb3.userdef_dyn_fric) arb3.dyn_fric = Math.sqrt(arb3.s1.material.dynamicFriction * arb3.s2.material.dynamicFriction);
-							if(!arb3.userdef_stat_fric) arb3.stat_fric = Math.sqrt(arb3.s1.material.staticFriction * arb3.s2.material.staticFriction);
-							if(!arb3.userdef_rfric) arb3.rfric = Math.sqrt(arb3.s1.material.rollingFriction * arb3.s2.material.rollingFriction);
-							carbs.inlined_add(arb3);
-							arb3.fresh = !swapped1;
-						} else arb3.fresh = arb3.up_stamp < this.stamp - 1 || arb3.endGenerated == this.stamp && continuous;
-						arb3.up_stamp = arb3.stamp;
-						if(arb3.fresh || (arb3.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-							arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
+							if(!arb2.userdef_dyn_fric) arb2.dyn_fric = Math.sqrt(arb2.s1.material.dynamicFriction * arb2.s2.material.dynamicFriction);
+							if(!arb2.userdef_stat_fric) arb2.stat_fric = Math.sqrt(arb2.s1.material.staticFriction * arb2.s2.material.staticFriction);
+							if(!arb2.userdef_rfric) arb2.rfric = Math.sqrt(arb2.s1.material.rollingFriction * arb2.s2.material.rollingFriction);
+							carbs.inlined_add(arb2);
+							arb2.fresh = !swapped1;
+						} else arb2.fresh = arb2.up_stamp < this.stamp - 1 || arb2.endGenerated == this.stamp && continuous;
+						arb2.up_stamp = arb2.stamp;
+						if(arb2.fresh || (arb2.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+							arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
 							var anyimpure1 = false;
 							var arbs11;
-							if(arb3.ws1.id > arb3.ws2.id) arbs11 = arb3.ws2; else arbs11 = arb3.ws1;
+							if(arb2.ws1.id > arb2.ws2.id) arbs11 = arb2.ws2; else arbs11 = arb2.ws1;
 							var arbs21;
-							if(arb3.ws1.id > arb3.ws2.id) arbs21 = arb3.ws1; else arbs21 = arb3.ws2;
+							if(arb2.ws1.id > arb2.ws2.id) arbs21 = arb2.ws1; else arbs21 = arb2.ws2;
 							this.inlined_MRCA_chains(arbs11,arbs21);
 							var cx_ite7 = this.mrca1.head;
 							while(cx_ite7 != null) {
@@ -15011,7 +15022,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 									var ncallbackset1 = null;
 									this.prelisteners.inlined_clear();
 									var lite1 = [null];
-									cb11.manager.pair(cb11,cb21).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_PRE,(function(lite1) {
+									cb11.manager.pair(cb11,cb21).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_PRE,(function(lite1) {
 										return function(listener4) {
 											if((listener4.itype & inttype1) != 0) {
 												lite1[0] = _g.prelisteners.inlined_insert(lite1[0],listener4);
@@ -15023,18 +15034,18 @@ zpp_nape.space.ZPP_Space.prototype = {
 										cx_ite8 = cx_ite8.next;
 										continue;
 									}
-									callbackset1 = zpp_nape.phys.ZPP_Interactor.get(i11,i21);
+									callbackset1 = zpp_$nape_phys_ZPP_$Interactor.get(i11,i21);
 									if(callbackset1 == null) {
-										ncallbackset1 = zpp_nape.space.ZPP_CallbackSet.get(i11,i21);
+										ncallbackset1 = zpp_$nape_space_ZPP_$CallbackSet.get(i11,i21);
 										this.add_callbackset(ncallbackset1);
 									}
-									if(callbackset1 == null || (callbackset1.COLLISIONstamp != this.stamp || continuous) && (callbackset1.COLLISIONstate & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
+									if(callbackset1 == null || (callbackset1.COLLISIONstamp != this.stamp || continuous) && (callbackset1.COLLISIONstate & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
 										if(ncallbackset1 != null) callbackset1 = ncallbackset1;
 										if(callbackset1 != null) {
 											var cx_ite9 = this.prelisteners.head;
 											while(cx_ite9 != null) {
 												var listener5 = cx_ite9.elt;
-												if(listener5.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
+												if(listener5.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
 													callbackset1.COLLISIONstamp = this.stamp;
 													callbackset1.SENSORstamp = this.stamp;
 													callbackset1.FLUIDstamp = this.stamp;
@@ -15042,129 +15053,129 @@ zpp_nape.space.ZPP_Space.prototype = {
 												cx_ite9 = cx_ite9.next;
 											}
 										}
-										arb3.mutable = true;
-										if(arb3.wrap_normal != null) arb3.wrap_normal.zpp_inner._immutable = false;
-										if(arb3.wrap_contacts != null) arb3.wrap_contacts.zpp_inner.immutable = false;
-										var pact1 = arb3.active;
-										arb3.active = true;
+										arb2.mutable = true;
+										if(arb2.wrap_normal != null) arb2.wrap_normal.zpp_inner._immutable = false;
+										if(arb2.wrap_contacts != null) arb2.wrap_contacts.zpp_inner.immutable = false;
+										var pact1 = arb2.active;
+										arb2.active = true;
 										var emptycontacts1 = false;
-										arb3.cleanupContacts();
-										this.precb.zpp_inner.pre_arbiter = arb3;
+										arb2.cleanupContacts();
+										this.precb.zpp_inner.pre_arbiter = arb2;
 										this.precb.zpp_inner.set = callbackset1;
 										var cx_ite10 = this.prelisteners.head;
 										while(cx_ite10 != null) {
 											var listener6 = cx_ite10.elt;
 											this.precb.zpp_inner.listener = listener6;
-											zpp_nape.phys.ZPP_Interactor.int_callback(callbackset1,listener6,this.precb.zpp_inner);
+											zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset1,listener6,this.precb.zpp_inner);
 											this.precb.zpp_inner.pre_swapped = i11 != this.precb.zpp_inner.int1;
 											var ret4 = listener6.handlerp(this.precb);
 											if(ret4 != null) if(ret4 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT;
 												return $r;
-											}(this))) arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else if(ret4 == (function($this) {
+											}(this))) arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else if(ret4 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE;
 												return $r;
-											}(this))) arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT; else if(ret4 == (function($this) {
+											}(this))) arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT; else if(ret4 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_IGNORE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_IGNORE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE;
 												return $r;
-											}(this))) arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE;
+											}(this))) arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE;
 											cx_ite10 = cx_ite10.next;
 										}
-										arb3.mutable = false;
-										if(arb3.wrap_normal != null) arb3.wrap_normal.zpp_inner._immutable = true;
-										if(arb3.wrap_contacts != null) arb3.wrap_contacts.zpp_inner.immutable = true;
-										arb3.active = pact1;
+										arb2.mutable = false;
+										if(arb2.wrap_normal != null) arb2.wrap_normal.zpp_inner._immutable = true;
+										if(arb2.wrap_contacts != null) arb2.wrap_contacts.zpp_inner.immutable = true;
+										arb2.active = pact1;
 										if(callbackset1 != null) {
 											var cx_ite11 = this.prelisteners.head;
 											while(cx_ite11 != null) {
 												var listener7 = cx_ite11.elt;
-												if(listener7.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
-													callbackset1.COLLISIONstate = arb3.immState;
-													callbackset1.SENSORstate = arb3.immState;
-													callbackset1.FLUIDstate = arb3.immState;
-												} else callbackset1.COLLISIONstate = arb3.immState;
+												if(listener7.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
+													callbackset1.COLLISIONstate = arb2.immState;
+													callbackset1.SENSORstate = arb2.immState;
+													callbackset1.FLUIDstate = arb2.immState;
+												} else callbackset1.COLLISIONstate = arb2.immState;
 												cx_ite11 = cx_ite11.next;
 											}
 										}
 									} else if(callbackset1 == null) {
-										if((arb3.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) arb3.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
-									} else arb3.immState = callbackset1.COLLISIONstate;
+										if((arb2.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) arb2.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
+									} else arb2.immState = callbackset1.COLLISIONstate;
 									cx_ite8 = cx_ite8.next;
 								}
 								cx_ite7 = cx_ite7.next;
 							}
-							if(anyimpure1 && (arb3.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-								if(arb3.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
-									var o5 = arb3.b1;
+							if(anyimpure1 && (arb2.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+								if(arb2.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
+									var o5 = arb2.b1;
 									if(!o5.world) {
 										o5.component.waket = this.stamp + (this.midstep?0:1);
-										if(o5.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o5.kinematicDelaySleep = true;
+										if(o5.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o5.kinematicDelaySleep = true;
 										if(o5.component.sleeping) this.really_wake(o5,false);
 									}
 								}
-								if(arb3.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) {
-									var o6 = arb3.b2;
+								if(arb2.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) {
+									var o6 = arb2.b2;
 									if(!o6.world) {
 										o6.component.waket = this.stamp + (this.midstep?0:1);
-										if(o6.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o6.kinematicDelaySleep = true;
+										if(o6.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o6.kinematicDelaySleep = true;
 										if(o6.component.sleeping) this.really_wake(o6,false);
 									}
 								}
 							}
 						}
-						if((arb3.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT) != 0) {
-							if(arb3.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb3.b1.component.sleeping) {
-								var o7 = arb3.b1;
+						if((arb2.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT) != 0) {
+							if(arb2.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb2.b1.component.sleeping) {
+								var o7 = arb2.b1;
 								if(!o7.world) {
 									o7.component.waket = this.stamp + (this.midstep?0:1);
-									if(o7.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o7.kinematicDelaySleep = true;
+									if(o7.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o7.kinematicDelaySleep = true;
 									if(o7.component.sleeping) this.really_wake(o7,false);
 								}
 							}
-							if(arb3.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC && arb3.b2.component.sleeping) {
-								var o8 = arb3.b2;
+							if(arb2.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC && arb2.b2.component.sleeping) {
+								var o8 = arb2.b2;
 								if(!o8.world) {
 									o8.component.waket = this.stamp + (this.midstep?0:1);
-									if(o8.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o8.kinematicDelaySleep = true;
+									if(o8.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o8.kinematicDelaySleep = true;
 									if(o8.component.sleeping) this.really_wake(o8,false);
 								}
 							}
 						}
-						if(arb3.sleeping) {
-							arb3.sleeping = false;
-							carbs.inlined_add(arb3);
+						if(arb2.sleeping) {
+							arb2.sleeping = false;
+							carbs.inlined_add(arb2);
 						}
-						ret = arb3;
+						ret = arb2;
 					} else if(first1) {
-						var o9 = arb3;
+						var o9 = arb2;
 						o9.userdef_dyn_fric = false;
 						o9.userdef_stat_fric = false;
 						o9.userdef_restitution = false;
 						o9.userdef_rfric = false;
 						o9.__ref_edge1 = o9.__ref_edge2 = null;
-						o9.next = zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_ColArbiter.zpp_pool = o9;
+						o9.next = zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$ColArbiter.zpp_pool = o9;
 						ret = null;
-					} else ret = arb3;
-				} else ret = arb3;
+					} else ret = arb2;
+				} else ret = arb2;
 			} else {
 				var xarb2;
 				if(in_arb == null) {
@@ -15173,9 +15184,9 @@ zpp_nape.space.ZPP_Space.prototype = {
 					if(b1.arbiters.length < b2.arbiters.length) b4 = b1; else b4 = b2;
 					var cx_ite12 = b4.arbiters.head;
 					while(cx_ite12 != null) {
-						var arb4 = cx_ite12.elt;
-						if(arb4.id == sa.id && arb4.di == sb.id) {
-							ret5 = arb4;
+						var arb5 = cx_ite12.elt;
+						if(arb5.id == sa.id && arb5.di == sb.id) {
+							ret5 = arb5;
 							break;
 						}
 						cx_ite12 = cx_ite12.next;
@@ -15183,13 +15194,13 @@ zpp_nape.space.ZPP_Space.prototype = {
 					xarb2 = ret5;
 				} else xarb2 = in_arb;
 				var first2 = xarb2 == null;
-				var arb5;
+				var arb4;
 				var swapped2 = false;
 				if(first2) {
-					if(zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool == null) arb5 = new zpp_nape.dynamics.ZPP_SensorArbiter(); else {
-						arb5 = zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool = arb5.next;
-						arb5.next = null;
+					if(zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool == null) arb4 = new zpp_$nape_dynamics_ZPP_$SensorArbiter(); else {
+						arb4 = zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool = arb4.next;
+						arb4.next = null;
 					}
 					null;
 				} else if(xarb2.sensorarb == null) {
@@ -15202,46 +15213,46 @@ zpp_nape.space.ZPP_Space.prototype = {
 					}
 					xarb2.active = false;
 					this.f_arbiters.modified = true;
-					if(zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool == null) arb5 = new zpp_nape.dynamics.ZPP_SensorArbiter(); else {
-						arb5 = zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool = arb5.next;
-						arb5.next = null;
+					if(zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool == null) arb4 = new zpp_$nape_dynamics_ZPP_$SensorArbiter(); else {
+						arb4 = zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool = arb4.next;
+						arb4.next = null;
 					}
 					null;
-					arb5.intchange = true;
+					arb4.intchange = true;
 					first2 = true;
 					swapped2 = true;
-				} else arb5 = xarb2.sensorarb;
-				var inttype2 = zpp_nape.util.ZPP_Flags.id_InteractionType_SENSOR;
-				if(first2 || arb5.stamp != this.stamp || continuous) {
-					arb5.stamp = this.stamp;
-					if(zpp_nape.geom.ZPP_Collide.testCollide(sa,sb)) {
+				} else arb4 = xarb2.sensorarb;
+				var inttype2 = zpp_$nape_util_ZPP_$Flags.id_InteractionType_SENSOR;
+				if(first2 || arb4.stamp != this.stamp || continuous) {
+					arb4.stamp = this.stamp;
+					if(zpp_$nape_geom_ZPP_$Collide.testCollide(sa,sb)) {
 						if(first2) {
-							arb5.b1 = s1.body;
-							arb5.ws1 = s1;
-							arb5.b2 = s2.body;
-							arb5.ws2 = s2;
-							arb5.id = sa.id;
-							arb5.di = sb.id;
-							arb5.b1.arbiters.inlined_add(arb5);
-							arb5.b2.arbiters.inlined_add(arb5);
-							arb5.active = true;
-							arb5.present = 0;
-							arb5.cleared = false;
-							arb5.sleeping = false;
-							arb5.fresh = false;
-							arb5.presentable = false;
-							this.s_arbiters.inlined_add(arb5);
-							arb5.fresh = !swapped2;
-						} else arb5.fresh = arb5.up_stamp < this.stamp - 1 || arb5.endGenerated == this.stamp && continuous;
-						arb5.up_stamp = arb5.stamp;
-						if(arb5.fresh || (arb5.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-							arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
+							arb4.b1 = s1.body;
+							arb4.ws1 = s1;
+							arb4.b2 = s2.body;
+							arb4.ws2 = s2;
+							arb4.id = sa.id;
+							arb4.di = sb.id;
+							arb4.b1.arbiters.inlined_add(arb4);
+							arb4.b2.arbiters.inlined_add(arb4);
+							arb4.active = true;
+							arb4.present = 0;
+							arb4.cleared = false;
+							arb4.sleeping = false;
+							arb4.fresh = false;
+							arb4.presentable = false;
+							this.s_arbiters.inlined_add(arb4);
+							arb4.fresh = !swapped2;
+						} else arb4.fresh = arb4.up_stamp < this.stamp - 1 || arb4.endGenerated == this.stamp && continuous;
+						arb4.up_stamp = arb4.stamp;
+						if(arb4.fresh || (arb4.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+							arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
 							var anyimpure2 = false;
 							var arbs12;
-							if(arb5.ws1.id > arb5.ws2.id) arbs12 = arb5.ws2; else arbs12 = arb5.ws1;
+							if(arb4.ws1.id > arb4.ws2.id) arbs12 = arb4.ws2; else arbs12 = arb4.ws1;
 							var arbs22;
-							if(arb5.ws1.id > arb5.ws2.id) arbs22 = arb5.ws1; else arbs22 = arb5.ws2;
+							if(arb4.ws1.id > arb4.ws2.id) arbs22 = arb4.ws1; else arbs22 = arb4.ws2;
 							this.inlined_MRCA_chains(arbs12,arbs22);
 							var cx_ite13 = this.mrca1.head;
 							while(cx_ite13 != null) {
@@ -15259,7 +15270,7 @@ zpp_nape.space.ZPP_Space.prototype = {
 									var ncallbackset2 = null;
 									this.prelisteners.inlined_clear();
 									var lite2 = [null];
-									cb12.manager.pair(cb12,cb22).forall(zpp_nape.util.ZPP_Flags.id_CbEvent_PRE,(function(lite2) {
+									cb12.manager.pair(cb12,cb22).forall(zpp_$nape_util_ZPP_$Flags.id_CbEvent_PRE,(function(lite2) {
 										return function(listener8) {
 											if((listener8.itype & inttype2) != 0) {
 												lite2[0] = _g.prelisteners.inlined_insert(lite2[0],listener8);
@@ -15271,18 +15282,18 @@ zpp_nape.space.ZPP_Space.prototype = {
 										cx_ite14 = cx_ite14.next;
 										continue;
 									}
-									callbackset2 = zpp_nape.phys.ZPP_Interactor.get(i12,i22);
+									callbackset2 = zpp_$nape_phys_ZPP_$Interactor.get(i12,i22);
 									if(callbackset2 == null) {
-										ncallbackset2 = zpp_nape.space.ZPP_CallbackSet.get(i12,i22);
+										ncallbackset2 = zpp_$nape_space_ZPP_$CallbackSet.get(i12,i22);
 										this.add_callbackset(ncallbackset2);
 									}
-									if(callbackset2 == null || (callbackset2.SENSORstamp != this.stamp || continuous) && (callbackset2.SENSORstate & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
+									if(callbackset2 == null || (callbackset2.SENSORstamp != this.stamp || continuous) && (callbackset2.SENSORstate & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
 										if(ncallbackset2 != null) callbackset2 = ncallbackset2;
 										if(callbackset2 != null) {
 											var cx_ite15 = this.prelisteners.head;
 											while(cx_ite15 != null) {
 												var listener9 = cx_ite15.elt;
-												if(listener9.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
+												if(listener9.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
 													callbackset2.COLLISIONstamp = this.stamp;
 													callbackset2.SENSORstamp = this.stamp;
 													callbackset2.FLUIDstamp = this.stamp;
@@ -15290,99 +15301,99 @@ zpp_nape.space.ZPP_Space.prototype = {
 												cx_ite15 = cx_ite15.next;
 											}
 										}
-										var pact2 = arb5.active;
-										arb5.active = true;
+										var pact2 = arb4.active;
+										arb4.active = true;
 										var emptycontacts2 = false;
-										this.precb.zpp_inner.pre_arbiter = arb5;
+										this.precb.zpp_inner.pre_arbiter = arb4;
 										this.precb.zpp_inner.set = callbackset2;
 										var cx_ite16 = this.prelisteners.head;
 										while(cx_ite16 != null) {
 											var listener10 = cx_ite16.elt;
 											this.precb.zpp_inner.listener = listener10;
-											zpp_nape.phys.ZPP_Interactor.int_callback(callbackset2,listener10,this.precb.zpp_inner);
+											zpp_$nape_phys_ZPP_$Interactor.int_callback(callbackset2,listener10,this.precb.zpp_inner);
 											this.precb.zpp_inner.pre_swapped = i12 != this.precb.zpp_inner.int1;
 											var ret6 = listener10.handlerp(this.precb);
 											if(ret6 != null) if(ret6 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT;
 												return $r;
-											}(this))) arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else if(ret6 == (function($this) {
+											}(this))) arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else if(ret6 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_ACCEPT_ONCE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_ACCEPT_ONCE;
 												return $r;
-											}(this))) arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT; else if(ret6 == (function($this) {
+											}(this))) arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT; else if(ret6 == (function($this) {
 												var $r;
-												if(zpp_nape.util.ZPP_Flags.PreFlag_IGNORE == null) {
-													zpp_nape.util.ZPP_Flags.internal = true;
-													zpp_nape.util.ZPP_Flags.PreFlag_IGNORE = new nape.callbacks.PreFlag();
-													zpp_nape.util.ZPP_Flags.internal = false;
+												if(zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE == null) {
+													zpp_$nape_util_ZPP_$Flags.internal = true;
+													zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE = new nape_callbacks_PreFlag();
+													zpp_$nape_util_ZPP_$Flags.internal = false;
 												}
-												$r = zpp_nape.util.ZPP_Flags.PreFlag_IGNORE;
+												$r = zpp_$nape_util_ZPP_$Flags.PreFlag_IGNORE;
 												return $r;
-											}(this))) arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE | zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS; else arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE;
+											}(this))) arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE | zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS; else arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE;
 											cx_ite16 = cx_ite16.next;
 										}
-										arb5.active = pact2;
+										arb4.active = pact2;
 										if(callbackset2 != null) {
 											var cx_ite17 = this.prelisteners.head;
 											while(cx_ite17 != null) {
 												var listener11 = cx_ite17.elt;
-												if(listener11.itype == zpp_nape.util.ZPP_Flags.id_InteractionType_ANY) {
-													callbackset2.COLLISIONstate = arb5.immState;
-													callbackset2.SENSORstate = arb5.immState;
-													callbackset2.FLUIDstate = arb5.immState;
-												} else callbackset2.SENSORstate = arb5.immState;
+												if(listener11.itype == zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY) {
+													callbackset2.COLLISIONstate = arb4.immState;
+													callbackset2.SENSORstate = arb4.immState;
+													callbackset2.FLUIDstate = arb4.immState;
+												} else callbackset2.SENSORstate = arb4.immState;
 												cx_ite17 = cx_ite17.next;
 											}
 										}
 									} else if(callbackset2 == null) {
-										if((arb5.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) arb5.immState = zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT;
-									} else arb5.immState = callbackset2.SENSORstate;
+										if((arb4.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) arb4.immState = zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT;
+									} else arb4.immState = callbackset2.SENSORstate;
 									cx_ite14 = cx_ite14.next;
 								}
 								cx_ite13 = cx_ite13.next;
 							}
-							if(anyimpure2 && (arb5.immState & zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS) == 0) {
-								if(!(arb5.b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
-									var o10 = arb5.b1;
+							if(anyimpure2 && (arb4.immState & zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS) == 0) {
+								if(!(arb4.b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
+									var o10 = arb4.b1;
 									if(!o10.world) {
 										o10.component.waket = this.stamp + (this.midstep?0:1);
-										if(o10.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o10.kinematicDelaySleep = true;
+										if(o10.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o10.kinematicDelaySleep = true;
 										if(o10.component.sleeping) this.really_wake(o10,false);
 									}
 								}
-								if(!(arb5.b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC)) {
-									var o11 = arb5.b2;
+								if(!(arb4.b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC)) {
+									var o11 = arb4.b2;
 									if(!o11.world) {
 										o11.component.waket = this.stamp + (this.midstep?0:1);
-										if(o11.type == zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC) o11.kinematicDelaySleep = true;
+										if(o11.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC) o11.kinematicDelaySleep = true;
 										if(o11.component.sleeping) this.really_wake(o11,false);
 									}
 								}
 							}
 						}
-						if(arb5.sleeping) {
-							arb5.sleeping = false;
-							this.s_arbiters.inlined_add(arb5);
+						if(arb4.sleeping) {
+							arb4.sleeping = false;
+							this.s_arbiters.inlined_add(arb4);
 						}
-						ret = arb5;
+						ret = arb4;
 					} else if(first2) {
-						var o12 = arb5;
-						o12.next = zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool;
-						zpp_nape.dynamics.ZPP_SensorArbiter.zpp_pool = o12;
+						var o12 = arb4;
+						o12.next = zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool;
+						zpp_$nape_dynamics_ZPP_$SensorArbiter.zpp_pool = o12;
 						ret = null;
-					} else ret = arb5;
-				} else ret = arb5;
+					} else ret = arb4;
+				} else ret = arb4;
 			}
 		}
 		return ret;
@@ -15413,33 +15424,33 @@ zpp_nape.space.ZPP_Space.prototype = {
 			}
 		}
 	}
-	,__class__: zpp_nape.space.ZPP_Space
+	,__class__: zpp_$nape_space_ZPP_$Space
 };
-zpp_nape.space.ZPP_SweepData = function() {
+var zpp_$nape_space_ZPP_$SweepData = function() {
 	this.aabb = null;
 	this.shape = null;
 	this.prev = null;
 	this.next = null;
 };
-zpp_nape.space.ZPP_SweepData.__name__ = true;
-zpp_nape.space.ZPP_SweepData.prototype = {
-	__class__: zpp_nape.space.ZPP_SweepData
+zpp_$nape_space_ZPP_$SweepData.__name__ = true;
+zpp_$nape_space_ZPP_$SweepData.prototype = {
+	__class__: zpp_$nape_space_ZPP_$SweepData
 };
-zpp_nape.space.ZPP_SweepPhase = function(space) {
+var zpp_$nape_space_ZPP_$SweepPhase = function(space) {
 	this.list = null;
-	zpp_nape.space.ZPP_Broadphase.call(this);
+	zpp_$nape_space_ZPP_$Broadphase.call(this);
 	this.space = space;
 	this.is_sweep = true;
 	this.sweep = this;
 };
-zpp_nape.space.ZPP_SweepPhase.__name__ = true;
-zpp_nape.space.ZPP_SweepPhase.__super__ = zpp_nape.space.ZPP_Broadphase;
-zpp_nape.space.ZPP_SweepPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.prototype,{
+zpp_$nape_space_ZPP_$SweepPhase.__name__ = true;
+zpp_$nape_space_ZPP_$SweepPhase.__super__ = zpp_$nape_space_ZPP_$Broadphase;
+zpp_$nape_space_ZPP_$SweepPhase.prototype = $extend(zpp_$nape_space_ZPP_$Broadphase.prototype,{
 	__insert: function(shape) {
 		var dat;
-		if(zpp_nape.space.ZPP_SweepData.zpp_pool == null) dat = new zpp_nape.space.ZPP_SweepData(); else {
-			dat = zpp_nape.space.ZPP_SweepData.zpp_pool;
-			zpp_nape.space.ZPP_SweepData.zpp_pool = dat.next;
+		if(zpp_$nape_space_ZPP_$SweepData.zpp_pool == null) dat = new zpp_$nape_space_ZPP_$SweepData(); else {
+			dat = zpp_$nape_space_ZPP_$SweepData.zpp_pool;
+			zpp_$nape_space_ZPP_$SweepData.zpp_pool = dat.next;
 			dat.next = null;
 		}
 		null;
@@ -15459,8 +15470,8 @@ zpp_nape.space.ZPP_SweepPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.
 		o.prev = null;
 		o.shape = null;
 		o.aabb = null;
-		o.next = zpp_nape.space.ZPP_SweepData.zpp_pool;
-		zpp_nape.space.ZPP_SweepData.zpp_pool = o;
+		o.next = zpp_$nape_space_ZPP_$SweepData.zpp_pool;
+		zpp_$nape_space_ZPP_$SweepData.zpp_pool = o;
 	}
 	,sync_broadphase_fast: function() {
 		var a = this.list.next;
@@ -15506,7 +15517,7 @@ zpp_nape.space.ZPP_SweepPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.
 						d2 = d2.next;
 						continue;
 					}
-					if(b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC && b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_STATIC) {
+					if(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC && b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC) {
 						d2 = d2.next;
 						continue;
 					}
@@ -15515,7 +15526,7 @@ zpp_nape.space.ZPP_SweepPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.
 						continue;
 					}
 					if(s1.aabb.intersectY(s2.aabb)) {
-						if(discrete) space.narrowPhase(s1,s2,!(b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC),null,false); else space.continuousEvent(s1,s2,!(b1.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC),null,false);
+						if(discrete) space.narrowPhase(s1,s2,!(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC),null,false); else space.continuousEvent(s1,s2,!(b1.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC) || !(b2.type == zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC),null,false);
 					}
 					d2 = d2.next;
 				}
@@ -15523,22 +15534,22 @@ zpp_nape.space.ZPP_SweepPhase.prototype = $extend(zpp_nape.space.ZPP_Broadphase.
 			}
 		}
 	}
-	,__class__: zpp_nape.space.ZPP_SweepPhase
+	,__class__: zpp_$nape_space_ZPP_$SweepPhase
 });
-zpp_nape.util.ZNPList_ZPP_CallbackSet = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$CallbackSet = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_CallbackSet.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_CallbackSet.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$CallbackSet.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$CallbackSet.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_CallbackSet.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_CallbackSet(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_CallbackSet.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_CallbackSet.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15581,32 +15592,32 @@ zpp_nape.util.ZNPList_ZPP_CallbackSet.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CallbackSet.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CallbackSet.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_CallbackSet
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$CallbackSet
 };
-zpp_nape.util.ZNPList_ZPP_Shape = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Shape = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Shape.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Shape.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Shape.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Shape.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Shape(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Shape(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15624,9 +15635,9 @@ zpp_nape.util.ZNPList_ZPP_Shape.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Shape(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Shape(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15677,8 +15688,8 @@ zpp_nape.util.ZNPList_ZPP_Shape.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Shape.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Shape.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -15689,25 +15700,25 @@ zpp_nape.util.ZNPList_ZPP_Shape.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Shape
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Shape
 };
-zpp_nape.util.ZNPList_ZPP_Body = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Body = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Body.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Body.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Body.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Body.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Body(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Body(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15725,9 +15736,9 @@ zpp_nape.util.ZNPList_ZPP_Body.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Body(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Body(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15752,8 +15763,8 @@ zpp_nape.util.ZNPList_ZPP_Body.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -15797,8 +15808,8 @@ zpp_nape.util.ZNPList_ZPP_Body.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Body.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Body.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -15809,16 +15820,16 @@ zpp_nape.util.ZNPList_ZPP_Body.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Body
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Body
 };
-zpp_nape.util.ZNPList_ZPP_Compound = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Compound = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Compound.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Compound.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Compound.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Compound.prototype = {
 	remove: function(obj) {
 		this.inlined_try_remove(obj);
 	}
@@ -15853,8 +15864,8 @@ zpp_nape.util.ZNPList_ZPP_Compound.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Compound.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Compound.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Compound.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Compound.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -15865,22 +15876,22 @@ zpp_nape.util.ZNPList_ZPP_Compound.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Compound
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Compound
 };
-zpp_nape.util.ZNPList_ZPP_Arbiter = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Arbiter = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Arbiter.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Arbiter.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Arbiter.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Arbiter.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Arbiter(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Arbiter(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -15900,8 +15911,8 @@ zpp_nape.util.ZNPList_ZPP_Arbiter.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -15948,8 +15959,8 @@ zpp_nape.util.ZNPList_ZPP_Arbiter.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Arbiter.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -15969,25 +15980,25 @@ zpp_nape.util.ZNPList_ZPP_Arbiter.prototype = {
 		}
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Arbiter
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Arbiter
 };
-zpp_nape.util.ZNPList_ZPP_CbSetPair = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$CbSetPair = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_CbSetPair.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_CbSetPair.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$CbSetPair.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$CbSetPair.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_CbSetPair(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16007,8 +16018,8 @@ zpp_nape.util.ZNPList_ZPP_CbSetPair.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -16055,29 +16066,29 @@ zpp_nape.util.ZNPList_ZPP_CbSetPair.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_CbSetPair.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_CbSetPair
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$CbSetPair
 };
-zpp_nape.util.ZNPList_ZPP_AABBPair = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$AABBPair = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_AABBPair.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_AABBPair.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$AABBPair.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$AABBPair.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_AABBPair(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$AABBPair(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16097,8 +16108,8 @@ zpp_nape.util.ZNPList_ZPP_AABBPair.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -16145,32 +16156,32 @@ zpp_nape.util.ZNPList_ZPP_AABBPair.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_AABBPair.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_AABBPair
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$AABBPair
 };
-zpp_nape.util.ZNPList_ZPP_Edge = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Edge = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Edge.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Edge.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Edge.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Edge.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Edge(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Edge(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16188,9 +16199,9 @@ zpp_nape.util.ZNPList_ZPP_Edge.prototype = {
 	,inlined_insert: function(cur,o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Edge(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Edge(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16215,8 +16226,8 @@ zpp_nape.util.ZNPList_ZPP_Edge.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -16248,8 +16259,8 @@ zpp_nape.util.ZNPList_ZPP_Edge.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Edge.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Edge.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -16273,22 +16284,22 @@ zpp_nape.util.ZNPList_ZPP_Edge.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Edge
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Edge
 };
-zpp_nape.util.ZNPList_ZPP_Component = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Component = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Component.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Component.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Component.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Component.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_Component.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_Component(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_Component.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_Component.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$Component.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$Component(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$Component.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$Component.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16308,8 +16319,8 @@ zpp_nape.util.ZNPList_ZPP_Component.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Component.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Component.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Component.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Component.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -16322,40 +16333,40 @@ zpp_nape.util.ZNPList_ZPP_Component.prototype = {
 		this.pop();
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Component
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Component
 };
-zpp_nape.util.ZNPList_ZPP_InteractionGroup = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_InteractionGroup.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_InteractionGroup.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup.prototype = {
 	iterator_at: function(ind) {
 		var ret = this.head;
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_InteractionGroup
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup
 };
-zpp_nape.util.ZNPList_ZPP_ColArbiter = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$ColArbiter = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_ColArbiter.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_ColArbiter.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_ColArbiter.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_ColArbiter(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_ColArbiter.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_ColArbiter.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16401,29 +16412,29 @@ zpp_nape.util.ZNPList_ZPP_ColArbiter.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_ColArbiter.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_ColArbiter.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_ColArbiter
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$ColArbiter
 };
-zpp_nape.util.ZNPList_ZPP_FluidArbiter = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_FluidArbiter.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_FluidArbiter.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_FluidArbiter.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_FluidArbiter(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_FluidArbiter.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_FluidArbiter.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16451,29 +16462,29 @@ zpp_nape.util.ZNPList_ZPP_FluidArbiter.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_FluidArbiter.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_FluidArbiter.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_FluidArbiter
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter
 };
-zpp_nape.util.ZNPList_ZPP_SensorArbiter = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_SensorArbiter.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_SensorArbiter.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter.prototype = {
 	inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_SensorArbiter.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_SensorArbiter(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_SensorArbiter.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_SensorArbiter.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16501,23 +16512,23 @@ zpp_nape.util.ZNPList_ZPP_SensorArbiter.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_SensorArbiter.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_SensorArbiter.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_SensorArbiter
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter
 };
-zpp_nape.util.ZNPList_ZPP_Listener = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$Listener = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_Listener.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_Listener.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$Listener.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$Listener.prototype = {
 	remove: function(obj) {
 		this.inlined_try_remove(obj);
 	}
@@ -16552,8 +16563,8 @@ zpp_nape.util.ZNPList_ZPP_Listener.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_Listener.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_Listener.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$Listener.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$Listener.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
@@ -16564,25 +16575,25 @@ zpp_nape.util.ZNPList_ZPP_Listener.prototype = {
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_Listener
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$Listener
 };
-zpp_nape.util.ZNPList_ZPP_ToiEvent = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$ToiEvent = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_ToiEvent.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_ToiEvent.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$ToiEvent.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$ToiEvent.prototype = {
 	add: function(o) {
 		return this.inlined_add(o);
 	}
 	,inlined_add: function(o) {
 		var temp;
 		var ret;
-		if(zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool == null) ret = new zpp_nape.util.ZNPNode_ZPP_ToiEvent(); else {
-			ret = zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool;
-			zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool = ret.next;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool = ret.next;
 			ret.next = null;
 		}
 		null;
@@ -16602,8 +16613,8 @@ zpp_nape.util.ZNPList_ZPP_ToiEvent.prototype = {
 		this.head = ret.next;
 		var o = ret;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool = o;
 		if(this.head == null) this.pushmod = true;
 		this.modified = true;
 		this.length--;
@@ -16635,290 +16646,290 @@ zpp_nape.util.ZNPList_ZPP_ToiEvent.prototype = {
 		}
 		var o = old;
 		o.elt = null;
-		o.next = zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool;
-		zpp_nape.util.ZNPNode_ZPP_ToiEvent.zpp_pool = o;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.zpp_pool = o;
 		this.modified = true;
 		this.length--;
 		this.pushmod = true;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_ToiEvent
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$ToiEvent
 };
-zpp_nape.util.ZNPList_ConvexResult = function() {
+var zpp_$nape_util_ZNPList_$ConvexResult = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ConvexResult.__name__ = true;
-zpp_nape.util.ZNPList_ConvexResult.prototype = {
+zpp_$nape_util_ZNPList_$ConvexResult.__name__ = true;
+zpp_$nape_util_ZNPList_$ConvexResult.prototype = {
 	iterator_at: function(ind) {
 		var ret = this.head;
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ConvexResult
+	,__class__: zpp_$nape_util_ZNPList_$ConvexResult
 };
-zpp_nape.util.ZNPList_ZPP_GeomPoly = function() {
+var zpp_$nape_util_ZNPList_$ZPP_$GeomPoly = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_ZPP_GeomPoly.__name__ = true;
-zpp_nape.util.ZNPList_ZPP_GeomPoly.prototype = {
+zpp_$nape_util_ZNPList_$ZPP_$GeomPoly.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$GeomPoly.prototype = {
 	iterator_at: function(ind) {
 		var ret = this.head;
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_ZPP_GeomPoly
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$GeomPoly
 };
-zpp_nape.util.ZNPList_RayResult = function() {
+var zpp_$nape_util_ZNPList_$RayResult = function() {
 	this.length = 0;
 	this.pushmod = false;
 	this.modified = false;
 	this.head = null;
 };
-zpp_nape.util.ZNPList_RayResult.__name__ = true;
-zpp_nape.util.ZNPList_RayResult.prototype = {
+zpp_$nape_util_ZNPList_$RayResult.__name__ = true;
+zpp_$nape_util_ZNPList_$RayResult.prototype = {
 	iterator_at: function(ind) {
 		var ret = this.head;
 		while(ind-- > 0 && ret != null) ret = ret.next;
 		return ret;
 	}
-	,__class__: zpp_nape.util.ZNPList_RayResult
+	,__class__: zpp_$nape_util_ZNPList_$RayResult
 };
-zpp_nape.util.ZNPNode_ZPP_CbType = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$CbType = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_CbType.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_CbType.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_CbType
+zpp_$nape_util_ZNPNode_$ZPP_$CbType.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$CbType.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CbType
 };
-zpp_nape.util.ZNPNode_ZPP_CallbackSet = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_CallbackSet.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_CallbackSet.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_CallbackSet
+zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CallbackSet
 };
-zpp_nape.util.ZNPNode_ZPP_Shape = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Shape = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Shape.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Shape.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Shape
+zpp_$nape_util_ZNPNode_$ZPP_$Shape.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Shape.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Shape
 };
-zpp_nape.util.ZNPNode_ZPP_Body = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Body = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Body.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Body.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Body
+zpp_$nape_util_ZNPNode_$ZPP_$Body.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Body.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Body
 };
-zpp_nape.util.ZNPNode_ZPP_Constraint = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Constraint = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Constraint.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Constraint.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Constraint
+zpp_$nape_util_ZNPNode_$ZPP_$Constraint.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Constraint.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Constraint
 };
-zpp_nape.util.ZNPNode_ZPP_Compound = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Compound = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Compound.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Compound.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Compound
+zpp_$nape_util_ZNPNode_$ZPP_$Compound.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Compound.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Compound
 };
-zpp_nape.util.ZNPNode_ZPP_Arbiter = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Arbiter = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Arbiter.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Arbiter.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Arbiter
+zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Arbiter
 };
-zpp_nape.util.ZNPNode_ZPP_InteractionListener = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_InteractionListener.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_InteractionListener.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_InteractionListener
+zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener
 };
-zpp_nape.util.ZNPNode_ZPP_CbSet = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$CbSet = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_CbSet.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_CbSet.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_CbSet
+zpp_$nape_util_ZNPNode_$ZPP_$CbSet.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$CbSet.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CbSet
 };
-zpp_nape.util.ZNPNode_ZPP_Interactor = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Interactor = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Interactor.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Interactor.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Interactor
+zpp_$nape_util_ZNPNode_$ZPP_$Interactor.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Interactor.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Interactor
 };
-zpp_nape.util.ZNPNode_ZPP_BodyListener = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$BodyListener = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_BodyListener.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_BodyListener.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_BodyListener
+zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$BodyListener
 };
-zpp_nape.util.ZNPNode_ZPP_CbSetPair = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_CbSetPair.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_CbSetPair.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_CbSetPair
+zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair
 };
-zpp_nape.util.ZNPNode_ZPP_ConstraintListener = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_ConstraintListener.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_ConstraintListener.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_ConstraintListener
+zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener
 };
-zpp_nape.util.ZNPNode_ZPP_AABBPair = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$AABBPair = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_AABBPair.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_AABBPair.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_AABBPair
+zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$AABBPair
 };
-zpp_nape.util.ZNPNode_ZPP_Vec2 = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Vec2 = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Vec2.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Vec2.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Vec2
+zpp_$nape_util_ZNPNode_$ZPP_$Vec2.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Vec2.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Vec2
 };
-zpp_nape.util.ZNPNode_ZPP_Edge = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Edge = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Edge.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Edge.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Edge
+zpp_$nape_util_ZNPNode_$ZPP_$Edge.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Edge.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Edge
 };
-zpp_nape.util.ZNPNode_ZPP_Component = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Component = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Component.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Component.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Component
+zpp_$nape_util_ZNPNode_$ZPP_$Component.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Component.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Component
 };
-zpp_nape.util.ZNPNode_ZPP_InteractionGroup = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_InteractionGroup.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_InteractionGroup.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_InteractionGroup
+zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup
 };
-zpp_nape.util.ZNPNode_ZPP_ColArbiter = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_ColArbiter.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_ColArbiter.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_ColArbiter
+zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter
 };
-zpp_nape.util.ZNPNode_ZPP_FluidArbiter = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_FluidArbiter.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_FluidArbiter.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_FluidArbiter
+zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter
 };
-zpp_nape.util.ZNPNode_ZPP_SensorArbiter = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_SensorArbiter.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_SensorArbiter.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_SensorArbiter
+zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter
 };
-zpp_nape.util.ZNPNode_ZPP_Listener = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Listener = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_Listener.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_Listener.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_Listener
+zpp_$nape_util_ZNPNode_$ZPP_$Listener.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Listener.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Listener
 };
-zpp_nape.util.ZNPNode_ZPP_ToiEvent = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_ToiEvent.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_ToiEvent.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_ToiEvent
+zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ToiEvent
 };
-zpp_nape.util.ZNPNode_ConvexResult = function() {
+var zpp_$nape_util_ZNPNode_$ConvexResult = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ConvexResult.__name__ = true;
-zpp_nape.util.ZNPNode_ConvexResult.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ConvexResult
+zpp_$nape_util_ZNPNode_$ConvexResult.__name__ = true;
+zpp_$nape_util_ZNPNode_$ConvexResult.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ConvexResult
 };
-zpp_nape.util.ZNPNode_ZPP_GeomPoly = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$GeomPoly = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_ZPP_GeomPoly.__name__ = true;
-zpp_nape.util.ZNPNode_ZPP_GeomPoly.prototype = {
-	__class__: zpp_nape.util.ZNPNode_ZPP_GeomPoly
+zpp_$nape_util_ZNPNode_$ZPP_$GeomPoly.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$GeomPoly.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$GeomPoly
 };
-zpp_nape.util.ZNPNode_RayResult = function() {
+var zpp_$nape_util_ZNPNode_$RayResult = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_nape.util.ZNPNode_RayResult.__name__ = true;
-zpp_nape.util.ZNPNode_RayResult.prototype = {
-	__class__: zpp_nape.util.ZNPNode_RayResult
+zpp_$nape_util_ZNPNode_$RayResult.__name__ = true;
+zpp_$nape_util_ZNPNode_$RayResult.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$RayResult
 };
-zpp_nape.util.ZPP_MixVec2List = function() {
+var zpp_$nape_util_ZPP_$MixVec2List = function() {
 	this.at_index = 0;
 	this.at_ite = null;
 	this.zip_length = false;
 	this._length = 0;
 	this.inner = null;
-	nape.geom.Vec2List.call(this);
+	nape_geom_Vec2List.call(this);
 	this.at_ite = null;
 	this.at_index = 0;
 	this.zip_length = true;
 	this._length = 0;
 };
-zpp_nape.util.ZPP_MixVec2List.__name__ = true;
-zpp_nape.util.ZPP_MixVec2List.get = function(list,immutable) {
+zpp_$nape_util_ZPP_$MixVec2List.__name__ = true;
+zpp_$nape_util_ZPP_$MixVec2List.get = function(list,immutable) {
 	if(immutable == null) immutable = false;
-	var ret = new zpp_nape.util.ZPP_MixVec2List();
+	var ret = new zpp_$nape_util_ZPP_$MixVec2List();
 	ret.inner = list;
 	ret.zpp_inner.immutable = immutable;
 	return ret;
 };
-zpp_nape.util.ZPP_MixVec2List.__super__ = nape.geom.Vec2List;
-zpp_nape.util.ZPP_MixVec2List.prototype = $extend(nape.geom.Vec2List.prototype,{
+zpp_$nape_util_ZPP_$MixVec2List.__super__ = nape_geom_Vec2List;
+zpp_$nape_util_ZPP_$MixVec2List.prototype = $extend(nape_geom_Vec2List.prototype,{
 	zpp_gl: function() {
 		this.zpp_vm();
 		if(this.zip_length) {
@@ -16943,7 +16954,7 @@ zpp_nape.util.ZPP_MixVec2List.prototype = $extend(nape.geom.Vec2List.prototype,{
 	}
 	,at: function(index) {
 		this.zpp_vm();
-		if(index < 0 || index >= this.zpp_gl()) throw "Error: Index out of bounds";
+		if(index < 0 || index >= this.zpp_gl()) throw new js__$Boot_HaxeError("Error: Index out of bounds");
 		if(this.zpp_inner.reverse_flag) index = this.zpp_gl() - 1 - index;
 		if(index < this.at_index || this.at_ite == null) {
 			this.at_index = 0;
@@ -16966,10 +16977,10 @@ zpp_nape.util.ZPP_MixVec2List.prototype = $extend(nape.geom.Vec2List.prototype,{
 		return this.at_ite.wrapper();
 	}
 	,push: function(obj) {
-		if(this.zpp_inner.immutable) throw "Error: " + "Vec2" + "List is immutable";
+		if(this.zpp_inner.immutable) throw new js__$Boot_HaxeError("Error: " + "Vec2" + "List is immutable");
 		this.zpp_inner.modify_test();
 		this.zpp_vm();
-		if(obj.zpp_inner._inuse) throw "Error: " + "Vec2" + " is already in use";
+		if(obj.zpp_inner._inuse) throw new js__$Boot_HaxeError("Error: " + "Vec2" + " is already in use");
 		var cont;
 		if(this.zpp_inner.adder != null) cont = this.zpp_inner.adder(obj); else cont = true;
 		if(cont) {
@@ -16982,9 +16993,9 @@ zpp_nape.util.ZPP_MixVec2List.prototype = $extend(nape.geom.Vec2List.prototype,{
 		}
 		return cont;
 	}
-	,__class__: zpp_nape.util.ZPP_MixVec2List
+	,__class__: zpp_$nape_util_ZPP_$MixVec2List
 });
-zpp_nape.util.ZPP_ConstraintList = function() {
+var zpp_$nape_util_ZPP_$ConstraintList = function() {
 	this.user_length = 0;
 	this.zip_length = false;
 	this.push_ite = null;
@@ -17001,19 +17012,19 @@ zpp_nape.util.ZPP_ConstraintList = function() {
 	this.immutable = false;
 	this.inner = null;
 	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Constraint();
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Constraint();
 	this._invalidated = true;
 };
-zpp_nape.util.ZPP_ConstraintList.__name__ = true;
-zpp_nape.util.ZPP_ConstraintList.get = function(list,imm) {
+zpp_$nape_util_ZPP_$ConstraintList.__name__ = true;
+zpp_$nape_util_ZPP_$ConstraintList.get = function(list,imm) {
 	if(imm == null) imm = false;
-	var ret = new nape.constraint.ConstraintList();
+	var ret = new nape_constraint_ConstraintList();
 	ret.zpp_inner.inner = list;
 	if(imm) ret.zpp_inner.immutable = true;
 	ret.zpp_inner.zip_length = true;
 	return ret;
 };
-zpp_nape.util.ZPP_ConstraintList.prototype = {
+zpp_$nape_util_ZPP_$ConstraintList.prototype = {
 	valmod: function() {
 		this.validate();
 		if(this.inner.modified) {
@@ -17037,420 +17048,9 @@ zpp_nape.util.ZPP_ConstraintList.prototype = {
 		this._invalidated = true;
 		if(this._invalidate != null) this._invalidate(this);
 	}
-	,__class__: zpp_nape.util.ZPP_ConstraintList
+	,__class__: zpp_$nape_util_ZPP_$ConstraintList
 };
-zpp_nape.util.ZPP_BodyList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this.dontremove = false;
-	this.subber = null;
-	this.post_adder = null;
-	this.adder = null;
-	this._modifiable = null;
-	this._validate = null;
-	this._invalidate = null;
-	this._invalidated = false;
-	this.immutable = false;
-	this.inner = null;
-	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Body();
-	this._invalidated = true;
-};
-zpp_nape.util.ZPP_BodyList.__name__ = true;
-zpp_nape.util.ZPP_BodyList.get = function(list,imm) {
-	if(imm == null) imm = false;
-	var ret = new nape.phys.BodyList();
-	ret.zpp_inner.inner = list;
-	if(imm) ret.zpp_inner.immutable = true;
-	ret.zpp_inner.zip_length = true;
-	return ret;
-};
-zpp_nape.util.ZPP_BodyList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,modify_test: function() {
-		if(this._modifiable != null) this._modifiable();
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,invalidate: function() {
-		this._invalidated = true;
-		if(this._invalidate != null) this._invalidate(this);
-	}
-	,__class__: zpp_nape.util.ZPP_BodyList
-};
-zpp_nape.util.ZPP_InteractorList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.inner = null;
-};
-zpp_nape.util.ZPP_InteractorList.__name__ = true;
-zpp_nape.util.ZPP_InteractorList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_InteractorList
-};
-zpp_nape.util.ZPP_CompoundList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this.dontremove = false;
-	this.subber = null;
-	this.adder = null;
-	this._modifiable = null;
-	this._validate = null;
-	this._invalidate = null;
-	this._invalidated = false;
-	this.immutable = false;
-	this.inner = null;
-	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Compound();
-	this._invalidated = true;
-};
-zpp_nape.util.ZPP_CompoundList.__name__ = true;
-zpp_nape.util.ZPP_CompoundList.get = function(list,imm) {
-	if(imm == null) imm = false;
-	var ret = new nape.phys.CompoundList();
-	ret.zpp_inner.inner = list;
-	if(imm) ret.zpp_inner.immutable = true;
-	ret.zpp_inner.zip_length = true;
-	return ret;
-};
-zpp_nape.util.ZPP_CompoundList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,modify_test: function() {
-		if(this._modifiable != null) this._modifiable();
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,invalidate: function() {
-		this._invalidated = true;
-		if(this._invalidate != null) this._invalidate(this);
-	}
-	,__class__: zpp_nape.util.ZPP_CompoundList
-};
-zpp_nape.util.ZPP_ListenerList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this.dontremove = false;
-	this.subber = null;
-	this.adder = null;
-	this._modifiable = null;
-	this._validate = null;
-	this._invalidate = null;
-	this._invalidated = false;
-	this.immutable = false;
-	this.inner = null;
-	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Listener();
-	this._invalidated = true;
-};
-zpp_nape.util.ZPP_ListenerList.__name__ = true;
-zpp_nape.util.ZPP_ListenerList.get = function(list,imm) {
-	if(imm == null) imm = false;
-	var ret = new nape.callbacks.ListenerList();
-	ret.zpp_inner.inner = list;
-	if(imm) ret.zpp_inner.immutable = true;
-	ret.zpp_inner.zip_length = true;
-	return ret;
-};
-zpp_nape.util.ZPP_ListenerList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,modify_test: function() {
-		if(this._modifiable != null) this._modifiable();
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,invalidate: function() {
-		this._invalidated = true;
-		if(this._invalidate != null) this._invalidate(this);
-	}
-	,__class__: zpp_nape.util.ZPP_ListenerList
-};
-zpp_nape.util.ZPP_CbTypeList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.immutable = false;
-	this.inner = null;
-	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_CbType();
-	this._invalidated = true;
-};
-zpp_nape.util.ZPP_CbTypeList.__name__ = true;
-zpp_nape.util.ZPP_CbTypeList.get = function(list,imm) {
-	if(imm == null) imm = false;
-	var ret = new nape.callbacks.CbTypeList();
-	ret.zpp_inner.inner = list;
-	if(imm) ret.zpp_inner.immutable = true;
-	ret.zpp_inner.zip_length = true;
-	return ret;
-};
-zpp_nape.util.ZPP_CbTypeList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_CbTypeList
-};
-zpp_nape.util.ZPP_Vec2List = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this.subber = null;
-	this.post_adder = null;
-	this.adder = null;
-	this._modifiable = null;
-	this._validate = null;
-	this._invalidate = null;
-	this._invalidated = false;
-	this.immutable = false;
-	this.inner = null;
-	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Vec2();
-	this._invalidated = true;
-};
-zpp_nape.util.ZPP_Vec2List.__name__ = true;
-zpp_nape.util.ZPP_Vec2List.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,modify_test: function() {
-		if(this._modifiable != null) this._modifiable();
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,invalidate: function() {
-		this._invalidated = true;
-		if(this._invalidate != null) this._invalidate(this);
-	}
-	,__class__: zpp_nape.util.ZPP_Vec2List
-};
-zpp_nape.util.ZPP_GeomPolyList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.inner = null;
-};
-zpp_nape.util.ZPP_GeomPolyList.__name__ = true;
-zpp_nape.util.ZPP_GeomPolyList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_GeomPolyList
-};
-zpp_nape.util.ZPP_RayResultList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.inner = null;
-};
-zpp_nape.util.ZPP_RayResultList.__name__ = true;
-zpp_nape.util.ZPP_RayResultList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_RayResultList
-};
-zpp_nape.util.ZPP_ConvexResultList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.inner = null;
-};
-zpp_nape.util.ZPP_ConvexResultList.__name__ = true;
-zpp_nape.util.ZPP_ConvexResultList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_ConvexResultList
-};
-zpp_nape.util.ZPP_EdgeList = function() {
-	this.user_length = 0;
-	this.zip_length = false;
-	this.push_ite = null;
-	this.at_ite = null;
-	this.at_index = 0;
-	this.reverse_flag = false;
-	this._validate = null;
-	this._invalidated = false;
-	this.inner = null;
-};
-zpp_nape.util.ZPP_EdgeList.__name__ = true;
-zpp_nape.util.ZPP_EdgeList.prototype = {
-	valmod: function() {
-		this.validate();
-		if(this.inner.modified) {
-			if(this.inner.pushmod) this.push_ite = null;
-			this.at_ite = null;
-			this.inner.modified = false;
-			this.inner.pushmod = false;
-			this.zip_length = true;
-		}
-	}
-	,validate: function() {
-		if(this._invalidated) {
-			this._invalidated = false;
-			if(this._validate != null) this._validate();
-		}
-	}
-	,__class__: zpp_nape.util.ZPP_EdgeList
-};
-zpp_nape.util.ZPP_ShapeList = function() {
+var zpp_$nape_util_ZPP_$BodyList = function() {
 	this.user_length = 0;
 	this.zip_length = false;
 	this.push_ite = null;
@@ -17468,19 +17068,19 @@ zpp_nape.util.ZPP_ShapeList = function() {
 	this.immutable = false;
 	this.inner = null;
 	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Shape();
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Body();
 	this._invalidated = true;
 };
-zpp_nape.util.ZPP_ShapeList.__name__ = true;
-zpp_nape.util.ZPP_ShapeList.get = function(list,imm) {
+zpp_$nape_util_ZPP_$BodyList.__name__ = true;
+zpp_$nape_util_ZPP_$BodyList.get = function(list,imm) {
 	if(imm == null) imm = false;
-	var ret = new nape.shape.ShapeList();
+	var ret = new nape_phys_BodyList();
 	ret.zpp_inner.inner = list;
 	if(imm) ret.zpp_inner.immutable = true;
 	ret.zpp_inner.zip_length = true;
 	return ret;
 };
-zpp_nape.util.ZPP_ShapeList.prototype = {
+zpp_$nape_util_ZPP_$BodyList.prototype = {
 	valmod: function() {
 		this.validate();
 		if(this.inner.modified) {
@@ -17504,9 +17104,9 @@ zpp_nape.util.ZPP_ShapeList.prototype = {
 		this._invalidated = true;
 		if(this._invalidate != null) this._invalidate(this);
 	}
-	,__class__: zpp_nape.util.ZPP_ShapeList
+	,__class__: zpp_$nape_util_ZPP_$BodyList
 };
-zpp_nape.util.ZPP_InteractionGroupList = function() {
+var zpp_$nape_util_ZPP_$InteractorList = function() {
 	this.user_length = 0;
 	this.zip_length = false;
 	this.push_ite = null;
@@ -17517,8 +17117,8 @@ zpp_nape.util.ZPP_InteractionGroupList = function() {
 	this._invalidated = false;
 	this.inner = null;
 };
-zpp_nape.util.ZPP_InteractionGroupList.__name__ = true;
-zpp_nape.util.ZPP_InteractionGroupList.prototype = {
+zpp_$nape_util_ZPP_$InteractorList.__name__ = true;
+zpp_$nape_util_ZPP_$InteractorList.prototype = {
 	valmod: function() {
 		this.validate();
 		if(this.inner.modified) {
@@ -17535,9 +17135,119 @@ zpp_nape.util.ZPP_InteractionGroupList.prototype = {
 			if(this._validate != null) this._validate();
 		}
 	}
-	,__class__: zpp_nape.util.ZPP_InteractionGroupList
+	,__class__: zpp_$nape_util_ZPP_$InteractorList
 };
-zpp_nape.util.ZPP_ArbiterList = function() {
+var zpp_$nape_util_ZPP_$CompoundList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this.dontremove = false;
+	this.subber = null;
+	this.adder = null;
+	this._modifiable = null;
+	this._validate = null;
+	this._invalidate = null;
+	this._invalidated = false;
+	this.immutable = false;
+	this.inner = null;
+	this.outer = null;
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Compound();
+	this._invalidated = true;
+};
+zpp_$nape_util_ZPP_$CompoundList.__name__ = true;
+zpp_$nape_util_ZPP_$CompoundList.get = function(list,imm) {
+	if(imm == null) imm = false;
+	var ret = new nape_phys_CompoundList();
+	ret.zpp_inner.inner = list;
+	if(imm) ret.zpp_inner.immutable = true;
+	ret.zpp_inner.zip_length = true;
+	return ret;
+};
+zpp_$nape_util_ZPP_$CompoundList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,modify_test: function() {
+		if(this._modifiable != null) this._modifiable();
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,invalidate: function() {
+		this._invalidated = true;
+		if(this._invalidate != null) this._invalidate(this);
+	}
+	,__class__: zpp_$nape_util_ZPP_$CompoundList
+};
+var zpp_$nape_util_ZPP_$ListenerList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this.dontremove = false;
+	this.subber = null;
+	this.adder = null;
+	this._modifiable = null;
+	this._validate = null;
+	this._invalidate = null;
+	this._invalidated = false;
+	this.immutable = false;
+	this.inner = null;
+	this.outer = null;
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Listener();
+	this._invalidated = true;
+};
+zpp_$nape_util_ZPP_$ListenerList.__name__ = true;
+zpp_$nape_util_ZPP_$ListenerList.get = function(list,imm) {
+	if(imm == null) imm = false;
+	var ret = new nape_callbacks_ListenerList();
+	ret.zpp_inner.inner = list;
+	if(imm) ret.zpp_inner.immutable = true;
+	ret.zpp_inner.zip_length = true;
+	return ret;
+};
+zpp_$nape_util_ZPP_$ListenerList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,modify_test: function() {
+		if(this._modifiable != null) this._modifiable();
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,invalidate: function() {
+		this._invalidated = true;
+		if(this._invalidate != null) this._invalidate(this);
+	}
+	,__class__: zpp_$nape_util_ZPP_$ListenerList
+};
+var zpp_$nape_util_ZPP_$CbTypeList = function() {
 	this.user_length = 0;
 	this.zip_length = false;
 	this.push_ite = null;
@@ -17549,19 +17259,19 @@ zpp_nape.util.ZPP_ArbiterList = function() {
 	this.immutable = false;
 	this.inner = null;
 	this.outer = null;
-	this.inner = new zpp_nape.util.ZNPList_ZPP_Arbiter();
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
 	this._invalidated = true;
 };
-zpp_nape.util.ZPP_ArbiterList.__name__ = true;
-zpp_nape.util.ZPP_ArbiterList.get = function(list,imm) {
+zpp_$nape_util_ZPP_$CbTypeList.__name__ = true;
+zpp_$nape_util_ZPP_$CbTypeList.get = function(list,imm) {
 	if(imm == null) imm = false;
-	var ret = new nape.dynamics.ArbiterList();
+	var ret = new nape_callbacks_CbTypeList();
 	ret.zpp_inner.inner = list;
 	if(imm) ret.zpp_inner.immutable = true;
 	ret.zpp_inner.zip_length = true;
 	return ret;
 };
-zpp_nape.util.ZPP_ArbiterList.prototype = {
+zpp_$nape_util_ZPP_$CbTypeList.prototype = {
 	valmod: function() {
 		this.validate();
 		if(this.inner.modified) {
@@ -17578,9 +17288,310 @@ zpp_nape.util.ZPP_ArbiterList.prototype = {
 			if(this._validate != null) this._validate();
 		}
 	}
-	,__class__: zpp_nape.util.ZPP_ArbiterList
+	,__class__: zpp_$nape_util_ZPP_$CbTypeList
 };
-zpp_nape.util.ZPP_ContactList = function() {
+var zpp_$nape_util_ZPP_$Vec2List = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this.subber = null;
+	this.post_adder = null;
+	this.adder = null;
+	this._modifiable = null;
+	this._validate = null;
+	this._invalidate = null;
+	this._invalidated = false;
+	this.immutable = false;
+	this.inner = null;
+	this.outer = null;
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Vec2();
+	this._invalidated = true;
+};
+zpp_$nape_util_ZPP_$Vec2List.__name__ = true;
+zpp_$nape_util_ZPP_$Vec2List.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,modify_test: function() {
+		if(this._modifiable != null) this._modifiable();
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,invalidate: function() {
+		this._invalidated = true;
+		if(this._invalidate != null) this._invalidate(this);
+	}
+	,__class__: zpp_$nape_util_ZPP_$Vec2List
+};
+var zpp_$nape_util_ZPP_$GeomPolyList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.inner = null;
+};
+zpp_$nape_util_ZPP_$GeomPolyList.__name__ = true;
+zpp_$nape_util_ZPP_$GeomPolyList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$GeomPolyList
+};
+var zpp_$nape_util_ZPP_$RayResultList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.inner = null;
+};
+zpp_$nape_util_ZPP_$RayResultList.__name__ = true;
+zpp_$nape_util_ZPP_$RayResultList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$RayResultList
+};
+var zpp_$nape_util_ZPP_$ConvexResultList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.inner = null;
+};
+zpp_$nape_util_ZPP_$ConvexResultList.__name__ = true;
+zpp_$nape_util_ZPP_$ConvexResultList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$ConvexResultList
+};
+var zpp_$nape_util_ZPP_$EdgeList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.inner = null;
+};
+zpp_$nape_util_ZPP_$EdgeList.__name__ = true;
+zpp_$nape_util_ZPP_$EdgeList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$EdgeList
+};
+var zpp_$nape_util_ZPP_$ShapeList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this.dontremove = false;
+	this.subber = null;
+	this.post_adder = null;
+	this.adder = null;
+	this._modifiable = null;
+	this._validate = null;
+	this._invalidate = null;
+	this._invalidated = false;
+	this.immutable = false;
+	this.inner = null;
+	this.outer = null;
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Shape();
+	this._invalidated = true;
+};
+zpp_$nape_util_ZPP_$ShapeList.__name__ = true;
+zpp_$nape_util_ZPP_$ShapeList.get = function(list,imm) {
+	if(imm == null) imm = false;
+	var ret = new nape_shape_ShapeList();
+	ret.zpp_inner.inner = list;
+	if(imm) ret.zpp_inner.immutable = true;
+	ret.zpp_inner.zip_length = true;
+	return ret;
+};
+zpp_$nape_util_ZPP_$ShapeList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,modify_test: function() {
+		if(this._modifiable != null) this._modifiable();
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,invalidate: function() {
+		this._invalidated = true;
+		if(this._invalidate != null) this._invalidate(this);
+	}
+	,__class__: zpp_$nape_util_ZPP_$ShapeList
+};
+var zpp_$nape_util_ZPP_$InteractionGroupList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.inner = null;
+};
+zpp_$nape_util_ZPP_$InteractionGroupList.__name__ = true;
+zpp_$nape_util_ZPP_$InteractionGroupList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$InteractionGroupList
+};
+var zpp_$nape_util_ZPP_$ArbiterList = function() {
+	this.user_length = 0;
+	this.zip_length = false;
+	this.push_ite = null;
+	this.at_ite = null;
+	this.at_index = 0;
+	this.reverse_flag = false;
+	this._validate = null;
+	this._invalidated = false;
+	this.immutable = false;
+	this.inner = null;
+	this.outer = null;
+	this.inner = new zpp_$nape_util_ZNPList_$ZPP_$Arbiter();
+	this._invalidated = true;
+};
+zpp_$nape_util_ZPP_$ArbiterList.__name__ = true;
+zpp_$nape_util_ZPP_$ArbiterList.get = function(list,imm) {
+	if(imm == null) imm = false;
+	var ret = new nape_dynamics_ArbiterList();
+	ret.zpp_inner.inner = list;
+	if(imm) ret.zpp_inner.immutable = true;
+	ret.zpp_inner.zip_length = true;
+	return ret;
+};
+zpp_$nape_util_ZPP_$ArbiterList.prototype = {
+	valmod: function() {
+		this.validate();
+		if(this.inner.modified) {
+			if(this.inner.pushmod) this.push_ite = null;
+			this.at_ite = null;
+			this.inner.modified = false;
+			this.inner.pushmod = false;
+			this.zip_length = true;
+		}
+	}
+	,validate: function() {
+		if(this._invalidated) {
+			this._invalidated = false;
+			if(this._validate != null) this._validate();
+		}
+	}
+	,__class__: zpp_$nape_util_ZPP_$ArbiterList
+};
+var zpp_$nape_util_ZPP_$ContactList = function() {
 	this.user_length = 0;
 	this.zip_length = false;
 	this.push_ite = null;
@@ -17592,8 +17603,8 @@ zpp_nape.util.ZPP_ContactList = function() {
 	this.immutable = false;
 	this.inner = null;
 };
-zpp_nape.util.ZPP_ContactList.__name__ = true;
-zpp_nape.util.ZPP_ContactList.prototype = {
+zpp_$nape_util_ZPP_$ContactList.__name__ = true;
+zpp_$nape_util_ZPP_$ContactList.prototype = {
 	valmod: function() {
 		this.validate();
 		if(this.inner.modified) {
@@ -17610,16 +17621,16 @@ zpp_nape.util.ZPP_ContactList.prototype = {
 			if(this._validate != null) this._validate();
 		}
 	}
-	,__class__: zpp_nape.util.ZPP_ContactList
+	,__class__: zpp_$nape_util_ZPP_$ContactList
 };
-zpp_nape.util.ZPP_Math = function() { };
-zpp_nape.util.ZPP_Math.__name__ = true;
-zpp_nape.util.ZPP_Math.sqr = function(x) {
+var zpp_$nape_util_ZPP_$Math = function() { };
+zpp_$nape_util_ZPP_$Math.__name__ = true;
+zpp_$nape_util_ZPP_$Math.sqr = function(x) {
 	return x * x;
 };
-zpp_nape.util.ZPP_PubPool = function() { };
-zpp_nape.util.ZPP_PubPool.__name__ = true;
-zpp_nape.util.ZPP_Set_ZPP_CbSetPair = function() {
+var zpp_$nape_util_ZPP_$PubPool = function() { };
+zpp_$nape_util_ZPP_$PubPool.__name__ = true;
+var zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair = function() {
 	this.colour = 0;
 	this.parent = null;
 	this.next = null;
@@ -17628,8 +17639,8 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair = function() {
 	this.swapped = null;
 	this.lt = null;
 };
-zpp_nape.util.ZPP_Set_ZPP_CbSetPair.__name__ = true;
-zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
+zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.__name__ = true;
+zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.prototype = {
 	clear_with: function(lambda) {
 		if(this.parent == null) return; else {
 			var cur = this.parent;
@@ -17648,8 +17659,8 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
 		o.data = null;
 		o.lt = null;
 		o.swapped = null;
-		o.next = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-		zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = o;
+		o.next = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+		zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = o;
 		return ret;
 	}
 	,__fix_dbl_red: function(x) {
@@ -17729,9 +17740,9 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
 		var x = null;
 		var cur = null;
 		if(this.parent == null) {
-			if(zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool == null) x = new zpp_nape.util.ZPP_Set_ZPP_CbSetPair(); else {
-				x = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-				zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = x.next;
+			if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool == null) x = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair(); else {
+				x = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+				zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = x.next;
 				x.next = null;
 			}
 			null;
@@ -17741,9 +17752,9 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
 			cur = this.parent;
 			while(true) if(this.lt(obj,cur.data)) {
 				if(cur.prev == null) {
-					if(zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool == null) x = new zpp_nape.util.ZPP_Set_ZPP_CbSetPair(); else {
-						x = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-						zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = x.next;
+					if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool == null) x = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair(); else {
+						x = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+						zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = x.next;
 						x.next = null;
 					}
 					null;
@@ -17754,9 +17765,9 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
 				} else cur = cur.prev;
 			} else if(this.lt(cur.data,obj)) {
 				if(cur.next == null) {
-					if(zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool == null) x = new zpp_nape.util.ZPP_Set_ZPP_CbSetPair(); else {
-						x = zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool;
-						zpp_nape.util.ZPP_Set_ZPP_CbSetPair.zpp_pool = x.next;
+					if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool == null) x = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair(); else {
+						x = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool;
+						zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair.zpp_pool = x.next;
 						x.next = null;
 					}
 					null;
@@ -17775,9 +17786,9 @@ zpp_nape.util.ZPP_Set_ZPP_CbSetPair.prototype = {
 			return x;
 		}
 	}
-	,__class__: zpp_nape.util.ZPP_Set_ZPP_CbSetPair
+	,__class__: zpp_$nape_util_ZPP_$Set_$ZPP_$CbSetPair
 };
-zpp_nape.util.ZPP_Set_ZPP_CbSet = function() {
+var zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet = function() {
 	this.colour = 0;
 	this.parent = null;
 	this.next = null;
@@ -17786,8 +17797,8 @@ zpp_nape.util.ZPP_Set_ZPP_CbSet = function() {
 	this.swapped = null;
 	this.lt = null;
 };
-zpp_nape.util.ZPP_Set_ZPP_CbSet.__name__ = true;
-zpp_nape.util.ZPP_Set_ZPP_CbSet.prototype = {
+zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.__name__ = true;
+zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.prototype = {
 	empty: function() {
 		return this.parent == null;
 	}
@@ -17870,8 +17881,8 @@ zpp_nape.util.ZPP_Set_ZPP_CbSet.prototype = {
 		o.data = null;
 		o.lt = null;
 		o.swapped = null;
-		o.next = zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool;
-		zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool = o;
+		o.next = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool;
+		zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool = o;
 	}
 	,__fix_neg_red: function(negred) {
 		var parent = negred.parent;
@@ -17994,9 +18005,9 @@ zpp_nape.util.ZPP_Set_ZPP_CbSet.prototype = {
 	}
 	,insert: function(obj) {
 		var x;
-		if(zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool == null) x = new zpp_nape.util.ZPP_Set_ZPP_CbSet(); else {
-			x = zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool;
-			zpp_nape.util.ZPP_Set_ZPP_CbSet.zpp_pool = x.next;
+		if(zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool == null) x = new zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet(); else {
+			x = zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool;
+			zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet.zpp_pool = x.next;
 			x.next = null;
 		}
 		null;
@@ -18021,19 +18032,10 @@ zpp_nape.util.ZPP_Set_ZPP_CbSet.prototype = {
 		}
 		return x;
 	}
-	,__class__: zpp_nape.util.ZPP_Set_ZPP_CbSet
+	,__class__: zpp_$nape_util_ZPP_$Set_$ZPP_$CbSet
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-Math.NaN = Number.NaN;
-Math.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
-Math.POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
-Math.isFinite = function(i) {
-	return isFinite(i);
-};
-Math.isNaN = function(i1) {
-	return isNaN(i1);
-};
 String.prototype.__class__ = String;
 String.__name__ = true;
 Array.__name__ = true;
@@ -18047,133 +18049,134 @@ var Bool = Boolean;
 Bool.__ename__ = ["Bool"];
 var Class = { __name__ : ["Class"]};
 var Enum = { };
-nape.Config.epsilon = 1e-8;
-nape.Config.fluidAngularDragFriction = 2.5;
-nape.Config.fluidAngularDrag = 100;
-nape.Config.fluidVacuumDrag = 0.5;
-nape.Config.fluidLinearDrag = 0.5;
-nape.Config.collisionSlop = 0.2;
-nape.Config.collisionSlopCCD = 0.5;
-nape.Config.distanceThresholdCCD = 0.05;
-nape.Config.staticCCDLinearThreshold = 0.05;
-nape.Config.staticCCDAngularThreshold = 0.005;
-nape.Config.bulletCCDLinearThreshold = 0.125;
-nape.Config.bulletCCDAngularThreshold = 0.0125;
-nape.Config.dynamicSweepLinearThreshold = 17;
-nape.Config.dynamicSweepAngularThreshold = 0.6;
-nape.Config.angularCCDSlipScale = 0.75;
-nape.Config.arbiterExpirationDelay = 6;
-nape.Config.staticFrictionThreshold = 2;
-nape.Config.elasticThreshold = 20;
-nape.Config.sleepDelay = 60;
-nape.Config.linearSleepThreshold = 0.2;
-nape.Config.angularSleepThreshold = 0.4;
-nape.Config.contactBiasCoef = 0.3;
-nape.Config.contactStaticBiasCoef = 0.6;
-nape.Config.contactContinuousBiasCoef = 0.4;
-nape.Config.contactContinuousStaticBiasCoef = 0.5;
-nape.Config.illConditionedThreshold = 2e+8;
-zpp_nape.ZPP_ID._Interactor = 0;
-zpp_nape.ZPP_ID._CbType = 0;
-zpp_nape.ZPP_ID._CbSet = 0;
-zpp_nape.callbacks.ZPP_Callback.internal = false;
-zpp_nape.callbacks.ZPP_CbType.ANY_SHAPE = new nape.callbacks.CbType();
-zpp_nape.callbacks.ZPP_CbType.ANY_BODY = new nape.callbacks.CbType();
-zpp_nape.callbacks.ZPP_CbType.ANY_COMPOUND = new nape.callbacks.CbType();
-zpp_nape.callbacks.ZPP_CbType.ANY_CONSTRAINT = new nape.callbacks.CbType();
-zpp_nape.util.ZPP_Flags.internal = false;
-zpp_nape.util.ZPP_Flags.id_ImmState_ACCEPT = 1;
-zpp_nape.util.ZPP_Flags.id_ImmState_IGNORE = 2;
-zpp_nape.util.ZPP_Flags.id_ImmState_ALWAYS = 4;
-zpp_nape.util.ZPP_Flags.id_GravMassMode_DEFAULT = 0;
-zpp_nape.util.ZPP_Flags.id_GravMassMode_FIXED = 1;
-zpp_nape.util.ZPP_Flags.id_GravMassMode_SCALED = 2;
-zpp_nape.util.ZPP_Flags.id_InertiaMode_DEFAULT = 0;
-zpp_nape.util.ZPP_Flags.id_MassMode_DEFAULT = 0;
-zpp_nape.util.ZPP_Flags.id_BodyType_STATIC = 1;
-zpp_nape.util.ZPP_Flags.id_BodyType_DYNAMIC = 2;
-zpp_nape.util.ZPP_Flags.id_BodyType_KINEMATIC = 3;
-zpp_nape.util.ZPP_Flags.id_ListenerType_BODY = 0;
-zpp_nape.util.ZPP_Flags.id_PreFlag_ACCEPT = 1;
-zpp_nape.util.ZPP_Flags.id_ListenerType_CONSTRAINT = 1;
-zpp_nape.util.ZPP_Flags.id_ListenerType_INTERACTION = 2;
-zpp_nape.util.ZPP_Flags.id_ListenerType_PRE = 3;
-zpp_nape.util.ZPP_Flags.id_CbEvent_BEGIN = 0;
-zpp_nape.util.ZPP_Flags.id_InteractionType_COLLISION = 1;
-zpp_nape.util.ZPP_Flags.id_CbEvent_ONGOING = 6;
-zpp_nape.util.ZPP_Flags.id_InteractionType_SENSOR = 2;
-zpp_nape.util.ZPP_Flags.id_CbEvent_END = 1;
-zpp_nape.util.ZPP_Flags.id_InteractionType_FLUID = 4;
-zpp_nape.util.ZPP_Flags.id_CbEvent_WAKE = 2;
-zpp_nape.util.ZPP_Flags.id_InteractionType_ANY = 7;
-zpp_nape.util.ZPP_Flags.id_CbEvent_SLEEP = 3;
-zpp_nape.util.ZPP_Flags.id_CbEvent_BREAK = 4;
-zpp_nape.util.ZPP_Flags.id_CbEvent_PRE = 5;
-zpp_nape.util.ZPP_Flags.id_ShapeType_CIRCLE = 0;
-zpp_nape.util.ZPP_Flags.id_ShapeType_POLYGON = 1;
-zpp_nape.callbacks.ZPP_InteractionListener.UCbSet = new zpp_nape.util.ZNPList_ZPP_CbSet();
-zpp_nape.callbacks.ZPP_InteractionListener.VCbSet = new zpp_nape.util.ZNPList_ZPP_CbSet();
-zpp_nape.callbacks.ZPP_InteractionListener.WCbSet = new zpp_nape.util.ZNPList_ZPP_CbSet();
-zpp_nape.callbacks.ZPP_InteractionListener.UCbType = new zpp_nape.util.ZNPList_ZPP_CbType();
-zpp_nape.callbacks.ZPP_InteractionListener.VCbType = new zpp_nape.util.ZNPList_ZPP_CbType();
-zpp_nape.callbacks.ZPP_InteractionListener.WCbType = new zpp_nape.util.ZNPList_ZPP_CbType();
-zpp_nape.dynamics.ZPP_Arbiter.internal = false;
-zpp_nape.dynamics.ZPP_Arbiter.COL = 1;
-zpp_nape.dynamics.ZPP_Arbiter.FLUID = 4;
-zpp_nape.dynamics.ZPP_Arbiter.SENSOR = 2;
-zpp_nape.dynamics.ZPP_Contact.internal = false;
-zpp_nape.geom.ZPP_Collide.flowpoly = new zpp_nape.util.ZNPList_ZPP_Vec2();
-zpp_nape.geom.ZPP_Collide.flowsegs = new zpp_nape.util.ZNPList_ZPP_Vec2();
-zpp_nape.phys.ZPP_Body.types = [null,(function($this) {
+js_Boot.__toStr = {}.toString;
+nape_Config.epsilon = 1e-8;
+nape_Config.fluidAngularDragFriction = 2.5;
+nape_Config.fluidAngularDrag = 100;
+nape_Config.fluidVacuumDrag = 0.5;
+nape_Config.fluidLinearDrag = 0.5;
+nape_Config.collisionSlop = 0.2;
+nape_Config.collisionSlopCCD = 0.5;
+nape_Config.distanceThresholdCCD = 0.05;
+nape_Config.staticCCDLinearThreshold = 0.05;
+nape_Config.staticCCDAngularThreshold = 0.005;
+nape_Config.bulletCCDLinearThreshold = 0.125;
+nape_Config.bulletCCDAngularThreshold = 0.0125;
+nape_Config.dynamicSweepLinearThreshold = 17;
+nape_Config.dynamicSweepAngularThreshold = 0.6;
+nape_Config.angularCCDSlipScale = 0.75;
+nape_Config.arbiterExpirationDelay = 6;
+nape_Config.staticFrictionThreshold = 2;
+nape_Config.elasticThreshold = 20;
+nape_Config.sleepDelay = 60;
+nape_Config.linearSleepThreshold = 0.2;
+nape_Config.angularSleepThreshold = 0.4;
+nape_Config.contactBiasCoef = 0.3;
+nape_Config.contactStaticBiasCoef = 0.6;
+nape_Config.contactContinuousBiasCoef = 0.4;
+nape_Config.contactContinuousStaticBiasCoef = 0.5;
+nape_Config.illConditionedThreshold = 2e+8;
+zpp_$nape_ZPP_$ID._Interactor = 0;
+zpp_$nape_ZPP_$ID._CbType = 0;
+zpp_$nape_ZPP_$ID._CbSet = 0;
+zpp_$nape_callbacks_ZPP_$Callback.internal = false;
+zpp_$nape_callbacks_ZPP_$CbType.ANY_SHAPE = new nape_callbacks_CbType();
+zpp_$nape_callbacks_ZPP_$CbType.ANY_BODY = new nape_callbacks_CbType();
+zpp_$nape_callbacks_ZPP_$CbType.ANY_COMPOUND = new nape_callbacks_CbType();
+zpp_$nape_callbacks_ZPP_$CbType.ANY_CONSTRAINT = new nape_callbacks_CbType();
+zpp_$nape_util_ZPP_$Flags.internal = false;
+zpp_$nape_util_ZPP_$Flags.id_ImmState_ACCEPT = 1;
+zpp_$nape_util_ZPP_$Flags.id_ImmState_IGNORE = 2;
+zpp_$nape_util_ZPP_$Flags.id_ImmState_ALWAYS = 4;
+zpp_$nape_util_ZPP_$Flags.id_GravMassMode_DEFAULT = 0;
+zpp_$nape_util_ZPP_$Flags.id_GravMassMode_FIXED = 1;
+zpp_$nape_util_ZPP_$Flags.id_GravMassMode_SCALED = 2;
+zpp_$nape_util_ZPP_$Flags.id_InertiaMode_DEFAULT = 0;
+zpp_$nape_util_ZPP_$Flags.id_MassMode_DEFAULT = 0;
+zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC = 1;
+zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC = 2;
+zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC = 3;
+zpp_$nape_util_ZPP_$Flags.id_ListenerType_BODY = 0;
+zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT = 1;
+zpp_$nape_util_ZPP_$Flags.id_ListenerType_CONSTRAINT = 1;
+zpp_$nape_util_ZPP_$Flags.id_ListenerType_INTERACTION = 2;
+zpp_$nape_util_ZPP_$Flags.id_ListenerType_PRE = 3;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_BEGIN = 0;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_COLLISION = 1;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_ONGOING = 6;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_SENSOR = 2;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_END = 1;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_FLUID = 4;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE = 2;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY = 7;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP = 3;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_BREAK = 4;
+zpp_$nape_util_ZPP_$Flags.id_CbEvent_PRE = 5;
+zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE = 0;
+zpp_$nape_util_ZPP_$Flags.id_ShapeType_POLYGON = 1;
+zpp_$nape_callbacks_ZPP_$InteractionListener.UCbSet = new zpp_$nape_util_ZNPList_$ZPP_$CbSet();
+zpp_$nape_callbacks_ZPP_$InteractionListener.VCbSet = new zpp_$nape_util_ZNPList_$ZPP_$CbSet();
+zpp_$nape_callbacks_ZPP_$InteractionListener.WCbSet = new zpp_$nape_util_ZNPList_$ZPP_$CbSet();
+zpp_$nape_callbacks_ZPP_$InteractionListener.UCbType = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
+zpp_$nape_callbacks_ZPP_$InteractionListener.VCbType = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
+zpp_$nape_callbacks_ZPP_$InteractionListener.WCbType = new zpp_$nape_util_ZNPList_$ZPP_$CbType();
+zpp_$nape_dynamics_ZPP_$Arbiter.internal = false;
+zpp_$nape_dynamics_ZPP_$Arbiter.COL = 1;
+zpp_$nape_dynamics_ZPP_$Arbiter.FLUID = 4;
+zpp_$nape_dynamics_ZPP_$Arbiter.SENSOR = 2;
+zpp_$nape_dynamics_ZPP_$Contact.internal = false;
+zpp_$nape_geom_ZPP_$Collide.flowpoly = new zpp_$nape_util_ZNPList_$ZPP_$Vec2();
+zpp_$nape_geom_ZPP_$Collide.flowsegs = new zpp_$nape_util_ZNPList_$ZPP_$Vec2();
+zpp_$nape_phys_ZPP_$Body.types = [null,(function($this) {
 	var $r;
-	if(zpp_nape.util.ZPP_Flags.BodyType_STATIC == null) {
-		zpp_nape.util.ZPP_Flags.internal = true;
-		zpp_nape.util.ZPP_Flags.BodyType_STATIC = new nape.phys.BodyType();
-		zpp_nape.util.ZPP_Flags.internal = false;
+	if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
+		zpp_$nape_util_ZPP_$Flags.internal = true;
+		zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
+		zpp_$nape_util_ZPP_$Flags.internal = false;
 	}
-	$r = zpp_nape.util.ZPP_Flags.BodyType_STATIC;
+	$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
 	return $r;
 }(this)),(function($this) {
 	var $r;
-	if(zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC == null) {
-		zpp_nape.util.ZPP_Flags.internal = true;
-		zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC = new nape.phys.BodyType();
-		zpp_nape.util.ZPP_Flags.internal = false;
+	if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+		zpp_$nape_util_ZPP_$Flags.internal = true;
+		zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+		zpp_$nape_util_ZPP_$Flags.internal = false;
 	}
-	$r = zpp_nape.util.ZPP_Flags.BodyType_DYNAMIC;
+	$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
 	return $r;
 }(this)),(function($this) {
 	var $r;
-	if(zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC == null) {
-		zpp_nape.util.ZPP_Flags.internal = true;
-		zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC = new nape.phys.BodyType();
-		zpp_nape.util.ZPP_Flags.internal = false;
+	if(zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC == null) {
+		zpp_$nape_util_ZPP_$Flags.internal = true;
+		zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC = new nape_phys_BodyType();
+		zpp_$nape_util_ZPP_$Flags.internal = false;
 	}
-	$r = zpp_nape.util.ZPP_Flags.BodyType_KINEMATIC;
+	$r = zpp_$nape_util_ZPP_$Flags.BodyType_KINEMATIC;
 	return $r;
 }(this))];
-zpp_nape.phys.ZPP_Material.WAKE = 1;
-zpp_nape.phys.ZPP_Material.PROPS = 2;
-zpp_nape.phys.ZPP_Material.ANGDRAG = 4;
-zpp_nape.phys.ZPP_Material.ARBITERS = 8;
-zpp_nape.shape.ZPP_Edge.internal = false;
-zpp_nape.space.ZPP_AABBTree.tmpaabb = new zpp_nape.geom.ZPP_AABB();
-zpp_nape.util.ZPP_ConstraintList.internal = false;
-zpp_nape.util.ZPP_BodyList.internal = false;
-zpp_nape.util.ZPP_InteractorList.internal = false;
-zpp_nape.util.ZPP_CompoundList.internal = false;
-zpp_nape.util.ZPP_ListenerList.internal = false;
-zpp_nape.util.ZPP_CbTypeList.internal = false;
-zpp_nape.util.ZPP_Vec2List.internal = false;
-zpp_nape.util.ZPP_GeomPolyList.internal = false;
-zpp_nape.util.ZPP_RayResultList.internal = false;
-zpp_nape.util.ZPP_ConvexResultList.internal = false;
-zpp_nape.util.ZPP_EdgeList.internal = false;
-zpp_nape.util.ZPP_ShapeList.internal = false;
-zpp_nape.util.ZPP_InteractionGroupList.internal = false;
-zpp_nape.util.ZPP_ArbiterList.internal = false;
-zpp_nape.util.ZPP_ContactList.internal = false;
-samples.nape.Main.main();
-})();
+zpp_$nape_phys_ZPP_$Material.WAKE = 1;
+zpp_$nape_phys_ZPP_$Material.PROPS = 2;
+zpp_$nape_phys_ZPP_$Material.ANGDRAG = 4;
+zpp_$nape_phys_ZPP_$Material.ARBITERS = 8;
+zpp_$nape_shape_ZPP_$Edge.internal = false;
+zpp_$nape_space_ZPP_$AABBTree.tmpaabb = new zpp_$nape_geom_ZPP_$AABB();
+zpp_$nape_util_ZPP_$ConstraintList.internal = false;
+zpp_$nape_util_ZPP_$BodyList.internal = false;
+zpp_$nape_util_ZPP_$InteractorList.internal = false;
+zpp_$nape_util_ZPP_$CompoundList.internal = false;
+zpp_$nape_util_ZPP_$ListenerList.internal = false;
+zpp_$nape_util_ZPP_$CbTypeList.internal = false;
+zpp_$nape_util_ZPP_$Vec2List.internal = false;
+zpp_$nape_util_ZPP_$GeomPolyList.internal = false;
+zpp_$nape_util_ZPP_$RayResultList.internal = false;
+zpp_$nape_util_ZPP_$ConvexResultList.internal = false;
+zpp_$nape_util_ZPP_$EdgeList.internal = false;
+zpp_$nape_util_ZPP_$ShapeList.internal = false;
+zpp_$nape_util_ZPP_$InteractionGroupList.internal = false;
+zpp_$nape_util_ZPP_$ArbiterList.internal = false;
+zpp_$nape_util_ZPP_$ContactList.internal = false;
+samples_nape_Main.main();
+})(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=nape.js.map
