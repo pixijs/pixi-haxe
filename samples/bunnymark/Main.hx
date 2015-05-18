@@ -1,5 +1,6 @@
 package samples.bunnymark;
 
+import pixi.core.particles.ParticleContainer;
 import js.html.DivElement;
 import js.Browser;
 import pixi.core.display.Container;
@@ -22,7 +23,7 @@ class Main extends Application {
 	var startBunnyCount:Int = 2;
 	var isAdding:Bool = false;
 	var count:Int = 0;
-	var container:Container;
+	var container:ParticleContainer;
 
 	var amount:Int = 100;
 	var bunnyType:Int;
@@ -65,7 +66,7 @@ class Main extends Application {
 		count = startBunnyCount;
 		counter.innerHTML = count + " BUNNIES";
 
-		container = new Container();
+		container = new ParticleContainer();
 		_stage.addChild(container);
 
 		var bunny1 = Texture.fromImage("assets/bunnymark/bunny1.png");

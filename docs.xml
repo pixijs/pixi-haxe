@@ -13099,8 +13099,17 @@
 	</class>
 	<class path="pixi.core.particles.ParticleContainer" params="" file="pixi/core/particles/ParticleContainer.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
+		<setProperties public="1" set="method">
+			<f a="properties">
+				<c path="Array"><x path="Bool"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the private properties array to dynamic / static based on the passed properties object
+	 *
+	 * @param properties {object} The properties to be uploaded</haxe_doc>
+		</setProperties>
 		<new public="1" set="method">
-			<f a="size:properties">
+			<f a="?size:?properties">
 				<x path="Int"/>
 				<c path="Array"><x path="Bool"/></c>
 				<x path="Void"/>

@@ -28,5 +28,12 @@ extern class ParticleContainer extends Container {
 	 * @class
 	 * @namespace PIXI
 	 */
-	function new(size:Int, properties:Array<Bool>);
+	function new(?size:Int, ?properties:Array<Bool>);
+
+	/**
+	 * Sets the private properties array to dynamic / static based on the passed properties object
+	 *
+	 * @param properties {object} The properties to be uploaded
+	 */
+	function setProperties(properties:Array<Bool>):Void;
 }

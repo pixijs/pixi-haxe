@@ -143,7 +143,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		window.document.body.appendChild(this.counter);
 		this.count = this.startBunnyCount;
 		this.counter.innerHTML = this.count + " BUNNIES";
-		this.container = new PIXI.Container();
+		this.container = new PIXI.ParticleContainer();
 		this._stage.addChild(this.container);
 		var bunny1 = PIXI.Texture.fromImage("assets/bunnymark/bunny1.png");
 		var bunny2 = PIXI.Texture.fromImage("assets/bunnymark/bunny2.png");
