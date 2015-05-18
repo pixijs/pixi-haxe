@@ -1,10 +1,10 @@
 package samples.retina;
 
+import pixi.core.Pixi;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -21,6 +21,8 @@ class Main extends Application {
 		backgroundColor = 0xFFFFFF;
 		pixelRatio = _getPixelRatio();
 		super.start(Application.AUTO);
+
+		Pixi.RETINA_PREFIX = untyped __js__("/scale-(.+)/");
 
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));

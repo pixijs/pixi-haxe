@@ -101,10 +101,10 @@ samples_graphics_Main.main = function() {
 samples_graphics_Main.__super__ = pixi_plugins_app_Application;
 samples_graphics_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
-		this.backgroundColor = 0;
+		this.backgroundColor = 13158;
 		this.antialias = true;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi_plugins_app_Application.prototype.start.call(this);
+		pixi_plugins_app_Application.prototype.start.call(this,"canvas");
 		this._graphics = new PIXI.Graphics();
 		this._graphics.beginFill(16724736);
 		this._graphics.lineStyle(10,16767232,1);

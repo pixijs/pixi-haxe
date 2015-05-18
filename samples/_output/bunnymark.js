@@ -119,7 +119,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
 		this.onResize = $bind(this,this._onResize);
-		pixi_plugins_app_Application.prototype.start.call(this,null,true);
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._setup();
 	}
 	,_setup: function() {

@@ -17,10 +17,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		backgroundColor = 0x000000;
+		backgroundColor = 0x003366;
 		antialias = true;
 		onUpdate = _onUpdate;
-		super.start();
+		super.start(Application.CANVAS);
 
 		_graphics = new Graphics();
 		_graphics.beginFill(0xFF3300);

@@ -38,7 +38,7 @@ class Main extends Application {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
-		super.start(true);
+		super.start();
 		_setup();
 	}
 

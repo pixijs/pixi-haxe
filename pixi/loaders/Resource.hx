@@ -21,6 +21,8 @@ extern class Resource {
 
 	var texture:Texture;
 
+	var textures:Dynamic;
+
 	/**
      * The name of this resource.
      *
@@ -55,7 +57,7 @@ extern class Resource {
 	/**
      * The type used to load the resource via XHR. If unset, determined automatically.
      *
-     * @member {string}
+     * @member {String}
      */
 	var xhrType:String;
 
@@ -80,6 +82,46 @@ extern class Resource {
      * @readonly
      */
 	var error:Dynamic;
+
+	/**
+     * Describes if this resource was loaded as json. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}
+     */
+	var isJson:Bool;
+
+	/**
+     * Describes if this resource was loaded as xml. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}
+     */
+	var isXml:Bool;
+
+	/**
+     * Describes if this resource was loaded as an image tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}
+     */
+	var isImage:Bool;
+
+	/**
+     * Describes if this resource was loaded as an audio tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}
+     */
+	var isAudio:Bool;
+
+	/**
+     * Describes if this resource was loaded as a video tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}
+     */
+	var isVideo:Bool;
 }
 
 /**

@@ -4,7 +4,6 @@ import pixi.extras.MovieClip;
 import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
 import js.Browser;
 
 class Main extends Application {

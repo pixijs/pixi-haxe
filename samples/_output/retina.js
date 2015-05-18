@@ -100,6 +100,7 @@ samples_retina_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.backgroundColor = 16777215;
 		this.pixelRatio = this._getPixelRatio();
 		pixi_plugins_app_Application.prototype.start.call(this,"auto");
+		PIXI.RETINA_PREFIX = /scale-(.+)/;
 		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
 		this._img.anchor.set(0.5,0.5);

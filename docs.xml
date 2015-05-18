@@ -15925,6 +15925,7 @@
 </a></typedef>
 	<class path="pixi.loaders.Resource" params="" file="pixi/loaders/Resource.hx" extern="1">
 		<texture public="1"><c path="pixi.core.textures.Texture"/></texture>
+		<textures public="1"><d/></textures>
 		<name public="1">
 			<c path="String"/>
 			<haxe_doc>* The name of this resource.
@@ -15956,7 +15957,7 @@
 			<c path="String"/>
 			<haxe_doc>* The type used to load the resource via XHR. If unset, determined automatically.
      *
-     * @member {string}</haxe_doc>
+     * @member {String}</haxe_doc>
 		</xhrType>
 		<crossOrigin public="1">
 			<c path="String"/>
@@ -15977,6 +15978,41 @@
      * @member {Error}
      * @readonly</haxe_doc>
 		</error>
+		<isJson public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Describes if this resource was loaded as json. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}</haxe_doc>
+		</isJson>
+		<isXml public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Describes if this resource was loaded as xml. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}</haxe_doc>
+		</isXml>
+		<isImage public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Describes if this resource was loaded as an image tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}</haxe_doc>
+		</isImage>
+		<isAudio public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Describes if this resource was loaded as an audio tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}</haxe_doc>
+		</isAudio>
+		<isVideo public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Describes if this resource was loaded as a video tag. Only valid after the resource
+     * has completely loaded.
+     *
+     * @member {Bool}</haxe_doc>
+		</isVideo>
 		<new public="1" set="method">
 			<f a="name:url:?options">
 				<c path="String"/>
