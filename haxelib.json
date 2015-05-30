@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "ParticleContainer bug fix and updated pixi to v3.0.6",
-  "version": "3.0.4",
+  "releasenote": "added fps property in plugins.app.Application class",
+  "version": "3.0.5",
   "url": "https://github.com/pixijs/pixi-haxe",
   "dependencies": {
 

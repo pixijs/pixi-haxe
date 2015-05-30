@@ -30,7 +30,13 @@ class Application {
 	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
 	 * default - false
 	 */
-	public var skipFrame(null, default):Bool;
+	public var skipFrame(null, set):Bool;
+
+	/**
+	 * Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
+	 * default - 60
+	 */
+	public var fps(default, set):Int;
 
 	/**
 	 * Width of the application.
@@ -102,11 +108,25 @@ class Application {
 	var _lastTime:Date;
 	var _currentTime:Date;
 	var _elapsedTime:Float;
-	var _skipFrame:Bool;
+
+	var _frameCount:Int;
 
 	public function new() {
 		_lastTime = Date.now();
 		_setDefaultValues();
+	}
+
+	function set_fps(val:Int):Int {
+		_frameCount = 0;
+		return fps = (val >= 1 && val < 60) ? val : 60;
+	}
+
+	function set_skipFrame(val:Bool):Bool {
+		if (val) {
+			trace("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
+			fps = 30;
+		}
+		return skipFrame = val;
 	}
 
 	function _setDefaultValues() {
@@ -119,7 +139,6 @@ class Application {
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		_skipFrame = false;
 	}
 
 	/**
@@ -178,9 +197,9 @@ class Application {
 	}
 
 	@:noCompletion function _onRequestAnimationFrame() {
-		if (skipFrame && _skipFrame) _skipFrame = false;
-		else {
-			_skipFrame = true;
+		_frameCount++;
+		if (_frameCount == Std.int(60 / fps)) {
+			_frameCount = 0;
 			_calculateElapsedTime();
 			if (onUpdate != null) onUpdate(_elapsedTime);
 			_renderer.render(_stage);

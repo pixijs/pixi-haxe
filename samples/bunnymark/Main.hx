@@ -39,6 +39,7 @@ class Main extends Application {
 		backgroundColor = 0xE0E6F8;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
+		fps = 50;
 		super.start();
 		_setup();
 	}
@@ -112,7 +113,6 @@ class Main extends Application {
 	function _onUpdate(elapsedTime:Float) {
 		if (isAdding) {
 			if (count < 200000) {
-
 				for (i in 0 ... amount) {
 					var bunny = new Bunny(currentTexture);
 					bunny.speedX = Math.random() * 5;

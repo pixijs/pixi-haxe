@@ -1,5 +1,26 @@
 <haxe>
 	<class path="Array" params="T" file="/usr/lib/haxe/std/js/_std/Array.hx" extern="1">
+		<length public="1" set="null">
+			<x path="Int"/>
+			<haxe_doc>The length of `this` Array.</haxe_doc>
+		</length>
+		<join public="1" set="method">
+			<f a="sep">
+				<c path="String"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns a string representation of `this` Array, with `sep` separating
+		each element.
+
+		The result of this operation is equal to `Std.string(this[0]) + sep +
+		Std.string(this[1]) + sep + ... + sep + Std.string(this[this.length-1])`
+
+		If `this` is the empty Array `[]`, the result is the empty String `""`.
+		If `this` has exactly one element, the result is equal to a call to
+		`Std.string(this[0])`.
+
+		If `sep` is null, the result is unspecified.</haxe_doc>
+		</join>
 		<push public="1" set="method">
 			<f a="x">
 				<c path="Array.T"/>
@@ -632,6 +653,35 @@
 		for documentation.</haxe_doc>
 		</match>
 	</class>
+	<class path="haxe.Log" params="" file="/usr/lib/haxe/std/haxe/Log.hx">
+		<trace public="1" set="dynamic" line="45" static="1">
+			<f a="v:?infos">
+				<d/>
+				<t path="haxe.PosInfos"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+			<haxe_doc>Outputs `v` in a platform-dependent way.
+
+		The second parameter `infos` is injected by the compiler and contains
+		information about the position where the trace() call was made.
+
+		This method can be rebound to a custom function:
+			var oldTrace = haxe.Log.trace; // store old function
+			haxe.Log.trace = function(v,infos) { // handle trace }
+			...
+			haxe.Log.trace = oldTrace;
+
+		If it is bound to null, subsequent calls to trace() will cause an
+		exception.</haxe_doc>
+		</trace>
+		<haxe_doc>Log primarily provides the trace() method, which is invoked upon a call to
+	trace() in haxe code.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+		</meta>
+	</class>
 	<typedef path="haxe.PosInfos" params="" file="/usr/lib/haxe/std/haxe/PosInfos.hx">
 		<a>
 			<methodName><c path="String"/></methodName>
@@ -690,6 +740,52 @@
 	<x path="Void"/>
 </f></new>
 		<meta><m n=":native"><e>"Error"</e></m></meta>
+	</class>
+	<class path="js.Boot" params="" file="/usr/lib/haxe/std/js/Boot.hx">
+		<__unhtml set="method" line="39" static="1"><f a="s">
+	<c path="String"/>
+	<c path="String"/>
+</f></__unhtml>
+		<__trace set="method" line="43" static="1">
+			<f a="v:i">
+				<a>
+					<toString set="null"><f a=""><c path="String"/></f></toString>
+					<length set="null"><x path="Int"/></length>
+					<hasOwnProperty set="null"><f a="">
+	<c path="String"/>
+	<x path="Bool"/>
+</f></hasOwnProperty>
+					<__enum__ set="null"><x path="Bool"/></__enum__>
+				</a>
+				<t path="haxe.PosInfos"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+		</__trace>
+		<__string_rec set="method" line="98" static="1">
+			<f a="o:s">
+				<a>
+					<toString set="null"><f a=""><c path="String"/></f></toString>
+					<length set="null"><x path="Int"/></length>
+					<hasOwnProperty set="null"><f a="">
+	<c path="String"/>
+	<x path="Bool"/>
+</f></hasOwnProperty>
+					<__enum__ set="null"><x path="Bool"/></__enum__>
+				</a>
+				<c path="String"/>
+				<c path="String"/>
+			</f>
+			<meta>
+				<m n=":has_untyped"/>
+				<m n=":ifFeature"><e>"has_enum"</e></m>
+			</meta>
+		</__string_rec>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+			<m n=":dox"><e>hide</e></m>
+		</meta>
 	</class>
 	<class path="js.EvalError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
@@ -13116,17 +13212,17 @@
 			</f>
 			<haxe_doc><![CDATA[* The ParticleContainer class is a really fast version of the Container built solely for speed,
 	 * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
-	 * 	functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
-	 * Any other 	functionality like tinting, masking, etc will not work on sprites in this batch.
+	 * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
+	 * Any other functionality like tinting, masking, etc will not work on sprites in this batch.
 	 *
 	 * It's extremely easy to use :
 	 *
 	 * ```js
-	 * 	var container = new ParticleContainer();
+	 * var container = new ParticleContainer();
 	 *
-	 * for (	var i = 0; i < 100; ++i)
+	 * for (var i = 0; i < 100; ++i)
 	 * {
-	 *     	var sprite = new PIXI.Sprite.fromImage("myImage.png");
+	 *     var sprite = new PIXI.Sprite.fromImage("myImage.png");
 	 *     container.addChild(sprite);
 	 * }
 	 * ```
@@ -13134,7 +13230,16 @@
 	 * And here you have a hundred sprites that will be renderer at the speed of light.
 	 *
 	 * @class
-	 * @namespace PIXI]]></haxe_doc>
+	 * @extends PIXI.Container
+	 * @memberof PIXI
+	 *
+	 * @param [size=15000] {number} The number of images in the SpriteBatch before it flushes.
+	 * @param [properties] {object} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties.scale=false] {boolean} When true, scale be uploaded and applied.
+	 * @param [properties.position=true] {boolean} When true, position be uploaded and applied.
+	 * @param [properties.rotation=false] {boolean} When true, rotation be uploaded and applied.
+	 * @param [properties.uvs=false] {boolean} When true, uvs be uploaded and applied.
+	 * @param [properties.alpha=false] {boolean} When true, alpha be uploaded and applied.]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.ParticleContainer"</e></m></meta>
 	</class>
@@ -16219,11 +16324,16 @@
 			<haxe_doc>* Sets the pixel ratio of the application.
      * default - 1</haxe_doc>
 		</pixelRatio>
-		<skipFrame public="1" get="null">
+		<skipFrame public="1" get="null" set="accessor">
 			<x path="Bool"/>
 			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
 	 * default - false</haxe_doc>
 		</skipFrame>
+		<fps public="1" set="accessor">
+			<x path="Int"/>
+			<haxe_doc>* Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
+	 * default - 60</haxe_doc>
+		</fps>
 		<width public="1" get="null">
 			<x path="Float"/>
 			<haxe_doc>* Width of the application.
@@ -16282,9 +16392,17 @@
 		<_lastTime><c path="Date"/></_lastTime>
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
-		<_skipFrame><x path="Bool"/></_skipFrame>
-		<_setDefaultValues set="method" line="112"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="134">
+		<_frameCount><x path="Int"/></_frameCount>
+		<set_fps set="method" line="119"><f a="val">
+	<x path="Int"/>
+	<x path="Int"/>
+</f></set_fps>
+		<set_skipFrame set="method" line="124"><f a="val">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></set_skipFrame>
+		<_setDefaultValues set="method" line="132"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="153">
 			<f a="?renderer:?stats:?parentDom">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -16298,29 +16416,29 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="165">
+		<_onWindowResize set="method" line="184">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="180">
+		<_onRequestAnimationFrame set="method" line="199">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="192">
+		<_calculateElapsedTime set="method" line="212">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="198">
+		<_addStats set="method" line="218">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<new public="1" set="method" line="107"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="114"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
