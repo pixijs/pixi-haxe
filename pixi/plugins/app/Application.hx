@@ -118,7 +118,7 @@ class Application {
 
 	function set_fps(val:Int):Int {
 		_frameCount = 0;
-		return fps = (val >= 1 && val < 60) ? val : 60;
+		return fps = (val >= 1 && val < 60) ? Std.int(val) : 60;
 	}
 
 	function set_skipFrame(val:Bool):Bool {
@@ -149,7 +149,6 @@ class Application {
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-
 	public function start(?renderer:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.style.width = width + "px";
