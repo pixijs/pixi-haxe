@@ -1,26 +1,5 @@
 <haxe>
 	<class path="Array" params="T" file="/usr/lib/haxe/std/js/_std/Array.hx" extern="1">
-		<length public="1" set="null">
-			<x path="Int"/>
-			<haxe_doc>The length of `this` Array.</haxe_doc>
-		</length>
-		<join public="1" set="method">
-			<f a="sep">
-				<c path="String"/>
-				<c path="String"/>
-			</f>
-			<haxe_doc>Returns a string representation of `this` Array, with `sep` separating
-		each element.
-
-		The result of this operation is equal to `Std.string(this[0]) + sep +
-		Std.string(this[1]) + sep + ... + sep + Std.string(this[this.length-1])`
-
-		If `this` is the empty Array `[]`, the result is the empty String `""`.
-		If `this` has exactly one element, the result is equal to a call to
-		`Std.string(this[0])`.
-
-		If `sep` is null, the result is unspecified.</haxe_doc>
-		</join>
 		<push public="1" set="method">
 			<f a="x">
 				<c path="Array.T"/>
@@ -653,35 +632,6 @@
 		for documentation.</haxe_doc>
 		</match>
 	</class>
-	<class path="haxe.Log" params="" file="/usr/lib/haxe/std/haxe/Log.hx">
-		<trace public="1" set="dynamic" line="45" static="1">
-			<f a="v:?infos">
-				<d/>
-				<t path="haxe.PosInfos"/>
-				<x path="Void"/>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-			<haxe_doc>Outputs `v` in a platform-dependent way.
-
-		The second parameter `infos` is injected by the compiler and contains
-		information about the position where the trace() call was made.
-
-		This method can be rebound to a custom function:
-			var oldTrace = haxe.Log.trace; // store old function
-			haxe.Log.trace = function(v,infos) { // handle trace }
-			...
-			haxe.Log.trace = oldTrace;
-
-		If it is bound to null, subsequent calls to trace() will cause an
-		exception.</haxe_doc>
-		</trace>
-		<haxe_doc>Log primarily provides the trace() method, which is invoked upon a call to
-	trace() in haxe code.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
 	<typedef path="haxe.PosInfos" params="" file="/usr/lib/haxe/std/haxe/PosInfos.hx">
 		<a>
 			<methodName><c path="String"/></methodName>
@@ -740,52 +690,6 @@
 	<x path="Void"/>
 </f></new>
 		<meta><m n=":native"><e>"Error"</e></m></meta>
-	</class>
-	<class path="js.Boot" params="" file="/usr/lib/haxe/std/js/Boot.hx">
-		<__unhtml set="method" line="39" static="1"><f a="s">
-	<c path="String"/>
-	<c path="String"/>
-</f></__unhtml>
-		<__trace set="method" line="43" static="1">
-			<f a="v:i">
-				<a>
-					<toString set="null"><f a=""><c path="String"/></f></toString>
-					<length set="null"><x path="Int"/></length>
-					<hasOwnProperty set="null"><f a="">
-	<c path="String"/>
-	<x path="Bool"/>
-</f></hasOwnProperty>
-					<__enum__ set="null"><x path="Bool"/></__enum__>
-				</a>
-				<t path="haxe.PosInfos"/>
-				<x path="Void"/>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-		</__trace>
-		<__string_rec set="method" line="98" static="1">
-			<f a="o:s">
-				<a>
-					<toString set="null"><f a=""><c path="String"/></f></toString>
-					<length set="null"><x path="Int"/></length>
-					<hasOwnProperty set="null"><f a="">
-	<c path="String"/>
-	<x path="Bool"/>
-</f></hasOwnProperty>
-					<__enum__ set="null"><x path="Bool"/></__enum__>
-				</a>
-				<c path="String"/>
-				<c path="String"/>
-			</f>
-			<meta>
-				<m n=":has_untyped"/>
-				<m n=":ifFeature"><e>"has_enum"</e></m>
-			</meta>
-		</__string_rec>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-			<m n=":dox"><e>hide</e></m>
-		</meta>
 	</class>
 	<class path="js.EvalError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
@@ -14484,7 +14388,7 @@
 		</updateSourceImage>
 		<new public="1" set="method">
 			<f a="source:?scaleMode:?resolution">
-				<c path="String"/>
+				<c path="js.html.ImageElement"/>
 				<x path="Int"/>
 				<x path="Float"/>
 				<x path="Void"/>
@@ -14492,11 +14396,42 @@
 			<haxe_doc>* A texture stores the information that represents an image. All textures have a base texture.
 	 *
 	 * @class
-	 * @mixes eventTarget
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
 	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
-	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+			<overloads>
+				<new public="1" set="method">
+					<f a="source:?scaleMode:?resolution">
+						<d/>
+						<x path="Int"/>
+						<x path="Float"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* A texture stores the information that represents an image. All textures have a base texture.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param source {Image|Canvas} the source object of the texture.
+	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="source:?scaleMode:?resolution">
+						<c path="js.html.CanvasElement"/>
+						<x path="Int"/>
+						<x path="Float"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* A texture stores the information that represents an image. All textures have a base texture.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param source {Image|Canvas} the source object of the texture.
+	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+				</new>
+			</overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
@@ -16427,11 +16362,11 @@
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="212">
+		<_calculateElapsedTime set="method" line="211">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="218">
+		<_addStats set="method" line="217">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>

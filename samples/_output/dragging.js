@@ -11,11 +11,6 @@ Std.__name__ = true;
 Std.string = function(s) {
 	return js_Boot.__string_rec(s,"");
 };
-var haxe_Log = function() { };
-haxe_Log.__name__ = true;
-haxe_Log.trace = function(v,infos) {
-	js_Boot.__trace(v,infos);
-};
 var js__$Boot_HaxeError = function(val) {
 	Error.call(this);
 	this.val = val;
@@ -29,25 +24,6 @@ js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
 });
 var js_Boot = function() { };
 js_Boot.__name__ = true;
-js_Boot.__unhtml = function(s) {
-	return s.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
-};
-js_Boot.__trace = function(v,i) {
-	var msg;
-	if(i != null) msg = i.fileName + ":" + i.lineNumber + ": "; else msg = "";
-	msg += js_Boot.__string_rec(v,"");
-	if(i != null && i.customParams != null) {
-		var _g = 0;
-		var _g1 = i.customParams;
-		while(_g < _g1.length) {
-			var v1 = _g1[_g];
-			++_g;
-			msg += "," + js_Boot.__string_rec(v1,"");
-		}
-	}
-	var d;
-	if(typeof(document) != "undefined" && (d = document.getElementById("haxe:trace")) != null) d.innerHTML += js_Boot.__unhtml(msg) + "<br/>"; else if(typeof console != "undefined" && console.log != null) console.log(msg);
-};
 js_Boot.getClass = function(o) {
 	if((o instanceof Array) && o.__enum__ == null) return Array; else {
 		var cl = o.__class__;
@@ -191,11 +167,11 @@ pixi_plugins_app_Application.__name__ = true;
 pixi_plugins_app_Application.prototype = {
 	set_fps: function(val) {
 		this._frameCount = 0;
-		return val >= 1 && val < 60?this.fps = val:this.fps = 60;
+		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
 	}
 	,set_skipFrame: function(val) {
 		if(val) {
-			haxe_Log.trace("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead",{ fileName : "Application.hx", lineNumber : 126, className : "pixi.plugins.app.Application", methodName : "set_skipFrame"});
+			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
 			this.set_fps(30);
 		}
 		return this.skipFrame = val;
@@ -210,6 +186,7 @@ pixi_plugins_app_Application.prototype = {
 		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
+		this.set_fps(60);
 	}
 	,start: function(renderer,stats,parentDom) {
 		if(stats == null) stats = true;
@@ -250,7 +227,6 @@ pixi_plugins_app_Application.prototype = {
 	}
 	,_onRequestAnimationFrame: function() {
 		this._frameCount++;
-		haxe_Log.trace(this._frameCount,{ fileName : "Application.hx", lineNumber : 201, className : "pixi.plugins.app.Application", methodName : "_onRequestAnimationFrame", customParams : [60 / this.fps | 0]});
 		if(this._frameCount == (60 / this.fps | 0)) {
 			this._frameCount = 0;
 			this._calculateElapsedTime();

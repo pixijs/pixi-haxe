@@ -139,6 +139,7 @@ class Application {
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
+		fps = 60;
 	}
 
 	/**
