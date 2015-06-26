@@ -87,3 +87,7 @@
 --next
 -main samples.mask.Main
 -js samples/_output/mask.js
+
+--next
+-main samples.deviceinfo.Main
+-js samples/_output/deviceinfo.js

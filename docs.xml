@@ -156,22 +156,11 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<class path="Math" params="" file="/usr/lib/haxe/std/js/_std/Math.hx" extern="1">
-		<abs public="1" set="method" static="1"><f a="v">
-	<x path="Float"/>
-	<x path="Float"/>
-</f></abs>
-		<floor public="1" set="method" static="1"><f a="v">
-	<x path="Float"/>
-	<x path="Int"/>
-</f></floor>
-		<random public="1" set="method" static="1"><f a=""><x path="Float"/></f></random>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-			<m n=":keepInit"/>
-		</meta>
-	</class>
+	<class path="Math" params="" file="/usr/lib/haxe/std/js/_std/Math.hx" extern="1"><meta>
+	<m n=":keep"/>
+	<m n=":directlyUsed"/>
+	<m n=":keepInit"/>
+</meta></class>
 	<class path="String" params="" file="/usr/lib/haxe/std/js/_std/String.hx" extern="1">
 		<fromCharCode public="1" set="method" static="1">
 			<f a="code">
@@ -12520,10 +12509,7 @@
 	 * @extends Container
 	 * @namespace PIXI</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Graphics"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Graphics"</e></m></meta>
 	</class>
 	<class path="pixi.core.graphics.GraphicsData" params="" file="pixi/core/graphics/GraphicsData.hx" extern="1">
 		<lineWidth public="1"><x path="Float"/></lineWidth>
@@ -12766,10 +12752,7 @@
 	 * @param [x=0] {number} position of the point on the x axis
 	 * @param [y=0] {number} position of the point on the y axis</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Point"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Point"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.Circle" params="" file="pixi/core/math/shapes/Circle.hx" extern="1">
 		<clone public="1" set="method">
@@ -14091,10 +14074,7 @@
 	 * @namespace PIXI
 	 * @param texture {Texture} The texture for this sprite</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Sprite"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Sprite"</e></m></meta>
 	</class>
 	<class path="pixi.core.text.Text" params="" file="pixi/core/text/Text.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
@@ -14176,7 +14156,10 @@
 	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
 	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.Text"</e></m>
+		</meta>
 	</class>
 	<typedef path="pixi.core.text.TextStyle" params="" file="pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
 	<wordWrapWidth>
@@ -16498,23 +16481,16 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
-	<class path="samples.mask.Main" params="" file="samples/mask/Main.hx">
+	<class path="samples.deviceinfo.Main" params="" file="samples/deviceinfo/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="58" static="1">
+		<main set="method" line="46" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_bg><c path="pixi.core.sprites.Sprite"/></_bg>
-		<_cells><c path="pixi.core.sprites.Sprite"/></_cells>
-		<_mask><c path="pixi.core.graphics.Graphics"/></_mask>
-		<_target><c path="pixi.core.math.Point"/></_target>
-		<_init set="method" line="20"><f a=""><x path="Void"/></f></_init>
-		<_reset set="method" line="47"><f a=""><x path="Void"/></f></_reset>
-		<_onUpdate set="method" line="52"><f a="elapsedTime">
-	<x path="Float"/>
-	<x path="Void"/>
-</f></_onUpdate>
-		<new public="1" set="method" line="15"><f a=""><x path="Void"/></f></new>
+		<_info><c path="pixi.core.display.Container"/></_info>
+		<_rendererType><c path="Array"><c path="String"/></c></_rendererType>
+		<_init set="method" line="19"><f a=""><x path="Void"/></f></_init>
+		<new public="1" set="method" line="14"><f a=""><x path="Void"/></f></new>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>
