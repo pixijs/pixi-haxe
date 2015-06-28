@@ -68,5 +68,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-zip");
 	grunt.loadNpmTasks("grunt-exec");
-	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.6:stats-js", "browserify", "uglify", "exec"]);
+	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.7:stats-js", "browserify", "uglify", "exec"]);
 };
