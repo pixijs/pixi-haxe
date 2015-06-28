@@ -1,7 +1,3 @@
--cmd echo /haxelib | haxelib setup
-
---next
-
 -cp samples
 -cp pixi
 -dce full
