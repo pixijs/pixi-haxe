@@ -91,3 +91,8 @@
 --next
 -main samples.deviceinfo.Main
 -js samples/_output/deviceinfo.js
+
+--next
+-lib msignal
+-main samples.audio.Main
+-js samples/_output/audio.js
