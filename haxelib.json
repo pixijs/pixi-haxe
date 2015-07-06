@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor bug fixes",
-	"version": "3.0.8",
+	"releasenote": "added gray, pixelate, twist and ascii filters",
+	"version": "3.0.9",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
