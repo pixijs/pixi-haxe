@@ -20,6 +20,6 @@ extern class AsciiFilter extends AbstractFilter {
      *
      * @member {number}
      * @memberof AsciiFilter#
-     */w
+     */
 	var size:Point;
 }
