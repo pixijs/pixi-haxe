@@ -115,10 +115,12 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._img.anchor.set(0.5,0.5);
 		this._img.position.set(400,300);
 		this._img.interactive = true;
-		this._img.on("click",$bind(this,this._onEvent));
+		this._img.scale.set(3);
 		this._img.on("mouseover",$bind(this,this._onEvent));
-		this._img.on("mousedown",$bind(this,this._onEvent));
 		this._img.on("touchstart",$bind(this,this._onEvent));
+		this._img.tap = $bind(this,this._onEvent);
+		this._img.click = $bind(this,this._onEvent);
+		this._img.hitArea = new PIXI.Rectangle(0,0,10,10);
 		this._stage.addChild(this._img);
 		var style = { };
 		style.fill = "#000000";

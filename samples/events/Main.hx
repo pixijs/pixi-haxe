@@ -1,5 +1,6 @@
 package samples.events;
 
+import pixi.core.math.shapes.Rectangle;
 import pixi.interaction.EventTarget;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
@@ -24,10 +25,13 @@ class Main extends Application {
 		_img.anchor.set(0.5, 0.5);
 		_img.position.set(400, 300);
 		_img.interactive = true;
-		_img.on("click", _onEvent);
+		_img.scale.set(3);
 		_img.on("mouseover", _onEvent);
-		_img.on("mousedown", _onEvent);
 		_img.on("touchstart", _onEvent);
+		_img.tap = _onEvent;
+		_img.click = _onEvent;
+
+		_img.hitArea = new Rectangle(0, 0, 10, 10);
 		_stage.addChild(_img);
 
 		var style:TextStyle = {};
