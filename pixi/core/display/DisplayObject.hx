@@ -1,6 +1,6 @@
 package pixi.core.display;
 
-import pixi.interaction.EventEmitter;
+import pixi.interaction.InteractionManager;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.textures.Texture;
@@ -9,7 +9,7 @@ import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
 
 @:native("PIXI.DisplayObject")
-extern class DisplayObject extends EventEmitter {
+extern class DisplayObject extends InteractionManager {
 
 	/**
 	 * The base class for all objects that are rendered on the screen.
@@ -252,4 +252,11 @@ extern class DisplayObject extends EventEmitter {
 	 * @memberof DisplayObject#
 	 */
 	var defaultCursor:String;
+
+	/**
+	 * Hit area
+	 *
+	 * @memberof DisplayObject#
+	 */
+	var hitArea:Dynamic;
 }
