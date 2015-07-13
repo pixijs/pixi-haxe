@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added gray, pixelate, twist and ascii filters",
-	"version": "3.0.9",
+	"releasenote": "added hit area to DisplayObject and also extending InteractionManager",
+	"version": "3.0.10",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
