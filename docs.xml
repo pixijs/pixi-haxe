@@ -12664,8 +12664,187 @@
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
-	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
+	<class path="pixi.interaction.InteractionManager" params="" file="pixi/interaction/InteractionManager.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
+		<renderer public="1">
+			<c path="pixi.core.renderers.SystemRenderer"/>
+			<haxe_doc>* The renderer this interaction manager works for.
+     *
+     * @member {SystemRenderer}</haxe_doc>
+		</renderer>
+		<autoPreventDefault public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Should default browser actions automatically be prevented.
+     *
+     * @member {Bool}
+     * @default true</haxe_doc>
+		</autoPreventDefault>
+		<interactionFrequency public="1">
+			<x path="Int"/>
+			<haxe_doc>* As this frequency increases the interaction events will be checked more often.
+     *
+     * @member {Int}
+     * @default 10</haxe_doc>
+		</interactionFrequency>
+		<mouse public="1">
+			<c path="pixi.interaction.InteractionData"/>
+			<haxe_doc>* The mouse data
+     *
+     * @member {InteractionData}</haxe_doc>
+		</mouse>
+		<eventData public="1">
+			<t path="pixi.interaction.EventTarget"/>
+			<haxe_doc>* An event data object to handle all the event tracking/dispatching
+     *
+     * @member {EventTarget}</haxe_doc>
+		</eventData>
+		<interactiveDataPool public="1">
+			<c path="Array"><c path="pixi.interaction.InteractionData"/></c>
+			<haxe_doc>* Tiny little interactiveData pool !
+     *
+     * @member {Array}</haxe_doc>
+		</interactiveDataPool>
+		<onMouseUp public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onMouseUp>
+		<onMouseDown public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onMouseDown>
+		<onMouseMove public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onMouseMove>
+		<onMouseOut public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onMouseOut>
+		<onTouchStart public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onTouchStart>
+		<onTouchEnd public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onTouchEnd>
+		<onTouchMove public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</onTouchMove>
+		<tap public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</tap>
+		<click public="1">
+			<f a="">
+				<t path="pixi.interaction.EventTarget"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @member {function}</haxe_doc>
+		</click>
+		<last public="1">
+			<x path="Int"/>
+			<haxe_doc>* @member {Int}</haxe_doc>
+		</last>
+		<currentCursorStyle public="1">
+			<c path="String"/>
+			<haxe_doc>* The css style of the cursor that is being used
+     * @member {String}</haxe_doc>
+		</currentCursorStyle>
+		<mapPositionToPoint public="1" set="method">
+			<f a="point:x:y">
+				<c path="pixi.core.math.Point"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Maps x and y coords from a DOM object and maps them correctly to the pixi view. The resulting value is stored in the point.
+	 * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
+	 *
+	 * @param  {Point} point the point that the result will be stored in
+	 * @param  {Float} x the x coord of the position to map
+	 * @param  {Float} y the y coord of the position to map</haxe_doc>
+		</mapPositionToPoint>
+		<processInteractive public="1" set="method">
+			<f a="point:displayObject:func:hitTest:interactive">
+				<c path="pixi.core.math.Point"/>
+				<c path="pixi.core.display.DisplayObject"/>
+				<f a=""><x path="Void"/></f>
+				<x path="Bool"/>
+				<x path="Bool"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* This function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
+	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
+	 *
+	 * @param  {Point} point the point that is tested for collision
+	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
+	 * @param  {function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
+	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
+	 * @return {Bool} returns true if the displayObject hit the point</haxe_doc>
+		</processInteractive>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
+	 * if its interactive parameter is set to true
+	 * This manager also supports multitouch.
+	 *
+	 * @class
+	 * @memberof PIXI.interaction
+	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
+	 * @param [options] {object}
+	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="renderer:?options">
+		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+		<t path="pixi.interaction.InteractionManagerOptions"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
+	 * if its interactive parameter is set to true
+	 * This manager also supports multitouch.
+	 *
+	 * @class
+	 * @memberof PIXI.interaction
+	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
+	 * @param [options] {object}
+	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.</haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
+		<extends path="pixi.interaction.InteractionManager"/>
 		<getGlobalPosition public="1" set="method">
 			<f a="point">
 				<c path="pixi.core.math.Point"/>
@@ -12903,6 +13082,12 @@
 	 * @default pointer
 	 * @memberof DisplayObject#</haxe_doc>
 		</defaultCursor>
+		<hitArea public="1">
+			<d/>
+			<haxe_doc>* Hit area
+	 *
+	 * @memberof DisplayObject#</haxe_doc>
+		</hitArea>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
@@ -16093,6 +16278,25 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.TilingSprite"</e></m></meta>
 	</class>
+	<class path="pixi.filters.ascii.AsciiFilter" params="" file="pixi/filters/ascii/AsciiFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<size public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The pixel size used by the filter.
+     *
+     * @member {number}
+     * @memberof AsciiFilter#</haxe_doc>
+		</size>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* An ASCII filter.
+	 *
+	 * @class
+	 * @extends PIXI.AbstractFilter
+	 * @memberof PIXI.filters</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.AsciiFilter"</e></m></meta>
+	</class>
 	<class path="pixi.filters.blur.BlurFilter" params="" file="pixi/filters/blur/BlurFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<passes public="1">
@@ -16432,6 +16636,78 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorStepFilter"</e></m></meta>
 	</class>
+	<class path="pixi.filters.gray.GrayFilter" params="" file="pixi/filters/gray/GrayFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<gray public="1">
+			<x path="Float"/>
+			<haxe_doc>* The strength of the gray. 1 will make the object black and white, 0 will make the object its normal color.
+     *
+     * @member {number}
+     * @memberof GrayFilter#</haxe_doc>
+		</gray>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* This filter applies a pixelate effect making display objects appear 'blocky'.
+	 *
+	 * @class
+	 * @extends PIXI.AbstractFilter
+	 * @memberof PIXI.filters</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.GrayFilter"</e></m></meta>
+	</class>
+	<class path="pixi.filters.pixelate.PixelateFilter" params="" file="pixi/filters/pixelate/PixelateFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<size public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* This a point that describes the size of the blocks.
+     * x is the width of the block and y is the height.
+     *
+     * @member {Point}
+     * @memberof PixelateFilter#</haxe_doc>
+		</size>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* This filter applies a pixelate effect making display objects appear 'blocky'.
+	 *
+	 * @class
+	 * @extends PIXI.AbstractFilter
+	 * @memberof PIXI.filters</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.PixelateFilter"</e></m></meta>
+	</class>
+	<class path="pixi.filters.twist.TwistFilter" params="" file="pixi/filters/twist/TwistFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<offset public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* This point describes the the offset of the twist.
+     *
+     * @member {Point}
+     * @memberof TwistFilter#</haxe_doc>
+		</offset>
+		<radius public="1">
+			<x path="Float"/>
+			<haxe_doc>* This radius of the twist.
+     *
+     * @member {number}
+     * @memberof TwistFilter#</haxe_doc>
+		</radius>
+		<angle public="1">
+			<x path="Float"/>
+			<haxe_doc>* This angle of the twist.
+     *
+     * @member {number}
+     * @memberof TwistFilter#</haxe_doc>
+		</angle>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* This filter applies a twist effect making display objects appear twisted in the given direction.
+	 *
+	 * @class
+	 * @extends PIXI.AbstractFilter
+	 * @memberof PIXI.filters</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.TwistFilter"</e></m></meta>
+	</class>
 	<typedef path="pixi.interaction.EventTarget" params="" file="pixi/interaction/EventTarget.hx"><a>
 	<type><c path="String"/></type>
 	<target><d/></target>
@@ -16484,163 +16760,16 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionData"</e></m></meta>
 	</class>
-	<class path="pixi.interaction.InteractionManager" params="" file="pixi/interaction/InteractionManager.hx" extern="1">
-		<renderer public="1"><d/></renderer>
-		<mouse public="1">
-			<c path="pixi.interaction.InteractionData"/>
-			<haxe_doc>* The mouse data
-     *
-     * @member {InteractionData}</haxe_doc>
-		</mouse>
-		<eventData public="1">
-			<t path="pixi.interaction.EventTarget"/>
-			<haxe_doc>* An event data object to handle all the event tracking/dispatching
-     *
-     * @member {EventTarget}</haxe_doc>
-		</eventData>
-		<interactiveDataPool public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* Tiny little interactiveData pool !
-     *
-     * @member {Array}</haxe_doc>
-		</interactiveDataPool>
-		<interactionDOMElement public="1">
-			<c path="js.html.HtmlElement"/>
-			<haxe_doc>* The DOM element to bind to.
-     *
-     * @member {HTMLElement}
-     * @private</haxe_doc>
-		</interactionDOMElement>
-		<eventsAdded public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Have events been attached to the dom element?
-     *
-     * @member {Bool}
-     * @private</haxe_doc>
-		</eventsAdded>
-		<onMouseUp public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onMouseUp>
-		<onMouseDown public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onMouseDown>
-		<onMouseMove public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onMouseMove>
-		<onMouseOut public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onMouseOut>
-		<onTouchStart public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onTouchStart>
-		<onTouchEnd public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onTouchEnd>
-		<onTouchMove public="1">
-			<f a="">
-				<c path="js.html.Event"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* @member {function}</haxe_doc>
-		</onTouchMove>
-		<last public="1">
-			<x path="Int"/>
-			<haxe_doc>* @member {Int}</haxe_doc>
-		</last>
-		<currentCursorStyle public="1">
-			<c path="String"/>
-			<haxe_doc>* The css style of the cursor that is being used
-     * @member {String}</haxe_doc>
-		</currentCursorStyle>
-		<resolution public="1">
-			<x path="Float"/>
-			<haxe_doc>* The current resolution
-     * @member {Float}</haxe_doc>
-		</resolution>
-		<mapPositionToPoint public="1" set="method">
-			<f a="point:x:y">
-				<c path="pixi.core.math.Point"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Maps x and y coords from a DOM object and maps them correctly to the pixi view. The resulting value is stored in the point.
-	 * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
-	 *
-	 * @param  {Point} point the point that the result will be stored in
-	 * @param  {Float} x the x coord of the position to map
-	 * @param  {Float} y the y coord of the position to map</haxe_doc>
-		</mapPositionToPoint>
-		<processInteractive public="1" set="method">
-			<f a="point:displayObject:func:hitTest:interactive">
-				<c path="pixi.core.math.Point"/>
-				<c path="pixi.core.display.DisplayObject"/>
-				<f a=""><x path="Void"/></f>
-				<x path="Bool"/>
-				<x path="Bool"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* This function is provides a neat way of crawling through the scene graph and running a specified 	function on all interactive objects it finds.
-	 * It will also take care of hit testing the interactive objects and passes the hit across in the 	function.
-	 *
-	 * @param  {Point} point the point that is tested for collision
-	 * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
-	 * @param  {function} func the 	function that will be called on each interactive object. The displayObject and hit will be passed to the 	function
-	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
-	 * @return {Bool} returns true if the displayObject hit the point</haxe_doc>
-		</processInteractive>
-		<new public="1" set="method">
-			<f a="renderer">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
-	 * if its interactive parameter is set to true
-	 * This manager also supports multitouch.
-	 *
-	 * @class
-	 * @memberof PIXI.interaction
-	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="renderer">
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
-	 * if its interactive parameter is set to true
-	 * This manager also supports multitouch.
-	 *
-	 * @class
-	 * @memberof PIXI.interaction
-	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer</haxe_doc>
-</new></overloads>
-		</new>
-		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
-	</class>
+	<typedef path="pixi.interaction.InteractionManagerOptions" params="" file="pixi/interaction/InteractionManager.hx" module="pixi.interaction.InteractionManager"><a>
+	<interactionFrequency>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</interactionFrequency>
+	<autoPreventDefault>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</autoPreventDefault>
+</a></typedef>
 	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/LoaderOptions.hx"><a>
 	<xhrType>
 		<t path="Null"><c path="String"/></t>
