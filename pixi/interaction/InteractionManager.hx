@@ -1,14 +1,13 @@
 package pixi.interaction;
 
+import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
-import js.html.Event;
-import js.html.HtmlElement;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 
 @:native("PIXI.interaction.InteractionManager")
-extern class InteractionManager {
+extern class InteractionManager extends EventEmitter {
 
 	/**
 	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
@@ -18,11 +17,35 @@ extern class InteractionManager {
 	 * @class
 	 * @memberof PIXI.interaction
 	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
+	 * @param [options] {object}
+	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.
 	 */
-	@:overload(function(renderer:CanvasRenderer):Void {})
+	@:overload(function(renderer:CanvasRenderer, ?options:InteractionManagerOptions):Void {})
 	function new(renderer:WebGLRenderer);
 
-	var renderer:Dynamic;
+	/**
+     * The renderer this interaction manager works for.
+     *
+     * @member {SystemRenderer}
+     */
+	var renderer:SystemRenderer;
+
+	/**
+     * Should default browser actions automatically be prevented.
+     *
+     * @member {Bool}
+     * @default true
+     */
+	var autoPreventDefault:Bool;
+
+	/**
+     * As this frequency increases the interaction events will be checked more often.
+     *
+     * @member {Int}
+     * @default 10
+     */
+	var interactionFrequency:Int;
 
 	/**
      * The mouse data
@@ -43,58 +66,52 @@ extern class InteractionManager {
      *
      * @member {Array}
      */
-	var interactiveDataPool:Array<Dynamic>;
-
-	/**
-     * The DOM element to bind to.
-     *
-     * @member {HTMLElement}
-     * @private
-     */
-	var interactionDOMElement:HtmlElement;
-
-	/**
-     * Have events been attached to the dom element?
-     *
-     * @member {Bool}
-     * @private
-     */
-	var eventsAdded:Bool;
+	var interactiveDataPool:Array<InteractionData>;
 
 	/**
      * @member {function}
      */
-	var onMouseUp:Event -> Void;
+	var onMouseUp:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseDown:Event -> Void;
+	var onMouseDown:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseMove:Event -> Void;
+	var onMouseMove:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseOut:Event -> Void;
+	var onMouseOut:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchStart:Event -> Void;
+	var onTouchStart:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchEnd:Event -> Void;
+	var onTouchEnd:EventTarget -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchMove:Event -> Void;
+	var onTouchMove:EventTarget -> Void;
+
+	/**
+     * @member {function}
+     */
+	var tap:EventTarget -> Void;
+
+	/**
+     * @member {function}
+     */
+	var click:EventTarget -> Void;
 
 	/**
      * @member {Int}
@@ -106,12 +123,6 @@ extern class InteractionManager {
      * @member {String}
      */
 	var currentCursorStyle:String;
-
-	/**
-     * The current resolution
-     * @member {Float}
-     */
-	var resolution:Float;
 
 	/**
 	 * Maps x and y coords from a DOM object and maps them correctly to the pixi view. The resulting value is stored in the point.
@@ -134,4 +145,9 @@ extern class InteractionManager {
 	 * @return {Bool} returns true if the displayObject hit the point
 	 */
 	function processInteractive(point:Point, displayObject:DisplayObject, func:Void -> Void, hitTest:Bool, interactive:Bool):Bool;
+}
+
+typedef InteractionManagerOptions = {
+	@:optional var autoPreventDefault:Bool;
+	@:optional var interactionFrequency:Int;
 }
