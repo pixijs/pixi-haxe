@@ -112,15 +112,13 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.backgroundColor = 16777215;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
-		this._img.anchor.set(0.5,0.5);
 		this._img.position.set(400,300);
 		this._img.interactive = true;
-		this._img.scale.set(3);
+		this._img.scale.set(4);
 		this._img.on("mouseover",$bind(this,this._onEvent));
 		this._img.on("touchstart",$bind(this,this._onEvent));
 		this._img.tap = $bind(this,this._onEvent);
 		this._img.click = $bind(this,this._onEvent);
-		this._img.hitArea = new PIXI.Rectangle(0,0,10,10);
 		this._stage.addChild(this._img);
 		var style = { };
 		style.fill = "#000000";

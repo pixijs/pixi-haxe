@@ -22,16 +22,14 @@ class Main extends Application {
 		super.start();
 
 		_img = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_img.anchor.set(0.5, 0.5);
 		_img.position.set(400, 300);
 		_img.interactive = true;
-		_img.scale.set(3);
+		_img.scale.set(4);
 		_img.on("mouseover", _onEvent);
 		_img.on("touchstart", _onEvent);
 		_img.tap = _onEvent;
 		_img.click = _onEvent;
 
-		_img.hitArea = new Rectangle(0, 0, 10, 10);
 		_stage.addChild(_img);
 
 		var style:TextStyle = {};
