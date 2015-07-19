@@ -1,4 +1,14 @@
 (function (console) { "use strict";
+var haxe_Timer = function(time_ms) {
+	var me = this;
+	this.id = setInterval(function() {
+		me.run();
+	},time_ms);
+};
+haxe_Timer.prototype = {
+	run: function() {
+	}
+};
 var samples_stream_Main = function() {
 	this._init();
 };
@@ -10,31 +20,51 @@ samples_stream_Main.prototype = {
 		var options = { };
 		options.backgroundColor = 13158;
 		options.resolution = 1;
+		options.transparent = true;
 		this._stage = new PIXI.Container();
 		this._renderer = PIXI.autoDetectRenderer(window.innerWidth,window.innerHeight,options);
-		this._wrapper = window.document.getElementById("game");
 		var _this = window.document;
-		this._videoElement = _this.createElement("video");
+		this._wrapper = _this.createElement("div");
+		var _this1 = window.document;
+		this._videoElement = _this1.createElement("video");
 		this._videoElement.id = "videoWheel";
 		this._videoElement.style.position = "absolute";
 		this._videoElement.style.top = "0px";
-		this._videoElement.autoplay = true;
+		this._videoElement.autoplay = false;
+		this._videoElement.width = 480;
+		this._videoElement.height = 270;
 		this._videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 		window.document.body.appendChild(this._wrapper);
+		this._wrapper.appendChild(this._videoElement);
 		this._wrapper.appendChild(this._renderer.view);
 		this._renderer.view.style.position = "absolute";
-		this._wrapper.appendChild(this._videoElement);
 		window.requestAnimationFrame($bind(this,this._animate));
-		this._bunny = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
-		this._bunny.anchor.set(0.5,0.5);
-		this._bunny.scale.set(4,4);
-		this._bunny.position.set(550,window.innerHeight);
-		this._bunny.interactive = true;
-		this._stage.addChild(this._bunny);
-		this._bunny.on("tap",$bind(this,this._onTap));
+		this._playBtn = new PIXI.Sprite(PIXI.Texture.fromImage("assets/stream/play.png"));
+		this._playBtn.interactive = true;
+		this._stage.addChild(this._playBtn);
+		this._playBtn.tap = $bind(this,this._onTap);
+		this._playBtn.click = $bind(this,this._onTap);
+		this._timer = new haxe_Timer(500);
+		var _this2 = window.document;
+		this._canvas = _this2.createElement("canvas");
+		this._canvas.id = "video_canvas";
+		this._canvas.style.position = "absolute";
+		this._canvas.style.backgroundColor = "#000000";
+		this._canvas.style.left = "0px";
+		this._canvas.style.top = "280px";
+		this._canvas.width = 480;
+		this._canvas.height = 50;
+		this._wrapper.appendChild(this._canvas);
+		this._context = this._canvas.getContext("2d",null);
 	}
 	,_onTap: function(data) {
+		this._playBtn.visible = false;
 		this._videoElement.play();
+		this._timer.run = $bind(this,this._draw);
+	}
+	,_draw: function() {
+		if(this._videoElement.paused || this._videoElement.ended) return;
+		this._context.drawImage(this._videoElement,0,200,480,50,0,0,480,50);
 	}
 	,_animate: function() {
 		window.requestAnimationFrame($bind(this,this._animate));

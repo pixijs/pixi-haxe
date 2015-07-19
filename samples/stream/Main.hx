@@ -1,5 +1,8 @@
 package samples.stream;
 
+import js.html.CanvasRenderingContext2D;
+import js.html.CanvasElement;
+import haxe.Timer;
 import pixi.interaction.EventTarget;
 import pixi.core.text.Text;
 import js.html.ImageElement;
@@ -22,13 +25,17 @@ class Main {
 	var _renderer:SystemRenderer;
 	var _stage:Container;
 
-	var _bunny:Sprite;
+	var _playBtn:Sprite;
 	var _table:Sprite;
 
 	var _label:Text;
 
 	var _vidTexture:Texture;
 	var _vidSprite:Sprite;
+
+	var _timer:Timer;
+	var _canvas:CanvasElement;
+	var _context:CanvasRenderingContext2D;
 
 	public function new() {
 		_init();
@@ -38,35 +45,57 @@ class Main {
 		var options:RenderingOptions = {};
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
+		options.transparent = true;
 
 		_stage = new Container();
 		_renderer = Detector.autoDetectRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
-		_wrapper = Browser.document.getElementById("game");
+		_wrapper = Browser.document.createDivElement();
 
 		_videoElement = Browser.document.createVideoElement();
 		_videoElement.id = "videoWheel";
 		_videoElement.style.position = "absolute";
 		_videoElement.style.top = "0px";
-		_videoElement.autoplay = true;
+		_videoElement.autoplay = false;
+		_videoElement.width = 480;
+		_videoElement.height = 270;
 		_videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 
 		Browser.document.body.appendChild(_wrapper);
+		_wrapper.appendChild(_videoElement);
 		_wrapper.appendChild(_renderer.view);
 		_renderer.view.style.position = "absolute";
-		_wrapper.appendChild(_videoElement);
 		Browser.window.requestAnimationFrame(cast _animate);
 
-		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_bunny.anchor.set(0.5, 0.5);
-		_bunny.scale.set(4, 4);
-		_bunny.position.set(550, Browser.window.innerHeight);
-		_bunny.interactive = true;
-		_stage.addChild(_bunny);
-		_bunny.on("tap", _onTap);
+		_playBtn = new Sprite(Texture.fromImage("assets/stream/play.png"));
+		_playBtn.interactive = true;
+		_stage.addChild(_playBtn);
+		_playBtn.tap = _onTap;
+		_playBtn.click = _onTap;
+
+		_timer = new Timer(500);
+
+		_canvas = Browser.document.createCanvasElement();
+		_canvas.id = "video_canvas";
+		_canvas.style.position = "absolute";
+		_canvas.style.backgroundColor = "#000000";
+		_canvas.style.left = "0px";
+		_canvas.style.top = "280px";
+		_canvas.width = 480;
+		_canvas.height = 50;
+		_wrapper.appendChild(_canvas);
+
+		_context = _canvas.getContext2d();
 	}
 
 	function _onTap(data:EventTarget) {
+		_playBtn.visible = false;
 		_videoElement.play();
+		_timer.run = _draw;
+	}
+
+	function _draw() {
+		if (_videoElement.paused || _videoElement.ended) return;
+		_context.drawImage(_videoElement, 0, 200, 480, 50, 0, 0, 480, 50);
 	}
 
 	function _animate() {

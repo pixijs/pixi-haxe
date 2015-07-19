@@ -12,52 +12,12 @@
     <script type="text/javascript" src="libs/pixi.min.js"></script>
     <script type="text/javascript" src="libs/stats.min.js"></script>
 
-    <script type="text/javascript">
-        function detectBrowser() {
-            var nav = window.navigator,
-                    ua = window.navigator.userAgent.toLowerCase();
-            // detect browsers (only the ones that have some kind of quirk we need to work around)
-            if (ua.match(/ipad/i) !== null)
-                return "iPod";
-            if (ua.match(/iphone/i) !== null)
-                return "iPhone";
-            if (ua.match(/android/i) !== null)
-                return "Android";
-            if ((nav.appName.toLowerCase().indexOf("microsoft") != -1 || nav.appName.toLowerCase().match(/trident/gi) !== null))
-                return "Desktop";
-            if (ua.match(/chrome/gi) !== null)
-                return "Desktop";
-            if (ua.match(/firefox/gi) !== null)
-                return "Desktop";
-            if (ua.match(/webkit/gi) !== null)
-                return "Desktop";
-            if (ua.match(/gecko/gi) !== null)
-                return "Desktop";
-            if (ua.match(/opera/gi) !== null)
-                return "Desktop";
-            //If any case miss we will return null
-            return null
-        }
-    </script>
-
     <style>
         html,body { margin: 0; padding: 0; width: 100%; height: 100%; }
     </style>
 
 </head>
-<body>
-<div id="container">
-    <div id="game" style="position: absolute; z-index: 0;">
+<body bgcolor="#6495ed">
         <script type="text/javascript" src="stream.js"></script>
-    </div>
-    <!--<script type="text/javascript">
-        console.log(detectBrowser());
-        if (detectBrowser() === "Desktop") {
-            document.write("<div id='flash' style='position: absolute; z-index: 1'>");
-            document.write("<object width='384' wmode='direct' quality='low' height='320' data='assets/stream/result.swf'></object>");
-            document.write("</div>");
-        }
-    </script>-->
-</div>
 </body>
 </html>
