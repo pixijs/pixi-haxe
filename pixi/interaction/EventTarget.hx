@@ -7,4 +7,5 @@ typedef EventTarget = {
 	var type:String;
 	var data:InteractionData;
 	var target:Dynamic;
+	function stopPropagation():Void;
 }
