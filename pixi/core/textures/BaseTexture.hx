@@ -45,10 +45,10 @@ extern class BaseTexture {
 	/**
 	 * The scale mode to apply when scaling this texture
 	 *
-	 * @member {Float}
+	 * @member {Number}
 	 * @default scaleModes.LINEAR
 	 */
-	var scaleMode:Float;
+	var scaleMode:Int;
 
 	/**
 	 * Set to true once the base texture has successfully loaded.
