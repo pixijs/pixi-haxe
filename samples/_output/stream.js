@@ -65,6 +65,27 @@ samples_stream_Main.prototype = {
 	,_draw: function() {
 		if(this._videoElement.paused || this._videoElement.ended) return;
 		this._context.drawImage(this._videoElement,0,200,480,50,0,0,480,50);
+		var textTrack = null;
+		var _g1 = 0;
+		var _g = this._videoElement.textTracks.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(this._videoElement.textTracks[i].kind == "subtitles") {
+				textTrack = this._videoElement.textTracks[i];
+				textTrack.mode = "hidden";
+				textTrack.addEventListener("oncuechange",function() {
+					if(textTrack.activeCues.length > 0) {
+						var _g3 = 0;
+						var _g2 = textTrack.activeCues.length;
+						while(_g3 < _g2) {
+							var j = _g3++;
+							var cue = textTrack.activeCues[j].text;
+							console.log(cue);
+						}
+					}
+				});
+			}
+		}
 	}
 	,_animate: function() {
 		window.requestAnimationFrame($bind(this,this._animate));

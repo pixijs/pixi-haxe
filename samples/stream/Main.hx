@@ -1,5 +1,8 @@
 package samples.stream;
 
+import js.html.TextTrackMode;
+import js.html.TextTrackKind;
+import js.html.TextTrack;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 import haxe.Timer;
@@ -96,6 +99,24 @@ class Main {
 	function _draw() {
 		if (_videoElement.paused || _videoElement.ended) return;
 		_context.drawImage(_videoElement, 0, 200, 480, 50, 0, 0, 480, 50);
+
+		var textTrack:TextTrack = null;
+		for (i in 0 ... _videoElement.textTracks.length) {
+			if (_videoElement.textTracks[i].kind == TextTrackKind.SUBTITLES) {
+				textTrack = _videoElement.textTracks[i];
+
+				textTrack.mode = TextTrackMode.HIDDEN;
+
+				textTrack.addEventListener("oncuechange", function () {
+					if (textTrack.activeCues.length > 0) {
+						for (j in 0 ... textTrack.activeCues.length) {
+							var cue = textTrack.activeCues[j].text;
+							trace(cue);
+						}
+					}
+				});
+			}
+		}
 	}
 
 	function _animate() {
