@@ -45,7 +45,7 @@ extern class BaseTexture {
 	/**
 	 * The scale mode to apply when scaling this texture
 	 *
-	 * @member {Number}
+	 * @member {Int}
 	 * @default scaleModes.LINEAR
 	 */
 	var scaleMode:Int;
@@ -74,8 +74,6 @@ extern class BaseTexture {
 
 	/**
 	 * The image source that is used to create the texture.
-	 *
-	 * TODO: Make this a setter that calls loadSource();
 	 *
 	 * @member {Image|Canvas}
 	 * @readonly

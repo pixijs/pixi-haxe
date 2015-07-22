@@ -15322,10 +15322,10 @@
 	 * @readOnly</haxe_doc>
 		</height>
 		<scaleMode public="1">
-			<x path="Float"/>
+			<x path="Int"/>
 			<haxe_doc>* The scale mode to apply when scaling this texture
 	 *
-	 * @member {Float}
+	 * @member {Int}
 	 * @default scaleModes.LINEAR</haxe_doc>
 		</scaleMode>
 		<hasLoaded public="1">
@@ -15351,8 +15351,6 @@
 		<source public="1">
 			<d/>
 			<haxe_doc>* The image source that is used to create the texture.
-	 *
-	 * TODO: Make this a setter that calls loadSource();
 	 *
 	 * @member {Image|Canvas}
 	 * @readonly</haxe_doc>
@@ -15765,8 +15763,8 @@
 	 * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.</haxe_doc>
 		</getCanvas>
 		<new public="1" set="method">
-			<f a="renderer:width:height:scaleMode:resolution">
-				<d/>
+			<f a="renderer:?width:?height:?scaleMode:?resolution">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 				<x path="Float"/>
 				<x path="Float"/>
 				<x path="Int"/>
@@ -15812,6 +15810,55 @@
 	 * @param [height=100] {number} The height of the render texture
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {number} The resolution of the texture being generated</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="renderer:?width:?height:?scaleMode:?resolution">
+		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+		<x path="Float"/>
+		<x path="Float"/>
+		<x path="Int"/>
+		<x path="Float"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>* A RenderTexture is a special texture that allows any Pixi display object to be rendered to it.
+	 *
+	 * __Hint__: All DisplayObjects (i.e. Sprites) that render to a RenderTexture should be preloaded
+	 * otherwise black rectangles will be drawn instead.
+	 *
+	 * A RenderTexture takes a snapshot of any Display Object given to its render method. The position
+	 * and rotation of the given Display Objects is ignored. For example:
+	 *
+	 * ```js
+	 * 	var renderTexture = new PIXI.RenderTexture(800, 600);
+	 * 	var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
+	 *
+	 * sprite.position.x = 800/2;
+	 * sprite.position.y = 600/2;
+	 * sprite.anchor.x = 0.5;
+	 * sprite.anchor.y = 0.5;
+	 *
+	 * renderTexture.render(sprite);
+	 * ```
+	 *
+	 * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
+	 * position a Container should be used:
+	 *
+	 * ```js
+	 * 	var doc = new Container();
+	 *
+	 * doc.addChild(sprite);
+	 *
+	 * renderTexture.render(doc);  // Renders to center of renderTexture
+	 * ```
+	 *
+	 * @class
+	 * @extends Texture
+	 * @namespace PIXI
+	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
+	 * @param [width=100] {number} The width of the render texture
+	 * @param [height=100] {number} The height of the render texture
+	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
+	 * @param [resolution=1] {number} The resolution of the texture being generated</haxe_doc>
+</new></overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.RenderTexture"</e></m></meta>
 	</class>
@@ -16712,6 +16759,7 @@
 	<type><c path="String"/></type>
 	<target><d/></target>
 	<stopped><x path="Bool"/></stopped>
+	<stopPropagation set="method"><f a=""><x path="Void"/></f></stopPropagation>
 	<data><c path="pixi.interaction.InteractionData"/></data>
 </a></typedef>
 	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">

@@ -1,5 +1,7 @@
 package pixi.core.textures;
 
+import pixi.core.renderers.canvas.CanvasRenderer;
+import pixi.core.renderers.webgl.WebGLRenderer;
 import js.html.Image;
 import js.html.CanvasElement;
 
@@ -47,8 +49,8 @@ extern class RenderTexture extends Texture {
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {number} The resolution of the texture being generated
 	 */
-	//@:overload(function(renderer, width, height, scaleMode, resolution):Void {})
-	function new(renderer:Dynamic, width:Float, height:Float, scaleMode:Int, resolution:Float);
+	@:overload(function(renderer:CanvasRenderer, ?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float):Void {})
+	function new(renderer:WebGLRenderer, ?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float);
 
 	/**
 	 * The Resolution of the texture.
