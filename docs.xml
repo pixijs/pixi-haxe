@@ -14256,13 +14256,6 @@
 </a></typedef>
 	<class path="pixi.core.renderers.SystemRenderer" params="" file="pixi/core/renderers/SystemRenderer.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
-		<backgroundColor public="1">
-			<x path="Int"/>
-			<haxe_doc>* The background color to fill if not transparent
-	 *
-	 * @member {Int}
-	 * @memberof SystemRenderer</haxe_doc>
-		</backgroundColor>
 		<type public="1">
 			<x path="Int"/>
 			<haxe_doc>* The type of the renderer.
@@ -14331,6 +14324,13 @@
 	 * @member {Bool}
 	 * @default</haxe_doc>
 		</clearBeforeRender>
+		<backgroundColor public="1">
+			<x path="Int"/>
+			<haxe_doc>* The background color to fill if not transparent
+	 *
+	 * @member {Int}
+	 * @default 0x000000</haxe_doc>
+		</backgroundColor>
 		<resize public="1" set="method">
 			<f a="width:height">
 				<x path="Float"/>

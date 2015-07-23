@@ -29,14 +29,6 @@ extern class SystemRenderer extends EventEmitter {
 	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderingOptions);
 
 	/**
-	 * The background color to fill if not transparent
-	 *
-	 * @member {Int}
-	 * @memberof SystemRenderer
-	 */
-	var backgroundColor:Int;
-
-	/**
 	 * The type of the renderer.
 	 *
 	 * @member {CONST.RENDERER_TYPE}
@@ -113,6 +105,14 @@ extern class SystemRenderer extends EventEmitter {
 	 * @default
 	 */
 	var clearBeforeRender:Bool;
+
+	/**
+	 * The background color to fill if not transparent
+	 *
+	 * @member {Int}
+	 * @default 0x000000
+	 */
+	var backgroundColor:Int;
 
 	/**
 	 * Resizes the canvas view to the specified width and height
