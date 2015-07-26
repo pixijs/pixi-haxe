@@ -24,13 +24,13 @@ class Application {
      * Sets the pixel ratio of the application.
      * default - 1
      */
-	public var pixelRatio(null, default):Float;
+	public var pixelRatio:Float;
 
 	/**
 	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
 	 * default - false
 	 */
-	public var skipFrame(null, set):Bool;
+	public var skipFrame(default, set):Bool;
 
 	/**
 	 * Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
@@ -42,44 +42,44 @@ class Application {
 	 * Width of the application.
 	 * default - Browser.window.innerWidth
 	 */
-	public var width(null, default):Float;
+	public var width:Float;
 
 	/**
 	 * Height of the application.
 	 * default - Browser.window.innerHeight
 	 */
-	public var height(null, default):Float;
+	public var height:Float;
 
 	/**
 	 * Renderer transparency property.
 	 * default - false
 	 */
-	public var transparent(null, default):Bool;
+	public var transparent:Bool;
 
 	/**
 	 * Graphics antialias property.
 	 * default - false
 	 */
-	public var antialias(null, default):Bool;
+	public var antialias:Bool;
 
 	/**
 	 * Force FXAA shader antialias instead of native (faster)
 	 * default - false
 	 */
-	public var forceFXAA(null, default):Bool;
+	public var forceFXAA:Bool;
 
 	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true
 	 */
-	public var autoResize(null, default):Bool;
+	public var autoResize:Bool;
 
 	/**
 	 * Sets the background color of the stage.
 	 * default - 0xFFFFFF
 	 */
-	public var backgroundColor(null, default):Int;
+	public var backgroundColor:Int;
 
 	/**
 	 * Update listener 	function
