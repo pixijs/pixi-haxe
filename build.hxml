@@ -1,3 +1,9 @@
+-cmd haxelib newrepo
+-cmd haxelib install nape || true
+-cmd haxelib install msignal || true
+-cmd haxelib install actuate || true
+
+--next
 -cp samples
 -cp pixi
 -dce full

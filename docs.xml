@@ -12219,14 +12219,14 @@
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<typedef path="msignal.AnySignal" params="" file="/haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
+	<typedef path="msignal.AnySignal" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
 		<c path="msignal.Signal">
 			<d/>
 			<d/>
 		</c>
 		<haxe_doc>A convenience type describing any kind of signal.</haxe_doc>
 	</typedef>
-	<class path="msignal.Signal" params="TSlot:TListener" file="/haxelib/msignal/1,2,2/msignal/Signal.hx">
+	<class path="msignal.Signal" params="TSlot:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx">
 		<valueClasses public="1"><c path="Array"><d/></c></valueClasses>
 		<slots><c path="msignal.SlotList">
 	<c path="msignal.Signal.TSlot"/>
@@ -12281,7 +12281,7 @@
 	dispatched.</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
-	<class path="msignal.Signal1" params="TValue" file="/haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
+	<class path="msignal.Signal1" params="TValue" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
 		<extends path="msignal.Signal">
 			<c path="msignal.Slot1"><c path="msignal.Signal1.TValue"/></c>
 			<f a="">
@@ -12315,14 +12315,14 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
-	<typedef path="msignal.AnySlot" params="" file="/haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
+	<typedef path="msignal.AnySlot" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
 		<c path="msignal.Slot">
 			<d/>
 			<d/>
 		</c>
 		<haxe_doc>A convenience type describing any kind of slot.</haxe_doc>
 	</typedef>
-	<class path="msignal.Slot" params="TSignal:TListener" file="/haxelib/msignal/1,2,2/msignal/Slot.hx">
+	<class path="msignal.Slot" params="TSignal:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx">
 		<listener public="1" set="accessor">
 			<c path="msignal.Slot.TListener"/>
 			<meta><m n=":isVar"/></meta>
@@ -12362,7 +12362,7 @@
 		<haxe_doc>Defines the basic properties of a listener associated with a Signal.</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
-	<class path="msignal.Slot1" params="TValue" file="/haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
+	<class path="msignal.Slot1" params="TValue" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
 		<extends path="msignal.Slot">
 			<c path="msignal.Signal1"><c path="msignal.Slot1.TValue"/></c>
 			<f a="">
@@ -12398,7 +12398,7 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
-	<class path="msignal.SlotList" params="TSlot:TListener" file="/haxelib/msignal/1,2,2/msignal/SlotList.hx">
+	<class path="msignal.SlotList" params="TSlot:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/SlotList.hx">
 		<NIL public="1" static="1">
 			<c path="msignal.SlotList">
 				<d/>
@@ -17114,12 +17114,12 @@
 		<meta><m n=":native"><e>"PIXI.mesh.Rope"</e></m></meta>
 	</class>
 	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
-		<pixelRatio public="1" get="null">
+		<pixelRatio public="1">
 			<x path="Float"/>
 			<haxe_doc>* Sets the pixel ratio of the application.
      * default - 1</haxe_doc>
 		</pixelRatio>
-		<skipFrame public="1" get="null" set="accessor">
+		<skipFrame public="1" set="accessor">
 			<x path="Bool"/>
 			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
 	 * default - false</haxe_doc>
@@ -17129,38 +17129,38 @@
 			<haxe_doc>* Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
 	 * default - 60</haxe_doc>
 		</fps>
-		<width public="1" get="null">
+		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* Width of the application.
 	 * default - Browser.window.innerWidth</haxe_doc>
 		</width>
-		<height public="1" get="null">
+		<height public="1">
 			<x path="Float"/>
 			<haxe_doc>* Height of the application.
 	 * default - Browser.window.innerHeight</haxe_doc>
 		</height>
-		<transparent public="1" get="null">
+		<transparent public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Renderer transparency property.
 	 * default - false</haxe_doc>
 		</transparent>
-		<antialias public="1" get="null">
+		<antialias public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Graphics antialias property.
 	 * default - false</haxe_doc>
 		</antialias>
-		<forceFXAA public="1" get="null">
+		<forceFXAA public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Force FXAA shader antialias instead of native (faster)
 	 * default - false</haxe_doc>
 		</forceFXAA>
-		<autoResize public="1" get="null">
+		<autoResize public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true</haxe_doc>
 		</autoResize>
-		<backgroundColor public="1" get="null">
+		<backgroundColor public="1">
 			<x path="Int"/>
 			<haxe_doc>* Sets the background color of the stage.
 	 * default - 0xFFFFFF</haxe_doc>

@@ -4,9 +4,6 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON("package.json"),
 
 		haxe: {
-			haxelib: {
-				hxml: "haxelib.hxml"
-			},
 			project: {
 				hxml: "build.hxml -xml docs.xml --macro include('pixi')"
 			}

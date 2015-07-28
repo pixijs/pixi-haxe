@@ -2048,7 +2048,7 @@ nape_geom_Winding.prototype = {
 };
 var nape_phys_Interactor = function() {
 	this.zpp_inner_i = null;
-	throw new js__$Boot_HaxeError("Error: Cannot instantiate an Interactor, only Shape/Body/Compound");
+	if(!nape_phys_Interactor.zpp_internalAlloc) throw new js__$Boot_HaxeError("Error: Cannot instantiate an Interactor, only Shape/Body/Compound");
 };
 nape_phys_Interactor.__name__ = true;
 nape_phys_Interactor.prototype = {
@@ -2059,11 +2059,9 @@ nape_phys_Interactor.prototype = {
 };
 var nape_phys_Body = function(type,position) {
 	this.zpp_inner = null;
-	try {
-		nape_phys_Interactor.call(this);
-	} catch( e ) {
-		if (e instanceof js__$Boot_HaxeError) e = e.val;
-	}
+	nape_phys_Interactor.zpp_internalAlloc = true;
+	nape_phys_Interactor.call(this);
+	nape_phys_Interactor.zpp_internalAlloc = false;
 	this.zpp_inner = new zpp_$nape_phys_ZPP_$Body();
 	this.zpp_inner.outer = this;
 	this.zpp_inner.outer_i = this;
@@ -2727,12 +2725,10 @@ nape_phys_Material.prototype = {
 };
 var nape_shape_Shape = function() {
 	this.zpp_inner = null;
-	try {
-		nape_phys_Interactor.call(this);
-	} catch( e ) {
-		if (e instanceof js__$Boot_HaxeError) e = e.val;
-	}
-	throw new js__$Boot_HaxeError("Error: Shape cannot be instantiated derp!");
+	nape_phys_Interactor.zpp_internalAlloc = true;
+	nape_phys_Interactor.call(this);
+	nape_phys_Interactor.zpp_internalAlloc = false;
+	if(!nape_shape_Shape.zpp_internalAlloc) throw new js__$Boot_HaxeError("Error: Shape cannot be instantiated derp!");
 };
 nape_shape_Shape.__name__ = true;
 nape_shape_Shape.__super__ = nape_phys_Interactor;
@@ -2752,11 +2748,9 @@ nape_shape_Shape.prototype = $extend(nape_phys_Interactor.prototype,{
 });
 var nape_shape_Circle = function(radius,localCOM,material,filter) {
 	this.zpp_inner_zn = null;
-	try {
-		nape_shape_Shape.call(this);
-	} catch( e ) {
-		if (e instanceof js__$Boot_HaxeError) e = e.val;
-	}
+	nape_shape_Shape.zpp_internalAlloc = true;
+	nape_shape_Shape.call(this);
+	nape_shape_Shape.zpp_internalAlloc = false;
 	this.zpp_inner_zn = new zpp_$nape_shape_ZPP_$Circle();
 	this.zpp_inner_zn.outer = this;
 	this.zpp_inner_zn.outer_zn = this;
@@ -2928,11 +2922,9 @@ nape_shape_EdgeList.prototype = {
 };
 var nape_shape_Polygon = function(localVerts,material,filter) {
 	this.zpp_inner_zn = null;
-	try {
-		nape_shape_Shape.call(this);
-	} catch( e ) {
-		if (e instanceof js__$Boot_HaxeError) e = e.val;
-	}
+	nape_shape_Shape.zpp_internalAlloc = true;
+	nape_shape_Shape.call(this);
+	nape_shape_Shape.zpp_internalAlloc = false;
 	if(localVerts == null) throw new js__$Boot_HaxeError("Error: localVerts cannot be null");
 	this.zpp_inner_zn = new zpp_$nape_shape_ZPP_$Polygon();
 	this.zpp_inner_zn.outer = this;
@@ -12914,7 +12906,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 			var set = [cx_ite5];
 			if(set[0].arbiters.head == null) {
 				cx_ite5 = this.callbackset_list.inlined_erase(pre1);
-				var inf = set[0].int1.id + " " + set[0].int2.id;
 				var o = set[0];
 				o.int1 = o.int2 = null;
 				o.id = o.di = -1;
@@ -13062,12 +13053,15 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 					if(minTOI.failed) b2.angvel = b2.sweep_angvel = 0; else if(minTOI.slipped) b2.angvel = b2.sweep_angvel *= nape_Config.angularCCDSlipScale; else b2.angvel = b2.sweep_angvel;
 				}
 			}
+			var o3 = minTOI;
+			o3.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+			zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o3;
 		}
 		while(!(this.toiEvents.head == null)) {
 			var toi1 = this.toiEvents.pop_unsafe();
-			var o3 = toi1;
-			o3.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
-			zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o3;
+			var o4 = toi1;
+			o4.next = zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool;
+			zpp_$nape_geom_ZPP_$ToiEvent.zpp_pool = o4;
 		}
 		var cx_ite1 = this.kinematics.head;
 		while(cx_ite1 != null) {
@@ -13907,7 +13901,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 		var fst1 = false;
 		if(fst1 && arbite1 == null) {
 			fst1 = false;
-			arbite1 = null.begin();
 			arbs1 = null;
 			pre1 = null;
 		}
@@ -13919,7 +13912,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 				arbite1 = arbs1.inlined_erase(pre1);
 				if(fst1 && arbite1 == null) {
 					fst1 = false;
-					arbite1 = null.begin();
 					arbs1 = null;
 					pre1 = null;
 				}
@@ -13929,7 +13921,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 			arbite1 = arbite1.next;
 			if(fst1 && arbite1 == null) {
 				fst1 = false;
-				arbite1 = null.begin();
 				arbs1 = null;
 				pre1 = null;
 			}
@@ -13940,7 +13931,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 		var fst2 = false;
 		if(fst2 && arbite2 == null) {
 			fst2 = false;
-			arbite2 = null.begin();
 			arbs2 = null;
 			pre2 = null;
 		}
@@ -13952,7 +13942,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 				arbite2 = arbs2.inlined_erase(pre2);
 				if(fst2 && arbite2 == null) {
 					fst2 = false;
-					arbite2 = null.begin();
 					arbs2 = null;
 					pre2 = null;
 				}
@@ -13962,7 +13951,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 			arbite2 = arbite2.next;
 			if(fst2 && arbite2 == null) {
 				fst2 = false;
-				arbite2 = null.begin();
 				arbs2 = null;
 				pre2 = null;
 			}
@@ -14437,7 +14425,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 		var fst1 = false;
 		if(fst1 && arbite1 == null) {
 			fst1 = false;
-			arbite1 = null.begin();
 			arbs1 = null;
 			pre2 = null;
 		}
@@ -14447,7 +14434,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 				arbite1 = arbs1.inlined_erase(pre2);
 				if(fst1 && arbite1 == null) {
 					fst1 = false;
-					arbite1 = null.begin();
 					arbs1 = null;
 					pre2 = null;
 				}
@@ -14457,7 +14443,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 			arbite1 = arbite1.next;
 			if(fst1 && arbite1 == null) {
 				fst1 = false;
-				arbite1 = null.begin();
 				arbs1 = null;
 				pre2 = null;
 			}
@@ -14468,7 +14453,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 		var fst2 = false;
 		if(fst2 && arbite2 == null) {
 			fst2 = false;
-			arbite2 = null.begin();
 			arbs2 = null;
 			pre3 = null;
 		}
@@ -14478,7 +14462,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 				arbite2 = arbs2.inlined_erase(pre3);
 				if(fst2 && arbite2 == null) {
 					fst2 = false;
-					arbite2 = null.begin();
 					arbs2 = null;
 					pre3 = null;
 				}
@@ -14488,7 +14471,6 @@ zpp_$nape_space_ZPP_$Space.prototype = {
 			arbite2 = arbite2.next;
 			if(fst2 && arbite2 == null) {
 				fst2 = false;
-				arbite2 = null.begin();
 				arbs2 = null;
 				pre3 = null;
 			}
@@ -16362,77 +16344,6 @@ zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup.prototype = {
 	}
 	,__class__: zpp_$nape_util_ZNPList_$ZPP_$InteractionGroup
 };
-var zpp_$nape_util_ZNPList_$ZPP_$ColArbiter = function() {
-	this.length = 0;
-	this.pushmod = false;
-	this.modified = false;
-	this.head = null;
-};
-zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.__name__ = true;
-zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.prototype = {
-	add: function(o) {
-		return this.inlined_add(o);
-	}
-	,inlined_add: function(o) {
-		var temp;
-		var ret;
-		if(zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter(); else {
-			ret = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
-			zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = ret.next;
-			ret.next = null;
-		}
-		null;
-		ret.elt = o;
-		temp = ret;
-		temp.next = this.head;
-		this.head = temp;
-		this.modified = true;
-		this.length++;
-		return o;
-	}
-	,remove: function(obj) {
-		this.inlined_try_remove(obj);
-	}
-	,inlined_try_remove: function(obj) {
-		var pre = null;
-		var cur = this.head;
-		var ret = false;
-		while(cur != null) {
-			if(cur.elt == obj) {
-				this.inlined_erase(pre);
-				ret = true;
-				break;
-			}
-			pre = cur;
-			cur = cur.next;
-		}
-		return ret;
-	}
-	,inlined_erase: function(pre) {
-		var old;
-		var ret;
-		if(pre == null) {
-			old = this.head;
-			ret = old.next;
-			this.head = ret;
-			if(this.head == null) this.pushmod = true;
-		} else {
-			old = pre.next;
-			ret = old.next;
-			pre.next = ret;
-			if(ret == null) this.pushmod = true;
-		}
-		var o = old;
-		o.elt = null;
-		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
-		zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = o;
-		this.modified = true;
-		this.length--;
-		this.pushmod = true;
-		return ret;
-	}
-	,__class__: zpp_$nape_util_ZNPList_$ZPP_$ColArbiter
-};
 var zpp_$nape_util_ZNPList_$ZPP_$FluidArbiter = function() {
 	this.length = 0;
 	this.pushmod = false;
@@ -16532,6 +16443,77 @@ zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter.prototype = {
 		return ret;
 	}
 	,__class__: zpp_$nape_util_ZNPList_$ZPP_$SensorArbiter
+};
+var zpp_$nape_util_ZNPList_$ZPP_$ColArbiter = function() {
+	this.length = 0;
+	this.pushmod = false;
+	this.modified = false;
+	this.head = null;
+};
+zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.__name__ = true;
+zpp_$nape_util_ZNPList_$ZPP_$ColArbiter.prototype = {
+	add: function(o) {
+		return this.inlined_add(o);
+	}
+	,inlined_add: function(o) {
+		var temp;
+		var ret;
+		if(zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool == null) ret = new zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter(); else {
+			ret = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
+			zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = ret.next;
+			ret.next = null;
+		}
+		null;
+		ret.elt = o;
+		temp = ret;
+		temp.next = this.head;
+		this.head = temp;
+		this.modified = true;
+		this.length++;
+		return o;
+	}
+	,remove: function(obj) {
+		this.inlined_try_remove(obj);
+	}
+	,inlined_try_remove: function(obj) {
+		var pre = null;
+		var cur = this.head;
+		var ret = false;
+		while(cur != null) {
+			if(cur.elt == obj) {
+				this.inlined_erase(pre);
+				ret = true;
+				break;
+			}
+			pre = cur;
+			cur = cur.next;
+		}
+		return ret;
+	}
+	,inlined_erase: function(pre) {
+		var old;
+		var ret;
+		if(pre == null) {
+			old = this.head;
+			ret = old.next;
+			this.head = ret;
+			if(this.head == null) this.pushmod = true;
+		} else {
+			old = pre.next;
+			ret = old.next;
+			pre.next = ret;
+			if(ret == null) this.pushmod = true;
+		}
+		var o = old;
+		o.elt = null;
+		o.next = zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool;
+		zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.zpp_pool = o;
+		this.modified = true;
+		this.length--;
+		this.pushmod = true;
+		return ret;
+	}
+	,__class__: zpp_$nape_util_ZNPList_$ZPP_$ColArbiter
 };
 var zpp_$nape_util_ZNPList_$ZPP_$Listener = function() {
 	this.length = 0;
@@ -16760,14 +16742,6 @@ zpp_$nape_util_ZNPNode_$ZPP_$Compound.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$Compound.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Compound
 };
-var zpp_$nape_util_ZNPNode_$ZPP_$Arbiter = function() {
-	this.elt = null;
-	this.next = null;
-};
-zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.__name__ = true;
-zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.prototype = {
-	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Arbiter
-};
 var zpp_$nape_util_ZNPNode_$ZPP_$InteractionListener = function() {
 	this.elt = null;
 	this.next = null;
@@ -16800,13 +16774,13 @@ zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$BodyListener.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$BodyListener
 };
-var zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair = function() {
+var zpp_$nape_util_ZNPNode_$ZPP_$Arbiter = function() {
 	this.elt = null;
 	this.next = null;
 };
-zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.__name__ = true;
-zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.prototype = {
-	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair
+zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Arbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Arbiter
 };
 var zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener = function() {
 	this.elt = null;
@@ -16816,6 +16790,14 @@ zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ConstraintListener
 };
+var zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair = function() {
+	this.elt = null;
+	this.next = null;
+};
+zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$CbSetPair
+};
 var zpp_$nape_util_ZNPNode_$ZPP_$AABBPair = function() {
 	this.elt = null;
 	this.next = null;
@@ -16824,14 +16806,6 @@ zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$AABBPair.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$AABBPair
 };
-var zpp_$nape_util_ZNPNode_$ZPP_$Vec2 = function() {
-	this.elt = null;
-	this.next = null;
-};
-zpp_$nape_util_ZNPNode_$ZPP_$Vec2.__name__ = true;
-zpp_$nape_util_ZNPNode_$ZPP_$Vec2.prototype = {
-	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Vec2
-};
 var zpp_$nape_util_ZNPNode_$ZPP_$Edge = function() {
 	this.elt = null;
 	this.next = null;
@@ -16839,6 +16813,14 @@ var zpp_$nape_util_ZNPNode_$ZPP_$Edge = function() {
 zpp_$nape_util_ZNPNode_$ZPP_$Edge.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$Edge.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Edge
+};
+var zpp_$nape_util_ZNPNode_$ZPP_$Vec2 = function() {
+	this.elt = null;
+	this.next = null;
+};
+zpp_$nape_util_ZNPNode_$ZPP_$Vec2.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$Vec2.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$Vec2
 };
 var zpp_$nape_util_ZNPNode_$ZPP_$Component = function() {
 	this.elt = null;
@@ -16856,14 +16838,6 @@ zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$InteractionGroup
 };
-var zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter = function() {
-	this.elt = null;
-	this.next = null;
-};
-zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.__name__ = true;
-zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.prototype = {
-	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter
-};
 var zpp_$nape_util_ZNPNode_$ZPP_$FluidArbiter = function() {
 	this.elt = null;
 	this.next = null;
@@ -16879,6 +16853,14 @@ var zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter = function() {
 zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.__name__ = true;
 zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter.prototype = {
 	__class__: zpp_$nape_util_ZNPNode_$ZPP_$SensorArbiter
+};
+var zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter = function() {
+	this.elt = null;
+	this.next = null;
+};
+zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.__name__ = true;
+zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter.prototype = {
+	__class__: zpp_$nape_util_ZNPNode_$ZPP_$ColArbiter
 };
 var zpp_$nape_util_ZNPNode_$ZPP_$Listener = function() {
 	this.elt = null;
@@ -18088,6 +18070,8 @@ nape_Config.contactStaticBiasCoef = 0.6;
 nape_Config.contactContinuousBiasCoef = 0.4;
 nape_Config.contactContinuousStaticBiasCoef = 0.5;
 nape_Config.illConditionedThreshold = 2e+8;
+nape_phys_Interactor.zpp_internalAlloc = false;
+nape_shape_Shape.zpp_internalAlloc = false;
 zpp_$nape_ZPP_$ID._Interactor = 0;
 zpp_$nape_ZPP_$ID._CbType = 0;
 zpp_$nape_ZPP_$ID._CbSet = 0;
@@ -18109,19 +18093,19 @@ zpp_$nape_util_ZPP_$Flags.id_BodyType_STATIC = 1;
 zpp_$nape_util_ZPP_$Flags.id_BodyType_DYNAMIC = 2;
 zpp_$nape_util_ZPP_$Flags.id_BodyType_KINEMATIC = 3;
 zpp_$nape_util_ZPP_$Flags.id_ListenerType_BODY = 0;
-zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT = 1;
 zpp_$nape_util_ZPP_$Flags.id_ListenerType_CONSTRAINT = 1;
+zpp_$nape_util_ZPP_$Flags.id_PreFlag_ACCEPT = 1;
 zpp_$nape_util_ZPP_$Flags.id_ListenerType_INTERACTION = 2;
 zpp_$nape_util_ZPP_$Flags.id_ListenerType_PRE = 3;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_BEGIN = 0;
-zpp_$nape_util_ZPP_$Flags.id_InteractionType_COLLISION = 1;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_ONGOING = 6;
-zpp_$nape_util_ZPP_$Flags.id_InteractionType_SENSOR = 2;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_COLLISION = 1;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_END = 1;
-zpp_$nape_util_ZPP_$Flags.id_InteractionType_FLUID = 4;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_SENSOR = 2;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_WAKE = 2;
-zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY = 7;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_FLUID = 4;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_SLEEP = 3;
+zpp_$nape_util_ZPP_$Flags.id_InteractionType_ANY = 7;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_BREAK = 4;
 zpp_$nape_util_ZPP_$Flags.id_CbEvent_PRE = 5;
 zpp_$nape_util_ZPP_$Flags.id_ShapeType_CIRCLE = 0;
