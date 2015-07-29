@@ -1,4 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe)
+[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) ![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
