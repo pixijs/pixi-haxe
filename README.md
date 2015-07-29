@@ -2,7 +2,7 @@
 =========
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
-Externs of Pixi.js (v3) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of Pixi.js (v3.x) for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
 
 ### Installation ###
 
