@@ -6,9 +6,14 @@ Externs of Pixi.js v3.x for Haxe - A fast and lightweight 2D javascript renderin
 
 ### Installation ###
 
-```haxe
-haxelib install pixijs
 ```
+haxelib install pixijs
+
+or via npm
+
+npm install hxpixijs
+```
+
 ### API Documentation ###
 
 [Documentation](http://adireddy.github.io/docs/pixi-haxe/)
