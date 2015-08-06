@@ -72,6 +72,14 @@ extern class DisplayObject extends InteractionManager {
 	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
 	function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
 
+	/*
+	 * Updates the object transform for rendering
+	 *
+	 * TODO - Optimization pass!
+	 */
+	function updateTransform():Void;
+	function displayObjectUpdateTransform():Void;
+
 	/**
 	 * The instance name of the object.
 	 *

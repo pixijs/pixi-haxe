@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor fixes",
-	"version": "3.0.12",
+	"releasenote": "added updateTransform method to DisplayObject class",
+	"version": "3.0.13",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
