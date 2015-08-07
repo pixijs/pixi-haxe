@@ -2,6 +2,7 @@
 -cmd haxelib install nape || true
 -cmd haxelib install msignal || true
 -cmd haxelib install actuate || true
+-cmd haxelib install chxdoc || true
 
 --next
 -cp samples
@@ -97,6 +98,10 @@
 --next
 -main samples.deviceinfo.Main
 -js samples/_output/deviceinfo.js
+
+--next
+-main samples.devicedetection.Main
+-js samples/_output/devicedetection.js
 
 --next
 -lib msignal
