@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -118,13 +118,13 @@ samples_retina_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._img.anchor.set(0.5,0.5);
 		this._img.name = "img";
 		this._img.position.set(window.innerWidth / 2,window.innerHeight / 2);
-		this._stage.addChild(this._img);
+		this.stage.addChild(this._img);
 		var style = { };
 		style.fill = "#F78181";
 		style.font = "12px Courier";
 		this._label = new PIXI.Text(imgPath,style);
 		this._label.position.set(0,0);
-		this._stage.addChild(this._label);
+		this.stage.addChild(this._label);
 	}
 	,_getPixelRatio: function() {
 		if(window.devicePixelRatio <= 1 || window.devicePixelRatio > 1 && window.devicePixelRatio < 1.5) return 1; else if(window.devicePixelRatio >= 1.5 && window.devicePixelRatio < 2) return 1.5; else if(window.devicePixelRatio >= 2 && window.devicePixelRatio < 3) return 2; else return 3;

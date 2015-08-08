@@ -22,7 +22,7 @@ class Main extends Application {
 		var texture = Texture.fromImage("assets/tiling/p2.jpeg");
 		_tilingSprite = new TilingSprite(texture, width, height);
 
-		_stage.addChild(_tilingSprite);
+		stage.addChild(_tilingSprite);
 
 		_count = 0;
 	}

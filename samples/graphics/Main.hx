@@ -57,18 +57,18 @@ class Main extends Application {
 		_graphics.moveTo(30, 30);
 		_graphics.lineTo(600, 300);
 
-		_stage.addChild(_graphics);
+		stage.addChild(_graphics);
 
 		_thing = new Graphics();
-		_stage.addChild(_thing);
+		stage.addChild(_thing);
 		_thing.position.x = Browser.window.innerWidth / 2;
 		_thing.position.y = Browser.window.innerHeight / 2;
 
 		_count = 0;
 
-		_stage.interactive = true;
-		_stage.on("click", _onStageClick);
-		_stage.on("tap", _onStageClick);
+		stage.interactive = true;
+		stage.on("click", _onStageClick);
+		stage.on("tap", _onStageClick);
 	}
 
 	function _onUpdate(elapsedTime:Float) {

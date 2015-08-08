@@ -36,7 +36,7 @@ class Main extends Application {
 
 	function _onLoaded() {
 		var _container:Container = new Container();
-		_stage.addChild(_container);
+		stage.addChild(_container);
 		for (i in 1 ... 11) {
 			_img = new Sprite(Texture.fromImage(_baseURL + i + ".png"));
 			_img.name = "img" + i;

@@ -3420,7 +3420,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -3454,7 +3454,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -3534,7 +3534,7 @@ samples_nape_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		var ball = new PIXI.Sprite(PIXI.Texture.fromImage("assets/nape/ball.png"));
 		ball.anchor.set(0.5,0.5);
 		this._balls.push(ball);
-		this._stage.addChild(ball);
+		this.stage.addChild(ball);
 		var pball = new nape_phys_Body((function($this) {
 			var $r;
 			if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {

@@ -27,10 +27,10 @@ class Main extends Application {
 		super();
 		_init();
 
-		_stage.interactive = true;
+		stage.interactive = true;
 		_container = new Container();
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
-		_stage.addChild(_container);
+		stage.addChild(_container);
 
 		_bg = Sprite.fromImage("assets/filters/BGrotate.jpg");
 		_bg.anchor.set(0.5);
@@ -62,12 +62,12 @@ class Main extends Application {
 		_switchy = false;
 		_container.filters = [_filter];
 
-		_stage.on("click", _onClick);
-		_stage.on("tap", _onClick);
+		stage.on("click", _onClick);
+		stage.on("tap", _onClick);
 
 		var style:TextStyle = {font: "bold 12pt Arial", fill: "#FFFFFF"};
 		var help = new Text("Click to turn filters on / off.", style);
-		_stage.addChild(help);
+		stage.addChild(help);
 	}
 
 	function _init() {

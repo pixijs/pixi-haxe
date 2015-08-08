@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -103,7 +103,7 @@ var samples_filters_blur_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 	this._container = new PIXI.Container();
-	this._stage.addChild(this._container);
+	this.stage.addChild(this._container);
 	this._container.position.set(window.innerWidth / 2,window.innerHeight / 2);
 	this._bg = PIXI.Sprite.fromImage("assets/filters/depth_blur_BG.jpg");
 	this._bg.anchor.set(0.5);
@@ -138,7 +138,6 @@ samples_filters_blur_Main.prototype = $extend(pixi_plugins_app_Application.proto
 		var blurAmount2 = Math.sin(this._count);
 		this._blurFilter1.blur = 20 * blurAmount1;
 		this._blurFilter2.blur = 20 * blurAmount2;
-		this._renderer.render(this._stage);
 	}
 });
 var $_, $fid = 0;

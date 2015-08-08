@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -102,10 +102,10 @@ pixi_plugins_app_Application.prototype = {
 var samples_filters_colormatrix_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
-	this._stage.interactive = true;
+	this.stage.interactive = true;
 	this._container = new PIXI.Container();
 	this._container.position.set(window.innerWidth / 2,window.innerHeight / 2);
-	this._stage.addChild(this._container);
+	this.stage.addChild(this._container);
 	this._bg = PIXI.Sprite.fromImage("assets/filters/BGrotate.jpg");
 	this._bg.anchor.set(0.5);
 	this._colorMatrix = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
@@ -125,11 +125,11 @@ var samples_filters_colormatrix_Main = function() {
 	this._count = 0;
 	this._switchy = false;
 	this._container.filters = [this._filter];
-	this._stage.on("click",$bind(this,this._onClick));
-	this._stage.on("tap",$bind(this,this._onClick));
+	this.stage.on("click",$bind(this,this._onClick));
+	this.stage.on("tap",$bind(this,this._onClick));
 	var style = { font : "bold 12pt Arial", fill : "#FFFFFF"};
 	var help = new PIXI.Text("Click to turn filters on / off.",style);
-	this._stage.addChild(help);
+	this.stage.addChild(help);
 };
 samples_filters_colormatrix_Main.main = function() {
 	new samples_filters_colormatrix_Main();

@@ -23,7 +23,7 @@ class Main extends Application {
 		_init();
 
 		_container = new Container();
-		_stage.addChild(_container);
+		stage.addChild(_container);
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
 		_bg = Sprite.fromImage("assets/filters/depth_blur_BG.jpg");
@@ -63,7 +63,6 @@ class Main extends Application {
 
 		_blurFilter1.blur = 20 * (blurAmount1);
 		_blurFilter2.blur = 20 * (blurAmount2);
-		_renderer.render(_stage);
 	}
 
 	static function main() {

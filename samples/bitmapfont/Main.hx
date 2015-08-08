@@ -25,7 +25,7 @@ class Main extends Application {
 		var bitmapFontText = new BitmapText("bitmap fonts are\n now supported!", {font: "60px Desyrel"});
 		bitmapFontText.position.x = (Browser.window.innerWidth - bitmapFontText.width) / 2;
 		bitmapFontText.position.y = (Browser.window.innerHeight - bitmapFontText.height) / 2;
-		_stage.addChild(bitmapFontText);
+		stage.addChild(bitmapFontText);
 	}
 
 	static function main() {

@@ -70,7 +70,7 @@ class Main extends Application {
 		fighter.position.set(x, y);
 		fighter.play();
 
-		_stage.addChild(fighter);
+		stage.addChild(fighter);
 		_count++;
 		_counter.innerHTML = _count + " SPRITES";
 	}

@@ -22,7 +22,7 @@ class Main extends Application {
 
 		_bg = Sprite.fromImage("assets/alphamask/bkg.jpg");
 
-		_stage.addChild(_bg);
+		stage.addChild(_bg);
 
 		_cells = Sprite.fromImage("assets/alphamask/cells.png");
 		_cells.scale.set(1.5);
@@ -33,8 +33,8 @@ class Main extends Application {
 
 		_cells.mask = _mask;
 
-		_stage.addChild(_mask);
-		_stage.addChild(_cells);
+		stage.addChild(_mask);
+		stage.addChild(_cells);
 
 		_target = new Point();
 		_reset();

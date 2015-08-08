@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -119,13 +119,13 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._img.on("touchstart",$bind(this,this._onEvent));
 		this._img.tap = $bind(this,this._onEvent);
 		this._img.click = $bind(this,this._onEvent);
-		this._stage.addChild(this._img);
+		this.stage.addChild(this._img);
 		var style = { };
 		style.fill = "#000000";
 		style.font = "12px Courier";
 		this._label = new PIXI.Text("EVENTS",style);
 		this._label.position.set(0,0);
-		this._stage.addChild(this._label);
+		this.stage.addChild(this._label);
 	}
 	,_onEvent: function(target) {
 		this._label.text = target.type;

@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -121,7 +121,7 @@ samples_textureswap_Main.prototype = $extend(pixi_plugins_app_Application.protot
 		this._bunny.position.set(window.innerWidth / 2,window.innerHeight / 2);
 		this._bunny.interactive = true;
 		this._bunny.on("click",$bind(this,this._onClick));
-		this._stage.addChild(this._bunny);
+		this.stage.addChild(this._bunny);
 	}
 	,_onClick: function(target) {
 		this._swap = !this._swap;

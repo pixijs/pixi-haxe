@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -127,7 +127,7 @@ samples_rope_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		snakeContainer.position.x = this.width / 2;
 		snakeContainer.position.y = this.height / 2;
 		snakeContainer.scale.x = this.width / 1100;
-		this._stage.addChild(snakeContainer);
+		this.stage.addChild(snakeContainer);
 		snakeContainer.addChild(strip);
 	}
 	,_onUpdate: function(elapsedTime) {

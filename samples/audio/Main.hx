@@ -37,7 +37,7 @@ class Main extends Application {
 		_loader.start(_onLoaded, _onLoadProgress);
 
 		_btnContainer = new Container();
-		_stage.addChild(_btnContainer);
+		stage.addChild(_btnContainer);
 	}
 
 	function _onLoadProgress() {

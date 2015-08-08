@@ -23,7 +23,7 @@ class Main extends Application {
 		_rendererType = ["Unknown", "WebGL", "Canvas"];
 
 		_info = new Container();
-		_stage.addChild(_info);
+		stage.addChild(_info);
 
 		var txt = new Text("", {fill: "#FFFFFF"});
 		txt.text = "Resolution: \t\t" + Browser.window.innerWidth + " x " + Browser.window.innerHeight;

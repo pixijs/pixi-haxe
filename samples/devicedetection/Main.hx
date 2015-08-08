@@ -19,7 +19,7 @@ class Main extends Application {
 		super.start();
 
 		_info = new Container();
-		_stage.addChild(_info);
+		stage.addChild(_info);
 
 		var txt = new Text("", {fill: "#FFFFFF"});
 		txt.text = "Android:\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + _isAndroid();

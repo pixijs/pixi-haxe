@@ -46,7 +46,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -80,7 +80,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -140,7 +140,7 @@ samples_movieclip_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
 			explosion.gotoAndPlay(Std.random(27));
 			explosion.animationSpeed = 0.8;
-			this._stage.addChild(explosion);
+			this.stage.addChild(explosion);
 		}
 	}
 });

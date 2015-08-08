@@ -29,7 +29,7 @@ class Main extends Application {
 		_img.anchor.set(0.5, 0.5);
 		_img.name = "img";
 		_img.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
-		_stage.addChild(_img);
+		stage.addChild(_img);
 
 		var style:TextStyle = {};
 		style.fill = "#F78181";
@@ -37,7 +37,7 @@ class Main extends Application {
 
 		_label = new Text(imgPath, style);
 		_label.position.set(0, 0);
-		_stage.addChild(_label);
+		stage.addChild(_label);
 	}
 
 	function _getPixelRatio():Float {

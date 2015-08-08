@@ -68,7 +68,7 @@ class Main extends Application {
 		counter.innerHTML = count + " BUNNIES";
 
 		container = new ParticleContainer();
-		_stage.addChild(container);
+		stage.addChild(container);
 
 		var bunny1 = Texture.fromImage("assets/bunnymark/bunny1.png");
 		var bunny2 = Texture.fromImage("assets/bunnymark/bunny2.png");

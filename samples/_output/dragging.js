@@ -197,7 +197,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -231,7 +231,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -298,7 +298,7 @@ samples_dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype
 		bunny.on("mousemove",$bind(this,this._onDragMove));
 		bunny.on("touchmove",$bind(this,this._onDragMove));
 		bunny.position.set(x,y);
-		this._stage.addChild(bunny);
+		this.stage.addChild(bunny);
 	}
 	,_onDragStart: function(event) {
 		var bunny;

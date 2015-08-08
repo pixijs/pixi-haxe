@@ -65,7 +65,7 @@ class Main extends Application {
 		var ball:Sprite = new Sprite(Texture.fromImage("assets/nape/ball.png"));
 		ball.anchor.set(0.5, 0.5);
 		_balls.push(ball);
-		_stage.addChild(ball);
+		stage.addChild(ball);
 
 		var pball:Body = new Body(BodyType.DYNAMIC);
 		pball.shapes.add(new Circle(10));

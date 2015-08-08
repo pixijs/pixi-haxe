@@ -374,7 +374,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -408,7 +408,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -524,7 +524,7 @@ var samples_audio_Main = function() {
 	this._loader.addAsset("sound2","sound2.wav",false,null);
 	this._loader.start($bind(this,this._onLoaded),$bind(this,this._onLoadProgress));
 	this._btnContainer = new PIXI.Container();
-	this._stage.addChild(this._btnContainer);
+	this.stage.addChild(this._btnContainer);
 };
 samples_audio_Main.__name__ = true;
 samples_audio_Main.main = function() {

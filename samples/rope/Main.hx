@@ -40,7 +40,7 @@ class Main extends Application {
 		snakeContainer.position.y = height / 2;
 
 		snakeContainer.scale.x = width / 1100;
-		_stage.addChild(snakeContainer);
+		stage.addChild(snakeContainer);
 
 		snakeContainer.addChild(strip);
 	}

@@ -131,7 +131,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -165,7 +165,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -202,7 +202,7 @@ samples_devicedetection_Main.prototype = $extend(pixi_plugins_app_Application.pr
 		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		this._info = new PIXI.Container();
-		this._stage.addChild(this._info);
+		this.stage.addChild(this._info);
 		var txt = new PIXI.Text("",{ fill : "#FFFFFF"});
 		txt.text = "Android:\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Std.string(this._isAndroid());
 		this._info.addChild(txt);

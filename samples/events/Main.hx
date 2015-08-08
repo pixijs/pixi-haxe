@@ -30,7 +30,7 @@ class Main extends Application {
 		_img.tap = _onEvent;
 		_img.click = _onEvent;
 
-		_stage.addChild(_img);
+		stage.addChild(_img);
 
 		var style:TextStyle = {};
 		style.fill = "#000000";
@@ -38,7 +38,7 @@ class Main extends Application {
 
 		_label = new Text("EVENTS", style);
 		_label.position.set(0, 0);
-		_stage.addChild(_label);
+		stage.addChild(_label);
 	}
 
 	function _onEvent(target:EventTarget) {

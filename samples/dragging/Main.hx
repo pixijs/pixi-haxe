@@ -57,7 +57,7 @@ class Main extends Application {
 		bunny.position.set(x, y);
 
 		// add it to the stage
-		_stage.addChild(bunny);
+		stage.addChild(bunny);
 	}
 
 	function _onDragStart(event:EventTarget) {

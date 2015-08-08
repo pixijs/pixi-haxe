@@ -35,9 +35,9 @@ class Main extends Application {
 		_spineBoy.stateData.setMixByName("walk", "jump", 0.2);
 		_spineBoy.stateData.setMixByName("jump", "walk", 0.4);
 		_spineBoy.state.setAnimationByName(0, "walk", true);
-		_stage.addChild(_spineBoy);
+		stage.addChild(_spineBoy);
 
-		_stage.click = _stageOnClick;
+		stage.click = _stageOnClick;
 	}
 
 	function _stageOnClick(data:InteractionData) {

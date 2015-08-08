@@ -42,7 +42,7 @@ pixi_plugins_app_Application.prototype = {
 		this._canvas.style.height = this.height + "px";
 		this._canvas.style.position = "absolute";
 		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
-		this._stage = new PIXI.Container();
+		this.stage = new PIXI.Container();
 		var renderingOptions = { };
 		renderingOptions.view = this._canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -76,7 +76,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this._stage);
+			this._renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -112,7 +112,7 @@ samples_mask_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi_plugins_app_Application.prototype.start.call(this,"recommended");
 		this._bg = PIXI.Sprite.fromImage("assets/alphamask/bkg.jpg");
-		this._stage.addChild(this._bg);
+		this.stage.addChild(this._bg);
 		this._cells = PIXI.Sprite.fromImage("assets/alphamask/cells.png");
 		this._cells.scale.set(1.5);
 		this._mask = new PIXI.Graphics();
@@ -122,8 +122,8 @@ samples_mask_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._mask.endFill();
 		this._mask.cacheAsBitmap = true;
 		this._cells.mask = this._mask;
-		this._stage.addChild(this._cells);
-		this._stage.addChild(this._mask);
+		this.stage.addChild(this._cells);
+		this.stage.addChild(this._mask);
 		this._target = new PIXI.Point();
 		this._reset();
 	}

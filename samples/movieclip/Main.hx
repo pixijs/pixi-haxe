@@ -44,7 +44,7 @@ class Main extends Application {
 			explosion.gotoAndPlay(Std.random(27));
 			explosion.animationSpeed = 0.8;
 
-			_stage.addChild(explosion);
+			stage.addChild(explosion);
 		}
 	}
 

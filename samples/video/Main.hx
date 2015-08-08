@@ -32,7 +32,7 @@ class Main extends Application {
 
 		_vidTexture = Texture.fromVideoUrl("assets/video/test.mp4");
 		_vidSprite = new Sprite(_vidTexture);
-		_stage.addChild(_vidSprite);
+		stage.addChild(_vidSprite);
 
 		//haxe.Timer.delay(_setup, 3000);
 	}
