@@ -95,7 +95,7 @@ class Application {
 	 * Global Container.
 	 * Read-only
 	 */
-	var _stage(default, null):Container;
+	public var stage(default, null):Container;
 
 	public static inline var AUTO:String = "auto";
 	public static inline var RECOMMENDED:String = "recommended";
@@ -158,7 +158,7 @@ class Application {
 		if (parentDom == null) Browser.document.body.appendChild(_canvas);
 		else parentDom.appendChild(_canvas);
 
-		_stage = new Container();
+		stage = new Container();
 
 		var renderingOptions:RenderingOptions = {};
 		renderingOptions.view = _canvas;
@@ -202,7 +202,7 @@ class Application {
 			_frameCount = 0;
 			_calculateElapsedTime();
 			if (onUpdate != null) onUpdate(_elapsedTime);
-			_renderer.render(_stage);
+			_renderer.render(stage);
 		}
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		if (_stats != null) _stats.update();
