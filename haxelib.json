@@ -14,7 +14,7 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "made stage property piblic in Application class - breaking change",
+	"releasenote": "made stage property public in Application class - breaking change",
 	"version": "3.0.14",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
