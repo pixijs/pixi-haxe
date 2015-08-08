@@ -12923,6 +12923,8 @@
 	 * @return {Texture} a texture of the display object</haxe_doc>
 </generateTexture></overloads>
 		</generateTexture>
+		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
+		<displayObjectUpdateTransform public="1" set="method"><f a=""><x path="Void"/></f></displayObjectUpdateTransform>
 		<name public="1">
 			<c path="String"/>
 			<haxe_doc>* The instance name of the object.
@@ -17176,11 +17178,11 @@
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Window resize listener 	function</haxe_doc>
 		</onResize>
-		<_stage set="null">
+		<stage public="1" set="null">
 			<c path="pixi.core.display.Container"/>
 			<haxe_doc>* Global Container.
 	 * Read-only</haxe_doc>
-		</_stage>
+		</stage>
 		<_canvas><c path="js.html.CanvasElement"/></_canvas>
 		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
 		<_stats><c path="pixi.plugins.stats.Stats"/></_stats>
