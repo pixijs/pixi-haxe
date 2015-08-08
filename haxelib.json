@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added updateTransform method to DisplayObject class",
-	"version": "3.0.13",
+	"releasenote": "made stage property piblic in Application class - breaking change",
+	"version": "3.0.14",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
