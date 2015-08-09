@@ -17178,64 +17178,72 @@
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Window resize listener 	function</haxe_doc>
 		</onResize>
+		<canvas public="1" set="null">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* Canvas Element
+	 * Read-only</haxe_doc>
+		</canvas>
+		<renderer public="1" set="null">
+			<c path="pixi.core.renderers.SystemRenderer"/>
+			<haxe_doc>* Renderer
+	 * Read-only</haxe_doc>
+		</renderer>
 		<stage public="1" set="null">
 			<c path="pixi.core.display.Container"/>
 			<haxe_doc>* Global Container.
 	 * Read-only</haxe_doc>
 		</stage>
-		<_canvas><c path="js.html.CanvasElement"/></_canvas>
-		<_renderer><c path="pixi.core.renderers.SystemRenderer"/></_renderer>
 		<_stats><c path="pixi.plugins.stats.Stats"/></_stats>
 		<_lastTime><c path="Date"/></_lastTime>
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
-		<set_fps set="method" line="119"><f a="val">
+		<set_fps set="method" line="128"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="124"><f a="val">
+		<set_skipFrame set="method" line="133"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<_setDefaultValues set="method" line="132"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="153">
-			<f a="?renderer:?stats:?parentDom">
+		<_setDefaultValues set="method" line="141"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="162">
+			<f a="?rendererType:?stats:?parentDom">
 				<c path="String"/>
 				<x path="Bool"/>
 				<c path="js.html.Element"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
-	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL
+	 * @param [rendererType] - Renderer type to use AUTO (default) | CANVAS | WEBGL
 	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="184">
+		<_onWindowResize set="method" line="193">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="199">
+		<_onRequestAnimationFrame set="method" line="208">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="211">
+		<_calculateElapsedTime set="method" line="220">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="217">
+		<_addStats set="method" line="226">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<new public="1" set="method" line="114"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="123"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io

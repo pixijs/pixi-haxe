@@ -35,7 +35,7 @@ class Main extends Application {
 		_info.addChild(txt);
 
 		txt = new Text("", {fill: "#FFFFFF"});
-		txt.text = "Renderer: \t\t\t\t\t" + _rendererType[_renderer.type];
+		txt.text = "Renderer: \t\t\t\t\t" + _rendererType[renderer.type];
 		txt.y = 80;
 		_info.addChild(txt);
 

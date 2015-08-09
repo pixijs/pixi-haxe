@@ -37,26 +37,26 @@ pixi_plugins_app_Application.prototype = {
 		this.height = window.innerHeight;
 		this.set_fps(60);
 	}
-	,start: function(renderer,stats,parentDom) {
+	,start: function(rendererType,stats,parentDom) {
 		if(stats == null) stats = true;
-		if(renderer == null) renderer = "auto";
+		if(rendererType == null) rendererType = "auto";
 		var _this = window.document;
-		this._canvas = _this.createElement("canvas");
-		this._canvas.style.width = this.width + "px";
-		this._canvas.style.height = this.height + "px";
-		this._canvas.style.position = "absolute";
-		if(parentDom == null) window.document.body.appendChild(this._canvas); else parentDom.appendChild(this._canvas);
+		this.canvas = _this.createElement("canvas");
+		this.canvas.style.width = this.width + "px";
+		this.canvas.style.height = this.height + "px";
+		this.canvas.style.position = "absolute";
+		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
 		var renderingOptions = { };
-		renderingOptions.view = this._canvas;
+		renderingOptions.view = this.canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
 		renderingOptions.antialias = this.antialias;
 		renderingOptions.forceFXAA = this.forceFXAA;
 		renderingOptions.autoResize = this.autoResize;
 		renderingOptions.transparent = this.transparent;
-		if(renderer == "auto") this._renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(renderer == "canvas") this._renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this._renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
-		window.document.body.appendChild(this._renderer.view);
+		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		window.document.body.appendChild(this.renderer.view);
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
@@ -65,9 +65,9 @@ pixi_plugins_app_Application.prototype = {
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
-		this._renderer.resize(this.width,this.height);
-		this._canvas.style.width = this.width + "px";
-		this._canvas.style.height = this.height + "px";
+		this.renderer.resize(this.width,this.height);
+		this.canvas.style.width = this.width + "px";
+		this.canvas.style.height = this.height + "px";
 		if(this._stats != null) {
 			this._stats.domElement.style.top = "2px";
 			this._stats.domElement.style.right = "2px";
@@ -80,7 +80,7 @@ pixi_plugins_app_Application.prototype = {
 			this._frameCount = 0;
 			this._calculateElapsedTime();
 			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
-			this._renderer.render(this.stage);
+			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
@@ -131,9 +131,9 @@ samples_spritesheet_Main.prototype = $extend(pixi_plugins_app_Application.protot
 			if(i < 10) frame = "0" + frame;
 			this._fighterTextures.push(PIXI.Texture.fromFrame("rollSequence00" + frame + ".png"));
 		}
-		this._renderer.view.onmouseup = $bind(this,this._onTouchEnd);
+		this.renderer.view.onmouseup = $bind(this,this._onTouchEnd);
 		window.document.addEventListener("touchend",$bind(this,this._onTouchEnd),true);
-		this._renderer.view.onmousedown = $bind(this,this._onTouchStart);
+		this.renderer.view.onmousedown = $bind(this,this._onTouchStart);
 		window.document.addEventListener("touchstart",$bind(this,this._onTouchStart),true);
 		this._addCounter();
 		this._addFighter(window.innerWidth / 2,window.innerHeight / 2);

@@ -92,8 +92,8 @@ class Main extends Application {
 			container.addChild(bunny);
 		}
 
-		_renderer.view.onmousedown = onTouchStart;
-		_renderer.view.onmouseup = onTouchEnd;
+		renderer.view.onmousedown = onTouchStart;
+		renderer.view.onmouseup = onTouchEnd;
 
 		Browser.document.addEventListener("touchstart", onTouchStart, true);
 		Browser.document.addEventListener("touchend", onTouchEnd, true);

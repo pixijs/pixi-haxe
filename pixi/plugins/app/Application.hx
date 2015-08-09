@@ -92,6 +92,18 @@ class Application {
 	public var onResize:Void -> Void;
 
 	/**
+	 * Canvas Element
+	 * Read-only
+	 */
+	public var canvas(default, null):CanvasElement;
+
+	/**
+	 * Renderer
+	 * Read-only
+	 */
+	public var renderer(default, null):SystemRenderer;
+
+	/**
 	 * Global Container.
 	 * Read-only
 	 */
@@ -102,13 +114,10 @@ class Application {
 	public static inline var CANVAS:String = "canvas";
 	public static inline var WEBGL:String = "webgl";
 
-	var _canvas:CanvasElement;
-	var _renderer:SystemRenderer;
 	var _stats:Stats;
 	var _lastTime:Date;
 	var _currentTime:Date;
 	var _elapsedTime:Float;
-
 	var _frameCount:Int;
 
 	public function new() {
@@ -144,24 +153,24 @@ class Application {
 
 	/**
 	 * Starts pixi application setup using the properties set or default values
-	 * @param [renderer] - Renderer type to use AUTO (default) | CANVAS | WEBGL
+	 * @param [rendererType] - Renderer type to use AUTO (default) | CANVAS | WEBGL
 	 * @param [stats] - Enable/disable stats for the application.
 	 * Note that stats.js is not part of pixi so don't forget to include it you html page
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-	public function start(?renderer:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
-		_canvas = Browser.document.createCanvasElement();
-		_canvas.style.width = width + "px";
-		_canvas.style.height = height + "px";
-		_canvas.style.position = "absolute";
-		if (parentDom == null) Browser.document.body.appendChild(_canvas);
-		else parentDom.appendChild(_canvas);
+	public function start(?rendererType:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
+		canvas = Browser.document.createCanvasElement();
+		canvas.style.width = width + "px";
+		canvas.style.height = height + "px";
+		canvas.style.position = "absolute";
+		if (parentDom == null) Browser.document.body.appendChild(canvas);
+		else parentDom.appendChild(canvas);
 
 		stage = new Container();
 
 		var renderingOptions:RenderingOptions = {};
-		renderingOptions.view = _canvas;
+		renderingOptions.view = canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
 		renderingOptions.antialias = antialias;
@@ -169,11 +178,11 @@ class Application {
 		renderingOptions.autoResize = autoResize;
 		renderingOptions.transparent = transparent;
 
-		if (renderer == AUTO) _renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
-		else if (renderer == CANVAS) _renderer = new CanvasRenderer(width, height, renderingOptions);
-		else _renderer = new WebGLRenderer(width, height, renderingOptions);
+		if (rendererType == AUTO) renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
+		else if (rendererType == CANVAS) renderer = new CanvasRenderer(width, height, renderingOptions);
+		else renderer = new WebGLRenderer(width, height, renderingOptions);
 
-		Browser.document.body.appendChild(_renderer.view);
+		Browser.document.body.appendChild(renderer.view);
 		if (autoResize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
@@ -184,9 +193,9 @@ class Application {
 	@:noCompletion function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		_renderer.resize(width, height);
-		_canvas.style.width = width + "px";
-		_canvas.style.height = height + "px";
+		renderer.resize(width, height);
+		canvas.style.width = width + "px";
+		canvas.style.height = height + "px";
 
 		if (_stats != null) {
 			_stats.domElement.style.top = "2px";
@@ -202,7 +211,7 @@ class Application {
 			_frameCount = 0;
 			_calculateElapsedTime();
 			if (onUpdate != null) onUpdate(_elapsedTime);
-			_renderer.render(stage);
+			renderer.render(stage);
 		}
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		if (_stats != null) _stats.update();

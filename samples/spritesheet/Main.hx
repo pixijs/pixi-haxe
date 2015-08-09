@@ -42,10 +42,10 @@ class Main extends Application {
 			_fighterTextures.push(Texture.fromFrame("rollSequence00" + frame + ".png"));
 		}
 
-		_renderer.view.onmouseup = _onTouchEnd;
+		renderer.view.onmouseup = _onTouchEnd;
 		Browser.document.addEventListener("touchend", _onTouchEnd, true);
 
-		_renderer.view.onmousedown = _onTouchStart;
+		renderer.view.onmousedown = _onTouchStart;
 		Browser.document.addEventListener("touchstart", _onTouchStart, true);
 
 		_addCounter();

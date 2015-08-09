@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "made stage property public in Application class - breaking change",
-	"version": "3.0.14",
+	"releasenote": "renderer and canvas properties are now public in Application class",
+	"version": "3.0.15",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
