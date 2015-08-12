@@ -92,6 +92,9 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
+	@:overload(function(url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader {})
+	@:overload(function(name:Array<String>):ResourceLoader {})
+	@:overload(function(name:Dynamic):ResourceLoader {})
 	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;
 
 	/**
