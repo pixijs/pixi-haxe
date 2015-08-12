@@ -1,100 +1,109 @@
+-cmd haxelib newrepo
+-cmd haxelib install nape || true
+-cmd haxelib install msignal || true
+-cmd haxelib install actuate || true
+-cmd haxelib install chxdoc || true
+
+--next
 -cp samples
--cp src
+-cp pixi
+-dce full
+-D source-map-content
+-debug
+
+--each
+
+--next
+-D analyzer
 -main samples.basics.Main
--js samples/_output/hx-pixi-basics.js
--dce full
+-js samples/_output/basics.js
 
 --next
--cp samples
--cp src
--main samples.bitmaptext.Main
--js samples/_output/hx-pixi-bitmaptext.js
--dce full
-
---next
--cp samples
--cp src
--main samples.graphics.Main
--js samples/_output/hx-pixi-graphics.js
--dce full
-
---next
--cp samples
--cp src
--main samples.movieclip.Main
--js samples/_output/hx-pixi-movieclip.js
--dce full
-
---next
--cp samples
--cp src
--main samples.pixidude.Main
--js samples/_output/hx-pixi-pixidude.js
--dce full
-
---next
--cp samples
--cp src
--main samples.rendertexture.Main
--js samples/_output/hx-pixi-rendertexture.js
--dce full
-
---next
--cp samples
--cp src
--main samples.snake.Main
--js samples/_output/hx-pixi-snake.js
--dce full
-
---next
--cp samples
--cp src
--main samples.spine.Main
--js samples/_output/hx-pixi-spine.js
--dce full
-
---next
--cp samples
--cp src
 -main samples.spritesheet.Main
--js samples/_output/hx-pixi-spritesheet.js
--dce full
+-js samples/_output/spritesheet.js
 
 --next
--cp samples
--cp src
--main samples.tilingsprite.Main
--js samples/_output/hx-pixi-tilingsprite.js
--dce full
+-main samples.movieclip.Main
+-js samples/_output/movieclip.js
 
 --next
--cp samples
--cp src
--main samples.blur.Main
--js samples/_output/hx-pixi-blur.js
--dce full
+-main samples.graphics.Main
+-js samples/_output/graphics.js
 
 --next
--cp samples
--cp src
--main samples.colourmatrix.Main
--js samples/_output/hx-pixi-colourmatrix.js
--dce full
+-main samples.tiling.Main
+-js samples/_output/tiling.js
 
 --next
--cp samples
--cp src
--main samples.bunnymark.Main
--js samples/_output/hx-pixi-bunnymark.js
--dce full
+-main samples.bitmapfont.Main
+-js samples/_output/bitmapfont.js
 
 --next
--cp samples
--cp src
+-main samples.dragging.Main
+-js samples/_output/dragging.js
+
+--next
 -main samples.nape.Main
--js samples/_output/hx-pixi-nape.js
--dce full
+-js samples/_output/nape.js
 -lib nape
 
-#-D source-map-content
-#-debug
+--next
+-main samples.rope.Main
+-js samples/_output/rope.js
+
+--next
+-main samples.retina.Main
+-js samples/_output/retina.js
+
+--next
+-main samples.bunnymark.Main
+-js samples/_output/bunnymark.js
+
+--next
+-main samples.textureswap.Main
+-js samples/_output/textureswap.js
+
+--next
+-main samples.alphamask.Main
+-js samples/_output/alphamask.js
+
+--next
+-main samples.filters.colormatrix.Main
+-js samples/_output/colormatrix.js
+
+--next
+-main samples.filters.blur.Main
+-js samples/_output/blur.js
+
+--next
+-main samples.loader.Main
+-js samples/_output/loader.js
+
+--next
+-main samples.video.Main
+-js samples/_output/video.js
+
+--next
+-main samples.stream.Main
+-js samples/_output/stream.js
+
+--next
+-main samples.events.Main
+-js samples/_output/events.js
+
+--next
+-main samples.mask.Main
+-js samples/_output/mask.js
+
+--next
+-main samples.deviceinfo.Main
+-js samples/_output/deviceinfo.js
+
+--next
+-main samples.devicedetection.Main
+-js samples/_output/devicedetection.js
+
+--next
+-lib msignal
+-main samples.audio.Main
+-js samples/_output/audio.js

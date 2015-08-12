@@ -1,45 +1,52 @@
-haxe-pixi ![Build Status](https://travis-ci.org/adireddy/haxe-pixi.svg?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/adireddy/haxe-pixi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
+![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
-![haxe pixi logo](https://raw.githubusercontent.com/adireddy/haxe-pixi/master/logo.png)
-
-Externs of pixi.js (v2.2.0) for Haxe - 2D webGL renderer with canvas fallback.
+Externs of Pixi.js v3.x for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
 
 ### Installation ###
 
-```haxe
-haxelib install pixijs
 ```
+haxelib install pixijs
+
+or via npm
+
+npm install hxpixijs
+```
+
 ### API Documentation ###
 
-Click [here](http://adireddy.github.io/docs/haxe-pixi) for API documentation.
-[YUIDoc API](http://adireddy.github.io/docs/haxe-pixi/yui/) similar to [pixi.js docs](http://www.goodboydigital.com/pixijs/docs/) also available.
+[Documentation](http://adireddy.github.io/docs/pixi-haxe/)
 
 ### Issues ###
 
-Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-pixi/issues/new).
+Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
 
 ### Demos ###
 
-Ported from pixi.js
+* [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
+* [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
+* [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
+* [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
+* [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
+* [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
+* [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
+* [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
+* [Bitmap Font](http://adireddy.github.io/demos/pixi-haxe/bitmapfont.html)
+* [Alpha Mask](http://adireddy.github.io/demos/pixi-haxe/alphamask.html)
+* [Bunnymark](http://adireddy.github.io/demos/pixi-haxe/bunnymark.html)
+* [Retina](http://adireddy.github.io/demos/pixi-haxe/retina.html)
+* [Events](http://adireddy.github.io/demos/pixi-haxe/events.html)
+* [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
+* [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
+* [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
+* [Device Info](http://adireddy.github.io/demos/pixi-haxe/deviceinfo.html)
+* [Device Detection](http://adireddy.github.io/demos/pixi-haxe/devicedetection.html)
 
-* [Basics](http://adireddy.github.io/demos/haxe-pixi/basics.html)
-* [Graphics](http://adireddy.github.io/demos/haxe-pixi/graphics.html)
-* [Movieclip](http://adireddy.github.io/demos/haxe-pixi/movieclip.html)
-* [Spritesheet](http://adireddy.github.io/demos/haxe-pixi/spritesheet.html)
-* [Snake](http://adireddy.github.io/demos/haxe-pixi/snake.html)
-* [Spine](http://adireddy.github.io/demos/haxe-pixi/spine.html)
-* [Render Texture](http://adireddy.github.io/demos/haxe-pixi/rendertexture.html)
-* [Pixi Dude](http://adireddy.github.io/demos/haxe-pixi/pixidude.html)
-* [Bitmap Text](http://adireddy.github.io/demos/haxe-pixi/bitmaptext.html)
-* [Tiling Sprite](http://adireddy.github.io/demos/haxe-pixi/tiling.html)
-* [Blur (Depth of Field)](http://adireddy.github.io/demos/haxe-pixi/blur.html)
-* [Colour Matrix](http://adireddy.github.io/demos/haxe-pixi/colourmatrix.html)
+**Filters (WebGL only)**
 
-New Demos
-
-* [Nape Physics](http://adireddy.github.io/demos/haxe-pixi/nape.html)
-* [Bunnymark](http://adireddy.github.io/demos/haxe-pixi/bunnymark.html)
+* [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
+* [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
 Look at the `samples` folder for the source code of above examples.
 
@@ -47,48 +54,45 @@ Look at the `samples` folder for the source code of above examples.
 
 ```haxe
 
-package ;
+package samples.basics;
 
-import pixi.renderers.IRenderer;
-import pixi.display.Sprite;
-import pixi.display.Stage;
-import pixi.textures.Texture;
-import pixi.utils.Detector;
+import pixi.core.display.Container;
+import pixi.core.textures.Texture;
+import pixi.core.renderers.SystemRenderer;
+import pixi.core.renderers.Detector;
+import pixi.core.sprites.Sprite;
 import js.Browser;
 
 class Main {
 
 	var _bunny:Sprite;
-    var _renderer:IRenderer;
-    var _stage:Stage;
+	var _renderer:SystemRenderer;
+	var _stage:Container;
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
-		
 		// Rendering options usage sample
 		var options:RenderingOptions = {};
-		options.antialias = true;
+		options.backgroundColor = 0x003366;
 		options.resolution = 1;
-		options.transparent = true;
-		
-        _renderer = Detector.autoDetectRenderer(800, 600, options);
-        Browser.document.body.appendChild(_renderer.view);
-        
-        _bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-        _bunny.anchor.set(0.5, 0.5);
-        _bunny.scale.set(2, 2);
-        _bunny.position.set(400, 300);
-        
-        _stage.addChild(_bunny);
-        
-        Browser.window.requestAnimationFrame(cast animate);
+
+		_stage = new Container();
+		_renderer = Detector.autoDetectRenderer(800, 600, options);
+
+		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+		_bunny.anchor.set(0.5, 0.5);
+		_bunny.position.set(400, 300);
+
+		_stage.addChild(_bunny);
+
+		Browser.document.body.appendChild(_renderer.view);
+		Browser.window.requestAnimationFrame(cast _animate);
 	}
 
-	function animate() {
-        Browser.window.requestAnimationFrame(cast animate);
-        _bunny.rotation += 0.1;  
-        _renderer.render(_stage);
-    }
+	function _animate() {
+		Browser.window.requestAnimationFrame(cast _animate);
+		_bunny.rotation += 0.1;
+		_renderer.render(_stage);
+	}
 
 	static function main() {
 		new Main();
@@ -96,9 +100,15 @@ class Main {
 }
 ```
 
+### Licensing Information ###
+
 <a rel="license" href="http://opensource.org/licenses/MIT">
 <img alt="MIT license" height="40" src="http://upload.wikimedia.org/wikipedia/commons/c/c3/License_icon-mit.svg" /></a>
 
-This content is released under the [MIT](http://opensource.org/licenses/MIT) License. [![Analytics](https://ga-beacon.appspot.com/UA-31531781-2/haxe-pixi/)](https://github.com/igrigorik/ga-beacon)
+This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
-[pixi.js](https://github.com/GoodBoyDigital/pixi.js) is made by [goodboy](http://www.goodboydigital.com/) and licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+[Pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+
+### Contributor Code of Conduct ###
+
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.2.0](http://contributor-covenant.org/version/1/2/0/)

@@ -1,73 +1,99 @@
 package samples.spritesheet;
 
-import pixi.renderers.webgl.WebGLRenderer;
-import pixi.display.Sprite;
-import pixi.display.Stage;
-import pixi.utils.Detector;
-import pixi.loaders.AssetLoader;
-import pixi.display.DisplayObjectContainer;
+import pixi.core.text.Text;
+import js.html.DivElement;
+import pixi.loaders.Loader;
+import pixi.extras.MovieClip;
+import pixi.core.textures.Texture;
+import pixi.plugins.app.Application;
 import js.Browser;
 
-class Main {
+class Main extends Application {
 
-    var _loader:AssetLoader;
-    var _alienContainer:DisplayObjectContainer;
-    var _renderer:WebGLRenderer;
-    var _stage:Stage;
+	var _loader:Loader;
+	var _label:Text;
+	var _fighterTextures:Array<Texture>;
+	var _counter:DivElement;
+	var _count:Int;
+	var _isAdding:Bool;
 
-    var _count:Float;
-    var _aliens:Array<Sprite>;
-    var _alienFrames:Array<String>;
+	public function new() {
+		super();
+		_init();
+	}
 
-    public function new() {
-        _stage = new Stage(0x00FF00);
-        _renderer = Detector.autoDetectRenderer(800, 600);
-        Browser.document.body.appendChild(_renderer.view);
+	function _init() {
+		onUpdate = _onUpdate;
+		super.start(Application.AUTO);
 
-        var assetsToLoader:Array<String> = ["assets/spritesheet/SpriteSheet.json"];
+		_loader = new Loader();
+		_loader.baseUrl = "assets/spritesheet/";
+		_loader.add("fighter", "fighter.json");
+		_loader.load(_onLoaded);
+	}
 
-        _loader = new AssetLoader(assetsToLoader);
-        _loader.onComplete = onAssetsLoaded;
-        _loader.load();
+	function _onLoaded() {
+		_count = 0;
+		_isAdding = false;
+		_fighterTextures = [];
+		for (i in 0 ... 29) {
+			var frame:String = "" + i;
+			if (i < 10) frame = "0" + frame;
+			_fighterTextures.push(Texture.fromFrame("rollSequence00" + frame + ".png"));
+		}
 
-        _count = 0;
-        _aliens = [];
-        _alienFrames = ["eggHead.png", "flowerTop.png", "helmlok.png", "skully.png"];
+		renderer.view.onmouseup = _onTouchEnd;
+		Browser.document.addEventListener("touchend", _onTouchEnd, true);
 
-        _alienContainer = new DisplayObjectContainer();
-        _alienContainer.x = 400;
-        _alienContainer.y = 300;
+		renderer.view.onmousedown = _onTouchStart;
+		Browser.document.addEventListener("touchstart", _onTouchStart, true);
 
-        _stage.addChild(_alienContainer);
-    }
+		_addCounter();
+		_addFighter(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
+	}
 
-    function animate() {
-        Browser.window.requestAnimationFrame(cast animate);
-        for (i in 0...100) {
-            var alien = _aliens[i];
-            alien.rotation += 0.1;
-        }
+	function _onTouchStart(event) {
+		_isAdding = true;
+	}
 
-        _count += 0.01;
-        _alienContainer.scale.set(Math.sin(_count), Math.sin(_count));
-        _alienContainer.rotation += 0.01;
-        _renderer.render(_stage);
-    }
+	function _onTouchEnd(event) {
+		_isAdding = false;
+	}
 
-    function onAssetsLoaded() {
-        for (i in 0...100) {
-            var frameName:String = _alienFrames[i % 4];
-            var alien = Sprite.fromFrame(frameName);
-            alien.x = Math.random() * 800 - 400;
-            alien.y = Math.random() * 600 - 300;
-            alien.anchor.set(0.5, 0.5);
-            _aliens.push(alien);
-            _alienContainer.addChild(alien);
-        }
-        Browser.window.requestAnimationFrame(cast animate);
-    }
+	function _onUpdate(elapsedTime:Float) {
+		if (_isAdding) _addFighter(Std.random(Browser.window.innerWidth), Std.random(Browser.window.innerHeight));
+	}
 
-    static function main() {
-        new Main();
-    }
+	function _addFighter(x:Float, y:Float) {
+		var fighter:MovieClip = new MovieClip(_fighterTextures);
+		fighter.anchor.set(0.5);
+		fighter.position.set(x, y);
+		fighter.play();
+
+		stage.addChild(fighter);
+		_count++;
+		_counter.innerHTML = _count + " SPRITES";
+	}
+
+	function _addCounter() {
+		_counter = Browser.document.createDivElement();
+		_counter.style.position = "absolute";
+		_counter.style.top = "1px";
+		_counter.style.left = "1px";
+		_counter.style.width = "90px";
+		_counter.style.background = "#CCCCC";
+		_counter.style.backgroundColor = "#105CB6";
+		_counter.style.fontFamily = "Helvetica,Arial";
+		_counter.style.padding = "3px";
+		_counter.style.color = "#0FF";
+		_counter.style.fontSize = "10px";
+		_counter.style.fontWeight = "bold";
+		_counter.style.textAlign = "center";
+		_counter.className = "counter";
+		Browser.document.body.appendChild(_counter);
+	}
+
+	static function main() {
+		new Main();
+	}
 }

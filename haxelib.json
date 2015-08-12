@@ -1,13 +1,23 @@
 {
-  "name": "pixijs",
-  "license": "MIT",
-  "tags": ["js","haxe","pixi","extern","web"],
-  "description": "Externs of pixi.js v2.2.0 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
-  "contributors": ["adireddy"],
-  "releasenote": "spine bug fixes",
-  "version": "2.2.1",
-  "url": "https://github.com/adireddy/haxe-pixi",
-  "dependencies": {
+	"name": "pixijs",
+	"license": "MIT",
+	"tags": [
+		"js",
+		"haxe",
+		"pixi",
+		"pixi.js",
+		"pixijs",
+		"extern",
+		"web"
+	],
+	"description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
+	"contributors": [
+		"adireddy"
+	],
+	"releasenote": "renderer and canvas properties are now public in Application class",
+	"version": "3.0.15",
+	"url": "https://github.com/pixijs/pixi-haxe",
+	"dependencies": {
 
-  }
+	}
 }

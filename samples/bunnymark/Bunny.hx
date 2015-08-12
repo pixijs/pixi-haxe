@@ -1,7 +1,7 @@
 package samples.bunnymark;
 
-import pixi.textures.Texture;
-import pixi.display.Sprite;
+import pixi.core.textures.Texture;
+import pixi.core.sprites.Sprite;
 
 class Bunny extends Sprite {
 

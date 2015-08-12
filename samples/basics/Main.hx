@@ -1,39 +1,56 @@
 package samples.basics;
 
-import pixi.renderers.IRenderer;
-import pixi.display.Sprite;
-import pixi.display.Stage;
-import pixi.textures.Texture;
-import pixi.utils.Detector;
+import pixi.core.graphics.Graphics;
+import pixi.core.display.Container;
+import pixi.core.textures.Texture;
+import pixi.core.renderers.SystemRenderer;
+import pixi.core.renderers.Detector;
+import pixi.core.sprites.Sprite;
 import js.Browser;
 
 class Main {
 
 	var _bunny:Sprite;
-	var _renderer:IRenderer;
-	var _stage:Stage;
+	var _renderer:SystemRenderer;
+	var _container:Container;
+
+	var _graphic:Graphics;
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
+		// Rendering options usage sample
+		var options:RenderingOptions = {};
+		options.backgroundColor = 0x006666;
+		options.resolution = 1;
+		options.transparent = true;
+		options.antialias = true;
 
-		_renderer = Detector.autoDetectRenderer(800, 600);
-		Browser.document.body.appendChild(_renderer.view);
+		_container = new Container();
+		_renderer = Detector.autoDetectRenderer(800, 600, options);
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_bunny.anchor.set(0.5, 0.5);
-		_bunny.scale.set(2, 2);
-		_bunny.position.x = 400;
-		_bunny.position.y = 300;
+		_bunny.anchor.set(0.5);
+		_bunny.position.set(400, 300);
 
-		_stage.addChild(_bunny);
+		_container.addChild(_bunny);
 
-		Browser.window.requestAnimationFrame(cast animate);
+		_graphic = new Graphics();
+		_graphic.beginFill(0xFF0000, 0.4);
+		_graphic.drawRect(200, 150, 400, 300);
+		_graphic.endFill();
+
+		_graphic.interactive = true;
+		_graphic.on("click", function(evt) {trace(evt);});
+
+		_container.addChild(_graphic);
+
+		Browser.document.body.appendChild(_renderer.view);
+		Browser.window.requestAnimationFrame(cast _animate);
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
+	function _animate() {
+		Browser.window.requestAnimationFrame(cast _animate);
 		_bunny.rotation += 0.1;
-		_renderer.render(_stage);
+		_renderer.render(_container);
 	}
 
 	static function main() {

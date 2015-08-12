@@ -1,39 +1,28 @@
 package samples.movieclip;
 
-import pixi.renderers.IRenderer;
-import pixi.display.MovieClip;
-import pixi.display.Stage;
-import pixi.textures.Texture;
-import pixi.utils.Detector;
-import pixi.loaders.AssetLoader;
+import pixi.extras.MovieClip;
+import pixi.loaders.Loader;
+import pixi.plugins.app.Application;
+import pixi.core.textures.Texture;
 import js.Browser;
 
-class Main {
-
-	var _loader:AssetLoader;
-	var _renderer:IRenderer;
-	var _stage:Stage;
+class Main extends Application {
 
 	public function new() {
-		_stage = new Stage(0x00FF00);
-		_renderer = Detector.autoDetectRenderer(800, 600);
-		Browser.document.body.appendChild(_renderer.view);
-
-		var assetsToLoader:Array<String> = ["assets/movieclip/SpriteSheet.json"];
-
-		_loader = new AssetLoader(assetsToLoader);
-		_loader.onComplete = onAssetsLoaded;
-		_loader.load();
-
-		Browser.window.requestAnimationFrame(cast animate);
+		super();
+		_init();
 	}
 
-	function animate() {
-		Browser.window.requestAnimationFrame(cast animate);
-		_renderer.render(_stage);
+	function _init() {
+		backgroundColor = 0xFFFFFF;
+		super.start(Application.AUTO);
+
+		var mcloader:Loader = new Loader();
+		mcloader.add("mc", "assets/movieclip/SpriteSheet.json");
+		mcloader.load(_onLoaded);
 	}
 
-	function onAssetsLoaded() {
+	function _onLoaded() {
 		var explosionTextures = [];
 
 		var texture:Texture;
@@ -43,12 +32,11 @@ class Main {
 		}
 
 		var explosion:MovieClip;
-		for (i in 0...50) {
+		for (i in 0 ... 80) {
 			explosion = new MovieClip(explosionTextures);
-			explosion.position.x = Math.random() * 800;
-			explosion.position.y = Math.random() * 600;
-			explosion.anchor.x = 0.5;
-			explosion.anchor.y = 0.5;
+			explosion.position.x = Math.random() * Browser.window.innerWidth;
+			explosion.position.y = Math.random() * Browser.window.innerHeight;
+			explosion.anchor.set(0.5, 0.5);
 
 			explosion.rotation = Math.random() * Math.PI;
 			explosion.scale.x = explosion.scale.y = 0.75 + Math.random() * 0.5;
@@ -56,10 +44,8 @@ class Main {
 			explosion.gotoAndPlay(Std.random(27));
 			explosion.animationSpeed = 0.8;
 
-			_stage.addChild(explosion);
+			stage.addChild(explosion);
 		}
-
-		Browser.window.requestAnimationFrame(cast animate);
 	}
 
 	static function main() {

@@ -1,33 +1,39 @@
 {
-  "name": "pixijs",
-  "version": "2.2.1",
-  "description": "Externs of pixi.js v2.2.0 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adireddy/haxe-pixi"
-  },
-  "keywords": [
-    "js",
-    "haxe",
-    "pixi",
-    "extern",
-    "web"
-  ],
-  "author": {
-    "name": "Adi Reddy Mora",
-    "email": "adiinteractive@gmail.com"
-  },
-  "dependencies": {
-    "grunt": "latest",
-    "grunt-cli": "latest"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-exec": "^0.4.6",
-    "grunt-haxe": "^0.1.12",
-    "grunt-shell": "^1.1.1",
-    "grunt-zip": "^0.16.0"
-  }
+	"name": "pixi.hx",
+	"version": "3.0.15",
+	"description": "Externs of pixi.js v3.x for Haxe - a fast and lightweight 2D rendering library that works across all devices",
+	"author": "Adi Reddy Mora",
+	"homepage": "http://adireddy.github.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pixijs/pixi-haxe"
+	},
+	"bugs": {
+		"url": "https://github.com/pixijs/pixi-haxe/issues"
+	},
+	"keywords": [
+		"js",
+		"haxe",
+		"pixi",
+		"pixi.js",
+		"pixijs",
+		"extern",
+		"web",
+		"library"
+	],
+	"dependencies": {
+		"grunt": "latest",
+		"grunt-cli": "latest"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"pixi.js": "^3.0.7",
+		"grunt-contrib-copy": "^0.7.0",
+		"grunt-exec": "^0.4.6",
+		"grunt-haxe": "^0.1.12",
+		"grunt-npm-install": "^0.2.0",
+		"grunt-shell": "^1.1.1",
+		"grunt-zip": "^0.16.0",
+		"jsdoc": "^3.2.2"
+	}
 }
