@@ -116,7 +116,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Void -> Void):ResourceLoader;
+	function before(fn:Resource -> Dynamic -> Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
