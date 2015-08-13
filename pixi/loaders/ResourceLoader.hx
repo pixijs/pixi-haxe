@@ -92,11 +92,12 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
+	@:overload(function(obj:ResourceObject):ResourceLoader {})
+	@:overload(function(urls:Array<ResourceObject>):ResourceLoader {})
+	@:overload(function(urls:Array<String>):ResourceLoader {})
 	@:overload(function(url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader {})
-	@:overload(function(name:Array<String>):ResourceLoader {})
-	@:overload(function(name:Dynamic):ResourceLoader {})
-	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;
-
+	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;	
+	
 	/**
 	 * Sets up a middleware 	function that will run *after* the
 	 * resource is loaded.
@@ -115,7 +116,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {	function} The middleware 	function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Void -> Void):ResourceLoader;
+	function before(fn:Resource -> Dynamic ->Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
@@ -144,4 +145,22 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param {	function} 	function to call
 	 */
 	function use(fn:Resource -> Dynamic ->Void):Void;
+	
+	/**
+	 * Sets up a middleware 	function that will run *before* the
+	 * resource is loaded.
+	 * 
+	 * @param middleware {	function} The middleware 	function to register.
+	 * @return {Loader}
+	 */
+	function pre(fn:Void -> Void):ResourceLoader;
+}
+
+typedef ResourceObject = {
+	var url:String;
+	@:optional var name:String;
+	@:optional var callback:Resource -> Void;
+	@:optional var crossOrigin:Dynamic;
+	@:optional var loadType:Int;
+	@:optional var xhrType:String;
 }
