@@ -44,7 +44,7 @@ extern class ResourceLoader extends EventEmitter {
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.
 	 *
-	 * This 	function can take a wide 	variety of different parameters. The only thing that is always
+	 * This function can take a wide variety of different parameters. The only thing that is always
 	 * required the url to load. All the following will work:
 	 *
 	 * ```js
@@ -61,22 +61,22 @@ extern class ResourceLoader extends EventEmitter {
 	 *     }, 	function () {})
 	 *     .add({
 	 *         url: 'http://...'
-	 *     }, 	function () {})
+	 *     }, function () {})
 	 *     .add({
 	 *         name: 'key3',
 	 *         url: 'http://...'
-	 *         onComplete: 	function () {}
+	 *         onComplete: function () {}
 	 *     })
 	 *     .add({
 	 *         url: 'https://...',
-	 *         onComplete: 	function () {},
+	 *         onComplete: function () {},
 	 *         crossOrigin: true
 	 *     })
 	 *
 	 *     // you can also pass an array of objects or urls or both
 	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: 	function () {} },
-	 *         { url: 'http://...', onComplete: 	function () {} },
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
 	 *         'http://...'
 	 *     ]);
 	 * ```
@@ -89,30 +89,31 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
 	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
 	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
+	 * @param [callback] {function} function to call when this specific resource completes loading.
 	 * @return {Loader}
 	 */
+	@:overload(function(obj:ResourceObject):ResourceLoader {})
+	@:overload(function(urls:Array<ResourceObject>):ResourceLoader {})
+	@:overload(function(urls:Array<String>):ResourceLoader {})
 	@:overload(function(url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader {})
-	@:overload(function(name:Array<String>):ResourceLoader {})
-	@:overload(function(name:Dynamic):ResourceLoader {})
 	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;
 
 	/**
-	 * Sets up a middleware 	function that will run *after* the
+	 * Sets up a middleware function that will run *after* the
 	 * resource is loaded.
 	 *
 	 * @alias use
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function after(fn:Resource -> Dynamic ->Void):ResourceLoader;
+	function after(fn:Resource -> Dynamic -> Void):ResourceLoader;
 
 	/**
-	 * Sets up a middleware 	function that will run *before* the
+	 * Sets up a middleware function that will run *before* the
 	 * resource is loaded.
 	 *
 	 * @alias pre
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
 	function before(fn:Void -> Void):ResourceLoader;
@@ -126,7 +127,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * Starts loading the queued resources.
 	 *
 	 * @fires start
-	 * @param [callback] {	function} Optional callback that will be bound to the `complete` event.
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}
 	 */
 	function load(?cb:Void -> Void):ResourceLoader;
@@ -139,9 +140,18 @@ extern class ResourceLoader extends EventEmitter {
 	function loadResource(resource:String, ?cb:Void -> Void):ResourceLoader;
 
 	/**
-	 * Middleware 	function to use
+	 * Middleware function to use
 	 *
-	 * @param {	function} 	function to call
+	 * @param {function} function to call
 	 */
-	function use(fn:Resource -> Dynamic ->Void):Void;
+	function use(fn:Resource -> Dynamic -> Void):Void;
+}
+
+typedef ResourceObject = {
+	var url:String;
+	@:optional var name:String;
+	@:optional var callback:Resource -> Void;
+	@:optional var crossOrigin:Dynamic;
+	@:optional var loadType:Int;
+	@:optional var xhrType:String;
 }

@@ -976,7 +976,7 @@
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
 	 *
-	 * This 	function can take a wide 	variety of different parameters. The only thing that is always
+	 * This function can take a wide variety of different parameters. The only thing that is always
 	 * required the url to load. All the following will work:
 	 *
 	 * ```js
@@ -993,22 +993,22 @@
 	 *     }, 	function () {})
 	 *     .add({
 	 *         url: 'http://...'
-	 *     }, 	function () {})
+	 *     }, function () {})
 	 *     .add({
 	 *         name: 'key3',
 	 *         url: 'http://...'
-	 *         onComplete: 	function () {}
+	 *         onComplete: function () {}
 	 *     })
 	 *     .add({
 	 *         url: 'https://...',
-	 *         onComplete: 	function () {},
+	 *         onComplete: function () {},
 	 *         crossOrigin: true
 	 *     })
 	 *
 	 *     // you can also pass an array of objects or urls or both
 	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: 	function () {} },
-	 *         { url: 'http://...', onComplete: 	function () {} },
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
 	 *         'http://...'
 	 *     ]);
 	 * ```
@@ -1021,19 +1021,250 @@
 	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
 	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
 	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
+	 * @param [callback] {function} function to call when this specific resource completes loading.
 	 * @return {Loader}</haxe_doc>
+			<overloads>
+				<add public="1" set="method">
+					<f a="obj">
+						<t path="pixi.loaders.ResourceObject"/>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><t path="pixi.loaders.ResourceObject"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><c path="String"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="url:?options:?callback">
+						<c path="String"/>
+						<t path="pixi.loaders.LoaderOptions"/>
+						<f a="">
+							<c path="pixi.loaders.Resource"/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+			</overloads>
 		</add>
 		<after public="1" set="method">
 			<f a="fn">
-				<f a=""><x path="Void"/></f>
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware 	function that will run *after* the
+			<haxe_doc>* Sets up a middleware function that will run *after* the
 	 * resource is loaded.
 	 *
 	 * @alias use
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}</haxe_doc>
 		</after>
 		<before public="1" set="method">
@@ -1041,11 +1272,11 @@
 				<f a=""><x path="Void"/></f>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware 	function that will run *before* the
+			<haxe_doc>* Sets up a middleware function that will run *before* the
 	 * resource is loaded.
 	 *
 	 * @alias pre
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}</haxe_doc>
 		</before>
 		<reset public="1" set="method">
@@ -1060,7 +1291,7 @@
 			<haxe_doc>* Starts loading the queued resources.
 	 *
 	 * @fires start
-	 * @param [callback] {	function} Optional callback that will be bound to the `complete` event.
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}</haxe_doc>
 		</load>
 		<loadResource public="1" set="method">
@@ -1075,12 +1306,16 @@
 		</loadResource>
 		<use public="1" set="method">
 			<f a="fn">
-				<d/>
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Middleware 	function to use
+			<haxe_doc>* Middleware function to use
 	 *
-	 * @param {	function} 	function to call</haxe_doc>
+	 * @param {function} function to call</haxe_doc>
 		</use>
 		<new public="1" set="method">
 			<f a="?baseUrl:?concurrency">
@@ -17001,6 +17236,32 @@
  * @property {string} XHR_RESPONSE_TYPE.JSON - Object
  * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
 	</typedef>
+	<typedef path="pixi.loaders.ResourceObject" params="" file="pixi/loaders/ResourceLoader.hx" module="pixi.loaders.ResourceLoader"><a>
+	<xhrType>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</xhrType>
+	<url><c path="String"/></url>
+	<name>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</name>
+	<loadType>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</loadType>
+	<crossOrigin>
+		<t path="Null"><d/></t>
+		<meta><m n=":optional"/></meta>
+	</crossOrigin>
+	<callback>
+		<t path="Null"><f a="">
+	<c path="pixi.loaders.Resource"/>
+	<x path="Void"/>
+</f></t>
+		<meta><m n=":optional"/></meta>
+	</callback>
+</a></typedef>
 	<class path="pixi.mesh.Mesh" params="" file="pixi/mesh/Mesh.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<DRAW_MODES public="1" static="1">
