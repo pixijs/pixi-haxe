@@ -9,7 +9,7 @@ extern class Ticker extends EventEmitter {
 	 * A Ticker class that runs an update loop that other objects listen to
 	 *
 	 * @class
-	 * @memberof PIXI.extras
+	 * @member of PIXI.core.ticker
 	 */
 	function new();
 
