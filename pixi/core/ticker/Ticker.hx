@@ -115,6 +115,39 @@ extern class Ticker extends EventEmitter {
 	var minFPS:Int;
 
 	/**
+	 * Calls EventEmitter.on internally for the
+	 * internal 'tick' event. It checks if the emitter has listeners,
+	 * and if so it requests a new animation frame at this point.
+	 *
+	 * @param fn {Function} The listener function to be added for updates
+	 * @param [context] {Function} The listener context
+	 * @returns {Ticker} this
+	 */
+	function add (fn:Void->Void, ?context:Void->Void):Ticker;
+
+	/**
+	 * Calls EventEmitter.once internally for the
+	 * internal 'tick' event. It checks if the emitter has listeners,
+	 * and if so it requests a new animation frame at this point.
+	 *
+	 * @param fn {Function} The listener function to be added for one update
+	 * @param [context] {Function} The listener context
+	 * @returns {Ticker} this
+	 */	
+	function addOnce (fn:Void->Void, ?context:Void->Void):Ticker;
+	
+	/**
+	 * Calls EventEmitter.off internally for 'tick' event.
+	 * It checks if the emitter has listeners for 'tick' event.
+	 * If it does, then it cancels the animation frame.
+	 *
+	 * @param [fn] {Function} The listener function to be removed
+	 * @param [context] {Function} The listener context to be removed
+	 * @returns {Ticker} this
+	 */	
+	function remove (fn:Void->Void, ?context:Void->Void):Ticker;
+	
+	/**
 	 * Starts the ticker. If the ticker has listeners
 	 * a new animation frame is requested at this point.
 	 */
@@ -128,10 +161,10 @@ extern class Ticker extends EventEmitter {
 
 	/**
 	 * Triggers an update. An update entails setting the
-	 * current {@link PIXI.ticker.Ticker#elapsedMS},
-	 * the current {@link PIXI.ticker.Ticker#deltaTime},
+	 * current elapsedMS,
+	 * the current deltaTime,
 	 * invoking all listeners with current deltaTime,
-	 * and then finally setting {@link PIXI.ticker.Ticker#lastTime}
+	 * and then finally setting lastTime
 	 * with the value of currentTime that was provided.
 	 * This method will be called automatically by animation
 	 * frame callbacks if the ticker instance has been started
@@ -140,40 +173,4 @@ extern class Ticker extends EventEmitter {
 	 * @param [currentTime=performance.now()] {DOMHighResTimeStamp|number} the current time of execution
 	 */
 	function update(?currentTime:Float):Void;
-<<<<<<< HEAD
-=======
-
-	/**
-	 * Calls EventEmitter.on internally for the
-	 * internal 'tick' event. It checks if the emitter has listeners,
-	 * and if so it requests a new animation frame at this point.
-	 *
-	 * @param fn {Function} The listener function to be added for updates
-	 * @param [context] {Function} The listener context
-	 * @returns {Ticker} this
-	 */
-	function add(fn:Void -> Void, ?context:Void -> Void):Ticker;
-
-	/**
-	 * Calls EventEmitter.once internally for the
-	 * internal 'tick' event. It checks if the emitter has listeners,
-	 * and if so it requests a new animation frame at this point.
-	 *
-	 * @param fn {Function} The listener function to be added for one update
-	 * @param [context] {Function} The listener context
-	 * @returns {Ticker} this
-	 */
-	function addOnce(fn:Void -> Void, ?context:Void -> Void):Ticker;
-
-	/**
-	 * Calls EventEmitter.off internally for 'tick' event.
-	 * It checks if the emitter has listeners for 'tick' event.
-	 * If it does, then it cancels the animation frame.
-	 *
-	 * @param [fn] {Function} The listener function to be removed
-	 * @param [context] {Function} The listener context to be removed
-	 * @returns {Ticker} this
-	 */
-	function remove(fn:Void -> Void, ?context:Void -> Void):Ticker;
->>>>>>> pixijs/master
 }
