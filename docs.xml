@@ -1269,7 +1269,11 @@
 		</after>
 		<before public="1" set="method">
 			<f a="fn">
-				<f a=""><x path="Void"/></f>
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Sets up a middleware function that will run *before* the
@@ -16186,6 +16190,137 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.VideoBaseTexture"</e></m></meta>
 	</class>
+	<class path="pixi.core.ticker.Ticker" params="" file="pixi/core/ticker/Ticker.hx" extern="1">
+		<extends path="pixi.interaction.EventEmitter"/>
+		<autoStart public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether or not this ticker should invoke the method
+     * {@link PIXI.ticker.Ticker#start} automatically
+     * when a listener is added.
+     *
+     * @member {Bool}
+     * @default false</haxe_doc>
+		</autoStart>
+		<deltaTime public="1">
+			<x path="Float"/>
+			<haxe_doc>* Scalar time value from last frame to this frame.
+     * This value is capped by setting {@link PIXI.ticker.Ticker#minFPS}
+     * and is scaled with {@link PIXI.ticker.Ticker#speed}.
+     * **Note:** The cap may be exceeded by scaling.
+     *
+     * @member {Float}
+     * @default 1</haxe_doc>
+		</deltaTime>
+		<elapsedMS public="1">
+			<x path="Float"/>
+			<haxe_doc>* Time elapsed in milliseconds from last frame to this frame.
+     * Opposed to what the scalar {@link PIXI.ticker.Ticker#deltaTime}
+     * is based, this value is neither capped nor scaled.
+     * If the platform supports DOMHighResTimeStamp,
+     * this value will have a precision of 1 µs.
+     *
+     * @member {Float}
+     * @default 1 / TARGET_FPMS</haxe_doc>
+		</elapsedMS>
+		<lastTime public="1">
+			<x path="Float"/>
+			<haxe_doc>* The last time {@link PIXI.ticker.Ticker#update} was invoked.
+     * This value is also reset internally outside of invoking
+     * update, but only when a new animation frame is requested.
+     * If the platform supports DOMHighResTimeStamp,
+     * this value will have a precision of 1 µs.
+     *
+     * @member {Float}
+     * @default 0</haxe_doc>
+		</lastTime>
+		<speed public="1">
+			<x path="Float"/>
+			<haxe_doc>* Factor of current {@link PIXI.ticker.Ticker#deltaTime}.
+     * @example
+     *     // Scales ticker.deltaTime to what would be
+     *     // the equivalent of approximately 120 FPS
+     *     ticker.speed = 2;
+     *
+     * @member {Float}
+     * @default 1</haxe_doc>
+		</speed>
+		<started public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether or not this ticker has been started.
+     * `true` if {@link PIXI.ticker.Ticker#start} has been called.
+     * `false` if {@link PIXI.ticker.Ticker#stop} has been called.
+     * While `false`, this value may change to `true` in the
+     * event of {@link PIXI.ticker.Ticker#autoStart} being `true`
+     * and a listener is added.
+     *
+     * @member {Bool}
+     * @default false</haxe_doc>
+		</started>
+		<FPS public="1">
+			<x path="Int"/>
+			<haxe_doc>* The frames per second at which this ticker is running.
+     * The default is approximately 60 in most modern browsers.
+     * **Note:** This does not factor in the value of
+     * {@link PIXI.ticker.Ticker#speed}, which is specific
+     * to scaling {@link PIXI.ticker.Ticker#deltaTime}.
+     *
+     * @member
+     * @memberof PIXI.ticker.Ticker#
+     * @readonly</haxe_doc>
+		</FPS>
+		<minFPS public="1">
+			<x path="Int"/>
+			<haxe_doc>* Manages the maximum amount of milliseconds allowed to
+     * elapse between invoking {@link PIXI.ticker.Ticker#update}.
+     * This value is used to cap {@link PIXI.ticker.Ticker#deltaTime},
+     * but does not effect the measured value of {@link PIXI.ticker.Ticker#FPS}.
+     * When setting this property it is clamped to a value between
+     * `0` and `PIXI.TARGET_FPMS * 1000`.
+     *
+     * @member
+     * @memberof PIXI.ticker.Ticker#
+     * @default 10</haxe_doc>
+		</minFPS>
+		<start public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Starts the ticker. If the ticker has listeners
+	 * a new animation frame is requested at this point.</haxe_doc>
+		</start>
+		<stop public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the ticker. If the ticker has requested
+	 * an animation frame it is canceled at this point.</haxe_doc>
+		</stop>
+		<update public="1" set="method">
+			<f a="?currentTime">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Triggers an update. An update entails setting the
+	 * current {@link PIXI.ticker.Ticker#elapsedMS},
+	 * the current {@link PIXI.ticker.Ticker#deltaTime},
+	 * invoking all listeners with current deltaTime,
+	 * and then finally setting {@link PIXI.ticker.Ticker#lastTime}
+	 * with the value of currentTime that was provided.
+	 * This method will be called automatically by animation
+	 * frame callbacks if the ticker instance has been started
+	 * and listeners are added.
+	 *
+	 * @param [currentTime=performance.now()] {DOMHighResTimeStamp|number} the current time of execution</haxe_doc>
+		</update>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* A Ticker class that runs an update loop that other objects listen to.
+	 * This class is composed around an EventEmitter object to add listeners
+	 * meant for execution on the next requested animation frame.
+	 * Animation frames are requested only when necessary,
+	 * e.g. When the ticker is started and the emitter has listeners.
+	 *
+	 * @class
+	 * @memberof PIXI.ticker</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.ticker.Ticker"</e></m></meta>
+	</class>
 	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
 		<isWebGLSupported public="1" set="method" static="1">
 			<f a=""><x path="Bool"/></f>
@@ -16441,62 +16576,6 @@
 	 * @param textures {Texture[]} an array of {Texture} objects that make up the animation]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.MovieClip"</e></m></meta>
-	</class>
-	<class path="pixi.extras.Ticker" params="" file="pixi/extras/Ticker.hx" extern="1">
-		<extends path="pixi.interaction.EventEmitter"/>
-		<active public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Whether or not this ticker runs
-	*
-	* @member {Bool}</haxe_doc>
-		</active>
-		<deltaTime public="1">
-			<x path="Float"/>
-			<haxe_doc>* The deltaTime
-	 *
-	 * @member {Float}</haxe_doc>
-		</deltaTime>
-		<timeElapsed public="1">
-			<x path="Float"/>
-			<haxe_doc>* The time between two frames
-	 *
-	 * @member {Float}</haxe_doc>
-		</timeElapsed>
-		<lastTime public="1">
-			<x path="Float"/>
-			<haxe_doc>* The time at the last frame
-	 *
-	 * @member {Float}</haxe_doc>
-		</lastTime>
-		<speed public="1">
-			<x path="Float"/>
-			<haxe_doc>* The speed
-	 *
-	 * @member {Float}</haxe_doc>
-		</speed>
-		<start public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Starts the ticker, automatically called by the constructor
-	 *</haxe_doc>
-		</start>
-		<stop public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Stops the ticker
-	 *</haxe_doc>
-		</stop>
-		<update public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* The update loop, fires the 'tick' event
-	 *</haxe_doc>
-		</update>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* A Ticker class that runs an update loop that other objects listen to
-	 *
-	 * @class
-	 * @memberof PIXI.extras</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.extras.Ticker"</e></m></meta>
 	</class>
 	<class path="pixi.extras.TilingSprite" params="" file="pixi/extras/TilingSprite.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
