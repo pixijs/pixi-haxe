@@ -145,14 +145,6 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param {function} function to call
 	 */
 	function use(fn:Resource -> Dynamic -> Void):Void;
-	
-	/**
-	 * Middleware function
-	 *
-	 * @param {function} function to call
-	 */
-	function pre(fn:Resource -> Dynamic -> Void):ResourceLoader;
-	
 }
 
 typedef ResourceObject = {
