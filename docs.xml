@@ -976,7 +976,7 @@
 			</f>
 			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
 	 *
-	 * This 	function can take a wide 	variety of different parameters. The only thing that is always
+	 * This function can take a wide variety of different parameters. The only thing that is always
 	 * required the url to load. All the following will work:
 	 *
 	 * ```js
@@ -993,22 +993,22 @@
 	 *     }, 	function () {})
 	 *     .add({
 	 *         url: 'http://...'
-	 *     }, 	function () {})
+	 *     }, function () {})
 	 *     .add({
 	 *         name: 'key3',
 	 *         url: 'http://...'
-	 *         onComplete: 	function () {}
+	 *         onComplete: function () {}
 	 *     })
 	 *     .add({
 	 *         url: 'https://...',
-	 *         onComplete: 	function () {},
+	 *         onComplete: function () {},
 	 *         crossOrigin: true
 	 *     })
 	 *
 	 *     // you can also pass an array of objects or urls or both
 	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: 	function () {} },
-	 *         { url: 'http://...', onComplete: 	function () {} },
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
 	 *         'http://...'
 	 *     ]);
 	 * ```
@@ -1021,19 +1021,250 @@
 	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
 	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
 	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {	function} 	function to call when this specific resource completes loading.
+	 * @param [callback] {function} function to call when this specific resource completes loading.
 	 * @return {Loader}</haxe_doc>
+			<overloads>
+				<add public="1" set="method">
+					<f a="obj">
+						<t path="pixi.loaders.ResourceObject"/>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><t path="pixi.loaders.ResourceObject"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><c path="String"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="url:?options:?callback">
+						<c path="String"/>
+						<t path="pixi.loaders.LoaderOptions"/>
+						<f a="">
+							<c path="pixi.loaders.Resource"/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+			</overloads>
 		</add>
 		<after public="1" set="method">
 			<f a="fn">
-				<f a=""><x path="Void"/></f>
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware 	function that will run *after* the
+			<haxe_doc>* Sets up a middleware function that will run *after* the
 	 * resource is loaded.
 	 *
 	 * @alias use
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}</haxe_doc>
 		</after>
 		<before public="1" set="method">
@@ -1045,11 +1276,11 @@
 				</f>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
-			<haxe_doc>* Sets up a middleware 	function that will run *before* the
+			<haxe_doc>* Sets up a middleware function that will run *before* the
 	 * resource is loaded.
 	 *
 	 * @alias pre
-	 * @param middleware {	function} The middleware 	function to register.
+	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}</haxe_doc>
 		</before>
 		<reset public="1" set="method">
@@ -1064,7 +1295,7 @@
 			<haxe_doc>* Starts loading the queued resources.
 	 *
 	 * @fires start
-	 * @param [callback] {	function} Optional callback that will be bound to the `complete` event.
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}</haxe_doc>
 		</load>
 		<loadResource public="1" set="method">
@@ -1079,13 +1310,30 @@
 		</loadResource>
 		<use public="1" set="method">
 			<f a="fn">
-				<d/>
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Middleware 	function to use
+			<haxe_doc>* Middleware function to use
 	 *
-	 * @param {	function} 	function to call</haxe_doc>
+	 * @param {function} function to call</haxe_doc>
 		</use>
+		<pre public="1" set="method">
+			<f a="fn">
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Middleware function
+	 *
+	 * @param {function} function to call</haxe_doc>
+		</pre>
 		<new public="1" set="method">
 			<f a="?baseUrl:?concurrency">
 				<c path="String"/>
@@ -15164,20 +15412,25 @@
 			<t path="pixi.core.text.TextStyle"/>
 			<haxe_doc>* Set the style of the text
      *
-     * @param [style] {TextStyle} The style parameters
-     * @param [style.font='bold 20pt Arial'] {string} The style and size of the font
-     * @param [style.fill='black'] {object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
-     * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-     * @param [style.stroke='black'] {string} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
-     * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-     * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
-     * @param [style.wordWrapWidth=100] {number} The width at which text will wrap
-     * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
-     * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
-     * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-     * @param [style.dropShadowAngle=Math.PI/6] {number} Set a angle of the drop shadow
-     * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
-     * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening
+	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
+	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
+	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
+	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
+	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
+	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
+	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
+	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
+	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
+	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
+	 *      prevent this from happening by adding padding to the top and bottom of text height.
+	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
+	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
+	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
+	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
+	 *      or increase the spikiness of rendered text.
      * @memberof Text#</haxe_doc>
 		</style>
 		<text public="1">
@@ -15200,27 +15453,33 @@
 	 * A Text can be created directly from a string and a style object
 	 *
 	 * ```js
-	 * 	var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
 	 * ```
 	 *
 	 * @class
-	 * @extends Sprite
-	 * @memberof PIXI.text
-	 * @param text {String} The copy that you would like the text to display
+	 * @extends PIXI.Sprite
+	 * @memberof PIXI
+	 * @param text {string} The copy that you would like the text to display
 	 * @param [style] {TextStyle} The style parameters
-	 * @param [style.font] {string} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {number} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {boolean} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {number} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {number} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {boolean} Set a drop shadow for the text
+	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
+	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
+	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
+	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
+	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
+	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
+	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
+	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
+	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
 	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
 	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {number} Set a distance of the drop shadow
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped. Adding some padding will prevent this from happening</haxe_doc>
+	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
+	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
+	 *      prevent this from happening by adding padding to the top and bottom of text height.
+	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
+	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
+	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
+	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
+	 *      or increase the spikiness of rendered text.</haxe_doc>
 		</new>
 		<meta>
 			<m n=":directlyUsed"/>
@@ -15236,6 +15495,10 @@
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
 	</wordWrap>
+	<textBaseline>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</textBaseline>
 	<strokeThickness>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -15248,6 +15511,18 @@
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
 	</padding>
+	<miterLimit>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</miterLimit>
+	<lineJoin>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</lineJoin>
+	<lineHeight>
+		<t path="Null"><x path="Float"/></t>
+		<meta><m n=":optional"/></meta>
+	</lineHeight>
 	<font>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16046,6 +16321,48 @@
      * @memberof PIXI.ticker.Ticker#
      * @default 10</haxe_doc>
 		</minFPS>
+		<add public="1" set="method">
+			<f a="fn:?context">
+				<f a=""><x path="Void"/></f>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.core.ticker.Ticker"/>
+			</f>
+			<haxe_doc>* Calls EventEmitter.on internally for the
+	 * internal 'tick' event. It checks if the emitter has listeners,
+	 * and if so it requests a new animation frame at this point.
+	 *
+	 * @param fn {Function} The listener function to be added for updates
+	 * @param [context] {Function} The listener context
+	 * @returns {Ticker} this</haxe_doc>
+		</add>
+		<addOnce public="1" set="method">
+			<f a="fn:?context">
+				<f a=""><x path="Void"/></f>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.core.ticker.Ticker"/>
+			</f>
+			<haxe_doc>* Calls EventEmitter.once internally for the
+	 * internal 'tick' event. It checks if the emitter has listeners,
+	 * and if so it requests a new animation frame at this point.
+	 *
+	 * @param fn {Function} The listener function to be added for one update
+	 * @param [context] {Function} The listener context
+	 * @returns {Ticker} this</haxe_doc>
+		</addOnce>
+		<remove public="1" set="method">
+			<f a="fn:?context">
+				<f a=""><x path="Void"/></f>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.core.ticker.Ticker"/>
+			</f>
+			<haxe_doc>* Calls EventEmitter.off internally for 'tick' event.
+	 * It checks if the emitter has listeners for 'tick' event.
+	 * If it does, then it cancels the animation frame.
+	 *
+	 * @param [fn] {Function} The listener function to be removed
+	 * @param [context] {Function} The listener context to be removed
+	 * @returns {Ticker} this</haxe_doc>
+		</remove>
 		<start public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Starts the ticker. If the ticker has listeners
@@ -16062,10 +16379,10 @@
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* Triggers an update. An update entails setting the
-	 * current {@link PIXI.ticker.Ticker#elapsedMS},
-	 * the current {@link PIXI.ticker.Ticker#deltaTime},
+	 * current elapsedMS,
+	 * the current deltaTime,
 	 * invoking all listeners with current deltaTime,
-	 * and then finally setting {@link PIXI.ticker.Ticker#lastTime}
+	 * and then finally setting lastTime
 	 * with the value of currentTime that was provided.
 	 * This method will be called automatically by animation
 	 * frame callbacks if the ticker instance has been started
@@ -17080,6 +17397,32 @@
  * @property {string} XHR_RESPONSE_TYPE.JSON - Object
  * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
 	</typedef>
+	<typedef path="pixi.loaders.ResourceObject" params="" file="pixi/loaders/ResourceLoader.hx" module="pixi.loaders.ResourceLoader"><a>
+	<xhrType>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</xhrType>
+	<url><c path="String"/></url>
+	<name>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</name>
+	<loadType>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</loadType>
+	<crossOrigin>
+		<t path="Null"><d/></t>
+		<meta><m n=":optional"/></meta>
+	</crossOrigin>
+	<callback>
+		<t path="Null"><f a="">
+	<c path="pixi.loaders.Resource"/>
+	<x path="Void"/>
+</f></t>
+		<meta><m n=":optional"/></meta>
+	</callback>
+</a></typedef>
 	<class path="pixi.mesh.Mesh" params="" file="pixi/mesh/Mesh.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<DRAW_MODES public="1" static="1">
