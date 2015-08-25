@@ -49,8 +49,8 @@ extern class RenderTexture extends Texture {
 	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {number} The resolution of the texture being generated
 	 */
-	@:overload(function(renderer:CanvasRenderer, ?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float):Void {})
-	function new(renderer:WebGLRenderer, ?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float);
+	@:overload(function(?width:Float, ?height:Float, renderer:CanvasRenderer, ?scaleMode:Int, ?resolution:Float):Void {})
+	function new(?width:Float, ?height:Float, ?renderer:WebGLRenderer, ?scaleMode:Int, ?resolution:Float);
 
 	/**
 	 * The Resolution of the texture.

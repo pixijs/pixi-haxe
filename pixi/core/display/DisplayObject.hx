@@ -69,8 +69,8 @@ extern class DisplayObject extends InteractionManager {
 	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object
 	 */
-	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
-	function generateTexture(renderer:WebGLRenderer, ?resolution:Float, ?scaleMode:Int):Texture;
+	@:overload(function(?resolution:Float, ?scaleMode:Int, ?renderer:CanvasRenderer):Texture {})
+	function generateTexture(?resolution:Float, ?scaleMode:Int, ?renderer:WebGLRenderer ):Texture;
 
 	/*
 	 * Updates the object transform for rendering
