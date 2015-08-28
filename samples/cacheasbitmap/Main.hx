@@ -20,7 +20,7 @@ class Main extends Application {
 		backgroundColor = 0x003366;
 		antialias = true;
 		onUpdate = _onUpdate;
-		super.start(Application.CANVAS);
+		super.start();
 
 		_graphics = new Graphics();
 		_graphics.beginFill(0xFF3300);

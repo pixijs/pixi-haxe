@@ -112,7 +112,7 @@ samples_cacheasbitmap_Main.prototype = $extend(pixi_plugins_app_Application.prot
 		this.backgroundColor = 13158;
 		this.antialias = true;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi_plugins_app_Application.prototype.start.call(this,"canvas");
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._graphics = new PIXI.Graphics();
 		this._graphics.beginFill(16724736);
 		this._graphics.lineStyle(10,16767232,1);
