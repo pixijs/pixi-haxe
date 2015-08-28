@@ -31,6 +31,10 @@
 -js samples/_output/graphics.js
 
 --next
+-main samples.cacheasbitmap.Main
+-js samples/_output/cacheasbitmap.js
+
+--next
 -main samples.tiling.Main
 -js samples/_output/tiling.js
 
