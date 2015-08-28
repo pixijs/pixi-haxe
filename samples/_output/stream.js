@@ -59,7 +59,7 @@ samples_stream_Main.prototype = {
 		this._canvas = _this2.createElement("canvas");
 		this._canvas.id = "video_canvas";
 		this._canvas.style.position = "absolute";
-		this._canvas.style.backgroundColor = "#000000";
+		this._canvas.style.backgroundColor = "#FFFFFF";
 		this._canvas.style.left = "0px";
 		this._canvas.style.top = "500px";
 		this._canvas.width = 400;
@@ -108,8 +108,6 @@ samples_stream_Main.prototype = {
 						while(_g3 < _g21) {
 							var j = _g3++;
 							var cue = textTrack.activeCues[j].text;
-							console.log(cue);
-							console.log(JSON.parse(cue));
 						}
 					}
 				};
