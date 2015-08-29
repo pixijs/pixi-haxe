@@ -42,7 +42,6 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
 * [Device Info](http://adireddy.github.io/demos/pixi-haxe/deviceinfo.html)
 * [Device Detection](http://adireddy.github.io/demos/pixi-haxe/devicedetection.html)
-* [Cache As Bitmap](http://adireddy.github.io/demos/pixi-haxe/cacheasbitmap.html)
 
 **Filters (WebGL only)**
 
