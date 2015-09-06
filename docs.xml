@@ -14585,6 +14585,10 @@
 	 * @member {Int}
 	 * @default 0x000000</haxe_doc>
 		</backgroundColor>
+		<plugins public="1">
+			<d/>
+			<haxe_doc>* Plugins object</haxe_doc>
+		</plugins>
 		<resize public="1" set="method">
 			<f a="width:height">
 				<x path="Float"/>

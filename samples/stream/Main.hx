@@ -67,7 +67,7 @@ class Main {
 
 		//_videoElement.width = 480;
 		//_videoElement.height = 270;
-		_videoElement.src = "http://93.93.85.123:1935/live/amlst:1/playlist.m3u8"; //"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
+		_videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 
 		Browser.document.body.appendChild(_wrapper);
 		_wrapper.appendChild(_videoElement);

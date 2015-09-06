@@ -41,7 +41,7 @@ samples_stream_Main.prototype = {
 		this._videoElement.style.position = "absolute";
 		this._videoElement.style.top = "0px";
 		this._videoElement.autoplay = false;
-		this._videoElement.src = "http://93.93.85.123:1935/live/amlst:1/playlist.m3u8";
+		this._videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 		window.document.body.appendChild(this._wrapper);
 		this._wrapper.appendChild(this._videoElement);
 		this._wrapper.appendChild(this._renderer.view);

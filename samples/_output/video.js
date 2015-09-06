@@ -116,9 +116,6 @@ samples_video_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 		pixi_plugins_app_Application.prototype.start.call(this);
-		var _this = window.document;
-		this._vidElement = _this.createElement("video");
-		this._vidElement.src = "assets/video/test.mp4";
 		this._vidTexture = PIXI.Texture.fromVideoUrl("assets/video/test.mp4");
 		this._vidSprite = new PIXI.Sprite(this._vidTexture);
 		this.stage.addChild(this._vidSprite);
