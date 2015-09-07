@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "moved Ticker class from extras to core and a few other minor fixes",
-	"version": "3.0.16",
+	"releasenote": "minor fixes",
+	"version": "3.0.17",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 

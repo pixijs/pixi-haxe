@@ -15557,6 +15557,7 @@
 	</align>
 </a></typedef>
 	<class path="pixi.core.textures.BaseTexture" params="" file="pixi/core/textures/BaseTexture.hx" extern="1">
+		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
 			<f a="imageUrl:?crossorigin:?scaleMode">
 				<c path="String"/>
