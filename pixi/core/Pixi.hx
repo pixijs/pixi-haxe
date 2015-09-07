@@ -1,5 +1,7 @@
 package pixi.core;
 
+import pixi.core.renderers.SystemRenderer;
+
 @:native("PIXI")
 extern class Pixi {
 
@@ -96,7 +98,7 @@ extern class Pixi {
 	 * @property {boolean} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
 	 * @property {boolean} DEFAULT_RENDER_OPTIONS.autoResize=false
 	 */
-	static var DEFAULT_RENDER_OPTIONS:DefaultRenderOptions;
+	static var DEFAULT_RENDER_OPTIONS:RenderOptions;
 
 	/**
 	 * Constants that identify shapes, mainly to prevent `instanceof` calls.
@@ -114,6 +116,8 @@ extern class Pixi {
 
 	static var SPRITE_BATCH_SIZE:Int;
 	//2000 - nice balance between mobile and desktop machines
+
+	static function autoDetectRenderer(width:Int, height:Int, ?options:RenderOptions, noWebGL:Bool = false):SystemRenderer;
 }
 
 typedef RendererType = {
@@ -122,7 +126,7 @@ typedef RendererType = {
 	var CANVAS:Int;
 }
 
-typedef DefaultRenderOptions = {
+typedef RenderOptions = {
 	@:optional var view:Dynamic;
 	@:optional var resolution:Float;
 	@:optional var antialias:Bool;
