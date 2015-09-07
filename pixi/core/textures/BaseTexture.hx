@@ -3,6 +3,7 @@ package pixi.core.textures;
 import pixi.interaction.EventEmitter;
 import js.html.ImageElement;
 import js.html.CanvasElement;
+import pixi.interaction.EventEmitter;
 
 @:native("PIXI.BaseTexture")
 extern class BaseTexture extends EventEmitter {
