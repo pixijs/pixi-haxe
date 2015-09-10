@@ -12747,6 +12747,32 @@
 	 * @constant
 	 * @property {string} VERSION</haxe_doc>
 		</VERSION>
+		<PI_2 public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* @property {number} PI_2 - Two Pi
+     * @constant
+     * @static</haxe_doc>
+		</PI_2>
+		<RAD_TO_DEG public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* @property {number} RAD_TO_DEG - Constant conversion factor for converting radians to degrees
+     * @constant
+     * @static</haxe_doc>
+		</RAD_TO_DEG>
+		<DEG_TO_RAD public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* @property {Number} DEG_TO_RAD - Constant conversion factor for converting degrees to radians
+     * @constant
+     * @static</haxe_doc>
+		</DEG_TO_RAD>
+		<TARGET_FPMS public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Target frames per millisecond.
+     *
+     * @static
+     * @constant
+     * @property {number} TARGET_FPMS=0.06</haxe_doc>
+		</TARGET_FPMS>
 		<RENDERER_TYPE public="1" static="1">
 			<t path="pixi.core.RendererType"/>
 			<haxe_doc>* Constant to identify the Renderer Type.
@@ -12808,6 +12834,7 @@
 	 * @property {String} RETINA_PREFIX</haxe_doc>
 		</RETINA_PREFIX>
 		<RESOLUTION public="1" static="1"><x path="Float"/></RESOLUTION>
+		<FILTER_RESOLUTION public="1" static="1"><x path="Float"/></FILTER_RESOLUTION>
 		<DEFAULT_RENDER_OPTIONS public="1" static="1">
 			<t path="pixi.core.DefaultRenderOptions"/>
 			<haxe_doc>* The default render options if none are supplied to {@link PIXI.WebGLRenderer}
@@ -13177,6 +13204,36 @@
 		</generateTexture>
 		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
 		<displayObjectUpdateTransform public="1" set="method"><f a=""><x path="Void"/></f></displayObjectUpdateTransform>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Base destroy method for generic display objects
+	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
+	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)</haxe_doc>
+			<overloads>
+				<destroy public="1" set="method">
+					<f a="?destroyTexture:?destroyBaseTexture">
+						<x path="Bool"/>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Base destroy method for generic display objects
+	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
+	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)</haxe_doc>
+				</destroy>
+				<destroy public="1" set="method">
+					<f a="?destroyChildren">
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Base destroy method for generic display objects
+	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
+	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)</haxe_doc>
+				</destroy>
+			</overloads>
+		</destroy>
 		<name public="1">
 			<c path="String"/>
 			<haxe_doc>* The instance name of the object.
@@ -15354,17 +15411,6 @@
 	 *
 	 * @member {AbstractFilter}</haxe_doc>
 		</shader>
-		<destroy public="1" set="method">
-			<f a="?destroyTexture:?destroyBaseTexture">
-				<x path="Bool"/>
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Destroys the texture of the sprite
-	 *
-	 * @param destroyTexture {Bool}
-	 * @param destroyBaseTexture {Bool}</haxe_doc>
-		</destroy>
 		<renderCanvas public="1" set="method">
 			<f a="renderer">
 				<d/>
