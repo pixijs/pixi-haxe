@@ -13,6 +13,36 @@ extern class Pixi {
 	static var VERSION:String;
 
 	/**
+     * @property {number} PI_2 - Two Pi
+     * @constant
+     * @static
+     */
+	static var PI_2:Float;
+
+	/**
+     * @property {number} RAD_TO_DEG - Constant conversion factor for converting radians to degrees
+     * @constant
+     * @static
+     */
+	static var RAD_TO_DEG:Float;
+
+	/**
+     * @property {Number} DEG_TO_RAD - Constant conversion factor for converting degrees to radians
+     * @constant
+     * @static
+     */
+	static var DEG_TO_RAD:Float;
+
+	/**
+     * Target frames per millisecond.
+     *
+     * @static
+     * @constant
+     * @property {number} TARGET_FPMS=0.06
+     */
+	static var TARGET_FPMS:Float;
+
+	/**
 	 * Constant to identify the Renderer Type.
 	 *
 	 * @static
@@ -78,6 +108,8 @@ extern class Pixi {
 	static var RETINA_PREFIX:String;
 
 	static var RESOLUTION:Float;
+
+	static var FILTER_RESOLUTION:Float;
 
 	/**
 	 * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
