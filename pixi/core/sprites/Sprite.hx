@@ -65,14 +65,6 @@ extern class Sprite extends Container {
 	var shader:Dynamic;
 
 	/**
-	 * Destroys the texture of the sprite
-	 *
-	 * @param destroyTexture {Bool}
-	 * @param destroyBaseTexture {Bool}
-	*/
-	function destroy(?destroyTexture:Bool, ?destroyBaseTexture:Bool):Void;
-
-	/**
 	* Renders the object using the Canvas renderer
 	*
 	* @param renderer {CanvasRenderer} The renderer
