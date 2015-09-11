@@ -16523,6 +16523,13 @@
 	 * @default 'left'
 	 * @memberof BitmapText#</haxe_doc>
 		</align>
+		<font public="1">
+			<d/>
+			<haxe_doc>* The font descriptor of the BitmapText object
+     *
+     * @member {Dynamic}
+     * @memberof BitmapText#</haxe_doc>
+		</font>
 		<text public="1">
 			<c path="String"/>
 			<haxe_doc>* The text of the BitmapText object
@@ -16571,7 +16578,7 @@
 		<meta><m n=":optional"/></meta>
 	</tint>
 	<font>
-		<t path="Null"><c path="String"/></t>
+		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
 	</font>
 	<align>
