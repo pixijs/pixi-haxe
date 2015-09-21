@@ -36,6 +36,13 @@ extern class BitmapText extends Container {
 	function new(text:String, ?style:BitmapTextStyle):Void;
 
 	/**
+	 * The style object
+	 *
+	 * @member {BitmapTextStyle}
+	 */
+	var style:BitmapTextStyle;
+
+	/**
 	 * The width of the overall text, different from fontSize,
 	 * which is defined in the style object
 	 *
