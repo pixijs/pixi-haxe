@@ -14,7 +14,7 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added style property to BitmapText class",
+	"releasenote": "added tint property to BitmapText class",
 	"version": "3.0.20",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
