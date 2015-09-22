@@ -1,9 +1,9 @@
 package pixi.plugins.app;
 
+import js.html.DivElement;
 import js.html.Element;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.SystemRenderer;
 import pixi.plugins.stats.Stats;
 import pixi.core.renderers.Detector;
 import pixi.core.display.Container;
@@ -63,10 +63,16 @@ class Application {
 	public var antialias:Bool;
 
 	/**
-	 * Force FXAA shader antialias instead of native (faster)
+	 * Force FXAA shader antialias instead of native (faster).
 	 * default - false
 	 */
 	public var forceFXAA:Bool;
+
+	/**
+	 * Force round pixels.
+	 * default - false
+	 */
+	public var roundPixels:Bool;
 
 	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
@@ -101,7 +107,7 @@ class Application {
 	 * Renderer
 	 * Read-only
 	 */
-	public var renderer(default, null):SystemRenderer;
+	public var renderer(default, null):Dynamic;
 
 	/**
 	 * Global Container.
@@ -145,6 +151,7 @@ class Application {
 		transparent = false;
 		antialias = false;
 		forceFXAA = false;
+		roundPixels = false;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -159,7 +166,8 @@ class Application {
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-	public function start(?rendererType:String = AUTO, ?stats:Bool = true, ?parentDom:Element) {
+
+	public function start(?rendererType:String = "auto", ?stats:Bool = true, ?parentDom:Element) {
 		canvas = Browser.document.createCanvasElement();
 		canvas.style.width = width + "px";
 		canvas.style.height = height + "px";
@@ -181,6 +189,8 @@ class Application {
 		if (rendererType == AUTO) renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		else if (rendererType == CANVAS) renderer = new CanvasRenderer(width, height, renderingOptions);
 		else renderer = new WebGLRenderer(width, height, renderingOptions);
+
+		if (roundPixels) renderer.roundPixels = true;
 
 		Browser.document.body.appendChild(renderer.view);
 		if (autoResize) Browser.window.onresize = _onWindowResize;
@@ -225,14 +235,30 @@ class Application {
 
 	@:noCompletion function _addStats() {
 		if (untyped __js__("window").Stats != null) {
-			var _container = Browser.document.createElement("div");
-			Browser.document.body.appendChild(_container);
+			var container = Browser.document.createDivElement();
+			Browser.document.body.appendChild(container);
 			_stats = new Stats();
 			_stats.domElement.style.position = "absolute";
 			_stats.domElement.style.top = "2px";
 			_stats.domElement.style.right = "2px";
-			_container.appendChild(_stats.domElement);
+			container.appendChild(_stats.domElement);
 			_stats.begin();
+
+			var counter:DivElement = Browser.document.createDivElement();
+			counter.style.position = "absolute";
+			counter.style.top = "50px";
+			counter.style.right = "2px";
+			counter.style.width = "76px";
+			counter.style.background = "#CCCCC";
+			counter.style.backgroundColor = "#105CB6";
+			counter.style.fontFamily = "Helvetica,Arial";
+			counter.style.padding = "2px";
+			counter.style.color = "#0FF";
+			counter.style.fontSize = "9px";
+			counter.style.fontWeight = "bold";
+			counter.style.textAlign = "center";
+			Browser.document.body.appendChild(counter);
+			counter.innerHTML = ["Unknown", "WebGL", "Canvas"][renderer.type] + " - " + pixelRatio;
 		}
 	}
 }

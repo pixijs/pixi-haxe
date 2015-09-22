@@ -16509,10 +16509,10 @@
 	 * @member {Bool}</haxe_doc>
 		</dirty>
 		<tint public="1">
-			<x path="Float"/>
+			<x path="Int"/>
 			<haxe_doc>* The tint of the BitmapText object
 	 *
-	 * @member {Float}
+	 * @member {Int}
 	 * @memberof BitmapText#</haxe_doc>
 		</tint>
 		<align public="1">

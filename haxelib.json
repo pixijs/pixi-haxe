@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added tint property to BitmapText class",
-	"version": "3.0.20",
+	"releasenote": "added roundPixels property in the Application class",
+	"version": "3.0.21",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
