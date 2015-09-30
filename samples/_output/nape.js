@@ -3406,6 +3406,7 @@ pixi_plugins_app_Application.prototype = {
 		this.transparent = false;
 		this.antialias = false;
 		this.forceFXAA = false;
+		this.roundPixels = false;
 		this.backgroundColor = 16777215;
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
@@ -3430,6 +3431,7 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.autoResize = this.autoResize;
 		renderingOptions.transparent = this.transparent;
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(this.roundPixels) this.renderer.roundPixels = true;
 		window.document.body.appendChild(this.renderer.view);
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
@@ -3466,14 +3468,33 @@ pixi_plugins_app_Application.prototype = {
 	}
 	,_addStats: function() {
 		if(window.Stats != null) {
-			var _container = window.document.createElement("div");
-			window.document.body.appendChild(_container);
+			var container;
+			var _this = window.document;
+			container = _this.createElement("div");
+			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
 			this._stats.domElement.style.top = "2px";
 			this._stats.domElement.style.right = "2px";
-			_container.appendChild(this._stats.domElement);
+			container.appendChild(this._stats.domElement);
 			this._stats.begin();
+			var counter;
+			var _this1 = window.document;
+			counter = _this1.createElement("div");
+			counter.style.position = "absolute";
+			counter.style.top = "50px";
+			counter.style.right = "2px";
+			counter.style.width = "76px";
+			counter.style.background = "#CCCCC";
+			counter.style.backgroundColor = "#105CB6";
+			counter.style.fontFamily = "Helvetica,Arial";
+			counter.style.padding = "2px";
+			counter.style.color = "#0FF";
+			counter.style.fontSize = "9px";
+			counter.style.fontWeight = "bold";
+			counter.style.textAlign = "center";
+			window.document.body.appendChild(counter);
+			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
 		}
 	}
 	,__class__: pixi_plugins_app_Application

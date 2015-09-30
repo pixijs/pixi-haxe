@@ -22,8 +22,6 @@ class Main extends Application {
 		pixelRatio = _getPixelRatio();
 		super.start(Application.AUTO);
 
-		Pixi.RETINA_PREFIX = untyped __js__("/scale-(.+)/");
-
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
 		_img = new Sprite(Texture.fromImage(imgPath));
 		_img.anchor.set(0.5, 0.5);

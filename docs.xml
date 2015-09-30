@@ -17633,9 +17633,14 @@
 		</antialias>
 		<forceFXAA public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Force FXAA shader antialias instead of native (faster)
+			<haxe_doc>* Force FXAA shader antialias instead of native (faster).
 	 * default - false</haxe_doc>
 		</forceFXAA>
+		<roundPixels public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Force round pixels.
+	 * default - false</haxe_doc>
+		</roundPixels>
 		<autoResize public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
@@ -17664,7 +17669,7 @@
 	 * Read-only</haxe_doc>
 		</canvas>
 		<renderer public="1" set="null">
-			<c path="pixi.core.renderers.SystemRenderer"/>
+			<d/>
 			<haxe_doc>* Renderer
 	 * Read-only</haxe_doc>
 		</renderer>
@@ -17678,16 +17683,16 @@
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
-		<set_fps set="method" line="128"><f a="val">
+		<set_fps set="method" line="134"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="133"><f a="val">
+		<set_skipFrame set="method" line="139"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<_setDefaultValues set="method" line="141"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="162">
+		<_setDefaultValues set="method" line="147"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="170">
 			<f a="?rendererType:?stats:?parentDom">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -17701,29 +17706,29 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="193">
+		<_onWindowResize set="method" line="203">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="208">
+		<_onRequestAnimationFrame set="method" line="218">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="220">
+		<_calculateElapsedTime set="method" line="230">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="226">
+		<_addStats set="method" line="236">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<new public="1" set="method" line="123"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="129"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
