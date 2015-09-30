@@ -132,10 +132,10 @@ samples_retina_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.pixelRatio = this._getPixelRatio();
-		pixi_plugins_app_Application.prototype.start.call(this,"auto");
+		pixi_plugins_app_Application.prototype.start.call(this);
 		var imgPath = "assets/retina/img" + this._getResolutionStr() + ".jpg";
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage(imgPath));
-		this._img.anchor.set(0.5,0.5);
+		this._img.anchor.set(0.5);
 		this._img.name = "img";
 		this._img.position.set(window.innerWidth / 2,window.innerHeight / 2);
 		this.stage.addChild(this._img);
