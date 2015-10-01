@@ -43,6 +43,10 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Device Info](http://adireddy.github.io/demos/pixi-haxe/deviceinfo.html)
 * [Device Detection](http://adireddy.github.io/demos/pixi-haxe/devicedetection.html)
 
+**Plugins**
+
+* [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
+
 **Filters (WebGL only)**
 
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
