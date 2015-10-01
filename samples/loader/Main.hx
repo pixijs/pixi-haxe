@@ -19,7 +19,7 @@ class Main extends Application {
 	}
 
 	function _init() {
-		super.start(Application.AUTO);
+		super.start();
 		_baseURL = "assets/loader/";
 
 		_loader = new Loader();

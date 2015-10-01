@@ -14,9 +14,12 @@
 --each
 
 --next
--D analyzer
 -main samples.basics.Main
 -js samples/_output/basics.js
+
+--next
+-main samples.spine.Main
+-js samples/_output/spine.js
 
 --next
 -main samples.spritesheet.Main

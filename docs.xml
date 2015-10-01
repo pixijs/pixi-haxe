@@ -17736,6 +17736,73 @@
  * @copyright 2015</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
+	<class path="pixi.plugins.spine.Spine" params="" file="pixi/plugins/spine/Spine.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<autoUpdate public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Should the Spine object update its transforms
+     *
+     * @member {boolean}</haxe_doc>
+		</autoUpdate>
+		<spineData public="1">
+			<d/>
+			<haxe_doc>* The spineData object
+     *
+     * @member {object}</haxe_doc>
+		</spineData>
+		<skeleton public="1">
+			<d/>
+			<haxe_doc>* A spine Skeleton object
+     *
+     * @member {object}</haxe_doc>
+		</skeleton>
+		<stateData public="1">
+			<d/>
+			<haxe_doc>* A spine AnimationStateData object created from the spine data passed in the constructor
+     *
+     * @member {object}</haxe_doc>
+		</stateData>
+		<state public="1">
+			<d/>
+			<haxe_doc>* A spine AnimationState object created from the spine AnimationStateData object
+     *
+     * @member {object}</haxe_doc>
+		</state>
+		<slotContainers public="1">
+			<c path="Array"><c path="pixi.core.display.Container"/></c>
+			<haxe_doc>* An array of containers
+     *
+     * @member {Container[]}</haxe_doc>
+		</slotContainers>
+		<update public="1" set="method">
+			<f a="dt">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Update the spine skeleton and its animations by delta time (dt)
+	 *
+	 * @param dt {number} Delta time. Time by which the animation should be updated</haxe_doc>
+		</update>
+		<new public="1" set="method">
+			<f a="spineData">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A class that enables the you to import and run your spine animations in pixi.
+	 * The Spine animation data needs to be loaded using either the Loader or a SpineLoader before it can be used by this class
+	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
+	 *
+	 * ```js
+	 * var spineAnimation = new PIXI.Spine(spineData);
+	 * ```
+	 *
+	 * @class
+	 * @extends Container
+	 * @memberof PIXI.spine
+	 * @param spineData {object} The spine data loaded from a spine atlas.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
+	</class>
 	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>
@@ -17780,78 +17847,6 @@
 			<m n=":directlyUsed"/>
 			<m n=":native"><e>"Stats"</e></m>
 		</meta>
-	</class>
-	<class path="pixi.spine.Spine" params="" file="pixi/spine/Spine.hx" extern="1">
-		<autoUpdate public="1">
-			<x path="Bool"/>
-			<haxe_doc>* If this flag is set to true, the spine animation will be autoupdated every time
-     * the object id drawn. The down side of this approach is that the delta time is
-     * automatically calculated and you could miss out on cool effects like slow motion,
-     * pause, skip ahead and the sorts. Most of these effects can be achieved even with
-     * autoupdate enabled but are harder to achieve.
-     *
-     * @member {boolean}
-     * @memberof Spine#
-     * @default true</haxe_doc>
-		</autoUpdate>
-		<spineData public="1">
-			<d/>
-			<haxe_doc>* The spineData object
-     *
-     * @member {object}</haxe_doc>
-		</spineData>
-		<skeleton public="1">
-			<d/>
-			<haxe_doc>* A spine Skeleton object
-     *
-     * @member {object}</haxe_doc>
-		</skeleton>
-		<stateData public="1">
-			<d/>
-			<haxe_doc>* A spine AnimationStateData object created from the spine data passed in the constructor
-     *
-     * @member {object}</haxe_doc>
-		</stateData>
-		<state public="1">
-			<d/>
-			<haxe_doc>* A spine AnimationState object created from the spine AnimationStateData object
-     *
-     * @member {object}</haxe_doc>
-		</state>
-		<slotContainers public="1">
-			<c path="Array"><c path="pixi.core.display.Container"/></c>
-			<haxe_doc><![CDATA[* An array of containers
-     *
-     * @member {Array<Container>}]]></haxe_doc>
-		</slotContainers>
-		<update public="1" set="method">
-			<f a="dt">
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Update the spine skeleton and its animations by delta time (dt)
-	 *
-	 * @param dt {Float} Delta time. Time by which the animation should be updated</haxe_doc>
-		</update>
-		<new public="1" set="method">
-			<f a="spineData">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* A class that enables the you to import and run your spine animations in pixi.
-	 * The Spine animation data needs to be loaded using either the Loader or a SpineLoader before it can be used by this class
-	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
-	 *
-	 * ```js
-	 * 	var spineAnimation = new PIXI.Spine(spineData);
-	 * ```
-	 *
-	 * @class
-	 * @extends Container
-	 * @memberof PIXI.spine
-	 * @param spineData {object} The spine data loaded from a spine atlas.</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.Spine"</e></m></meta>
 	</class>
 	<class path="samples.audio.Button" params="" file="samples/audio/Button.hx">
 		<extends path="pixi.core.display.Container"/>
