@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added roundPixels property in the Application class",
-	"version": "3.0.21",
+	"releasenote": "updated Spine class",
+	"version": "3.0.22",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 
