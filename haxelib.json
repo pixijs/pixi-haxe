@@ -14,10 +14,10 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "updated Spine class",
-	"version": "3.0.22",
+	"releasenote": "moved stats to external library",
+	"version": "3.0.23",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
-
+		"jsfps": ""
 	}
 }

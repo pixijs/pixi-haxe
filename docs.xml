@@ -12471,6 +12471,185 @@
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
+	<class path="jsfps.fpsmeter.FPSMeter" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/fpsmeter/FPSMeter.hx" extern="1">
+		<tick public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Marks the end of each frame. This is the method that measures everything.</haxe_doc>
+		</tick>
+		<tickStart public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Marks the beginning of each frame. .tick() than uses this time to measure the rendering duration of each frame.
+	 * This method is optional, and if omitted, .tick() will measure the duration between frames instead.</haxe_doc>
+		</tickStart>
+		<showFps public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Changes the meter to display FPS.</haxe_doc>
+		</showFps>
+		<showDuration public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Changes the meter to display duration between frames, or frame rendering duration when using .tickStart() method.</haxe_doc>
+		</showDuration>
+		<toggle public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Toggles between showFps amd showDuration.</haxe_doc>
+		</toggle>
+		<pause public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Pauses the meter rendering. FPSMeter still continues to measure everything, just the meter element rendering is paused.</haxe_doc>
+		</pause>
+		<resume public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Resumes the paused rendering.</haxe_doc>
+		</resume>
+		<hide public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Pauses the rendering, and hides the FPSMeter element.</haxe_doc>
+		</hide>
+		<show public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Shows the FPSMeter element, and resumes the rendering.</haxe_doc>
+		</show>
+		<set public="1" set="method">
+			<f a="name:value">
+				<c path="String"/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Updates an option value, and when needed, repositions or reloads the meter element.</haxe_doc>
+		</set>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Pauses rendering, unbinds events, removes the element from DOM, and stops listening to ticks.</haxe_doc>
+		</destroy>
+		<new public="1" set="method"><f a="?anchor:?options">
+	<c path="js.html.Element"/>
+	<t path="jsfps.fpsmeter.Options"/>
+	<x path="Void"/>
+</f></new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"FPSMeter"</e></m>
+		</meta>
+	</class>
+	<typedef path="jsfps.fpsmeter.Options" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/fpsmeter/FPSMeter.hx" module="jsfps.fpsmeter.FPSMeter"><a>
+	<zIndex>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</zIndex>
+	<top>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</top>
+	<toggleOn>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</toggleOn>
+	<threshold>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</threshold>
+	<theme>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</theme>
+	<smoothing>
+		<t path="Null"><x path="Float"/></t>
+		<meta><m n=":optional"/></meta>
+	</smoothing>
+	<show>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</show>
+	<right>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</right>
+	<position>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</position>
+	<maxFps>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</maxFps>
+	<margin>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</margin>
+	<left>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</left>
+	<interval>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</interval>
+	<history>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</history>
+	<heat>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</heat>
+	<graph>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</graph>
+	<decimals>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</decimals>
+	<bottom>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</bottom>
+</a></typedef>
+	<class path="jsfps.stats.Stats" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/stats/Stats.hx" extern="1">
+		<domElement public="1" set="null">
+			<c path="js.html.DivElement"/>
+			<haxe_doc>* Stats DOM element
+	 * @property domElement
+	 * @type DivElement</haxe_doc>
+		</domElement>
+		<begin public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Begin stats
+	 *
+	 * @method begin</haxe_doc>
+		</begin>
+		<end public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* End stats
+	 *
+	 * @method end</haxe_doc>
+		</end>
+		<update public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Update stats
+	 *
+	 * @method update</haxe_doc>
+		</update>
+		<setMode public="1" set="method">
+			<f a="value">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the display mode.
+	 *
+	 * @method setMode
+	 * @param value {Int} 0: fps, 1: ms</haxe_doc>
+		</setMode>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* https://github.com/mrdoob/stats.js/ (JS stats)
+	 * https://github.com/luizbills/stats.js.hx (Original Haxe Externs)</haxe_doc>
+		</new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"Stats"</e></m>
+		</meta>
+	</class>
 	<typedef path="msignal.AnySignal" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
 		<c path="msignal.Signal">
 			<d/>
@@ -17678,21 +17857,22 @@
 			<haxe_doc>* Global Container.
 	 * Read-only</haxe_doc>
 		</stage>
-		<_stats><c path="pixi.plugins.stats.Stats"/></_stats>
+		<_stats><c path="jsfps.stats.Stats"/></_stats>
+		<_fpsMeter><c path="jsfps.fpsmeter.FPSMeter"/></_fpsMeter>
 		<_lastTime><c path="Date"/></_lastTime>
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
-		<set_fps set="method" line="134"><f a="val">
+		<set_fps set="method" line="137"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="139"><f a="val">
+		<set_skipFrame set="method" line="142"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<_setDefaultValues set="method" line="147"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="170">
+		<_setDefaultValues set="method" line="150"><f a=""><x path="Void"/></f></_setDefaultValues>
+		<start public="1" set="method" line="173">
 			<f a="?rendererType:?stats:?parentDom">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -17706,29 +17886,29 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="203">
+		<_onWindowResize set="method" line="206">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="218">
+		<_onRequestAnimationFrame set="method" line="221">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="230">
+		<_calculateElapsedTime set="method" line="234">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="236">
+		<_addStats set="method" line="240">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<new public="1" set="method" line="129"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="132"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
@@ -17802,51 +17982,6 @@
 	 * @param spineData {object} The spine data loaded from a spine atlas.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
-	</class>
-	<class path="pixi.plugins.stats.Stats" params="" file="pixi/plugins/stats/Stats.hx" extern="1">
-		<domElement public="1" set="null">
-			<c path="js.html.DivElement"/>
-			<haxe_doc>* Stats DOM element
-	 * @property domElement
-	 * @type DivElement</haxe_doc>
-		</domElement>
-		<begin public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Begin stats
-	 *
-	 * @method begin</haxe_doc>
-		</begin>
-		<end public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* End stats
-	 *
-	 * @method end</haxe_doc>
-		</end>
-		<update public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Update stats
-	 *
-	 * @method update</haxe_doc>
-		</update>
-		<setMode public="1" set="method">
-			<f a="value">
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the display mode.
-	 *
-	 * @method setMode
-	 * @param value {Int} 0: fps, 1: ms</haxe_doc>
-		</setMode>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* https://github.com/mrdoob/stats.js/ (JS stats)
-	 * https://github.com/luizbills/stats.js.hx (Original Haxe Externs</haxe_doc>
-		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"Stats"</e></m>
-		</meta>
 	</class>
 	<class path="samples.audio.Button" params="" file="samples/audio/Button.hx">
 		<extends path="pixi.core.display.Container"/>
