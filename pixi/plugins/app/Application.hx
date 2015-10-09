@@ -4,12 +4,14 @@ import js.html.DivElement;
 import js.html.Element;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.plugins.stats.Stats;
 import pixi.core.renderers.Detector;
 import pixi.core.display.Container;
 import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
+
+import jsfps.fpsmeter.FPSMeter;
+import jsfps.stats.Stats;
 
 /**
  * Pixi Boilerplate Helper class that can be used by any application
@@ -121,6 +123,7 @@ class Application {
 	public static inline var WEBGL:String = "webgl";
 
 	var _stats:Stats;
+	var _fpsMeter:FPSMeter;
 	var _lastTime:Date;
 	var _currentTime:Date;
 	var _elapsedTime:Float;
@@ -225,6 +228,7 @@ class Application {
 		}
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		if (_stats != null) _stats.update();
+		if (_fpsMeter != null) _fpsMeter.tick();
 	}
 
 	@:noCompletion function _calculateElapsedTime() {
@@ -259,6 +263,9 @@ class Application {
 			counter.style.textAlign = "center";
 			Browser.document.body.appendChild(counter);
 			counter.innerHTML = ["Unknown", "WebGL", "Canvas"][renderer.type] + " - " + pixelRatio;
+		}
+		else if (untyped __js__("window").FPSMeter != null) {
+			_fpsMeter = new FPSMeter();
 		}
 	}
 }

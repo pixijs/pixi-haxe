@@ -3460,6 +3460,7 @@ pixi_plugins_app_Application.prototype = {
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
+		if(this._fpsMeter != null) this._fpsMeter.tick();
 	}
 	,_calculateElapsedTime: function() {
 		this._currentTime = new Date();
@@ -3495,7 +3496,7 @@ pixi_plugins_app_Application.prototype = {
 			counter.style.textAlign = "center";
 			window.document.body.appendChild(counter);
 			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
-		}
+		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter();
 	}
 	,__class__: pixi_plugins_app_Application
 };

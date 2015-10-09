@@ -1,4 +1,5 @@
 -cmd haxelib newrepo
+-cmd haxelib install jsfps || true
 -cmd haxelib install nape || true
 -cmd haxelib install msignal || true
 -cmd haxelib install actuate || true
@@ -7,6 +8,7 @@
 --next
 -cp samples
 -cp pixi
+-lib jsfps
 -dce full
 -D source-map-content
 -debug
