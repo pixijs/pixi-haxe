@@ -243,29 +243,31 @@ class Application {
 			Browser.document.body.appendChild(container);
 			_stats = new Stats();
 			_stats.domElement.style.position = "absolute";
-			_stats.domElement.style.top = "2px";
-			_stats.domElement.style.right = "2px";
+			_stats.domElement.style.top = "0px";
+			_stats.domElement.style.right = "0px";
 			container.appendChild(_stats.domElement);
 			_stats.begin();
-
-			var counter:DivElement = Browser.document.createDivElement();
-			counter.style.position = "absolute";
-			counter.style.top = "50px";
-			counter.style.right = "2px";
-			counter.style.width = "76px";
-			counter.style.background = "#CCCCC";
-			counter.style.backgroundColor = "#105CB6";
-			counter.style.fontFamily = "Helvetica,Arial";
-			counter.style.padding = "2px";
-			counter.style.color = "#0FF";
-			counter.style.fontSize = "9px";
-			counter.style.fontWeight = "bold";
-			counter.style.textAlign = "center";
-			Browser.document.body.appendChild(counter);
-			counter.innerHTML = ["Unknown", "WebGL", "Canvas"][renderer.type] + " - " + pixelRatio;
+			_addRenderStats();
 		}
 		else if (untyped __js__("window").FPSMeter != null) {
-			_fpsMeter = new FPSMeter();
+			_fpsMeter = new FPSMeter( {theme: "colorful", top: "0px", right: "0px", left: "auto"});
+			_addRenderStats();
 		}
+	}
+
+	inline function _addRenderStats() {
+		var ren:DivElement = Browser.document.createDivElement();
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		Browser.document.body.appendChild(ren);
+		ren.innerHTML = ["Unknown", "WebGL", "Canvas"][renderer.type] + " - " + pixelRatio;
 	}
 }

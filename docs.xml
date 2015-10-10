@@ -658,6 +658,17 @@
 	</typedef>
 	<class path="ArrayAccess" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represents the type of the elements stored.</haxe_doc></class>
+	<abstract path="UInt" params="" file="/usr/lib/haxe/std/UInt.hx">
+		<from><icast><x path="Int"/></icast></from>
+		<this><x path="Int"/></this>
+		<to>
+			<icast><x path="Int"/></icast>
+			<icast field="toFloat"><x path="Float"/></icast>
+		</to>
+		<haxe_doc>The unsigned Int type is only defined for Flash and C#.
+	Simulate it for other platforms.</haxe_doc>
+		<impl><class path="_UInt.UInt_Impl_" params="" file="/usr/lib/haxe/std/UInt.hx" private="1" module="UInt"><meta><m n=":keep"/></meta></class></impl>
+	</abstract>
 	<class path="pixi.interaction.EventEmitter" params="" file="pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
@@ -17317,6 +17328,76 @@
 	 * @memberof PIXI.filters</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorStepFilter"</e></m></meta>
+	</class>
+	<class path="pixi.filters.dropshadow.DropShadowFilter" params="" file="pixi/filters/dropshadow/DropShadowFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<blur public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the strength of both the blurX and blurY properties simultaneously
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 2</haxe_doc>
+		</blur>
+		<blurX public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the strength of the blurX property
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 2</haxe_doc>
+		</blurX>
+		<blurY public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the strength of the blurY property
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 2</haxe_doc>
+		</blurY>
+		<color public="1">
+			<x path="UInt"/>
+			<haxe_doc>* Sets the color of the shadow
+     *
+     * @member {UInt}
+     * @memberOf DropShadowFilter#
+     * @default 0x000000</haxe_doc>
+		</color>
+		<alpha public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the alpha of the shadow
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 0.75</haxe_doc>
+		</alpha>
+		<distance public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the distance of the shadow
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 10</haxe_doc>
+		</distance>
+		<angle public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the angle of the shadow
+     *
+     * @member {Float}
+     * @memberOf DropShadowFilter#
+     * @default 45 * Math.PI / 180</haxe_doc>
+		</angle>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* The DropShadowFilter applies a Gaussian blur to an object.
+	 * The strength of the blur can be set for x- and y-axis separately.
+	 *
+	 * @author goodboydigital
+	 * @class
+	 * @extends AbstractFilter
+	 * @memberof PIXI.filters</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.DropShadowFilter"</e></m></meta>
 	</class>
 	<class path="pixi.filters.gray.GrayFilter" params="" file="pixi/filters/gray/GrayFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>

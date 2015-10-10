@@ -207,7 +207,7 @@ pixi_plugins_app_Application.prototype = {
 			counter.style.textAlign = "center";
 			window.document.body.appendChild(counter);
 			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
-		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter();
+		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter(null,{ theme : "colorful"});
 	}
 };
 var samples_devicedetection_Main = function() {
