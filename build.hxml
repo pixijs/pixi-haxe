@@ -33,6 +33,7 @@
 
 --next
 -main samples.graphics.Main
+-D fps
 -js samples/_output/graphics.js
 
 --next

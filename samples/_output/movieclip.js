@@ -11,7 +11,17 @@ Std.random = function(x) {
 };
 var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
-	this._setDefaultValues();
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
 };
 pixi_plugins_app_Application.prototype = {
 	set_fps: function(val) {
@@ -24,19 +34,6 @@ pixi_plugins_app_Application.prototype = {
 			this.set_fps(30);
 		}
 		return this.skipFrame = val;
-	}
-	,_setDefaultValues: function() {
-		this.pixelRatio = 1;
-		this.set_skipFrame(false);
-		this.autoResize = true;
-		this.transparent = false;
-		this.antialias = false;
-		this.forceFXAA = false;
-		this.roundPixels = false;
-		this.backgroundColor = 16777215;
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.set_fps(60);
 	}
 	,start: function(rendererType,stats,parentDom) {
 		if(stats == null) stats = true;
@@ -101,28 +98,32 @@ pixi_plugins_app_Application.prototype = {
 			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
+			this._stats.domElement.style.top = "0px";
+			this._stats.domElement.style.right = "0px";
 			container.appendChild(this._stats.domElement);
 			this._stats.begin();
-			var counter;
-			var _this1 = window.document;
-			counter = _this1.createElement("div");
-			counter.style.position = "absolute";
-			counter.style.top = "50px";
-			counter.style.right = "2px";
-			counter.style.width = "76px";
-			counter.style.background = "#CCCCC";
-			counter.style.backgroundColor = "#105CB6";
-			counter.style.fontFamily = "Helvetica,Arial";
-			counter.style.padding = "2px";
-			counter.style.color = "#0FF";
-			counter.style.fontSize = "9px";
-			counter.style.fontWeight = "bold";
-			counter.style.textAlign = "center";
-			window.document.body.appendChild(counter);
-			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
-		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter(null,{ theme : "colorful"});
+			this._addRenderStats();
+		} else if(window.FPSMeter != null) {
+			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "0px", right : "0px", left : "auto"});
+			this._addRenderStats();
+		}
+	}
+	,_addRenderStats: function() {
+		var ren;
+		var _this = window.document;
+		ren = _this.createElement("div");
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		window.document.body.appendChild(ren);
+		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
 	}
 };
 var samples_movieclip_Main = function() {

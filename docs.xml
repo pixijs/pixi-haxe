@@ -12482,7 +12482,7 @@
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<class path="jsfps.fpsmeter.FPSMeter" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/fpsmeter/FPSMeter.hx" extern="1">
+	<class path="jsfps.fpsmeter.FPSMeter" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,1/jsfps/fpsmeter/FPSMeter.hx" extern="1">
 		<tick public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Marks the end of each frame. This is the method that measures everything.</haxe_doc>
@@ -12542,7 +12542,7 @@
 			<m n=":native"><e>"FPSMeter"</e></m>
 		</meta>
 	</class>
-	<typedef path="jsfps.fpsmeter.Options" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/fpsmeter/FPSMeter.hx" module="jsfps.fpsmeter.FPSMeter"><a>
+	<typedef path="jsfps.fpsmeter.Options" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,1/jsfps/fpsmeter/FPSMeter.hx" module="jsfps.fpsmeter.FPSMeter"><a>
 	<zIndex>
 		<t path="Null"><x path="Int"/></t>
 		<meta><m n=":optional"/></meta>
@@ -12616,7 +12616,7 @@
 		<meta><m n=":optional"/></meta>
 	</bottom>
 </a></typedef>
-	<class path="jsfps.stats.Stats" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,0/jsfps/stats/Stats.hx" extern="1">
+	<class path="jsfps.stats.Stats" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,1/jsfps/stats/Stats.hx" extern="1">
 		<domElement public="1" set="null">
 			<c path="js.html.DivElement"/>
 			<haxe_doc>* Stats DOM element
@@ -12649,7 +12649,7 @@
 			<haxe_doc>* Sets the display mode.
 	 *
 	 * @method setMode
-	 * @param value {Int} 0: fps, 1: ms</haxe_doc>
+	 * @param value {Int} 0: simplefps, 1: ms</haxe_doc>
 		</setMode>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -17944,16 +17944,15 @@
 		<_currentTime><c path="Date"/></_currentTime>
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
-		<set_fps set="method" line="137"><f a="val">
+		<set_fps set="method" line="143"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="142"><f a="val">
+		<set_skipFrame set="method" line="148"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<_setDefaultValues set="method" line="150"><f a=""><x path="Void"/></f></_setDefaultValues>
-		<start public="1" set="method" line="173">
+		<start public="1" set="method" line="180">
 			<f a="?rendererType:?stats:?parentDom">
 				<c path="String"/>
 				<x path="Bool"/>
@@ -17967,29 +17966,30 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="206">
+		<_onWindowResize set="method" line="213">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="221">
+		<_onRequestAnimationFrame set="method" line="228">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="234">
+		<_calculateElapsedTime set="method" line="242">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="240">
+		<_addStats set="method" line="248">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<new public="1" set="method" line="132"><f a=""><x path="Void"/></f></new>
+		<_addRenderStats get="inline" set="null" line="284"><f a=""><x path="Void"/></f></_addRenderStats>
+		<new public="1" set="method" line="138"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io

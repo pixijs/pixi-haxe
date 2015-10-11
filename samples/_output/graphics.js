@@ -9,9 +9,47 @@ var Std = function() { };
 Std["int"] = function(x) {
 	return x | 0;
 };
+var jsfps_simplefps_Fps = function(callback,every,decay) {
+	if(decay == null) decay = 1;
+	if(every == null) every = 60;
+	this._callback = callback;
+	this.rate = 60;
+	this._time = 0;
+	this._decay = decay;
+	this._every = every;
+	this._ticks = 0;
+	this._last = this._now();
+};
+jsfps_simplefps_Fps.prototype = {
+	_now: function() {
+		if(window.performance != null) return window.performance.now();
+		return new Date().getTime();
+	}
+	,tick: function() {
+		var time = this._now();
+		var diff = time - this._last;
+		this._ticks += 1;
+		this._last = time;
+		this._time += (diff - this._time) * this._decay;
+		this.rate = Math.round(1000 / this._time);
+		if(this.rate > 60) this.rate = 60;
+		if(this._ticks % this._every == 0 && this._callback != null) this._callback(this.rate);
+	}
+};
 var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
-	this._setDefaultValues();
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
+	this._fps = new jsfps_simplefps_Fps($bind(this,this._updateFps));
 };
 pixi_plugins_app_Application.prototype = {
 	set_fps: function(val) {
@@ -24,19 +62,6 @@ pixi_plugins_app_Application.prototype = {
 			this.set_fps(30);
 		}
 		return this.skipFrame = val;
-	}
-	,_setDefaultValues: function() {
-		this.pixelRatio = 1;
-		this.set_skipFrame(false);
-		this.autoResize = true;
-		this.transparent = false;
-		this.antialias = false;
-		this.forceFXAA = false;
-		this.roundPixels = false;
-		this.backgroundColor = 16777215;
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.set_fps(60);
 	}
 	,start: function(rendererType,stats,parentDom) {
 		if(stats == null) stats = true;
@@ -87,6 +112,7 @@ pixi_plugins_app_Application.prototype = {
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
 		if(this._fpsMeter != null) this._fpsMeter.tick();
+		this._fps.tick();
 	}
 	,_calculateElapsedTime: function() {
 		this._currentTime = new Date();
@@ -101,28 +127,51 @@ pixi_plugins_app_Application.prototype = {
 			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
+			this._stats.domElement.style.top = "0px";
+			this._stats.domElement.style.right = "0px";
 			container.appendChild(this._stats.domElement);
 			this._stats.begin();
-			var counter;
-			var _this1 = window.document;
-			counter = _this1.createElement("div");
-			counter.style.position = "absolute";
-			counter.style.top = "50px";
-			counter.style.right = "2px";
-			counter.style.width = "76px";
-			counter.style.background = "#CCCCC";
-			counter.style.backgroundColor = "#105CB6";
-			counter.style.fontFamily = "Helvetica,Arial";
-			counter.style.padding = "2px";
-			counter.style.color = "#0FF";
-			counter.style.fontSize = "9px";
-			counter.style.fontWeight = "bold";
-			counter.style.textAlign = "center";
-			window.document.body.appendChild(counter);
-			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
-		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter(null,{ theme : "colorful"});
+			this._addRenderStats();
+		} else if(window.FPSMeter != null) {
+			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "0px", right : "0px", left : "auto"});
+			this._addRenderStats();
+		}
+		var _this1 = window.document;
+		this._fpsDiv = _this1.createElement("div");
+		this._fpsDiv.style.position = "absolute";
+		this._fpsDiv.style.top = "14px";
+		this._fpsDiv.style.width = "76px";
+		this._fpsDiv.style.background = "#CCCCC";
+		this._fpsDiv.style.backgroundColor = "#00FF00";
+		this._fpsDiv.style.fontFamily = "Helvetica,Arial";
+		this._fpsDiv.style.padding = "2px";
+		this._fpsDiv.style.color = "#000000";
+		this._fpsDiv.style.fontSize = "9px";
+		this._fpsDiv.style.fontWeight = "bold";
+		this._fpsDiv.style.textAlign = "center";
+		this._fpsDiv.innerHTML = "FPS: 60";
+		window.document.body.appendChild(this._fpsDiv);
+		this._addRenderStats();
+	}
+	,_addRenderStats: function() {
+		var ren;
+		var _this = window.document;
+		ren = _this.createElement("div");
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		window.document.body.appendChild(ren);
+		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
+	}
+	,_updateFps: function(val) {
+		this._fpsDiv.innerHTML = "FPS: " + val;
 	}
 };
 var samples_graphics_Main = function() {
