@@ -98,22 +98,24 @@ pixi_plugins_app_Application.prototype = {
 			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "0px";
+			this._stats.domElement.style.top = "14px";
 			this._stats.domElement.style.right = "0px";
 			container.appendChild(this._stats.domElement);
 			this._stats.begin();
-			this._addRenderStats();
+			this._addRenderStats(null);
 		} else if(window.FPSMeter != null) {
-			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "0px", right : "0px", left : "auto"});
-			this._addRenderStats();
+			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
+			this._addRenderStats(null);
 		}
 	}
-	,_addRenderStats: function() {
+	,_addRenderStats: function(top) {
+		if(top == null) top = 0;
 		var ren;
 		var _this = window.document;
 		ren = _this.createElement("div");
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";
 		ren.style.fontFamily = "Helvetica,Arial";
@@ -164,7 +166,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		var _this = window.document;
 		this.counter = _this.createElement("div");
 		this.counter.style.position = "absolute";
-		this.counter.style.top = "14px";
+		this.counter.style.top = "0px";
 		this.counter.style.width = "76px";
 		this.counter.style.background = "#CCCCC";
 		this.counter.style.backgroundColor = "#105CB6";

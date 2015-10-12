@@ -251,20 +251,21 @@ class Application {
 			Browser.document.body.appendChild(container);
 			_stats = new Stats();
 			_stats.domElement.style.position = "absolute";
-			_stats.domElement.style.top = "0px";
+			_stats.domElement.style.top = "14px";
 			_stats.domElement.style.right = "0px";
 			container.appendChild(_stats.domElement);
 			_stats.begin();
 			_addRenderStats();
 		}
 		else if (untyped __js__("window").FPSMeter != null) {
-			_fpsMeter = new FPSMeter( {theme: "colorful", top: "0px", right: "0px", left: "auto"});
+			_fpsMeter = new FPSMeter( {theme: "colorful", top: "14px", right: "0px", left: "auto"});
 			_addRenderStats();
 		}
 
 		#if fps
 		_fpsDiv = Browser.document.createDivElement();
 		_fpsDiv.style.position = "absolute";
+		_fpsDiv.style.right = "0px";
 		_fpsDiv.style.top = "14px";
 		_fpsDiv.style.width = "76px";
 		_fpsDiv.style.background = "#CCCCC";
@@ -281,10 +282,11 @@ class Application {
 		#end
 	}
 
-	inline function _addRenderStats() {
+	inline function _addRenderStats(?top:Int = 0) {
 		var ren:DivElement = Browser.document.createDivElement();
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";
 		ren.style.fontFamily = "Helvetica,Arial";

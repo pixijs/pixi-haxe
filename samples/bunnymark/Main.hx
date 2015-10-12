@@ -50,7 +50,7 @@ class Main extends Application {
 
 		counter = Browser.document.createDivElement();
 		counter.style.position = "absolute";
-		counter.style.top = "14px";
+		counter.style.top = "0px";
 		counter.style.width = "76px";
 		counter.style.background = "#CCCCC";
 		counter.style.backgroundColor = "#105CB6";

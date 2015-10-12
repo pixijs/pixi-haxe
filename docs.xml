@@ -17988,7 +17988,10 @@
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<_addRenderStats get="inline" set="null" line="284"><f a=""><x path="Void"/></f></_addRenderStats>
+		<_addRenderStats get="inline" set="null" line="285"><f a="?top">
+	<x path="Int"/>
+	<x path="Void"/>
+</f></_addRenderStats>
 		<new public="1" set="method" line="138"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora

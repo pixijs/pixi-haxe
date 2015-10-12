@@ -127,18 +127,19 @@ pixi_plugins_app_Application.prototype = {
 			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "0px";
+			this._stats.domElement.style.top = "14px";
 			this._stats.domElement.style.right = "0px";
 			container.appendChild(this._stats.domElement);
 			this._stats.begin();
-			this._addRenderStats();
+			this._addRenderStats(null);
 		} else if(window.FPSMeter != null) {
-			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "0px", right : "0px", left : "auto"});
-			this._addRenderStats();
+			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
+			this._addRenderStats(null);
 		}
 		var _this1 = window.document;
 		this._fpsDiv = _this1.createElement("div");
 		this._fpsDiv.style.position = "absolute";
+		this._fpsDiv.style.right = "0px";
 		this._fpsDiv.style.top = "14px";
 		this._fpsDiv.style.width = "76px";
 		this._fpsDiv.style.background = "#CCCCC";
@@ -151,14 +152,16 @@ pixi_plugins_app_Application.prototype = {
 		this._fpsDiv.style.textAlign = "center";
 		this._fpsDiv.innerHTML = "FPS: 60";
 		window.document.body.appendChild(this._fpsDiv);
-		this._addRenderStats();
+		this._addRenderStats(null);
 	}
-	,_addRenderStats: function() {
+	,_addRenderStats: function(top) {
+		if(top == null) top = 0;
 		var ren;
 		var _this = window.document;
 		ren = _this.createElement("div");
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";
 		ren.style.fontFamily = "Helvetica,Arial";
