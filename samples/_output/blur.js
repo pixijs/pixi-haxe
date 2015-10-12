@@ -31,8 +31,7 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,stats,parentDom) {
-		if(stats == null) stats = true;
+	,start: function(rendererType,parentDom) {
 		if(rendererType == null) rendererType = "auto";
 		var _this = window.document;
 		this.canvas = _this.createElement("canvas");
@@ -55,7 +54,7 @@ pixi_plugins_app_Application.prototype = {
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
-		if(stats) this._addStats();
+		this._addStats();
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -63,10 +62,6 @@ pixi_plugins_app_Application.prototype = {
 		this.renderer.resize(this.width,this.height);
 		this.canvas.style.width = this.width + "px";
 		this.canvas.style.height = this.height + "px";
-		if(this._stats != null) {
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
-		}
 		if(this.onResize != null) this.onResize();
 	}
 	,_onRequestAnimationFrame: function() {
@@ -78,7 +73,6 @@ pixi_plugins_app_Application.prototype = {
 			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-		if(this._stats != null) this._stats.update();
 		if(this._fpsMeter != null) this._fpsMeter.tick();
 	}
 	,_calculateElapsedTime: function() {
@@ -87,22 +81,10 @@ pixi_plugins_app_Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats != null) {
-			var container;
-			var _this = window.document;
-			container = _this.createElement("div");
-			window.document.body.appendChild(container);
-			this._stats = new Stats();
-			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "14px";
-			this._stats.domElement.style.right = "0px";
-			container.appendChild(this._stats.domElement);
-			this._stats.begin();
-			this._addRenderStats(null);
-		} else if(window.FPSMeter != null) {
+		if(window.FPSMeter != null) {
 			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
 			this._addRenderStats(null);
-		}
+		} else console.log("Unable to find fpsmeter.js");
 	}
 	,_addRenderStats: function(top) {
 		if(top == null) top = 0;
