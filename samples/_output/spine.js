@@ -13,6 +13,33 @@ Reflect.field = function(o,field) {
 		return null;
 	}
 };
+var jsfps_simplefps_Fps = function(callback,every,decay) {
+	if(decay == null) decay = 1;
+	if(every == null) every = 60;
+	this._callback = callback;
+	this.rate = 60;
+	this._time = 0;
+	this._decay = decay;
+	this._every = every;
+	this._ticks = 0;
+	this._last = this._now();
+};
+jsfps_simplefps_Fps.prototype = {
+	_now: function() {
+		if(window.performance != null) return window.performance.now();
+		return new Date().getTime();
+	}
+	,tick: function() {
+		var time = this._now();
+		var diff = time - this._last;
+		this._ticks += 1;
+		this._last = time;
+		this._time += (diff - this._time) * this._decay;
+		this.rate = Math.round(1000 / this._time);
+		if(this.rate > 60) this.rate = 60;
+		if(this._ticks % this._every == 0 && this._callback != null) this._callback(this.rate);
+	}
+};
 var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
 	this.pixelRatio = 1;
@@ -39,8 +66,7 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,stats,parentDom) {
-		if(stats == null) stats = true;
+	,start: function(rendererType,parentDom) {
 		if(rendererType == null) rendererType = "auto";
 		var _this = window.document;
 		this.canvas = _this.createElement("canvas");
@@ -63,7 +89,7 @@ pixi_plugins_app_Application.prototype = {
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
-		if(stats) this._addStats();
+		this._addStats();
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -71,10 +97,6 @@ pixi_plugins_app_Application.prototype = {
 		this.renderer.resize(this.width,this.height);
 		this.canvas.style.width = this.width + "px";
 		this.canvas.style.height = this.height + "px";
-		if(this._stats != null) {
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
-		}
 		if(this.onResize != null) this.onResize();
 	}
 	,_onRequestAnimationFrame: function() {
@@ -86,8 +108,7 @@ pixi_plugins_app_Application.prototype = {
 			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-		if(this._stats != null) this._stats.update();
-		if(this._fpsMeter != null) this._fpsMeter.tick();
+		this._fps.tick();
 	}
 	,_calculateElapsedTime: function() {
 		this._currentTime = new Date();
@@ -95,22 +116,24 @@ pixi_plugins_app_Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats != null) {
-			var container;
-			var _this = window.document;
-			container = _this.createElement("div");
-			window.document.body.appendChild(container);
-			this._stats = new Stats();
-			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "14px";
-			this._stats.domElement.style.right = "0px";
-			container.appendChild(this._stats.domElement);
-			this._stats.begin();
-			this._addRenderStats(null);
-		} else if(window.FPSMeter != null) {
-			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
-			this._addRenderStats(null);
-		}
+		this._fps = new jsfps_simplefps_Fps($bind(this,this._updateFps));
+		var _this = window.document;
+		this._fpsDiv = _this.createElement("div");
+		this._fpsDiv.style.position = "absolute";
+		this._fpsDiv.style.right = "0px";
+		this._fpsDiv.style.top = "14px";
+		this._fpsDiv.style.width = "76px";
+		this._fpsDiv.style.background = "#CCCCC";
+		this._fpsDiv.style.backgroundColor = "#00FF00";
+		this._fpsDiv.style.fontFamily = "Helvetica,Arial";
+		this._fpsDiv.style.padding = "2px";
+		this._fpsDiv.style.color = "#000000";
+		this._fpsDiv.style.fontSize = "9px";
+		this._fpsDiv.style.fontWeight = "bold";
+		this._fpsDiv.style.textAlign = "center";
+		this._fpsDiv.innerHTML = "FPS: 60";
+		window.document.body.appendChild(this._fpsDiv);
+		this._addRenderStats(null);
 	}
 	,_addRenderStats: function(top) {
 		if(top == null) top = 0;
@@ -130,6 +153,9 @@ pixi_plugins_app_Application.prototype = {
 		ren.style.textAlign = "center";
 		window.document.body.appendChild(ren);
 		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
+	}
+	,_updateFps: function(val) {
+		this._fpsDiv.innerHTML = "FPS: " + val;
 	}
 };
 var samples_spine_Main = function() {

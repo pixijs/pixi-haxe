@@ -10,9 +10,9 @@ import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
 
-import jsfps.simplefps.Fps;
-import jsfps.fpsmeter.FPSMeter;
-import jsfps.stats.Stats;
+#if fps import jsfps.simplefps.Fps; #end
+#if fpsmeter import jsfps.fpsmeter.FPSMeter; #end
+#if stats import jsfps.stats.Stats; #end
 
 /**
  * Pixi Boilerplate Helper class that can be used by any application
@@ -123,8 +123,6 @@ class Application {
 	public static inline var CANVAS:String = "canvas";
 	public static inline var WEBGL:String = "webgl";
 
-	var _stats:Stats;
-	var _fpsMeter:FPSMeter;
 	var _lastTime:Date;
 	var _currentTime:Date;
 	var _elapsedTime:Float;
@@ -134,6 +132,9 @@ class Application {
 	var _fps:Fps;
 	var _fpsDiv:DivElement;
 	#end
+
+	#if stats var _stats:Stats; #end
+	#if fpsmeter var _fpsMeter:FPSMeter; #end
 
 	public function new() {
 		_lastTime = Date.now();
@@ -165,7 +166,6 @@ class Application {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		fps = 60;
-		#if fps _fps = new Fps(_updateFps); #end
 	}
 
 	/**
@@ -177,7 +177,7 @@ class Application {
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
 
-	public function start(?rendererType:String = "auto", ?stats:Bool = true, ?parentDom:Element) {
+	public function start(?rendererType:String = "auto", ?parentDom:Element) {
 		canvas = Browser.document.createCanvasElement();
 		canvas.style.width = width + "px";
 		canvas.style.height = height + "px";
@@ -207,7 +207,7 @@ class Application {
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		_lastTime = Date.now();
 
-		if (stats) _addStats();
+		_addStats();
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
@@ -216,11 +216,6 @@ class Application {
 		renderer.resize(width, height);
 		canvas.style.width = width + "px";
 		canvas.style.height = height + "px";
-
-		if (_stats != null) {
-			_stats.domElement.style.top = "2px";
-			_stats.domElement.style.right = "2px";
-		}
 
 		if (onResize != null) onResize();
 	}
@@ -234,9 +229,10 @@ class Application {
 			renderer.render(stage);
 		}
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
-		if (_stats != null) _stats.update();
-		if (_fpsMeter != null) _fpsMeter.tick();
+
 		#if fps _fps.tick(); #end
+		#if stats if (_stats != null) _stats.update(); #end
+		#if fpsmeter if (_fpsMeter != null) _fpsMeter.tick(); #end
 	}
 
 	@:noCompletion function _calculateElapsedTime() {
@@ -246,23 +242,8 @@ class Application {
 	}
 
 	@:noCompletion function _addStats() {
-		if (untyped __js__("window").Stats != null) {
-			var container = Browser.document.createDivElement();
-			Browser.document.body.appendChild(container);
-			_stats = new Stats();
-			_stats.domElement.style.position = "absolute";
-			_stats.domElement.style.top = "14px";
-			_stats.domElement.style.right = "0px";
-			container.appendChild(_stats.domElement);
-			_stats.begin();
-			_addRenderStats();
-		}
-		else if (untyped __js__("window").FPSMeter != null) {
-			_fpsMeter = new FPSMeter( {theme: "colorful", top: "14px", right: "0px", left: "auto"});
-			_addRenderStats();
-		}
-
 		#if fps
+		_fps = new Fps(_updateFps);
 		_fpsDiv = Browser.document.createDivElement();
 		_fpsDiv.style.position = "absolute";
 		_fpsDiv.style.right = "0px";
@@ -279,6 +260,29 @@ class Application {
 		_fpsDiv.innerHTML = "FPS: 60";
 		Browser.document.body.appendChild(_fpsDiv);
 		_addRenderStats();
+		#end
+
+		#if stats
+		if (untyped __js__("window").Stats != null) {
+			var container = Browser.document.createDivElement();
+			Browser.document.body.appendChild(container);
+			_stats = new Stats();
+			_stats.domElement.style.position = "absolute";
+			_stats.domElement.style.top = "14px";
+			_stats.domElement.style.right = "0px";
+			container.appendChild(_stats.domElement);
+			_stats.begin();
+			_addRenderStats();
+		}
+		else trace("Unable to find stats.js");
+		#end
+
+		#if fpsmeter
+		if (untyped __js__("window").FPSMeter != null) {
+			_fpsMeter = new FPSMeter( {theme: "colorful", top: "14px", right: "0px", left: "auto"});
+			_addRenderStats();
+		}
+		else trace("Unable to find fpsmeter.js");
 		#end
 	}
 

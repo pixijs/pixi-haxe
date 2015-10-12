@@ -21,14 +21,17 @@
 
 --next
 -main samples.spine.Main
+-D fps
 -js samples/_output/spine.js
 
 --next
 -main samples.spritesheet.Main
+-D stats
 -js samples/_output/spritesheet.js
 
 --next
 -main samples.movieclip.Main
+-D stats
 -js samples/_output/movieclip.js
 
 --next
@@ -38,31 +41,38 @@
 
 --next
 -main samples.tiling.Main
+-D stats
 -js samples/_output/tiling.js
 
 --next
 -main samples.bitmapfont.Main
+-D stats
 -js samples/_output/bitmapfont.js
 
 --next
 -main samples.dragging.Main
+-D stats
 -js samples/_output/dragging.js
 
 --next
 -main samples.nape.Main
+-D stats
 -js samples/_output/nape.js
 -lib nape
 
 --next
 -main samples.rope.Main
+-D stats
 -js samples/_output/rope.js
 
 --next
 -main samples.retina.Main
+-D stats
 -js samples/_output/retina.js
 
 --next
 -main samples.bunnymark.Main
+-D stats
 -js samples/_output/bunnymark.js
 
 --next
@@ -71,45 +81,56 @@
 
 --next
 -main samples.alphamask.Main
+-D stats
 -js samples/_output/alphamask.js
 
 --next
 -main samples.filters.colormatrix.Main
+-D stats
 -js samples/_output/colormatrix.js
 
 --next
 -main samples.filters.blur.Main
+-D fpsmeter
 -js samples/_output/blur.js
 
 --next
 -main samples.loader.Main
+-D stats
 -js samples/_output/loader.js
 
 --next
 -main samples.video.Main
+-D stats
 -js samples/_output/video.js
 
 --next
 -main samples.stream.Main
+-D stats
 -js samples/_output/stream.js
 
 --next
 -main samples.events.Main
+-D stats
 -js samples/_output/events.js
 
 --next
 -main samples.mask.Main
+-D stats
 -js samples/_output/mask.js
 
 --next
 -main samples.deviceinfo.Main
+-D stats
 -js samples/_output/deviceinfo.js
 
 --next
 -main samples.devicedetection.Main
+-D stats
 -js samples/_output/devicedetection.js
 
 --next
 -lib msignal
 -main samples.audio.Main
+-D stats
 -js samples/_output/audio.js

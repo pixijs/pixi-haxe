@@ -31,8 +31,7 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,stats,parentDom) {
-		if(stats == null) stats = true;
+	,start: function(rendererType,parentDom) {
 		if(rendererType == null) rendererType = "auto";
 		var _this = window.document;
 		this.canvas = _this.createElement("canvas");
@@ -55,7 +54,7 @@ pixi_plugins_app_Application.prototype = {
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
-		if(stats) this._addStats();
+		this._addStats();
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -63,10 +62,6 @@ pixi_plugins_app_Application.prototype = {
 		this.renderer.resize(this.width,this.height);
 		this.canvas.style.width = this.width + "px";
 		this.canvas.style.height = this.height + "px";
-		if(this._stats != null) {
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
-		}
 		if(this.onResize != null) this.onResize();
 	}
 	,_onRequestAnimationFrame: function() {
@@ -78,8 +73,6 @@ pixi_plugins_app_Application.prototype = {
 			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-		if(this._stats != null) this._stats.update();
-		if(this._fpsMeter != null) this._fpsMeter.tick();
 	}
 	,_calculateElapsedTime: function() {
 		this._currentTime = new Date();
@@ -87,41 +80,6 @@ pixi_plugins_app_Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats != null) {
-			var container;
-			var _this = window.document;
-			container = _this.createElement("div");
-			window.document.body.appendChild(container);
-			this._stats = new Stats();
-			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "14px";
-			this._stats.domElement.style.right = "0px";
-			container.appendChild(this._stats.domElement);
-			this._stats.begin();
-			this._addRenderStats(null);
-		} else if(window.FPSMeter != null) {
-			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
-			this._addRenderStats(null);
-		}
-	}
-	,_addRenderStats: function(top) {
-		if(top == null) top = 0;
-		var ren;
-		var _this = window.document;
-		ren = _this.createElement("div");
-		ren.style.position = "absolute";
-		ren.style.width = "76px";
-		ren.style.right = "0px";
-		ren.style.background = "#CCCCC";
-		ren.style.backgroundColor = "#105CB6";
-		ren.style.fontFamily = "Helvetica,Arial";
-		ren.style.padding = "2px";
-		ren.style.color = "#0FF";
-		ren.style.fontSize = "9px";
-		ren.style.fontWeight = "bold";
-		ren.style.textAlign = "center";
-		window.document.body.appendChild(ren);
-		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
 	}
 };
 var samples_textureswap_Main = function() {
