@@ -5,86 +5,20 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-Math.__name__ = true;
-var js_Boot = function() { };
-js_Boot.__name__ = true;
-js_Boot.__string_rec = function(o,s) {
-	if(o == null) return "null";
-	if(s.length >= 5) return "<...>";
-	var t = typeof(o);
-	if(t == "function" && (o.__name__ || o.__ename__)) t = "object";
-	switch(t) {
-	case "object":
-		if(o instanceof Array) {
-			if(o.__enum__) {
-				if(o.length == 2) return o[0];
-				var str2 = o[0] + "(";
-				s += "\t";
-				var _g1 = 2;
-				var _g = o.length;
-				while(_g1 < _g) {
-					var i1 = _g1++;
-					if(i1 != 2) str2 += "," + js_Boot.__string_rec(o[i1],s); else str2 += js_Boot.__string_rec(o[i1],s);
-				}
-				return str2 + ")";
-			}
-			var l = o.length;
-			var i;
-			var str1 = "[";
-			s += "\t";
-			var _g2 = 0;
-			while(_g2 < l) {
-				var i2 = _g2++;
-				str1 += (i2 > 0?",":"") + js_Boot.__string_rec(o[i2],s);
-			}
-			str1 += "]";
-			return str1;
-		}
-		var tostr;
-		try {
-			tostr = o.toString;
-		} catch( e ) {
-			return "???";
-		}
-		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
-			var s2 = o.toString();
-			if(s2 != "[object Object]") return s2;
-		}
-		var k = null;
-		var str = "{\n";
-		s += "\t";
-		var hasp = o.hasOwnProperty != null;
-		for( var k in o ) {
-		if(hasp && !o.hasOwnProperty(k)) {
-			continue;
-		}
-		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
-			continue;
-		}
-		if(str.length != 2) str += ", \n";
-		str += s + k + " : " + js_Boot.__string_rec(o[k],s);
-		}
-		s = s.substring(1);
-		str += "\n" + s + "}";
-		return str;
-	case "function":
-		return "<function>";
-	case "string":
-		return o;
-	default:
-		return String(o);
-	}
-};
-var js_Browser = function() { };
-js_Browser.__name__ = true;
-js_Browser.alert = function(v) {
-	window.alert(js_Boot.__string_rec(v,""));
-};
 var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
-	this._setDefaultValues();
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
 };
-pixi_plugins_app_Application.__name__ = true;
 pixi_plugins_app_Application.prototype = {
 	set_fps: function(val) {
 		this._frameCount = 0;
@@ -96,19 +30,6 @@ pixi_plugins_app_Application.prototype = {
 			this.set_fps(30);
 		}
 		return this.skipFrame = val;
-	}
-	,_setDefaultValues: function() {
-		this.pixelRatio = 1;
-		this.set_skipFrame(false);
-		this.autoResize = true;
-		this.transparent = false;
-		this.antialias = false;
-		this.forceFXAA = false;
-		this.roundPixels = false;
-		this.backgroundColor = 16777215;
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.set_fps(60);
 	}
 	,start: function(rendererType,stats,parentDom) {
 		if(stats == null) stats = true;
@@ -173,35 +94,40 @@ pixi_plugins_app_Application.prototype = {
 			window.document.body.appendChild(container);
 			this._stats = new Stats();
 			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
+			this._stats.domElement.style.top = "14px";
+			this._stats.domElement.style.right = "0px";
 			container.appendChild(this._stats.domElement);
 			this._stats.begin();
-			var counter;
-			var _this1 = window.document;
-			counter = _this1.createElement("div");
-			counter.style.position = "absolute";
-			counter.style.top = "50px";
-			counter.style.right = "2px";
-			counter.style.width = "76px";
-			counter.style.background = "#CCCCC";
-			counter.style.backgroundColor = "#105CB6";
-			counter.style.fontFamily = "Helvetica,Arial";
-			counter.style.padding = "2px";
-			counter.style.color = "#0FF";
-			counter.style.fontSize = "9px";
-			counter.style.fontWeight = "bold";
-			counter.style.textAlign = "center";
-			window.document.body.appendChild(counter);
-			counter.innerHTML = ["Unknown","WebGL","Canvas"][this.renderer.type] + " - " + this.pixelRatio;
-		} else if(window.FPSMeter != null) this._fpsMeter = new FPSMeter();
+			this._addRenderStats(null);
+		} else if(window.FPSMeter != null) {
+			this._fpsMeter = new FPSMeter(null,{ theme : "colorful", top : "14px", right : "0px", left : "auto"});
+			this._addRenderStats(null);
+		}
+	}
+	,_addRenderStats: function(top) {
+		if(top == null) top = 0;
+		var ren;
+		var _this = window.document;
+		ren = _this.createElement("div");
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.right = "0px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		window.document.body.appendChild(ren);
+		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
 	}
 };
 var samples_events_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_events_Main.__name__ = true;
 samples_events_Main.main = function() {
 	new samples_events_Main();
 };
@@ -216,7 +142,6 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._img.scale.set(4);
 		this._img.on("mouseover",$bind(this,this._onEvent));
 		this._img.on("touchstart",$bind(this,this._onEvent));
-		this._img.on("tap",$bind(this,this._onTap));
 		this._img.tap = $bind(this,this._onEvent);
 		this._img.click = $bind(this,this._onEvent);
 		this.stage.addChild(this._img);
@@ -226,29 +151,13 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._label = new PIXI.Text("EVENTS",style);
 		this._label.position.set(0,0);
 		this.stage.addChild(this._label);
-		var _this = window.document;
-		this._domText = _this.createElement("input");
-		this._domText.type = "text";
-		this._domText.id = "txt";
-		this._domText.style.position = "absolute";
-		window.document.body.appendChild(this._domText);
-		window.keyBoardEnter = $bind(this,this._keyBoardEnter);
-	}
-	,_onTap: function() {
-		this._domText.focus();
 	}
 	,_onEvent: function(target) {
 		this._label.text = target.type;
 	}
-	,_keyBoardEnter: function() {
-		js_Browser.alert("test");
-	}
 });
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-String.__name__ = true;
-Array.__name__ = true;
-Date.__name__ = ["Date"];
 samples_events_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}});
 

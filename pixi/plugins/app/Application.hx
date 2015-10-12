@@ -10,6 +10,7 @@ import js.html.Event;
 import js.html.CanvasElement;
 import js.Browser;
 
+import jsfps.simplefps.Fps;
 import jsfps.fpsmeter.FPSMeter;
 import jsfps.stats.Stats;
 
@@ -129,6 +130,11 @@ class Application {
 	var _elapsedTime:Float;
 	var _frameCount:Int;
 
+	#if fps
+	var _fps:Fps;
+	var _fpsDiv:DivElement;
+	#end
+
 	public function new() {
 		_lastTime = Date.now();
 		_setDefaultValues();
@@ -147,7 +153,7 @@ class Application {
 		return skipFrame = val;
 	}
 
-	function _setDefaultValues() {
+	inline function _setDefaultValues() {
 		pixelRatio = 1;
 		skipFrame = false;
 		autoResize = true;
@@ -159,6 +165,7 @@ class Application {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
 		fps = 60;
+		#if fps _fps = new Fps(_updateFps); #end
 	}
 
 	/**
@@ -229,6 +236,7 @@ class Application {
 		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		if (_stats != null) _stats.update();
 		if (_fpsMeter != null) _fpsMeter.tick();
+		#if fps _fps.tick(); #end
 	}
 
 	@:noCompletion function _calculateElapsedTime() {
@@ -243,29 +251,57 @@ class Application {
 			Browser.document.body.appendChild(container);
 			_stats = new Stats();
 			_stats.domElement.style.position = "absolute";
-			_stats.domElement.style.top = "2px";
-			_stats.domElement.style.right = "2px";
+			_stats.domElement.style.top = "14px";
+			_stats.domElement.style.right = "0px";
 			container.appendChild(_stats.domElement);
 			_stats.begin();
-
-			var counter:DivElement = Browser.document.createDivElement();
-			counter.style.position = "absolute";
-			counter.style.top = "50px";
-			counter.style.right = "2px";
-			counter.style.width = "76px";
-			counter.style.background = "#CCCCC";
-			counter.style.backgroundColor = "#105CB6";
-			counter.style.fontFamily = "Helvetica,Arial";
-			counter.style.padding = "2px";
-			counter.style.color = "#0FF";
-			counter.style.fontSize = "9px";
-			counter.style.fontWeight = "bold";
-			counter.style.textAlign = "center";
-			Browser.document.body.appendChild(counter);
-			counter.innerHTML = ["Unknown", "WebGL", "Canvas"][renderer.type] + " - " + pixelRatio;
+			_addRenderStats();
 		}
 		else if (untyped __js__("window").FPSMeter != null) {
-			_fpsMeter = new FPSMeter();
+			_fpsMeter = new FPSMeter( {theme: "colorful", top: "14px", right: "0px", left: "auto"});
+			_addRenderStats();
 		}
+
+		#if fps
+		_fpsDiv = Browser.document.createDivElement();
+		_fpsDiv.style.position = "absolute";
+		_fpsDiv.style.right = "0px";
+		_fpsDiv.style.top = "14px";
+		_fpsDiv.style.width = "76px";
+		_fpsDiv.style.background = "#CCCCC";
+		_fpsDiv.style.backgroundColor = "#00FF00";
+		_fpsDiv.style.fontFamily = "Helvetica,Arial";
+		_fpsDiv.style.padding = "2px";
+		_fpsDiv.style.color = "#000000";
+		_fpsDiv.style.fontSize = "9px";
+		_fpsDiv.style.fontWeight = "bold";
+		_fpsDiv.style.textAlign = "center";
+		_fpsDiv.innerHTML = "FPS: 60";
+		Browser.document.body.appendChild(_fpsDiv);
+		_addRenderStats();
+		#end
 	}
+
+	inline function _addRenderStats(?top:Int = 0) {
+		var ren:DivElement = Browser.document.createDivElement();
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.right = "0px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		Browser.document.body.appendChild(ren);
+		ren.innerHTML = ["UNKNOWN", "WEBGL", "CANVAS"][renderer.type] + " - " + pixelRatio;
+	}
+
+	#if fps
+	function _updateFps(val:Float) {
+		_fpsDiv.innerHTML = "FPS: " + val;
+	}
+	#end
 }

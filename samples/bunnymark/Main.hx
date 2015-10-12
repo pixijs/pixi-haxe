@@ -50,15 +50,14 @@ class Main extends Application {
 
 		counter = Browser.document.createDivElement();
 		counter.style.position = "absolute";
-		counter.style.top = "1px";
-		counter.style.left = "1px";
-		counter.style.width = "90px";
+		counter.style.top = "0px";
+		counter.style.width = "76px";
 		counter.style.background = "#CCCCC";
 		counter.style.backgroundColor = "#105CB6";
 		counter.style.fontFamily = "Helvetica,Arial";
-		counter.style.padding = "3px";
+		counter.style.padding = "2px";
 		counter.style.color = "#0FF";
-		counter.style.fontSize = "10px";
+		counter.style.fontSize = "9px";
 		counter.style.fontWeight = "bold";
 		counter.style.textAlign = "center";
 		counter.className = "counter";
