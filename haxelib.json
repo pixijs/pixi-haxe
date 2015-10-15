@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "improved stats in Application class",
-	"version": "3.0.24",
+	"releasenote": "fixed the inappropriate array type of Mesh vertices, uvs and indices",
+	"version": "3.0.25",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"jsfps": ""
