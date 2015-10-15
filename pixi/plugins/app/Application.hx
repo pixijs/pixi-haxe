@@ -290,6 +290,7 @@ class Application {
 		var ren:DivElement = Browser.document.createDivElement();
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.top = top + "px";
 		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";
