@@ -7146,6 +7146,75 @@
 		</setSelectionRange>
 		<meta><m n=":native"><e>"HTMLInputElement"</e></m></meta>
 	</class>
+	<class path="js.html.Int16Array" params="" file="/usr/lib/haxe/std/js/html/Int16Array.hx" extern="1">
+		<extends path="js.html.ArrayBufferView"/>
+		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="2" line="30" static="1">
+			<x path="Int"/>
+			<meta><m n=":value"><e>2</e></m></meta>
+		</BYTES_PER_ELEMENT>
+		<length public="1" set="null"><x path="Int"/></length>
+		<get public="1" set="method"><f a="index">
+	<x path="Int"/>
+	<x path="Int"/>
+</f></get>
+		<set public="1" set="method">
+			<f a="array:?offset">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<overloads>
+				<set public="1" set="method"><f a="index:value">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+				<set public="1" set="method"><f a="array:?offset">
+	<c path="js.html.Int16Array"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+			</overloads>
+		</set>
+		<subarray public="1" set="method"><f a="start:end">
+	<x path="Int"/>
+	<x path="Int"/>
+	<c path="js.html.Int16Array"/>
+</f></subarray>
+		<new public="1" set="method">
+			<f a="buffer:?byteOffset:?length">
+				<c path="js.html.ArrayBuffer"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+			<overloads>
+				<new public="1" set="method">
+					<f a="length">
+						<x path="Int"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="js.html.Int16Array"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="Array"><x path="Int"/></c>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+			</overloads>
+		</new>
+		<meta><m n=":native"><e>"Int16Array"</e></m></meta>
+	</class>
 	<class path="js.html.Int32Array" params="" file="/usr/lib/haxe/std/js/html/Int32Array.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="4" line="30" static="1">
@@ -17626,18 +17695,18 @@
 	 * @member {Texture}</haxe_doc>
 		</texture>
 		<uvs public="1">
-			<c path="Array"><x path="Float"/></c>
-			<haxe_doc><![CDATA[* The Uvs of the Mesh
+			<c path="js.html.Float32Array"/>
+			<haxe_doc>* The Uvs of the Mesh
 	 *
-	 * @member {Array<Float>}]]></haxe_doc>
+	 * @member {Float32Array}</haxe_doc>
 		</uvs>
 		<vertices public="1">
-			<c path="Array"><x path="Float"/></c>
-			<haxe_doc><![CDATA[* An array of vertices
+			<c path="js.html.Float32Array"/>
+			<haxe_doc>* An array of vertices
 	 *
-	 * @member {Array<Float>}]]></haxe_doc>
+	 * @member {Float32Array}</haxe_doc>
 		</vertices>
-		<indices public="1"><c path="Array"><x path="Int"/></c></indices>
+		<indices public="1"><c path="js.html.Int16Array"/></indices>
 		<dirty public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether the Mesh is dirty or not
@@ -17666,21 +17735,21 @@
 		<new public="1" set="method">
 			<f a="texture:?vertices:?uvs:?indices:?drawMode">
 				<c path="pixi.core.textures.Texture"/>
-				<c path="Array"><x path="Float"/></c>
-				<c path="Array"><x path="Float"/></c>
-				<c path="Array"><x path="Int"/></c>
+				<c path="js.html.Float32Array"/>
+				<c path="js.html.Float32Array"/>
+				<c path="js.html.Int16Array"/>
 				<x path="Int"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc><![CDATA[* Base mesh class
+			<haxe_doc>* Base mesh class
 	 * @class
 	 * @extends Container
 	 * @memberof PIXI.mesh
 	 * @param texture {Texture} The texture to use
-	 * @param [vertices] {Array<Float>} if you want to specify the vertices
-	 * @param [uvs] {Array<Float>} if you want to specify the uvs
-	 * @param [indices] {Array<Int>} if you want to specify the indices
-	 * @param [drawMode] {Int} the drawMode, can be any of the Mesh.DRAW_MODES consts]]></haxe_doc>
+	 * @param [vertices] {Float32Array} if you want to specify the vertices
+	 * @param [uvs] {Float32Array} if you want to specify the uvs
+	 * @param [indices] {Int16Array} if you want to specify the indices
+	 * @param [drawMode] {Int} the drawMode, can be any of the Mesh.DRAW_MODES consts</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.mesh.Mesh"</e></m></meta>
 	</class>

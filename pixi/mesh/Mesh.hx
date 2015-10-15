@@ -1,5 +1,7 @@
 package pixi.mesh;
 
+import js.html.Float32Array;
+import js.html.Int16Array;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 
@@ -12,12 +14,12 @@ extern class Mesh extends Container {
 	 * @extends Container
 	 * @memberof PIXI.mesh
 	 * @param texture {Texture} The texture to use
-	 * @param [vertices] {Array<Float>} if you want to specify the vertices
-	 * @param [uvs] {Array<Float>} if you want to specify the uvs
-	 * @param [indices] {Array<Int>} if you want to specify the indices
+	 * @param [vertices] {Float32Array} if you want to specify the vertices
+	 * @param [uvs] {Float32Array} if you want to specify the uvs
+	 * @param [indices] {Int16Array} if you want to specify the indices
 	 * @param [drawMode] {Int} the drawMode, can be any of the Mesh.DRAW_MODES consts
 	 */
-	function new(texture:Texture, ?vertices:Array<Float>, ?uvs:Array<Float>, ?indices:Array<Int>, ?drawMode:Int);
+	function new(texture:Texture, ?vertices:Float32Array, ?uvs:Float32Array, ?indices:Int16Array, ?drawMode:Int);
 
 	/**
 	 * Different drawing buffer modes supported
@@ -40,21 +42,21 @@ extern class Mesh extends Container {
 	/**
 	 * The Uvs of the Mesh
 	 *
-	 * @member {Array<Float>}
+	 * @member {Float32Array}
 	 */
-	var uvs:Array<Float>;
+	var uvs:Float32Array;
 
 	/**
 	 * An array of vertices
 	 *
-	 * @member {Array<Float>}
+	 * @member {Float32Array}
 	 */
-	var vertices:Array<Float>;
+	var vertices:Float32Array;
 
 	/*
-	 * @member {Array<Int>} An array containing the indices of the vertices
+	 * @member {Int16Array} An array containing the indices of the vertices
 	 */
-	var indices:Array<Int>;
+	var indices:Int16Array;
 
 	/**
 	 * Whether the Mesh is dirty or not
