@@ -210,6 +210,16 @@ class Application {
 		_addStats();
 	}
 
+	public function pauseRendering() {
+		Browser.window.onresize = null;
+		Browser.window.requestAnimationFrame(cast function(){});
+	}
+
+	public function resumeRendering() {
+		if (autoResize) Browser.window.onresize = _onWindowResize;
+		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+	}
+
 	@:noCompletion function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -245,6 +255,8 @@ class Application {
 		#if fps
 		_fps = new Fps(_updateFps);
 		_fpsDiv = Browser.document.createDivElement();
+		_fpsDiv.id = "fps";
+		_fpsDiv.className = "fps";
 		_fpsDiv.style.position = "absolute";
 		_fpsDiv.style.right = "0px";
 		_fpsDiv.style.top = "14px";
@@ -290,6 +302,7 @@ class Application {
 		var ren:DivElement = Browser.document.createDivElement();
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.top = top + "px";
 		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";

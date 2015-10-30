@@ -17899,29 +17899,29 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="213">
+		<_onWindowResize set="method" line="223">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="223">
+		<_onRequestAnimationFrame set="method" line="233">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="238">
+		<_calculateElapsedTime set="method" line="248">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="244">
+		<_addStats set="method" line="254">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<_addRenderStats get="inline" set="null" line="289"><f a="?top">
+		<_addRenderStats get="inline" set="null" line="301"><f a="?top">
 	<x path="Int"/>
 	<x path="Void"/>
 </f></_addRenderStats>
