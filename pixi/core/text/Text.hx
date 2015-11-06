@@ -100,9 +100,9 @@ extern class Text extends Sprite {
 
 typedef TextStyle = {
 	@:optional var font:String;
-	@:optional var fill:String;
+	@:optional var fill:Dynamic;
 	@:optional var align:String;
-	@:optional var stroke:String;
+	@:optional var stroke:Dynamic;
 	@:optional var strokeThickness:Float;
 	@:optional var wordWrap:Bool;
 	@:optional var wordWrapWidth:Float;
