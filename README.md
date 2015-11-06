@@ -1,4 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
@@ -42,6 +42,10 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
 * [Device Info](http://adireddy.github.io/demos/pixi-haxe/deviceinfo.html)
 * [Device Detection](http://adireddy.github.io/demos/pixi-haxe/devicedetection.html)
+
+**Plugins**
+
+* [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
 
 **Filters (WebGL only)**
 

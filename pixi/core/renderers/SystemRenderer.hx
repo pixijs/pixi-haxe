@@ -115,6 +115,11 @@ extern class SystemRenderer extends EventEmitter {
 	var backgroundColor:Int;
 
 	/**
+	 * Plugins object
+	 */
+	var plugins:Dynamic;
+
+	/**
 	 * Resizes the canvas view to the specified width and height
 	 *
 	 * @param width {Float} the new width of the canvas view

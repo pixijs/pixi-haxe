@@ -1,9 +1,9 @@
-package pixi.spine;
+package pixi.plugins.spine;
 
 import pixi.core.display.Container;
 
-@:native("PIXI.Spine")
-extern class Spine {
+@:native("PIXI.spine.Spine")
+extern class Spine extends Container {
 
 	/**
 	 * A class that enables the you to import and run your spine animations in pixi.
@@ -11,7 +11,7 @@ extern class Spine {
 	 * See example 12 (http://www.goodboydigital.com/pixijs/examples/12/) to see a working example and check out the source
 	 *
 	 * ```js
-	 * 	var spineAnimation = new PIXI.Spine(spineData);
+	 * var spineAnimation = new PIXI.Spine(spineData);
 	 * ```
 	 *
 	 * @class
@@ -22,15 +22,9 @@ extern class Spine {
 	function new(spineData:Dynamic);
 
 	/**
-     * If this flag is set to true, the spine animation will be autoupdated every time
-     * the object id drawn. The down side of this approach is that the delta time is
-     * automatically calculated and you could miss out on cool effects like slow motion,
-     * pause, skip ahead and the sorts. Most of these effects can be achieved even with
-     * autoupdate enabled but are harder to achieve.
+     * Should the Spine object update its transforms
      *
      * @member {boolean}
-     * @memberof Spine#
-     * @default true
      */
 	var autoUpdate:Bool;
 
@@ -65,14 +59,14 @@ extern class Spine {
 	/**
      * An array of containers
      *
-     * @member {Array<Container>}
+     * @member {Container[]}
      */
 	var slotContainers:Array<Container>;
 
 	/**
 	 * Update the spine skeleton and its animations by delta time (dt)
 	 *
-	 * @param dt {Float} Delta time. Time by which the animation should be updated
+	 * @param dt {number} Delta time. Time by which the animation should be updated
 	 */
 	function update(dt:Float):Void;
 }

@@ -81,6 +81,16 @@ extern class DisplayObject extends InteractionManager {
 	function displayObjectUpdateTransform():Void;
 
 	/**
+	 * Base destroy method for generic display objects
+	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
+	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)
+	 */
+	@:overload(function(?destroyTexture:Bool, ?destroyBaseTexture:Bool):Void {})
+	@:overload(function(?destroyChildren:Bool):Void {})
+	function destroy():Void;
+
+	/**
 	 * The instance name of the object.
 	 *
 	 * @member {String}

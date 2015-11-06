@@ -1,48 +1,48 @@
 package samples.spine;
 
-import pixi.Application;
-import pixi.InteractionData;
-import pixi.display.Stage;
-import pixi.spine.Spine;
-import pixi.loaders.AssetLoader;
+import pixi.loaders.Loader;
+import pixi.plugins.app.Application;
+import pixi.plugins.spine.Spine;
 
 class Main extends Application {
 
-	var _loader:AssetLoader;
-	var _spineBoy:Spine;
+	var _loader:Loader;
+	var _spine:Spine;
 
 	public function new() {
 		super();
-		_init();
-
-		var assetsToLoader:Array<String> = ["assets/spine/data/spineboy.json"];
-
-		_loader = new AssetLoader(assetsToLoader);
-		_loader.onComplete = onAssetsLoaded;
-		_loader.load();
-	}
-
-	function _init() {
 		backgroundColor = 0x00FF66;
 		super.start();
+
+		stage.interactive = true;
+		var assetsToLoader:Array<String> = [];
+
+		_loader = new Loader();
+		_loader.add("spinedata", "assets/spine/spineboy.json");
+		_loader.load(onAssetsLoaded);
 	}
 
 	function onAssetsLoaded() {
-		_spineBoy = new Spine("assets/spine/data/spineboy.json");
+		_spine = new Spine(Reflect.field(_loader.resources, "spinedata").spineData);
 
-		_spineBoy.position.x = 400;
-		_spineBoy.position.y = 600;
-		_spineBoy.stateData.setMixByName("walk", "jump", 0.2);
-		_spineBoy.stateData.setMixByName("jump", "walk", 0.4);
-		_spineBoy.state.setAnimationByName(0, "walk", true);
-		stage.addChild(_spineBoy);
+		_spine.position.set(400, 600);
 
-		stage.click = _stageOnClick;
+		_spine.scale.set(1.5);
+
+		_spine.stateData.setMixByName("walk", "jump", 0.2);
+		_spine.stateData.setMixByName("jump", "walk", 0.4);
+
+		_spine.state.setAnimationByName(0, "walk", true);
+
+		stage.addChild(_spine);
+
+		stage.on("click", _stageOnClick);
+		stage.on("tap", _stageOnClick);
 	}
 
-	function _stageOnClick(data:InteractionData) {
-		_spineBoy.state.setAnimationByName(0, "jump", false);
-		_spineBoy.state.addAnimationByName(0, "walk", true);
+	function _stageOnClick() {
+		_spine.state.setAnimationByName(0, "jump", false);
+		_spine.state.addAnimationByName(0, "walk", true, 0);
 	}
 
 	static function main() {

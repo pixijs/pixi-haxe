@@ -67,7 +67,7 @@ class Main {
 
 		//_videoElement.width = 480;
 		//_videoElement.height = 270;
-		_videoElement.src = "http://93.93.85.123:1935/live/amlst:1/playlist.m3u8"; //"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
+		_videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 
 		Browser.document.body.appendChild(_wrapper);
 		_wrapper.appendChild(_videoElement);
@@ -88,7 +88,7 @@ class Main {
 		_canvas = Browser.document.createCanvasElement();
 		_canvas.id = "video_canvas";
 		_canvas.style.position = "absolute";
-		_canvas.style.backgroundColor = "#000000";
+		_canvas.style.backgroundColor = "#FFFFFF";
 		_canvas.style.left = "0px";
 		_canvas.style.top = "500px";
 		_canvas.width = 400;
@@ -105,6 +105,11 @@ class Main {
 		_playBtn.visible = false;
 		_videoElement.play();
 		_timer.run = _draw;
+		/*untyped __js__("window.document.getElementById('videoWheel').webkitRequestFullscreen()");
+
+		Timer.delay(function() {
+			untyped __js__("window.document.getElementById('videoWheel').webkitExitFullscreen()");
+		}, 1000);*/
 
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
@@ -142,8 +147,8 @@ class Main {
 					if (textTrack.activeCues.length > 0) {
 						for (j in 0 ... textTrack.activeCues.length) {
 							var cue = textTrack.activeCues[j].text;
-							trace(cue);
-							trace(Json.parse(cue));
+							//trace(cue);
+							//trace(Json.parse(cue));
 							//trace("Text Track Data: " + Reflect.field(cue, "typ"));
 						}
 					}

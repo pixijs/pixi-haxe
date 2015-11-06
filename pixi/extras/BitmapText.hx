@@ -71,10 +71,10 @@ extern class BitmapText extends Container {
 	/**
 	 * The tint of the BitmapText object
 	 *
-	 * @member {Float}
+	 * @member {Int}
 	 * @memberof BitmapText#
 	 */
-	var tint:Float;
+	var tint:Int;
 
 	/**
 	 * The alignment of the BitmapText object
@@ -86,6 +86,14 @@ extern class BitmapText extends Container {
 	var align:String;
 
 	/**
+     * The font descriptor of the BitmapText object
+     *
+     * @member {Dynamic}
+     * @memberof BitmapText#
+     */
+	var font:Dynamic;
+
+	/**
 	 * The text of the BitmapText object
 	 *
 	 * @member {String}
@@ -95,7 +103,7 @@ extern class BitmapText extends Container {
 }
 
 typedef BitmapTextStyle = {
-	@:optional var font:String;
+	@:optional var font:Dynamic;
 	@:optional var align:String;
 	@:optional var tint:Int;
 }

@@ -9,9 +9,46 @@ var Std = function() { };
 Std["int"] = function(x) {
 	return x | 0;
 };
+var jsfps_simplefps_Fps = function(callback,every,decay) {
+	if(decay == null) decay = 1;
+	if(every == null) every = 60;
+	this._callback = callback;
+	this.rate = 60;
+	this._time = 0;
+	this._decay = decay;
+	this._every = every;
+	this._ticks = 0;
+	this._last = this._now();
+};
+jsfps_simplefps_Fps.prototype = {
+	_now: function() {
+		if(window.performance != null) return window.performance.now();
+		return new Date().getTime();
+	}
+	,tick: function() {
+		var time = this._now();
+		var diff = time - this._last;
+		this._ticks += 1;
+		this._last = time;
+		this._time += (diff - this._time) * this._decay;
+		this.rate = Math.round(1000 / this._time);
+		if(this.rate > 60) this.rate = 60;
+		if(this._ticks % this._every == 0 && this._callback != null) this._callback(this.rate);
+	}
+};
 var pixi_plugins_app_Application = function() {
 	this._lastTime = new Date();
-	this._setDefaultValues();
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
 };
 pixi_plugins_app_Application.prototype = {
 	set_fps: function(val) {
@@ -25,20 +62,7 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,_setDefaultValues: function() {
-		this.pixelRatio = 1;
-		this.set_skipFrame(false);
-		this.autoResize = true;
-		this.transparent = false;
-		this.antialias = false;
-		this.forceFXAA = false;
-		this.backgroundColor = 16777215;
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.set_fps(60);
-	}
-	,start: function(rendererType,stats,parentDom) {
-		if(stats == null) stats = true;
+	,start: function(rendererType,parentDom) {
 		if(rendererType == null) rendererType = "auto";
 		var _this = window.document;
 		this.canvas = _this.createElement("canvas");
@@ -56,11 +80,12 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.autoResize = this.autoResize;
 		renderingOptions.transparent = this.transparent;
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(this.roundPixels) this.renderer.roundPixels = true;
 		window.document.body.appendChild(this.renderer.view);
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		this._lastTime = new Date();
-		if(stats) this._addStats();
+		this._addStats();
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -68,10 +93,6 @@ pixi_plugins_app_Application.prototype = {
 		this.renderer.resize(this.width,this.height);
 		this.canvas.style.width = this.width + "px";
 		this.canvas.style.height = this.height + "px";
-		if(this._stats != null) {
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
-		}
 		if(this.onResize != null) this.onResize();
 	}
 	,_onRequestAnimationFrame: function() {
@@ -83,7 +104,7 @@ pixi_plugins_app_Application.prototype = {
 			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-		if(this._stats != null) this._stats.update();
+		this._fps.tick();
 	}
 	,_calculateElapsedTime: function() {
 		this._currentTime = new Date();
@@ -91,16 +112,48 @@ pixi_plugins_app_Application.prototype = {
 		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
-		if(window.Stats != null) {
-			var _container = window.document.createElement("div");
-			window.document.body.appendChild(_container);
-			this._stats = new Stats();
-			this._stats.domElement.style.position = "absolute";
-			this._stats.domElement.style.top = "2px";
-			this._stats.domElement.style.right = "2px";
-			_container.appendChild(this._stats.domElement);
-			this._stats.begin();
-		}
+		this._fps = new jsfps_simplefps_Fps($bind(this,this._updateFps));
+		var _this = window.document;
+		this._fpsDiv = _this.createElement("div");
+		this._fpsDiv.id = "fps";
+		this._fpsDiv.className = "fps";
+		this._fpsDiv.style.position = "absolute";
+		this._fpsDiv.style.right = "0px";
+		this._fpsDiv.style.top = "14px";
+		this._fpsDiv.style.width = "76px";
+		this._fpsDiv.style.background = "#CCCCC";
+		this._fpsDiv.style.backgroundColor = "#00FF00";
+		this._fpsDiv.style.fontFamily = "Helvetica,Arial";
+		this._fpsDiv.style.padding = "2px";
+		this._fpsDiv.style.color = "#000000";
+		this._fpsDiv.style.fontSize = "9px";
+		this._fpsDiv.style.fontWeight = "bold";
+		this._fpsDiv.style.textAlign = "center";
+		this._fpsDiv.innerHTML = "FPS: 60";
+		window.document.body.appendChild(this._fpsDiv);
+		this._addRenderStats(null);
+	}
+	,_addRenderStats: function(top) {
+		if(top == null) top = 0;
+		var ren;
+		var _this = window.document;
+		ren = _this.createElement("div");
+		ren.style.position = "absolute";
+		ren.style.width = "76px";
+		ren.style.right = "0px";
+		ren.style.background = "#CCCCC";
+		ren.style.backgroundColor = "#105CB6";
+		ren.style.fontFamily = "Helvetica,Arial";
+		ren.style.padding = "2px";
+		ren.style.color = "#0FF";
+		ren.style.fontSize = "9px";
+		ren.style.fontWeight = "bold";
+		ren.style.textAlign = "center";
+		window.document.body.appendChild(ren);
+		ren.innerHTML = ["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio;
+	}
+	,_updateFps: function(val) {
+		this._fpsDiv.innerHTML = "FPS: " + val;
 	}
 };
 var samples_graphics_Main = function() {
@@ -116,7 +169,7 @@ samples_graphics_Main.prototype = $extend(pixi_plugins_app_Application.prototype
 		this.backgroundColor = 13158;
 		this.antialias = true;
 		this.onUpdate = $bind(this,this._onUpdate);
-		pixi_plugins_app_Application.prototype.start.call(this,"canvas");
+		pixi_plugins_app_Application.prototype.start.call(this);
 		this._graphics = new PIXI.Graphics();
 		this._graphics.beginFill(16724736);
 		this._graphics.lineStyle(10,16767232,1);

@@ -27,9 +27,6 @@ class Main extends Application {
 		height = Browser.window.innerHeight;
 		super.start();
 
-		_vidElement = Browser.document.createVideoElement();
-		_vidElement.src = "assets/video/test.mp4";
-
 		_vidTexture = Texture.fromVideoUrl("assets/video/test.mp4");
 		_vidSprite = new Sprite(_vidTexture);
 		stage.addChild(_vidSprite);

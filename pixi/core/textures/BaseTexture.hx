@@ -1,10 +1,11 @@
 package pixi.core.textures;
 
+import pixi.interaction.EventEmitter;
 import js.html.ImageElement;
 import js.html.CanvasElement;
 
 @:native("PIXI.BaseTexture")
-extern class BaseTexture {
+extern class BaseTexture extends EventEmitter {
 
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture.

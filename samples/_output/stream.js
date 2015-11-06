@@ -41,7 +41,7 @@ samples_stream_Main.prototype = {
 		this._videoElement.style.position = "absolute";
 		this._videoElement.style.top = "0px";
 		this._videoElement.autoplay = false;
-		this._videoElement.src = "http://93.93.85.123:1935/live/amlst:1/playlist.m3u8";
+		this._videoElement.src = "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8";
 		window.document.body.appendChild(this._wrapper);
 		this._wrapper.appendChild(this._videoElement);
 		this._wrapper.appendChild(this._renderer.view);
@@ -59,7 +59,7 @@ samples_stream_Main.prototype = {
 		this._canvas = _this2.createElement("canvas");
 		this._canvas.id = "video_canvas";
 		this._canvas.style.position = "absolute";
-		this._canvas.style.backgroundColor = "#000000";
+		this._canvas.style.backgroundColor = "#FFFFFF";
 		this._canvas.style.left = "0px";
 		this._canvas.style.top = "500px";
 		this._canvas.width = 400;
@@ -108,8 +108,6 @@ samples_stream_Main.prototype = {
 						while(_g3 < _g21) {
 							var j = _g3++;
 							var cue = textTrack.activeCues[j].text;
-							console.log(cue);
-							console.log(JSON.parse(cue));
 						}
 					}
 				};
