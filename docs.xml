@@ -15679,7 +15679,7 @@
 		<meta><m n=":optional"/></meta>
 	</strokeThickness>
 	<stroke>
-		<t path="Null"><c path="String"/></t>
+		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
 	</stroke>
 	<padding>
@@ -15703,7 +15703,7 @@
 		<meta><m n=":optional"/></meta>
 	</font>
 	<fill>
-		<t path="Null"><c path="String"/></t>
+		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
 	</fill>
 	<dropShadowDistance>
