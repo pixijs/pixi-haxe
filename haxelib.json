@@ -14,8 +14,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "fixed the inappropriate array type of Mesh vertices, uvs and indices",
-	"version": "3.0.25",
+	"releasenote": "exposed preserveDrawingBuffer and clearBeforeRender in Application class",
+	"version": "3.0.26",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"jsfps": ""

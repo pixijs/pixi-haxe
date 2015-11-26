@@ -14,6 +14,8 @@ var pixi_plugins_app_Application = function() {
 	this.antialias = false;
 	this.forceFXAA = false;
 	this.roundPixels = false;
+	this.clearBeforeRender = true;
+	this.preserveDrawingBuffer = false;
 	this.backgroundColor = 16777215;
 	this.width = window.innerWidth;
 	this.height = window.innerHeight;
@@ -48,6 +50,8 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.forceFXAA = this.forceFXAA;
 		renderingOptions.autoResize = this.autoResize;
 		renderingOptions.transparent = this.transparent;
+		renderingOptions.clearBeforeRender = this.clearBeforeRender;
+		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		if(this.roundPixels) this.renderer.roundPixels = true;
 		window.document.body.appendChild(this.renderer.view);
@@ -93,6 +97,7 @@ pixi_plugins_app_Application.prototype = {
 		ren = _this.createElement("div");
 		ren.style.position = "absolute";
 		ren.style.width = "76px";
+		ren.style.top = top + "px";
 		ren.style.right = "0px";
 		ren.style.background = "#CCCCC";
 		ren.style.backgroundColor = "#105CB6";
