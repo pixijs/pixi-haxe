@@ -78,6 +78,21 @@ class Application {
 	public var roundPixels:Bool;
 
 	/**
+	 * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+     * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
+     * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
+     * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
+	 * default - true
+	 */
+	public var clearBeforeRender:Bool;
+
+	/**
+	 * enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+	 * default - false
+	 */
+	public var preserveDrawingBuffer:Bool;
+
+	/**
 	 * Whether you want to resize the canvas and renderer on browser resize.
 	 * Should be set to false when custom width and height are used for the application.
 	 * default - true
@@ -162,6 +177,8 @@ class Application {
 		antialias = false;
 		forceFXAA = false;
 		roundPixels = false;
+		clearBeforeRender = true;
+		preserveDrawingBuffer = false;
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
@@ -195,6 +212,8 @@ class Application {
 		renderingOptions.forceFXAA = forceFXAA;
 		renderingOptions.autoResize = autoResize;
 		renderingOptions.transparent = transparent;
+		renderingOptions.clearBeforeRender = clearBeforeRender;
+		renderingOptions.preserveDrawingBuffer = preserveDrawingBuffer;
 
 		if (rendererType == AUTO) renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
 		else if (rendererType == CANVAS) renderer = new CanvasRenderer(width, height, renderingOptions);

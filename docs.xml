@@ -17836,6 +17836,19 @@
 			<haxe_doc>* Force round pixels.
 	 * default - false</haxe_doc>
 		</roundPixels>
+		<clearBeforeRender public="1">
+			<x path="Bool"/>
+			<haxe_doc>* This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+     * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
+     * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
+     * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
+	 * default - true</haxe_doc>
+		</clearBeforeRender>
+		<preserveDrawingBuffer public="1">
+			<x path="Bool"/>
+			<haxe_doc>* enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+	 * default - false</haxe_doc>
+		</preserveDrawingBuffer>
 		<autoResize public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
@@ -17878,15 +17891,15 @@
 		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
 		<_stats><c path="jsfps.stats.Stats"/></_stats>
-		<set_fps set="method" line="144"><f a="val">
+		<set_fps set="method" line="159"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="149"><f a="val">
+		<set_skipFrame set="method" line="164"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<start public="1" set="method" line="180">
+		<start public="1" set="method" line="197">
 			<f a="?rendererType:?parentDom">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -17899,33 +17912,33 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="223">
+		<_onWindowResize set="method" line="242">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="233">
+		<_onRequestAnimationFrame set="method" line="252">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="248">
+		<_calculateElapsedTime set="method" line="267">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_calculateElapsedTime>
-		<_addStats set="method" line="254">
+		<_addStats set="method" line="273">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<_addRenderStats get="inline" set="null" line="301"><f a="?top">
+		<_addRenderStats get="inline" set="null" line="320"><f a="?top">
 	<x path="Int"/>
 	<x path="Void"/>
 </f></_addRenderStats>
-		<new public="1" set="method" line="139"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="154"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
