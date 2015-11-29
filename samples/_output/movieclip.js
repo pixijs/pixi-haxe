@@ -10,7 +10,6 @@ Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
 var pixi_plugins_app_Application = function() {
-	this._lastTime = new Date();
 	this.pixelRatio = 1;
 	this.set_skipFrame(false);
 	this.autoResize = true;
@@ -61,7 +60,6 @@ pixi_plugins_app_Application.prototype = {
 		window.document.body.appendChild(this.renderer.view);
 		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-		this._lastTime = new Date();
 		this._addStats();
 	}
 	,_onWindowResize: function(event) {
@@ -72,21 +70,15 @@ pixi_plugins_app_Application.prototype = {
 		this.canvas.style.height = this.height + "px";
 		if(this.onResize != null) this.onResize();
 	}
-	,_onRequestAnimationFrame: function() {
+	,_onRequestAnimationFrame: function(elapsedTime) {
 		this._frameCount++;
 		if(this._frameCount == (60 / this.fps | 0)) {
 			this._frameCount = 0;
-			this._calculateElapsedTime();
-			if(this.onUpdate != null) this.onUpdate(this._elapsedTime);
+			if(this.onUpdate != null) this.onUpdate(elapsedTime);
 			this.renderer.render(this.stage);
 		}
 		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 		if(this._stats != null) this._stats.update();
-	}
-	,_calculateElapsedTime: function() {
-		this._currentTime = new Date();
-		this._elapsedTime = this._currentTime.getTime() - this._lastTime.getTime();
-		this._lastTime = this._currentTime;
 	}
 	,_addStats: function() {
 		if(window.Stats != null) {
