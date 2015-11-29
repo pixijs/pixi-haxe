@@ -154,10 +154,7 @@
 
 	In the context of haxe dates, a timestamp is defined as the number of
 	milliseconds elapsed since 1st January 1970.</haxe_doc>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":coreApi"/>
-		</meta>
+		<meta><m n=":coreApi"/></meta>
 	</class>
 	<class path="EReg" params="" file="/usr/lib/haxe/std/js/_std/EReg.hx">
 		<r><c path="_EReg.HaxeRegExp"/></r>
@@ -17886,20 +17883,17 @@
 			<haxe_doc>* Global Container.
 	 * Read-only</haxe_doc>
 		</stage>
-		<_lastTime><c path="Date"/></_lastTime>
-		<_currentTime><c path="Date"/></_currentTime>
-		<_elapsedTime><x path="Float"/></_elapsedTime>
 		<_frameCount><x path="Int"/></_frameCount>
 		<_stats><c path="jsfps.stats.Stats"/></_stats>
-		<set_fps set="method" line="159"><f a="val">
+		<set_fps set="method" line="155"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="164"><f a="val">
+		<set_skipFrame set="method" line="160"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<start public="1" set="method" line="197">
+		<start public="1" set="method" line="193">
 			<f a="?rendererType:?parentDom">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -17912,33 +17906,32 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="242">
+		<_onWindowResize set="method" line="237">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="252">
-			<f a=""><x path="Void"/></f>
+		<_onRequestAnimationFrame set="method" line="247">
+			<f a="elapsedTime">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_calculateElapsedTime set="method" line="267">
-			<f a=""><x path="Void"/></f>
-			<meta><m n=":noCompletion"/></meta>
-		</_calculateElapsedTime>
-		<_addStats set="method" line="273">
+		<_addStats set="method" line="261">
 			<f a=""><x path="Void"/></f>
 			<meta>
 				<m n=":has_untyped"/>
 				<m n=":noCompletion"/>
 			</meta>
 		</_addStats>
-		<_addRenderStats get="inline" set="null" line="320"><f a="?top">
+		<_addRenderStats get="inline" set="null" line="308"><f a="?top">
 	<x path="Int"/>
 	<x path="Void"/>
 </f></_addRenderStats>
-		<new public="1" set="method" line="154"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="151"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io

@@ -138,9 +138,6 @@ class Application {
 	public static inline var CANVAS:String = "canvas";
 	public static inline var WEBGL:String = "webgl";
 
-	var _lastTime:Date;
-	var _currentTime:Date;
-	var _elapsedTime:Float;
 	var _frameCount:Int;
 
 	#if fps
@@ -152,7 +149,6 @@ class Application {
 	#if fpsmeter var _fpsMeter:FPSMeter; #end
 
 	public function new() {
-		_lastTime = Date.now();
 		_setDefaultValues();
 	}
 
@@ -223,20 +219,19 @@ class Application {
 
 		Browser.document.body.appendChild(renderer.view);
 		if (autoResize) Browser.window.onresize = _onWindowResize;
-		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
-		_lastTime = Date.now();
+		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 
 		_addStats();
 	}
 
 	public function pauseRendering() {
 		Browser.window.onresize = null;
-		Browser.window.requestAnimationFrame(cast function(){});
+		Browser.window.requestAnimationFrame(function(elapsedTime){});
 	}
 
 	public function resumeRendering() {
 		if (autoResize) Browser.window.onresize = _onWindowResize;
-		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
@@ -249,25 +244,18 @@ class Application {
 		if (onResize != null) onResize();
 	}
 
-	@:noCompletion function _onRequestAnimationFrame() {
+	@:noCompletion function _onRequestAnimationFrame(elapsedTime:Float) {
 		_frameCount++;
 		if (_frameCount == Std.int(60 / fps)) {
 			_frameCount = 0;
-			_calculateElapsedTime();
-			if (onUpdate != null) onUpdate(_elapsedTime);
+			if (onUpdate != null) onUpdate(elapsedTime);
 			renderer.render(stage);
 		}
-		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 
 		#if fps _fps.tick(); #end
 		#if stats if (_stats != null) _stats.update(); #end
 		#if fpsmeter if (_fpsMeter != null) _fpsMeter.tick(); #end
-	}
-
-	@:noCompletion function _calculateElapsedTime() {
-		_currentTime = Date.now();
-		_elapsedTime = _currentTime.getTime() - _lastTime.getTime();
-		_lastTime = _currentTime;
 	}
 
 	@:noCompletion function _addStats() {
