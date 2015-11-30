@@ -1,18 +1,13 @@
 package pixi.plugins.app;
 
-import js.html.DivElement;
-import js.html.Element;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.Detector;
 import pixi.core.display.Container;
 import js.html.Event;
+import js.html.Element;
 import js.html.CanvasElement;
 import js.Browser;
-
-#if fps import jsfps.simplefps.Fps; #end
-#if fpsmeter import jsfps.fpsmeter.FPSMeter; #end
-#if stats import jsfps.stats.Stats; #end
 
 /**
  * Pixi Boilerplate Helper class that can be used by any application
@@ -140,14 +135,6 @@ class Application {
 
 	var _frameCount:Int;
 
-	#if fps
-	var _fps:Fps;
-	var _fpsDiv:DivElement;
-	#end
-
-	#if stats var _stats:Stats; #end
-	#if fpsmeter var _fpsMeter:FPSMeter; #end
-
 	public function new() {
 		_setDefaultValues();
 	}
@@ -221,12 +208,12 @@ class Application {
 		if (autoResize) Browser.window.onresize = _onWindowResize;
 		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 
-		_addStats();
+		#if stats addStats(); #end
 	}
 
 	public function pauseRendering() {
 		Browser.window.onresize = null;
-		Browser.window.requestAnimationFrame(function(elapsedTime){});
+		Browser.window.requestAnimationFrame(function(elapsedTime) {});
 	}
 
 	public function resumeRendering() {
@@ -252,80 +239,11 @@ class Application {
 			renderer.render(stage);
 		}
 		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
-
-		#if fps _fps.tick(); #end
-		#if stats if (_stats != null) _stats.update(); #end
-		#if fpsmeter if (_fpsMeter != null) _fpsMeter.tick(); #end
 	}
 
-	@:noCompletion function _addStats() {
-		#if fps
-		_fps = new Fps(_updateFps);
-		_fpsDiv = Browser.document.createDivElement();
-		_fpsDiv.id = "fps";
-		_fpsDiv.className = "fps";
-		_fpsDiv.style.position = "absolute";
-		_fpsDiv.style.right = "0px";
-		_fpsDiv.style.top = "14px";
-		_fpsDiv.style.width = "76px";
-		_fpsDiv.style.background = "#CCCCC";
-		_fpsDiv.style.backgroundColor = "#00FF00";
-		_fpsDiv.style.fontFamily = "Helvetica,Arial";
-		_fpsDiv.style.padding = "2px";
-		_fpsDiv.style.color = "#000000";
-		_fpsDiv.style.fontSize = "9px";
-		_fpsDiv.style.fontWeight = "bold";
-		_fpsDiv.style.textAlign = "center";
-		_fpsDiv.innerHTML = "FPS: 60";
-		Browser.document.body.appendChild(_fpsDiv);
-		_addRenderStats();
-		#end
-
-		#if stats
-		if (untyped __js__("window").Stats != null) {
-			var container = Browser.document.createDivElement();
-			Browser.document.body.appendChild(container);
-			_stats = new Stats();
-			_stats.domElement.style.position = "absolute";
-			_stats.domElement.style.top = "14px";
-			_stats.domElement.style.right = "0px";
-			container.appendChild(_stats.domElement);
-			_stats.begin();
-			_addRenderStats();
+	public function addStats() {
+		if (untyped __js__("window").Perf != null) {
+			new Perf().addInfo(["UNKNOWN", "WEBGL", "CANVAS"][renderer.type] + " - " + pixelRatio);
 		}
-		else trace("Unable to find stats.js");
-		#end
-
-		#if fpsmeter
-		if (untyped __js__("window").FPSMeter != null) {
-			_fpsMeter = new FPSMeter( {theme: "colorful", top: "14px", right: "0px", left: "auto"});
-			_addRenderStats();
-		}
-		else trace("Unable to find fpsmeter.js");
-		#end
 	}
-
-	inline function _addRenderStats(?top:Int = 0) {
-		var ren:DivElement = Browser.document.createDivElement();
-		ren.style.position = "absolute";
-		ren.style.width = "76px";
-		ren.style.top = top + "px";
-		ren.style.right = "0px";
-		ren.style.background = "#CCCCC";
-		ren.style.backgroundColor = "#105CB6";
-		ren.style.fontFamily = "Helvetica,Arial";
-		ren.style.padding = "2px";
-		ren.style.color = "#0FF";
-		ren.style.fontSize = "9px";
-		ren.style.fontWeight = "bold";
-		ren.style.textAlign = "center";
-		Browser.document.body.appendChild(ren);
-		ren.innerHTML = ["UNKNOWN", "WEBGL", "CANVAS"][renderer.type] + " - " + pixelRatio;
-	}
-
-	#if fps
-	function _updateFps(val:Float) {
-		_fpsDiv.innerHTML = "FPS: " + val;
-	}
-	#end
 }

@@ -22,11 +22,11 @@ module.exports = function (grunt) {
 			},
 			stats: {
 				src: [],
-				dest: "libs/stats.dev.js",
+				dest: "libs/perf.min.js",
 				options: {
-					require: ["stats-js"],
+					require: ["perf.js"],
 					browserifyOptions: {
-						standalone: "Stats"
+						standalone: "Perf"
 					}
 				}
 			}
@@ -40,21 +40,20 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					"libs/pixi.min.js": ["libs/pixi.dev.js"],
-					"libs/stats.min.js": ["libs/stats.dev.js"]
+					"libs/pixi.min.js": ["libs/pixi.dev.js"]
 				}
 			}
 		},
 
 		exec: {
 			copy_libs: "cp -R ./libs/*.min.js ./samples/_output/libs/",
-			docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/pixi-haxe/ -f docs.xml " +
+			/*docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/pixi-haxe/ -f docs.xml " +
 				  " --showTodoTags=false " +
 				  " --deny=demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
 				  "--title='Externs of pixi.js for Haxe' " +
 				  "--subtitle='<a href='http://adireddy.github.io/docs/pixi-haxe' target='_blank'>pixi-haxe</a>'",
-			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/",
-			cleanup: "rm ./libs/pixi.dev.js && rm ./libs/stats.dev.js"
+			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/",*/
+			cleanup: "rm ./libs/pixi.dev.js"
 		},
 
 		zip: {
@@ -68,5 +67,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-zip");
 	grunt.loadNpmTasks("grunt-exec");
-	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.8:stats-js", "browserify", "uglify", "exec"]);
+	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.8:perf.js", "browserify", "uglify", "exec"]);
 };
