@@ -4,7 +4,6 @@
 -cmd haxelib install msignal || true
 -cmd haxelib install actuate || true
 -cmd haxelib install chxdoc || true
--cmd haxelib install jsfps || true
 
 --next
 -cp samples

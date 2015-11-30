@@ -14,7 +14,7 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "optimized stats usage",
+	"releasenote": "using perf.js stats",
 	"version": "3.0.27",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {

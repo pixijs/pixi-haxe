@@ -337,7 +337,7 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
-	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,2/Perf.hx">
+	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx">
 		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
 		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
 		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
@@ -396,7 +396,7 @@
 			<m n=":expose"/>
 		</meta>
 	</class>
-	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,2/Perf.hx" module="Perf"><a>
+	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
 	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
