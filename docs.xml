@@ -154,7 +154,10 @@
 
 	In the context of haxe dates, a timestamp is defined as the number of
 	milliseconds elapsed since 1st January 1970.</haxe_doc>
-		<meta><m n=":coreApi"/></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":coreApi"/>
+		</meta>
 	</class>
 	<class path="EReg" params="" file="/usr/lib/haxe/std/js/_std/EReg.hx">
 		<r><c path="_EReg.HaxeRegExp"/></r>
@@ -305,6 +308,25 @@
 	<x path="Float"/>
 	<x path="Int"/>
 </f></floor>
+		<log public="1" set="method" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Float"/>
+</f></log>
+		<max public="1" set="method" static="1"><f a="a:b">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></max>
+		<min public="1" set="method" static="1"><f a="a:b">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></min>
+		<pow public="1" set="method" static="1"><f a="v:exp">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></pow>
 		<round public="1" set="method" static="1"><f a="v">
 	<x path="Float"/>
 	<x path="Int"/>
@@ -315,6 +337,70 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
+	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx">
+		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
+		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
+		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
+		<FPS_WARN_BG_CLR public="1" line="12" static="1"><c path="String"/></FPS_WARN_BG_CLR>
+		<FPS_PROB_BG_CLR public="1" line="13" static="1"><c path="String"/></FPS_PROB_BG_CLR>
+		<MS_BG_CLR public="1" line="15" static="1"><c path="String"/></MS_BG_CLR>
+		<MEM_BG_CLR public="1" line="16" static="1"><c path="String"/></MEM_BG_CLR>
+		<INFO_BG_CLR public="1" line="17" static="1"><c path="String"/></INFO_BG_CLR>
+		<FPS_TXT_CLR public="1" line="18" static="1"><c path="String"/></FPS_TXT_CLR>
+		<MS_TXT_CLR public="1" line="19" static="1"><c path="String"/></MS_TXT_CLR>
+		<MEM_TXT_CLR public="1" line="20" static="1"><c path="String"/></MEM_TXT_CLR>
+		<INFO_TXT_CLR public="1" line="21" static="1"><c path="String"/></INFO_TXT_CLR>
+		<fps public="1"><c path="js.html.DivElement"/></fps>
+		<ms public="1"><c path="js.html.DivElement"/></ms>
+		<memory public="1"><c path="js.html.DivElement"/></memory>
+		<info public="1"><c path="js.html.DivElement"/></info>
+		<_time><x path="Float"/></_time>
+		<_startTime><x path="Float"/></_startTime>
+		<_prevTime><x path="Float"/></_prevTime>
+		<_ticks><x path="Int"/></_ticks>
+		<_fps><x path="Float"/></_fps>
+		<_fpsMin><x path="Float"/></_fpsMin>
+		<_fpsMax><x path="Float"/></_fpsMax>
+		<_memCheck><x path="Bool"/></_memCheck>
+		<_pos><c path="String"/></_pos>
+		<_perfObj><c path="js.html.Performance"/></_perfObj>
+		<_memoryObj><t path="Memory"/></_memoryObj>
+		<_tick set="method" line="70"><f a=""><x path="Void"/></f></_tick>
+		<_createDiv set="method" line="97"><f a="id:?top">
+	<c path="String"/>
+	<x path="Float"/>
+	<c path="js.html.DivElement"/>
+</f></_createDiv>
+		<_createFpsDom set="method" line="128"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="136"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="144"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="152"><f a="bytes:?frac">
+	<x path="Float"/>
+	<x path="Int"/>
+	<c path="String"/>
+</f></_getFormattedSize>
+		<addInfo public="1" set="method" line="160"><f a="val">
+	<c path="String"/>
+	<x path="Void"/>
+</f></addInfo>
+		<new public="1" set="method" line="46">
+			<f a="?pos">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+		</new>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+			<m n=":expose"/>
+		</meta>
+	</class>
+	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx" module="Perf"><a>
+	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
+	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
+	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
+</a></typedef>
 	<class path="Reflect" params="" file="/usr/lib/haxe/std/js/_std/Reflect.hx">
 		<field public="1" set="method" line="28" static="1">
 			<f a="o:field">
@@ -12548,51 +12634,6 @@
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<class path="jsfps.stats.Stats" params="" file="/haxe/pixi-haxe/.haxelib/jsfps/1,0,1/jsfps/stats/Stats.hx" extern="1">
-		<domElement public="1" set="null">
-			<c path="js.html.DivElement"/>
-			<haxe_doc>* Stats DOM element
-	 * @property domElement
-	 * @type DivElement</haxe_doc>
-		</domElement>
-		<begin public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Begin stats
-	 *
-	 * @method begin</haxe_doc>
-		</begin>
-		<end public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* End stats
-	 *
-	 * @method end</haxe_doc>
-		</end>
-		<update public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Update stats
-	 *
-	 * @method update</haxe_doc>
-		</update>
-		<setMode public="1" set="method">
-			<f a="value">
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the display mode.
-	 *
-	 * @method setMode
-	 * @param value {Int} 0: simplefps, 1: ms</haxe_doc>
-		</setMode>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* https://github.com/mrdoob/stats.js/ (JS stats)
-	 * https://github.com/luizbills/stats.js.hx (Original Haxe Externs)</haxe_doc>
-		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"Stats"</e></m>
-		</meta>
-	</class>
 	<typedef path="msignal.AnySignal" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
 		<c path="msignal.Signal">
 			<d/>
@@ -17884,16 +17925,15 @@
 	 * Read-only</haxe_doc>
 		</stage>
 		<_frameCount><x path="Int"/></_frameCount>
-		<_stats><c path="jsfps.stats.Stats"/></_stats>
-		<set_fps set="method" line="155"><f a="val">
+		<set_fps set="method" line="142"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="160"><f a="val">
+		<set_skipFrame set="method" line="147"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<start public="1" set="method" line="193">
+		<start public="1" set="method" line="180">
 			<f a="?rendererType:?parentDom">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -17906,32 +17946,25 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="237">
+		<_onWindowResize set="method" line="224">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="247">
+		<_onRequestAnimationFrame set="method" line="234">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<_addStats set="method" line="261">
+		<addStats public="1" set="method" line="244">
 			<f a=""><x path="Void"/></f>
-			<meta>
-				<m n=":has_untyped"/>
-				<m n=":noCompletion"/>
-			</meta>
-		</_addStats>
-		<_addRenderStats get="inline" set="null" line="308"><f a="?top">
-	<x path="Int"/>
-	<x path="Void"/>
-</f></_addRenderStats>
-		<new public="1" set="method" line="151"><f a=""><x path="Void"/></f></new>
+			<meta><m n=":has_untyped"/></meta>
+		</addStats>
+		<new public="1" set="method" line="138"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
