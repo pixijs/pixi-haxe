@@ -337,7 +337,7 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
-	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx">
+	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,6/Perf.hx">
 		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
 		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
 		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
@@ -354,36 +354,38 @@
 		<ms public="1"><c path="js.html.DivElement"/></ms>
 		<memory public="1"><c path="js.html.DivElement"/></memory>
 		<info public="1"><c path="js.html.DivElement"/></info>
+		<currentFps public="1"><x path="Float"/></currentFps>
+		<currentMs public="1"><x path="Float"/></currentMs>
+		<currentMem public="1"><c path="String"/></currentMem>
 		<_time><x path="Float"/></_time>
 		<_startTime><x path="Float"/></_startTime>
 		<_prevTime><x path="Float"/></_prevTime>
 		<_ticks><x path="Int"/></_ticks>
-		<_fps><x path="Float"/></_fps>
 		<_fpsMin><x path="Float"/></_fpsMin>
 		<_fpsMax><x path="Float"/></_fpsMax>
 		<_memCheck><x path="Bool"/></_memCheck>
 		<_pos><c path="String"/></_pos>
 		<_perfObj><c path="js.html.Performance"/></_perfObj>
 		<_memoryObj><t path="Memory"/></_memoryObj>
-		<_tick set="method" line="70"><f a=""><x path="Void"/></f></_tick>
-		<_createDiv set="method" line="97"><f a="id:?top">
+		<_tick set="method" line="76"><f a=""><x path="Void"/></f></_tick>
+		<_createDiv set="method" line="107"><f a="id:?top">
 	<c path="String"/>
 	<x path="Float"/>
 	<c path="js.html.DivElement"/>
 </f></_createDiv>
-		<_createFpsDom set="method" line="128"><f a=""><x path="Void"/></f></_createFpsDom>
-		<_createMsDom set="method" line="136"><f a=""><x path="Void"/></f></_createMsDom>
-		<_createMemoryDom set="method" line="144"><f a=""><x path="Void"/></f></_createMemoryDom>
-		<_getFormattedSize set="method" line="152"><f a="bytes:?frac">
+		<_createFpsDom set="method" line="140"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="148"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="156"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="164"><f a="bytes:?frac">
 	<x path="Float"/>
 	<x path="Int"/>
 	<c path="String"/>
 </f></_getFormattedSize>
-		<addInfo public="1" set="method" line="160"><f a="val">
+		<addInfo public="1" set="method" line="172"><f a="val">
 	<c path="String"/>
 	<x path="Void"/>
 </f></addInfo>
-		<new public="1" set="method" line="46">
+		<new public="1" set="method" line="49">
 			<f a="?pos">
 				<c path="String"/>
 				<x path="Void"/>
@@ -396,7 +398,7 @@
 			<m n=":expose"/>
 		</meta>
 	</class>
-	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,5/Perf.hx" module="Perf"><a>
+	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,6/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
 	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
@@ -16618,12 +16620,78 @@
 		<meta><m n=":native"><e>"PIXI.ticker.Ticker"</e></m></meta>
 	</class>
 	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
-		<isWebGLSupported public="1" set="method" static="1">
+		<EventEmitter public="1" static="1"><d/></EventEmitter>
+		<pluginTarget public="1" static="1"><d/></pluginTarget>
+		<async public="1" static="1"><d/></async>
+		<TextureCache public="1" static="1"><d/></TextureCache>
+		<BaseTextureCache public="1" static="1"><d/></BaseTextureCache>
+		<uid public="1" set="method" static="1">
+			<f a=""><x path="Int"/></f>
+			<haxe_doc>* Gets the next unique identifier
+     *
+     * @return {Int} The next unique identifier to use.</haxe_doc>
+		</uid>
+		<hex2rgb public="1" set="method" static="1">
+			<f a="hex:out">
+				<x path="Int"/>
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc><![CDATA[* Converts a hex color number to an [R, G, B] array
+     *
+     * @param hex {Int}
+     * @param out {Array<Int>}
+     * @return {Array<Int>} An array representing the [R, G, B] of the color.]]></haxe_doc>
+		</hex2rgb>
+		<hex2string public="1" set="method" static="1">
+			<f a="hex">
+				<x path="Int"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>* Converts a hex color number to a string.
+     *
+     * @param hex {Int}
+     * @return {string} The string color.</haxe_doc>
+		</hex2string>
+		<rgb2hex public="1" set="method" static="1">
+			<f a="rgb">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[* Converts a color as an [R, G, B] array to a hex number
+     *
+     * @param rgb {Array<Int>}
+     * @return {Int} The color number]]></haxe_doc>
+		</rgb2hex>
+		<canUseNewCanvasBlendModes public="1" set="method" static="1">
 			<f a=""><x path="Bool"/></f>
-			<haxe_doc>* Helper for checking for webgl support
-	 *
-	 * @return {Bool}</haxe_doc>
-		</isWebGLSupported>
+			<haxe_doc>* Checks whether the Canvas BlendModes are supported by the current browser
+     *
+     * @return {Bool} whether they are supported</haxe_doc>
+		</canUseNewCanvasBlendModes>
+		<getNextPowerOfTwo public="1" set="method" static="1">
+			<f a="number">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>* Given a number, this function returns the closest number that is a power of two
+     * this function is taken from Starling Framework as its pretty neat ;)
+     *
+     * @param number {Float}
+     * @return {Float} the closest number that is a power of two</haxe_doc>
+		</getNextPowerOfTwo>
+		<isPowerOfTwo public="1" set="method" static="1">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* checks if the given width and height make a power of two rectangle
+     *
+     * @param width {Float}
+     * @param height {Float}
+     * @return {Bool}</haxe_doc>
+		</isPowerOfTwo>
 		<getResolutionOfUrl public="1" set="method" static="1">
 			<f a="url">
 				<c path="String"/>
@@ -16635,6 +16703,36 @@
 	 * @param url {String} the image path
 	 * @return {Float}</haxe_doc>
 		</getResolutionOfUrl>
+		<sayHello public="1" set="method" static="1">
+			<f a="type">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Logs out the version and renderer information for this running instance of PIXI.
+     * If you don't want to see this message you can set `PIXI.utils._saidHello = true;`
+     * so the library thinks it already said it. Keep in mind that doing that will forever
+     * makes you a jerk face.
+     *
+     * @param {String} type - The string renderer type to log.
+     * @constant
+     * @static</haxe_doc>
+		</sayHello>
+		<isWebGLSupported public="1" set="method" static="1">
+			<f a=""><x path="Bool"/></f>
+			<haxe_doc>* Helper for checking for webgl support
+	 *
+	 * @return {Bool}</haxe_doc>
+		</isWebGLSupported>
+		<sign public="1" set="method" static="1">
+			<f a="n">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>* Returns sign of number
+     *
+     * @param n {Float}
+     * @returns {Int} 0 if n is 0, -1 if n is negative, 1 if n i positive</haxe_doc>
+		</sign>
 		<meta>
 			<m n=":directlyUsed"/>
 			<m n=":native"><e>"PIXI.utils"</e></m>
