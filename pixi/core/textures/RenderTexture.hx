@@ -1,9 +1,12 @@
 package pixi.core.textures;
 
+import js.html.CanvasElement;
+import js.html.Image;
+import js.html.Uint8ClampedArray;
+import pixi.core.display.DisplayObject;
+import pixi.core.math.Matrix;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
-import js.html.Image;
-import js.html.CanvasElement;
 
 @:native("PIXI.RenderTexture")
 extern class RenderTexture extends Texture {
@@ -67,6 +70,25 @@ extern class RenderTexture extends Texture {
 	var renderer:Dynamic;
 
 	/**
+	 * Draw/render the given DisplayObject onto the texture.
+	 *
+	 * The displayObject and descendents are transformed during this operation.
+	 * If `updateTransform` is true then the transformations will be restored before the
+	 * method returns. Otherwise it is up to the calling code to correctly use or reset
+	 * the transformed display objects.
+	 *
+	 * The display object is always rendered with a worldAlpha value of 1.
+	 *
+	 * @method
+	 * @param displayObject {PIXI.DisplayObject} The display object to render this texture on
+	 * @param [matrix] {PIXI.Matrix} Optional matrix to apply to the display object before rendering.
+	 * @param [clear=false] {boolean} If true the texture will be cleared before the displayObject is drawn
+	 * @param [updateTransform=true] {boolean} If true the displayObject's worldTransform/worldAlpha and all children
+	 *  transformations will be restored. Not restoring this information will be a little faster.
+	 */
+	function render(displayObject:DisplayObject, matrix:Matrix, clear:Bool = false, updateTransform:Bool = true):Void;
+
+	/**
 	 * Resizes the RenderTexture.
 	 *
 	 * @param width {Float} The width to resize to.
@@ -101,4 +123,20 @@ extern class RenderTexture extends Texture {
 	 * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.
 	 */
 	function getCanvas():CanvasElement;
+
+	/**
+	 * Will return a one-dimensional array containing the pixel data of a pixel within the texture in RGBA order, with integer values between 0 and 255 (included).
+	 *
+	 * @param x {number} The x coordinate of the pixel to retrieve.
+	 * @param y {number} The y coordinate of the pixel to retrieve.
+	 * @return {Uint8ClampedArray}
+	 */
+	function getPixel(x:Float, y:Float):Uint8ClampedArray;
+
+	/**
+	 * Will return a one-dimensional array containing the pixel data of the entire texture in RGBA order, with integer values between 0 and 255 (included).
+	 *
+	 * @return {Uint8ClampedArray}
+	 */
+	function getPixels():Uint8ClampedArray;
 }
