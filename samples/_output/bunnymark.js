@@ -234,6 +234,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		this._setup();
 	}
 	,_setup: function() {
+		this.renderer.view.style.transform = "translatez(0)";
 		this.maxX = window.innerWidth;
 		this.maxY = window.innerHeight;
 		var _this = window.document;
@@ -253,13 +254,14 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		window.document.body.appendChild(this.counter);
 		this.count = this.startBunnyCount;
 		this.counter.innerHTML = this.count + " BUNNIES";
-		this.container = new PIXI.ParticleContainer();
+		this.container = new PIXI.ParticleContainer(200000,[false,true,false,false,false]);
 		this.stage.addChild(this.container);
-		var bunny1 = PIXI.Texture.fromImage("assets/bunnymark/bunny1.png");
-		var bunny2 = PIXI.Texture.fromImage("assets/bunnymark/bunny2.png");
-		var bunny3 = PIXI.Texture.fromImage("assets/bunnymark/bunny3.png");
-		var bunny4 = PIXI.Texture.fromImage("assets/bunnymark/bunny4.png");
-		var bunny5 = PIXI.Texture.fromImage("assets/bunnymark/bunny5.png");
+		this.wabbitTexture = PIXI.Texture.fromImage("assets/bunnymark/bunnys.png");
+		var bunny1 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,47,26,37));
+		var bunny2 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,86,26,37));
+		var bunny3 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,125,26,37));
+		var bunny4 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,164,26,37));
+		var bunny5 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,2,26,37));
 		this.bunnyTextures = [bunny1,bunny2,bunny3,bunny4,bunny5];
 		this.bunnyType = 1;
 		this.currentTexture = this.bunnyTextures[this.bunnyType];
