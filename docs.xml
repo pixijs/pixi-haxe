@@ -13369,6 +13369,42 @@
 		</generateTexture>
 		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
 		<displayObjectUpdateTransform public="1" set="method"><f a=""><x path="Void"/></f></displayObjectUpdateTransform>
+		<setParent public="1" set="method">
+			<f a="container">
+				<c path="pixi.core.display.Container"/>
+				<c path="pixi.core.display.Container"/>
+			</f>
+			<haxe_doc>* Set the parent Container of this DisplayObject
+	 *
+	 * @param container {Container} The Container to add this DisplayObject to
+	 * @return {Container} The Container that this DisplayObject was added to</haxe_doc>
+		</setParent>
+		<setTransform public="1" set="method">
+			<f a="?x:?y:?scaleX:?scaleY:?rotation:?skewX:?skewY:?pivotX:?pivotY" v="0:0:0:0:0:0:0:0:0">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="pixi.core.display.DisplayObject"/>
+			</f>
+			<meta><m n=":value"><e>{pivotY:0,pivotX:0,skewY:0,skewX:0,rotation:0,scaleY:0,scaleX:0,y:0,x:0}</e></m></meta>
+			<haxe_doc>* Convenience function to set the postion, scale, skew and pivot at once.
+	 *
+	 * @param [x=0] {Float} The X position
+	 * @param [y=0] {Float} The Y position
+	 * @param [scaleX=1] {Float} The X scale value
+	 * @param [scaleY=1] {Float} The Y scale value
+	 * @param [skewX=0] {Float} The X skew value
+	 * @param [skewY=0] {Float} The Y skew value
+	 * @param [pivotX=0] {Float} The X pivot value
+	 * @param [pivotY=0] {Float} The Y pivot value
+	 * @return {DisplayObject}</haxe_doc>
+		</setTransform>
 		<destroy public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Base destroy method for generic display objects
@@ -13432,6 +13468,12 @@
 	 *
 	 * @member {Point}</haxe_doc>
 		</pivot>
+		<skew public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The skew factor for the object in radians.
+     *
+     * @member {Point}</haxe_doc>
+		</skew>
 		<rotation public="1">
 			<x path="Float"/>
 			<haxe_doc>* The rotation of the object in radians.
@@ -13514,17 +13556,17 @@
 	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
 	 * To remove a mask, set this property to null.
 	 *
-	 * @member {Graphics}
+	 * @member {Graphics or Sprite}
 	 * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
-			<c path="Array"><d/></c>
-			<haxe_doc>* Sets the filters for the displayObject.
+			<c path="Array"><c path="pixi.core.renderers.webgl.filters.AbstractFilter"/></c>
+			<haxe_doc><![CDATA[* Sets the filters for the displayObject.
 	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
 	 * To remove filters simply set this property to 'null'
 	 *
-	 * @member {Filter[]}
-	 * @memberof DisplayObject#</haxe_doc>
+	 * @member {Array<AbstractFilter>}
+	 * @memberof DisplayObject#]]></haxe_doc>
 		</filters>
 		<interactive public="1">
 			<x path="Bool"/>
@@ -14675,17 +14717,13 @@
 				<x path="Bool"/>
 				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 			</f>
-			<haxe_doc>* @class Detector</haxe_doc>
-			<overloads><autoDetectRenderer public="1" set="method">
-	<f a="width:height:?options:?noWebGL">
-		<x path="Float"/>
-		<x path="Float"/>
-		<t path="pixi.core.renderers.RenderingOptions"/>
-		<x path="Bool"/>
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-	</f>
-	<haxe_doc>* @class Detector</haxe_doc>
-</autoDetectRenderer></overloads>
+			<overloads><autoDetectRenderer public="1" set="method"><f a="width:height:?options:?noWebGL">
+	<x path="Float"/>
+	<x path="Float"/>
+	<t path="pixi.core.renderers.RenderingOptions"/>
+	<x path="Bool"/>
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+</f></autoDetectRenderer></overloads>
 		</autoDetectRenderer>
 		<meta>
 			<m n=":directlyUsed"/>
@@ -14701,6 +14739,10 @@
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
 	</transparent>
+	<roundPixels>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</roundPixels>
 	<resolution>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -14807,6 +14849,13 @@
 	 * @member {Int}
 	 * @default 0x000000</haxe_doc>
 		</backgroundColor>
+		<roundPixels public="1">
+			<x path="Bool"/>
+			<haxe_doc>* If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
+     * Handy for crisp pixel art and speed on legacy devices.
+     *
+     * @member {Bool}</haxe_doc>
+		</roundPixels>
 		<plugins public="1">
 			<d/>
 			<haxe_doc>* Plugins object</haxe_doc>
@@ -14850,22 +14899,21 @@
 				<x path="Void"/>
 			</f>
 			<meta><m n=":value"><e>{height:600,width:800}</e></m></meta>
-			<haxe_doc>* The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
-	 * Don't forget to add the CanvasRenderer.view to your DOM or you will not see anything :)
-	 *
-	 * @class
-	 * @namespace PIXI
-	 * @param system {string} The name of the system this renderer is for.
-	 * @param [width=800] {number} the width of the canvas view
-	 * @param [height=600] {number} the height of the canvas view
-	 * @param [options] {object} The optional renderer parameters
+			<haxe_doc>* @class
+	 * @memberof PIXI
+	 * @param system {String} The name of the system this renderer is for.
+	 * @param [width=800] {Float} the width of the canvas view
+	 * @param [height=600] {Float} the height of the canvas view
+	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {boolean} If the render view is transparent, default false
-	 * @param [options.autoResize=false] {boolean} If the render view is automatically resized, default false
-	 * @param [options.antialias=false] {boolean} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
-	 * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
-	 *      not before the new render pass.</haxe_doc>
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.autoResize=false] {Bool} If the render view is automatically resized, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+	 * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or
+	 *      not before the new render pass.
+	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
+	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.SystemRenderer"</e></m></meta>
 	</class>
@@ -14889,13 +14937,6 @@
 	 *
 	 * @member {CanvasMaskManager}</haxe_doc>
 		</maskManager>
-		<roundPixels public="1">
-			<x path="Bool"/>
-			<haxe_doc>* If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
-	 * Handy for crisp pixel art and speed on legacy devices.
-	 *
-	 * @member {Bool}</haxe_doc>
-		</roundPixels>
 		<currentScaleMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* Tracks the active scale mode for this renderer.
@@ -14924,19 +14965,19 @@
 			<haxe_doc>* The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
 	 * Don't forget to add the CanvasRenderer.view to your DOM or you will not see anything :)
 	 *
-	 * @class
-	 * @namespace PIXI
-	 * @param system {string} The name of the system this renderer is for.
-	 * @param [width=800] {number} the width of the canvas view
-	 * @param [height=600] {number} the height of the canvas view
-	 * @param [options] {object} The optional renderer parameters
+	 * @param system {String} The name of the system this renderer is for.
+	 * @param [width=800] {Float} the width of the canvas view
+	 * @param [height=600] {Float} the height of the canvas view
+	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {boolean} If the render view is transparent, default false
-	 * @param [options.autoResize=false] {boolean} If the render view is automatically resized, default false
-	 * @param [options.antialias=false] {boolean} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
-	 * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
-	 *      not before the new render pass.</haxe_doc>
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.autoResize=false] {Bool} If the render view is automatically resized, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+	 * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or
+	 *      not before the new render pass.
+	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
+	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
 		<meta>
 			<m n=":directlyUsed"/>
@@ -15198,20 +15239,19 @@
 	 * So no need for Sprite Batches or Sprite Clouds.
 	 * Don't forget to add the view to your DOM or you will not see anything :)
 	 *
-	 * @class
-	 * @namespace PIXI
-	 * @param [width=0] {number} the width of the canvas view
-	 * @param [height=0] {number} the height of the canvas view
-	 * @param [options] {object} The optional renderer parameters
+	 * @param system {String} The name of the system this renderer is for.
+	 * @param [width=800] {Float} the width of the canvas view
+	 * @param [height=600] {Float} the height of the canvas view
+	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {boolean} If the render view is transparent, default false
-	 * @param [options.autoResize=false] {boolean} If the render view is automatically resized, default false
-	 * @param [options.antialias=false] {boolean} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.resolution=1] {number} the resolution of the renderer retina would be 2
-	 * @param [options.clearBeforeRender=true] {boolean} This sets if the CanvasRenderer will clear the canvas or
+	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
+	 * @param [options.autoResize=false] {Bool} If the render view is automatically resized, default false
+	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
+	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
+	 * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or
 	 *      not before the new render pass.
-	 * @param [options.preserveDrawingBuffer=false] {boolean} enables drawing buffer preservation, enable var if
-	 *      you need to call toDataUrl on the webgl context.</haxe_doc>
+	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
+	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
 		<meta>
 			<m n=":directlyUsed"/>
@@ -16223,6 +16263,31 @@
 	 *
 	 * @member {CanvasRenderer|WebGLRenderer}</haxe_doc>
 		</renderer>
+		<render public="1" set="method">
+			<f a="displayObject:matrix:?clear:?updateTransform" v="::false:true">
+				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.math.Matrix"/>
+				<x path="Bool"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":value"><e>{updateTransform:true,clear:false}</e></m></meta>
+			<haxe_doc>* Draw/render the given DisplayObject onto the texture.
+	 *
+	 * The displayObject and descendents are transformed during this operation.
+	 * If `updateTransform` is true then the transformations will be restored before the
+	 * method returns. Otherwise it is up to the calling code to correctly use or reset
+	 * the transformed display objects.
+	 *
+	 * The display object is always rendered with a worldAlpha value of 1.
+	 *
+	 * @method
+	 * @param displayObject {PIXI.DisplayObject} The display object to render this texture on
+	 * @param [matrix] {PIXI.Matrix} Optional matrix to apply to the display object before rendering.
+	 * @param [clear=false] {boolean} If true the texture will be cleared before the displayObject is drawn
+	 * @param [updateTransform=true] {boolean} If true the displayObject's worldTransform/worldAlpha and all children
+	 *  transformations will be restored. Not restoring this information will be a little faster.</haxe_doc>
+		</render>
 		<resize public="1" set="method">
 			<f a="width:height:updateBase">
 				<x path="Float"/>
@@ -16259,6 +16324,24 @@
 	 *
 	 * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.</haxe_doc>
 		</getCanvas>
+		<getPixel public="1" set="method">
+			<f a="x:y">
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="js.html.Uint8ClampedArray"/>
+			</f>
+			<haxe_doc>* Will return a one-dimensional array containing the pixel data of a pixel within the texture in RGBA order, with integer values between 0 and 255 (included).
+	 *
+	 * @param x {number} The x coordinate of the pixel to retrieve.
+	 * @param y {number} The y coordinate of the pixel to retrieve.
+	 * @return {Uint8ClampedArray}</haxe_doc>
+		</getPixel>
+		<getPixels public="1" set="method">
+			<f a=""><c path="js.html.Uint8ClampedArray"/></f>
+			<haxe_doc>* Will return a one-dimensional array containing the pixel data of the entire texture in RGBA order, with integer values between 0 and 255 (included).
+	 *
+	 * @return {Uint8ClampedArray}</haxe_doc>
+		</getPixels>
 		<new public="1" set="method">
 			<f a="renderer:?width:?height:?scaleMode:?resolution">
 				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
@@ -16733,6 +16816,19 @@
      * @param n {Float}
      * @returns {Int} 0 if n is 0, -1 if n is negative, 1 if n i positive</haxe_doc>
 		</sign>
+		<removeItems public="1" set="method" static="1">
+			<f a="arr:startIdx:removeCount">
+				<c path="Array"><d/></c>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* removeItems
+     *
+     * @param {Array} arr The target array
+     * @param {Int} startIdx The index to begin removing from (inclusive)
+     * @param {Int} removeCount How many items to remove</haxe_doc>
+		</removeItems>
 		<meta>
 			<m n=":directlyUsed"/>
 			<m n=":native"><e>"PIXI.utils"</e></m>

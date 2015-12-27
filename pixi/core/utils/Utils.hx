@@ -101,4 +101,13 @@ extern class Utils {
      * @returns {Int} 0 if n is 0, -1 if n is negative, 1 if n i positive
      */
 	static function sign(n:Float):Int;
+
+	/**
+     * removeItems
+     *
+     * @param {Array} arr The target array
+     * @param {Int} startIdx The index to begin removing from (inclusive)
+     * @param {Int} removeCount How many items to remove
+     */
+	static function removeItems(arr:Array<Dynamic>, startIdx:Int, removeCount:Int):Void;
 }
