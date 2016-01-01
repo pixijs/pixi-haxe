@@ -57,7 +57,7 @@ module.exports = function (grunt) {
 		},
 
 		zip: {
-			"pixi.zip": ["pixi/**", "haxelib.json", "extraParams.hxml", "README.md"]
+			"pixi.zip": ["src/**", "haxelib.json", "extraParams.hxml", "README.md", "LICENSE"]
 		}
 	});
 
@@ -67,5 +67,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-zip");
 	grunt.loadNpmTasks("grunt-exec");
-	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.8:perf.js", "exec"]);
+	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.9", "exec"]);
 };

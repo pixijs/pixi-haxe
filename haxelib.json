@@ -1,6 +1,7 @@
 {
 	"name": "pixijs",
 	"license": "MIT",
+	"classPath": "src",
 	"tags": [
 		"js",
 		"haxe",
