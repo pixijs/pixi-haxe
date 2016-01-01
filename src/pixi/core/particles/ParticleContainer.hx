@@ -16,9 +16,8 @@ extern class ParticleContainer extends Container {
 	 * ```js
 	 * var container = new ParticleContainer();
 	 *
-	 * for (var i = 0; i < 100; ++i)
-	 * {
-	 *     var sprite = new PIXI.Sprite.fromImage("myImage.png");
+	 * for (i in 0 ... 100) {
+	 *     var sprite = new Sprite.fromImage("myImage.png");
 	 *     container.addChild(sprite);
 	 * }
 	 * ```
@@ -29,15 +28,16 @@ extern class ParticleContainer extends Container {
 	 * @extends PIXI.Container
 	 * @memberof PIXI
 	 *
-	 * @param [size=15000] {number} The number of images in the SpriteBatch before it flushes.
-	 * @param [properties] {object} The properties of children that should be uploaded to the gpu and applied.
-	 * @param [properties.scale=false] {boolean} When true, scale be uploaded and applied.
-	 * @param [properties.position=true] {boolean} When true, position be uploaded and applied.
-	 * @param [properties.rotation=false] {boolean} When true, rotation be uploaded and applied.
-	 * @param [properties.uvs=false] {boolean} When true, uvs be uploaded and applied.
-	 * @param [properties.alpha=false] {boolean} When true, alpha be uploaded and applied.
+	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
+	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
+	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
+	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
+	 * @param [properties.uvs=false] {Bool} When true, uvs be uploaded and applied.
+	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
+	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
-	function new(?size:Int, ?properties:Array<Bool>);
+	function new(?size:Int, ?properties:Array<Bool>, ?batchSize:Int);
 
 	/**
 	 * Sets the private properties array to dynamic / static based on the passed properties object
