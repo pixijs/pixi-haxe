@@ -66,8 +66,8 @@ extern class DisplayObject extends InteractionManager {
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Number} The resolution of the texture being generated
-	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object
 	 */
 	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
