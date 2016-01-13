@@ -192,4 +192,12 @@ extern class Texture extends EventEmitter {
 	 * @return {Texture} The texture that was removed
 	 */
 	static function removeTextureFromCache(id:String):Texture;
+	
+	/**
+	 * An empty texture, used often to not have to create multiple empty textures.
+	 * @static
+	 * @constant
+	 * @member {Texture}
+	 */
+	static var EMPTY:Texture;	
 }
