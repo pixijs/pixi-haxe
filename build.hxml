@@ -7,7 +7,7 @@
 
 --next
 -cp samples
--cp pixi
+-cp src
 -lib perf.js
 -dce full
 -D stats

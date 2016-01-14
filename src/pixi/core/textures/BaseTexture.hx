@@ -13,8 +13,8 @@ extern class BaseTexture extends EventEmitter {
 	 * @class
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
-	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
-	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios
+	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios
 	 */
 	@:overload(function(source:Dynamic,?scaleMode:Int, ?resolution:Float):Void {})
 	@:overload(function(source:CanvasElement,?scaleMode:Int, ?resolution:Float):Void {})

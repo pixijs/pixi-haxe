@@ -5,15 +5,19 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var Perf = $hx_exports.Perf = function(pos) {
+var Perf = $hx_exports.Perf = function(pos,offset) {
+	if(offset == null) offset = 0;
 	if(pos == null) pos = "TR";
 	this._perfObj = window.performance;
 	this._memoryObj = window.performance.memory;
 	this._memCheck = this._perfObj != null && this._memoryObj != null && this._memoryObj.totalJSHeapSize > 0;
+	this.currentFps = 0;
+	this.currentMs = 0;
+	this.currentMem = "0";
 	this._pos = pos;
+	this._offset = offset;
 	this._time = 0;
 	this._ticks = 0;
-	this._fps = 0;
 	this._fpsMin = Infinity;
 	this._fpsMax = 0;
 	if(this._perfObj != null && ($_=this._perfObj,$bind($_,$_.now)) != null) this._startTime = this._perfObj.now(); else this._startTime = new Date().getTime();
@@ -29,15 +33,19 @@ Perf.prototype = {
 		if(this._perfObj != null && ($_=this._perfObj,$bind($_,$_.now)) != null) time = this._perfObj.now(); else time = new Date().getTime();
 		this._ticks++;
 		if(time > this._prevTime + Perf.MEASUREMENT_INTERVAL) {
-			this.ms.innerHTML = "MS: " + Math.round(time - this._startTime);
-			this._fps = Math.round(this._ticks * 1000 / (time - this._prevTime));
-			this._fpsMin = Math.min(this._fpsMin,this._fps);
-			this._fpsMax = Math.max(this._fpsMax,this._fps);
-			this.fps.innerHTML = "FPS: " + this._fps + " (" + this._fpsMin + "-" + this._fpsMax + ")";
-			if(this._fps >= 30) this.fps.style.backgroundColor = Perf.FPS_BG_CLR; else if(this._fps >= 15) this.fps.style.backgroundColor = Perf.FPS_WARN_BG_CLR; else this.fps.style.backgroundColor = Perf.FPS_PROB_BG_CLR;
+			this.currentMs = Math.round(time - this._startTime);
+			this.ms.innerHTML = "MS: " + this.currentMs;
+			this.currentFps = Math.round(this._ticks * 1000 / (time - this._prevTime));
+			this._fpsMin = Math.min(this._fpsMin,this.currentFps);
+			this._fpsMax = Math.max(this._fpsMax,this.currentFps);
+			this.fps.innerHTML = "FPS: " + this.currentFps + " (" + this._fpsMin + "-" + this._fpsMax + ")";
+			if(this.currentFps >= 30) this.fps.style.backgroundColor = Perf.FPS_BG_CLR; else if(this.currentFps >= 15) this.fps.style.backgroundColor = Perf.FPS_WARN_BG_CLR; else this.fps.style.backgroundColor = Perf.FPS_PROB_BG_CLR;
 			this._prevTime = time;
 			this._ticks = 0;
-			if(this._memCheck) this.memory.innerHTML = "MEM: " + this._getFormattedSize(this._memoryObj.usedJSHeapSize,2);
+			if(this._memCheck) {
+				this.currentMem = this._getFormattedSize(this._memoryObj.usedJSHeapSize,2);
+				this.memory.innerHTML = "MEM: " + this.currentMem;
+			}
 		}
 		this._startTime = time;
 		window.requestAnimationFrame($bind(this,this._tick));
@@ -53,25 +61,27 @@ Perf.prototype = {
 		var _g = this._pos;
 		switch(_g) {
 		case "TL":
-			div.style.left = "0px";
+			div.style.left = this._offset + "px";
 			div.style.top = top + "px";
 			break;
 		case "TR":
-			div.style.right = "0px";
+			div.style.right = this._offset + "px";
 			div.style.top = top + "px";
 			break;
 		case "BL":
-			div.style.left = "0px";
-			div.style.bottom = 28 - top + "px";
+			div.style.left = this._offset + "px";
+			div.style.bottom = (this._memCheck?48:32) - top + "px";
 			break;
 		case "BR":
-			div.style.right = "0px";
-			div.style.bottom = 28 - top + "px";
+			div.style.right = this._offset + "px";
+			div.style.bottom = (this._memCheck?48:32) - top + "px";
 			break;
 		}
 		div.style.width = "80px";
-		div.style.fontFamily = Perf.FONT_FAMILY;
+		div.style.height = "12px";
+		div.style.lineHeight = "12px";
 		div.style.padding = "2px";
+		div.style.fontFamily = Perf.FONT_FAMILY;
 		div.style.fontSize = "9px";
 		div.style.fontWeight = "bold";
 		div.style.textAlign = "center";
@@ -86,14 +96,14 @@ Perf.prototype = {
 		this.fps.innerHTML = "FPS: 0";
 	}
 	,_createMsDom: function() {
-		this.ms = this._createDiv("ms",14);
+		this.ms = this._createDiv("ms",16);
 		this.ms.style.backgroundColor = Perf.MS_BG_CLR;
 		this.ms.style.zIndex = "996";
 		this.ms.style.color = Perf.MS_TXT_CLR;
 		this.ms.innerHTML = "MS: 0";
 	}
 	,_createMemoryDom: function() {
-		this.memory = this._createDiv("memory",28);
+		this.memory = this._createDiv("memory",32);
 		this.memory.style.backgroundColor = Perf.MEM_BG_CLR;
 		this.memory.style.color = Perf.MEM_TXT_CLR;
 		this.memory.style.zIndex = "997";
@@ -108,7 +118,7 @@ Perf.prototype = {
 		return Math.round(bytes * precision / Math.pow(1024,i)) / precision + " " + sizes[i];
 	}
 	,addInfo: function(val) {
-		this.info = this._createDiv("info",this._memCheck?42:28);
+		this.info = this._createDiv("info",this._memCheck?48:32);
 		this.info.style.backgroundColor = Perf.INFO_BG_CLR;
 		this.info.style.color = Perf.INFO_TXT_CLR;
 		this.info.style.zIndex = "998";

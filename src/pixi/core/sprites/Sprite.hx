@@ -21,7 +21,7 @@ extern class Sprite extends Container {
 	 * @namespace PIXI
 	 * @param texture {Texture} The texture for this sprite
 	 */
-	function new(texture:Texture);
+	function new(?texture:Texture);
 
 	/**
 	 * The anchor sets the origin point of the texture.

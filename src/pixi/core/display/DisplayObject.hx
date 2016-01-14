@@ -1,5 +1,6 @@
 package pixi.core.display;
 
+import pixi.core.renderers.webgl.filters.AbstractFilter;
 import pixi.interaction.InteractionManager;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
@@ -65,8 +66,8 @@ extern class DisplayObject extends InteractionManager {
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Number} The resolution of the texture being generated
-	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object
 	 */
 	@:overload(function(renderer:CanvasRenderer, ?resolution:Float, ?scaleMode:Int):Texture {})
@@ -79,6 +80,29 @@ extern class DisplayObject extends InteractionManager {
 	 */
 	function updateTransform():Void;
 	function displayObjectUpdateTransform():Void;
+
+	/**
+	 * Set the parent Container of this DisplayObject
+	 *
+	 * @param container {Container} The Container to add this DisplayObject to
+	 * @return {Container} The Container that this DisplayObject was added to
+	 */
+	function setParent(container:Container):Container;
+
+	/**
+	 * Convenience function to set the postion, scale, skew and pivot at once.
+	 *
+	 * @param [x=0] {Float} The X position
+	 * @param [y=0] {Float} The Y position
+	 * @param [scaleX=1] {Float} The X scale value
+	 * @param [scaleY=1] {Float} The Y scale value
+	 * @param [skewX=0] {Float} The X skew value
+	 * @param [skewY=0] {Float} The Y skew value
+	 * @param [pivotX=0] {Float} The X pivot value
+	 * @param [pivotY=0] {Float} The Y pivot value
+	 * @return {DisplayObject}
+	 */
+	function setTransform(?x:Float = 0, ?y:Float = 0, ?scaleX:Float = 0, ?scaleY:Float = 0, ?rotation:Float = 0, ?skewX:Float = 0, ?skewY:Float = 0, ?pivotX:Float = 0, ?pivotY:Float = 0):DisplayObject;
 
 	/**
 	 * Base destroy method for generic display objects
@@ -127,6 +151,13 @@ extern class DisplayObject extends InteractionManager {
 	 * @member {Point}
 	 */
 	var pivot:Point;
+
+	/**
+     * The skew factor for the object in radians.
+     *
+     * @member {Point}
+     */
+	var skew:Point;
 
 	/**
 	 * The rotation of the object in radians.
@@ -220,7 +251,7 @@ extern class DisplayObject extends InteractionManager {
 	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
 	 * To remove a mask, set this property to null.
 	 *
-	 * @member {Graphics}
+	 * @member {Graphics or Sprite}
 	 * @memberof DisplayObject#
 	 */
 	var mask:Dynamic;
@@ -230,10 +261,10 @@ extern class DisplayObject extends InteractionManager {
 	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
 	 * To remove filters simply set this property to 'null'
 	 *
-	 * @member {Filter[]}
+	 * @member {Array<AbstractFilter>}
 	 * @memberof DisplayObject#
 	 */
-	var filters:Array<Dynamic>;
+	var filters:Array<AbstractFilter>;
 
 	/**
 	 * Indicates if the displayObject is interactive or not.

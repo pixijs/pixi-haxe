@@ -22,6 +22,23 @@ extern class Point {
 	function clone():Point;
 
 	/**
+	 * Copies x and y from the given point
+	 *
+	 * @method copy
+	 * @param {Point} the point to copy
+	 */
+	function copy(p:Point):Void;
+
+	/**
+	 * Returns true if the given point is equal to this point
+	 *
+	 * @method copy
+	 * @param {Point} the point to compare
+	 * @returns {Bool} the result of the comparison
+	 */
+	function equals(p:Point):Bool;	
+
+	/**
 	 * Sets the point to a new x and y position.
 	 * If y is ommited, both x and y will be set to x.
 	 *
