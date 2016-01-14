@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor api updates",
-	"version": "3.0.28",
+	"releasenote": "minor api updates in Sprite, Texture and Point classes",
+	"version": "3.0.30",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

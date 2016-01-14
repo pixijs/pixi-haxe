@@ -19,7 +19,8 @@ EReg.prototype = {
 	}
 };
 Math.__name__ = true;
-var Perf = $hx_exports.Perf = function(pos) {
+var Perf = $hx_exports.Perf = function(pos,offset) {
+	if(offset == null) offset = 0;
 	if(pos == null) pos = "TR";
 	this._perfObj = window.performance;
 	this._memoryObj = window.performance.memory;
@@ -28,6 +29,7 @@ var Perf = $hx_exports.Perf = function(pos) {
 	this.currentMs = 0;
 	this.currentMem = "0";
 	this._pos = pos;
+	this._offset = offset;
 	this._time = 0;
 	this._ticks = 0;
 	this._fpsMin = Infinity;
@@ -74,25 +76,25 @@ Perf.prototype = {
 		var _g = this._pos;
 		switch(_g) {
 		case "TL":
-			div.style.left = "0px";
+			div.style.left = this._offset + "px";
 			div.style.top = top + "px";
 			break;
 		case "TR":
-			div.style.right = "0px";
+			div.style.right = this._offset + "px";
 			div.style.top = top + "px";
 			break;
 		case "BL":
-			div.style.left = "0px";
-			div.style.bottom = 30 - top + "px";
+			div.style.left = this._offset + "px";
+			div.style.bottom = (this._memCheck?48:32) - top + "px";
 			break;
 		case "BR":
-			div.style.right = "0px";
-			div.style.bottom = 30 - top + "px";
+			div.style.right = this._offset + "px";
+			div.style.bottom = (this._memCheck?48:32) - top + "px";
 			break;
 		}
 		div.style.width = "80px";
-		div.style.height = "14px";
-		div.style.lineHeight = "14px";
+		div.style.height = "12px";
+		div.style.lineHeight = "12px";
 		div.style.padding = "2px";
 		div.style.fontFamily = Perf.FONT_FAMILY;
 		div.style.fontSize = "9px";

@@ -337,7 +337,7 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
-	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,6/Perf.hx">
+	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,1,1/src/Perf.hx">
 		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
 		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
 		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
@@ -365,29 +365,31 @@
 		<_fpsMax><x path="Float"/></_fpsMax>
 		<_memCheck><x path="Bool"/></_memCheck>
 		<_pos><c path="String"/></_pos>
+		<_offset><x path="Float"/></_offset>
 		<_perfObj><c path="js.html.Performance"/></_perfObj>
 		<_memoryObj><t path="Memory"/></_memoryObj>
-		<_tick set="method" line="76"><f a=""><x path="Void"/></f></_tick>
-		<_createDiv set="method" line="107"><f a="id:?top">
+		<_tick set="method" line="78"><f a=""><x path="Void"/></f></_tick>
+		<_createDiv set="method" line="109"><f a="id:?top">
 	<c path="String"/>
 	<x path="Float"/>
 	<c path="js.html.DivElement"/>
 </f></_createDiv>
-		<_createFpsDom set="method" line="140"><f a=""><x path="Void"/></f></_createFpsDom>
-		<_createMsDom set="method" line="148"><f a=""><x path="Void"/></f></_createMsDom>
-		<_createMemoryDom set="method" line="156"><f a=""><x path="Void"/></f></_createMemoryDom>
-		<_getFormattedSize set="method" line="164"><f a="bytes:?frac">
+		<_createFpsDom set="method" line="142"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="150"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="158"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="166"><f a="bytes:?frac">
 	<x path="Float"/>
 	<x path="Int"/>
 	<c path="String"/>
 </f></_getFormattedSize>
-		<addInfo public="1" set="method" line="172"><f a="val">
+		<addInfo public="1" set="method" line="174"><f a="val">
 	<c path="String"/>
 	<x path="Void"/>
 </f></addInfo>
-		<new public="1" set="method" line="49">
-			<f a="?pos">
+		<new public="1" set="method" line="50">
+			<f a="?pos:?offset">
 				<c path="String"/>
+				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":has_untyped"/></meta>
@@ -398,7 +400,7 @@
 			<m n=":expose"/>
 		</meta>
 	</class>
-	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,0,6/Perf.hx" module="Perf"><a>
+	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,1,1/src/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
 	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
@@ -754,7 +756,7 @@
 	Simulate it for other platforms.</haxe_doc>
 		<impl><class path="_UInt.UInt_Impl_" params="" file="/usr/lib/haxe/std/UInt.hx" private="1" module="UInt"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<class path="pixi.interaction.EventEmitter" params="" file="pixi/interaction/EventEmitter.hx" extern="1">
+	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
 				<c path="String"/>
@@ -1033,7 +1035,7 @@
 	 * @constructor</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.loaders.ResourceLoader" params="" file="pixi/loaders/ResourceLoader.hx" extern="1">
+	<class path="pixi.loaders.ResourceLoader" params="" file="src/pixi/loaders/ResourceLoader.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<baseUrl public="1">
 			<c path="String"/>
@@ -1443,7 +1445,7 @@
 	 * @param [concurrency=10] {number} The number of resources to load concurrently.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.loaders.Loader" params="" file="pixi/loaders/Loader.hx" extern="1">
+	<class path="pixi.loaders.Loader" params="" file="src/pixi/loaders/Loader.hx" extern="1">
 		<extends path="pixi.loaders.ResourceLoader"/>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -12903,7 +12905,7 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
-	<class path="pixi.core.Pixi" params="" file="pixi/core/Pixi.hx" extern="1">
+	<class path="pixi.core.Pixi" params="" file="src/pixi/core/Pixi.hx" extern="1">
 		<VERSION public="1" static="1">
 			<c path="String"/>
 			<haxe_doc>* String of the current PIXI version
@@ -13034,12 +13036,12 @@
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
-	<typedef path="pixi.core.RendererType" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<typedef path="pixi.core.RendererType" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<WEBGL><x path="Int"/></WEBGL>
 	<UNKNOWN><x path="Int"/></UNKNOWN>
 	<CANVAS><x path="Int"/></CANVAS>
 </a></typedef>
-	<typedef path="pixi.core.DefaultRenderOptions" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<typedef path="pixi.core.DefaultRenderOptions" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<view>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -13077,12 +13079,12 @@
 		<meta><m n=":optional"/></meta>
 	</antialias>
 </a></typedef>
-	<typedef path="pixi.core.ScaleModes" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<typedef path="pixi.core.ScaleModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<NEAREST><x path="Int"/></NEAREST>
 	<LINEAR><x path="Int"/></LINEAR>
 	<DEFAULT><x path="Int"/></DEFAULT>
 </a></typedef>
-	<typedef path="pixi.core.BlendModes" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<typedef path="pixi.core.BlendModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<SOFT_LIGHT><x path="Int"/></SOFT_LIGHT>
 	<SCREEN><x path="Int"/></SCREEN>
 	<SATURATION><x path="Int"/></SATURATION>
@@ -13101,14 +13103,14 @@
 	<COLOR><x path="Int"/></COLOR>
 	<ADD><x path="Int"/></ADD>
 </a></typedef>
-	<typedef path="pixi.core.Shapes" params="" file="pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<typedef path="pixi.core.Shapes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<RREC><x path="Int"/></RREC>
 	<RECT><x path="Int"/></RECT>
 	<POLY><x path="Int"/></POLY>
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
-	<class path="pixi.interaction.InteractionManager" params="" file="pixi/interaction/InteractionManager.hx" extern="1">
+	<class path="pixi.interaction.InteractionManager" params="" file="src/pixi/interaction/InteractionManager.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<renderer public="1">
 			<c path="pixi.core.renderers.SystemRenderer"/>
@@ -13287,7 +13289,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
 	</class>
-	<class path="pixi.core.display.DisplayObject" params="" file="pixi/core/display/DisplayObject.hx" extern="1">
+	<class path="pixi.core.display.DisplayObject" params="" file="src/pixi/core/display/DisplayObject.hx" extern="1">
 		<extends path="pixi.interaction.InteractionManager"/>
 		<getGlobalPosition public="1" set="method">
 			<f a="point">
@@ -13348,8 +13350,8 @@
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Number} The resolution of the texture being generated
-	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object</haxe_doc>
 			<overloads><generateTexture public="1" set="method">
 	<f a="renderer:?resolution:?scaleMode">
@@ -13362,8 +13364,8 @@
 	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
 	 *
 	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Number} The resolution of the texture being generated
-	 * @param scaleMode {Number} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} The resolution of the texture being generated
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {Texture} a texture of the display object</haxe_doc>
 </generateTexture></overloads>
 		</generateTexture>
@@ -13616,7 +13618,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.DisplayObject"</e></m></meta>
 	</class>
-	<class path="pixi.core.display.Container" params="" file="pixi/core/display/Container.hx" extern="1">
+	<class path="pixi.core.display.Container" params="" file="src/pixi/core/display/Container.hx" extern="1">
 		<extends path="pixi.core.display.DisplayObject"/>
 		<children public="1">
 			<c path="Array"><c path="pixi.core.display.DisplayObject"/></c>
@@ -13758,7 +13760,7 @@
 			<m n=":native"><e>"PIXI.Container"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.graphics.Graphics" params="" file="pixi/core/graphics/Graphics.hx" extern="1">
+	<class path="pixi.core.graphics.Graphics" params="" file="src/pixi/core/graphics/Graphics.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<fillAlpha public="1">
 			<x path="Float"/>
@@ -14086,7 +14088,7 @@
 			<m n=":native"><e>"PIXI.Graphics"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.graphics.GraphicsData" params="" file="pixi/core/graphics/GraphicsData.hx" extern="1">
+	<class path="pixi.core.graphics.GraphicsData" params="" file="src/pixi/core/graphics/GraphicsData.hx" extern="1">
 		<lineWidth public="1"><x path="Float"/></lineWidth>
 		<lineColor public="1"><c path="String"/></lineColor>
 		<lineAlpha public="1"><x path="Float"/></lineAlpha>
@@ -14119,7 +14121,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.Matrix" params="" file="pixi/core/math/Matrix.hx" extern="1">
+	<class path="pixi.core.math.Matrix" params="" file="src/pixi/core/math/Matrix.hx" extern="1">
 		<a public="1">
 			<x path="Float"/>
 			<haxe_doc>* @member {Float}
@@ -14281,13 +14283,34 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Matrix"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.Point" params="" file="pixi/core/math/Point.hx" extern="1">
+	<class path="pixi.core.math.Point" params="" file="src/pixi/core/math/Point.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.Point"/></f>
 			<haxe_doc>* Creates a clone of this point
 	 *
 	 * @return {Point} a copy of the point</haxe_doc>
 		</clone>
+		<copy public="1" set="method">
+			<f a="p">
+				<c path="pixi.core.math.Point"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Copies x and y from the given point
+	 *
+	 * @method copy
+	 * @param {Point} the point to copy</haxe_doc>
+		</copy>
+		<equals public="1" set="method">
+			<f a="p">
+				<c path="pixi.core.math.Point"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Returns true if the given point is equal to this point
+	 *
+	 * @method copy
+	 * @param {Point} the point to compare
+	 * @returns {Bool} the result of the comparison</haxe_doc>
+		</equals>
 		<set public="1" set="method">
 			<f a="?x:?y">
 				<x path="Float"/>
@@ -14329,7 +14352,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Point"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.shapes.Circle" params="" file="pixi/core/math/shapes/Circle.hx" extern="1">
+	<class path="pixi.core.math.shapes.Circle" params="" file="src/pixi/core/math/shapes/Circle.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.shapes.Circle"/></f>
 			<haxe_doc>* Creates a clone of this Circle instance
@@ -14392,7 +14415,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Circle"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.shapes.Ellipse" params="" file="pixi/core/math/shapes/Ellipse.hx" extern="1">
+	<class path="pixi.core.math.shapes.Ellipse" params="" file="src/pixi/core/math/shapes/Ellipse.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.shapes.Ellipse"/></f>
 			<haxe_doc>* Creates a clone of this Ellipse instance
@@ -14463,7 +14486,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Ellipse"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.shapes.Polygon" params="" file="pixi/core/math/shapes/Polygon.hx" extern="1">
+	<class path="pixi.core.math.shapes.Polygon" params="" file="src/pixi/core/math/shapes/Polygon.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.shapes.Polygon"/></f>
 			<haxe_doc>* Creates a clone of this polygon
@@ -14519,7 +14542,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Polygon"</e></m></meta>
 	</class>
-	<class path="pixi.core.math.shapes.Rectangle" params="" file="pixi/core/math/shapes/Rectangle.hx" extern="1">
+	<class path="pixi.core.math.shapes.Rectangle" params="" file="src/pixi/core/math/shapes/Rectangle.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.shapes.Rectangle"/></f>
 			<haxe_doc>* Creates a clone of this Rectangle instance
@@ -14586,7 +14609,7 @@
 			<m n=":native"><e>"PIXI.Rectangle"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.math.shapes.RoundedRectangle" params="" file="pixi/core/math/shapes/RoundedRectangle.hx" extern="1">
+	<class path="pixi.core.math.shapes.RoundedRectangle" params="" file="src/pixi/core/math/shapes/RoundedRectangle.hx" extern="1">
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.math.shapes.RoundedRectangle"/></f>
 			<haxe_doc>* Creates a clone of this Rounded Rectangle
@@ -14658,7 +14681,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
-	<class path="pixi.core.particles.ParticleContainer" params="" file="pixi/core/particles/ParticleContainer.hx" extern="1">
+	<class path="pixi.core.particles.ParticleContainer" params="" file="src/pixi/core/particles/ParticleContainer.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<setProperties public="1" set="method">
 			<f a="properties">
@@ -14670,9 +14693,10 @@
 	 * @param properties {object} The properties to be uploaded</haxe_doc>
 		</setProperties>
 		<new public="1" set="method">
-			<f a="?size:?properties">
+			<f a="?size:?properties:?batchSize">
 				<x path="Int"/>
 				<c path="Array"><x path="Bool"/></c>
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* The ParticleContainer class is a really fast version of the Container built solely for speed,
@@ -14685,9 +14709,8 @@
 	 * ```js
 	 * var container = new ParticleContainer();
 	 *
-	 * for (var i = 0; i < 100; ++i)
-	 * {
-	 *     var sprite = new PIXI.Sprite.fromImage("myImage.png");
+	 * for (i in 0 ... 100) {
+	 *     var sprite = new Sprite.fromImage("myImage.png");
 	 *     container.addChild(sprite);
 	 * }
 	 * ```
@@ -14698,17 +14721,18 @@
 	 * @extends PIXI.Container
 	 * @memberof PIXI
 	 *
-	 * @param [size=15000] {number} The number of images in the SpriteBatch before it flushes.
-	 * @param [properties] {object} The properties of children that should be uploaded to the gpu and applied.
-	 * @param [properties.scale=false] {boolean} When true, scale be uploaded and applied.
-	 * @param [properties.position=true] {boolean} When true, position be uploaded and applied.
-	 * @param [properties.rotation=false] {boolean} When true, rotation be uploaded and applied.
-	 * @param [properties.uvs=false] {boolean} When true, uvs be uploaded and applied.
-	 * @param [properties.alpha=false] {boolean} When true, alpha be uploaded and applied.]]></haxe_doc>
+	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
+	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
+	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
+	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
+	 * @param [properties.uvs=false] {Bool} When true, uvs be uploaded and applied.
+	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
+	 * @param [batchSize=15000] {Int} Number of particles per batch.]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.ParticleContainer"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.Detector" params="" file="pixi/core/renderers/Detector.hx" extern="1">
+	<class path="pixi.core.renderers.Detector" params="" file="src/pixi/core/renderers/Detector.hx" extern="1">
 		<autoDetectRenderer public="1" set="method" static="1">
 			<f a="width:height:?options:?noWebGL">
 				<x path="Float"/>
@@ -14730,7 +14754,7 @@
 			<m n=":native"><e>"PIXI"</e></m>
 		</meta>
 	</class>
-	<typedef path="pixi.core.renderers.RenderingOptions" params="" file="pixi/core/renderers/Detector.hx" module="pixi.core.renderers.Detector"><a>
+	<typedef path="pixi.core.renderers.RenderingOptions" params="" file="src/pixi/core/renderers/Detector.hx" module="pixi.core.renderers.Detector"><a>
 	<view>
 		<t path="Null"><c path="js.html.CanvasElement"/></t>
 		<meta><m n=":optional"/></meta>
@@ -14772,7 +14796,7 @@
 		<meta><m n=":optional"/></meta>
 	</antialias>
 </a></typedef>
-	<class path="pixi.core.renderers.SystemRenderer" params="" file="pixi/core/renderers/SystemRenderer.hx" extern="1">
+	<class path="pixi.core.renderers.SystemRenderer" params="" file="src/pixi/core/renderers/SystemRenderer.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<type public="1">
 			<x path="Int"/>
@@ -14917,7 +14941,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.SystemRenderer"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.CanvasRenderer" params="" file="pixi/core/renderers/canvas/CanvasRenderer.hx" extern="1">
+	<class path="pixi.core.renderers.canvas.CanvasRenderer" params="" file="src/pixi/core/renderers/canvas/CanvasRenderer.hx" extern="1">
 		<extends path="pixi.core.renderers.SystemRenderer"/>
 		<context public="1">
 			<c path="js.html.CanvasRenderingContext2D"/>
@@ -14984,7 +15008,7 @@
 			<m n=":native"><e>"PIXI.CanvasRenderer"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasBuffer" params="" file="pixi/core/renderers/canvas/utils/CanvasBuffer.hx" extern="1">
+	<class path="pixi.core.renderers.canvas.utils.CanvasBuffer" params="" file="src/pixi/core/renderers/canvas/utils/CanvasBuffer.hx" extern="1">
 		<canvas public="1">
 			<c path="js.html.CanvasElement"/>
 			<haxe_doc>* The Canvas object that belongs to this CanvasBuffer.
@@ -15042,7 +15066,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.CanvasBuffer"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
+	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="src/pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.core.graphics.Graphics"/>
 	<c path="js.html.CanvasRenderingContext2D"/>
@@ -15050,7 +15074,7 @@
 </f></renderGraphics>
 		<meta><m n=":native"><e>"PIXI.CanvasGraphics"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasMaskManager" params="" file="pixi/core/renderers/canvas/utils/CanvasMaskManager.hx" extern="1">
+	<class path="pixi.core.renderers.canvas.utils.CanvasMaskManager" params="" file="src/pixi/core/renderers/canvas/utils/CanvasMaskManager.hx" extern="1">
 		<pushMask public="1" set="method">
 			<f a="maskData:renderer">
 				<d/>
@@ -15094,7 +15118,7 @@
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":native"><e>"PIXI.CanvasMaskManager"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasTinter" params="" file="pixi/core/renderers/canvas/utils/CanvasTinter.hx" extern="1">
+	<class path="pixi.core.renderers.canvas.utils.CanvasTinter" params="" file="src/pixi/core/renderers/canvas/utils/CanvasTinter.hx" extern="1">
 		<getTintedTexture public="1" set="method" static="1">
 			<f a="sprite:color">
 				<c path="pixi.core.sprites.Sprite"/>
@@ -15180,7 +15204,7 @@
 		</tintMethod>
 		<meta><m n=":native"><e>"PIXI.CanvasTinter"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.webgl.WebGLRenderer" params="" file="pixi/core/renderers/webgl/WebGLRenderer.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.WebGLRenderer" params="" file="src/pixi/core/renderers/webgl/WebGLRenderer.hx" extern="1">
 		<extends path="pixi.core.renderers.SystemRenderer"/>
 		<drawCount public="1">
 			<x path="Int"/>
@@ -15258,7 +15282,7 @@
 			<m n=":native"><e>"PIXI.WebGLRenderer"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.renderers.webgl.filters.AbstractFilter" params="" file="pixi/core/renderers/webgl/filters/AbstractFilter.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.filters.AbstractFilter" params="" file="src/pixi/core/renderers/webgl/filters/AbstractFilter.hx" extern="1">
 		<padding public="1">
 			<x path="Float"/>
 			<haxe_doc>* The extra padding that the filter might need
@@ -15317,7 +15341,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.AbstractFilter"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.webgl.managers.WebGLManager" params="" file="pixi/core/renderers/webgl/managers/WebGLManager.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.managers.WebGLManager" params="" file="src/pixi/core/renderers/webgl/managers/WebGLManager.hx" extern="1">
 		<onContextChange public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Generic method called when there is a WebGL context change.
@@ -15338,7 +15362,7 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.core.renderers.webgl.managers.BlendModeManager" params="" file="pixi/core/renderers/webgl/managers/BlendModeManager.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.managers.BlendModeManager" params="" file="src/pixi/core/renderers/webgl/managers/BlendModeManager.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
 		<setBlendMode public="1" set="method">
 			<f a="blendMode">
@@ -15360,7 +15384,7 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.core.renderers.webgl.managers.FilterManager" params="" file="pixi/core/renderers/webgl/managers/FilterManager.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.managers.FilterManager" params="" file="src/pixi/core/renderers/webgl/managers/FilterManager.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
 		<filterStack public="1">
 			<c path="Array"><d/></c>
@@ -15434,7 +15458,7 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.core.renderers.webgl.managers.MaskManager" params="" file="pixi/core/renderers/webgl/managers/MaskManager.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.managers.MaskManager" params="" file="src/pixi/core/renderers/webgl/managers/MaskManager.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
 		<pushMask public="1" set="method">
 			<f a="target:maskData">
@@ -15505,7 +15529,7 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.core.renderers.webgl.managers.ShaderManager" params="" file="pixi/core/renderers/webgl/managers/ShaderManager.hx" extern="1">
+	<class path="pixi.core.renderers.webgl.managers.ShaderManager" params="" file="src/pixi/core/renderers/webgl/managers/ShaderManager.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
 		<maxAttibs public="1">
 			<x path="Int"/>
@@ -15552,7 +15576,7 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
-	<class path="pixi.core.sprites.Sprite" params="" file="pixi/core/sprites/Sprite.hx" extern="1">
+	<class path="pixi.core.sprites.Sprite" params="" file="src/pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<fromFrame public="1" set="method" static="1">
 			<f a="frameId">
@@ -15626,7 +15650,7 @@
 	* @param renderer {CanvasRenderer} The renderer</haxe_doc>
 		</renderCanvas>
 		<new public="1" set="method">
-			<f a="texture">
+			<f a="?texture">
 				<c path="pixi.core.textures.Texture"/>
 				<x path="Void"/>
 			</f>
@@ -15645,7 +15669,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Sprite"</e></m></meta>
 	</class>
-	<class path="pixi.core.text.Text" params="" file="pixi/core/text/Text.hx" extern="1">
+	<class path="pixi.core.text.Text" params="" file="src/pixi/core/text/Text.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<canvas public="1">
 			<c path="js.html.CanvasElement"/>
@@ -15661,7 +15685,7 @@
 		<resolution public="1">
 			<x path="Float"/>
 			<haxe_doc>* The resolution of the canvas.
-	 * @member {number}</haxe_doc>
+	 * @member {Float}</haxe_doc>
 		</resolution>
 		<style public="1">
 			<t path="pixi.core.text.TextStyle"/>
@@ -15676,10 +15700,10 @@
 	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
 	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
 	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
+	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
+	 * @param [style.padding=0] {Float} Occasionally some fonts are cropped on top or bottom. Adding some padding will
 	 *      prevent this from happening by adding padding to the top and bottom of text height.
 	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
 	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
@@ -15708,13 +15732,13 @@
 	 * A Text can be created directly from a string and a style object
 	 *
 	 * ```js
-	 * var text = new PIXI.Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * var text = new Text('This is a pixi text', {font : '24px Arial', fill : 0xff1010, align : 'center'});
 	 * ```
 	 *
 	 * @class
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
-	 * @param text {string} The copy that you would like the text to display
+	 * @param text {String} The copy that you would like the text to display
 	 * @param [style] {TextStyle} The style parameters
 	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
 	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
@@ -15725,8 +15749,8 @@
 	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
 	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
 	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {string} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {number} Set a angle of the drop shadow
+	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
 	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
 	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
 	 *      prevent this from happening by adding padding to the top and bottom of text height.
@@ -15741,7 +15765,7 @@
 			<m n=":native"><e>"PIXI.Text"</e></m>
 		</meta>
 	</class>
-	<typedef path="pixi.core.text.TextStyle" params="" file="pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
+	<typedef path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
 	<wordWrapWidth>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -15807,7 +15831,7 @@
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<class path="pixi.core.textures.BaseTexture" params="" file="pixi/core/textures/BaseTexture.hx" extern="1">
+	<class path="pixi.core.textures.BaseTexture" params="" file="src/pixi/core/textures/BaseTexture.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
 			<f a="imageUrl:?crossorigin:?scaleMode">
@@ -15976,8 +16000,8 @@
 	 * @class
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
-	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
-	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
 			<overloads>
 				<new public="1" set="method">
 					<f a="source:?scaleMode:?resolution">
@@ -15991,8 +16015,8 @@
 	 * @class
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
-	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
-	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
 				</new>
 				<new public="1" set="method">
 					<f a="source:?scaleMode:?resolution">
@@ -16006,14 +16030,14 @@
 	 * @class
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
-	 * @param [scaleMode=scaleModes.DEFAULT] {number} See {@link SCALE_MODES} for possible values
-	 * @param resolution {number} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
+	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
 				</new>
 			</overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
-	<class path="pixi.core.textures.Texture" params="" file="pixi/core/textures/Texture.hx" extern="1">
+	<class path="pixi.core.textures.Texture" params="" file="src/pixi/core/textures/Texture.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
 			<f a="imageId:?crossorigin:?scaleMode">
@@ -16105,6 +16129,13 @@
 	 * @param id {String} The id of the texture to be removed
 	 * @return {Texture} The texture that was removed</haxe_doc>
 		</removeTextureFromCache>
+		<EMPTY public="1" static="1">
+			<c path="pixi.core.textures.Texture"/>
+			<haxe_doc>* An empty texture, used often to not have to create multiple empty textures.
+	 * @static
+	 * @constant
+	 * @member {Texture}</haxe_doc>
+		</EMPTY>
 		<noFrame public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Does this Texture have any frame data assigned to it?
@@ -16249,7 +16280,7 @@
 			<m n=":native"><e>"PIXI.Texture"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.textures.RenderTexture" params="" file="pixi/core/textures/RenderTexture.hx" extern="1">
+	<class path="pixi.core.textures.RenderTexture" params="" file="src/pixi/core/textures/RenderTexture.hx" extern="1">
 		<extends path="pixi.core.textures.Texture"/>
 		<resolution public="1">
 			<x path="Float"/>
@@ -16442,7 +16473,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.RenderTexture"</e></m></meta>
 	</class>
-	<class path="pixi.core.textures.VideoBaseTexture" params="" file="pixi/core/textures/VideoBaseTexture.hx" extern="1">
+	<class path="pixi.core.textures.VideoBaseTexture" params="" file="src/pixi/core/textures/VideoBaseTexture.hx" extern="1">
 		<extends path="pixi.core.textures.BaseTexture"/>
 		<fromVideo public="1" set="method" static="1">
 			<f a="video:?scaleMode">
@@ -16529,7 +16560,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.VideoBaseTexture"</e></m></meta>
 	</class>
-	<class path="pixi.core.ticker.Ticker" params="" file="pixi/core/ticker/Ticker.hx" extern="1">
+	<class path="pixi.core.ticker.Ticker" params="" file="src/pixi/core/ticker/Ticker.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<autoStart public="1">
 			<x path="Bool"/>
@@ -16702,7 +16733,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.ticker.Ticker"</e></m></meta>
 	</class>
-	<class path="pixi.core.utils.Utils" params="" file="pixi/core/utils/Utils.hx" extern="1">
+	<class path="pixi.core.utils.Utils" params="" file="src/pixi/core/utils/Utils.hx" extern="1">
 		<EventEmitter public="1" static="1"><d/></EventEmitter>
 		<pluginTarget public="1" static="1"><d/></pluginTarget>
 		<async public="1" static="1"><d/></async>
@@ -16834,7 +16865,7 @@
 			<m n=":native"><e>"PIXI.utils"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.extras.BitmapText" params="" file="pixi/extras/BitmapText.hx" extern="1">
+	<class path="pixi.extras.BitmapText" params="" file="src/pixi/extras/BitmapText.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<textWidth public="1">
 			<x path="Float"/>
@@ -16929,7 +16960,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.BitmapText"</e></m></meta>
 	</class>
-	<typedef path="pixi.extras.BitmapTextStyle" params="" file="pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a>
+	<typedef path="pixi.extras.BitmapTextStyle" params="" file="src/pixi/extras/BitmapText.hx" module="pixi.extras.BitmapText"><a>
 	<tint>
 		<t path="Null"><x path="Int"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16943,7 +16974,7 @@
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
-	<class path="pixi.extras.MovieClip" params="" file="pixi/extras/MovieClip.hx" extern="1">
+	<class path="pixi.extras.MovieClip" params="" file="src/pixi/extras/MovieClip.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<fromFrames public="1" set="method" static="1">
 			<f a="frames">
@@ -17074,7 +17105,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.MovieClip"</e></m></meta>
 	</class>
-	<class path="pixi.extras.TilingSprite" params="" file="pixi/extras/TilingSprite.hx" extern="1">
+	<class path="pixi.extras.TilingSprite" params="" file="src/pixi/extras/TilingSprite.hx" extern="1">
 		<extends path="pixi.core.sprites.Sprite"/>
 		<tileScale public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17138,7 +17169,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.TilingSprite"</e></m></meta>
 	</class>
-	<class path="pixi.filters.ascii.AsciiFilter" params="" file="pixi/filters/ascii/AsciiFilter.hx" extern="1">
+	<class path="pixi.filters.ascii.AsciiFilter" params="" file="src/pixi/filters/ascii/AsciiFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<size public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17157,7 +17188,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.AsciiFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.blur.BlurFilter" params="" file="pixi/filters/blur/BlurFilter.hx" extern="1">
+	<class path="pixi.filters.blur.BlurFilter" params="" file="src/pixi/filters/blur/BlurFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<passes public="1">
 			<x path="Int"/>
@@ -17202,7 +17233,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.BlurFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.blur.BlurXFilter" params="" file="pixi/filters/blur/BlurXFilter.hx" extern="1">
+	<class path="pixi.filters.blur.BlurXFilter" params="" file="src/pixi/filters/blur/BlurXFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<passes public="1">
 			<x path="Int"/>
@@ -17238,7 +17269,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.BlurXFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.blur.BlurYFilter" params="" file="pixi/filters/blur/BlurYFilter.hx" extern="1">
+	<class path="pixi.filters.blur.BlurYFilter" params="" file="src/pixi/filters/blur/BlurYFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<passes public="1">
 			<x path="Int"/>
@@ -17266,7 +17297,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.BlurYFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.blur.SmartBlurFilter" params="" file="pixi/filters/blur/SmartBlurFilter.hx" extern="1">
+	<class path="pixi.filters.blur.SmartBlurFilter" params="" file="src/pixi/filters/blur/SmartBlurFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -17278,7 +17309,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.SmartBlurFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.color.ColorMatrixFilter" params="" file="pixi/filters/color/ColorMatrixFilter.hx" extern="1">
+	<class path="pixi.filters.color.ColorMatrixFilter" params="" file="src/pixi/filters/color/ColorMatrixFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<matrix public="1">
 			<c path="Array"><x path="Float"/></c>
@@ -17477,7 +17508,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorMatrixFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.color.ColorStepFilter" params="" file="pixi/filters/color/ColorStepFilter.hx" extern="1">
+	<class path="pixi.filters.color.ColorStepFilter" params="" file="src/pixi/filters/color/ColorStepFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<step public="1">
 			<x path="Int"/>
@@ -17496,7 +17527,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorStepFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.dropshadow.DropShadowFilter" params="" file="pixi/filters/dropshadow/DropShadowFilter.hx" extern="1">
+	<class path="pixi.filters.dropshadow.DropShadowFilter" params="" file="src/pixi/filters/dropshadow/DropShadowFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<blur public="1">
 			<x path="Float"/>
@@ -17566,7 +17597,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.DropShadowFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.gray.GrayFilter" params="" file="pixi/filters/gray/GrayFilter.hx" extern="1">
+	<class path="pixi.filters.gray.GrayFilter" params="" file="src/pixi/filters/gray/GrayFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<gray public="1">
 			<x path="Float"/>
@@ -17585,7 +17616,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.GrayFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.pixelate.PixelateFilter" params="" file="pixi/filters/pixelate/PixelateFilter.hx" extern="1">
+	<class path="pixi.filters.pixelate.PixelateFilter" params="" file="src/pixi/filters/pixelate/PixelateFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<size public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17605,7 +17636,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.PixelateFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.twist.TwistFilter" params="" file="pixi/filters/twist/TwistFilter.hx" extern="1">
+	<class path="pixi.filters.twist.TwistFilter" params="" file="src/pixi/filters/twist/TwistFilter.hx" extern="1">
 		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
 		<offset public="1">
 			<c path="pixi.core.math.Point"/>
@@ -17638,14 +17669,14 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.TwistFilter"</e></m></meta>
 	</class>
-	<typedef path="pixi.interaction.EventTarget" params="" file="pixi/interaction/EventTarget.hx"><a>
+	<typedef path="pixi.interaction.EventTarget" params="" file="src/pixi/interaction/EventTarget.hx"><a>
 	<type><c path="String"/></type>
 	<target><d/></target>
 	<stopped><x path="Bool"/></stopped>
 	<stopPropagation set="method"><f a=""><x path="Void"/></f></stopPropagation>
 	<data><c path="pixi.interaction.InteractionData"/></data>
 </a></typedef>
-	<class path="pixi.interaction.InteractionData" params="" file="pixi/interaction/InteractionData.hx" extern="1">
+	<class path="pixi.interaction.InteractionData" params="" file="src/pixi/interaction/InteractionData.hx" extern="1">
 		<global public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* This point stores the global coords of where the touch/mouse event happened
@@ -17691,7 +17722,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionData"</e></m></meta>
 	</class>
-	<typedef path="pixi.interaction.InteractionManagerOptions" params="" file="pixi/interaction/InteractionManager.hx" module="pixi.interaction.InteractionManager"><a>
+	<typedef path="pixi.interaction.InteractionManagerOptions" params="" file="src/pixi/interaction/InteractionManager.hx" module="pixi.interaction.InteractionManager"><a>
 	<interactionFrequency>
 		<t path="Null"><x path="Int"/></t>
 		<meta><m n=":optional"/></meta>
@@ -17701,7 +17732,7 @@
 		<meta><m n=":optional"/></meta>
 	</autoPreventDefault>
 </a></typedef>
-	<typedef path="pixi.loaders.LoaderOptions" params="" file="pixi/loaders/LoaderOptions.hx"><a>
+	<typedef path="pixi.loaders.LoaderOptions" params="" file="src/pixi/loaders/LoaderOptions.hx"><a>
 	<xhrType>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -17715,7 +17746,7 @@
 		<meta><m n=":optional"/></meta>
 	</crossOrigin>
 </a></typedef>
-	<class path="pixi.loaders.Resource" params="" file="pixi/loaders/Resource.hx" extern="1">
+	<class path="pixi.loaders.Resource" params="" file="src/pixi/loaders/Resource.hx" extern="1">
 		<texture public="1"><c path="pixi.core.textures.Texture"/></texture>
 		<textures public="1"><d/></textures>
 		<name public="1">
@@ -17825,7 +17856,7 @@
 	 *      loaded be interpreted when using XHR?</haxe_doc>
 		</new>
 	</class>
-	<typedef path="pixi.loaders.LOAD_TYPE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+	<typedef path="pixi.loaders.LOAD_TYPE" params="" file="src/pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
 		<a>
 			<XHR><x path="Int"/></XHR>
 			<VIDEO><x path="Int"/></VIDEO>
@@ -17842,7 +17873,7 @@
  * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.</haxe_doc>
 	</typedef>
-	<typedef path="pixi.loaders.XHR_READY_STATE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+	<typedef path="pixi.loaders.XHR_READY_STATE" params="" file="src/pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
 		<a>
 			<UNSENT><x path="Int"/></UNSENT>
 			<OPENED><x path="Int"/></OPENED>
@@ -17861,7 +17892,7 @@
  * @property {number} XHR_READY_STATE.LOADING - Downloading; responseText holds partial data.
  * @property {number} XHR_READY_STATE.DONE - The operation is complete.</haxe_doc>
 	</typedef>
-	<typedef path="pixi.loaders.XHR_RESPONSE_TYPE" params="" file="pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
+	<typedef path="pixi.loaders.XHR_RESPONSE_TYPE" params="" file="src/pixi/loaders/Resource.hx" module="pixi.loaders.Resource">
 		<a>
 			<TEXT><c path="String"/></TEXT>
 			<JSON><c path="String"/></JSON>
@@ -17882,7 +17913,7 @@
  * @property {string} XHR_RESPONSE_TYPE.JSON - Object
  * @property {string} XHR_RESPONSE_TYPE.TEXT - String</haxe_doc>
 	</typedef>
-	<typedef path="pixi.loaders.ResourceObject" params="" file="pixi/loaders/ResourceLoader.hx" module="pixi.loaders.ResourceLoader"><a>
+	<typedef path="pixi.loaders.ResourceObject" params="" file="src/pixi/loaders/ResourceLoader.hx" module="pixi.loaders.ResourceLoader"><a>
 	<xhrType>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -17908,7 +17939,7 @@
 		<meta><m n=":optional"/></meta>
 	</callback>
 </a></typedef>
-	<class path="pixi.mesh.Mesh" params="" file="pixi/mesh/Mesh.hx" extern="1">
+	<class path="pixi.mesh.Mesh" params="" file="src/pixi/mesh/Mesh.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<DRAW_MODES public="1" static="1">
 			<t path="pixi.mesh.DrawModes"/>
@@ -17985,11 +18016,11 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.mesh.Mesh"</e></m></meta>
 	</class>
-	<typedef path="pixi.mesh.DrawModes" params="" file="pixi/mesh/Mesh.hx" module="pixi.mesh.Mesh"><a>
+	<typedef path="pixi.mesh.DrawModes" params="" file="src/pixi/mesh/Mesh.hx" module="pixi.mesh.Mesh"><a>
 	<TRIANGLE_MESH><x path="Int"/></TRIANGLE_MESH>
 	<TRIANGLES><x path="Int"/></TRIANGLES>
 </a></typedef>
-	<class path="pixi.mesh.Rope" params="" file="pixi/mesh/Rope.hx" extern="1">
+	<class path="pixi.mesh.Rope" params="" file="src/pixi/mesh/Rope.hx" extern="1">
 		<extends path="pixi.mesh.Mesh"/>
 		<points public="1"><c path="Array"><c path="pixi.core.math.Point"/></c></points>
 		<colors public="1"><c path="Array"><x path="Float"/></c></colors>
@@ -18022,7 +18053,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.mesh.Rope"</e></m></meta>
 	</class>
-	<class path="pixi.plugins.app.Application" params="" file="pixi/plugins/app/Application.hx">
+	<class path="pixi.plugins.app.Application" params="" file="src/pixi/plugins/app/Application.hx">
 		<pixelRatio public="1">
 			<x path="Float"/>
 			<haxe_doc>* Sets the pixel ratio of the application.
@@ -18166,7 +18197,7 @@
  * @copyright 2015</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
-	<class path="pixi.plugins.spine.Spine" params="" file="pixi/plugins/spine/Spine.hx" extern="1">
+	<class path="pixi.plugins.spine.Spine" params="" file="src/pixi/plugins/spine/Spine.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<autoUpdate public="1">
 			<x path="Bool"/>
