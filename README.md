@@ -52,7 +52,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
 * [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
-**[Cohere](http://adireddy.github.io/cohere/)** - Sample MVC application using haxe and pixi.js
+**[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using haxe and pixi.js
 
 Look at the `samples` folder for the source code of above examples.
 
