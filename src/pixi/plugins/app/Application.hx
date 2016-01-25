@@ -134,6 +134,7 @@ class Application {
 	public static inline var WEBGL:String = "webgl";
 
 	var _frameCount:Int;
+	var _animationFrameId:Null<Int>;
 
 	public function new() {
 		_setDefaultValues();
@@ -153,6 +154,7 @@ class Application {
 	}
 
 	inline function _setDefaultValues() {
+		_animationFrameId = null;
 		pixelRatio = 1;
 		skipFrame = false;
 		autoResize = true;
@@ -205,20 +207,21 @@ class Application {
 		if (roundPixels) renderer.roundPixels = true;
 
 		Browser.document.body.appendChild(renderer.view);
-		if (autoResize) Browser.window.onresize = _onWindowResize;
-		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
-
+		resumeRendering();
 		#if stats addStats(); #end
 	}
 
 	public function pauseRendering() {
 		Browser.window.onresize = null;
-		Browser.window.requestAnimationFrame(function(elapsedTime) {});
+		if (_animationFrameId != null) {
+			Browser.window.cancelAnimationFrame(_animationFrameId);
+			_animationFrameId = null;
+		}
 	}
 
 	public function resumeRendering() {
 		if (autoResize) Browser.window.onresize = _onWindowResize;
-		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
+		if (_animationFrameId == null) _animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
@@ -238,7 +241,7 @@ class Application {
 			if (onUpdate != null) onUpdate(elapsedTime);
 			renderer.render(stage);
 		}
-		Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
+		_animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 	}
 
 	public function addStats() {

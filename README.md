@@ -1,4 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/tag/pixijs/pixi-haxe.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Haxelib version](https://badge.fury.io/gh/pixijs%2Fpixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
 ![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
 
@@ -52,7 +52,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
 * [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
-**[Cohere](http://adireddy.github.io/cohere/)** - Sample MVC application using haxe and pixi.js
+**[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using haxe and pixi.js
 
 Look at the `samples` folder for the source code of above examples.
 
@@ -117,4 +117,4 @@ This content is released under the [MIT](http://opensource.org/licenses/MIT) Lic
 
 ### Contributor Code of Conduct ###
 
-[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.2.0](http://contributor-covenant.org/version/1/2/0/)
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.3.0](http://contributor-covenant.org/version/1/3/0/)

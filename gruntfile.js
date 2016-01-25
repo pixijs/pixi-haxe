@@ -52,8 +52,8 @@ module.exports = function (grunt) {
 				  " --deny=msignal.*,core.*,demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
 				  "--title='pixi-haxe' " +
 				  "--subtitle='Externs'",
-			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/"
-			/*cleanup: "rm ./libs/pixi.dev.js"*/
+			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/",
+			cleanup: "rm ./libs/pixi.dev.js"
 		},
 
 		zip: {
@@ -67,5 +67,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-zip");
 	grunt.loadNpmTasks("grunt-exec");
-	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.9", "exec"]);
+	grunt.registerTask("default", ["haxe", "npm-install:pixi.js@3.0.9", "browserify", "exec"]);
 };
