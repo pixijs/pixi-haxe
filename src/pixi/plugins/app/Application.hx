@@ -213,7 +213,7 @@ class Application {
 
 	public function pauseRendering() {
 		Browser.window.onresize = null;
-		if (_animationFrameId != null){
+		if (_animationFrameId != null) {
 			Browser.window.cancelAnimationFrame(_animationFrameId);
 			_animationFrameId = null;
 		}
@@ -221,9 +221,7 @@ class Application {
 
 	public function resumeRendering() {
 		if (autoResize) Browser.window.onresize = _onWindowResize;
-		if (_animationFrameId == null){
-			_animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
-		}
+		if (_animationFrameId == null) _animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
