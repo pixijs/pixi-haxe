@@ -77,6 +77,8 @@ class Application {
 	public static inline var RECOMMENDED:String = "recommended";
 	public static inline var CANVAS:String = "canvas";
 	public static inline var WEBGL:String = "webgl";
+	var _animationFrameId:Null<Int>;
+
 
 	@:noCompletion var _canvas:CanvasElement;
 	@:noCompletion var _renderer:IRenderer;
@@ -100,6 +102,8 @@ class Application {
 		height = Browser.window.innerHeight;
 		resize = true;
 		_skipFrame = false;
+		_animationFrameId = null;
+
 	}
 
 	/*
@@ -127,8 +131,7 @@ class Application {
 		else _renderer = new WebGLRenderer(width, height, renderingOptions);
 
 		Browser.document.body.appendChild(_renderer.view);
-		if (resize) Browser.window.onresize = _onWindowResize;
-		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+		resumeRendering();
 		_lastTime = Date.now();
 
 		if (stats) _addStats();
@@ -142,6 +145,20 @@ class Application {
 		_canvas.style.height = height + "px";
 		if (onResize != null) onResize();
 	}
+	@:noCompletion public function resumeRendering() {
+	 	if (resize) Browser.window.onresize = _onWindowResize;
+		if (_animationFrameId == null){
+			_animationFrameId = Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+		}
+	}
+	@:noCompletion public function pauseRendering() {
+ 		Browser.window.onresize = null;
+		if (_animationFrameId != null){
+			Browser.window.cancelAnimationFrame(_animationFrameId);
+			_animationFrameId = null;
+		}
+ 	}
+
 
 	@:noCompletion function _onRequestAnimationFrame() {
 		if (skipFrame && _skipFrame) _skipFrame = false;
@@ -151,7 +168,7 @@ class Application {
 			if (onUpdate != null) onUpdate(_elapsedTime);
 			_renderer.render(_stage);
 		}
-		Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
+		_animationFrameId = Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 		if (_stats != null) _stats.update();
 	}
 
