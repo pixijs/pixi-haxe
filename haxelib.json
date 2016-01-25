@@ -4,8 +4,8 @@
   "tags": ["js","haxe","pixi","extern","web"],
   "description": "Externs of pixi.js v2.2.9 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
   "contributors": ["adireddy"],
-  "releasenote": "added 'instances' static property to Pixi class available on WebGL",
-  "version": "2.3.1",
+  "releasenote": "added pauseRendering and resumeRendering in Application class",
+  "version": "2.3.2",
   "url": "https://github.com/adireddy/haxe-pixi",
   "dependencies": {
 

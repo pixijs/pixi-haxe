@@ -145,12 +145,12 @@ class Application {
 		_canvas.style.height = height + "px";
 		if (onResize != null) onResize();
 	}
+
 	@:noCompletion public function resumeRendering() {
 	 	if (resize) Browser.window.onresize = _onWindowResize;
-		if (_animationFrameId == null){
-			_animationFrameId = Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
-		}
+		if (_animationFrameId == null) _animationFrameId = Browser.window.requestAnimationFrame(cast _onRequestAnimationFrame);
 	}
+
 	@:noCompletion public function pauseRendering() {
  		Browser.window.onresize = null;
 		if (_animationFrameId != null){
@@ -158,7 +158,6 @@ class Application {
 			_animationFrameId = null;
 		}
  	}
-
 
 	@:noCompletion function _onRequestAnimationFrame() {
 		if (skipFrame && _skipFrame) _skipFrame = false;
