@@ -9,35 +9,46 @@ var Perf = $hx_exports.Perf = function(pos,offset) {
 	if(offset == null) offset = 0;
 	if(pos == null) pos = "TR";
 	this._perfObj = window.performance;
-	this._memoryObj = window.performance.memory;
+	if(Reflect.field(this._perfObj,"memory") != null) this._memoryObj = Reflect.field(this._perfObj,"memory");
 	this._memCheck = this._perfObj != null && this._memoryObj != null && this._memoryObj.totalJSHeapSize > 0;
-	this.currentFps = 0;
-	this.currentMs = 0;
-	this.currentMem = "0";
 	this._pos = pos;
 	this._offset = offset;
+	this.currentFps = 60;
+	this.currentMs = 0;
+	this.currentMem = "0";
+	this.lowFps = 60;
+	this.avgFps = 60;
+	this._measureCount = 0;
+	this._totalFps = 0;
 	this._time = 0;
 	this._ticks = 0;
-	this._fpsMin = Infinity;
-	this._fpsMax = 0;
+	this._fpsMin = 60;
+	this._fpsMax = 60;
 	if(this._perfObj != null && ($_=this._perfObj,$bind($_,$_.now)) != null) this._startTime = this._perfObj.now(); else this._startTime = new Date().getTime();
 	this._prevTime = -Perf.MEASUREMENT_INTERVAL;
 	this._createFpsDom();
 	this._createMsDom();
 	if(this._memCheck) this._createMemoryDom();
-	window.requestAnimationFrame($bind(this,this._tick));
+	if(Reflect.field(window,"requestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"requestAnimationFrame"); else if(Reflect.field(window,"mozRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"mozRequestAnimationFrame"); else if(Reflect.field(window,"webkitRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"webkitRequestAnimationFrame"); else if(Reflect.field(window,"msRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"msRequestAnimationFrame");
+	if(Reflect.field(window,"cancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"cancelAnimationFrame"); else if(Reflect.field(window,"mozCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"mozCancelAnimationFrame"); else if(Reflect.field(window,"webkitCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"webkitCancelAnimationFrame"); else if(Reflect.field(window,"msCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"msCancelAnimationFrame");
+	if(this.requestAnimationFrame != null) this._raf = Reflect.callMethod(window,this.requestAnimationFrame,[$bind(this,this._tick)]);
 };
 Perf.prototype = {
-	_tick: function() {
+	_tick: function(val) {
 		var time;
 		if(this._perfObj != null && ($_=this._perfObj,$bind($_,$_.now)) != null) time = this._perfObj.now(); else time = new Date().getTime();
 		this._ticks++;
-		if(time > this._prevTime + Perf.MEASUREMENT_INTERVAL) {
+		if(this._raf != null && time > this._prevTime + Perf.MEASUREMENT_INTERVAL) {
 			this.currentMs = Math.round(time - this._startTime);
 			this.ms.innerHTML = "MS: " + this.currentMs;
 			this.currentFps = Math.round(this._ticks * 1000 / (time - this._prevTime));
-			this._fpsMin = Math.min(this._fpsMin,this.currentFps);
-			this._fpsMax = Math.max(this._fpsMax,this.currentFps);
+			if(this.currentFps > 0 && val > Perf.DELAY_TIME) {
+				this._measureCount++;
+				this._totalFps += this.currentFps;
+				this.lowFps = this._fpsMin = Math.min(this._fpsMin,this.currentFps);
+				this._fpsMax = Math.max(this._fpsMax,this.currentFps);
+				this.avgFps = Math.round(this._totalFps / this._measureCount);
+			}
 			this.fps.innerHTML = "FPS: " + this.currentFps + " (" + this._fpsMin + "-" + this._fpsMax + ")";
 			if(this.currentFps >= 30) this.fps.style.backgroundColor = Perf.FPS_BG_CLR; else if(this.currentFps >= 15) this.fps.style.backgroundColor = Perf.FPS_WARN_BG_CLR; else this.fps.style.backgroundColor = Perf.FPS_PROB_BG_CLR;
 			this._prevTime = time;
@@ -48,7 +59,7 @@ Perf.prototype = {
 			}
 		}
 		this._startTime = time;
-		window.requestAnimationFrame($bind(this,this._tick));
+		if(this._raf != null) this._raf = Reflect.callMethod(window,this.requestAnimationFrame,[$bind(this,this._tick)]);
 	}
 	,_createDiv: function(id,top) {
 		if(top == null) top = 0;
@@ -125,7 +136,19 @@ Perf.prototype = {
 		this.info.innerHTML = val;
 	}
 };
+var Reflect = function() { };
+Reflect.field = function(o,field) {
+	try {
+		return o[field];
+	} catch( e ) {
+		return null;
+	}
+};
+Reflect.callMethod = function(o,func,args) {
+	return func.apply(o,args);
+};
 var pixi_plugins_app_Application = function() {
+	this._animationFrameId = null;
 	this.pixelRatio = 1;
 	this.set_skipFrame(false);
 	this.autoResize = true;
@@ -174,9 +197,12 @@ pixi_plugins_app_Application.prototype = {
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		if(this.roundPixels) this.renderer.roundPixels = true;
 		window.document.body.appendChild(this.renderer.view);
-		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
-		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+		this.resumeRendering();
 		this.addStats();
+	}
+	,resumeRendering: function() {
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
+		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
@@ -193,7 +219,7 @@ pixi_plugins_app_Application.prototype = {
 			if(this.onUpdate != null) this.onUpdate(elapsedTime);
 			this.renderer.render(this.stage);
 		}
-		window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 	}
 	,addStats: function() {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
@@ -255,6 +281,7 @@ Perf.FPS_TXT_CLR = "#000000";
 Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
+Perf.DELAY_TIME = 4000;
 samples_rope_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
