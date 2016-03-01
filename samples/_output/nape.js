@@ -30,9 +30,9 @@ var Perf = $hx_exports.Perf = function(pos,offset) {
 	this._createFpsDom();
 	this._createMsDom();
 	if(this._memCheck) this._createMemoryDom();
-	if(Reflect.field(window,"requestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"requestAnimationFrame"); else if(Reflect.field(window,"mozRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"mozRequestAnimationFrame"); else if(Reflect.field(window,"webkitRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"webkitRequestAnimationFrame"); else if(Reflect.field(window,"msRequestAnimationFrame") != null) this.requestAnimationFrame = Reflect.field(window,"msRequestAnimationFrame");
-	if(Reflect.field(window,"cancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"cancelAnimationFrame"); else if(Reflect.field(window,"mozCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"mozCancelAnimationFrame"); else if(Reflect.field(window,"webkitCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"webkitCancelAnimationFrame"); else if(Reflect.field(window,"msCancelAnimationFrame") != null) this.cancelAnimationFrame = Reflect.field(window,"msCancelAnimationFrame");
-	if(this.requestAnimationFrame != null) this._raf = Reflect.callMethod(window,this.requestAnimationFrame,[$bind(this,this._tick)]);
+	if(($_=window,$bind($_,$_.requestAnimationFrame)) != null) this.RAF = ($_=window,$bind($_,$_.requestAnimationFrame)); else if(window.mozRequestAnimationFrame != null) this.RAF = window.mozRequestAnimationFrame; else if(window.webkitRequestAnimationFrame != null) this.RAF = window.webkitRequestAnimationFrame; else if(window.msRequestAnimationFrame != null) this.RAF = window.msRequestAnimationFrame;
+	if(($_=window,$bind($_,$_.cancelAnimationFrame)) != null) this.CAF = ($_=window,$bind($_,$_.cancelAnimationFrame)); else if(window.mozCancelAnimationFrame != null) this.CAF = window.mozCancelAnimationFrame; else if(window.webkitCancelAnimationFrame != null) this.CAF = window.webkitCancelAnimationFrame; else if(window.msCancelAnimationFrame != null) this.CAF = window.msCancelAnimationFrame;
+	if(this.RAF != null) this._raf = Reflect.callMethod(window,this.RAF,[$bind(this,this._tick)]);
 };
 Perf.__name__ = true;
 Perf.prototype = {
@@ -61,7 +61,7 @@ Perf.prototype = {
 			}
 		}
 		this._startTime = time;
-		if(this._raf != null) this._raf = Reflect.callMethod(window,this.requestAnimationFrame,[$bind(this,this._tick)]);
+		if(this._raf != null) this._raf = Reflect.callMethod(window,this.RAF,[$bind(this,this._tick)]);
 	}
 	,_createDiv: function(id,top) {
 		if(top == null) top = 0;

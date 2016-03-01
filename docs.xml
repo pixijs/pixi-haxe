@@ -337,7 +337,7 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
-	<class path="Perf" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,6/src/Perf.hx">
+	<class path="Perf" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx">
 		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
 		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
 		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
@@ -374,41 +374,44 @@
 		<_perfObj><c path="js.html.Performance"/></_perfObj>
 		<_memoryObj><t path="Memory"/></_memoryObj>
 		<_raf><x path="Int"/></_raf>
-		<requestAnimationFrame><d/></requestAnimationFrame>
-		<cancelAnimationFrame><d/></cancelAnimationFrame>
-		<_tick set="method" line="109"><f a="val">
+		<RAF><d/></RAF>
+		<CAF><d/></CAF>
+		<_tick set="method" line="108"><f a="val">
 	<x path="Float"/>
 	<x path="Void"/>
 </f></_tick>
-		<_createDiv set="method" line="145"><f a="id:?top">
+		<_createDiv set="method" line="144"><f a="id:?top">
 	<c path="String"/>
 	<x path="Float"/>
 	<c path="js.html.DivElement"/>
 </f></_createDiv>
-		<_createFpsDom set="method" line="178"><f a=""><x path="Void"/></f></_createFpsDom>
-		<_createMsDom set="method" line="186"><f a=""><x path="Void"/></f></_createMsDom>
-		<_createMemoryDom set="method" line="194"><f a=""><x path="Void"/></f></_createMemoryDom>
-		<_getFormattedSize set="method" line="202"><f a="bytes:?frac">
+		<_createFpsDom set="method" line="177"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="185"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="193"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="201"><f a="bytes:?frac">
 	<x path="Float"/>
 	<x path="Int"/>
 	<c path="String"/>
 </f></_getFormattedSize>
-		<addInfo public="1" set="method" line="210"><f a="val">
+		<addInfo public="1" set="method" line="209"><f a="val">
 	<c path="String"/>
 	<x path="Void"/>
 </f></addInfo>
-		<new public="1" set="method" line="60"><f a="?pos:?offset">
-	<c path="String"/>
-	<x path="Float"/>
-	<x path="Void"/>
-</f></new>
+		<new public="1" set="method" line="60">
+			<f a="?pos:?offset">
+				<c path="String"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+		</new>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>
 			<m n=":expose"/>
 		</meta>
 	</class>
-	<typedef path="Memory" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,6/src/Perf.hx" module="Perf"><a>
+	<typedef path="Memory" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
 	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
