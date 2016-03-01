@@ -1,5 +1,5 @@
 <haxe>
-	<class path="Array" params="T" file="/usr/lib/haxe/std/js/_std/Array.hx" extern="1">
+	<class path="Array" params="T" file="/usr/local/lib/haxe/std/js/_std/Array.hx" extern="1">
 		<length public="1" set="null">
 			<x path="Int"/>
 			<haxe_doc>The length of `this` Array.</haxe_doc>
@@ -41,7 +41,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<abstract path="Class" params="T" file="/usr/lib/haxe/std/Class.hx">
+	<abstract path="Class" params="T" file="/usr/local/lib/haxe/std/Class.hx">
 		<this><x path="Class"><c path="Class.T"/></x></this>
 		<haxe_doc>An abstract type that represents a Class.
 
@@ -51,7 +51,7 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<class path="Date" params="" file="/usr/lib/haxe/std/js/_std/Date.hx" extern="1">
+	<class path="Date" params="" file="/usr/local/lib/haxe/std/js/_std/Date.hx" extern="1">
 		<now public="1" get="inline" set="null" line="38" static="1">
 			<f a=""><c path="Date"/></f>
 			<meta><m n=":has_untyped"/></meta>
@@ -159,7 +159,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<class path="EReg" params="" file="/usr/lib/haxe/std/js/_std/EReg.hx">
+	<class path="EReg" params="" file="/usr/local/lib/haxe/std/js/_std/EReg.hx">
 		<r><c path="_EReg.HaxeRegExp"/></r>
 		<match public="1" set="method" line="31">
 			<f a="s">
@@ -204,7 +204,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<class path="js.RegExp" params="" file="/usr/lib/haxe/std/js/RegExp.hx" extern="1">
+	<class path="js.RegExp" params="" file="/usr/local/lib/haxe/std/js/RegExp.hx" extern="1">
 		<global public="1" set="null"><x path="Bool"/></global>
 		<ignoreCase public="1" set="null"><x path="Bool"/></ignoreCase>
 		<multiline public="1" set="null"><x path="Bool"/></multiline>
@@ -229,7 +229,7 @@
     For cross-platform regular expressions, use haxe `EReg` class or regexp literals.</haxe_doc>
 		<meta><m n=":native"><e>"RegExp"</e></m></meta>
 	</class>
-	<class path="_EReg.HaxeRegExp" params="" file="/usr/lib/haxe/std/js/_std/EReg.hx" private="1" module="EReg" extern="1">
+	<class path="_EReg.HaxeRegExp" params="" file="/usr/local/lib/haxe/std/js/_std/EReg.hx" private="1" module="EReg" extern="1">
 		<extends path="js.RegExp"/>
 		<m public="1"><c path="js.RegExpMatch"/></m>
 		<s public="1"><c path="String"/></s>
@@ -238,7 +238,7 @@
 			<m n=":native"><e>"RegExp"</e></m>
 		</meta>
 	</class>
-	<abstract path="Enum" params="T" file="/usr/lib/haxe/std/Enum.hx">
+	<abstract path="Enum" params="T" file="/usr/local/lib/haxe/std/Enum.hx">
 		<this><x path="Enum"><c path="Enum.T"/></x></this>
 		<haxe_doc>An abstract type that represents an Enum type.
 
@@ -250,13 +250,13 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<abstract path="EnumValue" params="" file="/usr/lib/haxe/std/EnumValue.hx">
+	<abstract path="EnumValue" params="" file="/usr/local/lib/haxe/std/EnumValue.hx">
 		<this><x path="EnumValue"/></this>
 		<haxe_doc>An abstract type that represents any enum value.
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<abstract path="Map" params="K:V" file="/usr/lib/haxe/std/Map.hx">
+	<abstract path="Map" params="K:V" file="/usr/local/lib/haxe/std/Map.hx">
 		<from>
 			<icast field="fromStringMap"><c path="haxe.ds.StringMap"><c path="fromStringMap.V"/></c></icast>
 			<icast field="fromIntMap"><c path="haxe.ds.IntMap"><c path="fromIntMap.V"/></c></icast>
@@ -294,16 +294,16 @@
 
 	Map is an abstract type, it is not available at runtime.]]></haxe_doc>
 		<meta><m n=":multiType"><e>K</e></m></meta>
-		<impl><class path="_Map.Map_Impl_" params="" file="/usr/lib/haxe/std/Map.hx" private="1" module="Map"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="_Map.Map_Impl_" params="" file="/usr/local/lib/haxe/std/Map.hx" private="1" module="Map"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<typedef path="IMap" params="K:V" file="/usr/lib/haxe/std/Map.hx" module="Map">
+	<typedef path="IMap" params="K:V" file="/usr/local/lib/haxe/std/Map.hx" module="Map">
 		<c path="haxe.IMap">
 			<c path="IMap.K"/>
 			<c path="IMap.V"/>
 		</c>
 		<meta><m n=":deprecated"/></meta>
 	</typedef>
-	<class path="Math" params="" file="/usr/lib/haxe/std/js/_std/Math.hx" extern="1">
+	<class path="Math" params="" file="/usr/local/lib/haxe/std/js/_std/Math.hx" extern="1">
 		<floor public="1" set="method" static="1"><f a="v">
 	<x path="Float"/>
 	<x path="Int"/>
@@ -337,7 +337,7 @@
 			<m n=":keepInit"/>
 		</meta>
 	</class>
-	<class path="Perf" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,1,1/src/Perf.hx">
+	<class path="Perf" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx">
 		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
 		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
 		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
@@ -350,10 +350,13 @@
 		<MS_TXT_CLR public="1" line="19" static="1"><c path="String"/></MS_TXT_CLR>
 		<MEM_TXT_CLR public="1" line="20" static="1"><c path="String"/></MEM_TXT_CLR>
 		<INFO_TXT_CLR public="1" line="21" static="1"><c path="String"/></INFO_TXT_CLR>
+		<DELAY_TIME line="28" static="1"><x path="Int"/></DELAY_TIME>
 		<fps public="1"><c path="js.html.DivElement"/></fps>
 		<ms public="1"><c path="js.html.DivElement"/></ms>
 		<memory public="1"><c path="js.html.DivElement"/></memory>
 		<info public="1"><c path="js.html.DivElement"/></info>
+		<lowFps public="1"><x path="Float"/></lowFps>
+		<avgFps public="1"><x path="Float"/></avgFps>
 		<currentFps public="1"><x path="Float"/></currentFps>
 		<currentMs public="1"><x path="Float"/></currentMs>
 		<currentMem public="1"><c path="String"/></currentMem>
@@ -366,27 +369,35 @@
 		<_memCheck><x path="Bool"/></_memCheck>
 		<_pos><c path="String"/></_pos>
 		<_offset><x path="Float"/></_offset>
+		<_measureCount><x path="Int"/></_measureCount>
+		<_totalFps><x path="Float"/></_totalFps>
 		<_perfObj><c path="js.html.Performance"/></_perfObj>
 		<_memoryObj><t path="Memory"/></_memoryObj>
-		<_tick set="method" line="78"><f a=""><x path="Void"/></f></_tick>
-		<_createDiv set="method" line="109"><f a="id:?top">
+		<_raf><x path="Int"/></_raf>
+		<RAF><d/></RAF>
+		<CAF><d/></CAF>
+		<_tick set="method" line="108"><f a="val">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></_tick>
+		<_createDiv set="method" line="144"><f a="id:?top">
 	<c path="String"/>
 	<x path="Float"/>
 	<c path="js.html.DivElement"/>
 </f></_createDiv>
-		<_createFpsDom set="method" line="142"><f a=""><x path="Void"/></f></_createFpsDom>
-		<_createMsDom set="method" line="150"><f a=""><x path="Void"/></f></_createMsDom>
-		<_createMemoryDom set="method" line="158"><f a=""><x path="Void"/></f></_createMemoryDom>
-		<_getFormattedSize set="method" line="166"><f a="bytes:?frac">
+		<_createFpsDom set="method" line="177"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="185"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="193"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="201"><f a="bytes:?frac">
 	<x path="Float"/>
 	<x path="Int"/>
 	<c path="String"/>
 </f></_getFormattedSize>
-		<addInfo public="1" set="method" line="174"><f a="val">
+		<addInfo public="1" set="method" line="209"><f a="val">
 	<c path="String"/>
 	<x path="Void"/>
 </f></addInfo>
-		<new public="1" set="method" line="50">
+		<new public="1" set="method" line="60">
 			<f a="?pos:?offset">
 				<c path="String"/>
 				<x path="Float"/>
@@ -400,12 +411,12 @@
 			<m n=":expose"/>
 		</meta>
 	</class>
-	<typedef path="Memory" params="" file="/haxe/pixi-haxe/.haxelib/perf,js/1,1,1/src/Perf.hx" module="Perf"><a>
+	<typedef path="Memory" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
 	<jsHeapSizeLimit><x path="Float"/></jsHeapSizeLimit>
 </a></typedef>
-	<class path="Reflect" params="" file="/usr/lib/haxe/std/js/_std/Reflect.hx">
+	<class path="Reflect" params="" file="/usr/local/lib/haxe/std/js/_std/Reflect.hx">
 		<field public="1" set="method" line="28" static="1">
 			<f a="o:field">
 				<d/>
@@ -426,6 +437,16 @@
 		(As3) If used on a property field, the getter will be invoked. It is
 		not possible to obtain the value directly.</haxe_doc>
 		</field>
+		<callMethod public="1" get="inline" set="null" line="46" static="1">
+			<f a="o:func:args">
+				<d/>
+				<x path="haxe.Function"/>
+				<c path="Array"><d/></c>
+				<d/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+			<haxe_doc>Call a method with the given object and arguments.</haxe_doc>
+		</callMethod>
 		<fields public="1" set="method" line="50" static="1">
 			<f a="o">
 				<d/>
@@ -470,7 +491,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<class path="String" params="" file="/usr/lib/haxe/std/js/_std/String.hx" extern="1">
+	<class path="String" params="" file="/usr/local/lib/haxe/std/js/_std/String.hx" extern="1">
 		<fromCharCode public="1" set="method" static="1">
 			<f a="code">
 				<x path="Int"/>
@@ -641,7 +662,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<class path="Std" params="" file="/usr/lib/haxe/std/js/_std/Std.hx">
+	<class path="Std" params="" file="/usr/local/lib/haxe/std/js/_std/Std.hx">
 		<haxe_doc>The Std class provides standard methods for manipulating basic types.</haxe_doc>
 		<meta>
 			<m n=":keep"/>
@@ -649,12 +670,12 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<abstract path="Void" params="" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<abstract path="Void" params="" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<this><x path="Void"/></this>
 		<haxe_doc>The standard Void type. Only `null` values can be of the type `Void`.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<abstract path="Float" params="" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<abstract path="Float" params="" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<this><x path="Float"/></this>
 		<haxe_doc><![CDATA[The standard Float type, this is a double-precision IEEE 64bit float.
 
@@ -666,7 +687,7 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<abstract path="Int" params="" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<abstract path="Int" params="" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<this><x path="Int"/></this>
 		<to><icast><x path="Float"/></icast></to>
 		<haxe_doc><![CDATA[The standard Int type. Its precision depends on the platform.
@@ -679,14 +700,14 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<typedef path="Null" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<typedef path="Null" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<c path="Null.T"/>
 		<haxe_doc>`Null` can be useful in two cases. In order to document some methods
 	that accepts or can return a `null` value, or for the Flash compiler and AS3
 	generator to distinguish between base values that can be null and others that
 	can't.</haxe_doc>
 	</typedef>
-	<abstract path="Bool" params="" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<abstract path="Bool" params="" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<this><x path="Bool"/></this>
 		<haxe_doc><![CDATA[The standard Boolean type, which can either be true or false.
 
@@ -698,7 +719,7 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<abstract path="Dynamic" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<abstract path="Dynamic" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<this><x path="Dynamic"><c path="Dynamic.T"/></x></this>
 		<haxe_doc>Dynamic is a special type which is compatible with all other types.
 
@@ -710,7 +731,7 @@
 			<m n=":runtimeValue"/>
 		</meta>
 	</abstract>
-	<typedef path="Iterator" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<typedef path="Iterator" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<a>
 			<next set="method">
 				<f a=""><c path="Iterator.T"/></f>
@@ -738,14 +759,14 @@
 	and can then be used e.g. in for-loops. This makes it easy to implement
 	custom iterators.</haxe_doc>
 	</typedef>
-	<typedef path="Iterable" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes">
+	<typedef path="Iterable" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes">
 		<a><iterator set="method"><f a=""><t path="Iterator"><c path="Iterable.T"/></t></f></iterator></a>
 		<haxe_doc>An Iterable is a data structure which has an iterator() method.
 	See `Lambda` for generic functions on iterable structures.</haxe_doc>
 	</typedef>
-	<class path="ArrayAccess" params="T" file="/usr/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
+	<class path="ArrayAccess" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represents the type of the elements stored.</haxe_doc></class>
-	<abstract path="UInt" params="" file="/usr/lib/haxe/std/UInt.hx">
+	<abstract path="UInt" params="" file="/usr/local/lib/haxe/std/UInt.hx">
 		<from><icast><x path="Int"/></icast></from>
 		<this><x path="Int"/></this>
 		<to>
@@ -754,7 +775,7 @@
 		</to>
 		<haxe_doc>The unsigned Int type is only defined for Flash and C#.
 	Simulate it for other platforms.</haxe_doc>
-		<impl><class path="_UInt.UInt_Impl_" params="" file="/usr/lib/haxe/std/UInt.hx" private="1" module="UInt"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="_UInt.UInt_Impl_" params="" file="/usr/local/lib/haxe/std/UInt.hx" private="1" module="UInt"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
@@ -1580,26 +1601,26 @@
 	<format><c path="String"/></format>
 	<app><c path="String"/></app>
 </a></typedef>
-	<abstract path="haxe.Function" params="" file="/usr/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
+	<abstract path="haxe.Function" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
 		<haxe_doc>This type unifies with any function type.
 
 	It is intended to be used as a type parameter constraint. If used as a real
 	type, the underlying type will be `Dynamic`.</haxe_doc>
 		<meta><m n=":callable"/></meta>
-		<impl><class path="haxe._Constraints.Function_Impl_" params="" file="/usr/lib/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe._Constraints.Function_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<abstract path="haxe.FlatEnum" params="" file="/usr/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
+	<abstract path="haxe.FlatEnum" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
 		<haxe_doc>This type unifies with an enum instance if all constructors of the enum
 	require no arguments.
 
 	It is intended to be used as a type parameter constraint. If used as a real
 	type, the underlying type will be `Dynamic`.</haxe_doc>
-		<impl><class path="haxe._Constraints.FlatEnum_Impl_" params="" file="/usr/lib/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe._Constraints.FlatEnum_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<class path="haxe.IMap" params="K:V" file="/usr/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints" interface="1"><meta><m n=":keep"/></meta></class>
-	<class path="haxe.EnumTools" params="" file="/usr/lib/haxe/std/haxe/EnumTools.hx" extern="1">
+	<class path="haxe.IMap" params="K:V" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints" interface="1"><meta><m n=":keep"/></meta></class>
+	<class path="haxe.EnumTools" params="" file="/usr/local/lib/haxe/std/haxe/EnumTools.hx" extern="1">
 		<getName public="1" params="T" get="inline" set="null" line="41" static="1">
 			<f a="e">
 				<x path="Enum"><c path="getName.T"/></x>
@@ -1682,7 +1703,7 @@
 		If `c` is null, the result is unspecified.</haxe_doc>
 		</getConstructors>
 	</class>
-	<class path="haxe.EnumValueTools" params="" file="/usr/lib/haxe/std/haxe/EnumTools.hx" module="haxe.EnumTools" extern="1">
+	<class path="haxe.EnumValueTools" params="" file="/usr/local/lib/haxe/std/haxe/EnumTools.hx" module="haxe.EnumTools" extern="1">
 		<equals public="1" params="T" get="inline" set="null" line="114" static="1">
 			<f a="a:b">
 				<c path="equals.T"/>
@@ -1767,7 +1788,7 @@
 		for documentation.</haxe_doc>
 		</match>
 	</class>
-	<typedef path="haxe.PosInfos" params="" file="/usr/lib/haxe/std/haxe/PosInfos.hx">
+	<typedef path="haxe.PosInfos" params="" file="/usr/local/lib/haxe/std/haxe/PosInfos.hx">
 		<a>
 			<methodName><c path="String"/></methodName>
 			<lineNumber><x path="Int"/></lineNumber>
@@ -1788,14 +1809,14 @@
 	This can be used to track positions of calls in e.g. a unit testing
 	framework.</haxe_doc>
 	</typedef>
-	<abstract path="haxe.ds.HashMap" params="K:V" file="/usr/lib/haxe/std/haxe/ds/HashMap.hx">
+	<abstract path="haxe.ds.HashMap" params="K:V" file="/usr/local/lib/haxe/std/haxe/ds/HashMap.hx">
 		<this><c path="haxe.ds._HashMap.HashMapData">
 	<c path="haxe.ds.HashMap.K"/>
 	<c path="haxe.ds.HashMap.V"/>
 </c></this>
-		<impl><class path="haxe.ds._HashMap.HashMap_Impl_" params="" file="/usr/lib/haxe/std/haxe/ds/HashMap.hx" private="1" module="haxe.ds.HashMap"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe.ds._HashMap.HashMap_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/ds/HashMap.hx" private="1" module="haxe.ds.HashMap"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<class path="haxe.ds.StringMap" params="T" file="/usr/lib/haxe/std/js/_std/haxe/ds/StringMap.hx">
+	<class path="haxe.ds.StringMap" params="T" file="/usr/local/lib/haxe/std/js/_std/haxe/ds/StringMap.hx">
 		<implements path="haxe.IMap">
 			<c path="String"/>
 			<c path="haxe.ds.StringMap.T"/>
@@ -1839,7 +1860,7 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<abstract path="haxe.extern.EitherType" params="T1:T2" file="/usr/lib/haxe/std/haxe/extern/EitherType.hx">
+	<abstract path="haxe.extern.EitherType" params="T1:T2" file="/usr/local/lib/haxe/std/haxe/extern/EitherType.hx">
 		<from>
 			<icast><c path="haxe.extern.EitherType.T2"/></icast>
 			<icast><c path="haxe.extern.EitherType.T1"/></icast>
@@ -1856,18 +1877,18 @@
     such as JavaScript or Python.
 
     Otherwise, use of this type is discouraged.</haxe_doc>
-		<impl><class path="haxe.extern._EitherType.EitherType_Impl_" params="" file="/usr/lib/haxe/std/haxe/extern/EitherType.hx" private="1" module="haxe.extern.EitherType"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe.extern._EitherType.EitherType_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/extern/EitherType.hx" private="1" module="haxe.extern.EitherType"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<abstract path="haxe.extern.Rest" params="T" file="/usr/lib/haxe/std/haxe/extern/Rest.hx">
+	<abstract path="haxe.extern.Rest" params="T" file="/usr/local/lib/haxe/std/haxe/extern/Rest.hx">
 		<this><c path="Array"><c path="haxe.extern.Rest.T"/></c></this>
 		<haxe_doc>A special abstract type that represents "rest" function argument.
 
     Should be used as a type for the last argument of an extern method,
     representing that arbitrary number of arguments of given type can be
     passed to that method.</haxe_doc>
-		<impl><class path="haxe.extern._Rest.Rest_Impl_" params="" file="/usr/lib/haxe/std/haxe/extern/Rest.hx" private="1" module="haxe.extern.Rest"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe.extern._Rest.Rest_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/extern/Rest.hx" private="1" module="haxe.extern.Rest"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<class path="js.Error" params="" file="/usr/lib/haxe/std/js/Error.hx" extern="1">
+	<class path="js.Error" params="" file="/usr/local/lib/haxe/std/js/Error.hx" extern="1">
 		<message public="1"><c path="String"/></message>
 		<name public="1"><c path="String"/></name>
 		<stack public="1" set="null"><c path="String"/></stack>
@@ -1880,7 +1901,7 @@
 			<m n=":native"><e>"Error"</e></m>
 		</meta>
 	</class>
-	<class path="js._Boot.HaxeError" params="" file="/usr/lib/haxe/std/js/Boot.hx" private="1" module="js.Boot">
+	<class path="js._Boot.HaxeError" params="" file="/usr/local/lib/haxe/std/js/Boot.hx" private="1" module="js.Boot">
 		<extends path="js.Error"/>
 		<val><d/></val>
 		<new public="1" set="method" line="28">
@@ -1895,7 +1916,7 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
-	<class path="js.EvalError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.EvalError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1903,7 +1924,7 @@
 </f></new>
 		<meta><m n=":native"><e>"EvalError"</e></m></meta>
 	</class>
-	<class path="js.RangeError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.RangeError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1911,7 +1932,7 @@
 </f></new>
 		<meta><m n=":native"><e>"RangeError"</e></m></meta>
 	</class>
-	<class path="js.ReferenceError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.ReferenceError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1919,7 +1940,7 @@
 </f></new>
 		<meta><m n=":native"><e>"ReferenceError"</e></m></meta>
 	</class>
-	<class path="js.SyntaxError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.SyntaxError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1927,7 +1948,7 @@
 </f></new>
 		<meta><m n=":native"><e>"SyntaxError"</e></m></meta>
 	</class>
-	<class path="js.TypeError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.TypeError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1935,7 +1956,7 @@
 </f></new>
 		<meta><m n=":native"><e>"TypeError"</e></m></meta>
 	</class>
-	<class path="js.URIError" params="" file="/usr/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
+	<class path="js.URIError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
 		<new public="1" set="method"><f a="?message">
 	<c path="String"/>
@@ -1943,7 +1964,7 @@
 </f></new>
 		<meta><m n=":native"><e>"URIError"</e></m></meta>
 	</class>
-	<class path="js.Promise" params="T" file="/usr/lib/haxe/std/js/Promise.hx" extern="1">
+	<class path="js.Promise" params="T" file="/usr/local/lib/haxe/std/js/Promise.hx" extern="1">
 		<resolve public="1" params="T" set="method" static="1">
 			<f a="value">
 				<c path="resolve.T"/>
@@ -2024,7 +2045,7 @@
 		</new>
 		<meta><m n=":native"><e>"Promise"</e></m></meta>
 	</class>
-	<typedef path="js.PromiseCallback" params="T:TOut" file="/usr/lib/haxe/std/js/Promise.hx" module="js.Promise"><x path="haxe.extern.EitherType">
+	<typedef path="js.PromiseCallback" params="T:TOut" file="/usr/local/lib/haxe/std/js/Promise.hx" module="js.Promise"><x path="haxe.extern.EitherType">
 	<f a="">
 		<c path="js.PromiseCallback.T"/>
 		<c path="js.PromiseCallback.TOut"/>
@@ -2034,7 +2055,7 @@
 		<c path="js.Promise"><c path="js.PromiseCallback.TOut"/></c>
 	</f>
 </x></typedef>
-	<typedef path="js.Thenable" params="T" file="/usr/lib/haxe/std/js/Promise.hx" module="js.Promise"><a><then><x path="haxe.extern.EitherType">
+	<typedef path="js.Thenable" params="T" file="/usr/local/lib/haxe/std/js/Promise.hx" module="js.Promise"><a><then><x path="haxe.extern.EitherType">
 	<f a=":">
 		<f a="">
 			<c path="js.Thenable.T"/>
@@ -2054,20 +2075,20 @@
 		<x path="Void"/>
 	</f>
 </x></then></a></typedef>
-	<class path="js.RegExpMatch" params="" file="/usr/lib/haxe/std/js/RegExp.hx" module="js.RegExp" extern="1">
+	<class path="js.RegExpMatch" params="" file="/usr/local/lib/haxe/std/js/RegExp.hx" module="js.RegExp" extern="1">
 		<extends path="Array"><c path="String"/></extends>
 		<index public="1"><x path="Int"/></index>
 		<input public="1"><c path="String"/></input>
 	</class>
-	<abstract path="js.html.AlignSetting" params="" file="/usr/lib/haxe/std/js/html/AlignSetting.hx">
+	<abstract path="js.html.AlignSetting" params="" file="/usr/local/lib/haxe/std/js/html/AlignSetting.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._AlignSetting.AlignSetting_Impl_" params="" file="/usr/lib/haxe/std/js/html/AlignSetting.hx" private="1" module="js.html.AlignSetting"><meta>
+		<impl><class path="js.html._AlignSetting.AlignSetting_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/AlignSetting.hx" private="1" module="js.html.AlignSetting"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.EventTarget" params="" file="/usr/lib/haxe/std/js/html/EventTarget.hx" extern="1">
+	<class path="js.html.EventTarget" params="" file="/usr/local/lib/haxe/std/js/html/EventTarget.hx" extern="1">
 		<addEventListener public="1" set="method">
 			<f a="type:listener:?capture" v="::false">
 				<c path="String"/>
@@ -2118,7 +2139,7 @@
 		</dispatchEvent>
 		<meta><m n=":native"><e>"EventTarget"</e></m></meta>
 	</class>
-	<class path="js.html.Node" params="" file="/usr/lib/haxe/std/js/html/Node.hx" extern="1">
+	<class path="js.html.Node" params="" file="/usr/local/lib/haxe/std/js/html/Node.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<ELEMENT_NODE public="1" get="inline" set="null" expr="1" line="30" static="1">
 			<x path="Int"/>
@@ -2274,7 +2295,7 @@
 </f></isDefaultNamespace>
 		<meta><m n=":native"><e>"Node"</e></m></meta>
 	</class>
-	<class path="js.html.DOMElement" params="" file="/usr/lib/haxe/std/js/html/DOMElement.hx" extern="1">
+	<class path="js.html.DOMElement" params="" file="/usr/local/lib/haxe/std/js/html/DOMElement.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<tagName public="1" set="null"><c path="String"/></tagName>
 		<id public="1"><c path="String"/></id>
@@ -2665,11 +2686,11 @@
 		</convertPointFromNode>
 		<meta><m n=":native"><e>"Element"</e></m></meta>
 	</class>
-	<class path="js.html.Element" params="" file="/usr/lib/haxe/std/js/html/Element.hx" extern="1">
+	<class path="js.html.Element" params="" file="/usr/local/lib/haxe/std/js/html/Element.hx" extern="1">
 		<extends path="js.html.DOMElement"/>
 		<meta><m n=":native"><e>"HTMLElement"</e></m></meta>
 	</class>
-	<class path="js.html.AnchorElement" params="" file="/usr/lib/haxe/std/js/html/AnchorElement.hx" extern="1">
+	<class path="js.html.AnchorElement" params="" file="/usr/local/lib/haxe/std/js/html/AnchorElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<target public="1"><c path="String"/></target>
 		<download public="1"><c path="String"/></download>
@@ -2698,24 +2719,24 @@
 		<searchParams public="1"><c path="js.html.URLSearchParams"/></searchParams>
 		<meta><m n=":native"><e>"HTMLAnchorElement"</e></m></meta>
 	</class>
-	<class path="js.html.Animation" params="" file="/usr/lib/haxe/std/js/html/Animation.hx" extern="1">
+	<class path="js.html.Animation" params="" file="/usr/local/lib/haxe/std/js/html/Animation.hx" extern="1">
 		<effect public="1" set="null"><c path="js.html.AnimationEffect"/></effect>
 		<target public="1" set="null"><c path="js.html.Element"/></target>
 		<meta><m n=":native"><e>"Animation"</e></m></meta>
 	</class>
-	<class path="js.html.AnimationEffect" params="" file="/usr/lib/haxe/std/js/html/AnimationEffect.hx" extern="1">
+	<class path="js.html.AnimationEffect" params="" file="/usr/local/lib/haxe/std/js/html/AnimationEffect.hx" extern="1">
 		<name public="1" set="null"><c path="String"/></name>
 		<meta><m n=":native"><e>"AnimationEffect"</e></m></meta>
 	</class>
-	<abstract path="js.html.AnimationPlayState" params="" file="/usr/lib/haxe/std/js/html/AnimationPlayState.hx">
+	<abstract path="js.html.AnimationPlayState" params="" file="/usr/local/lib/haxe/std/js/html/AnimationPlayState.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._AnimationPlayState.AnimationPlayState_Impl_" params="" file="/usr/lib/haxe/std/js/html/AnimationPlayState.hx" private="1" module="js.html.AnimationPlayState"><meta>
+		<impl><class path="js.html._AnimationPlayState.AnimationPlayState_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/AnimationPlayState.hx" private="1" module="js.html.AnimationPlayState"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.AnimationPlayer" params="" file="/usr/lib/haxe/std/js/html/AnimationPlayer.hx" extern="1">
+	<class path="js.html.AnimationPlayer" params="" file="/usr/local/lib/haxe/std/js/html/AnimationPlayer.hx" extern="1">
 		<source public="1" set="null"><c path="js.html.Animation"/></source>
 		<timeline public="1" set="null"><c path="js.html.AnimationTimeline"/></timeline>
 		<startTime public="1" set="null"><x path="Float"/></startTime>
@@ -2725,11 +2746,11 @@
 		<pause public="1" set="method"><f a=""><x path="Void"/></f></pause>
 		<meta><m n=":native"><e>"AnimationPlayer"</e></m></meta>
 	</class>
-	<class path="js.html.AnimationTimeline" params="" file="/usr/lib/haxe/std/js/html/AnimationTimeline.hx" extern="1">
+	<class path="js.html.AnimationTimeline" params="" file="/usr/local/lib/haxe/std/js/html/AnimationTimeline.hx" extern="1">
 		<currentTime public="1" set="null"><x path="Float"/></currentTime>
 		<meta><m n=":native"><e>"AnimationTimeline"</e></m></meta>
 	</class>
-	<class path="js.html.AppletElement" params="" file="/usr/lib/haxe/std/js/html/AppletElement.hx" extern="1">
+	<class path="js.html.AppletElement" params="" file="/usr/local/lib/haxe/std/js/html/AppletElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<align public="1"><c path="String"/></align>
 		<alt public="1"><c path="String"/></alt>
@@ -2744,7 +2765,7 @@
 		<width public="1"><c path="String"/></width>
 		<meta><m n=":native"><e>"HTMLAppletElement"</e></m></meta>
 	</class>
-	<class path="js.html.ApplicationCache" params="" file="/usr/lib/haxe/std/js/html/ApplicationCache.hx" extern="1">
+	<class path="js.html.ApplicationCache" params="" file="/usr/local/lib/haxe/std/js/html/ApplicationCache.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<UNCACHED public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
@@ -2789,7 +2810,7 @@
 		</swapCache>
 		<meta><m n=":native"><e>"ApplicationCache"</e></m></meta>
 	</class>
-	<class path="js.html.AreaElement" params="" file="/usr/lib/haxe/std/js/html/AreaElement.hx" extern="1">
+	<class path="js.html.AreaElement" params="" file="/usr/local/lib/haxe/std/js/html/AreaElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<alt public="1"><c path="String"/></alt>
 		<coords public="1"><c path="String"/></coords>
@@ -2814,7 +2835,7 @@
 		<searchParams public="1"><c path="js.html.URLSearchParams"/></searchParams>
 		<meta><m n=":native"><e>"HTMLAreaElement"</e></m></meta>
 	</class>
-	<class path="js.html.ArrayBuffer" params="" file="/usr/lib/haxe/std/js/html/ArrayBuffer.hx" extern="1">
+	<class path="js.html.ArrayBuffer" params="" file="/usr/local/lib/haxe/std/js/html/ArrayBuffer.hx" extern="1">
 		<isView public="1" set="method" static="1"><f a="value">
 	<d/>
 	<x path="Bool"/>
@@ -2834,13 +2855,13 @@
 		</new>
 		<meta><m n=":native"><e>"ArrayBuffer"</e></m></meta>
 	</class>
-	<class path="js.html.ArrayBufferView" params="" file="/usr/lib/haxe/std/js/html/ArrayBufferView.hx" extern="1">
+	<class path="js.html.ArrayBufferView" params="" file="/usr/local/lib/haxe/std/js/html/ArrayBufferView.hx" extern="1">
 		<buffer public="1" set="null"><c path="js.html.ArrayBuffer"/></buffer>
 		<byteOffset public="1" set="null"><x path="Int"/></byteOffset>
 		<byteLength public="1" set="null"><x path="Int"/></byteLength>
 		<meta><m n=":native"><e>"ArrayBufferView"</e></m></meta>
 	</class>
-	<class path="js.html.Attr" params="" file="/usr/lib/haxe/std/js/html/Attr.hx" extern="1">
+	<class path="js.html.Attr" params="" file="/usr/local/lib/haxe/std/js/html/Attr.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<value public="1"><c path="String"/></value>
 		<name public="1" set="null"><c path="String"/></name>
@@ -2848,7 +2869,7 @@
 		<ownerElement public="1" set="null"><c path="js.html.Element"/></ownerElement>
 		<meta><m n=":native"><e>"Attr"</e></m></meta>
 	</class>
-	<class path="js.html.MediaElement" params="" file="/usr/lib/haxe/std/js/html/MediaElement.hx" extern="1">
+	<class path="js.html.MediaElement" params="" file="/usr/local/lib/haxe/std/js/html/MediaElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<NETWORK_EMPTY public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
@@ -2950,11 +2971,11 @@
 </f></setMediaKeys>
 		<meta><m n=":native"><e>"HTMLMediaElement"</e></m></meta>
 	</class>
-	<class path="js.html.AudioElement" params="" file="/usr/lib/haxe/std/js/html/AudioElement.hx" extern="1">
+	<class path="js.html.AudioElement" params="" file="/usr/local/lib/haxe/std/js/html/AudioElement.hx" extern="1">
 		<extends path="js.html.MediaElement"/>
 		<meta><m n=":native"><e>"HTMLAudioElement"</e></m></meta>
 	</class>
-	<class path="js.html.Audio" params="" file="/usr/lib/haxe/std/js/html/Audio.hx" extern="1">
+	<class path="js.html.Audio" params="" file="/usr/local/lib/haxe/std/js/html/Audio.hx" extern="1">
 		<extends path="js.html.AudioElement"/>
 		<new public="1" set="method">
 			<f a="?src">
@@ -2965,7 +2986,7 @@
 		</new>
 		<meta><m n=":native"><e>"Audio"</e></m></meta>
 	</class>
-	<class path="js.html.AudioTrack" params="" file="/usr/lib/haxe/std/js/html/AudioTrack.hx" extern="1">
+	<class path="js.html.AudioTrack" params="" file="/usr/local/lib/haxe/std/js/html/AudioTrack.hx" extern="1">
 		<id public="1" set="null"><c path="String"/></id>
 		<kind public="1" set="null"><c path="String"/></kind>
 		<label public="1" set="null"><c path="String"/></label>
@@ -2973,7 +2994,7 @@
 		<enabled public="1"><x path="Bool"/></enabled>
 		<meta><m n=":native"><e>"AudioTrack"</e></m></meta>
 	</class>
-	<class path="js.html.AudioTrackList" params="" file="/usr/lib/haxe/std/js/html/AudioTrackList.hx" extern="1">
+	<class path="js.html.AudioTrackList" params="" file="/usr/local/lib/haxe/std/js/html/AudioTrackList.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<length public="1" set="null"><x path="Int"/></length>
 		<onchange public="1"><x path="haxe.Function"/></onchange>
@@ -2985,22 +3006,22 @@
 </f></getTrackById>
 		<meta><m n=":native"><e>"AudioTrackList"</e></m></meta>
 	</class>
-	<class path="js.html.BRElement" params="" file="/usr/lib/haxe/std/js/html/BRElement.hx" extern="1">
+	<class path="js.html.BRElement" params="" file="/usr/local/lib/haxe/std/js/html/BRElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<clear public="1"><c path="String"/></clear>
 		<meta><m n=":native"><e>"HTMLBRElement"</e></m></meta>
 	</class>
-	<class path="js.html.BarProp" params="" file="/usr/lib/haxe/std/js/html/BarProp.hx" extern="1">
+	<class path="js.html.BarProp" params="" file="/usr/local/lib/haxe/std/js/html/BarProp.hx" extern="1">
 		<visible public="1"><x path="Bool"/></visible>
 		<meta><m n=":native"><e>"BarProp"</e></m></meta>
 	</class>
-	<class path="js.html.BaseElement" params="" file="/usr/lib/haxe/std/js/html/BaseElement.hx" extern="1">
+	<class path="js.html.BaseElement" params="" file="/usr/local/lib/haxe/std/js/html/BaseElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<href public="1"><c path="String"/></href>
 		<target public="1"><c path="String"/></target>
 		<meta><m n=":native"><e>"HTMLBaseElement"</e></m></meta>
 	</class>
-	<class path="js.html.BatteryManager" params="" file="/usr/lib/haxe/std/js/html/BatteryManager.hx" extern="1">
+	<class path="js.html.BatteryManager" params="" file="/usr/local/lib/haxe/std/js/html/BatteryManager.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<charging public="1" set="null"><x path="Bool"/></charging>
 		<chargingTime public="1" set="null"><x path="Float"/></chargingTime>
@@ -3012,7 +3033,7 @@
 		<onlevelchange public="1"><x path="haxe.Function"/></onlevelchange>
 		<meta><m n=":native"><e>"BatteryManager"</e></m></meta>
 	</class>
-	<class path="js.html.Blob" params="" file="/usr/lib/haxe/std/js/html/Blob.hx" extern="1">
+	<class path="js.html.Blob" params="" file="/usr/local/lib/haxe/std/js/html/Blob.hx" extern="1">
 		<size public="1" set="null"><x path="Int"/></size>
 		<type public="1" set="null"><c path="String"/></type>
 		<slice public="1" set="method">
@@ -3048,7 +3069,7 @@
 		</new>
 		<meta><m n=":native"><e>"Blob"</e></m></meta>
 	</class>
-	<typedef path="js.html.BlobPropertyBag" params="" file="/usr/lib/haxe/std/js/html/BlobPropertyBag.hx"><a>
+	<typedef path="js.html.BlobPropertyBag" params="" file="/usr/local/lib/haxe/std/js/html/BlobPropertyBag.hx"><a>
 	<type>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -3058,7 +3079,7 @@
 		<meta><m n=":optional"/></meta>
 	</endings>
 </a></typedef>
-	<class path="js.html.BodyElement" params="" file="/usr/lib/haxe/std/js/html/BodyElement.hx" extern="1">
+	<class path="js.html.BodyElement" params="" file="/usr/local/lib/haxe/std/js/html/BodyElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<text public="1"><c path="String"/></text>
 		<link public="1"><c path="String"/></link>
@@ -3084,7 +3105,7 @@
 		<onunload public="1"><x path="haxe.Function"/></onunload>
 		<meta><m n=":native"><e>"HTMLBodyElement"</e></m></meta>
 	</class>
-	<class path="js.html.ButtonElement" params="" file="/usr/lib/haxe/std/js/html/ButtonElement.hx" extern="1">
+	<class path="js.html.ButtonElement" params="" file="/usr/local/lib/haxe/std/js/html/ButtonElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<autofocus public="1"><x path="Bool"/></autofocus>
 		<disabled public="1"><x path="Bool"/></disabled>
@@ -3107,7 +3128,7 @@
 </f></setCustomValidity>
 		<meta><m n=":native"><e>"HTMLButtonElement"</e></m></meta>
 	</class>
-	<class path="js.html.CharacterData" params="" file="/usr/lib/haxe/std/js/html/CharacterData.hx" extern="1">
+	<class path="js.html.CharacterData" params="" file="/usr/local/lib/haxe/std/js/html/CharacterData.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<data public="1"><c path="String"/></data>
 		<length public="1" set="null"><x path="Int"/></length>
@@ -3156,7 +3177,7 @@
 		<remove public="1" set="method"><f a=""><x path="Void"/></f></remove>
 		<meta><m n=":native"><e>"CharacterData"</e></m></meta>
 	</class>
-	<class path="js.html.Text" params="" file="/usr/lib/haxe/std/js/html/Text.hx" extern="1">
+	<class path="js.html.Text" params="" file="/usr/local/lib/haxe/std/js/html/Text.hx" extern="1">
 		<extends path="js.html.CharacterData"/>
 		<wholeText public="1" set="null"><c path="String"/></wholeText>
 		<splitText public="1" set="method">
@@ -3221,11 +3242,11 @@
 		</new>
 		<meta><m n=":native"><e>"Text"</e></m></meta>
 	</class>
-	<class path="js.html.CDATASection" params="" file="/usr/lib/haxe/std/js/html/CDATASection.hx" extern="1">
+	<class path="js.html.CDATASection" params="" file="/usr/local/lib/haxe/std/js/html/CDATASection.hx" extern="1">
 		<extends path="js.html.Text"/>
 		<meta><m n=":native"><e>"CDATASection"</e></m></meta>
 	</class>
-	<class path="js.html.CSSRule" params="" file="/usr/lib/haxe/std/js/html/CSSRule.hx" extern="1">
+	<class path="js.html.CSSRule" params="" file="/usr/local/lib/haxe/std/js/html/CSSRule.hx" extern="1">
 		<UNKNOWN_RULE public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -3260,7 +3281,7 @@
 		<parentRule public="1" set="null"><c path="js.html.CSSRule"/></parentRule>
 		<meta><m n=":native"><e>"CSSRule"</e></m></meta>
 	</class>
-	<class path="js.html.CSSRuleList" params="" file="/usr/lib/haxe/std/js/html/CSSRuleList.hx" extern="1">
+	<class path="js.html.CSSRuleList" params="" file="/usr/local/lib/haxe/std/js/html/CSSRuleList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -3268,7 +3289,7 @@
 </f></item>
 		<meta><m n=":native"><e>"CSSRuleList"</e></m></meta>
 	</class>
-	<class path="js.html.CSSStyleDeclaration" params="" file="/usr/lib/haxe/std/js/html/CSSStyleDeclaration.hx" extern="1">
+	<class path="js.html.CSSStyleDeclaration" params="" file="/usr/local/lib/haxe/std/js/html/CSSStyleDeclaration.hx" extern="1">
 		<cssText public="1"><c path="String"/></cssText>
 		<length public="1" set="null"><x path="Int"/></length>
 		<parentRule public="1" set="null"><c path="js.html.CSSRule"/></parentRule>
@@ -4653,7 +4674,7 @@
 		</removeProperty>
 		<meta><m n=":native"><e>"CSSStyleDeclaration"</e></m></meta>
 	</class>
-	<class path="js.html.StyleSheet" params="" file="/usr/lib/haxe/std/js/html/StyleSheet.hx" extern="1">
+	<class path="js.html.StyleSheet" params="" file="/usr/local/lib/haxe/std/js/html/StyleSheet.hx" extern="1">
 		<type public="1" set="null"><c path="String"/></type>
 		<href public="1" set="null"><c path="String"/></href>
 		<ownerNode public="1" set="null"><c path="js.html.Node"/></ownerNode>
@@ -4663,7 +4684,7 @@
 		<disabled public="1"><x path="Bool"/></disabled>
 		<meta><m n=":native"><e>"StyleSheet"</e></m></meta>
 	</class>
-	<class path="js.html.CSSStyleSheet" params="" file="/usr/lib/haxe/std/js/html/CSSStyleSheet.hx" extern="1">
+	<class path="js.html.CSSStyleSheet" params="" file="/usr/local/lib/haxe/std/js/html/CSSStyleSheet.hx" extern="1">
 		<extends path="js.html.StyleSheet"/>
 		<ownerRule public="1" set="null"><c path="js.html.CSSRule"/></ownerRule>
 		<cssRules public="1" set="null"><c path="js.html.CSSRuleList"/></cssRules>
@@ -4684,7 +4705,7 @@
 		</deleteRule>
 		<meta><m n=":native"><e>"CSSStyleSheet"</e></m></meta>
 	</class>
-	<class path="js.html.CSSValue" params="" file="/usr/lib/haxe/std/js/html/CSSValue.hx" extern="1">
+	<class path="js.html.CSSValue" params="" file="/usr/local/lib/haxe/std/js/html/CSSValue.hx" extern="1">
 		<CSS_INHERIT public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -4705,7 +4726,7 @@
 		<cssValueType public="1" set="null"><x path="Int"/></cssValueType>
 		<meta><m n=":native"><e>"CSSValue"</e></m></meta>
 	</class>
-	<class path="js.html.CanvasElement" params="" file="/usr/lib/haxe/std/js/html/CanvasElement.hx" extern="1">
+	<class path="js.html.CanvasElement" params="" file="/usr/local/lib/haxe/std/js/html/CanvasElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<width public="1"><x path="Int"/></width>
 		<height public="1"><x path="Int"/></height>
@@ -4755,7 +4776,7 @@
 		</getContextWebGL>
 		<meta><m n=":native"><e>"HTMLCanvasElement"</e></m></meta>
 	</class>
-	<class path="js.html.CanvasGradient" params="" file="/usr/lib/haxe/std/js/html/CanvasGradient.hx" extern="1">
+	<class path="js.html.CanvasGradient" params="" file="/usr/local/lib/haxe/std/js/html/CanvasGradient.hx" extern="1">
 		<addColorStop public="1" set="method">
 			<f a="offset:color">
 				<x path="Float"/>
@@ -4766,14 +4787,14 @@
 		</addColorStop>
 		<meta><m n=":native"><e>"CanvasGradient"</e></m></meta>
 	</class>
-	<class path="js.html.CanvasPattern" params="" file="/usr/lib/haxe/std/js/html/CanvasPattern.hx" extern="1">
+	<class path="js.html.CanvasPattern" params="" file="/usr/local/lib/haxe/std/js/html/CanvasPattern.hx" extern="1">
 		<setTransform public="1" set="method"><f a="matrix">
 	<c path="js.html.svg.Matrix"/>
 	<x path="Void"/>
 </f></setTransform>
 		<meta><m n=":native"><e>"CanvasPattern"</e></m></meta>
 	</class>
-	<class path="js.html.CanvasRenderingContext2D" params="" file="/usr/lib/haxe/std/js/html/CanvasRenderingContext2D.hx" extern="1">
+	<class path="js.html.CanvasRenderingContext2D" params="" file="/usr/local/lib/haxe/std/js/html/CanvasRenderingContext2D.hx" extern="1">
 		<canvas public="1" set="null"><c path="js.html.CanvasElement"/></canvas>
 		<globalAlpha public="1"><x path="Float"/></globalAlpha>
 		<globalCompositeOperation public="1"><c path="String"/></globalCompositeOperation>
@@ -5196,21 +5217,21 @@
 		</arc>
 		<meta><m n=":native"><e>"CanvasRenderingContext2D"</e></m></meta>
 	</class>
-	<abstract path="js.html.CanvasWindingRule" params="" file="/usr/lib/haxe/std/js/html/CanvasWindingRule.hx">
+	<abstract path="js.html.CanvasWindingRule" params="" file="/usr/local/lib/haxe/std/js/html/CanvasWindingRule.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._CanvasWindingRule.CanvasWindingRule_Impl_" params="" file="/usr/lib/haxe/std/js/html/CanvasWindingRule.hx" private="1" module="js.html.CanvasWindingRule"><meta>
+		<impl><class path="js.html._CanvasWindingRule.CanvasWindingRule_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/CanvasWindingRule.hx" private="1" module="js.html.CanvasWindingRule"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.CaretPosition" params="" file="/usr/lib/haxe/std/js/html/CaretPosition.hx" extern="1">
+	<class path="js.html.CaretPosition" params="" file="/usr/local/lib/haxe/std/js/html/CaretPosition.hx" extern="1">
 		<offsetNode public="1" set="null"><c path="js.html.Node"/></offsetNode>
 		<offset public="1" set="null"><x path="Int"/></offset>
 		<getClientRect public="1" set="method"><f a=""><c path="js.html.DOMRect"/></f></getClientRect>
 		<meta><m n=":native"><e>"CaretPosition"</e></m></meta>
 	</class>
-	<typedef path="js.html.ChromeFilePropertyBag" params="" file="/usr/lib/haxe/std/js/html/ChromeFilePropertyBag.hx"><a>
+	<typedef path="js.html.ChromeFilePropertyBag" params="" file="/usr/local/lib/haxe/std/js/html/ChromeFilePropertyBag.hx"><a>
 	<type>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -5228,7 +5249,7 @@
 		<meta><m n=":optional"/></meta>
 	</lastModified>
 </a></typedef>
-	<class path="js.html.Comment" params="" file="/usr/lib/haxe/std/js/html/Comment.hx" extern="1">
+	<class path="js.html.Comment" params="" file="/usr/local/lib/haxe/std/js/html/Comment.hx" extern="1">
 		<extends path="js.html.CharacterData"/>
 		<new public="1" set="method">
 			<f a="?data" v="&quot;&quot;">
@@ -5240,7 +5261,7 @@
 		</new>
 		<meta><m n=":native"><e>"Comment"</e></m></meta>
 	</class>
-	<class path="js.html.Console" params="" file="/usr/lib/haxe/std/js/html/Console.hx" extern="1">
+	<class path="js.html.Console" params="" file="/usr/local/lib/haxe/std/js/html/Console.hx" extern="1">
 		<log public="1" set="method"><f a="data">
 	<x path="haxe.extern.Rest"><d/></x>
 	<x path="Void"/>
@@ -5314,13 +5335,13 @@
 		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
 		<meta><m n=":native"><e>"Console"</e></m></meta>
 	</class>
-	<class path="js.html.ContentElement" params="" file="/usr/lib/haxe/std/js/html/ContentElement.hx" extern="1">
+	<class path="js.html.ContentElement" params="" file="/usr/local/lib/haxe/std/js/html/ContentElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<select public="1"><c path="String"/></select>
 		<getDistributedNodes public="1" set="method"><f a=""><c path="js.html.NodeList"/></f></getDistributedNodes>
 		<meta><m n=":native"><e>"HTMLContentElement"</e></m></meta>
 	</class>
-	<typedef path="js.html.ConvertCoordinateOptions" params="" file="/usr/lib/haxe/std/js/html/ConvertCoordinateOptions.hx"><a>
+	<typedef path="js.html.ConvertCoordinateOptions" params="" file="/usr/local/lib/haxe/std/js/html/ConvertCoordinateOptions.hx"><a>
 	<toBox>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -5330,7 +5351,7 @@
 		<meta><m n=":optional"/></meta>
 	</fromBox>
 </a></typedef>
-	<class path="js.html.Coordinates" params="" file="/usr/lib/haxe/std/js/html/Coordinates.hx" extern="1">
+	<class path="js.html.Coordinates" params="" file="/usr/local/lib/haxe/std/js/html/Coordinates.hx" extern="1">
 		<latitude public="1" set="null"><x path="Float"/></latitude>
 		<longitude public="1" set="null"><x path="Float"/></longitude>
 		<altitude public="1" set="null"><x path="Float"/></altitude>
@@ -5340,12 +5361,12 @@
 		<speed public="1" set="null"><x path="Float"/></speed>
 		<meta><m n=":native"><e>"Coordinates"</e></m></meta>
 	</class>
-	<class path="js.html.DListElement" params="" file="/usr/lib/haxe/std/js/html/DListElement.hx" extern="1">
+	<class path="js.html.DListElement" params="" file="/usr/local/lib/haxe/std/js/html/DListElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<compact public="1"><x path="Bool"/></compact>
 		<meta><m n=":native"><e>"HTMLDListElement"</e></m></meta>
 	</class>
-	<class path="js.html.DOMError" params="" file="/usr/lib/haxe/std/js/html/DOMError.hx" extern="1">
+	<class path="js.html.DOMError" params="" file="/usr/local/lib/haxe/std/js/html/DOMError.hx" extern="1">
 		<name public="1" set="null"><c path="String"/></name>
 		<message public="1" set="null"><c path="String"/></message>
 		<new public="1" set="method">
@@ -5359,7 +5380,7 @@
 		</new>
 		<meta><m n=":native"><e>"DOMError"</e></m></meta>
 	</class>
-	<class path="js.html.DOMImplementation" params="" file="/usr/lib/haxe/std/js/html/DOMImplementation.hx" extern="1">
+	<class path="js.html.DOMImplementation" params="" file="/usr/local/lib/haxe/std/js/html/DOMImplementation.hx" extern="1">
 		<hasFeature public="1" set="method"><f a="feature:version">
 	<c path="String"/>
 	<c path="String"/>
@@ -5392,14 +5413,14 @@
 		</createHTMLDocument>
 		<meta><m n=":native"><e>"DOMImplementation"</e></m></meta>
 	</class>
-	<class path="js.html.DOMPointReadOnly" params="" file="/usr/lib/haxe/std/js/html/DOMPointReadOnly.hx" extern="1">
+	<class path="js.html.DOMPointReadOnly" params="" file="/usr/local/lib/haxe/std/js/html/DOMPointReadOnly.hx" extern="1">
 		<x public="1" set="null"><x path="Float"/></x>
 		<y public="1" set="null"><x path="Float"/></y>
 		<z public="1" set="null"><x path="Float"/></z>
 		<w public="1" set="null"><x path="Float"/></w>
 		<meta><m n=":native"><e>"DOMPointReadOnly"</e></m></meta>
 	</class>
-	<class path="js.html.DOMPoint" params="" file="/usr/lib/haxe/std/js/html/DOMPoint.hx" extern="1">
+	<class path="js.html.DOMPoint" params="" file="/usr/local/lib/haxe/std/js/html/DOMPoint.hx" extern="1">
 		<extends path="js.html.DOMPointReadOnly"/>
 		<new public="1" set="method">
 			<f a="x:y:?z:?w" v="::0.0:1.0">
@@ -5421,7 +5442,7 @@
 		</new>
 		<meta><m n=":native"><e>"DOMPoint"</e></m></meta>
 	</class>
-	<typedef path="js.html.DOMPointInit" params="" file="/usr/lib/haxe/std/js/html/DOMPointInit.hx"><a>
+	<typedef path="js.html.DOMPointInit" params="" file="/usr/local/lib/haxe/std/js/html/DOMPointInit.hx"><a>
 	<z>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -5439,7 +5460,7 @@
 		<meta><m n=":optional"/></meta>
 	</w>
 </a></typedef>
-	<class path="js.html.DOMQuad" params="" file="/usr/lib/haxe/std/js/html/DOMQuad.hx" extern="1">
+	<class path="js.html.DOMQuad" params="" file="/usr/local/lib/haxe/std/js/html/DOMQuad.hx" extern="1">
 		<p1 public="1" set="null"><c path="js.html.DOMPoint"/></p1>
 		<p2 public="1" set="null"><c path="js.html.DOMPoint"/></p2>
 		<p3 public="1" set="null"><c path="js.html.DOMPoint"/></p3>
@@ -5464,7 +5485,7 @@
 		</new>
 		<meta><m n=":native"><e>"DOMQuad"</e></m></meta>
 	</class>
-	<class path="js.html.DOMRectReadOnly" params="" file="/usr/lib/haxe/std/js/html/DOMRectReadOnly.hx" extern="1">
+	<class path="js.html.DOMRectReadOnly" params="" file="/usr/local/lib/haxe/std/js/html/DOMRectReadOnly.hx" extern="1">
 		<x public="1" set="null"><x path="Float"/></x>
 		<y public="1" set="null"><x path="Float"/></y>
 		<width public="1" set="null"><x path="Float"/></width>
@@ -5475,7 +5496,7 @@
 		<left public="1" set="null"><x path="Float"/></left>
 		<meta><m n=":native"><e>"DOMRectReadOnly"</e></m></meta>
 	</class>
-	<class path="js.html.DOMRect" params="" file="/usr/lib/haxe/std/js/html/DOMRect.hx" extern="1">
+	<class path="js.html.DOMRect" params="" file="/usr/local/lib/haxe/std/js/html/DOMRect.hx" extern="1">
 		<extends path="js.html.DOMRectReadOnly"/>
 		<new public="1" set="method">
 			<f a="x:y:width:height">
@@ -5493,7 +5514,7 @@
 		</new>
 		<meta><m n=":native"><e>"DOMRect"</e></m></meta>
 	</class>
-	<class path="js.html.DOMRectList" params="" file="/usr/lib/haxe/std/js/html/DOMRectList.hx" extern="1">
+	<class path="js.html.DOMRectList" params="" file="/usr/local/lib/haxe/std/js/html/DOMRectList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -5501,7 +5522,7 @@
 </f></item>
 		<meta><m n=":native"><e>"DOMRectList"</e></m></meta>
 	</class>
-	<class path="js.html.DOMTokenList" params="" file="/usr/lib/haxe/std/js/html/DOMTokenList.hx" extern="1">
+	<class path="js.html.DOMTokenList" params="" file="/usr/local/lib/haxe/std/js/html/DOMTokenList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -5538,12 +5559,12 @@
 		</toggle>
 		<meta><m n=":native"><e>"DOMTokenList"</e></m></meta>
 	</class>
-	<class path="js.html.DOMSettableTokenList" params="" file="/usr/lib/haxe/std/js/html/DOMSettableTokenList.hx" extern="1">
+	<class path="js.html.DOMSettableTokenList" params="" file="/usr/local/lib/haxe/std/js/html/DOMSettableTokenList.hx" extern="1">
 		<extends path="js.html.DOMTokenList"/>
 		<value public="1"><c path="String"/></value>
 		<meta><m n=":native"><e>"DOMSettableTokenList"</e></m></meta>
 	</class>
-	<class path="js.html.DOMStringList" params="" file="/usr/lib/haxe/std/js/html/DOMStringList.hx" extern="1">
+	<class path="js.html.DOMStringList" params="" file="/usr/local/lib/haxe/std/js/html/DOMStringList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -5555,34 +5576,34 @@
 </f></contains>
 		<meta><m n=":native"><e>"DOMStringList"</e></m></meta>
 	</class>
-	<class path="js.html.DOMStringMap" params="" file="/usr/lib/haxe/std/js/html/DOMStringMap.hx" extern="1">
+	<class path="js.html.DOMStringMap" params="" file="/usr/local/lib/haxe/std/js/html/DOMStringMap.hx" extern="1">
 		<meta><m n=":native"><e>"DOMStringMap"</e></m></meta>
 		<haxe_dynamic><c path="String"/></haxe_dynamic>
 	</class>
-	<class path="js.html.DataListElement" params="" file="/usr/lib/haxe/std/js/html/DataListElement.hx" extern="1">
+	<class path="js.html.DataListElement" params="" file="/usr/local/lib/haxe/std/js/html/DataListElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<options public="1" set="null"><c path="js.html.HTMLCollection"/></options>
 		<meta><m n=":native"><e>"HTMLDataListElement"</e></m></meta>
 	</class>
-	<abstract path="js.html.DirectionSetting" params="" file="/usr/lib/haxe/std/js/html/DirectionSetting.hx">
+	<abstract path="js.html.DirectionSetting" params="" file="/usr/local/lib/haxe/std/js/html/DirectionSetting.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._DirectionSetting.DirectionSetting_Impl_" params="" file="/usr/lib/haxe/std/js/html/DirectionSetting.hx" private="1" module="js.html.DirectionSetting"><meta>
+		<impl><class path="js.html._DirectionSetting.DirectionSetting_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/DirectionSetting.hx" private="1" module="js.html.DirectionSetting"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.DirectoryElement" params="" file="/usr/lib/haxe/std/js/html/DirectoryElement.hx" extern="1">
+	<class path="js.html.DirectoryElement" params="" file="/usr/local/lib/haxe/std/js/html/DirectoryElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<compact public="1"><x path="Bool"/></compact>
 		<meta><m n=":native"><e>"HTMLDirectoryElement"</e></m></meta>
 	</class>
-	<class path="js.html.DivElement" params="" file="/usr/lib/haxe/std/js/html/DivElement.hx" extern="1">
+	<class path="js.html.DivElement" params="" file="/usr/local/lib/haxe/std/js/html/DivElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<align public="1"><c path="String"/></align>
 		<meta><m n=":native"><e>"HTMLDivElement"</e></m></meta>
 	</class>
-	<class path="js.html.Document" params="" file="/usr/lib/haxe/std/js/html/Document.hx" extern="1">
+	<class path="js.html.Document" params="" file="/usr/local/lib/haxe/std/js/html/Document.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<implementation public="1" set="null"><c path="js.html.DOMImplementation"/></implementation>
 		<URL public="1" set="null"><c path="String"/></URL>
@@ -5984,7 +6005,7 @@
 		</new>
 		<meta><m n=":native"><e>"Document"</e></m></meta>
 	</class>
-	<class path="js.html.DocumentFragment" params="" file="/usr/lib/haxe/std/js/html/DocumentFragment.hx" extern="1">
+	<class path="js.html.DocumentFragment" params="" file="/usr/local/lib/haxe/std/js/html/DocumentFragment.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<children public="1" set="null"><c path="js.html.HTMLCollection"/></children>
 		<firstElementChild public="1" set="null"><c path="js.html.Element"/></firstElementChild>
@@ -6014,7 +6035,7 @@
 		</new>
 		<meta><m n=":native"><e>"DocumentFragment"</e></m></meta>
 	</class>
-	<class path="js.html.DocumentType" params="" file="/usr/lib/haxe/std/js/html/DocumentType.hx" extern="1">
+	<class path="js.html.DocumentType" params="" file="/usr/local/lib/haxe/std/js/html/DocumentType.hx" extern="1">
 		<extends path="js.html.Node"/>
 		<name public="1" set="null"><c path="String"/></name>
 		<publicId public="1" set="null"><c path="String"/></publicId>
@@ -6023,7 +6044,7 @@
 		<remove public="1" set="method"><f a=""><x path="Void"/></f></remove>
 		<meta><m n=":native"><e>"DocumentType"</e></m></meta>
 	</class>
-	<typedef path="js.html.ElementRegistrationOptions" params="" file="/usr/lib/haxe/std/js/html/ElementRegistrationOptions.hx"><a>
+	<typedef path="js.html.ElementRegistrationOptions" params="" file="/usr/local/lib/haxe/std/js/html/ElementRegistrationOptions.hx"><a>
 	<prototype>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -6036,7 +6057,7 @@
 		</meta>
 	</extends_>
 </a></typedef>
-	<class path="js.html.EmbedElement" params="" file="/usr/lib/haxe/std/js/html/EmbedElement.hx" extern="1">
+	<class path="js.html.EmbedElement" params="" file="/usr/local/lib/haxe/std/js/html/EmbedElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<src public="1"><c path="String"/></src>
 		<type public="1"><c path="String"/></type>
@@ -6047,7 +6068,7 @@
 		<getSVGDocument public="1" set="method"><f a=""><c path="js.html.HTMLDocument"/></f></getSVGDocument>
 		<meta><m n=":native"><e>"HTMLEmbedElement"</e></m></meta>
 	</class>
-	<class path="js.html.Event" params="" file="/usr/lib/haxe/std/js/html/Event.hx" extern="1">
+	<class path="js.html.Event" params="" file="/usr/local/lib/haxe/std/js/html/Event.hx" extern="1">
 		<NONE public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -6114,7 +6135,7 @@
 		</new>
 		<meta><m n=":native"><e>"Event"</e></m></meta>
 	</class>
-	<typedef path="js.html.EventInit" params="" file="/usr/lib/haxe/std/js/html/EventInit.hx"><a>
+	<typedef path="js.html.EventInit" params="" file="/usr/local/lib/haxe/std/js/html/EventInit.hx"><a>
 	<cancelable>
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
@@ -6124,14 +6145,14 @@
 		<meta><m n=":optional"/></meta>
 	</bubbles>
 </a></typedef>
-	<class path="js.html.EventListener" params="" file="/usr/lib/haxe/std/js/html/EventListener.hx" extern="1">
+	<class path="js.html.EventListener" params="" file="/usr/local/lib/haxe/std/js/html/EventListener.hx" extern="1">
 		<handleEvent public="1" set="method"><f a="event">
 	<c path="js.html.Event"/>
 	<x path="Void"/>
 </f></handleEvent>
 		<meta><m n=":native"><e>"EventListener"</e></m></meta>
 	</class>
-	<class path="js.html.FieldSetElement" params="" file="/usr/lib/haxe/std/js/html/FieldSetElement.hx" extern="1">
+	<class path="js.html.FieldSetElement" params="" file="/usr/local/lib/haxe/std/js/html/FieldSetElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<disabled public="1"><x path="Bool"/></disabled>
 		<form public="1" set="null"><c path="js.html.FormElement"/></form>
@@ -6148,7 +6169,7 @@
 </f></setCustomValidity>
 		<meta><m n=":native"><e>"HTMLFieldSetElement"</e></m></meta>
 	</class>
-	<class path="js.html.File" params="" file="/usr/lib/haxe/std/js/html/File.hx" extern="1">
+	<class path="js.html.File" params="" file="/usr/local/lib/haxe/std/js/html/File.hx" extern="1">
 		<extends path="js.html.Blob"/>
 		<name public="1" set="null"><c path="String"/></name>
 		<lastModified public="1" set="null"><x path="Int"/></lastModified>
@@ -6199,7 +6220,7 @@
 		</new>
 		<meta><m n=":native"><e>"File"</e></m></meta>
 	</class>
-	<class path="js.html.FileList" params="" file="/usr/lib/haxe/std/js/html/FileList.hx" extern="1">
+	<class path="js.html.FileList" params="" file="/usr/local/lib/haxe/std/js/html/FileList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -6207,7 +6228,7 @@
 </f></item>
 		<meta><m n=":native"><e>"FileList"</e></m></meta>
 	</class>
-	<typedef path="js.html.FilePropertyBag" params="" file="/usr/lib/haxe/std/js/html/FilePropertyBag.hx"><a>
+	<typedef path="js.html.FilePropertyBag" params="" file="/usr/local/lib/haxe/std/js/html/FilePropertyBag.hx"><a>
 	<type>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -6217,7 +6238,7 @@
 		<meta><m n=":optional"/></meta>
 	</lastModified>
 </a></typedef>
-	<class path="js.html.Float32Array" params="" file="/usr/lib/haxe/std/js/html/Float32Array.hx" extern="1">
+	<class path="js.html.Float32Array" params="" file="/usr/local/lib/haxe/std/js/html/Float32Array.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="4" line="30" static="1">
 			<x path="Int"/>
@@ -6286,14 +6307,14 @@
 		</new>
 		<meta><m n=":native"><e>"Float32Array"</e></m></meta>
 	</class>
-	<class path="js.html.FontElement" params="" file="/usr/lib/haxe/std/js/html/FontElement.hx" extern="1">
+	<class path="js.html.FontElement" params="" file="/usr/local/lib/haxe/std/js/html/FontElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<color public="1"><c path="String"/></color>
 		<face public="1"><c path="String"/></face>
 		<size public="1"><c path="String"/></size>
 		<meta><m n=":native"><e>"HTMLFontElement"</e></m></meta>
 	</class>
-	<class path="js.html.FontFace" params="" file="/usr/lib/haxe/std/js/html/FontFace.hx" extern="1">
+	<class path="js.html.FontFace" params="" file="/usr/local/lib/haxe/std/js/html/FontFace.hx" extern="1">
 		<family public="1"><c path="String"/></family>
 		<style public="1"><c path="String"/></style>
 		<weight public="1"><c path="String"/></weight>
@@ -6324,7 +6345,7 @@
 		</new>
 		<meta><m n=":native"><e>"FontFace"</e></m></meta>
 	</class>
-	<typedef path="js.html.FontFaceDescriptors" params="" file="/usr/lib/haxe/std/js/html/FontFaceDescriptors.hx"><a>
+	<typedef path="js.html.FontFaceDescriptors" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceDescriptors.hx"><a>
 	<weight>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -6350,15 +6371,15 @@
 		<meta><m n=":optional"/></meta>
 	</featureSettings>
 </a></typedef>
-	<abstract path="js.html.FontFaceLoadStatus" params="" file="/usr/lib/haxe/std/js/html/FontFaceLoadStatus.hx">
+	<abstract path="js.html.FontFaceLoadStatus" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceLoadStatus.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._FontFaceLoadStatus.FontFaceLoadStatus_Impl_" params="" file="/usr/lib/haxe/std/js/html/FontFaceLoadStatus.hx" private="1" module="js.html.FontFaceLoadStatus"><meta>
+		<impl><class path="js.html._FontFaceLoadStatus.FontFaceLoadStatus_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceLoadStatus.hx" private="1" module="js.html.FontFaceLoadStatus"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.FontFaceSet" params="" file="/usr/lib/haxe/std/js/html/FontFaceSet.hx" extern="1">
+	<class path="js.html.FontFaceSet" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceSet.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<onloading public="1"><x path="haxe.Function"/></onloading>
 		<onloadingdone public="1"><x path="haxe.Function"/></onloadingdone>
@@ -6397,15 +6418,15 @@
 		</load>
 		<meta><m n=":native"><e>"FontFaceSet"</e></m></meta>
 	</class>
-	<abstract path="js.html.FontFaceSetLoadStatus" params="" file="/usr/lib/haxe/std/js/html/FontFaceSetLoadStatus.hx">
+	<abstract path="js.html.FontFaceSetLoadStatus" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceSetLoadStatus.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._FontFaceSetLoadStatus.FontFaceSetLoadStatus_Impl_" params="" file="/usr/lib/haxe/std/js/html/FontFaceSetLoadStatus.hx" private="1" module="js.html.FontFaceSetLoadStatus"><meta>
+		<impl><class path="js.html._FontFaceSetLoadStatus.FontFaceSetLoadStatus_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/FontFaceSetLoadStatus.hx" private="1" module="js.html.FontFaceSetLoadStatus"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.FormData" params="" file="/usr/lib/haxe/std/js/html/FormData.hx" extern="1">
+	<class path="js.html.FormData" params="" file="/usr/local/lib/haxe/std/js/html/FormData.hx" extern="1">
 		<append public="1" set="method">
 			<f a="name:value">
 				<c path="String"/>
@@ -6428,7 +6449,7 @@
 		</new>
 		<meta><m n=":native"><e>"FormData"</e></m></meta>
 	</class>
-	<class path="js.html.FormElement" params="" file="/usr/lib/haxe/std/js/html/FormElement.hx" extern="1">
+	<class path="js.html.FormElement" params="" file="/usr/local/lib/haxe/std/js/html/FormElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<acceptCharset public="1"><c path="String"/></acceptCharset>
 		<action public="1"><c path="String"/></action>
@@ -6449,7 +6470,7 @@
 		<checkValidity public="1" set="method"><f a=""><x path="Bool"/></f></checkValidity>
 		<meta><m n=":native"><e>"HTMLFormElement"</e></m></meta>
 	</class>
-	<class path="js.html.FrameElement" params="" file="/usr/lib/haxe/std/js/html/FrameElement.hx" extern="1">
+	<class path="js.html.FrameElement" params="" file="/usr/local/lib/haxe/std/js/html/FrameElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<name public="1"><c path="String"/></name>
 		<scrolling public="1"><c path="String"/></scrolling>
@@ -6463,7 +6484,7 @@
 		<marginWidth public="1"><c path="String"/></marginWidth>
 		<meta><m n=":native"><e>"HTMLFrameElement"</e></m></meta>
 	</class>
-	<class path="js.html.FrameSetElement" params="" file="/usr/lib/haxe/std/js/html/FrameSetElement.hx" extern="1">
+	<class path="js.html.FrameSetElement" params="" file="/usr/local/lib/haxe/std/js/html/FrameSetElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<cols public="1"><c path="String"/></cols>
 		<rows public="1"><c path="String"/></rows>
@@ -6485,7 +6506,7 @@
 		<onunload public="1"><x path="haxe.Function"/></onunload>
 		<meta><m n=":native"><e>"HTMLFrameSetElement"</e></m></meta>
 	</class>
-	<class path="js.html.Gamepad" params="" file="/usr/lib/haxe/std/js/html/Gamepad.hx" extern="1">
+	<class path="js.html.Gamepad" params="" file="/usr/local/lib/haxe/std/js/html/Gamepad.hx" extern="1">
 		<id public="1" set="null"><c path="String"/></id>
 		<index public="1" set="null"><x path="Int"/></index>
 		<mapping public="1" set="null"><x path="js.html.GamepadMappingType"/></mapping>
@@ -6495,20 +6516,20 @@
 		<timestamp public="1" set="null"><x path="Float"/></timestamp>
 		<meta><m n=":native"><e>"Gamepad"</e></m></meta>
 	</class>
-	<class path="js.html.GamepadButton" params="" file="/usr/lib/haxe/std/js/html/GamepadButton.hx" extern="1">
+	<class path="js.html.GamepadButton" params="" file="/usr/local/lib/haxe/std/js/html/GamepadButton.hx" extern="1">
 		<pressed public="1" set="null"><x path="Bool"/></pressed>
 		<value public="1" set="null"><x path="Float"/></value>
 		<meta><m n=":native"><e>"GamepadButton"</e></m></meta>
 	</class>
-	<abstract path="js.html.GamepadMappingType" params="" file="/usr/lib/haxe/std/js/html/GamepadMappingType.hx">
+	<abstract path="js.html.GamepadMappingType" params="" file="/usr/local/lib/haxe/std/js/html/GamepadMappingType.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._GamepadMappingType.GamepadMappingType_Impl_" params="" file="/usr/lib/haxe/std/js/html/GamepadMappingType.hx" private="1" module="js.html.GamepadMappingType"><meta>
+		<impl><class path="js.html._GamepadMappingType.GamepadMappingType_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/GamepadMappingType.hx" private="1" module="js.html.GamepadMappingType"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.Geolocation" params="" file="/usr/lib/haxe/std/js/html/Geolocation.hx" extern="1">
+	<class path="js.html.Geolocation" params="" file="/usr/local/lib/haxe/std/js/html/Geolocation.hx" extern="1">
 		<getCurrentPosition public="1" set="method">
 			<f a="successCallback:?errorCallback:?options">
 				<f a="">
@@ -6545,7 +6566,7 @@
 </f></clearWatch>
 		<meta><m n=":native"><e>"Geolocation"</e></m></meta>
 	</class>
-	<class path="js.html.HRElement" params="" file="/usr/lib/haxe/std/js/html/HRElement.hx" extern="1">
+	<class path="js.html.HRElement" params="" file="/usr/local/lib/haxe/std/js/html/HRElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<align public="1"><c path="String"/></align>
 		<color public="1"><c path="String"/></color>
@@ -6554,7 +6575,7 @@
 		<width public="1"><c path="String"/></width>
 		<meta><m n=":native"><e>"HTMLHRElement"</e></m></meta>
 	</class>
-	<class path="js.html.HTMLAllCollection" params="" file="/usr/lib/haxe/std/js/html/HTMLAllCollection.hx" extern="1">
+	<class path="js.html.HTMLAllCollection" params="" file="/usr/local/lib/haxe/std/js/html/HTMLAllCollection.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method">
 			<f a="name">
@@ -6578,7 +6599,7 @@
 </f></namedItem>
 		<meta><m n=":native"><e>"HTMLAllCollection"</e></m></meta>
 	</class>
-	<class path="js.html.HTMLCollection" params="" file="/usr/lib/haxe/std/js/html/HTMLCollection.hx" extern="1">
+	<class path="js.html.HTMLCollection" params="" file="/usr/local/lib/haxe/std/js/html/HTMLCollection.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -6590,7 +6611,7 @@
 </f></namedItem>
 		<meta><m n=":native"><e>"HTMLCollection"</e></m></meta>
 	</class>
-	<class path="js.html.HTMLDocument" params="" file="/usr/lib/haxe/std/js/html/HTMLDocument.hx" extern="1">
+	<class path="js.html.HTMLDocument" params="" file="/usr/local/lib/haxe/std/js/html/HTMLDocument.hx" extern="1">
 		<extends path="js.html.Document"/>
 		<domain public="1"><c path="String"/></domain>
 		<cookie public="1"><c path="String"/></cookie>
@@ -6967,7 +6988,7 @@
 		</createTableCaptionElement>
 		<meta><m n=":native"><e>"HTMLDocument"</e></m></meta>
 	</class>
-	<class path="js.html.HTMLOptionsCollection" params="" file="/usr/lib/haxe/std/js/html/HTMLOptionsCollection.hx" extern="1">
+	<class path="js.html.HTMLOptionsCollection" params="" file="/usr/local/lib/haxe/std/js/html/HTMLOptionsCollection.hx" extern="1">
 		<extends path="js.html.HTMLCollection"/>
 		<selectedIndex public="1"><x path="Int"/></selectedIndex>
 		<add public="1" set="method">
@@ -6993,16 +7014,16 @@
 		</remove>
 		<meta><m n=":native"><e>"HTMLOptionsCollection"</e></m></meta>
 	</class>
-	<class path="js.html.HTMLPropertiesCollection" params="" file="/usr/lib/haxe/std/js/html/HTMLPropertiesCollection.hx" extern="1">
+	<class path="js.html.HTMLPropertiesCollection" params="" file="/usr/local/lib/haxe/std/js/html/HTMLPropertiesCollection.hx" extern="1">
 		<extends path="js.html.HTMLCollection"/>
 		<names public="1" set="null"><c path="js.html.DOMStringList"/></names>
 		<meta><m n=":native"><e>"HTMLPropertiesCollection"</e></m></meta>
 	</class>
-	<class path="js.html.HeadElement" params="" file="/usr/lib/haxe/std/js/html/HeadElement.hx" extern="1">
+	<class path="js.html.HeadElement" params="" file="/usr/local/lib/haxe/std/js/html/HeadElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<meta><m n=":native"><e>"HTMLHeadElement"</e></m></meta>
 	</class>
-	<class path="js.html.History" params="" file="/usr/lib/haxe/std/js/html/History.hx" extern="1">
+	<class path="js.html.History" params="" file="/usr/local/lib/haxe/std/js/html/History.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<state public="1" set="null"><d/></state>
 		<go public="1" set="method">
@@ -7041,7 +7062,7 @@
 		</replaceState>
 		<meta><m n=":native"><e>"History"</e></m></meta>
 	</class>
-	<typedef path="js.html.HitRegionOptions" params="" file="/usr/lib/haxe/std/js/html/HitRegionOptions.hx"><a>
+	<typedef path="js.html.HitRegionOptions" params="" file="/usr/local/lib/haxe/std/js/html/HitRegionOptions.hx"><a>
 	<id>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -7051,12 +7072,12 @@
 		<meta><m n=":optional"/></meta>
 	</control>
 </a></typedef>
-	<class path="js.html.HtmlElement" params="" file="/usr/lib/haxe/std/js/html/HtmlElement.hx" extern="1">
+	<class path="js.html.HtmlElement" params="" file="/usr/local/lib/haxe/std/js/html/HtmlElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<version public="1"><c path="String"/></version>
 		<meta><m n=":native"><e>"HTMLHtmlElement"</e></m></meta>
 	</class>
-	<class path="js.html.IFrameElement" params="" file="/usr/lib/haxe/std/js/html/IFrameElement.hx" extern="1">
+	<class path="js.html.IFrameElement" params="" file="/usr/local/lib/haxe/std/js/html/IFrameElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<src public="1"><c path="String"/></src>
 		<srcdoc public="1"><c path="String"/></srcdoc>
@@ -7076,7 +7097,7 @@
 		<getSVGDocument public="1" set="method"><f a=""><c path="js.html.HTMLDocument"/></f></getSVGDocument>
 		<meta><m n=":native"><e>"HTMLIFrameElement"</e></m></meta>
 	</class>
-	<class path="js.html.ImageElement" params="" file="/usr/lib/haxe/std/js/html/ImageElement.hx" extern="1">
+	<class path="js.html.ImageElement" params="" file="/usr/local/lib/haxe/std/js/html/ImageElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<alt public="1"><c path="String"/></alt>
 		<src public="1"><c path="String"/></src>
@@ -7102,7 +7123,7 @@
 		<y public="1" set="null"><x path="Int"/></y>
 		<meta><m n=":native"><e>"HTMLImageElement"</e></m></meta>
 	</class>
-	<class path="js.html.Image" params="" file="/usr/lib/haxe/std/js/html/Image.hx" extern="1">
+	<class path="js.html.Image" params="" file="/usr/local/lib/haxe/std/js/html/Image.hx" extern="1">
 		<extends path="js.html.ImageElement"/>
 		<new public="1" set="method">
 			<f a="?width:?height">
@@ -7114,7 +7135,7 @@
 		</new>
 		<meta><m n=":native"><e>"Image"</e></m></meta>
 	</class>
-	<class path="js.html.ImageData" params="" file="/usr/lib/haxe/std/js/html/ImageData.hx" extern="1">
+	<class path="js.html.ImageData" params="" file="/usr/local/lib/haxe/std/js/html/ImageData.hx" extern="1">
 		<width public="1" set="null"><x path="Int"/></width>
 		<height public="1" set="null"><x path="Int"/></height>
 		<data public="1" set="null"><c path="js.html.Uint8ClampedArray"/></data>
@@ -7137,7 +7158,7 @@
 		</new>
 		<meta><m n=":native"><e>"ImageData"</e></m></meta>
 	</class>
-	<class path="js.html.InputElement" params="" file="/usr/lib/haxe/std/js/html/InputElement.hx" extern="1">
+	<class path="js.html.InputElement" params="" file="/usr/local/lib/haxe/std/js/html/InputElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<accept public="1"><c path="String"/></accept>
 		<alt public="1"><c path="String"/></alt>
@@ -7233,7 +7254,7 @@
 		</setSelectionRange>
 		<meta><m n=":native"><e>"HTMLInputElement"</e></m></meta>
 	</class>
-	<class path="js.html.Int16Array" params="" file="/usr/lib/haxe/std/js/html/Int16Array.hx" extern="1">
+	<class path="js.html.Int16Array" params="" file="/usr/local/lib/haxe/std/js/html/Int16Array.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="2" line="30" static="1">
 			<x path="Int"/>
@@ -7302,7 +7323,7 @@
 		</new>
 		<meta><m n=":native"><e>"Int16Array"</e></m></meta>
 	</class>
-	<class path="js.html.Int32Array" params="" file="/usr/lib/haxe/std/js/html/Int32Array.hx" extern="1">
+	<class path="js.html.Int32Array" params="" file="/usr/local/lib/haxe/std/js/html/Int32Array.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="4" line="30" static="1">
 			<x path="Int"/>
@@ -7371,26 +7392,26 @@
 		</new>
 		<meta><m n=":native"><e>"Int32Array"</e></m></meta>
 	</class>
-	<class path="js.html.LIElement" params="" file="/usr/lib/haxe/std/js/html/LIElement.hx" extern="1">
+	<class path="js.html.LIElement" params="" file="/usr/local/lib/haxe/std/js/html/LIElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<value public="1"><x path="Int"/></value>
 		<type public="1"><c path="String"/></type>
 		<meta><m n=":native"><e>"HTMLLIElement"</e></m></meta>
 	</class>
-	<class path="js.html.LabelElement" params="" file="/usr/lib/haxe/std/js/html/LabelElement.hx" extern="1">
+	<class path="js.html.LabelElement" params="" file="/usr/local/lib/haxe/std/js/html/LabelElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<form public="1" set="null"><c path="js.html.FormElement"/></form>
 		<htmlFor public="1"><c path="String"/></htmlFor>
 		<control public="1" set="null"><c path="js.html.Element"/></control>
 		<meta><m n=":native"><e>"HTMLLabelElement"</e></m></meta>
 	</class>
-	<class path="js.html.LegendElement" params="" file="/usr/lib/haxe/std/js/html/LegendElement.hx" extern="1">
+	<class path="js.html.LegendElement" params="" file="/usr/local/lib/haxe/std/js/html/LegendElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<form public="1" set="null"><c path="js.html.FormElement"/></form>
 		<align public="1"><c path="String"/></align>
 		<meta><m n=":native"><e>"HTMLLegendElement"</e></m></meta>
 	</class>
-	<class path="js.html.LinkElement" params="" file="/usr/lib/haxe/std/js/html/LinkElement.hx" extern="1">
+	<class path="js.html.LinkElement" params="" file="/usr/local/lib/haxe/std/js/html/LinkElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<disabled public="1"><x path="Bool"/></disabled>
 		<href public="1"><c path="String"/></href>
@@ -7411,7 +7432,7 @@
 		<sheet public="1" set="null"><c path="js.html.StyleSheet"/></sheet>
 		<meta><m n=":native"><e>"HTMLLinkElement"</e></m></meta>
 	</class>
-	<class path="js.html.Location" params="" file="/usr/lib/haxe/std/js/html/Location.hx" extern="1">
+	<class path="js.html.Location" params="" file="/usr/local/lib/haxe/std/js/html/Location.hx" extern="1">
 		<href public="1"><c path="String"/></href>
 		<origin public="1" set="null"><c path="String"/></origin>
 		<protocol public="1"><c path="String"/></protocol>
@@ -7447,13 +7468,13 @@
 		</reload>
 		<meta><m n=":native"><e>"Location"</e></m></meta>
 	</class>
-	<class path="js.html.MapElement" params="" file="/usr/lib/haxe/std/js/html/MapElement.hx" extern="1">
+	<class path="js.html.MapElement" params="" file="/usr/local/lib/haxe/std/js/html/MapElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<name public="1"><c path="String"/></name>
 		<areas public="1" set="null"><c path="js.html.HTMLCollection"/></areas>
 		<meta><m n=":native"><e>"HTMLMapElement"</e></m></meta>
 	</class>
-	<class path="js.html.MediaError" params="" file="/usr/lib/haxe/std/js/html/MediaError.hx" extern="1">
+	<class path="js.html.MediaError" params="" file="/usr/local/lib/haxe/std/js/html/MediaError.hx" extern="1">
 		<MEDIA_ERR_ABORTED public="1" get="inline" set="null" expr="1" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>1</e></m></meta>
@@ -7473,12 +7494,12 @@
 		<code public="1" set="null"><x path="Int"/></code>
 		<meta><m n=":native"><e>"MediaError"</e></m></meta>
 	</class>
-	<class path="js.html.MediaKeyError" params="" file="/usr/lib/haxe/std/js/html/MediaKeyError.hx" extern="1">
+	<class path="js.html.MediaKeyError" params="" file="/usr/local/lib/haxe/std/js/html/MediaKeyError.hx" extern="1">
 		<extends path="js.html.Event"/>
 		<systemCode public="1" set="null"><x path="Int"/></systemCode>
 		<meta><m n=":native"><e>"MediaKeyError"</e></m></meta>
 	</class>
-	<class path="js.html.MediaKeySession" params="" file="/usr/lib/haxe/std/js/html/MediaKeySession.hx" extern="1">
+	<class path="js.html.MediaKeySession" params="" file="/usr/local/lib/haxe/std/js/html/MediaKeySession.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<error public="1" set="null"><c path="js.html.MediaKeyError"/></error>
 		<keySystem public="1" set="null"><c path="String"/></keySystem>
@@ -7509,12 +7530,12 @@
 		<getUsableKeyIds public="1" set="method"><f a=""><c path="js.Promise"><c path="Array"><c path="js.html.ArrayBuffer"/></c></c></f></getUsableKeyIds>
 		<meta><m n=":native"><e>"MediaKeySession"</e></m></meta>
 	</class>
-	<class path="js.html.MediaKeySystemAccess" params="" file="/usr/lib/haxe/std/js/html/MediaKeySystemAccess.hx" extern="1">
+	<class path="js.html.MediaKeySystemAccess" params="" file="/usr/local/lib/haxe/std/js/html/MediaKeySystemAccess.hx" extern="1">
 		<keySystem public="1" set="null"><c path="String"/></keySystem>
 		<createMediaKeys public="1" set="method"><f a=""><c path="js.Promise"><c path="js.html.MediaKeys"/></c></f></createMediaKeys>
 		<meta><m n=":native"><e>"MediaKeySystemAccess"</e></m></meta>
 	</class>
-	<typedef path="js.html.MediaKeySystemOptions" params="" file="/usr/lib/haxe/std/js/html/MediaKeySystemOptions.hx"><a>
+	<typedef path="js.html.MediaKeySystemOptions" params="" file="/usr/local/lib/haxe/std/js/html/MediaKeySystemOptions.hx"><a>
 	<videoType>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -7544,7 +7565,7 @@
 		<meta><m n=":optional"/></meta>
 	</audioCapability>
 </a></typedef>
-	<class path="js.html.MediaKeys" params="" file="/usr/lib/haxe/std/js/html/MediaKeys.hx" extern="1">
+	<class path="js.html.MediaKeys" params="" file="/usr/local/lib/haxe/std/js/html/MediaKeys.hx" extern="1">
 		<keySystem public="1" set="null"><c path="String"/></keySystem>
 		<createSession public="1" set="method">
 			<f a="?sessionType" v="&quot;temporary&quot;">
@@ -7563,7 +7584,7 @@
 </f></setServerCertificate>
 		<meta><m n=":native"><e>"MediaKeys"</e></m></meta>
 	</class>
-	<class path="js.html.MediaList" params="" file="/usr/lib/haxe/std/js/html/MediaList.hx" extern="1">
+	<class path="js.html.MediaList" params="" file="/usr/local/lib/haxe/std/js/html/MediaList.hx" extern="1">
 		<mediaText public="1"><c path="String"/></mediaText>
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
@@ -7586,7 +7607,7 @@
 		</appendMedium>
 		<meta><m n=":native"><e>"MediaList"</e></m></meta>
 	</class>
-	<class path="js.html.MediaQueryList" params="" file="/usr/lib/haxe/std/js/html/MediaQueryList.hx" extern="1">
+	<class path="js.html.MediaQueryList" params="" file="/usr/local/lib/haxe/std/js/html/MediaQueryList.hx" extern="1">
 		<media public="1" set="null"><c path="String"/></media>
 		<matches public="1" set="null"><x path="Bool"/></matches>
 		<addListener public="1" set="method"><f a="listener">
@@ -7605,22 +7626,22 @@
 </f></removeListener>
 		<meta><m n=":native"><e>"MediaQueryList"</e></m></meta>
 	</class>
-	<abstract path="js.html.MediaWaitingFor" params="" file="/usr/lib/haxe/std/js/html/MediaWaitingFor.hx">
+	<abstract path="js.html.MediaWaitingFor" params="" file="/usr/local/lib/haxe/std/js/html/MediaWaitingFor.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._MediaWaitingFor.MediaWaitingFor_Impl_" params="" file="/usr/lib/haxe/std/js/html/MediaWaitingFor.hx" private="1" module="js.html.MediaWaitingFor"><meta>
+		<impl><class path="js.html._MediaWaitingFor.MediaWaitingFor_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/MediaWaitingFor.hx" private="1" module="js.html.MediaWaitingFor"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.MenuElement" params="" file="/usr/lib/haxe/std/js/html/MenuElement.hx" extern="1">
+	<class path="js.html.MenuElement" params="" file="/usr/local/lib/haxe/std/js/html/MenuElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<type public="1"><c path="String"/></type>
 		<label public="1"><c path="String"/></label>
 		<compact public="1"><x path="Bool"/></compact>
 		<meta><m n=":native"><e>"HTMLMenuElement"</e></m></meta>
 	</class>
-	<class path="js.html.MetaElement" params="" file="/usr/lib/haxe/std/js/html/MetaElement.hx" extern="1">
+	<class path="js.html.MetaElement" params="" file="/usr/local/lib/haxe/std/js/html/MetaElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<name public="1"><c path="String"/></name>
 		<httpEquiv public="1"><c path="String"/></httpEquiv>
@@ -7628,7 +7649,7 @@
 		<scheme public="1"><c path="String"/></scheme>
 		<meta><m n=":native"><e>"HTMLMetaElement"</e></m></meta>
 	</class>
-	<class path="js.html.MeterElement" params="" file="/usr/lib/haxe/std/js/html/MeterElement.hx" extern="1">
+	<class path="js.html.MeterElement" params="" file="/usr/local/lib/haxe/std/js/html/MeterElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<value public="1"><x path="Float"/></value>
 		<min public="1"><x path="Float"/></min>
@@ -7638,14 +7659,14 @@
 		<optimum public="1"><x path="Float"/></optimum>
 		<meta><m n=":native"><e>"HTMLMeterElement"</e></m></meta>
 	</class>
-	<class path="js.html.MimeType" params="" file="/usr/lib/haxe/std/js/html/MimeType.hx" extern="1">
+	<class path="js.html.MimeType" params="" file="/usr/local/lib/haxe/std/js/html/MimeType.hx" extern="1">
 		<description public="1" set="null"><c path="String"/></description>
 		<enabledPlugin public="1" set="null"><c path="js.html.Plugin"/></enabledPlugin>
 		<suffixes public="1" set="null"><c path="String"/></suffixes>
 		<type public="1" set="null"><c path="String"/></type>
 		<meta><m n=":native"><e>"MimeType"</e></m></meta>
 	</class>
-	<class path="js.html.MimeTypeArray" params="" file="/usr/lib/haxe/std/js/html/MimeTypeArray.hx" extern="1">
+	<class path="js.html.MimeTypeArray" params="" file="/usr/local/lib/haxe/std/js/html/MimeTypeArray.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -7657,13 +7678,13 @@
 </f></namedItem>
 		<meta><m n=":native"><e>"MimeTypeArray"</e></m></meta>
 	</class>
-	<class path="js.html.ModElement" params="" file="/usr/lib/haxe/std/js/html/ModElement.hx" extern="1">
+	<class path="js.html.ModElement" params="" file="/usr/local/lib/haxe/std/js/html/ModElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<cite public="1"><c path="String"/></cite>
 		<dateTime public="1"><c path="String"/></dateTime>
 		<meta><m n=":native"><e>"HTMLModElement"</e></m></meta>
 	</class>
-	<class path="js.html.NamedNodeMap" params="" file="/usr/lib/haxe/std/js/html/NamedNodeMap.hx" extern="1">
+	<class path="js.html.NamedNodeMap" params="" file="/usr/local/lib/haxe/std/js/html/NamedNodeMap.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<getNamedItem public="1" set="method"><f a="name">
 	<c path="String"/>
@@ -7709,7 +7730,7 @@
 		</removeNamedItemNS>
 		<meta><m n=":native"><e>"NamedNodeMap"</e></m></meta>
 	</class>
-	<class path="js.html.Navigator" params="" file="/usr/lib/haxe/std/js/html/Navigator.hx" extern="1">
+	<class path="js.html.Navigator" params="" file="/usr/local/lib/haxe/std/js/html/Navigator.hx" extern="1">
 		<mimeTypes public="1" set="null"><c path="js.html.MimeTypeArray"/></mimeTypes>
 		<plugins public="1" set="null"><c path="js.html.PluginArray"/></plugins>
 		<doNotTrack public="1" set="null"><c path="String"/></doNotTrack>
@@ -7792,7 +7813,7 @@
 		<taintEnabled public="1" set="method"><f a=""><x path="Bool"/></f></taintEnabled>
 		<meta><m n=":native"><e>"Navigator"</e></m></meta>
 	</class>
-	<class path="js.html.NodeFilter" params="" file="/usr/lib/haxe/std/js/html/NodeFilter.hx" extern="1">
+	<class path="js.html.NodeFilter" params="" file="/usr/local/lib/haxe/std/js/html/NodeFilter.hx" extern="1">
 		<FILTER_ACCEPT public="1" get="inline" set="null" expr="1" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>1</e></m></meta>
@@ -7863,7 +7884,7 @@
 </f></acceptNode>
 		<meta><m n=":native"><e>"NodeFilter"</e></m></meta>
 	</class>
-	<class path="js.html.NodeIterator" params="" file="/usr/lib/haxe/std/js/html/NodeIterator.hx" extern="1">
+	<class path="js.html.NodeIterator" params="" file="/usr/local/lib/haxe/std/js/html/NodeIterator.hx" extern="1">
 		<root public="1" set="null"><c path="js.html.Node"/></root>
 		<referenceNode public="1" set="null"><c path="js.html.Node"/></referenceNode>
 		<pointerBeforeReferenceNode public="1" set="null"><x path="Bool"/></pointerBeforeReferenceNode>
@@ -7880,7 +7901,7 @@
 		<detach public="1" set="method"><f a=""><x path="Void"/></f></detach>
 		<meta><m n=":native"><e>"NodeIterator"</e></m></meta>
 	</class>
-	<class path="js.html.NodeList" params="" file="/usr/lib/haxe/std/js/html/NodeList.hx" extern="1">
+	<class path="js.html.NodeList" params="" file="/usr/local/lib/haxe/std/js/html/NodeList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -7888,7 +7909,7 @@
 </f></item>
 		<meta><m n=":native"><e>"NodeList"</e></m></meta>
 	</class>
-	<class path="js.html.OListElement" params="" file="/usr/lib/haxe/std/js/html/OListElement.hx" extern="1">
+	<class path="js.html.OListElement" params="" file="/usr/local/lib/haxe/std/js/html/OListElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<reversed public="1"><x path="Bool"/></reversed>
 		<start public="1"><x path="Int"/></start>
@@ -7896,7 +7917,7 @@
 		<compact public="1"><x path="Bool"/></compact>
 		<meta><m n=":native"><e>"HTMLOListElement"</e></m></meta>
 	</class>
-	<class path="js.html.ObjectElement" params="" file="/usr/lib/haxe/std/js/html/ObjectElement.hx" extern="1">
+	<class path="js.html.ObjectElement" params="" file="/usr/local/lib/haxe/std/js/html/ObjectElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<data public="1"><c path="String"/></data>
 		<type public="1"><c path="String"/></type>
@@ -7929,13 +7950,13 @@
 		<getSVGDocument public="1" set="method"><f a=""><c path="js.html.HTMLDocument"/></f></getSVGDocument>
 		<meta><m n=":native"><e>"HTMLObjectElement"</e></m></meta>
 	</class>
-	<class path="js.html.OptGroupElement" params="" file="/usr/lib/haxe/std/js/html/OptGroupElement.hx" extern="1">
+	<class path="js.html.OptGroupElement" params="" file="/usr/local/lib/haxe/std/js/html/OptGroupElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<disabled public="1"><x path="Bool"/></disabled>
 		<label public="1"><c path="String"/></label>
 		<meta><m n=":native"><e>"HTMLOptGroupElement"</e></m></meta>
 	</class>
-	<class path="js.html.OptionElement" params="" file="/usr/lib/haxe/std/js/html/OptionElement.hx" extern="1">
+	<class path="js.html.OptionElement" params="" file="/usr/local/lib/haxe/std/js/html/OptionElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<disabled public="1"><x path="Bool"/></disabled>
 		<form public="1" set="null"><c path="js.html.FormElement"/></form>
@@ -7947,7 +7968,7 @@
 		<index public="1" set="null"><x path="Int"/></index>
 		<meta><m n=":native"><e>"HTMLOptionElement"</e></m></meta>
 	</class>
-	<class path="js.html.OutputElement" params="" file="/usr/lib/haxe/std/js/html/OutputElement.hx" extern="1">
+	<class path="js.html.OutputElement" params="" file="/usr/local/lib/haxe/std/js/html/OutputElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<htmlFor public="1" set="null"><c path="js.html.DOMSettableTokenList"/></htmlFor>
 		<form public="1" set="null"><c path="js.html.FormElement"/></form>
@@ -7965,12 +7986,12 @@
 </f></setCustomValidity>
 		<meta><m n=":native"><e>"HTMLOutputElement"</e></m></meta>
 	</class>
-	<class path="js.html.ParagraphElement" params="" file="/usr/lib/haxe/std/js/html/ParagraphElement.hx" extern="1">
+	<class path="js.html.ParagraphElement" params="" file="/usr/local/lib/haxe/std/js/html/ParagraphElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<align public="1"><c path="String"/></align>
 		<meta><m n=":native"><e>"HTMLParagraphElement"</e></m></meta>
 	</class>
-	<class path="js.html.ParamElement" params="" file="/usr/lib/haxe/std/js/html/ParamElement.hx" extern="1">
+	<class path="js.html.ParamElement" params="" file="/usr/local/lib/haxe/std/js/html/ParamElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<name public="1"><c path="String"/></name>
 		<value public="1"><c path="String"/></value>
@@ -7978,7 +7999,7 @@
 		<valueType public="1"><c path="String"/></valueType>
 		<meta><m n=":native"><e>"HTMLParamElement"</e></m></meta>
 	</class>
-	<class path="js.html.Path2D" params="" file="/usr/lib/haxe/std/js/html/Path2D.hx" extern="1">
+	<class path="js.html.Path2D" params="" file="/usr/local/lib/haxe/std/js/html/Path2D.hx" extern="1">
 		<addPath public="1" set="method"><f a="path:?transformation">
 	<c path="js.html.Path2D"/>
 	<c path="js.html.svg.Matrix"/>
@@ -8064,13 +8085,13 @@
 		</new>
 		<meta><m n=":native"><e>"Path2D"</e></m></meta>
 	</class>
-	<class path="js.html.Performance" params="" file="/usr/lib/haxe/std/js/html/Performance.hx" extern="1">
+	<class path="js.html.Performance" params="" file="/usr/local/lib/haxe/std/js/html/Performance.hx" extern="1">
 		<timing public="1" set="null"><c path="js.html.PerformanceTiming"/></timing>
 		<navigation public="1" set="null"><c path="js.html.PerformanceNavigation"/></navigation>
 		<now public="1" set="method"><f a=""><x path="Float"/></f></now>
 		<meta><m n=":native"><e>"Performance"</e></m></meta>
 	</class>
-	<class path="js.html.PerformanceNavigation" params="" file="/usr/lib/haxe/std/js/html/PerformanceNavigation.hx" extern="1">
+	<class path="js.html.PerformanceNavigation" params="" file="/usr/local/lib/haxe/std/js/html/PerformanceNavigation.hx" extern="1">
 		<TYPE_NAVIGATE public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -8091,7 +8112,7 @@
 		<redirectCount public="1" set="null"><x path="Int"/></redirectCount>
 		<meta><m n=":native"><e>"PerformanceNavigation"</e></m></meta>
 	</class>
-	<class path="js.html.PerformanceTiming" params="" file="/usr/lib/haxe/std/js/html/PerformanceTiming.hx" extern="1">
+	<class path="js.html.PerformanceTiming" params="" file="/usr/local/lib/haxe/std/js/html/PerformanceTiming.hx" extern="1">
 		<navigationStart public="1" set="null"><x path="Int"/></navigationStart>
 		<unloadEventStart public="1" set="null"><x path="Int"/></unloadEventStart>
 		<unloadEventEnd public="1" set="null"><x path="Int"/></unloadEventEnd>
@@ -8114,11 +8135,11 @@
 		<loadEventEnd public="1" set="null"><x path="Int"/></loadEventEnd>
 		<meta><m n=":native"><e>"PerformanceTiming"</e></m></meta>
 	</class>
-	<class path="js.html.PictureElement" params="" file="/usr/lib/haxe/std/js/html/PictureElement.hx" extern="1">
+	<class path="js.html.PictureElement" params="" file="/usr/local/lib/haxe/std/js/html/PictureElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<meta><m n=":native"><e>"HTMLPictureElement"</e></m></meta>
 	</class>
-	<class path="js.html.Plugin" params="" file="/usr/lib/haxe/std/js/html/Plugin.hx" extern="1">
+	<class path="js.html.Plugin" params="" file="/usr/local/lib/haxe/std/js/html/Plugin.hx" extern="1">
 		<description public="1" set="null"><c path="String"/></description>
 		<filename public="1" set="null"><c path="String"/></filename>
 		<version public="1" set="null"><c path="String"/></version>
@@ -8134,7 +8155,7 @@
 </f></namedItem>
 		<meta><m n=":native"><e>"Plugin"</e></m></meta>
 	</class>
-	<class path="js.html.PluginArray" params="" file="/usr/lib/haxe/std/js/html/PluginArray.hx" extern="1">
+	<class path="js.html.PluginArray" params="" file="/usr/local/lib/haxe/std/js/html/PluginArray.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -8153,12 +8174,12 @@
 		</refresh>
 		<meta><m n=":native"><e>"PluginArray"</e></m></meta>
 	</class>
-	<class path="js.html.Position" params="" file="/usr/lib/haxe/std/js/html/Position.hx" extern="1">
+	<class path="js.html.Position" params="" file="/usr/local/lib/haxe/std/js/html/Position.hx" extern="1">
 		<coords public="1" set="null"><c path="js.html.Coordinates"/></coords>
 		<timestamp public="1" set="null"><x path="Int"/></timestamp>
 		<meta><m n=":native"><e>"Position"</e></m></meta>
 	</class>
-	<class path="js.html.PositionError" params="" file="/usr/lib/haxe/std/js/html/PositionError.hx" extern="1">
+	<class path="js.html.PositionError" params="" file="/usr/local/lib/haxe/std/js/html/PositionError.hx" extern="1">
 		<PERMISSION_DENIED public="1" get="inline" set="null" expr="1" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>1</e></m></meta>
@@ -8175,7 +8196,7 @@
 		<message public="1" set="null"><c path="String"/></message>
 		<meta><m n=":native"><e>"PositionError"</e></m></meta>
 	</class>
-	<typedef path="js.html.PositionOptions" params="" file="/usr/lib/haxe/std/js/html/PositionOptions.hx"><a>
+	<typedef path="js.html.PositionOptions" params="" file="/usr/local/lib/haxe/std/js/html/PositionOptions.hx"><a>
 	<timeout>
 		<t path="Null"><x path="Int"/></t>
 		<meta><m n=":optional"/></meta>
@@ -8189,29 +8210,29 @@
 		<meta><m n=":optional"/></meta>
 	</enableHighAccuracy>
 </a></typedef>
-	<class path="js.html.PreElement" params="" file="/usr/lib/haxe/std/js/html/PreElement.hx" extern="1">
+	<class path="js.html.PreElement" params="" file="/usr/local/lib/haxe/std/js/html/PreElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<width public="1"><x path="Int"/></width>
 		<meta><m n=":native"><e>"HTMLPreElement"</e></m></meta>
 	</class>
-	<class path="js.html.ProcessingInstruction" params="" file="/usr/lib/haxe/std/js/html/ProcessingInstruction.hx" extern="1">
+	<class path="js.html.ProcessingInstruction" params="" file="/usr/local/lib/haxe/std/js/html/ProcessingInstruction.hx" extern="1">
 		<extends path="js.html.CharacterData"/>
 		<target public="1" set="null"><c path="String"/></target>
 		<meta><m n=":native"><e>"ProcessingInstruction"</e></m></meta>
 	</class>
-	<class path="js.html.ProgressElement" params="" file="/usr/lib/haxe/std/js/html/ProgressElement.hx" extern="1">
+	<class path="js.html.ProgressElement" params="" file="/usr/local/lib/haxe/std/js/html/ProgressElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<value public="1"><x path="Float"/></value>
 		<max public="1"><x path="Float"/></max>
 		<position public="1" set="null"><x path="Float"/></position>
 		<meta><m n=":native"><e>"HTMLProgressElement"</e></m></meta>
 	</class>
-	<class path="js.html.QuoteElement" params="" file="/usr/lib/haxe/std/js/html/QuoteElement.hx" extern="1">
+	<class path="js.html.QuoteElement" params="" file="/usr/local/lib/haxe/std/js/html/QuoteElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<cite public="1"><c path="String"/></cite>
 		<meta><m n=":native"><e>"HTMLQuoteElement"</e></m></meta>
 	</class>
-	<class path="js.html.Range" params="" file="/usr/lib/haxe/std/js/html/Range.hx" extern="1">
+	<class path="js.html.Range" params="" file="/usr/local/lib/haxe/std/js/html/Range.hx" extern="1">
 		<START_TO_START public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -8373,7 +8394,7 @@
 		</new>
 		<meta><m n=":native"><e>"Range"</e></m></meta>
 	</class>
-	<class path="js.html.Screen" params="" file="/usr/lib/haxe/std/js/html/Screen.hx" extern="1">
+	<class path="js.html.Screen" params="" file="/usr/local/lib/haxe/std/js/html/Screen.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<availWidth public="1" set="null"><x path="Int"/></availWidth>
 		<availHeight public="1" set="null"><x path="Int"/></availHeight>
@@ -8387,7 +8408,7 @@
 		<availLeft public="1" set="null"><x path="Int"/></availLeft>
 		<meta><m n=":native"><e>"Screen"</e></m></meta>
 	</class>
-	<class path="js.html.ScriptElement" params="" file="/usr/lib/haxe/std/js/html/ScriptElement.hx" extern="1">
+	<class path="js.html.ScriptElement" params="" file="/usr/local/lib/haxe/std/js/html/ScriptElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<src public="1"><c path="String"/></src>
 		<type public="1"><c path="String"/></type>
@@ -8400,7 +8421,7 @@
 		<htmlFor public="1"><c path="String"/></htmlFor>
 		<meta><m n=":native"><e>"HTMLScriptElement"</e></m></meta>
 	</class>
-	<typedef path="js.html.ScrollIntoViewOptions" params="" file="/usr/lib/haxe/std/js/html/ScrollIntoViewOptions.hx"><a>
+	<typedef path="js.html.ScrollIntoViewOptions" params="" file="/usr/local/lib/haxe/std/js/html/ScrollIntoViewOptions.hx"><a>
 	<block>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -8410,11 +8431,11 @@
 		<meta><m n=":optional"/></meta>
 	</behavior>
 </a></typedef>
-	<typedef path="js.html.ScrollOptions" params="" file="/usr/lib/haxe/std/js/html/ScrollOptions.hx"><a><behavior>
+	<typedef path="js.html.ScrollOptions" params="" file="/usr/local/lib/haxe/std/js/html/ScrollOptions.hx"><a><behavior>
 	<t path="Null"><d/></t>
 	<meta><m n=":optional"/></meta>
 </behavior></a></typedef>
-	<typedef path="js.html.ScrollToOptions" params="" file="/usr/lib/haxe/std/js/html/ScrollToOptions.hx"><a>
+	<typedef path="js.html.ScrollToOptions" params="" file="/usr/local/lib/haxe/std/js/html/ScrollToOptions.hx"><a>
 	<top>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -8428,7 +8449,7 @@
 		<meta><m n=":optional"/></meta>
 	</behavior>
 </a></typedef>
-	<class path="js.html.SelectElement" params="" file="/usr/lib/haxe/std/js/html/SelectElement.hx" extern="1">
+	<class path="js.html.SelectElement" params="" file="/usr/local/lib/haxe/std/js/html/SelectElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<autofocus public="1"><x path="Bool"/></autofocus>
 		<disabled public="1"><x path="Bool"/></disabled>
@@ -8475,7 +8496,7 @@
 </f></setCustomValidity>
 		<meta><m n=":native"><e>"HTMLSelectElement"</e></m></meta>
 	</class>
-	<class path="js.html.Selection" params="" file="/usr/lib/haxe/std/js/html/Selection.hx" extern="1">
+	<class path="js.html.Selection" params="" file="/usr/local/lib/haxe/std/js/html/Selection.hx" extern="1">
 		<anchorNode public="1" set="null"><c path="js.html.Node"/></anchorNode>
 		<anchorOffset public="1" set="null"><x path="Int"/></anchorOffset>
 		<focusNode public="1" set="null"><c path="js.html.Node"/></focusNode>
@@ -8561,28 +8582,28 @@
 		</modify>
 		<meta><m n=":native"><e>"Selection"</e></m></meta>
 	</class>
-	<abstract path="js.html.SelectionMode" params="" file="/usr/lib/haxe/std/js/html/SelectionMode.hx">
+	<abstract path="js.html.SelectionMode" params="" file="/usr/local/lib/haxe/std/js/html/SelectionMode.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._SelectionMode.SelectionMode_Impl_" params="" file="/usr/lib/haxe/std/js/html/SelectionMode.hx" private="1" module="js.html.SelectionMode"><meta>
+		<impl><class path="js.html._SelectionMode.SelectionMode_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/SelectionMode.hx" private="1" module="js.html.SelectionMode"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<abstract path="js.html.SessionType" params="" file="/usr/lib/haxe/std/js/html/SessionType.hx">
+	<abstract path="js.html.SessionType" params="" file="/usr/local/lib/haxe/std/js/html/SessionType.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._SessionType.SessionType_Impl_" params="" file="/usr/lib/haxe/std/js/html/SessionType.hx" private="1" module="js.html.SessionType"><meta>
+		<impl><class path="js.html._SessionType.SessionType_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/SessionType.hx" private="1" module="js.html.SessionType"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.ShadowElement" params="" file="/usr/lib/haxe/std/js/html/ShadowElement.hx" extern="1">
+	<class path="js.html.ShadowElement" params="" file="/usr/local/lib/haxe/std/js/html/ShadowElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<olderShadowRoot public="1" set="null"><c path="js.html.ShadowRoot"/></olderShadowRoot>
 		<meta><m n=":native"><e>"HTMLShadowElement"</e></m></meta>
 	</class>
-	<class path="js.html.ShadowRoot" params="" file="/usr/lib/haxe/std/js/html/ShadowRoot.hx" extern="1">
+	<class path="js.html.ShadowRoot" params="" file="/usr/local/lib/haxe/std/js/html/ShadowRoot.hx" extern="1">
 		<extends path="js.html.DocumentFragment"/>
 		<innerHTML public="1"><c path="String"/></innerHTML>
 		<host public="1" set="null"><c path="js.html.Element"/></host>
@@ -8604,7 +8625,7 @@
 </f></getElementsByClassName>
 		<meta><m n=":native"><e>"ShadowRoot"</e></m></meta>
 	</class>
-	<class path="js.html.SourceElement" params="" file="/usr/lib/haxe/std/js/html/SourceElement.hx" extern="1">
+	<class path="js.html.SourceElement" params="" file="/usr/local/lib/haxe/std/js/html/SourceElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<src public="1"><c path="String"/></src>
 		<type public="1"><c path="String"/></type>
@@ -8613,11 +8634,11 @@
 		<media public="1"><c path="String"/></media>
 		<meta><m n=":native"><e>"HTMLSourceElement"</e></m></meta>
 	</class>
-	<class path="js.html.SpanElement" params="" file="/usr/lib/haxe/std/js/html/SpanElement.hx" extern="1">
+	<class path="js.html.SpanElement" params="" file="/usr/local/lib/haxe/std/js/html/SpanElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<meta><m n=":native"><e>"HTMLSpanElement"</e></m></meta>
 	</class>
-	<class path="js.html.SpeechSynthesis" params="" file="/usr/lib/haxe/std/js/html/SpeechSynthesis.hx" extern="1">
+	<class path="js.html.SpeechSynthesis" params="" file="/usr/local/lib/haxe/std/js/html/SpeechSynthesis.hx" extern="1">
 		<pending public="1" set="null"><x path="Bool"/></pending>
 		<speaking public="1" set="null"><x path="Bool"/></speaking>
 		<paused public="1" set="null"><x path="Bool"/></paused>
@@ -8631,7 +8652,7 @@
 		<getVoices public="1" set="method"><f a=""><c path="Array"><c path="js.html.SpeechSynthesisVoice"/></c></f></getVoices>
 		<meta><m n=":native"><e>"SpeechSynthesis"</e></m></meta>
 	</class>
-	<class path="js.html.SpeechSynthesisUtterance" params="" file="/usr/lib/haxe/std/js/html/SpeechSynthesisUtterance.hx" extern="1">
+	<class path="js.html.SpeechSynthesisUtterance" params="" file="/usr/local/lib/haxe/std/js/html/SpeechSynthesisUtterance.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<text public="1"><c path="String"/></text>
 		<lang public="1"><c path="String"/></lang>
@@ -8659,7 +8680,7 @@
 		</new>
 		<meta><m n=":native"><e>"SpeechSynthesisUtterance"</e></m></meta>
 	</class>
-	<class path="js.html.SpeechSynthesisVoice" params="" file="/usr/lib/haxe/std/js/html/SpeechSynthesisVoice.hx" extern="1">
+	<class path="js.html.SpeechSynthesisVoice" params="" file="/usr/local/lib/haxe/std/js/html/SpeechSynthesisVoice.hx" extern="1">
 		<voiceURI public="1" set="null"><c path="String"/></voiceURI>
 		<name public="1" set="null"><c path="String"/></name>
 		<lang public="1" set="null"><c path="String"/></lang>
@@ -8670,7 +8691,7 @@
 		</default_>
 		<meta><m n=":native"><e>"SpeechSynthesisVoice"</e></m></meta>
 	</class>
-	<class path="js.html.Storage" params="" file="/usr/lib/haxe/std/js/html/Storage.hx" extern="1">
+	<class path="js.html.Storage" params="" file="/usr/local/lib/haxe/std/js/html/Storage.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<key public="1" set="method">
 			<f a="index">
@@ -8707,7 +8728,7 @@
 		</clear>
 		<meta><m n=":native"><e>"Storage"</e></m></meta>
 	</class>
-	<class path="js.html.StyleElement" params="" file="/usr/lib/haxe/std/js/html/StyleElement.hx" extern="1">
+	<class path="js.html.StyleElement" params="" file="/usr/local/lib/haxe/std/js/html/StyleElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<disabled public="1"><x path="Bool"/></disabled>
 		<media public="1"><c path="String"/></media>
@@ -8716,7 +8737,7 @@
 		<sheet public="1" set="null"><c path="js.html.StyleSheet"/></sheet>
 		<meta><m n=":native"><e>"HTMLStyleElement"</e></m></meta>
 	</class>
-	<class path="js.html.StyleSheetList" params="" file="/usr/lib/haxe/std/js/html/StyleSheetList.hx" extern="1">
+	<class path="js.html.StyleSheetList" params="" file="/usr/local/lib/haxe/std/js/html/StyleSheetList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -8724,12 +8745,12 @@
 </f></item>
 		<meta><m n=":native"><e>"StyleSheetList"</e></m></meta>
 	</class>
-	<class path="js.html.TableCaptionElement" params="" file="/usr/lib/haxe/std/js/html/TableCaptionElement.hx" extern="1">
+	<class path="js.html.TableCaptionElement" params="" file="/usr/local/lib/haxe/std/js/html/TableCaptionElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<align public="1"><c path="String"/></align>
 		<meta><m n=":native"><e>"HTMLTableCaptionElement"</e></m></meta>
 	</class>
-	<class path="js.html.TableCellElement" params="" file="/usr/lib/haxe/std/js/html/TableCellElement.hx" extern="1">
+	<class path="js.html.TableCellElement" params="" file="/usr/local/lib/haxe/std/js/html/TableCellElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<colSpan public="1"><x path="Int"/></colSpan>
 		<rowSpan public="1"><x path="Int"/></rowSpan>
@@ -8748,7 +8769,7 @@
 		<bgColor public="1"><c path="String"/></bgColor>
 		<meta><m n=":native"><e>"HTMLTableCellElement"</e></m></meta>
 	</class>
-	<class path="js.html.TableColElement" params="" file="/usr/lib/haxe/std/js/html/TableColElement.hx" extern="1">
+	<class path="js.html.TableColElement" params="" file="/usr/local/lib/haxe/std/js/html/TableColElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<span public="1"><x path="Int"/></span>
 		<align public="1"><c path="String"/></align>
@@ -8758,7 +8779,7 @@
 		<width public="1"><c path="String"/></width>
 		<meta><m n=":native"><e>"HTMLTableColElement"</e></m></meta>
 	</class>
-	<class path="js.html.TableElement" params="" file="/usr/lib/haxe/std/js/html/TableElement.hx" extern="1">
+	<class path="js.html.TableElement" params="" file="/usr/local/lib/haxe/std/js/html/TableElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<caption public="1"><c path="js.html.TableCaptionElement"/></caption>
 		<tHead public="1"><c path="js.html.TableSectionElement"/></tHead>
@@ -8798,7 +8819,7 @@
 		</deleteRow>
 		<meta><m n=":native"><e>"HTMLTableElement"</e></m></meta>
 	</class>
-	<class path="js.html.TableRowElement" params="" file="/usr/lib/haxe/std/js/html/TableRowElement.hx" extern="1">
+	<class path="js.html.TableRowElement" params="" file="/usr/local/lib/haxe/std/js/html/TableRowElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<rowIndex public="1" set="null"><x path="Int"/></rowIndex>
 		<sectionRowIndex public="1" set="null"><x path="Int"/></sectionRowIndex>
@@ -8825,7 +8846,7 @@
 		</deleteCell>
 		<meta><m n=":native"><e>"HTMLTableRowElement"</e></m></meta>
 	</class>
-	<class path="js.html.TableSectionElement" params="" file="/usr/lib/haxe/std/js/html/TableSectionElement.hx" extern="1">
+	<class path="js.html.TableSectionElement" params="" file="/usr/local/lib/haxe/std/js/html/TableSectionElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<rows public="1" set="null"><c path="js.html.HTMLCollection"/></rows>
 		<align public="1"><c path="String"/></align>
@@ -8849,7 +8870,7 @@
 		</deleteRow>
 		<meta><m n=":native"><e>"HTMLTableSectionElement"</e></m></meta>
 	</class>
-	<class path="js.html.TextAreaElement" params="" file="/usr/lib/haxe/std/js/html/TextAreaElement.hx" extern="1">
+	<class path="js.html.TextAreaElement" params="" file="/usr/local/lib/haxe/std/js/html/TextAreaElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<autofocus public="1"><x path="Bool"/></autofocus>
 		<cols public="1"><x path="Int"/></cols>
@@ -8907,11 +8928,11 @@
 		</setSelectionRange>
 		<meta><m n=":native"><e>"HTMLTextAreaElement"</e></m></meta>
 	</class>
-	<class path="js.html.TextMetrics" params="" file="/usr/lib/haxe/std/js/html/TextMetrics.hx" extern="1">
+	<class path="js.html.TextMetrics" params="" file="/usr/local/lib/haxe/std/js/html/TextMetrics.hx" extern="1">
 		<width public="1" set="null"><x path="Float"/></width>
 		<meta><m n=":native"><e>"TextMetrics"</e></m></meta>
 	</class>
-	<class path="js.html.TextTrack" params="" file="/usr/lib/haxe/std/js/html/TextTrack.hx" extern="1">
+	<class path="js.html.TextTrack" params="" file="/usr/local/lib/haxe/std/js/html/TextTrack.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<kind public="1" set="null"><x path="js.html.TextTrackKind"/></kind>
 		<label public="1" set="null"><c path="String"/></label>
@@ -8934,7 +8955,7 @@
 		</removeCue>
 		<meta><m n=":native"><e>"TextTrack"</e></m></meta>
 	</class>
-	<class path="js.html.TextTrackCueList" params="" file="/usr/lib/haxe/std/js/html/TextTrackCueList.hx" extern="1">
+	<class path="js.html.TextTrackCueList" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackCueList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<getCueById public="1" set="method"><f a="id">
 	<c path="String"/>
@@ -8942,15 +8963,15 @@
 </f></getCueById>
 		<meta><m n=":native"><e>"TextTrackCueList"</e></m></meta>
 	</class>
-	<abstract path="js.html.TextTrackKind" params="" file="/usr/lib/haxe/std/js/html/TextTrackKind.hx">
+	<abstract path="js.html.TextTrackKind" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackKind.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._TextTrackKind.TextTrackKind_Impl_" params="" file="/usr/lib/haxe/std/js/html/TextTrackKind.hx" private="1" module="js.html.TextTrackKind"><meta>
+		<impl><class path="js.html._TextTrackKind.TextTrackKind_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackKind.hx" private="1" module="js.html.TextTrackKind"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.TextTrackList" params="" file="/usr/lib/haxe/std/js/html/TextTrackList.hx" extern="1">
+	<class path="js.html.TextTrackList" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackList.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<length public="1" set="null"><x path="Int"/></length>
 		<onchange public="1"><x path="haxe.Function"/></onchange>
@@ -8962,15 +8983,15 @@
 </f></getTrackById>
 		<meta><m n=":native"><e>"TextTrackList"</e></m></meta>
 	</class>
-	<abstract path="js.html.TextTrackMode" params="" file="/usr/lib/haxe/std/js/html/TextTrackMode.hx">
+	<abstract path="js.html.TextTrackMode" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackMode.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._TextTrackMode.TextTrackMode_Impl_" params="" file="/usr/lib/haxe/std/js/html/TextTrackMode.hx" private="1" module="js.html.TextTrackMode"><meta>
+		<impl><class path="js.html._TextTrackMode.TextTrackMode_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/TextTrackMode.hx" private="1" module="js.html.TextTrackMode"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.TimeRanges" params="" file="/usr/lib/haxe/std/js/html/TimeRanges.hx" extern="1">
+	<class path="js.html.TimeRanges" params="" file="/usr/local/lib/haxe/std/js/html/TimeRanges.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<start public="1" set="method">
 			<f a="index">
@@ -8988,12 +9009,12 @@
 		</end>
 		<meta><m n=":native"><e>"TimeRanges"</e></m></meta>
 	</class>
-	<class path="js.html.TitleElement" params="" file="/usr/lib/haxe/std/js/html/TitleElement.hx" extern="1">
+	<class path="js.html.TitleElement" params="" file="/usr/local/lib/haxe/std/js/html/TitleElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<text public="1"><c path="String"/></text>
 		<meta><m n=":native"><e>"HTMLTitleElement"</e></m></meta>
 	</class>
-	<class path="js.html.Touch" params="" file="/usr/lib/haxe/std/js/html/Touch.hx" extern="1">
+	<class path="js.html.Touch" params="" file="/usr/local/lib/haxe/std/js/html/Touch.hx" extern="1">
 		<identifier public="1" set="null"><x path="Int"/></identifier>
 		<target public="1" set="null"><c path="js.html.EventTarget"/></target>
 		<screenX public="1" set="null"><x path="Int"/></screenX>
@@ -9008,7 +9029,7 @@
 		<force public="1" set="null"><x path="Float"/></force>
 		<meta><m n=":native"><e>"Touch"</e></m></meta>
 	</class>
-	<class path="js.html.TouchList" params="" file="/usr/lib/haxe/std/js/html/TouchList.hx" extern="1">
+	<class path="js.html.TouchList" params="" file="/usr/local/lib/haxe/std/js/html/TouchList.hx" extern="1">
 		<length public="1" set="null"><x path="Int"/></length>
 		<item public="1" set="method"><f a="index">
 	<x path="Int"/>
@@ -9020,7 +9041,7 @@
 </f></identifiedTouch>
 		<meta><m n=":native"><e>"TouchList"</e></m></meta>
 	</class>
-	<class path="js.html.TrackElement" params="" file="/usr/lib/haxe/std/js/html/TrackElement.hx" extern="1">
+	<class path="js.html.TrackElement" params="" file="/usr/local/lib/haxe/std/js/html/TrackElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<NONE public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
@@ -9050,7 +9071,7 @@
 		<track public="1" set="null"><c path="js.html.TextTrack"/></track>
 		<meta><m n=":native"><e>"HTMLTrackElement"</e></m></meta>
 	</class>
-	<class path="js.html.TreeWalker" params="" file="/usr/lib/haxe/std/js/html/TreeWalker.hx" extern="1">
+	<class path="js.html.TreeWalker" params="" file="/usr/local/lib/haxe/std/js/html/TreeWalker.hx" extern="1">
 		<root public="1" set="null"><c path="js.html.Node"/></root>
 		<whatToShow public="1" set="null"><x path="Int"/></whatToShow>
 		<filter public="1" set="null"><c path="js.html.NodeFilter"/></filter>
@@ -9085,13 +9106,13 @@
 		</nextNode>
 		<meta><m n=":native"><e>"TreeWalker"</e></m></meta>
 	</class>
-	<class path="js.html.UListElement" params="" file="/usr/lib/haxe/std/js/html/UListElement.hx" extern="1">
+	<class path="js.html.UListElement" params="" file="/usr/local/lib/haxe/std/js/html/UListElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<compact public="1"><x path="Bool"/></compact>
 		<type public="1"><c path="String"/></type>
 		<meta><m n=":native"><e>"HTMLUListElement"</e></m></meta>
 	</class>
-	<class path="js.html.URLSearchParams" params="" file="/usr/lib/haxe/std/js/html/URLSearchParams.hx" extern="1">
+	<class path="js.html.URLSearchParams" params="" file="/usr/local/lib/haxe/std/js/html/URLSearchParams.hx" extern="1">
 		<append public="1" set="method"><f a="name:value">
 	<c path="String"/>
 	<c path="String"/>
@@ -9138,7 +9159,7 @@
 		</new>
 		<meta><m n=":native"><e>"URLSearchParams"</e></m></meta>
 	</class>
-	<class path="js.html.Uint8ClampedArray" params="" file="/usr/lib/haxe/std/js/html/Uint8ClampedArray.hx" extern="1">
+	<class path="js.html.Uint8ClampedArray" params="" file="/usr/local/lib/haxe/std/js/html/Uint8ClampedArray.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="1" line="30" static="1">
 			<x path="Int"/>
@@ -9207,7 +9228,7 @@
 		</new>
 		<meta><m n=":native"><e>"Uint8ClampedArray"</e></m></meta>
 	</class>
-	<class path="js.html.VTTCue" params="" file="/usr/lib/haxe/std/js/html/VTTCue.hx" extern="1">
+	<class path="js.html.VTTCue" params="" file="/usr/local/lib/haxe/std/js/html/VTTCue.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<track public="1" set="null"><c path="js.html.TextTrack"/></track>
 		<id public="1"><c path="String"/></id>
@@ -9241,7 +9262,7 @@
 		</new>
 		<meta><m n=":native"><e>"VTTCue"</e></m></meta>
 	</class>
-	<class path="js.html.VTTRegion" params="" file="/usr/lib/haxe/std/js/html/VTTRegion.hx" extern="1">
+	<class path="js.html.VTTRegion" params="" file="/usr/local/lib/haxe/std/js/html/VTTRegion.hx" extern="1">
 		<width public="1"><x path="Float"/></width>
 		<lines public="1"><x path="Int"/></lines>
 		<regionAnchorX public="1"><x path="Float"/></regionAnchorX>
@@ -9255,7 +9276,7 @@
 		</new>
 		<meta><m n=":native"><e>"VTTRegion"</e></m></meta>
 	</class>
-	<class path="js.html.ValidityState" params="" file="/usr/lib/haxe/std/js/html/ValidityState.hx" extern="1">
+	<class path="js.html.ValidityState" params="" file="/usr/local/lib/haxe/std/js/html/ValidityState.hx" extern="1">
 		<valueMissing public="1" set="null"><x path="Bool"/></valueMissing>
 		<typeMismatch public="1" set="null"><x path="Bool"/></typeMismatch>
 		<patternMismatch public="1" set="null"><x path="Bool"/></patternMismatch>
@@ -9268,7 +9289,7 @@
 		<valid public="1" set="null"><x path="Bool"/></valid>
 		<meta><m n=":native"><e>"ValidityState"</e></m></meta>
 	</class>
-	<class path="js.html.VideoElement" params="" file="/usr/lib/haxe/std/js/html/VideoElement.hx" extern="1">
+	<class path="js.html.VideoElement" params="" file="/usr/local/lib/haxe/std/js/html/VideoElement.hx" extern="1">
 		<extends path="js.html.MediaElement"/>
 		<width public="1"><x path="Int"/></width>
 		<height public="1"><x path="Int"/></height>
@@ -9278,14 +9299,14 @@
 		<getVideoPlaybackQuality public="1" set="method"><f a=""><c path="js.html.VideoPlaybackQuality"/></f></getVideoPlaybackQuality>
 		<meta><m n=":native"><e>"HTMLVideoElement"</e></m></meta>
 	</class>
-	<class path="js.html.VideoPlaybackQuality" params="" file="/usr/lib/haxe/std/js/html/VideoPlaybackQuality.hx" extern="1">
+	<class path="js.html.VideoPlaybackQuality" params="" file="/usr/local/lib/haxe/std/js/html/VideoPlaybackQuality.hx" extern="1">
 		<creationTime public="1" set="null"><x path="Float"/></creationTime>
 		<totalVideoFrames public="1" set="null"><x path="Int"/></totalVideoFrames>
 		<droppedVideoFrames public="1" set="null"><x path="Int"/></droppedVideoFrames>
 		<corruptedVideoFrames public="1" set="null"><x path="Int"/></corruptedVideoFrames>
 		<meta><m n=":native"><e>"VideoPlaybackQuality"</e></m></meta>
 	</class>
-	<class path="js.html.VideoTrack" params="" file="/usr/lib/haxe/std/js/html/VideoTrack.hx" extern="1">
+	<class path="js.html.VideoTrack" params="" file="/usr/local/lib/haxe/std/js/html/VideoTrack.hx" extern="1">
 		<id public="1" set="null"><c path="String"/></id>
 		<kind public="1" set="null"><c path="String"/></kind>
 		<label public="1" set="null"><c path="String"/></label>
@@ -9293,7 +9314,7 @@
 		<selected public="1"><x path="Bool"/></selected>
 		<meta><m n=":native"><e>"VideoTrack"</e></m></meta>
 	</class>
-	<class path="js.html.VideoTrackList" params="" file="/usr/lib/haxe/std/js/html/VideoTrackList.hx" extern="1">
+	<class path="js.html.VideoTrackList" params="" file="/usr/local/lib/haxe/std/js/html/VideoTrackList.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<length public="1" set="null"><x path="Int"/></length>
 		<selectedIndex public="1" set="null"><x path="Int"/></selectedIndex>
@@ -9306,15 +9327,15 @@
 </f></getTrackById>
 		<meta><m n=":native"><e>"VideoTrackList"</e></m></meta>
 	</class>
-	<abstract path="js.html.VisibilityState" params="" file="/usr/lib/haxe/std/js/html/VisibilityState.hx">
+	<abstract path="js.html.VisibilityState" params="" file="/usr/local/lib/haxe/std/js/html/VisibilityState.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._VisibilityState.VisibilityState_Impl_" params="" file="/usr/lib/haxe/std/js/html/VisibilityState.hx" private="1" module="js.html.VisibilityState"><meta>
+		<impl><class path="js.html._VisibilityState.VisibilityState_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/VisibilityState.hx" private="1" module="js.html.VisibilityState"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.Window" params="" file="/usr/lib/haxe/std/js/html/Window.hx" extern="1">
+	<class path="js.html.Window" params="" file="/usr/local/lib/haxe/std/js/html/Window.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<window public="1" set="null"><c path="js.html.Window"/></window>
 		<self public="1" set="null"><c path="js.html.Window"/></self>
@@ -9759,7 +9780,7 @@
 		</clearInterval>
 		<meta><m n=":native"><e>"Window"</e></m></meta>
 	</class>
-	<class path="js.html.XMLHttpRequestEventTarget" params="" file="/usr/lib/haxe/std/js/html/XMLHttpRequestEventTarget.hx" extern="1">
+	<class path="js.html.XMLHttpRequestEventTarget" params="" file="/usr/local/lib/haxe/std/js/html/XMLHttpRequestEventTarget.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<onloadstart public="1"><x path="haxe.Function"/></onloadstart>
 		<onprogress public="1"><x path="haxe.Function"/></onprogress>
@@ -9770,7 +9791,7 @@
 		<onloadend public="1"><x path="haxe.Function"/></onloadend>
 		<meta><m n=":native"><e>"XMLHttpRequestEventTarget"</e></m></meta>
 	</class>
-	<class path="js.html.XMLHttpRequest" params="" file="/usr/lib/haxe/std/js/html/XMLHttpRequest.hx" extern="1">
+	<class path="js.html.XMLHttpRequest" params="" file="/usr/local/lib/haxe/std/js/html/XMLHttpRequest.hx" extern="1">
 		<extends path="js.html.XMLHttpRequestEventTarget"/>
 		<UNSENT public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
@@ -9931,19 +9952,19 @@
 		</new>
 		<meta><m n=":native"><e>"XMLHttpRequest"</e></m></meta>
 	</class>
-	<abstract path="js.html.XMLHttpRequestResponseType" params="" file="/usr/lib/haxe/std/js/html/XMLHttpRequestResponseType.hx">
+	<abstract path="js.html.XMLHttpRequestResponseType" params="" file="/usr/local/lib/haxe/std/js/html/XMLHttpRequestResponseType.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html._XMLHttpRequestResponseType.XMLHttpRequestResponseType_Impl_" params="" file="/usr/lib/haxe/std/js/html/XMLHttpRequestResponseType.hx" private="1" module="js.html.XMLHttpRequestResponseType"><meta>
+		<impl><class path="js.html._XMLHttpRequestResponseType.XMLHttpRequestResponseType_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/XMLHttpRequestResponseType.hx" private="1" module="js.html.XMLHttpRequestResponseType"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.XMLHttpRequestUpload" params="" file="/usr/lib/haxe/std/js/html/XMLHttpRequestUpload.hx" extern="1">
+	<class path="js.html.XMLHttpRequestUpload" params="" file="/usr/local/lib/haxe/std/js/html/XMLHttpRequestUpload.hx" extern="1">
 		<extends path="js.html.XMLHttpRequestEventTarget"/>
 		<meta><m n=":native"><e>"XMLHttpRequestUpload"</e></m></meta>
 	</class>
-	<class path="js.html.XPathExpression" params="" file="/usr/lib/haxe/std/js/html/XPathExpression.hx" extern="1">
+	<class path="js.html.XPathExpression" params="" file="/usr/local/lib/haxe/std/js/html/XPathExpression.hx" extern="1">
 		<evaluate public="1" set="method">
 			<f a="contextNode:type:result">
 				<c path="js.html.Node"/>
@@ -9955,14 +9976,14 @@
 		</evaluate>
 		<meta><m n=":native"><e>"XPathExpression"</e></m></meta>
 	</class>
-	<class path="js.html.XPathNSResolver" params="" file="/usr/lib/haxe/std/js/html/XPathNSResolver.hx" extern="1">
+	<class path="js.html.XPathNSResolver" params="" file="/usr/local/lib/haxe/std/js/html/XPathNSResolver.hx" extern="1">
 		<lookupNamespaceURI public="1" set="method"><f a="prefix">
 	<c path="String"/>
 	<c path="String"/>
 </f></lookupNamespaceURI>
 		<meta><m n=":native"><e>"XPathNSResolver"</e></m></meta>
 	</class>
-	<class path="js.html.XPathResult" params="" file="/usr/lib/haxe/std/js/html/XPathResult.hx" extern="1">
+	<class path="js.html.XPathResult" params="" file="/usr/local/lib/haxe/std/js/html/XPathResult.hx" extern="1">
 		<ANY_TYPE public="1" get="inline" set="null" expr="0" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>0</e></m></meta>
@@ -10023,7 +10044,7 @@
 		</snapshotItem>
 		<meta><m n=":native"><e>"XPathResult"</e></m></meta>
 	</class>
-	<class path="js.html.idb.Cursor" params="" file="/usr/lib/haxe/std/js/html/idb/Cursor.hx" extern="1">
+	<class path="js.html.idb.Cursor" params="" file="/usr/local/lib/haxe/std/js/html/idb/Cursor.hx" extern="1">
 		<source public="1" set="null"><x path="haxe.extern.EitherType">
 	<c path="js.html.idb.ObjectStore"/>
 	<c path="js.html.idb.Index"/>
@@ -10060,15 +10081,15 @@
 		</delete_>
 		<meta><m n=":native"><e>"IDBCursor"</e></m></meta>
 	</class>
-	<abstract path="js.html.idb.CursorDirection" params="" file="/usr/lib/haxe/std/js/html/idb/CursorDirection.hx">
+	<abstract path="js.html.idb.CursorDirection" params="" file="/usr/local/lib/haxe/std/js/html/idb/CursorDirection.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html.idb._CursorDirection.CursorDirection_Impl_" params="" file="/usr/lib/haxe/std/js/html/idb/CursorDirection.hx" private="1" module="js.html.idb.CursorDirection"><meta>
+		<impl><class path="js.html.idb._CursorDirection.CursorDirection_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/idb/CursorDirection.hx" private="1" module="js.html.idb.CursorDirection"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.idb.Database" params="" file="/usr/lib/haxe/std/js/html/idb/Database.hx" extern="1">
+	<class path="js.html.idb.Database" params="" file="/usr/local/lib/haxe/std/js/html/idb/Database.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<name public="1" set="null"><c path="String"/></name>
 		<version public="1" set="null"><x path="Int"/></version>
@@ -10120,7 +10141,7 @@
 		</createMutableFile>
 		<meta><m n=":native"><e>"IDBDatabase"</e></m></meta>
 	</class>
-	<class path="js.html.idb.Factory" params="" file="/usr/lib/haxe/std/js/html/idb/Factory.hx" extern="1">
+	<class path="js.html.idb.Factory" params="" file="/usr/local/lib/haxe/std/js/html/idb/Factory.hx" extern="1">
 		<open public="1" set="method">
 			<f a="name:?options">
 				<c path="String"/>
@@ -10155,7 +10176,7 @@
 		</cmp>
 		<meta><m n=":native"><e>"IDBFactory"</e></m></meta>
 	</class>
-	<class path="js.html.idb.Index" params="" file="/usr/lib/haxe/std/js/html/idb/Index.hx" extern="1">
+	<class path="js.html.idb.Index" params="" file="/usr/local/lib/haxe/std/js/html/idb/Index.hx" extern="1">
 		<name public="1" set="null"><c path="String"/></name>
 		<objectStore public="1" set="null"><c path="js.html.idb.ObjectStore"/></objectStore>
 		<keyPath public="1" set="null"><d/></keyPath>
@@ -10202,7 +10223,7 @@
 		</count>
 		<meta><m n=":native"><e>"IDBIndex"</e></m></meta>
 	</class>
-	<typedef path="js.html.idb.IndexParameters" params="" file="/usr/lib/haxe/std/js/html/idb/IndexParameters.hx"><a>
+	<typedef path="js.html.idb.IndexParameters" params="" file="/usr/local/lib/haxe/std/js/html/idb/IndexParameters.hx"><a>
 	<unique>
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
@@ -10212,7 +10233,7 @@
 		<meta><m n=":optional"/></meta>
 	</multiEntry>
 </a></typedef>
-	<class path="js.html.idb.ObjectStore" params="" file="/usr/lib/haxe/std/js/html/idb/ObjectStore.hx" extern="1">
+	<class path="js.html.idb.ObjectStore" params="" file="/usr/local/lib/haxe/std/js/html/idb/ObjectStore.hx" extern="1">
 		<name public="1" set="null"><c path="String"/></name>
 		<keyPath public="1" set="null"><d/></keyPath>
 		<indexNames public="1" set="null"><c path="js.html.DOMStringList"/></indexNames>
@@ -10303,7 +10324,7 @@
 		</count>
 		<meta><m n=":native"><e>"IDBObjectStore"</e></m></meta>
 	</class>
-	<typedef path="js.html.idb.ObjectStoreParameters" params="" file="/usr/lib/haxe/std/js/html/idb/ObjectStoreParameters.hx"><a>
+	<typedef path="js.html.idb.ObjectStoreParameters" params="" file="/usr/local/lib/haxe/std/js/html/idb/ObjectStoreParameters.hx"><a>
 	<keyPath>
 		<t path="Null"><x path="haxe.extern.EitherType">
 	<c path="String"/>
@@ -10316,7 +10337,7 @@
 		<meta><m n=":optional"/></meta>
 	</autoIncrement>
 </a></typedef>
-	<typedef path="js.html.idb.OpenDBOptions" params="" file="/usr/lib/haxe/std/js/html/idb/OpenDBOptions.hx"><a>
+	<typedef path="js.html.idb.OpenDBOptions" params="" file="/usr/local/lib/haxe/std/js/html/idb/OpenDBOptions.hx"><a>
 	<version>
 		<t path="Null"><x path="Int"/></t>
 		<meta><m n=":optional"/></meta>
@@ -10326,7 +10347,7 @@
 		<meta><m n=":optional"/></meta>
 	</storage>
 </a></typedef>
-	<class path="js.html.idb.Request" params="" file="/usr/lib/haxe/std/js/html/idb/Request.hx" extern="1">
+	<class path="js.html.idb.Request" params="" file="/usr/local/lib/haxe/std/js/html/idb/Request.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<result public="1" set="null"><d/></result>
 		<error public="1" set="null"><c path="js.html.DOMError"/></error>
@@ -10343,21 +10364,21 @@
 		<onerror public="1"><x path="haxe.Function"/></onerror>
 		<meta><m n=":native"><e>"IDBRequest"</e></m></meta>
 	</class>
-	<class path="js.html.idb.OpenDBRequest" params="" file="/usr/lib/haxe/std/js/html/idb/OpenDBRequest.hx" extern="1">
+	<class path="js.html.idb.OpenDBRequest" params="" file="/usr/local/lib/haxe/std/js/html/idb/OpenDBRequest.hx" extern="1">
 		<extends path="js.html.idb.Request"/>
 		<onblocked public="1"><x path="haxe.Function"/></onblocked>
 		<onupgradeneeded public="1"><x path="haxe.Function"/></onupgradeneeded>
 		<meta><m n=":native"><e>"IDBOpenDBRequest"</e></m></meta>
 	</class>
-	<abstract path="js.html.idb.RequestReadyState" params="" file="/usr/lib/haxe/std/js/html/idb/RequestReadyState.hx">
+	<abstract path="js.html.idb.RequestReadyState" params="" file="/usr/local/lib/haxe/std/js/html/idb/RequestReadyState.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html.idb._RequestReadyState.RequestReadyState_Impl_" params="" file="/usr/lib/haxe/std/js/html/idb/RequestReadyState.hx" private="1" module="js.html.idb.RequestReadyState"><meta>
+		<impl><class path="js.html.idb._RequestReadyState.RequestReadyState_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/idb/RequestReadyState.hx" private="1" module="js.html.idb.RequestReadyState"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.idb.Transaction" params="" file="/usr/lib/haxe/std/js/html/idb/Transaction.hx" extern="1">
+	<class path="js.html.idb.Transaction" params="" file="/usr/local/lib/haxe/std/js/html/idb/Transaction.hx" extern="1">
 		<extends path="js.html.EventTarget"/>
 		<mode public="1" set="null"><x path="js.html.idb.TransactionMode"/></mode>
 		<db public="1" set="null"><c path="js.html.idb.Database"/></db>
@@ -10379,15 +10400,15 @@
 		</abort>
 		<meta><m n=":native"><e>"IDBTransaction"</e></m></meta>
 	</class>
-	<abstract path="js.html.idb.TransactionMode" params="" file="/usr/lib/haxe/std/js/html/idb/TransactionMode.hx">
+	<abstract path="js.html.idb.TransactionMode" params="" file="/usr/local/lib/haxe/std/js/html/idb/TransactionMode.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
-		<impl><class path="js.html.idb._TransactionMode.TransactionMode_Impl_" params="" file="/usr/lib/haxe/std/js/html/idb/TransactionMode.hx" private="1" module="js.html.idb.TransactionMode"><meta>
+		<impl><class path="js.html.idb._TransactionMode.TransactionMode_Impl_" params="" file="/usr/local/lib/haxe/std/js/html/idb/TransactionMode.hx" private="1" module="js.html.idb.TransactionMode"><meta>
 	<m n=":keep"/>
 	<m n=":enum"/>
 </meta></class></impl>
 	</abstract>
-	<class path="js.html.svg.Matrix" params="" file="/usr/lib/haxe/std/js/html/svg/Matrix.hx" extern="1">
+	<class path="js.html.svg.Matrix" params="" file="/usr/local/lib/haxe/std/js/html/svg/Matrix.hx" extern="1">
 		<a public="1"><x path="Float"/></a>
 		<b public="1"><x path="Float"/></b>
 		<c public="1"><x path="Float"/></c>
@@ -10446,14 +10467,14 @@
 		</skewY>
 		<meta><m n=":native"><e>"SVGMatrix"</e></m></meta>
 	</class>
-	<class path="js.html.webgl.ActiveInfo" params="" file="/usr/lib/haxe/std/js/html/webgl/ActiveInfo.hx" extern="1">
+	<class path="js.html.webgl.ActiveInfo" params="" file="/usr/local/lib/haxe/std/js/html/webgl/ActiveInfo.hx" extern="1">
 		<size public="1" set="null"><x path="Int"/></size>
 		<type public="1" set="null"><x path="Int"/></type>
 		<name public="1" set="null"><c path="String"/></name>
 		<meta><m n=":native"><e>"WebGLActiveInfo"</e></m></meta>
 	</class>
-	<class path="js.html.webgl.Buffer" params="" file="/usr/lib/haxe/std/js/html/webgl/Buffer.hx" extern="1"><meta><m n=":native"><e>"WebGLBuffer"</e></m></meta></class>
-	<typedef path="js.html.webgl.ContextAttributes" params="" file="/usr/lib/haxe/std/js/html/webgl/ContextAttributes.hx"><a>
+	<class path="js.html.webgl.Buffer" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Buffer.hx" extern="1"><meta><m n=":native"><e>"WebGLBuffer"</e></m></meta></class>
+	<typedef path="js.html.webgl.ContextAttributes" params="" file="/usr/local/lib/haxe/std/js/html/webgl/ContextAttributes.hx"><a>
 	<stencil>
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
@@ -10479,10 +10500,10 @@
 		<meta><m n=":optional"/></meta>
 	</alpha>
 </a></typedef>
-	<class path="js.html.webgl.Framebuffer" params="" file="/usr/lib/haxe/std/js/html/webgl/Framebuffer.hx" extern="1"><meta><m n=":native"><e>"WebGLFramebuffer"</e></m></meta></class>
-	<class path="js.html.webgl.Program" params="" file="/usr/lib/haxe/std/js/html/webgl/Program.hx" extern="1"><meta><m n=":native"><e>"WebGLProgram"</e></m></meta></class>
-	<class path="js.html.webgl.Renderbuffer" params="" file="/usr/lib/haxe/std/js/html/webgl/Renderbuffer.hx" extern="1"><meta><m n=":native"><e>"WebGLRenderbuffer"</e></m></meta></class>
-	<class path="js.html.webgl.RenderingContext" params="" file="/usr/lib/haxe/std/js/html/webgl/RenderingContext.hx" extern="1">
+	<class path="js.html.webgl.Framebuffer" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Framebuffer.hx" extern="1"><meta><m n=":native"><e>"WebGLFramebuffer"</e></m></meta></class>
+	<class path="js.html.webgl.Program" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Program.hx" extern="1"><meta><m n=":native"><e>"WebGLProgram"</e></m></meta></class>
+	<class path="js.html.webgl.Renderbuffer" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Renderbuffer.hx" extern="1"><meta><m n=":native"><e>"WebGLRenderbuffer"</e></m></meta></class>
+	<class path="js.html.webgl.RenderingContext" params="" file="/usr/local/lib/haxe/std/js/html/webgl/RenderingContext.hx" extern="1">
 		<DEPTH_BUFFER_BIT public="1" get="inline" set="null" expr="256" line="30" static="1">
 			<x path="Int"/>
 			<meta><m n=":value"><e>256</e></m></meta>
@@ -12629,30 +12650,34 @@
 </f></viewport>
 		<meta><m n=":native"><e>"WebGLRenderingContext"</e></m></meta>
 	</class>
-	<class path="js.html.webgl.Shader" params="" file="/usr/lib/haxe/std/js/html/webgl/Shader.hx" extern="1"><meta><m n=":native"><e>"WebGLShader"</e></m></meta></class>
-	<class path="js.html.webgl.ShaderPrecisionFormat" params="" file="/usr/lib/haxe/std/js/html/webgl/ShaderPrecisionFormat.hx" extern="1">
+	<class path="js.html.webgl.Shader" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Shader.hx" extern="1"><meta><m n=":native"><e>"WebGLShader"</e></m></meta></class>
+	<class path="js.html.webgl.ShaderPrecisionFormat" params="" file="/usr/local/lib/haxe/std/js/html/webgl/ShaderPrecisionFormat.hx" extern="1">
 		<rangeMin public="1" set="null"><x path="Int"/></rangeMin>
 		<rangeMax public="1" set="null"><x path="Int"/></rangeMax>
 		<precision public="1" set="null"><x path="Int"/></precision>
 		<meta><m n=":native"><e>"WebGLShaderPrecisionFormat"</e></m></meta>
 	</class>
-	<class path="js.html.webgl.Texture" params="" file="/usr/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
-	<class path="js.html.webgl.UniformLocation" params="" file="/usr/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<typedef path="msignal.AnySignal" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
+	<class path="js.html.webgl.Texture" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
+	<class path="js.html.webgl.UniformLocation" params="" file="/usr/local/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
+	<typedef path="msignal.AnySignal" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
 		<c path="msignal.Signal">
 			<d/>
 			<d/>
 		</c>
 		<haxe_doc>A convenience type describing any kind of signal.</haxe_doc>
 	</typedef>
-	<class path="msignal.Signal" params="TSlot:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx">
+	<class path="msignal.Signal" params="TSlot:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx">
 		<valueClasses public="1"><c path="Array"><d/></c></valueClasses>
+		<numListeners public="1" get="accessor" set="null">
+			<x path="Int"/>
+			<haxe_doc>The current number of listeners for the signal.</haxe_doc>
+		</numListeners>
 		<slots><c path="msignal.SlotList">
 	<c path="msignal.Signal.TSlot"/>
 	<c path="msignal.Signal.TListener"/>
 </c></slots>
 		<priorityBased><x path="Bool"/></priorityBased>
-		<add public="1" set="method" line="62">
+		<add public="1" set="method" line="63">
 			<f a="listener">
 				<c path="msignal.Signal.TListener"/>
 				<c path="msignal.Signal.TSlot"/>
@@ -12662,7 +12687,47 @@
 		@param listener A function matching the signature of TListener
 		@return The added listener slot</haxe_doc>
 		</add>
-		<remove public="1" set="method" line="114">
+		<addOnce public="1" set="method" line="76">
+			<f a="listener">
+				<c path="msignal.Signal.TListener"/>
+				<c path="msignal.Signal.TSlot"/>
+			</f>
+			<haxe_doc>Subscribes a one-time listener for this signal.
+		The signal will remove the listener automatically the first time it is called,
+		after the dispatch to all listeners is complete.
+		
+		@param listener A function matching the signature of TListener
+		@return The added listener slot</haxe_doc>
+		</addOnce>
+		<addWithPriority public="1" set="method" line="91">
+			<f a="listener:?priority">
+				<c path="msignal.Signal.TListener"/>
+				<x path="Int"/>
+				<c path="msignal.Signal.TSlot"/>
+			</f>
+			<haxe_doc>Subscribes a listener for the signal.
+		After you successfully register an event listener,
+		you cannot change its priority through additional calls to add().
+		To change a listener's priority, you must first call remove().
+		Then you can register the listener again with the new priority level.
+		
+		@param listener A function matching the signature of TListener
+		@return The added listener slot</haxe_doc>
+		</addWithPriority>
+		<addOnceWithPriority public="1" set="method" line="104">
+			<f a="listener:?priority">
+				<c path="msignal.Signal.TListener"/>
+				<x path="Int"/>
+				<c path="msignal.Signal.TSlot"/>
+			</f>
+			<haxe_doc>Subscribes a one-time listener for this signal.
+		The signal will remove the listener automatically the first time it is 
+		called, after the dispatch to all listeners is complete.
+		
+		@param listener A function matching the signature of TListener
+		@return The added listener slot</haxe_doc>
+		</addOnceWithPriority>
+		<remove public="1" set="method" line="115">
 			<f a="listener">
 				<c path="msignal.Signal.TListener"/>
 				<c path="msignal.Signal.TSlot"/>
@@ -12672,35 +12737,55 @@
 		@param listener The listener to remove
 		@return The removed listener slot</haxe_doc>
 		</remove>
-		<registerListener set="method" line="131"><f a="listener:?once:?priority">
+		<removeAll public="1" set="method" line="127">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>Unsubscribes all listeners from the signal.</haxe_doc>
+		</removeAll>
+		<registerListener set="method" line="132"><f a="listener:?once:?priority">
 	<c path="msignal.Signal.TListener"/>
 	<x path="Bool"/>
 	<x path="Int"/>
 	<c path="msignal.Signal.TSlot"/>
 </f></registerListener>
-		<registrationPossible set="method" line="147"><f a="listener:once">
+		<registrationPossible set="method" line="148"><f a="listener:once">
 	<c path="msignal.Signal.TListener"/>
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></registrationPossible>
-		<createSlot set="method" line="165">
-			<f a="listener:?once:?priority">
-				<c path="msignal.Signal.TListener"/>
-				<x path="Bool"/>
-				<x path="Int"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<meta><m n=":IgnoreCover"/></meta>
-		</createSlot>
-		<new set="method" line="48"><f a="?valueClasses">
+		<createSlot set="method" line="167"><f a="listener:?once:?priority">
+	<c path="msignal.Signal.TListener"/>
+	<x path="Bool"/>
+	<x path="Int"/>
+	<c path="msignal.Signal.TSlot"/>
+</f></createSlot>
+		<get_numListeners set="method" line="172"><f a=""><x path="Int"/></f></get_numListeners>
+		<new set="method" line="49"><f a="?valueClasses">
 	<c path="Array"><d/></c>
 	<x path="Void"/>
 </f></new>
 		<haxe_doc>A Signal manages a list of listeners, which are executed when the signal is 
 	dispatched.</haxe_doc>
-		<meta><m n=":keep"/></meta>
+		<meta><m n=":keepSub"/></meta>
 	</class>
-	<class path="msignal.Signal1" params="TValue" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Signal.hx" module="msignal.Signal">
+	<class path="msignal.Signal0" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
+		<extends path="msignal.Signal">
+			<c path="msignal.Slot0"/>
+			<f a=""><x path="Void"/></f>
+		</extends>
+		<dispatch public="1" set="method" line="191">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>Executes the signals listeners with no arguements.</haxe_doc>
+		</dispatch>
+		<createSlot set="method" line="202" override="1"><f a="listener:?once:?priority">
+	<f a=""><x path="Void"/></f>
+	<x path="Bool"/>
+	<x path="Int"/>
+	<c path="msignal.Slot0"/>
+</f></createSlot>
+		<new public="1" set="method" line="183"><f a=""><x path="Void"/></f></new>
+		<haxe_doc>Signal that executes listeners with no arguments.</haxe_doc>
+	</class>
+	<class path="msignal.Signal1" params="TValue" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
 		<extends path="msignal.Signal">
 			<c path="msignal.Slot1"><c path="msignal.Signal1.TValue"/></c>
 			<f a="">
@@ -12708,14 +12793,14 @@
 				<x path="Void"/>
 			</f>
 		</extends>
-		<dispatch public="1" set="method" line="219">
+		<dispatch public="1" set="method" line="221">
 			<f a="value">
 				<c path="msignal.Signal1.TValue"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>Executes the signals listeners with one arguement.</haxe_doc>
 		</dispatch>
-		<createSlot set="method" line="230" override="1"><f a="listener:?once:?priority">
+		<createSlot set="method" line="232" override="1"><f a="listener:?once:?priority">
 	<f a="">
 		<c path="msignal.Signal1.TValue"/>
 		<x path="Void"/>
@@ -12724,24 +12809,61 @@
 	<x path="Int"/>
 	<c path="msignal.Slot1"><c path="msignal.Signal1.TValue"/></c>
 </f></createSlot>
-		<new public="1" set="method" line="211"><f a="?type">
+		<new public="1" set="method" line="213"><f a="?type">
 	<d/>
 	<x path="Void"/>
 </f></new>
 		<haxe_doc>Signal that executes listeners with one arguments.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
+		<meta><m n=":directlyUsed"/></meta>
 	</class>
-	<typedef path="msignal.AnySlot" params="" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
+	<class path="msignal.Signal2" params="TValue1:TValue2" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
+		<extends path="msignal.Signal">
+			<c path="msignal.Slot2">
+				<c path="msignal.Signal2.TValue1"/>
+				<c path="msignal.Signal2.TValue2"/>
+			</c>
+			<f a=":">
+				<c path="msignal.Signal2.TValue1"/>
+				<c path="msignal.Signal2.TValue2"/>
+				<x path="Void"/>
+			</f>
+		</extends>
+		<dispatch public="1" set="method" line="251">
+			<f a="value1:value2">
+				<c path="msignal.Signal2.TValue1"/>
+				<c path="msignal.Signal2.TValue2"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Executes the signals listeners with two arguements.</haxe_doc>
+		</dispatch>
+		<createSlot set="method" line="262" override="1"><f a="listener:?once:?priority">
+	<f a=":">
+		<c path="msignal.Signal2.TValue1"/>
+		<c path="msignal.Signal2.TValue2"/>
+		<x path="Void"/>
+	</f>
+	<x path="Bool"/>
+	<x path="Int"/>
+	<c path="msignal.Slot2">
+		<c path="msignal.Signal2.TValue1"/>
+		<c path="msignal.Signal2.TValue2"/>
+	</c>
+</f></createSlot>
+		<new public="1" set="method" line="243"><f a="?type1:?type2">
+	<d/>
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<haxe_doc>Signal that executes listeners with two arguments.</haxe_doc>
+	</class>
+	<typedef path="msignal.AnySlot" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
 		<c path="msignal.Slot">
 			<d/>
 			<d/>
 		</c>
 		<haxe_doc>A convenience type describing any kind of slot.</haxe_doc>
 	</typedef>
-	<class path="msignal.Slot" params="TSignal:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx">
+	<class path="msignal.Slot" params="TSignal:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx">
 		<listener public="1" set="accessor">
 			<c path="msignal.Slot.TListener"/>
 			<meta><m n=":isVar"/></meta>
@@ -12781,7 +12903,29 @@
 		<haxe_doc>Defines the basic properties of a listener associated with a Signal.</haxe_doc>
 		<meta><m n=":keep"/></meta>
 	</class>
-	<class path="msignal.Slot1" params="TValue" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/Slot.hx" module="msignal.Slot">
+	<class path="msignal.Slot0" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
+		<extends path="msignal.Slot">
+			<c path="msignal.Signal0"/>
+			<f a=""><x path="Void"/></f>
+		</extends>
+		<execute public="1" set="method" line="123">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>Executes a listener with no arguments.</haxe_doc>
+		</execute>
+		<new public="1" set="method" line="115"><f a="signal:listener:?once:?priority">
+	<c path="msignal.Signal0"/>
+	<f a=""><x path="Void"/></f>
+	<x path="Bool"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></new>
+		<haxe_doc>A slot that executes a listener with no arguments.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+		</meta>
+	</class>
+	<class path="msignal.Slot1" params="TValue" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
 		<extends path="msignal.Slot">
 			<c path="msignal.Signal1"><c path="msignal.Slot1.TValue"/></c>
 			<f a="">
@@ -12793,7 +12937,7 @@
 			<c path="msignal.Slot1.TValue"/>
 			<haxe_doc>Allows the slot to inject the argument to dispatch.</haxe_doc>
 		</param>
-		<execute public="1" set="method" line="148">
+		<execute public="1" set="method" line="150">
 			<f a="value1">
 				<c path="msignal.Slot1.TValue"/>
 				<x path="Void"/>
@@ -12801,7 +12945,7 @@
 			<haxe_doc><![CDATA[Executes a listener with one argument.
 		If <code>param</code> is not null, it overrides the value provided.]]></haxe_doc>
 		</execute>
-		<new public="1" set="method" line="139"><f a="signal:listener:?once:?priority">
+		<new public="1" set="method" line="141"><f a="signal:listener:?once:?priority">
 	<c path="msignal.Signal1"><c path="msignal.Slot1.TValue"/></c>
 	<f a="">
 		<c path="msignal.Slot1.TValue"/>
@@ -12817,7 +12961,57 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
-	<class path="msignal.SlotList" params="TSlot:TListener" file="/haxe/pixi-haxe/.haxelib/msignal/1,2,2/msignal/SlotList.hx">
+	<class path="msignal.Slot2" params="TValue1:TValue2" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
+		<extends path="msignal.Slot">
+			<c path="msignal.Signal2">
+				<c path="msignal.Slot2.TValue1"/>
+				<c path="msignal.Slot2.TValue2"/>
+			</c>
+			<f a=":">
+				<c path="msignal.Slot2.TValue1"/>
+				<c path="msignal.Slot2.TValue2"/>
+				<x path="Void"/>
+			</f>
+		</extends>
+		<param1 public="1">
+			<c path="msignal.Slot2.TValue1"/>
+			<haxe_doc>Allows the slot to inject the first argument to dispatch.</haxe_doc>
+		</param1>
+		<param2 public="1">
+			<c path="msignal.Slot2.TValue2"/>
+			<haxe_doc>Allows the slot to inject the second argument to dispatch.</haxe_doc>
+		</param2>
+		<execute public="1" set="method" line="184">
+			<f a="value1:value2">
+				<c path="msignal.Slot2.TValue1"/>
+				<c path="msignal.Slot2.TValue2"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[Executes a listener with two arguments.
+		If <code>param1</code> or <code>param2</code> is set, 
+		they override the values provided.]]></haxe_doc>
+		</execute>
+		<new public="1" set="method" line="174"><f a="signal:listener:?once:?priority">
+	<c path="msignal.Signal2">
+		<c path="msignal.Slot2.TValue1"/>
+		<c path="msignal.Slot2.TValue2"/>
+	</c>
+	<f a=":">
+		<c path="msignal.Slot2.TValue1"/>
+		<c path="msignal.Slot2.TValue2"/>
+		<x path="Void"/>
+	</f>
+	<x path="Bool"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></new>
+		<haxe_doc>A slot that executes a listener with two arguments.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+		</meta>
+	</class>
+	<class path="msignal.SlotList" params="TSlot:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/SlotList.hx">
 		<NIL public="1" static="1">
 			<c path="msignal.SlotList">
 				<d/>
@@ -12831,7 +13025,11 @@
 	<c path="msignal.SlotList.TListener"/>
 </c></tail>
 		<nonEmpty public="1"><x path="Bool"/></nonEmpty>
-		<prepend public="1" set="method" line="106">
+		<get_length set="method" line="81">
+			<f a=""><x path="Int"/></f>
+			<meta><m n=":accessor"/></meta>
+		</get_length>
+		<prepend public="1" set="method" line="107">
 			<f a="slot">
 				<c path="msignal.SlotList.TSlot"/>
 				<c path="msignal.SlotList">
@@ -12843,7 +13041,7 @@
 		@param	slot The item to be prepended.
 		@return	A list consisting of slot followed by all elements of this list.</haxe_doc>
 		</prepend>
-		<insertWithPriority public="1" set="method" line="153">
+		<insertWithPriority public="1" set="method" line="154">
 			<f a="slot">
 				<c path="msignal.SlotList.TSlot"/>
 				<c path="msignal.SlotList">
@@ -12856,7 +13054,7 @@
 		list head.
 		@param slot The item to be inserted.</haxe_doc>
 		</insertWithPriority>
-		<filterNot public="1" set="method" line="191">
+		<filterNot public="1" set="method" line="192">
 			<f a="listener">
 				<c path="msignal.SlotList.TListener"/>
 				<c path="msignal.SlotList">
@@ -12870,7 +13068,7 @@
 		@return A list consisting of all elements of this list that do not 
 				have listener.</haxe_doc>
 		</filterNot>
-		<find public="1" set="method" line="244">
+		<find public="1" set="method" line="245">
 			<f a="listener">
 				<c path="msignal.SlotList.TListener"/>
 				<c path="msignal.SlotList.TSlot"/>
@@ -18150,15 +18348,16 @@
 	 * Read-only</haxe_doc>
 		</stage>
 		<_frameCount><x path="Int"/></_frameCount>
-		<set_fps set="method" line="142"><f a="val">
+		<_animationFrameId><t path="Null"><x path="Int"/></t></_animationFrameId>
+		<set_fps set="method" line="143"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="147"><f a="val">
+		<set_skipFrame set="method" line="148"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<start public="1" set="method" line="180">
+		<start public="1" set="method" line="182">
 			<f a="?rendererType:?parentDom">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -18171,25 +18370,26 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<_onWindowResize set="method" line="224">
+		<resumeRendering public="1" set="method" line="222"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="227">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="234">
+		<_onRequestAnimationFrame set="method" line="237">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="244">
+		<addStats public="1" set="method" line="247">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
-		<new public="1" set="method" line="138"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="139"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io

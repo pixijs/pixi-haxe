@@ -205,8 +205,9 @@ class Application {
 		else renderer = new WebGLRenderer(width, height, renderingOptions);
 
 		if (roundPixels) renderer.roundPixels = true;
-
-		Browser.document.body.appendChild(renderer.view);
+		
+		if (parentDom == null) Browser.document.body.appendChild(renderer.view);
+		else parentDom.appendChild(renderer.view);
 		resumeRendering();
 		#if stats addStats(); #end
 	}
