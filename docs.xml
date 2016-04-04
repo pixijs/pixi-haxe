@@ -766,17 +766,6 @@
 	</typedef>
 	<class path="ArrayAccess" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represents the type of the elements stored.</haxe_doc></class>
-	<abstract path="UInt" params="" file="/usr/local/lib/haxe/std/UInt.hx">
-		<from><icast><x path="Int"/></icast></from>
-		<this><x path="Int"/></this>
-		<to>
-			<icast><x path="Int"/></icast>
-			<icast field="toFloat"><x path="Float"/></icast>
-		</to>
-		<haxe_doc>The unsigned Int type is only defined for Flash and C#.
-	Simulate it for other platforms.</haxe_doc>
-		<impl><class path="_UInt.UInt_Impl_" params="" file="/usr/local/lib/haxe/std/UInt.hx" private="1" module="UInt"><meta><m n=":keep"/></meta></class></impl>
-	</abstract>
 	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
@@ -13103,6 +13092,42 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
+	<class path="pixi.accessibility.AccessibilityManager" params="" file="src/pixi/accessibility/AccessibilityManager.hx" extern="1">
+		<debug public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Setting this to true will visually show the divs
+   	 *
+   	 * @type {Bool}</haxe_doc>
+		</debug>
+		<renderer public="1">
+			<c path="pixi.core.renderers.SystemRenderer"/>
+			<haxe_doc>* The renderer this accessibility manager works for.
+     *
+     * @member {SystemRenderer}</haxe_doc>
+		</renderer>
+		<capHitArea public="1" set="method"><f a="hitArea">
+	<c path="pixi.core.math.shapes.Rectangle"/>
+	<x path="Void"/>
+</f></capHitArea>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys the accessibility manager
+	 *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.SystemRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Accessibility manager reacreates the ability to tab and and have content read by screen readers. This is very important as it can possibly help people with disabilities access pixi content.
+	 * Much like interaction any DisplayObject can be made accessible. This manager will map the events as if the mouse was being used, minimizing the efferot required to implement.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param renderer {SystemRenderer} A reference to the current renderer</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.accessibility.AccessibilityManager"</e></m></meta>
+	</class>
 	<class path="pixi.core.Pixi" params="" file="src/pixi/core/Pixi.hx" extern="1">
 		<VERSION public="1" static="1">
 			<c path="String"/>
@@ -13110,23 +13135,23 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {string} VERSION</haxe_doc>
+	 * @property {String} VERSION</haxe_doc>
 		</VERSION>
 		<PI_2 public="1" static="1">
 			<x path="Float"/>
-			<haxe_doc>* @property {number} PI_2 - Two Pi
+			<haxe_doc>* @property {Float} PI_2 - Two Pi
      * @constant
      * @static</haxe_doc>
 		</PI_2>
 		<RAD_TO_DEG public="1" static="1">
 			<x path="Float"/>
-			<haxe_doc>* @property {number} RAD_TO_DEG - Constant conversion factor for converting radians to degrees
+			<haxe_doc>* @property {Float} RAD_TO_DEG - Constant conversion factor for converting radians to degrees
      * @constant
      * @static</haxe_doc>
 		</RAD_TO_DEG>
 		<DEG_TO_RAD public="1" static="1">
 			<x path="Float"/>
-			<haxe_doc>* @property {Number} DEG_TO_RAD - Constant conversion factor for converting degrees to radians
+			<haxe_doc>* @property {Float} DEG_TO_RAD - Constant conversion factor for converting degrees to radians
      * @constant
      * @static</haxe_doc>
 		</DEG_TO_RAD>
@@ -13136,7 +13161,7 @@
      *
      * @static
      * @constant
-     * @property {number} TARGET_FPMS=0.06</haxe_doc>
+     * @property {Float} TARGET_FPMS=0.06</haxe_doc>
 		</TARGET_FPMS>
 		<RENDERER_TYPE public="1" static="1">
 			<t path="pixi.core.RendererType"/>
@@ -13144,10 +13169,10 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {object} RENDERER_TYPE
-	 * @property {number} RENDERER_TYPE.UNKNOWN
-	 * @property {number} RENDERER_TYPE.WEBGL
-	 * @property {number} RENDERER_TYPE.CANVAS</haxe_doc>
+	 * @property {RendererType} RENDERER_TYPE
+	 * @property {Int} RENDERER_TYPE.UNKNOWN
+	 * @property {Int} RENDERER_TYPE.WEBGL
+	 * @property {Int} RENDERER_TYPE.CANVAS</haxe_doc>
 		</RENDERER_TYPE>
 		<BLEND_MODES public="1" static="1">
 			<t path="pixi.core.BlendModes"/>
@@ -13157,25 +13182,41 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {object} BLEND_MODES
-	 * @property {number} BLEND_MODES.NORMAL
-	 * @property {number} BLEND_MODES.ADD
-	 * @property {number} BLEND_MODES.MULTIPLY
-	 * @property {number} BLEND_MODES.SCREEN
-	 * @property {number} BLEND_MODES.OVERLAY
-	 * @property {number} BLEND_MODES.DARKEN
-	 * @property {number} BLEND_MODES.LIGHTEN
-	 * @property {number} BLEND_MODES.COLOR_DODGE
-	 * @property {number} BLEND_MODES.COLOR_BURN
-	 * @property {number} BLEND_MODES.HARD_LIGHT
-	 * @property {number} BLEND_MODES.SOFT_LIGHT
-	 * @property {number} BLEND_MODES.DIFFERENCE
-	 * @property {number} BLEND_MODES.EXCLUSION
-	 * @property {number} BLEND_MODES.HUE
-	 * @property {number} BLEND_MODES.SATURATION
-	 * @property {number} BLEND_MODES.COLOR
-	 * @property {number} BLEND_MODES.LUMINOSITY</haxe_doc>
+	 * @property {BlendModes} BLEND_MODES
+	 * @property {Int} BLEND_MODES.NORMAL
+	 * @property {Int} BLEND_MODES.ADD
+	 * @property {Int} BLEND_MODES.MULTIPLY
+	 * @property {Int} BLEND_MODES.SCREEN
+	 * @property {Int} BLEND_MODES.OVERLAY
+	 * @property {Int} BLEND_MODES.DARKEN
+	 * @property {Int} BLEND_MODES.LIGHTEN
+	 * @property {Int} BLEND_MODES.COLOR_DODGE
+	 * @property {Int} BLEND_MODES.COLOR_BURN
+	 * @property {Int} BLEND_MODES.HARD_LIGHT
+	 * @property {Int} BLEND_MODES.SOFT_LIGHT
+	 * @property {Int} BLEND_MODES.DIFFERENCE
+	 * @property {Int} BLEND_MODES.EXCLUSION
+	 * @property {Int} BLEND_MODES.HUE
+	 * @property {Int} BLEND_MODES.SATURATION
+	 * @property {Int} BLEND_MODES.COLOR
+	 * @property {Int} BLEND_MODES.LUMINOSITY</haxe_doc>
 		</BLEND_MODES>
+		<DRAW_MODES public="1" static="1">
+			<t path="pixi.core.DrawModes"/>
+			<haxe_doc>* Various webgl draw modes. These can be used to specify which GL drawMode to use
+     * under certain situations and renderers.
+     *
+     * @static
+     * @constant
+     * @property {DrawModes} DRAW_MODES
+     * @property {Int} DRAW_MODES.POINTS
+     * @property {Int} DRAW_MODES.LINES
+     * @property {Int} DRAW_MODES.LINE_LOOP
+     * @property {Int} DRAW_MODES.LINE_STRIP
+     * @property {Int} DRAW_MODES.TRIANGLES
+     * @property {Int} DRAW_MODES.TRIANGLE_STRIP
+     * @property {Int} DRAW_MODES.TRIANGLE_FAN</haxe_doc>
+		</DRAW_MODES>
 		<SCALE_MODES public="1" static="1">
 			<t path="pixi.core.ScaleModes"/>
 			<haxe_doc>* The scale modes that are supported by pixi.
@@ -13185,11 +13226,51 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {object} SCALE_MODES
-	 * @property {number} SCALE_MODES.DEFAULT=LINEAR
-	 * @property {number} SCALE_MODES.LINEAR Smooth scaling
-	 * @property {number} SCALE_MODES.NEAREST Pixelating scaling</haxe_doc>
+	 * @property {ScaleModes} SCALE_MODES
+	 * @property {Int} SCALE_MODES.DEFAULT=LINEAR
+	 * @property {Int} SCALE_MODES.LINEAR Smooth scaling
+	 * @property {Int} SCALE_MODES.NEAREST Pixelating scaling</haxe_doc>
 		</SCALE_MODES>
+		<WRAP_MODES public="1" static="1">
+			<t path="pixi.core.WrapModes"/>
+			<haxe_doc>* The wrap modes that are supported by pixi.
+     *
+     * The DEFAULT wrap mode affects the default wraping mode of future operations.
+     * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
+     * If the texture is non power of two then clamp will be used regardless as webGL can only use REPEAT if the texture is po2
+     * This property only affects WebGL
+     * @static
+     * @constant
+     * @property {WrapModes} WRAP_MODES
+     * @property {Int} WRAP_MODES.DEFAULT=CLAMP
+     * @property {Int} WRAP_MODES.CLAMP The textures uvs are clamped
+     * @property {Int} WRAP_MODES.REPEAT The texture uvs tile and repeat
+     * @property {Int} WRAP_MODES.MIRRORED_REPEAT The texture uvs tile and repeat with mirroring</haxe_doc>
+		</WRAP_MODES>
+		<GC_MODES public="1" static="1">
+			<t path="pixi.core.GCModes"/>
+			<haxe_doc>* The gc modes that are supported by pixi.
+     *
+     * The DEFAULT Garbage Collection mode for pixi textures is MANUAL
+     * If set to DEFAULT, the renderer will occasianally check textures usage. If they are not used for a specified period of time they will be removed from the GPU.
+     * They will of corse be uploaded again when they are required. This is a silent behind the scenes process that should ensure that the GPU does not  get filled up.
+     * Handy for mobile devices!
+     * This property only affects WebGL
+     * @static
+     * @constant
+     * @property {GCModes} GC_MODES
+     * @property {Int} GC_MODES.DEFAULT=DEFAULT
+     * @property {Int} GC_MODES.AUTO Garbage collection will happen periodically automatically
+     * @property {Int} GC_MODES.MANUAL Garbage collection will need to be called manually</haxe_doc>
+		</GC_MODES>
+		<MIPMAP_TEXTURES public="1" static="1">
+			<x path="Bool"/>
+			<haxe_doc>* If set to true WebGL will attempt make textures mimpaped by default
+     * Mipmapping will only succeed if the base texture uploaded has power of two dimensions
+     * @static
+     * @constant
+     * @property {Bool} MIPMAP_TEXTURES</haxe_doc>
+		</MIPMAP_TEXTURES>
 		<RETINA_PREFIX public="1" static="1">
 			<c path="String"/>
 			<haxe_doc>* The prefix that denotes a URL is for a retina asset
@@ -13207,16 +13288,16 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {object} DEFAULT_RENDER_OPTIONS
+	 * @property {DefaultRenderOptions} DEFAULT_RENDER_OPTIONS
 	 * @property {HTMLCanvasElement} DEFAULT_RENDER_OPTIONS.view=null
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.transparent=false
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.antialias=false
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.forceFXAA=false
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
-	 * @property {number} DEFAULT_RENDER_OPTIONS.resolution=1
-	 * @property {number} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
-	 * @property {boolean} DEFAULT_RENDER_OPTIONS.autoResize=false</haxe_doc>
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.transparent=false
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.antialias=false
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.forceFXAA=false
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
+	 * @property {Float} DEFAULT_RENDER_OPTIONS.resolution=1
+	 * @property {Int} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
+	 * @property {Bool} DEFAULT_RENDER_OPTIONS.autoResize=false</haxe_doc>
 		</DEFAULT_RENDER_OPTIONS>
 		<SHAPES public="1" static="1">
 			<t path="pixi.core.Shapes"/>
@@ -13224,14 +13305,15 @@
 	 *
 	 * @static
 	 * @constant
-	 * @property {object} SHAPES
-	 * @property {object} SHAPES.POLY=0
-	 * @property {object} SHAPES.RECT=1
-	 * @property {object} SHAPES.CIRC=2
-	 * @property {object} SHAPES.ELIP=3
-	 * @property {object} SHAPES.RREC=4</haxe_doc>
+	 * @property {Shapes} SHAPES
+	 * @property {Int} SHAPES.POLY=0
+	 * @property {Int} SHAPES.RECT=1
+	 * @property {Int} SHAPES.CIRC=2
+	 * @property {Int} SHAPES.ELIP=3
+	 * @property {Int} SHAPES.RREC=4</haxe_doc>
 		</SHAPES>
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
+		<SPRITE_MAX_TEXTURES public="1" static="1"><x path="Int"/></SPRITE_MAX_TEXTURES>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
 	<typedef path="pixi.core.RendererType" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
@@ -13282,6 +13364,17 @@
 	<LINEAR><x path="Int"/></LINEAR>
 	<DEFAULT><x path="Int"/></DEFAULT>
 </a></typedef>
+	<typedef path="pixi.core.WrapModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<REPEAT><x path="Int"/></REPEAT>
+	<MIRRORED_REPEAT><x path="Int"/></MIRRORED_REPEAT>
+	<DEFAULT><x path="Int"/></DEFAULT>
+	<CLAMP><x path="Int"/></CLAMP>
+</a></typedef>
+	<typedef path="pixi.core.GCModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<MANUAL><x path="Int"/></MANUAL>
+	<DEFAULT><x path="Int"/></DEFAULT>
+	<AUTO><x path="Int"/></AUTO>
+</a></typedef>
 	<typedef path="pixi.core.BlendModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<SOFT_LIGHT><x path="Int"/></SOFT_LIGHT>
 	<SCREEN><x path="Int"/></SCREEN>
@@ -13300,6 +13393,15 @@
 	<COLOR_BURN><x path="Int"/></COLOR_BURN>
 	<COLOR><x path="Int"/></COLOR>
 	<ADD><x path="Int"/></ADD>
+</a></typedef>
+	<typedef path="pixi.core.DrawModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<TRIANGLE_STRIP><x path="Int"/></TRIANGLE_STRIP>
+	<TRIANGLE_FAN><x path="Int"/></TRIANGLE_FAN>
+	<TRIANGLES><x path="Int"/></TRIANGLES>
+	<POINTS><x path="Int"/></POINTS>
+	<LINE_STRIP><x path="Int"/></LINE_STRIP>
+	<LINE_LOOP><x path="Int"/></LINE_LOOP>
+	<LINES><x path="Int"/></LINES>
 </a></typedef>
 	<typedef path="pixi.core.Shapes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<RREC><x path="Int"/></RREC>
@@ -13415,6 +13517,12 @@
 			<x path="Int"/>
 			<haxe_doc>* @member {Int}</haxe_doc>
 		</last>
+		<defaultCursorStyle public="1">
+			<c path="String"/>
+			<haxe_doc>* Every update cursor will be reset to this value, if some element wont override it in its hitTest
+     * @member {String}
+     * @default 'inherit'</haxe_doc>
+		</defaultCursorStyle>
 		<currentCursorStyle public="1">
 			<c path="String"/>
 			<haxe_doc>* The css style of the cursor that is being used
@@ -13463,13 +13571,13 @@
 	 *
 	 * @class
 	 * @memberof PIXI.interaction
-	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
-	 * @param [options] {object}
-	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
-	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.</haxe_doc>
+	 * @param renderer {SystemRenderer} A reference to the current renderer
+	 * @param [options] {InteractionManagerOptions}
+	 * @param [options.autoPreventDefault=true] {Bool} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {Int} Frequency increases the interaction events will be checked.</haxe_doc>
 			<overloads><new public="1" set="method">
 	<f a="renderer:?options">
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+		<c path="pixi.core.renderers.SystemRenderer"/>
 		<t path="pixi.interaction.InteractionManagerOptions"/>
 		<x path="Void"/>
 	</f>
@@ -13479,10 +13587,10 @@
 	 *
 	 * @class
 	 * @memberof PIXI.interaction
-	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
-	 * @param [options] {object}
-	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
-	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.</haxe_doc>
+	 * @param renderer {SystemRenderer} A reference to the current renderer
+	 * @param [options] {InteractionManagerOptions}
+	 * @param [options.autoPreventDefault=true] {Bool} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {Int} Frequency increases the interaction events will be checked.</haxe_doc>
 </new></overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.interaction.InteractionManager"</e></m></meta>
@@ -13760,7 +13868,7 @@
 	 * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
-			<c path="Array"><c path="pixi.core.renderers.webgl.filters.AbstractFilter"/></c>
+			<c path="Array"><c path="pixi.core.renderers.webgl.filters.Filter"/></c>
 			<haxe_doc><![CDATA[* Sets the filters for the displayObject.
 	 * * IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
 	 * To remove filters simply set this property to 'null'
@@ -14879,57 +14987,6 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
-	<class path="pixi.core.particles.ParticleContainer" params="" file="src/pixi/core/particles/ParticleContainer.hx" extern="1">
-		<extends path="pixi.core.display.Container"/>
-		<setProperties public="1" set="method">
-			<f a="properties">
-				<c path="Array"><x path="Bool"/></c>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Sets the private properties array to dynamic / static based on the passed properties object
-	 *
-	 * @param properties {object} The properties to be uploaded</haxe_doc>
-		</setProperties>
-		<new public="1" set="method">
-			<f a="?size:?properties:?batchSize">
-				<x path="Int"/>
-				<c path="Array"><x path="Bool"/></c>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[* The ParticleContainer class is a really fast version of the Container built solely for speed,
-	 * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
-	 * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
-	 * Any other functionality like tinting, masking, etc will not work on sprites in this batch.
-	 *
-	 * It's extremely easy to use :
-	 *
-	 * ```js
-	 * var container = new ParticleContainer();
-	 *
-	 * for (i in 0 ... 100) {
-	 *     var sprite = new Sprite.fromImage("myImage.png");
-	 *     container.addChild(sprite);
-	 * }
-	 * ```
-	 *
-	 * And here you have a hundred sprites that will be renderer at the speed of light.
-	 *
-	 * @class
-	 * @extends PIXI.Container
-	 * @memberof PIXI
-	 *
-	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
-	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
-	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
-	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
-	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
-	 * @param [properties.uvs=false] {Bool} When true, uvs be uploaded and applied.
-	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
-	 * @param [batchSize=15000] {Int} Number of particles per batch.]]></haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.particles.ParticleContainer"</e></m></meta>
-	</class>
 	<class path="pixi.core.renderers.Detector" params="" file="src/pixi/core/renderers/Detector.hx" extern="1">
 		<autoDetectRenderer public="1" set="method" static="1">
 			<f a="width:height:?options:?noWebGL">
@@ -15480,64 +15537,54 @@
 			<m n=":native"><e>"PIXI.WebGLRenderer"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.renderers.webgl.filters.AbstractFilter" params="" file="src/pixi/core/renderers/webgl/filters/AbstractFilter.hx" extern="1">
-		<padding public="1">
-			<x path="Float"/>
-			<haxe_doc>* The extra padding that the filter might need
-	 * @member {number}</haxe_doc>
-		</padding>
-		<getShader public="1" set="method"><f a="renderer">
-	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<class path="pixi.core.renderers.webgl.filters.Filter" params="" file="src/pixi/core/renderers/webgl/filters/Filter.hx" extern="1">
+		<defaultVertexSrc public="1" static="1">
+			<d/>
+			<haxe_doc>* The default vertex shader source
+	 *
+	 * @static
+	 * @constant</haxe_doc>
+		</defaultVertexSrc>
+		<defaultFragmentSrc public="1" static="1">
+			<d/>
+			<haxe_doc>* The default fragment shader source
+	 *
+	 * @static
+	 * @constant</haxe_doc>
+		</defaultFragmentSrc>
+		<vertexSrc public="1">
+			<c path="String"/>
+			<haxe_doc>* The vertex shader.
+     *
+     * @member {String}</haxe_doc>
+		</vertexSrc>
+		<fragmentSrc public="1">
+			<c path="String"/>
+			<haxe_doc>* The fragment shader.
+     *
+     * @member {String}</haxe_doc>
+		</fragmentSrc>
+		<apply public="1" set="method"><f a="filterManager:input:output:?clear">
 	<d/>
-</f></getShader>
-		<applyFilter public="1" set="method"><f a="renderer:input:output:clear">
-	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 	<d/>
 	<d/>
 	<x path="Bool"/>
 	<x path="Void"/>
-</f></applyFilter>
-		<syncUniform public="1" set="method">
-			<f a="uniform">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Syncs a uniform between the class object and the shaders.
-	 *</haxe_doc>
-		</syncUniform>
+</f></apply>
 		<new public="1" set="method">
-			<f a="vertexSrc:fragmentSrc:uniforms">
+			<f a="?vertexSrc:?fragmentSrc:?uniforms">
 				<c path="String"/>
 				<c path="String"/>
 				<d/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* This is the base class for creating a PIXI filter. Currently only WebGL supports filters.
-	 * If you want to make a custom filter this should be your base class.
-	 *
-	 * @class
+			<haxe_doc>* @class
 	 * @memberof PIXI
-	 * @param vertexSrc {String|String[]} The vertex shader source as an array of strings.
-	 * @param fragmentSrc {String|String[]} The fragment shader source as an array of strings.
-	 * @param uniforms {object} An object containing the uniforms for this filter.</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="vertexSrc:fragmentSrc:uniforms">
-		<c path="Array"><c path="String"/></c>
-		<c path="Array"><c path="String"/></c>
-		<d/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* This is the base class for creating a PIXI filter. Currently only WebGL supports filters.
-	 * If you want to make a custom filter this should be your base class.
-	 *
-	 * @class
-	 * @memberof PIXI
-	 * @param vertexSrc {String|String[]} The vertex shader source as an array of strings.
-	 * @param fragmentSrc {String|String[]} The fragment shader source as an array of strings.
-	 * @param uniforms {object} An object containing the uniforms for this filter.</haxe_doc>
-</new></overloads>
+	 * @param [vertexSrc] {String} The source of the vertex shader.
+	 * @param [fragmentSrc] {String} The source of the fragment shader.
+	 * @param [uniforms] {Dynamic} Custom uniforms to use to augment the built-in ones.</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.AbstractFilter"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.Filter"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.webgl.managers.WebGLManager" params="" file="src/pixi/core/renderers/webgl/managers/WebGLManager.hx" extern="1">
 		<onContextChange public="1" set="method">
@@ -17148,13 +17195,13 @@
 	 * @memberof PIXI.text
 	 * @param text {String} The copy that you would like the text to display
 	 * @param style {TextStyle} The style parameters
-	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
+	 * @param style.font {Dynamic} The font descriptor for the object, can be passed as a string of form
 	 * "24px FontName" or "FontName" or as an object with explicit name/size properties.
-	 * @param [style.font.name] {string} The bitmap font id
-	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect
+	 * @param [style.font.name] {String} The bitmap font id
+	 * @param [style.font.size] {Float} The size of the font in pixels, e.g. 24
+	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect
 	 *      single line text
-	 * @param [style.tint=0xFFFFFF] {number} The tint color</haxe_doc>
+	 * @param [style.tint=0xFFFFFF] {Int} The tint color</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.BitmapText"</e></m></meta>
 	</class>
@@ -17317,30 +17364,6 @@
 	 *
 	 * @member {Point}</haxe_doc>
 		</tilePosition>
-		<generateTilingTexture public="1" set="method">
-			<f a="renderer:texture:forcePowerOfTwo">
-				<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-				<c path="pixi.core.textures.Texture"/>
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Creates the tiling texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} a reference to the current renderer
-	 * @param texture {Texture} The texture to use to generate the tiling texture
-	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two</haxe_doc>
-			<overloads><generateTilingTexture public="1" set="method">
-	<f a="renderer:texture:forcePowerOfTwo">
-		<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-		<c path="pixi.core.textures.Texture"/>
-		<x path="Bool"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* Creates the tiling texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} a reference to the current renderer
-	 * @param texture {Texture} The texture to use to generate the tiling texture
-	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two</haxe_doc>
-</generateTilingTexture></overloads>
-		</generateTilingTexture>
 		<containsPoint public="1" set="method">
 			<f a="point">
 				<c path="pixi.core.math.Point"/>
@@ -17367,27 +17390,8 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.extras.TilingSprite"</e></m></meta>
 	</class>
-	<class path="pixi.filters.ascii.AsciiFilter" params="" file="src/pixi/filters/ascii/AsciiFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
-		<size public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The pixel size used by the filter.
-     *
-     * @member {number}
-     * @memberof AsciiFilter#</haxe_doc>
-		</size>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* An ASCII filter.
-	 *
-	 * @class
-	 * @extends PIXI.AbstractFilter
-	 * @memberof PIXI.filters</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.filters.AsciiFilter"</e></m></meta>
-	</class>
 	<class path="pixi.filters.blur.BlurFilter" params="" file="src/pixi/filters/blur/BlurFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<passes public="1">
 			<x path="Int"/>
 			<haxe_doc>* Sets the number of passes for blur. More passes means higher quaility bluring.
@@ -17432,7 +17436,7 @@
 		<meta><m n=":native"><e>"PIXI.filters.BlurFilter"</e></m></meta>
 	</class>
 	<class path="pixi.filters.blur.BlurXFilter" params="" file="src/pixi/filters/blur/BlurXFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<passes public="1">
 			<x path="Int"/>
 			<haxe_doc>* Sets the number of passes for blur. More passes means higher quaility bluring.
@@ -17468,7 +17472,7 @@
 		<meta><m n=":native"><e>"PIXI.filters.BlurXFilter"</e></m></meta>
 	</class>
 	<class path="pixi.filters.blur.BlurYFilter" params="" file="src/pixi/filters/blur/BlurYFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<passes public="1">
 			<x path="Int"/>
 			<haxe_doc>* Sets the number of passes for blur. More passes means higher quaility bluring.
@@ -17496,7 +17500,7 @@
 		<meta><m n=":native"><e>"PIXI.filters.BlurYFilter"</e></m></meta>
 	</class>
 	<class path="pixi.filters.blur.SmartBlurFilter" params="" file="src/pixi/filters/blur/SmartBlurFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* A Smart Blur Filter.
@@ -17507,8 +17511,8 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.SmartBlurFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.color.ColorMatrixFilter" params="" file="src/pixi/filters/color/ColorMatrixFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+	<class path="pixi.filters.colormatrix.ColorMatrixFilter" params="" file="src/pixi/filters/colormatrix/ColorMatrixFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<matrix public="1">
 			<c path="Array"><x path="Float"/></c>
 			<haxe_doc>* Sets the matrix of the color matrix filter
@@ -17695,7 +17699,7 @@
 	 * with a new set of RGBA color and alpha values. It's pretty powerful!
 	 *
 	 * ```js
-	 *  var colorMatrix = new PIXI.ColorMatrixFilter();
+	 *  var colorMatrix = new ColorMatrixFilter();
 	 *  container.filters = [colorMatrix];
 	 *  colorMatrix.contrast(2);
 	 * ```
@@ -17706,97 +17710,79 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.ColorMatrixFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.color.ColorStepFilter" params="" file="src/pixi/filters/color/ColorStepFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
-		<step public="1">
-			<x path="Int"/>
-			<haxe_doc>* The number of steps to reduce the palette by.
+	<class path="pixi.filters.displacement.DisplacementFilter" params="" file="src/pixi/filters/displacement/DisplacementFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
+		<map public="1">
+			<c path="pixi.core.textures.Texture"/>
+			<haxe_doc>* The texture used for the displacement map. Must be power of 2 sized texture.
      *
-     * @member {Int}
-     * @memberof ColorStepFilter#</haxe_doc>
-		</step>
+     * @member {Texture}
+     * @memberof PIXI.filters.DisplacementFilter#</haxe_doc>
+		</map>
 		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* This lowers the color depth of your image by the given amount, producing an image with a smaller palette.
+			<f a="sprite:?scale">
+				<c path="pixi.core.sprites.Sprite"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The DisplacementFilter class uses the pixel values from the specified texture (called the displacement map) to perform a displacement of an object.
+	 * You can use this filter to apply all manor of crazy warping effects
+	 * Currently the r property of the texture is used to offset the x and the g property of the texture is used to offset the y.
 	 *
 	 * @class
-	 * @extends AbstractFilter
+	 * @extends Filter
+	 * @memberof PIXI.filters
+	 * @param sprite {Sprite} the sprite used for the displacement map. (make sure its added to the scene!)</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.filters.DisplacementFilter"</e></m></meta>
+	</class>
+	<class path="pixi.filters.fxaa.FXAAFilter" params="" file="src/pixi/filters/fxaa/FXAAFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* An ASCII filter.
+	 *
+	 * @class
+	 * @extends PIXI.AbstractFilter
 	 * @memberof PIXI.filters</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.filters.ColorStepFilter"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.filters.FXAAFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.dropshadow.DropShadowFilter" params="" file="src/pixi/filters/dropshadow/DropShadowFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
-		<blur public="1">
+	<class path="pixi.filters.godray.GodrayFilter" params="" file="src/pixi/filters/godray/GodrayFilter.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
+		<offset public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* This point describes the the offset of the twist.
+     *
+     * @member {Point}
+     * @memberof PIXI.filters.GodrayFilter#</haxe_doc>
+		</offset>
+		<radius public="1">
 			<x path="Float"/>
-			<haxe_doc>* Sets the strength of both the blurX and blurY properties simultaneously
+			<haxe_doc>* This radius of the twist.
      *
      * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 2</haxe_doc>
-		</blur>
-		<blurX public="1">
-			<x path="Float"/>
-			<haxe_doc>* Sets the strength of the blurX property
-     *
-     * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 2</haxe_doc>
-		</blurX>
-		<blurY public="1">
-			<x path="Float"/>
-			<haxe_doc>* Sets the strength of the blurY property
-     *
-     * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 2</haxe_doc>
-		</blurY>
-		<color public="1">
-			<x path="UInt"/>
-			<haxe_doc>* Sets the color of the shadow
-     *
-     * @member {UInt}
-     * @memberOf DropShadowFilter#
-     * @default 0x000000</haxe_doc>
-		</color>
-		<alpha public="1">
-			<x path="Float"/>
-			<haxe_doc>* Sets the alpha of the shadow
-     *
-     * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 0.75</haxe_doc>
-		</alpha>
-		<distance public="1">
-			<x path="Float"/>
-			<haxe_doc>* Sets the distance of the shadow
-     *
-     * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 10</haxe_doc>
-		</distance>
+     * @memberof PIXI.filters.GodrayFilter#</haxe_doc>
+		</radius>
 		<angle public="1">
 			<x path="Float"/>
-			<haxe_doc>* Sets the angle of the shadow
+			<haxe_doc>* This angle of the twist.
      *
      * @member {Float}
-     * @memberOf DropShadowFilter#
-     * @default 45 * Math.PI / 180</haxe_doc>
+     * @memberof PIXI.filters.GodrayFilter#</haxe_doc>
 		</angle>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
-			<haxe_doc>* The DropShadowFilter applies a Gaussian blur to an object.
-	 * The strength of the blur can be set for x- and y-axis separately.
+			<haxe_doc>* This filter applies a twist effect making display objects appear twisted in the given direction.
 	 *
-	 * @author goodboydigital
 	 * @class
-	 * @extends AbstractFilter
+	 * @extends Filter
 	 * @memberof PIXI.filters</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.filters.DropShadowFilter"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.filters.GodrayFilter"</e></m></meta>
 	</class>
 	<class path="pixi.filters.gray.GrayFilter" params="" file="src/pixi/filters/gray/GrayFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<gray public="1">
 			<x path="Float"/>
 			<haxe_doc>* The strength of the gray. 1 will make the object black and white, 0 will make the object its normal color.
@@ -17814,28 +17800,8 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.filters.GrayFilter"</e></m></meta>
 	</class>
-	<class path="pixi.filters.pixelate.PixelateFilter" params="" file="src/pixi/filters/pixelate/PixelateFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
-		<size public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* This a point that describes the size of the blocks.
-     * x is the width of the block and y is the height.
-     *
-     * @member {Point}
-     * @memberof PixelateFilter#</haxe_doc>
-		</size>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* This filter applies a pixelate effect making display objects appear 'blocky'.
-	 *
-	 * @class
-	 * @extends PIXI.AbstractFilter
-	 * @memberof PIXI.filters</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.filters.PixelateFilter"</e></m></meta>
-	</class>
 	<class path="pixi.filters.twist.TwistFilter" params="" file="src/pixi/filters/twist/TwistFilter.hx" extern="1">
-		<extends path="pixi.core.renderers.webgl.filters.AbstractFilter"/>
+		<extends path="pixi.core.renderers.webgl.filters.Filter"/>
 		<offset public="1">
 			<c path="pixi.core.math.Point"/>
 			<haxe_doc>* This point describes the the offset of the twist.
@@ -17893,15 +17859,10 @@
      *
      * @member {Event}</haxe_doc>
 		</originalEvent>
-		<identifier public="1">
-			<x path="Int"/>
-			<haxe_doc>* Touch identifier
-     *
-     * @member {Event}</haxe_doc>
-		</identifier>
 		<getLocalPosition public="1" set="method">
-			<f a="displayObject:?point">
+			<f a="displayObject:?point:?globalPos">
 				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.math.Point"/>
 			</f>
@@ -17909,6 +17870,7 @@
 	 *
 	 * @param displayObject {DisplayObject} The DisplayObject that you would like the local coords off
 	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new point)
+	 * @param [globalPos] {Point} A Point object containing your custom global coords, optional (otherwise will use the current global coords)
 	 * @return {Point} A point containing the coordinates of the InteractionData position relative to the DisplayObject</haxe_doc>
 		</getLocalPosition>
 		<new public="1" set="method">
@@ -18218,6 +18180,41 @@
 	<TRIANGLE_MESH><x path="Int"/></TRIANGLE_MESH>
 	<TRIANGLES><x path="Int"/></TRIANGLES>
 </a></typedef>
+	<class path="pixi.mesh.Plane" params="" file="src/pixi/mesh/Plane.hx" extern="1">
+		<extends path="pixi.mesh.Mesh"/>
+		<segmentsX public="1"><x path="Int"/></segmentsX>
+		<segmentsY public="1"><x path="Int"/></segmentsY>
+		<refresh public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Refreshes
+	 *</haxe_doc>
+		</refresh>
+		<new public="1" set="method">
+			<f a="texture:segmentsX:segmentsY">
+				<c path="pixi.core.textures.Texture"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The Plane allows you to draw a texture across several points and them manipulate these points
+	 *
+	 *```haxe
+	 * for (var i in 0 ... 20) {
+	 *     points.push(new Point(i * 50, 0));
+	 * };
+	 * var Plane = new Plane(Texture.fromImage("snake.png"), points);
+	 *  ```
+	 *
+	 * @class
+	 * @extends PIXI.mesh.Mesh
+	 * @memberof PIXI.mesh
+	 * @param {Texture} texture - The texture to use on the Plane.
+	 * @param {Int} segmentsX - The number ox x segments
+	 * @param {Int} segmentsY - The number of y segments
+	 *</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.mesh.Plane"</e></m></meta>
+	</class>
 	<class path="pixi.mesh.Rope" params="" file="src/pixi/mesh/Rope.hx" extern="1">
 		<extends path="pixi.mesh.Mesh"/>
 		<points public="1"><c path="Array"><c path="pixi.core.math.Point"/></c></points>
@@ -18250,6 +18247,57 @@
 	 *]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.mesh.Rope"</e></m></meta>
+	</class>
+	<class path="pixi.particles.ParticleContainer" params="" file="src/pixi/particles/ParticleContainer.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<setProperties public="1" set="method">
+			<f a="properties">
+				<c path="Array"><x path="Bool"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the private properties array to dynamic / static based on the passed properties object
+	 *
+	 * @param properties {object} The properties to be uploaded</haxe_doc>
+		</setProperties>
+		<new public="1" set="method">
+			<f a="?size:?properties:?batchSize">
+				<x path="Int"/>
+				<c path="Array"><x path="Bool"/></c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* The ParticleContainer class is a really fast version of the Container built solely for speed,
+	 * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
+	 * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
+	 * Any other functionality like tinting, masking, etc will not work on sprites in this batch.
+	 *
+	 * It's extremely easy to use :
+	 *
+	 * ```js
+	 * var container = new ParticleContainer();
+	 *
+	 * for (i in 0 ... 100) {
+	 *     var sprite = new Sprite.fromImage("myImage.png");
+	 *     container.addChild(sprite);
+	 * }
+	 * ```
+	 *
+	 * And here you have a hundred sprites that will be renderer at the speed of light.
+	 *
+	 * @class
+	 * @extends Container
+	 * @memberof PIXI
+	 *
+	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
+	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
+	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
+	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
+	 * @param [properties.uvs=false] {Bool} When true, uvs be uploaded and applied.
+	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
+	 * @param [batchSize=15000] {Int} Number of particles per batch.]]></haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.particles.ParticleContainer"</e></m></meta>
 	</class>
 	<class path="pixi.plugins.app.Application" params="" file="src/pixi/plugins/app/Application.hx">
 		<pixelRatio public="1">

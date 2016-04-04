@@ -1,7 +1,7 @@
 package samples.bunnymark;
 
+import pixi.particles.ParticleContainer;
 import pixi.core.math.shapes.Rectangle;
-import pixi.core.particles.ParticleContainer;
 import js.html.DivElement;
 import js.Browser;
 import pixi.core.display.Container;
