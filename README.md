@@ -1,6 +1,6 @@
 [![Haxelib version](https://badge.fury.io/gh/pixijs%2Fpixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
-![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
+![haxe pixi logo](logo.png)
 
 Externs of Pixi.js v3.x for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
 
