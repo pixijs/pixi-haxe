@@ -1,9 +1,9 @@
 package pixi.filters.gray;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.GrayFilter")
-extern class GrayFilter extends AbstractFilter {
+extern class GrayFilter extends Filter {
 
 	/**
 	 * This filter applies a pixelate effect making display objects appear 'blocky'.

@@ -1,4 +1,4 @@
-package pixi.core.particles;
+package pixi.particles;
 
 import pixi.core.display.Container;
 
@@ -25,7 +25,7 @@ extern class ParticleContainer extends Container {
 	 * And here you have a hundred sprites that will be renderer at the speed of light.
 	 *
 	 * @class
-	 * @extends PIXI.Container
+	 * @extends Container
 	 * @memberof PIXI
 	 *
 	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.

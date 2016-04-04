@@ -1,9 +1,9 @@
 package pixi.filters.blur;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.SmartBlurFilter")
-extern class SmartBlurFilter extends AbstractFilter {
+extern class SmartBlurFilter extends Filter {
 
 	/**
 	 * A Smart Blur Filter.

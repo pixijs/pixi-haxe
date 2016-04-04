@@ -1,6 +1,6 @@
 package pixi.core.display;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 import pixi.interaction.InteractionManager;
 import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
@@ -264,7 +264,7 @@ extern class DisplayObject extends InteractionManager {
 	 * @member {Array<AbstractFilter>}
 	 * @memberof DisplayObject#
 	 */
-	var filters:Array<AbstractFilter>;
+	var filters:Array<Filter>;
 
 	/**
 	 * Indicates if the displayObject is interactive or not.

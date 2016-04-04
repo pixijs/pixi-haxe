@@ -1,9 +1,9 @@
 package pixi.filters.blur;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.BlurFilter")
-extern class BlurFilter extends AbstractFilter {
+extern class BlurFilter extends Filter {
 
 	/**
 	 * The BlurFilter applies a Gaussian blur to an object.

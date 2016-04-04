@@ -36,15 +36,6 @@ extern class TilingSprite extends Sprite {
 	var tilePosition:Point;
 
 	/**
-	 * Creates the tiling texture
-	 * @param renderer {CanvasRenderer|WebGLRenderer} a reference to the current renderer
-	 * @param texture {Texture} The texture to use to generate the tiling texture
-	 * @param forcePowerOfTwo {Bool} Whether we want to force the texture to be a power of two
-	 */
-	@:overload( function(renderer:WebGLRenderer, texture:Texture, forcePowerOfTwo:Bool):Void {})
-	function generateTilingTexture(renderer:CanvasRenderer, texture:Texture, forcePowerOfTwo:Bool):Void;
-
-	/**
 	 * Checks if a point is inside this tiling sprite
 	 * @param point {Point} the point to check
 	 */
