@@ -11,12 +11,12 @@
 		"extern",
 		"web"
 	],
-	"description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
+	"description": "Externs of pixi.js v4.x for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor bug fix in Application class",
-	"version": "3.1.0",
+	"releasenote": "v4 update",
+	"version": "4.0.0-rc.1",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

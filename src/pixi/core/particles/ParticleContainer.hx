@@ -2,7 +2,7 @@ package pixi.core.particles;
 
 import pixi.core.display.Container;
 
-@:native("PIXI.ParticleContainer")
+@:native("PIXI.particles.ParticleContainer")
 extern class ParticleContainer extends Container {
 
 	/**

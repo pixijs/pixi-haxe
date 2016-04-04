@@ -196,7 +196,7 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		if(this.roundPixels) this.renderer.roundPixels = true;
-		window.document.body.appendChild(this.renderer.view);
+		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
 		this.resumeRendering();
 		this.addStats();
 	}
@@ -235,25 +235,17 @@ samples_bitmapfont_Main.main = function() {
 samples_bitmapfont_Main.__super__ = pixi_plugins_app_Application;
 samples_bitmapfont_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
-		this.backgroundColor = 16777215;
+		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		var fontloader = new PIXI.loaders.Loader();
 		fontloader.add("font","assets/fonts/desyrel.xml");
-		fontloader.add("bg","assets/basics/bg.json");
 		fontloader.load($bind(this,this._onLoaded));
 	}
 	,_onLoaded: function() {
 		var bitmapFontText = new PIXI.extras.BitmapText("bitmap fonts are\n now supported!",{ font : "60px Desyrel"});
 		bitmapFontText.position.x = (window.innerWidth - bitmapFontText.width) / 2;
 		bitmapFontText.position.y = (window.innerHeight - bitmapFontText.height) / 2;
-		var left = new PIXI.Sprite(PIXI.Texture.fromFrame("left.jpg"));
-		this.stage.addChild(left);
-		var center = new PIXI.Sprite(PIXI.Texture.fromFrame("center.jpg"));
-		center.position.x = left.width;
-		this.stage.addChild(center);
-		var right = new PIXI.Sprite(PIXI.Texture.fromFrame("right.jpg"));
-		right.position.x = center.position.x + center.width;
-		this.stage.addChild(right);
+		this.stage.addChild(bitmapFontText);
 	}
 });
 var $_, $fid = 0;

@@ -1,10 +1,10 @@
-[![Haxelib version](https://badge.fury.io/gh/pixijs%2Fpixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=master)](https://travis-ci.org/pixijs/pixi-haxe) [![Stories in Ready](https://badge.waffle.io/pixijs/pixi-haxe.png?label=ready&title=Ready)](https://waffle.io/pixijs/pixi-haxe) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Haxelib Version](https://badge.fury.io/gh/pixijs%2Fpixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =========
-![haxe pixi logo](https://raw.githubusercontent.com/pixijs/pixi-haxe/master/logo.png)
+![haxe pixi logo](logo.png)
 
-Externs of Pixi.js v3.x for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
+Externs of Pixi.js v4.x for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
 
-### Installation ###
+### Installation
 
 ```
 haxelib install pixijs
@@ -14,21 +14,16 @@ or via npm
 npm install hxpixijs
 ```
 
-### API Documentation ###
-
-[Documentation](http://adireddy.github.io/docs/pixi-haxe/)
-
-### Issues ###
+### Issues
 
 Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
 
-### Demos ###
+### Demos
 
 * [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
 * [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
 * [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
 * [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
-* [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
 * [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
 * [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
 * [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
@@ -40,23 +35,17 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
 * [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
 * [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
-* [Device Info](http://adireddy.github.io/demos/pixi-haxe/deviceinfo.html)
-* [Device Detection](http://adireddy.github.io/demos/pixi-haxe/devicedetection.html)
-
-**Plugins**
-
-* [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
 
 **Filters (WebGL only)**
 
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
 * [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
-**[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using haxe and pixi.js
+**[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using Haxe and Pixi.js
 
 Look at the `samples` folder for the source code of above examples.
 
-### Usage ###
+### Usage
 
 ```haxe
 
@@ -106,7 +95,7 @@ class Main {
 }
 ```
 
-### Licensing Information ###
+### Licensing Information
 
 <a rel="license" href="http://opensource.org/licenses/MIT">
 <img alt="MIT license" height="40" src="http://upload.wikimedia.org/wikipedia/commons/c/c3/License_icon-mit.svg" /></a>
@@ -115,6 +104,6 @@ This content is released under the [MIT](http://opensource.org/licenses/MIT) Lic
 
 [Pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
 
-### Contributor Code of Conduct ###
+### Contributor Code of Conduct
 
-[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.3.0](http://contributor-covenant.org/version/1/3/0/)
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.4](http://contributor-covenant.org/version/1/4)
