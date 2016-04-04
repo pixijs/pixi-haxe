@@ -1,5 +1,6 @@
 package pixi.interaction;
 
+import js.html.Event;
 import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
@@ -16,12 +17,12 @@ extern class InteractionManager extends EventEmitter {
 	 *
 	 * @class
 	 * @memberof PIXI.interaction
-	 * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
-	 * @param [options] {object}
-	 * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
-	 * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.
+	 * @param renderer {SystemRenderer} A reference to the current renderer
+	 * @param [options] {InteractionManagerOptions}
+	 * @param [options.autoPreventDefault=true] {Bool} Should the manager automatically prevent default browser actions.
+	 * @param [options.interactionFrequency=10] {Int} Frequency increases the interaction events will be checked.
 	 */
-	@:overload(function(renderer:CanvasRenderer, ?options:InteractionManagerOptions):Void {})
+	@:overload(function(renderer:SystemRenderer, ?options:InteractionManagerOptions):Void {})
 	function new(renderer:WebGLRenderer);
 
 	/**
@@ -117,6 +118,13 @@ extern class InteractionManager extends EventEmitter {
      * @member {Int}
      */
 	var last:Int;
+
+	/**
+     * Every update cursor will be reset to this value, if some element wont override it in its hitTest
+     * @member {String}
+     * @default 'inherit'
+     */
+	var defaultCursorStyle:String;
 
 	/**
      * The css style of the cursor that is being used

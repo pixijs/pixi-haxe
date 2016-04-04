@@ -37,20 +37,13 @@ extern class InteractionData {
      */
 	var originalEvent:Event;
 
-
-	/**
-     * Touch identifier
-     *
-     * @member {Event}
-     */
-	var identifier:Int;
-
 	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData
 	 *
 	 * @param displayObject {DisplayObject} The DisplayObject that you would like the local coords off
 	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new point)
+	 * @param [globalPos] {Point} A Point object containing your custom global coords, optional (otherwise will use the current global coords)
 	 * @return {Point} A point containing the coordinates of the InteractionData position relative to the DisplayObject
 	 */
-	function getLocalPosition(displayObject:DisplayObject, ?point:Point):Point;
+	function getLocalPosition(displayObject:DisplayObject, ?point:Point, ?globalPos:Point):Point;
 }
