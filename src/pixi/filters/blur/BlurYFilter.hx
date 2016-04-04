@@ -1,9 +1,9 @@
 package pixi.filters.blur;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.BlurYFilter")
-extern class BlurYFilter  extends AbstractFilter {
+extern class BlurYFilter  extends Filter {
 
 	/**
 	 * TheBlurYFilter applies a vertical Gaussian blur to an object.

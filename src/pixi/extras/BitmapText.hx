@@ -25,13 +25,13 @@ extern class BitmapText extends Container {
 	 * @memberof PIXI.text
 	 * @param text {String} The copy that you would like the text to display
 	 * @param style {TextStyle} The style parameters
-	 * @param style.font {string|object} The font descriptor for the object, can be passed as a string of form
+	 * @param style.font {Dynamic} The font descriptor for the object, can be passed as a string of form
 	 * "24px FontName" or "FontName" or as an object with explicit name/size properties.
-	 * @param [style.font.name] {string} The bitmap font id
-	 * @param [style.font.size] {number} The size of the font in pixels, e.g. 24
-	 * @param [style.align='left'] {string} Alignment for multiline text ('left', 'center' or 'right'), does not affect
+	 * @param [style.font.name] {String} The bitmap font id
+	 * @param [style.font.size] {Float} The size of the font in pixels, e.g. 24
+	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect
 	 *      single line text
-	 * @param [style.tint=0xFFFFFF] {number} The tint color
+	 * @param [style.tint=0xFFFFFF] {Int} The tint color
 	 */
 	function new(text:String, ?style:BitmapTextStyle):Void;
 

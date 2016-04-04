@@ -1,9 +1,9 @@
-package pixi.filters.color;
+package pixi.filters.colormatrix;
 
-import pixi.core.renderers.webgl.filters.AbstractFilter;
+import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.ColorMatrixFilter")
-extern class ColorMatrixFilter extends AbstractFilter {
+extern class ColorMatrixFilter extends Filter {
 
 	/**
 	 * The ColorMatrixFilter class lets you apply a 5x5 matrix transformation on the RGBA
@@ -11,7 +11,7 @@ extern class ColorMatrixFilter extends AbstractFilter {
 	 * with a new set of RGBA color and alpha values. It's pretty powerful!
 	 *
 	 * ```js
-	 *  var colorMatrix = new PIXI.ColorMatrixFilter();
+	 *  var colorMatrix = new ColorMatrixFilter();
 	 *  container.filters = [colorMatrix];
 	 *  colorMatrix.contrast(2);
 	 * ```

@@ -247,6 +247,7 @@ samples_textureswap_Main.prototype = $extend(pixi_plugins_app_Application.protot
 		this._bunny.position.set(window.innerWidth / 2,window.innerHeight / 2);
 		this._bunny.interactive = true;
 		this._bunny.on("click",$bind(this,this._onClick));
+		this._bunny.on("tap",$bind(this,this._onClick));
 		this.stage.addChild(this._bunny);
 	}
 	,_onClick: function(target) {

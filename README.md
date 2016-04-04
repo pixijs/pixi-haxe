@@ -1,4 +1,4 @@
-[![Haxelib Version](https://badge.fury.io/gh/pixijs%2Fpixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)
 =========
 ![haxe pixi logo](logo.png)
 
@@ -26,6 +26,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
 * [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
 * [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
+* [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
 * [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
 * [Bitmap Font](http://adireddy.github.io/demos/pixi-haxe/bitmapfont.html)
 * [Alpha Mask](http://adireddy.github.io/demos/pixi-haxe/alphamask.html)
