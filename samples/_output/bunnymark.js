@@ -200,7 +200,7 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
 		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
 		if(this.roundPixels) this.renderer.roundPixels = true;
-		window.document.body.appendChild(this.renderer.view);
+		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
 		this.resumeRendering();
 		this.addStats();
 	}
@@ -282,7 +282,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		window.document.body.appendChild(this.counter);
 		this.count = this.startBunnyCount;
 		this.counter.innerHTML = this.count + " BUNNIES";
-		this.container = new PIXI.ParticleContainer(200000,[false,true,false,false,false]);
+		this.container = new PIXI.particles.ParticleContainer(200000,[false,true,false,false,false]);
 		this.stage.addChild(this.container);
 		this.wabbitTexture = PIXI.Texture.fromImage("assets/bunnymark/bunnys.png");
 		var bunny1 = new PIXI.Texture(this.wabbitTexture.baseTexture,new PIXI.Rectangle(2,47,26,37));

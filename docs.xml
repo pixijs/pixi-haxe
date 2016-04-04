@@ -14928,7 +14928,7 @@
 	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.]]></haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.ParticleContainer"</e></m></meta>
+		<meta><m n=":native"><e>"PIXI.particles.ParticleContainer"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.Detector" params="" file="src/pixi/core/renderers/Detector.hx" extern="1">
 		<autoDetectRenderer public="1" set="method" static="1">
@@ -18370,22 +18370,22 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="222"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="227">
+		<resumeRendering public="1" set="method" line="223"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="228">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="237">
+		<_onRequestAnimationFrame set="method" line="238">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="247">
+		<addStats public="1" set="method" line="248">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
