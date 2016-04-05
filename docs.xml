@@ -7086,6 +7086,29 @@
 		<getSVGDocument public="1" set="method"><f a=""><c path="js.html.HTMLDocument"/></f></getSVGDocument>
 		<meta><m n=":native"><e>"HTMLIFrameElement"</e></m></meta>
 	</class>
+	<class path="js.html.ImageData" params="" file="/usr/local/lib/haxe/std/js/html/ImageData.hx" extern="1">
+		<width public="1" set="null"><x path="Int"/></width>
+		<height public="1" set="null"><x path="Int"/></height>
+		<data public="1" set="null"><c path="js.html.Uint8ClampedArray"/></data>
+		<new public="1" set="method">
+			<f a="data:sw:?sh">
+				<c path="js.html.Uint8ClampedArray"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="sw:sh">
+		<x path="Int"/>
+		<x path="Int"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>@throws DOMError</haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"ImageData"</e></m></meta>
+	</class>
 	<class path="js.html.ImageElement" params="" file="/usr/local/lib/haxe/std/js/html/ImageElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<alt public="1"><c path="String"/></alt>
@@ -7111,41 +7134,6 @@
 		<x public="1" set="null"><x path="Int"/></x>
 		<y public="1" set="null"><x path="Int"/></y>
 		<meta><m n=":native"><e>"HTMLImageElement"</e></m></meta>
-	</class>
-	<class path="js.html.Image" params="" file="/usr/local/lib/haxe/std/js/html/Image.hx" extern="1">
-		<extends path="js.html.ImageElement"/>
-		<new public="1" set="method">
-			<f a="?width:?height">
-				<x path="Int"/>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>@throws DOMError</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"Image"</e></m></meta>
-	</class>
-	<class path="js.html.ImageData" params="" file="/usr/local/lib/haxe/std/js/html/ImageData.hx" extern="1">
-		<width public="1" set="null"><x path="Int"/></width>
-		<height public="1" set="null"><x path="Int"/></height>
-		<data public="1" set="null"><c path="js.html.Uint8ClampedArray"/></data>
-		<new public="1" set="method">
-			<f a="data:sw:?sh">
-				<c path="js.html.Uint8ClampedArray"/>
-				<x path="Int"/>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>@throws DOMError</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="sw:sh">
-		<x path="Int"/>
-		<x path="Int"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>@throws DOMError</haxe_doc>
-</new></overloads>
-		</new>
-		<meta><m n=":native"><e>"ImageData"</e></m></meta>
 	</class>
 	<class path="js.html.InputElement" params="" file="/usr/local/lib/haxe/std/js/html/InputElement.hx" extern="1">
 		<extends path="js.html.Element"/>
@@ -16282,6 +16270,72 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.BaseTexture"</e></m></meta>
 	</class>
+	<class path="pixi.core.textures.BaseRenderTexture" params="" file="src/pixi/core/textures/BaseRenderTexture.hx" extern="1">
+		<extends path="pixi.core.textures.BaseTexture"/>
+		<resize public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the BaseRenderTexture.
+	 *
+	 * @param width {Float} The width to resize to.
+	 * @param height {Float} The height to resize to.</haxe_doc>
+		</resize>
+		<new public="1" set="method">
+			<f a="?width:?height:?scaleMode:?resolution">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A BaseRenderTexture is a special texture that allows any Pixi display object to be rendered to it.
+	 *
+	 * __Hint__: All DisplayObjects (i.e. Sprites) that render to a BaseRenderTexture should be preloaded
+	 * otherwise black rectangles will be drawn instead.
+	 *
+	 * A BaseRenderTexture takes a snapshot of any Display Object given to its render method. The position
+	 * and rotation of the given Display Objects is ignored. For example:
+	 *
+	 * ```js
+	 * var renderer = PIXI.autoDetectRenderer(1024, 1024, { view: canvas, ratio: 1 });
+	 * var BaserenderTexture = new PIXI.BaseRenderTexture(renderer, 800, 600);
+	 * var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
+	 *
+	 * sprite.position.x = 800/2;
+	 * sprite.position.y = 600/2;
+	 * sprite.anchor.x = 0.5;
+	 * sprite.anchor.y = 0.5;
+	 *
+	 * BaserenderTexture.render(sprite);
+	 * ```
+	 *
+	 * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
+	 * position a Container should be used:
+	 *
+	 * ```haxe
+	 * var doc = new Container();
+	 *
+	 * doc.addChild(sprite);
+	 *
+	 * var baseRenderTexture = new BaserenderTexture(100, 100);
+	 * var renderTexture = new RenderTexture(baseRenderTexture);
+	 *
+	 * renderer.render(doc, renderTexture);  // Renders to center of RenderTexture
+	 * ```
+	 *
+	 * @class
+	 * @extends BaseTexture
+	 * @memberof PIXI
+	 * @param [width=100] {Float} The width of the base render texture
+	 * @param [height=100] {Float} The height of the base render texture
+	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
+	 * @param [resolution=1] {Float} The resolution of the texture being generated</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.BaseRenderTexture"</e></m></meta>
+	</class>
 	<class path="pixi.core.textures.Texture" params="" file="src/pixi/core/textures/Texture.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
@@ -16527,43 +16581,20 @@
 	</class>
 	<class path="pixi.core.textures.RenderTexture" params="" file="src/pixi/core/textures/RenderTexture.hx" extern="1">
 		<extends path="pixi.core.textures.Texture"/>
-		<resolution public="1">
-			<x path="Float"/>
-			<haxe_doc>* The Resolution of the texture.
-	 *
-	 * @member {Float}</haxe_doc>
-		</resolution>
-		<renderer public="1">
-			<d/>
-			<haxe_doc>* The renderer this RenderTexture uses. A RenderTexture can only belong to one renderer at the moment if its webGL.
-	 *
-	 * @member {CanvasRenderer|WebGLRenderer}</haxe_doc>
-		</renderer>
-		<render public="1" set="method">
-			<f a="displayObject:matrix:?clear:?updateTransform" v="::false:true">
-				<c path="pixi.core.display.DisplayObject"/>
-				<c path="pixi.core.math.Matrix"/>
-				<x path="Bool"/>
-				<x path="Bool"/>
+		<create public="1" set="method" static="1">
+			<f a="?width:?height:?scaleMode:?resolution">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<x path="Float"/>
 				<x path="Void"/>
 			</f>
-			<meta><m n=":value"><e>{updateTransform:true,clear:false}</e></m></meta>
-			<haxe_doc>* Draw/render the given DisplayObject onto the texture.
-	 *
-	 * The displayObject and descendents are transformed during this operation.
-	 * If `updateTransform` is true then the transformations will be restored before the
-	 * method returns. Otherwise it is up to the calling code to correctly use or reset
-	 * the transformed display objects.
-	 *
-	 * The display object is always rendered with a worldAlpha value of 1.
-	 *
-	 * @method
-	 * @param displayObject {PIXI.DisplayObject} The display object to render this texture on
-	 * @param [matrix] {PIXI.Matrix} Optional matrix to apply to the display object before rendering.
-	 * @param [clear=false] {boolean} If true the texture will be cleared before the displayObject is drawn
-	 * @param [updateTransform=true] {boolean} If true the displayObject's worldTransform/worldAlpha and all children
-	 *  transformations will be restored. Not restoring this information will be a little faster.</haxe_doc>
-		</render>
+			<haxe_doc>* A short hand way of creating a render texture..
+	 * @param [width=100] {Float} The width of the render texture
+	 * @param [height=100] {Float} The height of the render texture
+	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
+	 * @param [resolution=1] {Float} The resolution of the texture being generated</haxe_doc>
+		</create>
 		<resize public="1" set="method">
 			<f a="width:height:updateBase">
 				<x path="Float"/>
@@ -16577,54 +16608,10 @@
 	 * @param height {Float} The height to resize to.
 	 * @param updateBase {Bool} Should the baseTexture.width and height values be resized as well?</haxe_doc>
 		</resize>
-		<clear public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Clears the RenderTexture.
-	 *</haxe_doc>
-		</clear>
-		<getImage public="1" set="method">
-			<f a=""><c path="js.html.Image"/></f>
-			<haxe_doc>* Will return a HTML Image of the texture
-	 *
-	 * @return {Image}</haxe_doc>
-		</getImage>
-		<getBase64 public="1" set="method">
-			<f a=""><c path="String"/></f>
-			<haxe_doc>* Will return a a base64 encoded string of this texture. It works by calling RenderTexture.getCanvas and then running toDataURL on that.
-	 *
-	 * @return {String} A base64 encoded string of the texture.</haxe_doc>
-		</getBase64>
-		<getCanvas public="1" set="method">
-			<f a=""><c path="js.html.CanvasElement"/></f>
-			<haxe_doc>* Creates a Canvas element, renders this RenderTexture to it and then returns it.
-	 *
-	 * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.</haxe_doc>
-		</getCanvas>
-		<getPixel public="1" set="method">
-			<f a="x:y">
-				<x path="Float"/>
-				<x path="Float"/>
-				<c path="js.html.Uint8ClampedArray"/>
-			</f>
-			<haxe_doc>* Will return a one-dimensional array containing the pixel data of a pixel within the texture in RGBA order, with integer values between 0 and 255 (included).
-	 *
-	 * @param x {number} The x coordinate of the pixel to retrieve.
-	 * @param y {number} The y coordinate of the pixel to retrieve.
-	 * @return {Uint8ClampedArray}</haxe_doc>
-		</getPixel>
-		<getPixels public="1" set="method">
-			<f a=""><c path="js.html.Uint8ClampedArray"/></f>
-			<haxe_doc>* Will return a one-dimensional array containing the pixel data of the entire texture in RGBA order, with integer values between 0 and 255 (included).
-	 *
-	 * @return {Uint8ClampedArray}</haxe_doc>
-		</getPixels>
 		<new public="1" set="method">
-			<f a="renderer:?width:?height:?scaleMode:?resolution">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Int"/>
-				<x path="Float"/>
+			<f a="baseRenderTexture:frame">
+				<c path="pixi.core.textures.BaseRenderTexture"/>
+				<c path="pixi.core.math.shapes.Rectangle"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* A RenderTexture is a special texture that allows any Pixi display object to be rendered to it.
@@ -16635,86 +16622,34 @@
 	 * A RenderTexture takes a snapshot of any Display Object given to its render method. The position
 	 * and rotation of the given Display Objects is ignored. For example:
 	 *
-	 * ```js
-	 * 	var renderTexture = new PIXI.RenderTexture(800, 600);
-	 * 	var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
+	 * ```haxe
+	 * var renderer = Detector.autoDetectRenderer(1024, 1024, { view: canvas, ratio: 1 });
+	 * var renderTexture = RenderTexture.create(800, 600);
+	 * var sprite = Sprite.fromImage("spinObj_01.png");
 	 *
 	 * sprite.position.x = 800/2;
 	 * sprite.position.y = 600/2;
 	 * sprite.anchor.x = 0.5;
 	 * sprite.anchor.y = 0.5;
 	 *
-	 * renderTexture.render(sprite);
+	 * renderer.render(sprite, renderTexture);
 	 * ```
 	 *
 	 * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
 	 * position a Container should be used:
 	 *
-	 * ```js
-	 * 	var doc = new Container();
+	 * ```haxe
+	 * var doc = new Container();
 	 *
 	 * doc.addChild(sprite);
 	 *
-	 * renderTexture.render(doc);  // Renders to center of renderTexture
+	 * renderer.render(doc, renderTexture);  // Renders to center of renderTexture
 	 * ```
 	 *
 	 * @class
 	 * @extends Texture
-	 * @namespace PIXI
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-	 * @param [width=100] {number} The width of the render texture
-	 * @param [height=100] {number} The height of the render texture
-	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
-	 * @param [resolution=1] {number} The resolution of the texture being generated</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="renderer:?width:?height:?scaleMode:?resolution">
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-		<x path="Float"/>
-		<x path="Float"/>
-		<x path="Int"/>
-		<x path="Float"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* A RenderTexture is a special texture that allows any Pixi display object to be rendered to it.
-	 *
-	 * __Hint__: All DisplayObjects (i.e. Sprites) that render to a RenderTexture should be preloaded
-	 * otherwise black rectangles will be drawn instead.
-	 *
-	 * A RenderTexture takes a snapshot of any Display Object given to its render method. The position
-	 * and rotation of the given Display Objects is ignored. For example:
-	 *
-	 * ```js
-	 * 	var renderTexture = new PIXI.RenderTexture(800, 600);
-	 * 	var sprite = PIXI.Sprite.fromImage("spinObj_01.png");
-	 *
-	 * sprite.position.x = 800/2;
-	 * sprite.position.y = 600/2;
-	 * sprite.anchor.x = 0.5;
-	 * sprite.anchor.y = 0.5;
-	 *
-	 * renderTexture.render(sprite);
-	 * ```
-	 *
-	 * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
-	 * position a Container should be used:
-	 *
-	 * ```js
-	 * 	var doc = new Container();
-	 *
-	 * doc.addChild(sprite);
-	 *
-	 * renderTexture.render(doc);  // Renders to center of renderTexture
-	 * ```
-	 *
-	 * @class
-	 * @extends Texture
-	 * @namespace PIXI
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used for this RenderTexture
-	 * @param [width=100] {number} The width of the render texture
-	 * @param [height=100] {number} The height of the render texture
-	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values
-	 * @param [resolution=1] {number} The resolution of the texture being generated</haxe_doc>
-</new></overloads>
+	 * @memberof PIXI
+	 * @param baseRenderTexture {BaseRenderTexture} The renderer used for this RenderTexture</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.RenderTexture"</e></m></meta>
 	</class>
@@ -16730,7 +16665,7 @@
 	 *
 	 * @static
 	 * @param video {HTMLVideoElement}
-	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}</haxe_doc>
 		</fromVideo>
 		<fromUrl public="1" set="method" static="1">
@@ -16743,14 +16678,14 @@
 	 *
 	 * This can be used in a couple ways, such as:
 	 *
-	 * ```js
-	 * 	var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
+	 * ```haxe
+	 * 	var texture = VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
 	 *
-	 * 	var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
+	 * 	var texture = VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
 	 *
-	 * 	var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
+	 * 	var texture = VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
 	 *
-	 * 	var texture = PIXI.VideoBaseTexture.fromUrls([
+	 * 	var texture = VideoBaseTexture.fromUrls([
 	 *     { src: '/video.webm', mime: 'video/webm' },
 	 *     { src: '/video.mp4', mime: 'video/mp4' }
 	 * ]);
@@ -16758,11 +16693,11 @@
 	 *
 	 * @alias fromUrls
 	 * @static
-	 * @param videoSrc {string|object|string[]|object[]} The URL(s) for the video.
-	 * @param [videoSrc.src] {string} One of the source urls for the video
-	 * @param [videoSrc.mime] {string} The mimetype of the video (e.g. 'video/mp4'). If not specified
+	 * @param videoSrc {String|object|String[]|object[]} The URL(s) for the video.
+	 * @param [videoSrc.src] {String} One of the source urls for the video
+	 * @param [videoSrc.mime] {String} The mimetype of the video (e.g. 'video/mp4'). If not specified
 	 *  the url's extension will be used as the second part of the mime type.
-	 * @param scaleMode {number} See {@link SCALE_MODES} for possible values
+	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
 	 * @return {VideoBaseTexture}</haxe_doc>
 		</fromUrl>
 		<fromUrls public="1" set="method" static="1"><f a="videoSrc:?scaleMode">
@@ -16782,14 +16717,14 @@
 	 *
 	 * This can be used in several ways, such as:
 	 *
-	 * ```js
-	 * var texture = PIXI.VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
+	 * ```haxe
+	 * var texture = VideoBaseTexture.fromUrl('http://mydomain.com/video.mp4');
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
+	 * var texture = VideoBaseTexture.fromUrl({ src: 'http://mydomain.com/video.mp4', mime: 'video/mp4' });
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
+	 * var texture = VideoBaseTexture.fromUrls(['/video.webm', '/video.mp4']);
 	 *
-	 * var texture = PIXI.VideoBaseTexture.fromUrls([
+	 * var texture = VideoBaseTexture.fromUrls([
 	 *     { src: '/video.webm', mime: 'video/webm' },
 	 *     { src: '/video.mp4', mime: 'video/mp4' }
 	 * ]);
@@ -16801,7 +16736,7 @@
 	 * @extends BaseTexture
 	 * @memberof PIXI
 	 * @param source {HTMLVideoElement}
-	 * @param [scaleMode] {number} See {@link SCALE_MODES} for possible values</haxe_doc>
+	 * @param [scaleMode] {Int} See {@link SCALE_MODES} for possible values</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.VideoBaseTexture"</e></m></meta>
 	</class>
