@@ -61,5 +61,5 @@ extern class RenderTexture extends Texture {
 	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
 	 * @param [resolution=1] {Float} The resolution of the texture being generated
 	 */
-	static function create(?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float):Void;
+	static function create(?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float):RenderTexture;
 }
