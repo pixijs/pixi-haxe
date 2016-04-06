@@ -1,5 +1,6 @@
 package pixi.core.graphics;
 
+import pixi.core.math.Point;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Ellipse;
 import pixi.core.math.shapes.Rectangle;
@@ -75,6 +76,7 @@ extern class Graphics extends Container {
 
 	/**
 	 * Creates a new Graphics object with the same values as this one.
+	 * Note that the only the properties of the object are cloned, not its transform (position,scale,etc)
 	 *
 	 * @return {Graphics}
 	 */
@@ -233,6 +235,14 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function clear():Graphics;
+
+	/**
+	* Tests if a point is inside this graphics object
+	*
+	* @param point {Point} the point to test
+	* @return {Bool} the result of the test
+	*/
+	function containsPoint(point:Point):Bool;
 
 	/**
 	 * Update the bounds of the object

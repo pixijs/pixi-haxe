@@ -2,9 +2,6 @@ package pixi.core.display;
 
 import pixi.core.renderers.webgl.filters.Filter;
 import pixi.interaction.InteractionManager;
-import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
-import pixi.core.textures.Texture;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;

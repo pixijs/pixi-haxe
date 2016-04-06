@@ -1,5 +1,7 @@
 package pixi.core.display;
 
+import haxe.extern.Rest;
+
 @:native("PIXI.Container")
 extern class Container extends DisplayObject {
 
@@ -40,13 +42,16 @@ extern class Container extends DisplayObject {
 	/**
 	 * Adds a child to the container.
 	 *
+	 * You can also add multple items like so: myContainer.addChild(thinkOne, thingTwo, thingThree)
+	 *
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	 * @return {DisplayObject} The child that was added.
 	 */
-	function addChild(child:DisplayObject):DisplayObject;
+	function addChild(child:Rest<DisplayObject>):DisplayObject;
 
 	/**
-	 * Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
+	 * Adds a child to the container at a specified index.
+	 * If the index is out of bounds an error will be thrown.
 	 *
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Int} The index to place the child in
