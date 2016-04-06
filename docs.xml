@@ -13585,16 +13585,6 @@
 	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="src/pixi/core/display/DisplayObject.hx" extern="1">
 		<extends path="pixi.interaction.InteractionManager"/>
-		<getGlobalPosition public="1" set="method">
-			<f a="point">
-				<c path="pixi.core.math.Point"/>
-				<c path="pixi.core.math.Point"/>
-			</f>
-			<haxe_doc>* Returns the global position of the displayObject
-	 *
-	 * @param point {Point} the point to write the global value to. If null a new point will be returned
-	 * @return {Point}</haxe_doc>
-		</getGlobalPosition>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
 				<c path="pixi.core.math.Matrix"/>
@@ -13622,47 +13612,19 @@
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toGlobal>
 		<toLocal public="1" set="method">
-			<f a="position:?frm">
+			<f a="position:?frm:?point">
 				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.math.Point"/>
 			</f>
 			<haxe_doc>* Calculates the local position of the display object relative to another point
 	 *
 	 * @param position {Point} The world origin to calculate from
 	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new Point)
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toLocal>
-		<generateTexture public="1" set="method">
-			<f a="renderer:?resolution:?scaleMode">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-				<x path="Float"/>
-				<x path="Int"/>
-				<c path="pixi.core.textures.Texture"/>
-			</f>
-			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
-	 * @return {Texture} a texture of the display object</haxe_doc>
-			<overloads><generateTexture public="1" set="method">
-	<f a="renderer:?resolution:?scaleMode">
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-		<x path="Float"/>
-		<x path="Int"/>
-		<c path="pixi.core.textures.Texture"/>
-	</f>
-	<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
-	 * @return {Texture} a texture of the display object</haxe_doc>
-</generateTexture></overloads>
-		</generateTexture>
 		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
 		<displayObjectUpdateTransform public="1" set="method"><f a=""><x path="Void"/></f></displayObjectUpdateTransform>
 		<setParent public="1" set="method">
@@ -13746,36 +13708,6 @@
 	 * @member {Bool}
 	 * @memberof DisplayObject#</haxe_doc>
 		</cacheAsBitmap>
-		<position public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
-	 *
-	 * @member {Point}</haxe_doc>
-		</position>
-		<scale public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The scale factor of the object.
-	 *
-	 * @member {Point}</haxe_doc>
-		</scale>
-		<pivot public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The pivot point of the displayObject that it rotates around
-	 *
-	 * @member {Point}</haxe_doc>
-		</pivot>
-		<skew public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The skew factor for the object in radians.
-     *
-     * @member {Point}</haxe_doc>
-		</skew>
-		<rotation public="1">
-			<x path="Float"/>
-			<haxe_doc>* The rotation of the object in radians.
-	 *
-	 * @member {Float}</haxe_doc>
-		</rotation>
 		<alpha public="1">
 			<x path="Float"/>
 			<haxe_doc>* The opacity of the object.
@@ -13810,20 +13742,21 @@
 	 * @member {Float}
 	 * @readOnly</haxe_doc>
 		</worldAlpha>
-		<worldTransform public="1">
-			<c path="pixi.core.math.Matrix"/>
-			<haxe_doc>* Current transform of the object based on world (parent) factors
-	 *
-	 * @member {Matrix}
-	 * @readOnly</haxe_doc>
-		</worldTransform>
 		<filterArea public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* The area the filter is applied to. This is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	 *
+	 * Also works as an interaction mask
+	 *
 	 * @member {Rectangle}</haxe_doc>
 		</filterArea>
+		<hitArea public="1">
+			<d/>
+			<haxe_doc>* Interaction shape. Children will be hit first, then this shape will be checked.
+	 *
+	 * @memberof DisplayObject#</haxe_doc>
+		</hitArea>
 		<x public="1">
 			<x path="Float"/>
 			<haxe_doc>* The position of the displayObject on the x axis relative to the local coordinates of the parent.
@@ -13838,6 +13771,50 @@
 	 * @member {Float}
 	 * @memberof DisplayObject#</haxe_doc>
 		</y>
+		<worldTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* Current transform of the object based on world (parent) factors
+	 *
+	 * @member {Matrix}
+	 * @readOnly</haxe_doc>
+		</worldTransform>
+		<localTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* Current transform of the object based on local factors: position, scale, other stuff
+     *
+     * @member {PIXI.Matrix}
+     * @readOnly</haxe_doc>
+		</localTransform>
+		<position public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
+	 *
+	 * @member {Point}</haxe_doc>
+		</position>
+		<scale public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The scale factor of the object.
+	 *
+	 * @member {Point}</haxe_doc>
+		</scale>
+		<pivot public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The pivot point of the displayObject that it rotates around
+	 *
+	 * @member {Point}</haxe_doc>
+		</pivot>
+		<skew public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The skew factor for the object in radians.
+     *
+     * @member {Point}</haxe_doc>
+		</skew>
+		<rotation public="1">
+			<x path="Float"/>
+			<haxe_doc>* The rotation of the object in radians.
+	 *
+	 * @member {Float}</haxe_doc>
+		</rotation>
 		<worldVisible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the displayObject is globally visible.
@@ -13849,11 +13826,13 @@
 		<mask public="1">
 			<d/>
 			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
-	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
-	 * To remove a mask, set this property to null.
-	 *
-	 * @member {Graphics or Sprite}
-	 * @memberof DisplayObject#</haxe_doc>
+     * In PIXI a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping.
+     * To remove a mask, set this property to null.
+     *
+     * @todo For the moment, PIXI.CanvasRenderer doesn't support PIXI.Sprite as mask.
+     *
+     * @member {Graphics|Sprite}
+     * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
 			<c path="Array"><c path="pixi.core.renderers.webgl.filters.Filter"/></c>
@@ -13896,12 +13875,6 @@
 	 * @default pointer
 	 * @memberof DisplayObject#</haxe_doc>
 		</defaultCursor>
-		<hitArea public="1">
-			<d/>
-			<haxe_doc>* Hit area
-	 *
-	 * @memberof DisplayObject#</haxe_doc>
-		</hitArea>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
@@ -16587,7 +16560,7 @@
 				<x path="Float"/>
 				<x path="Int"/>
 				<x path="Float"/>
-				<x path="Void"/>
+				<c path="pixi.core.textures.RenderTexture"/>
 			</f>
 			<haxe_doc>* A short hand way of creating a render texture..
 	 * @param [width=100] {Float} The width of the render texture

@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 		},
 
 		zip: {
-			"pixi.zip": ["src/**", "haxelib.json", "extraParams.hxml", "README.md", "LICENSE"]
+			"pixi.zip": ["src/**", "haxelib.json", "logo.png", "extraParams.hxml", "README.md", "LICENSE"]
 		}
 	});
 
