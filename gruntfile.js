@@ -24,11 +24,6 @@ module.exports = function (grunt) {
 
 		exec: {
 			copy_libs: "cp -R ./libs/*.min.js ./samples/_output/libs/",
-			/*docs: "haxelib run chxdoc -o ../adireddy.github.io/docs/pixi-haxe/ -f docs.xml " +
-				  " --showTodoTags=false " +
-				  " --deny=msignal.*,core.*,demos.*,samples.*,js.*,haxe.*,nape.*,zpp_nape.*,/ " +
-				  "--title='pixi-haxe' " +
-				  "--subtitle='Externs'",*/
 			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/"
 		},
 

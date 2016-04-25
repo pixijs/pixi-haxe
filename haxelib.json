@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor bug fix in Application class",
-	"version": "3.1.0",
+	"releasenote": "added optional canvas parameter in Application class",
+	"version": "3.1.1",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

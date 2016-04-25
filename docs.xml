@@ -18358,9 +18358,10 @@
 	<x path="Bool"/>
 </f></set_skipFrame>
 		<start public="1" set="method" line="182">
-			<f a="?rendererType:?parentDom">
+			<f a="?rendererType:?parentDom:?canvasElement">
 				<c path="String"/>
 				<c path="js.html.Element"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
@@ -18370,22 +18371,22 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="222"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="227">
+		<resumeRendering public="1" set="method" line="227"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="232">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="237">
+		<_onRequestAnimationFrame set="method" line="242">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="247">
+		<addStats public="1" set="method" line="252">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
