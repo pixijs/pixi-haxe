@@ -179,11 +179,15 @@ class Application {
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
 
-	public function start(?rendererType:String = "auto", ?parentDom:Element) {
-		canvas = Browser.document.createCanvasElement();
-		canvas.style.width = width + "px";
-		canvas.style.height = height + "px";
-		canvas.style.position = "absolute";
+	public function start(?rendererType:String = "auto", ?parentDom:Element, ?canvasElement:CanvasElement) {
+		if (canvasElement == null) {
+			canvas = Browser.document.createCanvasElement();
+			canvas.style.width = width + "px";
+			canvas.style.height = height + "px";
+			canvas.style.position = "absolute";
+		}
+		else canvas = canvasElement;
+		
 		if (parentDom == null) Browser.document.body.appendChild(canvas);
 		else parentDom.appendChild(canvas);
 
@@ -205,7 +209,7 @@ class Application {
 		else renderer = new WebGLRenderer(width, height, renderingOptions);
 
 		if (roundPixels) renderer.roundPixels = true;
-		
+
 		if (parentDom == null) Browser.document.body.appendChild(renderer.view);
 		else parentDom.appendChild(renderer.view);
 		resumeRendering();
