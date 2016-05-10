@@ -187,7 +187,7 @@ class Application {
 			canvas.style.position = "absolute";
 		}
 		else canvas = canvasElement;
-		
+
 		if (parentDom == null) Browser.document.body.appendChild(canvas);
 		else parentDom.appendChild(canvas);
 
