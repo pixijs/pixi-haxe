@@ -4,6 +4,7 @@
 	"classPath": "src",
 	"tags": [
 		"js",
+		"javascript",
 		"haxe",
 		"pixi",
 		"pixi.js",
@@ -15,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added optional canvas parameter in Application class",
-	"version": "3.1.1",
+	"releasenote": "added graphicsData property to Graphics class",
+	"version": "3.1.2",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
