@@ -13981,6 +13981,12 @@
 	 * @member {Int}
 	 * @default 0</haxe_doc>
 		</lineColor>
+		<graphicsData public="1">
+			<c path="Array"><c path="pixi.core.graphics.GraphicsData"/></c>
+			<haxe_doc><![CDATA[* Graphics data
+     *
+     * @member {Array<GraphicsData>}]]></haxe_doc>
+		</graphicsData>
 		<tint public="1">
 			<x path="Int"/>
 			<haxe_doc>* The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.

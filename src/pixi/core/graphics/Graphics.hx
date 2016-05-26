@@ -44,6 +44,13 @@ extern class Graphics extends Container {
 	var lineColor:Int;
 
 	/**
+     * Graphics data
+     *
+     * @member {Array<GraphicsData>}
+     */
+	var graphicsData:Array<GraphicsData>;
+
+	/**
 	 * The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
 	 *
 	 * @member {Int}
