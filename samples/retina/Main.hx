@@ -1,5 +1,6 @@
 package samples.retina;
 
+import pixi.core.text.TextStyleObject;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
@@ -28,9 +29,10 @@ class Main extends Application {
 		_img.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		stage.addChild(_img);
 
-		var style:TextStyle = {};
-		style.fill = "#F78181";
-		style.font = "12px Courier";
+		var style:TextStyleObject = {};
+		style.fill = 0xF78181;
+		style.fontSize = "12px";
+		style.fontFamily = "impact";
 
 		_label = new Text(imgPath, style);
 		_label.position.set(0, 0);

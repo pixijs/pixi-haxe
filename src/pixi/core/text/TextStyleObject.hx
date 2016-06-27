@@ -2,7 +2,7 @@ package pixi.core.text;
 
 import haxe.extern.EitherType;
 
-typedef TextStyleObj = {
+typedef TextStyleObject = {
 	@:optional var align:String;						//left
 	@:optional var breakWords:Bool;						//false
 	@:optional var dropShadow:Bool;						//false

@@ -13300,8 +13300,32 @@
 	 * @property {Int} SHAPES.ELIP=3
 	 * @property {Int} SHAPES.RREC=4</haxe_doc>
 		</SHAPES>
+		<TRANSFORM_MODE public="1" static="1">
+			<t path="pixi.core.TransformModes"/>
+			<haxe_doc>* Constants that specify float precision in shaders.
+     *
+     * @static
+     * @constant
+     * @property {object} PRECISION
+     * @property {String} PRECISION.DEFAULT='mediump'
+     * @property {String} PRECISION.LOW='lowp'
+     * @property {String} PRECISION.MEDIUM='mediump'
+     * @property {String} PRECISION.HIGH='highp'</haxe_doc>
+		</TRANSFORM_MODE>
+		<PRECISION public="1" static="1"><t path="pixi.core.Precisions"/></PRECISION>
+		<TEXT_GRADIENT public="1" static="1">
+			<t path="pixi.core.TextGradients"/>
+			<haxe_doc>* Constants that define the type of gradient on text.
+     *
+     * @static
+     * @constant
+     * @property {object} TEXT_GRADIENT
+     * @property {Int} TEXT_GRADIENT.LINEAR_VERTICAL=0
+     * @property {Int} TEXT_GRADIENT.LINEAR_HORIZONTAL=1</haxe_doc>
+		</TEXT_GRADIENT>
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
 		<SPRITE_MAX_TEXTURES public="1" static="1"><x path="Int"/></SPRITE_MAX_TEXTURES>
+		<TEXT_STYLE_CHANGED public="1" static="1"><c path="String"/></TEXT_STYLE_CHANGED>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
 	<typedef path="pixi.core.RendererType" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
@@ -13397,6 +13421,21 @@
 	<POLY><x path="Int"/></POLY>
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
+</a></typedef>
+	<typedef path="pixi.core.Precisions" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<MEDIUM><c path="String"/></MEDIUM>
+	<LOW><c path="String"/></LOW>
+	<HIGH><c path="String"/></HIGH>
+	<DEFAULT><c path="String"/></DEFAULT>
+</a></typedef>
+	<typedef path="pixi.core.TextGradients" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<LINEAR_VERTICAL><x path="Int"/></LINEAR_VERTICAL>
+	<LINEAR_HORIZONTAL><x path="Int"/></LINEAR_HORIZONTAL>
+</a></typedef>
+	<typedef path="pixi.core.TransformModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<STATIC><x path="Int"/></STATIC>
+	<DYNAMIC><x path="Int"/></DYNAMIC>
+	<DEFAULT><x path="Int"/></DEFAULT>
 </a></typedef>
 	<class path="pixi.interaction.InteractionManager" params="" file="src/pixi/interaction/InteractionManager.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
@@ -14053,6 +14092,12 @@
 	 * @member {Int}
 	 * @default 0</haxe_doc>
 		</lineColor>
+		<graphicsData public="1">
+			<c path="Array"><c path="pixi.core.graphics.GraphicsData"/></c>
+			<haxe_doc><![CDATA[* Graphics data
+     *
+     * @member {Array<GraphicsData>}]]></haxe_doc>
+		</graphicsData>
 		<tint public="1">
 			<x path="Int"/>
 			<haxe_doc>* The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
@@ -15108,10 +15153,13 @@
 	 * @default</haxe_doc>
 		</clearBeforeRender>
 		<backgroundColor public="1">
-			<x path="Int"/>
+			<x path="haxe.extern.EitherType">
+				<c path="String"/>
+				<x path="Int"/>
+			</x>
 			<haxe_doc>* The background color to fill if not transparent
 	 *
-	 * @member {Int}
+	 * @member {String|Int}
 	 * @default 0x000000</haxe_doc>
 		</backgroundColor>
 		<roundPixels public="1">
@@ -15938,37 +15986,21 @@
      * @memberof Text#</haxe_doc>
 		</text>
 		<style public="1">
-			<t path="pixi.core.text.TextStyle"/>
-			<haxe_doc>* Set the style of the text
-     *
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.letterSpacing=0] {Float} The amount of spacing between letters, default is 0
-	 * @param [style.breakWords=false] {Bool} Indicates if lines can be wrapped within words, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
-	 * @param [style.dropShadowBlur=0] {Float} Set a shadow blur radius
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
-	 *      prevent this from happening by adding padding to the top and bottom of text height.
-	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
-	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
-	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
-	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
-	 *      or increase the spikiness of rendered text.
-     * @memberof Text#</haxe_doc>
+			<x path="haxe.extern.EitherType">
+				<t path="pixi.core.text.TextStyleObject"/>
+				<c path="pixi.core.text.TextStyle"/>
+			</x>
+			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
+     * @member {TextStyleObj|TextStyle}
+     *</haxe_doc>
 		</style>
 		<new public="1" set="method">
 			<f a="text:?style:?resolution">
 				<c path="String"/>
-				<t path="pixi.core.text.TextStyle"/>
+				<x path="haxe.extern.EitherType">
+					<t path="pixi.core.text.TextStyleObject"/>
+					<c path="pixi.core.text.TextStyle"/>
+				</x>
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
@@ -15977,44 +16009,27 @@
 	 *
 	 * A Text can be created directly from a string and a style object
 	 *
-	 * ```haxe
-	 * var text = new Text('This is a pixi text', {font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * ```js
+	 * var text = new Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
 	 * ```
 	 *
 	 * @class
-	 * @extends Sprite
+	 * @extends PIXI.Sprite
 	 * @memberof PIXI
-	 * @param text {String} The copy that you would like the text to display
-	 * @param [style] {TextStyle} The style parameters
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.letterSpacing=0] {Float} The amount of spacing between letters, default is 0
-	 * @param [style.breakWords=false] {Bool} Indicates if lines can be wrapped within words, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
-	 * @param [style.dropShadowBlur=0] {Float} Set a shadow blur radius
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
-	 *      prevent this from happening by adding padding to the top and bottom of text height.
-	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
-	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
-	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
-	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
-	 *      or increase the spikiness of rendered text.</haxe_doc>
+	 * @param text {String} The string that you would like the text to display
+	 * @param [style] {TextStyleObj|TextStyle} The style parameters
+	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas</haxe_doc>
 		</new>
 		<meta>
 			<m n=":directlyUsed"/>
 			<m n=":native"><e>"PIXI.Text"</e></m>
 		</meta>
 	</class>
-	<typedef path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
+	<class path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/TextStyle.hx" extern="1">
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":native"><e>""</e></m></meta>
+	</class>
+	<typedef path="pixi.core.text.TextStyleObject" params="" file="src/pixi/core/text/TextStyleObject.hx"><a>
 	<wordWrapWidth>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16032,7 +16047,10 @@
 		<meta><m n=":optional"/></meta>
 	</strokeThickness>
 	<stroke>
-		<t path="Null"><d/></t>
+		<t path="Null"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Int"/>
+</x></t>
 		<meta><m n=":optional"/></meta>
 	</stroke>
 	<padding>
@@ -16040,7 +16058,7 @@
 		<meta><m n=":optional"/></meta>
 	</padding>
 	<miterLimit>
-		<t path="Null"><x path="Int"/></t>
+		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
 	</miterLimit>
 	<lineJoin>
@@ -16055,10 +16073,33 @@
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
 	</letterSpacing>
-	<font>
+	<fontWeight>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
-	</font>
+	</fontWeight>
+	<fontVariant>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontVariant>
+	<fontStyle>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontStyle>
+	<fontSize>
+		<t path="Null"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Float"/>
+</x></t>
+		<meta><m n=":optional"/></meta>
+	</fontSize>
+	<fontFamily>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontFamily>
+	<fillGradientType>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</fillGradientType>
 	<fill>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -18369,9 +18410,10 @@
 	<x path="Bool"/>
 </f></set_skipFrame>
 		<start public="1" set="method" line="182">
-			<f a="?rendererType:?parentDom">
+			<f a="?rendererType:?parentDom:?canvasElement">
 				<c path="String"/>
 				<c path="js.html.Element"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
@@ -18381,22 +18423,22 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="223"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="228">
+		<resumeRendering public="1" set="method" line="227"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="232">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="238">
+		<_onRequestAnimationFrame set="method" line="242">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="248">
+		<addStats public="1" set="method" line="252">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
@@ -18483,54 +18525,54 @@
 		<_background><c path="pixi.core.graphics.Graphics"/></_background>
 		<_enabled><x path="Bool"/></_enabled>
 		<action public="1"><c path="msignal.Signal1"><d/></c></action>
-		<_setupBackground set="method" line="36"><f a="width:height">
+		<_setupBackground set="method" line="37"><f a="width:height">
 	<x path="Float"/>
 	<x path="Float"/>
 	<x path="Void"/>
 </f></_setupBackground>
-		<_setupLabel set="method" line="54"><f a="width:height:fontSize">
+		<_setupLabel set="method" line="55"><f a="width:height:fontSize">
 	<x path="Float"/>
 	<x path="Float"/>
 	<x path="Int"/>
 	<x path="Void"/>
 </f></_setupLabel>
-		<_redraw set="method" line="66"><f a="colour">
+		<_redraw set="method" line="68"><f a="colour">
 	<x path="Int"/>
 	<x path="Void"/>
 </f></_redraw>
-		<_onMouseDown set="method" line="81"><f a="target">
+		<_onMouseDown set="method" line="83"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onMouseDown>
-		<_onMouseUp set="method" line="85"><f a="target">
+		<_onMouseUp set="method" line="87"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onMouseUp>
-		<_onMouseUpOutside set="method" line="92"><f a="target">
+		<_onMouseUpOutside set="method" line="94"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onMouseUpOutside>
-		<_onMouseOver set="method" line="96"><f a="target">
+		<_onMouseOver set="method" line="98"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onMouseOver>
-		<_onMouseOut set="method" line="100"><f a="target">
+		<_onMouseOut set="method" line="102"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onMouseOut>
-		<_onTouchEndOutside set="method" line="104"><f a="target">
+		<_onTouchEndOutside set="method" line="106"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onTouchEndOutside>
-		<_onTouchEnd set="method" line="108"><f a="target">
+		<_onTouchEnd set="method" line="110"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onTouchEnd>
-		<_onTouchStart set="method" line="115"><f a="target">
+		<_onTouchStart set="method" line="117"><f a="target">
 	<t path="pixi.interaction.EventTarget"/>
 	<x path="Void"/>
 </f></_onTouchStart>
-		<new public="1" set="method" line="27"><f a="label:width:height:?data:?fontSize">
+		<new public="1" set="method" line="28"><f a="label:width:height:?data:?fontSize">
 	<c path="String"/>
 	<x path="Float"/>
 	<x path="Float"/>

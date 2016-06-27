@@ -1,5 +1,6 @@
 package samples.filters.colormatrix;
 
+import pixi.core.text.TextStyleObject;
 import pixi.interaction.EventTarget;
 import pixi.core.display.Container;
 import pixi.filters.colormatrix.ColorMatrixFilter;
@@ -65,7 +66,7 @@ class Main extends Application {
 		stage.on("click", _onClick);
 		stage.on("tap", _onClick);
 
-		var style:TextStyle = {font: "bold 12pt Arial", fill: "#FFFFFF"};
+		var style:TextStyleObject = {fontSize: "12", fontFamily:"Arial", fontWeight: "bold", fill: 0xFFFFFF};
 		var help = new Text("Click to turn filters on / off.", style);
 		stage.addChild(help);
 	}
