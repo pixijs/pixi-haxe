@@ -204,11 +204,38 @@ extern class Pixi {
 	 */
 	static var SHAPES:Shapes;
 
+	/**
+     * Constants that specify float precision in shaders.
+     *
+     * @static
+     * @constant
+     * @property {object} PRECISION
+     * @property {String} PRECISION.DEFAULT='mediump'
+     * @property {String} PRECISION.LOW='lowp'
+     * @property {String} PRECISION.MEDIUM='mediump'
+     * @property {String} PRECISION.HIGH='highp'
+     */
+	static var TRANSFORM_MODE:TransformModes;
+
+	static var PRECISION:Precisions;
+
+	/**
+     * Constants that define the type of gradient on text.
+     *
+     * @static
+     * @constant
+     * @property {object} TEXT_GRADIENT
+     * @property {Int} TEXT_GRADIENT.LINEAR_VERTICAL=0
+     * @property {Int} TEXT_GRADIENT.LINEAR_HORIZONTAL=1
+     */
+	static var TEXT_GRADIENT:TextGradients;
+
 	//4096 - nice balance between mobile and desktop machines
 	static var SPRITE_BATCH_SIZE:Int;
 
 	static var SPRITE_MAX_TEXTURES:Int;
 
+	static var TEXT_STYLE_CHANGED:String;
 }
 
 typedef RendererType = {
@@ -284,4 +311,22 @@ typedef Shapes = {
 	var CIRC:Int;
 	var ELIP:Int;
 	var RREC:Int;
+}
+
+typedef Precisions = {
+	var DEFAULT:String;
+	var LOW:String;
+	var MEDIUM:String;
+	var HIGH:String;
+}
+
+typedef TextGradients = {
+	var LINEAR_VERTICAL:Int;
+	var LINEAR_HORIZONTAL:Int;
+}
+
+typedef TransformModes = {
+	var STATIC:Int;
+	var DYNAMIC:Int;
+	var DEFAULT:Int;
 }
