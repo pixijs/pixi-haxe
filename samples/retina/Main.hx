@@ -31,8 +31,8 @@ class Main extends Application {
 
 		var style:TextStyleObject = {};
 		style.fill = 0xF78181;
-		style.fontSize = "12px";
-		style.fontFamily = "impact";
+		style.fontSize = 12;
+		style.fontFamily = "Courier";
 
 		_label = new Text(imgPath, style);
 		_label.position.set(0, 0);

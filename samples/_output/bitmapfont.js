@@ -240,7 +240,7 @@ samples_bitmapfont_Main.prototype = $extend(pixi_plugins_app_Application.prototy
 		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		var fontloader = new PIXI.loaders.Loader();
-		fontloader.add("font","assets/fonts/desyrel.xml");
+		fontloader.add("font","./assets/fonts/desyrel.xml");
 		fontloader.load($bind(this,this._onLoaded));
 	}
 	,_onLoaded: function() {
