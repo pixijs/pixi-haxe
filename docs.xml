@@ -17406,7 +17406,7 @@
 		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
 	</class>
 	<class path="samples.webglinfo.Main" params="" file="samples/webglinfo/Main.hx">
-		<main set="method" line="77" static="1">
+		<main set="method" line="91" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
@@ -17416,7 +17416,7 @@
 	<x path="Bool"/>
 </f></detectWebGL>
 		<displayWebGLProperties set="method" line="44"><f a=""><x path="Void"/></f></displayWebGLProperties>
-		<log set="method" line="73"><f a="msg:?val">
+		<log set="method" line="87"><f a="msg:?val">
 	<c path="String"/>
 	<c path="String"/>
 	<x path="Void"/>
