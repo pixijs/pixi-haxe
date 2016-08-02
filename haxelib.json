@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "v4 update - filters",
-	"version": "4.0.0-rc.2",
+	"releasenote": "event emitter bug fix",
+	"version": "4.0.0-rc.3",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
