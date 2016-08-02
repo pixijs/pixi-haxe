@@ -849,6 +849,19 @@
 	 * @param {function} fn Callback function.
 	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</on>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
 			</overloads>
 		</on>
 		<once public="1" set="method">
@@ -887,6 +900,19 @@
 							<d/>
 							<x path="Void"/>
 						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
 						<d/>
 						<x path="Void"/>
 					</f>
@@ -943,6 +969,19 @@
 	 * @param {function} fn Callback function.
 	 * @param {Mixed} context The context of the function.</haxe_doc>
 				</addListener>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
 			</overloads>
 		</addListener>
 		<off public="1" set="method">
@@ -990,6 +1029,19 @@
 	 * @param {function} fn The listener that we need to find.
 	 * @param {Bool} once Only remove once listeners.</haxe_doc>
 				</off>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<d/>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</off>
 			</overloads>
 		</off>
 		<removeListener public="1" set="method">
@@ -1028,6 +1080,19 @@
 							<d/>
 							<x path="Void"/>
 						</f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<d/>
 						<x path="Bool"/>
 						<x path="Void"/>
 					</f>
@@ -1408,7 +1473,7 @@
 		</reset>
 		<load public="1" set="method">
 			<f a="?cb">
-				<f a=""><x path="Void"/></f>
+				<d/>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Starts loading the queued resources.

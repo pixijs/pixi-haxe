@@ -27,6 +27,7 @@ class Main extends Application {
 
 		for (i in 1 ... 10) _loader.add("img" + i, i + ".png");
 		_loader.on("progress", _onLoadProgress);
+		_loader.once("complete", _onLoadComplete);
 		_loader.load(_onLoaded);
 	}
 
@@ -34,7 +35,14 @@ class Main extends Application {
 		trace("Loaded: " + Math.round(_loader.progress));
 	}
 
-	function _onLoaded() {
+	function _onLoadComplete(a, b) {
+		trace(a);
+		trace(b);
+	}
+
+	function _onLoaded(a, b) {
+		trace(a);
+		trace(b);
 		var _container:Container = new Container();
 		stage.addChild(_container);
 		for (i in 1 ... 11) {

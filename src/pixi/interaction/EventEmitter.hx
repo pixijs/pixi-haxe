@@ -36,6 +36,7 @@ extern class EventEmitter {
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
 	function on(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -47,6 +48,7 @@ extern class EventEmitter {
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
 	function once(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -58,6 +60,7 @@ extern class EventEmitter {
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
+	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
 	function addListener(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
 
 	/**
@@ -69,6 +72,7 @@ extern class EventEmitter {
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Dynamic, ?once:Bool):Void {})
 	function off(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
 
 	/**
@@ -80,6 +84,7 @@ extern class EventEmitter {
 	 */
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
+	@:overload(function(event:String, fn:Dynamic, ?once:Bool):Void {})
 	function removeListener(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
 
 	/**

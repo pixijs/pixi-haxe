@@ -130,7 +130,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}
 	 */
-	function load(?cb:Void -> Void):ResourceLoader;
+	function load(?cb:Dynamic):ResourceLoader;
 
 	/**
 	 * Loads a single resource.
