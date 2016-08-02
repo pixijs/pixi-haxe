@@ -247,10 +247,15 @@ samples_loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 			this._loader.add("img" + i,i + ".png");
 		}
 		this._loader.on("progress",$bind(this,this._onLoadProgress));
+		this._loader.once("complete",$bind(this,this._onLoadComplete));
 		this._loader.load($bind(this,this._onLoaded));
 	}
 	,_onLoadProgress: function() {
 		console.log("Loaded: " + Math.round(this._loader.progress));
+	}
+	,_onLoadComplete: function(a,b) {
+		console.log(a);
+		console.log(b);
 	}
 	,_onLoaded: function() {
 		var _container = new PIXI.Container();
