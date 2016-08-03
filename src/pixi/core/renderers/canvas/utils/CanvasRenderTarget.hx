@@ -3,21 +3,22 @@ package pixi.core.renderers.canvas.utils;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 
-@:native("PIXI.CanvasBuffer")
-extern class CanvasBuffer {
+@:native("CanvasRenderTarget")
+extern class CanvasRenderTarget {
 
 	/**
 	 * Creates a Canvas element of the given size.
 	 *
 	 * @class
 	 * @memberof PIXI
-	 * @param width {Float} the width for the newly created canvas
-	 * @param height {Float} the height for the newly created canvas
+	 * @param width {number} the width for the newly created canvas
+	 * @param height {number} the height for the newly created canvas
+	 * @param [resolution=1] The resolution / device pixel ratio of the canvas
 	 */
-	function new(width:Float, height:Float);
+	function new(width:Float, height:Float, ?resolution:Float);
 
 	/**
-     * The Canvas object that belongs to this CanvasBuffer.
+     * The Canvas object that belongs to this to this CanvasRenderTarget.
      *
      * @member {HTMLCanvasElement}
      */
@@ -33,24 +34,32 @@ extern class CanvasBuffer {
 	/**
 	 * The width of the canvas buffer in pixels.
 	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#
 	 */
 	var width:Float;
 
 	/**
 	 * The height of the canvas buffer in pixels.
 	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#
 	 */
 	var height:Float;
 
 	/**
+	 * The resolution of this CanvasRenderTarget.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#
+	 */
+	var resolution:Float;
+
+	/**
 	 * Resizes the canvas to the specified width and height.
 	 *
-	 * @param width {number} the new width of the canvas
-	 * @param height {number} the new height of the canvas
+	 * @param width {Float} the new width of the canvas
+	 * @param height {Float} the new height of the canvas
 	 */
 	function resize(width:Float, height:Float):Void;
 

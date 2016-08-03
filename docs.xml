@@ -13976,64 +13976,6 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.CanvasRenderer"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasBuffer" params="" file="src/pixi/core/renderers/canvas/utils/CanvasBuffer.hx" extern="1">
-		<canvas public="1">
-			<c path="js.html.CanvasElement"/>
-			<haxe_doc>* The Canvas object that belongs to this CanvasBuffer.
-     *
-     * @member {HTMLCanvasElement}</haxe_doc>
-		</canvas>
-		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
-			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
-	 *
-	 * @member {CanvasRenderingContext2D}</haxe_doc>
-		</context>
-		<width public="1">
-			<x path="Float"/>
-			<haxe_doc>* The width of the canvas buffer in pixels.
-	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#</haxe_doc>
-		</width>
-		<height public="1">
-			<x path="Float"/>
-			<haxe_doc>* The height of the canvas buffer in pixels.
-	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#</haxe_doc>
-		</height>
-		<resize public="1" set="method">
-			<f a="width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Resizes the canvas to the specified width and height.
-	 *
-	 * @param width {number} the new width of the canvas
-	 * @param height {number} the new height of the canvas</haxe_doc>
-		</resize>
-		<destroy public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Destroys this canvas.
-	 *</haxe_doc>
-		</destroy>
-		<new public="1" set="method">
-			<f a="width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Creates a Canvas element of the given size.
-	 *
-	 * @class
-	 * @memberof PIXI
-	 * @param width {Float} the width for the newly created canvas
-	 * @param height {Float} the height for the newly created canvas</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.CanvasBuffer"</e></m></meta>
-	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="src/pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.core.graphics.Graphics"/>
@@ -14085,6 +14027,73 @@
 		</popMask>
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":native"><e>"PIXI.CanvasMaskManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasRenderTarget" params="" file="src/pixi/core/renderers/canvas/utils/CanvasRenderTarget.hx" extern="1">
+		<canvas public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* The Canvas object that belongs to this to this CanvasRenderTarget.
+     *
+     * @member {HTMLCanvasElement}</haxe_doc>
+		</canvas>
+		<context public="1">
+			<c path="js.html.CanvasRenderingContext2D"/>
+			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
+	 *
+	 * @member {CanvasRenderingContext2D}</haxe_doc>
+		</context>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* The width of the canvas buffer in pixels.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* The height of the canvas buffer in pixels.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</height>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of this CanvasRenderTarget.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</resolution>
+		<resize public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the canvas to the specified width and height.
+	 *
+	 * @param width {Float} the new width of the canvas
+	 * @param height {Float} the new height of the canvas</haxe_doc>
+		</resize>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys this canvas.
+	 *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="width:height:?resolution">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Creates a Canvas element of the given size.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param width {number} the width for the newly created canvas
+	 * @param height {number} the height for the newly created canvas
+	 * @param [resolution=1] The resolution / device pixel ratio of the canvas</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"CanvasRenderTarget"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasTinter" params="" file="src/pixi/core/renderers/canvas/utils/CanvasTinter.hx" extern="1">
 		<getTintedTexture public="1" set="method" static="1">
@@ -16915,7 +16924,7 @@
 		</reset>
 		<load public="1" set="method">
 			<f a="?cb">
-				<f a=""><x path="Void"/></f>
+				<d/>
 				<c path="pixi.loaders.ResourceLoader"/>
 			</f>
 			<haxe_doc>* Starts loading the queued resources.
