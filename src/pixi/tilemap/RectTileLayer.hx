@@ -7,7 +7,7 @@ import pixi.core.textures.Texture;
 
 extern class RectTileLayer extends DisplayObject {
 
-	function new(zIndex:Float, texture:Texture):Void;
+	function new(zIndex:Float, texture:Texture);
 	
 	var pointsBuf:Array<Float>;
 	

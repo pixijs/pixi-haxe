@@ -5,7 +5,7 @@ import pixi.core.renderers.webgl.WebGLRenderer;
 
 extern class SquareTileShader extends Shader {
 
-	function new(gl:WebGLRenderer):Void;
+	function new(gl:WebGLRenderer);
 	
 	var vertSize:Int;
 	

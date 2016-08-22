@@ -13,7 +13,7 @@ extern class TileRenderer extends ObjectRenderer {
 	 * @static
 	 * @constant
 	 */
-	function new(renderer:WebGLRenderer):Void;
+	function new(renderer:WebGLRenderer);
 	
 	var vbs:Dynamic;
 	

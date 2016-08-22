@@ -5,7 +5,7 @@ import pixi.core.renderers.canvas.CanvasRenderer;
 
 extern class ZLayer extends Container {
 
-	function new():Void;
+	function new();
 	
 	var tilemap:Dynamic;
 	

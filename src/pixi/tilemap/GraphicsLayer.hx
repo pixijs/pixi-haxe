@@ -6,7 +6,7 @@ import pixi.core.renderers.webgl.WebGLRenderer;
 
 extern class GraphicsLayer extends Graphics {
 
-	function new(zIndex:Float):Void;
+	function new(zIndex:Float);
 	
 	function renderCanvas(renderer:CanvasRenderer):Void;
 	

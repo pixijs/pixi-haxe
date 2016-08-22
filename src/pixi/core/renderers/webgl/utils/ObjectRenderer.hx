@@ -13,7 +13,7 @@ extern class ObjectRenderer extends WebGLManager {
 	 * @memberof PIXI
 	 * @param renderer {PIXI.WebGLRenderer} The renderer this object renderer works for.
 	 */
-	function new(renderer:WebGLRenderer):Void;
+	function new(renderer:WebGLRenderer);
 	
 	/**
 	 * Starts the renderer and sets the shader

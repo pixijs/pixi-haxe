@@ -14,7 +14,7 @@ extern class Shader {
 	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
 	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.
 	 */
-	function new(gl:WebGLRenderer, vertexSrc:Dynamic, framentSrc:Dynamic):Void;
+	function new(gl:WebGLRenderer, vertexSrc:Dynamic, framentSrc:Dynamic);
 	
 	/**
 	 * 

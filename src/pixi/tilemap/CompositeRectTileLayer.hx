@@ -5,9 +5,10 @@ import pixi.core.renderers.canvas.CanvasRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.textures.Texture;
 
+@:native("PIXI.tilemap.CompositeRectTileLayer")
 extern class CompositeRectTileLayer extends Container {
 
-	function new():Void;
+	function new();
 	
 	var useSquare:Bool;
 	
@@ -24,12 +25,12 @@ extern class CompositeRectTileLayer extends Container {
 	
 	/**
 	 * "hello world!" of pixi-tilemap library. Pass it texture and it will be added
-	 * @param texture
-	 * @param x
-	 * @param y
+	 * @param texture {string|Texture}
+	 * @param x {number}
+	 * @param y {number}
 	 * @returns {boolean}
 	 */
-	function addFrame(texture:Texture, x:Float, y:Float):Bool;
+	function addFrame(texture:Dynamic, x:Float, y:Float):Bool;
 	
 	function renderCanvas(renderer:CanvasRenderer):Void;
 	

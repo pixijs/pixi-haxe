@@ -4,7 +4,7 @@ import pixi.core.renderers.canvas.CanvasRenderer;
 
 extern class CanvasTileRenderer {
 
-	public function new(renderer:CanvasRenderer):Void;
+	public function new(renderer:CanvasRenderer);
 	
 	var renderer:CanvasRenderer;
 	
