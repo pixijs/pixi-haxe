@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_rope_Main = function() {
+var rope_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_rope_Main.main = function() {
-	new samples_rope_Main();
+rope_Main.main = function() {
+	new rope_Main();
 };
-samples_rope_Main.__super__ = pixi_plugins_app_Application;
-samples_rope_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+rope_Main.__super__ = pixi_plugins_app_Application;
+rope_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -284,7 +284,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_rope_Main.main();
+rope_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=rope.js.map

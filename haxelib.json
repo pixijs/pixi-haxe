@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "pixi-tilemap externs by @Tiago-Ling",
-	"version": "4.0.0-rc.4",
+	"releasenote": "v4 release",
+	"version": "4.0.0",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

@@ -1,4 +1,4 @@
-package samples.bitmapfont;
+package bitmapfont;
 
 import pixi.loaders.Loader;
 import pixi.extras.BitmapText;

@@ -157,6 +157,157 @@ Std.__name__ = true;
 Std.string = function(s) {
 	return js_Boot.__string_rec(s,"");
 };
+var dragging_Bunny = function(texture) {
+	PIXI.Sprite.call(this,texture);
+};
+dragging_Bunny.__name__ = true;
+dragging_Bunny.__super__ = PIXI.Sprite;
+dragging_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
+	__class__: dragging_Bunny
+});
+var pixi_plugins_app_Application = function() {
+	this._animationFrameId = null;
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.clearBeforeRender = true;
+	this.preserveDrawingBuffer = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
+};
+pixi_plugins_app_Application.__name__ = true;
+pixi_plugins_app_Application.prototype = {
+	set_fps: function(val) {
+		this._frameCount = 0;
+		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
+	}
+	,set_skipFrame: function(val) {
+		if(val) {
+			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
+			this.set_fps(30);
+		}
+		return this.skipFrame = val;
+	}
+	,start: function(rendererType,parentDom,canvasElement) {
+		if(rendererType == null) rendererType = "auto";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
+		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
+		this.stage = new PIXI.Container();
+		var renderingOptions = { };
+		renderingOptions.view = this.canvas;
+		renderingOptions.backgroundColor = this.backgroundColor;
+		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.antialias = this.antialias;
+		renderingOptions.forceFXAA = this.forceFXAA;
+		renderingOptions.autoResize = this.autoResize;
+		renderingOptions.transparent = this.transparent;
+		renderingOptions.clearBeforeRender = this.clearBeforeRender;
+		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
+		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(this.roundPixels) this.renderer.roundPixels = true;
+		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
+		this.resumeRendering();
+		this.addStats();
+	}
+	,resumeRendering: function() {
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
+		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,_onWindowResize: function(event) {
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+		this.renderer.resize(this.width,this.height);
+		this.canvas.style.width = this.width + "px";
+		this.canvas.style.height = this.height + "px";
+		if(this.onResize != null) this.onResize();
+	}
+	,_onRequestAnimationFrame: function(elapsedTime) {
+		this._frameCount++;
+		if(this._frameCount == (60 / this.fps | 0)) {
+			this._frameCount = 0;
+			if(this.onUpdate != null) this.onUpdate(elapsedTime);
+			this.renderer.render(this.stage);
+		}
+		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,addStats: function() {
+		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
+	}
+	,__class__: pixi_plugins_app_Application
+};
+var dragging_Main = function() {
+	pixi_plugins_app_Application.call(this);
+	this._init();
+};
+dragging_Main.__name__ = true;
+dragging_Main.main = function() {
+	new dragging_Main();
+};
+dragging_Main.__super__ = pixi_plugins_app_Application;
+dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+	_init: function() {
+		this.backgroundColor = 16777215;
+		pixi_plugins_app_Application.prototype.start.call(this);
+		this._texture = PIXI.Texture.fromImage("assets/basics/bunny.png");
+		var _g = 0;
+		while(_g < 10) {
+			var i = _g++;
+			this._createBunny(Math.floor(Math.random() * window.innerWidth),Math.floor(Math.random() * window.innerHeight));
+		}
+	}
+	,_createBunny: function(x,y) {
+		var bunny = new dragging_Bunny(this._texture);
+		bunny.interactive = true;
+		bunny.buttonMode = true;
+		bunny.anchor.set(0.5);
+		bunny.scale.set(3);
+		bunny.on("mousedown",$bind(this,this._onDragStart));
+		bunny.on("touchstart",$bind(this,this._onDragStart));
+		bunny.on("mouseup",$bind(this,this._onDragEnd));
+		bunny.on("mouseupoutside",$bind(this,this._onDragEnd));
+		bunny.on("touchend",$bind(this,this._onDragEnd));
+		bunny.on("touchendoutside",$bind(this,this._onDragEnd));
+		bunny.on("mousemove",$bind(this,this._onDragMove));
+		bunny.on("touchmove",$bind(this,this._onDragMove));
+		bunny.position.set(x,y);
+		this.stage.addChild(bunny);
+	}
+	,_onDragStart: function(event) {
+		var bunny;
+		bunny = js_Boot.__cast(event.target , dragging_Bunny);
+		bunny.data = event.data;
+		bunny.alpha = 0.5;
+		bunny.dragging = true;
+	}
+	,_onDragEnd: function(event) {
+		var bunny;
+		bunny = js_Boot.__cast(event.target , dragging_Bunny);
+		bunny.alpha = 1;
+		bunny.dragging = false;
+		bunny.data = null;
+	}
+	,_onDragMove: function(event) {
+		var bunny;
+		bunny = js_Boot.__cast(event.target , dragging_Bunny);
+		if(bunny.dragging) {
+			var newPosition = bunny.data.getLocalPosition(bunny.parent);
+			bunny.position.set(newPosition.x,newPosition.y);
+		}
+	}
+	,__class__: dragging_Main
+});
 var js__$Boot_HaxeError = function(val) {
 	Error.call(this);
 	this.val = val;
@@ -305,157 +456,6 @@ js_Boot.__isNativeObj = function(o) {
 js_Boot.__resolveNativeClass = function(name) {
 	return $global[name];
 };
-var pixi_plugins_app_Application = function() {
-	this._animationFrameId = null;
-	this.pixelRatio = 1;
-	this.set_skipFrame(false);
-	this.autoResize = true;
-	this.transparent = false;
-	this.antialias = false;
-	this.forceFXAA = false;
-	this.roundPixels = false;
-	this.clearBeforeRender = true;
-	this.preserveDrawingBuffer = false;
-	this.backgroundColor = 16777215;
-	this.width = window.innerWidth;
-	this.height = window.innerHeight;
-	this.set_fps(60);
-};
-pixi_plugins_app_Application.__name__ = true;
-pixi_plugins_app_Application.prototype = {
-	set_fps: function(val) {
-		this._frameCount = 0;
-		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
-	}
-	,set_skipFrame: function(val) {
-		if(val) {
-			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
-			this.set_fps(30);
-		}
-		return this.skipFrame = val;
-	}
-	,start: function(rendererType,parentDom,canvasElement) {
-		if(rendererType == null) rendererType = "auto";
-		if(canvasElement == null) {
-			var _this = window.document;
-			this.canvas = _this.createElement("canvas");
-			this.canvas.style.width = this.width + "px";
-			this.canvas.style.height = this.height + "px";
-			this.canvas.style.position = "absolute";
-		} else this.canvas = canvasElement;
-		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
-		this.stage = new PIXI.Container();
-		var renderingOptions = { };
-		renderingOptions.view = this.canvas;
-		renderingOptions.backgroundColor = this.backgroundColor;
-		renderingOptions.resolution = this.pixelRatio;
-		renderingOptions.antialias = this.antialias;
-		renderingOptions.forceFXAA = this.forceFXAA;
-		renderingOptions.autoResize = this.autoResize;
-		renderingOptions.transparent = this.transparent;
-		renderingOptions.clearBeforeRender = this.clearBeforeRender;
-		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
-		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
-		if(this.roundPixels) this.renderer.roundPixels = true;
-		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
-		this.resumeRendering();
-		this.addStats();
-	}
-	,resumeRendering: function() {
-		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
-		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,_onWindowResize: function(event) {
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.renderer.resize(this.width,this.height);
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		if(this.onResize != null) this.onResize();
-	}
-	,_onRequestAnimationFrame: function(elapsedTime) {
-		this._frameCount++;
-		if(this._frameCount == (60 / this.fps | 0)) {
-			this._frameCount = 0;
-			if(this.onUpdate != null) this.onUpdate(elapsedTime);
-			this.renderer.render(this.stage);
-		}
-		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,addStats: function() {
-		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
-	}
-	,__class__: pixi_plugins_app_Application
-};
-var samples_dragging_Bunny = function(texture) {
-	PIXI.Sprite.call(this,texture);
-};
-samples_dragging_Bunny.__name__ = true;
-samples_dragging_Bunny.__super__ = PIXI.Sprite;
-samples_dragging_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
-	__class__: samples_dragging_Bunny
-});
-var samples_dragging_Main = function() {
-	pixi_plugins_app_Application.call(this);
-	this._init();
-};
-samples_dragging_Main.__name__ = true;
-samples_dragging_Main.main = function() {
-	new samples_dragging_Main();
-};
-samples_dragging_Main.__super__ = pixi_plugins_app_Application;
-samples_dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
-	_init: function() {
-		this.backgroundColor = 16777215;
-		pixi_plugins_app_Application.prototype.start.call(this);
-		this._texture = PIXI.Texture.fromImage("assets/basics/bunny.png");
-		var _g = 0;
-		while(_g < 10) {
-			var i = _g++;
-			this._createBunny(Math.floor(Math.random() * window.innerWidth),Math.floor(Math.random() * window.innerHeight));
-		}
-	}
-	,_createBunny: function(x,y) {
-		var bunny = new samples_dragging_Bunny(this._texture);
-		bunny.interactive = true;
-		bunny.buttonMode = true;
-		bunny.anchor.set(0.5);
-		bunny.scale.set(3);
-		bunny.on("mousedown",$bind(this,this._onDragStart));
-		bunny.on("touchstart",$bind(this,this._onDragStart));
-		bunny.on("mouseup",$bind(this,this._onDragEnd));
-		bunny.on("mouseupoutside",$bind(this,this._onDragEnd));
-		bunny.on("touchend",$bind(this,this._onDragEnd));
-		bunny.on("touchendoutside",$bind(this,this._onDragEnd));
-		bunny.on("mousemove",$bind(this,this._onDragMove));
-		bunny.on("touchmove",$bind(this,this._onDragMove));
-		bunny.position.set(x,y);
-		this.stage.addChild(bunny);
-	}
-	,_onDragStart: function(event) {
-		var bunny;
-		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
-		bunny.data = event.data;
-		bunny.alpha = 0.5;
-		bunny.dragging = true;
-	}
-	,_onDragEnd: function(event) {
-		var bunny;
-		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
-		bunny.alpha = 1;
-		bunny.dragging = false;
-		bunny.data = null;
-	}
-	,_onDragMove: function(event) {
-		var bunny;
-		bunny = js_Boot.__cast(event.target , samples_dragging_Bunny);
-		if(bunny.dragging) {
-			var newPosition = bunny.data.getLocalPosition(bunny.parent);
-			bunny.position.set(newPosition.x,newPosition.y);
-		}
-	}
-	,__class__: samples_dragging_Main
-});
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.prototype.__class__ = String;
@@ -485,7 +485,7 @@ Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
 js_Boot.__toStr = {}.toString;
-samples_dragging_Main.main();
+dragging_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports, typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
 
 //# sourceMappingURL=dragging.js.map

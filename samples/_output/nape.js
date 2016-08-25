@@ -319,6 +319,181 @@ js_Boot.__resolveNativeClass = function(name) {
 };
 var nape_Config = function() { };
 nape_Config.__name__ = true;
+var pixi_plugins_app_Application = function() {
+	this._animationFrameId = null;
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.clearBeforeRender = true;
+	this.preserveDrawingBuffer = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
+};
+pixi_plugins_app_Application.__name__ = true;
+pixi_plugins_app_Application.prototype = {
+	set_fps: function(val) {
+		this._frameCount = 0;
+		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
+	}
+	,set_skipFrame: function(val) {
+		if(val) {
+			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
+			this.set_fps(30);
+		}
+		return this.skipFrame = val;
+	}
+	,start: function(rendererType,parentDom,canvasElement) {
+		if(rendererType == null) rendererType = "auto";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
+		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
+		this.stage = new PIXI.Container();
+		var renderingOptions = { };
+		renderingOptions.view = this.canvas;
+		renderingOptions.backgroundColor = this.backgroundColor;
+		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.antialias = this.antialias;
+		renderingOptions.forceFXAA = this.forceFXAA;
+		renderingOptions.autoResize = this.autoResize;
+		renderingOptions.transparent = this.transparent;
+		renderingOptions.clearBeforeRender = this.clearBeforeRender;
+		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
+		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(this.roundPixels) this.renderer.roundPixels = true;
+		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
+		this.resumeRendering();
+		this.addStats();
+	}
+	,resumeRendering: function() {
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
+		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,_onWindowResize: function(event) {
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+		this.renderer.resize(this.width,this.height);
+		this.canvas.style.width = this.width + "px";
+		this.canvas.style.height = this.height + "px";
+		if(this.onResize != null) this.onResize();
+	}
+	,_onRequestAnimationFrame: function(elapsedTime) {
+		this._frameCount++;
+		if(this._frameCount == (60 / this.fps | 0)) {
+			this._frameCount = 0;
+			if(this.onUpdate != null) this.onUpdate(elapsedTime);
+			this.renderer.render(this.stage);
+		}
+		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,addStats: function() {
+		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
+	}
+	,__class__: pixi_plugins_app_Application
+};
+var nape_Main = function() {
+	pixi_plugins_app_Application.call(this);
+	this._init();
+	this._balls = [];
+	this._pballs = [];
+	this._setUpPhysics();
+	this.onUpdate = $bind(this,this._onUpdate);
+	var timer = new haxe_Timer(1000);
+	timer.run = $bind(this,this._addBall);
+	this._addBall();
+};
+nape_Main.__name__ = true;
+nape_Main.main = function() {
+	new nape_Main();
+};
+nape_Main.__super__ = pixi_plugins_app_Application;
+nape_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+	_init: function() {
+		this.backgroundColor = 6724095;
+		this.autoResize = false;
+		this.width = 800;
+		this.height = 600;
+		pixi_plugins_app_Application.prototype.start.call(this);
+	}
+	,_onUpdate: function(elapsedTime) {
+		this._space.step(0.0166666666666666664);
+		var _g1 = 0;
+		var _g = this._pballs.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this._balls[i].position.x = this._pballs[i].get_position().get_x();
+			this._balls[i].position.y = this._pballs[i].get_position().get_y();
+			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
+		}
+	}
+	,_setUpPhysics: function() {
+		var gravity = nape_geom_Vec2.get(0,600,true);
+		this._space = new nape_space_Space(gravity);
+		this._floor = new nape_phys_Body((function($this) {
+			var $r;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
+			}
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
+			return $r;
+		}(this)));
+		this._floor.setShapeMaterials(nape_phys_Material.wood());
+		this._floor.zpp_inner.wrap_shapes.add(new nape_shape_Polygon(nape_shape_Polygon.rect(0,595,800,1)));
+		this._floor.set_space(this._space);
+	}
+	,_addBall: function() {
+		var ball = new PIXI.Sprite(PIXI.Texture.fromImage("assets/nape/ball.png"));
+		ball.anchor.set(0.5,0.5);
+		this._balls.push(ball);
+		this.stage.addChild(ball);
+		var pball = new nape_phys_Body((function($this) {
+			var $r;
+			if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
+				zpp_$nape_util_ZPP_$Flags.internal = true;
+				zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
+				zpp_$nape_util_ZPP_$Flags.internal = false;
+			}
+			$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
+			return $r;
+		}(this)));
+		pball.zpp_inner.wrap_shapes.add(new nape_shape_Circle(10));
+		((function($this) {
+			var $r;
+			if(pball.zpp_inner.wrap_pos == null) pball.zpp_inner.setupPosition();
+			$r = pball.zpp_inner.wrap_pos;
+			return $r;
+		}(this))).setxy(Std.random(800),0);
+		if(pball.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
+		if(pball.zpp_inner.angvel != 0) {
+			if(pball.zpp_inner.type == 1) throw new js__$Boot_HaxeError("Error: A static object cannot be given a velocity");
+			pball.zpp_inner.angvel = 0;
+			pball.zpp_inner.wake();
+		}
+		pball.zpp_inner.angvel;
+		pball.zpp_inner.immutable_midstep("Body::" + "true");
+		if(!pball.zpp_inner.norotate != true) {
+			pball.zpp_inner.norotate = false;
+			pball.zpp_inner.invalidate_inertia();
+		}
+		!pball.zpp_inner.norotate;
+		pball.setShapeMaterials(nape_phys_Material.rubber());
+		pball.set_space(this._space);
+		this._pballs.push(pball);
+	}
+	,__class__: nape_Main
+});
 var nape_callbacks_Callback = function() {
 	this.zpp_inner = null;
 	if(!zpp_$nape_callbacks_ZPP_$Callback.internal) throw new js__$Boot_HaxeError("Error: Callback cannot be instantiated derp!");
@@ -3528,181 +3703,6 @@ nape_space_Space.prototype = {
 	}
 	,__class__: nape_space_Space
 };
-var pixi_plugins_app_Application = function() {
-	this._animationFrameId = null;
-	this.pixelRatio = 1;
-	this.set_skipFrame(false);
-	this.autoResize = true;
-	this.transparent = false;
-	this.antialias = false;
-	this.forceFXAA = false;
-	this.roundPixels = false;
-	this.clearBeforeRender = true;
-	this.preserveDrawingBuffer = false;
-	this.backgroundColor = 16777215;
-	this.width = window.innerWidth;
-	this.height = window.innerHeight;
-	this.set_fps(60);
-};
-pixi_plugins_app_Application.__name__ = true;
-pixi_plugins_app_Application.prototype = {
-	set_fps: function(val) {
-		this._frameCount = 0;
-		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
-	}
-	,set_skipFrame: function(val) {
-		if(val) {
-			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
-			this.set_fps(30);
-		}
-		return this.skipFrame = val;
-	}
-	,start: function(rendererType,parentDom,canvasElement) {
-		if(rendererType == null) rendererType = "auto";
-		if(canvasElement == null) {
-			var _this = window.document;
-			this.canvas = _this.createElement("canvas");
-			this.canvas.style.width = this.width + "px";
-			this.canvas.style.height = this.height + "px";
-			this.canvas.style.position = "absolute";
-		} else this.canvas = canvasElement;
-		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
-		this.stage = new PIXI.Container();
-		var renderingOptions = { };
-		renderingOptions.view = this.canvas;
-		renderingOptions.backgroundColor = this.backgroundColor;
-		renderingOptions.resolution = this.pixelRatio;
-		renderingOptions.antialias = this.antialias;
-		renderingOptions.forceFXAA = this.forceFXAA;
-		renderingOptions.autoResize = this.autoResize;
-		renderingOptions.transparent = this.transparent;
-		renderingOptions.clearBeforeRender = this.clearBeforeRender;
-		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
-		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
-		if(this.roundPixels) this.renderer.roundPixels = true;
-		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
-		this.resumeRendering();
-		this.addStats();
-	}
-	,resumeRendering: function() {
-		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
-		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,_onWindowResize: function(event) {
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.renderer.resize(this.width,this.height);
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		if(this.onResize != null) this.onResize();
-	}
-	,_onRequestAnimationFrame: function(elapsedTime) {
-		this._frameCount++;
-		if(this._frameCount == (60 / this.fps | 0)) {
-			this._frameCount = 0;
-			if(this.onUpdate != null) this.onUpdate(elapsedTime);
-			this.renderer.render(this.stage);
-		}
-		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,addStats: function() {
-		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
-	}
-	,__class__: pixi_plugins_app_Application
-};
-var samples_nape_Main = function() {
-	pixi_plugins_app_Application.call(this);
-	this._init();
-	this._balls = [];
-	this._pballs = [];
-	this._setUpPhysics();
-	this.onUpdate = $bind(this,this._onUpdate);
-	var timer = new haxe_Timer(1000);
-	timer.run = $bind(this,this._addBall);
-	this._addBall();
-};
-samples_nape_Main.__name__ = true;
-samples_nape_Main.main = function() {
-	new samples_nape_Main();
-};
-samples_nape_Main.__super__ = pixi_plugins_app_Application;
-samples_nape_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
-	_init: function() {
-		this.backgroundColor = 6724095;
-		this.autoResize = false;
-		this.width = 800;
-		this.height = 600;
-		pixi_plugins_app_Application.prototype.start.call(this);
-	}
-	,_onUpdate: function(elapsedTime) {
-		this._space.step(0.0166666666666666664);
-		var _g1 = 0;
-		var _g = this._pballs.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			this._balls[i].position.x = this._pballs[i].get_position().get_x();
-			this._balls[i].position.y = this._pballs[i].get_position().get_y();
-			this._balls[i].rotation = this._pballs[i].zpp_inner.rot;
-		}
-	}
-	,_setUpPhysics: function() {
-		var gravity = nape_geom_Vec2.get(0,600,true);
-		this._space = new nape_space_Space(gravity);
-		this._floor = new nape_phys_Body((function($this) {
-			var $r;
-			if(zpp_$nape_util_ZPP_$Flags.BodyType_STATIC == null) {
-				zpp_$nape_util_ZPP_$Flags.internal = true;
-				zpp_$nape_util_ZPP_$Flags.BodyType_STATIC = new nape_phys_BodyType();
-				zpp_$nape_util_ZPP_$Flags.internal = false;
-			}
-			$r = zpp_$nape_util_ZPP_$Flags.BodyType_STATIC;
-			return $r;
-		}(this)));
-		this._floor.setShapeMaterials(nape_phys_Material.wood());
-		this._floor.zpp_inner.wrap_shapes.add(new nape_shape_Polygon(nape_shape_Polygon.rect(0,595,800,1)));
-		this._floor.set_space(this._space);
-	}
-	,_addBall: function() {
-		var ball = new PIXI.Sprite(PIXI.Texture.fromImage("assets/nape/ball.png"));
-		ball.anchor.set(0.5,0.5);
-		this._balls.push(ball);
-		this.stage.addChild(ball);
-		var pball = new nape_phys_Body((function($this) {
-			var $r;
-			if(zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC == null) {
-				zpp_$nape_util_ZPP_$Flags.internal = true;
-				zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC = new nape_phys_BodyType();
-				zpp_$nape_util_ZPP_$Flags.internal = false;
-			}
-			$r = zpp_$nape_util_ZPP_$Flags.BodyType_DYNAMIC;
-			return $r;
-		}(this)));
-		pball.zpp_inner.wrap_shapes.add(new nape_shape_Circle(10));
-		((function($this) {
-			var $r;
-			if(pball.zpp_inner.wrap_pos == null) pball.zpp_inner.setupPosition();
-			$r = pball.zpp_inner.wrap_pos;
-			return $r;
-		}(this))).setxy(Std.random(800),0);
-		if(pball.zpp_inner.world) throw new js__$Boot_HaxeError("Error: Space::world is immutable");
-		if(pball.zpp_inner.angvel != 0) {
-			if(pball.zpp_inner.type == 1) throw new js__$Boot_HaxeError("Error: A static object cannot be given a velocity");
-			pball.zpp_inner.angvel = 0;
-			pball.zpp_inner.wake();
-		}
-		pball.zpp_inner.angvel;
-		pball.zpp_inner.immutable_midstep("Body::" + "true");
-		if(!pball.zpp_inner.norotate != true) {
-			pball.zpp_inner.norotate = false;
-			pball.zpp_inner.invalidate_inertia();
-		}
-		!pball.zpp_inner.norotate;
-		pball.setShapeMaterials(nape_phys_Material.rubber());
-		pball.set_space(this._space);
-		this._pballs.push(pball);
-	}
-	,__class__: samples_nape_Main
-});
 var zpp_$nape_ZPP_$ID = function() { };
 zpp_$nape_ZPP_$ID.__name__ = true;
 zpp_$nape_ZPP_$ID.Interactor = function() {
@@ -18288,7 +18288,7 @@ zpp_$nape_util_ZPP_$ShapeList.internal = false;
 zpp_$nape_util_ZPP_$InteractionGroupList.internal = false;
 zpp_$nape_util_ZPP_$ArbiterList.internal = false;
 zpp_$nape_util_ZPP_$ContactList.internal = false;
-samples_nape_Main.main();
+nape_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports, typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
 
 //# sourceMappingURL=nape.js.map

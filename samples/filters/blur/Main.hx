@@ -1,4 +1,4 @@
-package samples.filters.blur;
+package filters.blur;
 
 import js.Browser;
 import pixi.core.display.Container;

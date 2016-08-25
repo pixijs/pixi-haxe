@@ -1,4 +1,4 @@
-package samples.rope;
+package rope;
 
 import pixi.mesh.Rope;
 import pixi.core.display.Container;
