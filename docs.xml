@@ -1,26 +1,5 @@
 <haxe>
 	<class path="Array" params="T" file="/usr/local/lib/haxe/std/js/_std/Array.hx" extern="1">
-		<length public="1" set="null">
-			<x path="Int"/>
-			<haxe_doc>The length of `this` Array.</haxe_doc>
-		</length>
-		<join public="1" set="method">
-			<f a="sep">
-				<c path="String"/>
-				<c path="String"/>
-			</f>
-			<haxe_doc>Returns a string representation of `this` Array, with `sep` separating
-		each element.
-
-		The result of this operation is equal to `Std.string(this[0]) + sep +
-		Std.string(this[1]) + sep + ... + sep + Std.string(this[this.length-1])`
-
-		If `this` is the empty Array `[]`, the result is the empty String `""`.
-		If `this` has exactly one element, the result is equal to a call to
-		`Std.string(this[0])`.
-
-		If `sep` is null, the result is unspecified.</haxe_doc>
-		</join>
 		<push public="1" set="method">
 			<f a="x">
 				<c path="Array.T"/>
@@ -159,85 +138,6 @@
 			<m n=":coreApi"/>
 		</meta>
 	</class>
-	<class path="EReg" params="" file="/usr/local/lib/haxe/std/js/_std/EReg.hx">
-		<r><c path="_EReg.HaxeRegExp"/></r>
-		<match public="1" set="method" line="31">
-			<f a="s">
-				<c path="String"/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Tells if `this` regular expression matches String `s`.
-
-		This method modifies the internal state.
-
-		If `s` is `null`, the result is unspecified.</haxe_doc>
-		</match>
-		<new public="1" set="method" line="26">
-			<f a="r:opt">
-				<c path="String"/>
-				<c path="String"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>Creates a new regular expression with pattern `r` and modifiers `opt`.
-
-		This is equivalent to the shorthand syntax `~/r/opt`
-
-		If `r` or `opt` are null, the result is unspecified.</haxe_doc>
-		</new>
-		<haxe_doc>The EReg class represents regular expressions.
-
-	While basic usage and patterns consistently work across platforms, some more
-	complex operations may yield different results. This is a necessary trade-
-	off to retain a certain level of performance.
-
-	EReg instances can be created by calling the constructor, or with the
-	special syntax ~/pattern/modifier
-
-	EReg instances maintain an internal state, which is affected by several of
-	its methods.
-
-	A detailed explanation of the supported operations is available at
-	http://haxe.org/manual/std-regex.html</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-			<m n=":coreApi"/>
-		</meta>
-	</class>
-	<class path="js.RegExp" params="" file="/usr/local/lib/haxe/std/js/RegExp.hx" extern="1">
-		<global public="1" set="null"><x path="Bool"/></global>
-		<ignoreCase public="1" set="null"><x path="Bool"/></ignoreCase>
-		<multiline public="1" set="null"><x path="Bool"/></multiline>
-		<source public="1" set="null"><c path="String"/></source>
-		<lastIndex public="1"><x path="Int"/></lastIndex>
-		<exec public="1" set="method"><f a="str">
-	<c path="String"/>
-	<t path="Null"><c path="js.RegExpMatch"/></t>
-</f></exec>
-		<test public="1" set="method"><f a="str">
-	<c path="String"/>
-	<x path="Bool"/>
-</f></test>
-		<toString public="1" set="method"><f a=""><c path="String"/></f></toString>
-		<new public="1" set="method"><f a="pattern:?flags">
-	<c path="String"/>
-	<c path="String"/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>Native JavaScript regular expressions.
-
-    For cross-platform regular expressions, use haxe `EReg` class or regexp literals.</haxe_doc>
-		<meta><m n=":native"><e>"RegExp"</e></m></meta>
-	</class>
-	<class path="_EReg.HaxeRegExp" params="" file="/usr/local/lib/haxe/std/js/_std/EReg.hx" private="1" module="EReg" extern="1">
-		<extends path="js.RegExp"/>
-		<m public="1"><c path="js.RegExpMatch"/></m>
-		<s public="1"><c path="String"/></s>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"RegExp"</e></m>
-		</meta>
-	</class>
 	<abstract path="Enum" params="T" file="/usr/local/lib/haxe/std/Enum.hx">
 		<this><x path="Enum"><c path="Enum.T"/></x></this>
 		<haxe_doc>An abstract type that represents an Enum type.
@@ -256,53 +156,6 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<abstract path="Map" params="K:V" file="/usr/local/lib/haxe/std/Map.hx">
-		<from>
-			<icast field="fromStringMap"><c path="haxe.ds.StringMap"><c path="fromStringMap.V"/></c></icast>
-			<icast field="fromIntMap"><c path="haxe.ds.IntMap"><c path="fromIntMap.V"/></c></icast>
-			<icast field="fromObjectMap"><c path="haxe.ds.ObjectMap">
-	<c path="fromObjectMap.K"/>
-	<c path="fromObjectMap.V"/>
-</c></icast>
-		</from>
-		<this><t path="IMap">
-	<c path="Map.K"/>
-	<c path="Map.V"/>
-</t></this>
-		<to>
-			<icast field="toStringMap"><c path="haxe.ds.StringMap"><c path="toStringMap.V"/></c></icast>
-			<icast field="toIntMap"><c path="haxe.ds.IntMap"><c path="toIntMap.V"/></c></icast>
-			<icast field="toEnumValueMapMap"><c path="haxe.ds.EnumValueMap">
-	<c path="toEnumValueMapMap.K"/>
-	<c path="toEnumValueMapMap.V"/>
-</c></icast>
-			<icast field="toObjectMap"><c path="haxe.ds.ObjectMap">
-	<c path="toObjectMap.K"/>
-	<c path="toObjectMap.V"/>
-</c></icast>
-		</to>
-		<haxe_doc><![CDATA[Map allows key to value mapping for arbitrary value types, and many key
-	types.
-
-	This is a multi-type abstract, it is instantiated as one of its
-	specialization types depending on its type parameters.
-
-	A Map can be instantiated without explicit type parameters. Type inference
-	will then determine the type parameters from the usage.
-
-	Maps can also be created with `key1 => value1, key2 => value2` syntax.
-
-	Map is an abstract type, it is not available at runtime.]]></haxe_doc>
-		<meta><m n=":multiType"><e>K</e></m></meta>
-		<impl><class path="_Map.Map_Impl_" params="" file="/usr/local/lib/haxe/std/Map.hx" private="1" module="Map"><meta><m n=":keep"/></meta></class></impl>
-	</abstract>
-	<typedef path="IMap" params="K:V" file="/usr/local/lib/haxe/std/Map.hx" module="Map">
-		<c path="haxe.IMap">
-			<c path="IMap.K"/>
-			<c path="IMap.V"/>
-		</c>
-		<meta><m n=":deprecated"/></meta>
-	</typedef>
 	<class path="Math" params="" file="/usr/local/lib/haxe/std/js/_std/Math.hx" extern="1">
 		<floor public="1" set="method" static="1"><f a="v">
 	<x path="Float"/>
@@ -447,42 +300,6 @@
 			<meta><m n=":has_untyped"/></meta>
 			<haxe_doc>Call a method with the given object and arguments.</haxe_doc>
 		</callMethod>
-		<fields public="1" set="method" line="50" static="1">
-			<f a="o">
-				<d/>
-				<c path="Array"><c path="String"/></c>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-			<haxe_doc>Returns the fields of structure `o`.
-
-		This method is only guaranteed to work on anonymous structures. Refer to
-		`Type.getInstanceFields` for a function supporting class instances.
-
-		If `o` is null, the result is unspecified.</haxe_doc>
-		</fields>
-		<isFunction public="1" set="method" line="61" static="1">
-			<f a="f">
-				<d/>
-				<x path="Bool"/>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-			<haxe_doc>Returns true if `f` is a function, false otherwise.
-
-		If `f` is null, the result is false.</haxe_doc>
-		</isFunction>
-		<compareMethods public="1" set="method" line="69" static="1">
-			<f a="f1:f2">
-				<d/>
-				<d/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>Compares the functions `f1` and `f2`.
-
-		If `f1` or `f2` are not functions, the result is unspecified.
-
-		Otherwise the result is true if `f1` and the `f2` are physically equal,
-		false otherwise.</haxe_doc>
-		</compareMethods>
 		<haxe_doc>The Reflect API is a way to manipulate values dynamically through an
 	abstract interface in an untyped manner. Use with care.</haxe_doc>
 		<meta>
@@ -726,7 +543,6 @@
 	Use of Dynamic should be minimized as it prevents several compiler
 	checks and optimizations.</haxe_doc>
 		<meta>
-			<m n=":valueUsed"/>
 			<m n=":coreType"/>
 			<m n=":runtimeValue"/>
 		</meta>
@@ -766,830 +582,6 @@
 	</typedef>
 	<class path="ArrayAccess" params="T" file="/usr/local/lib/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>ArrayAccess is used to indicate a class that can be accessed using brackets.
 	The type parameter represents the type of the elements stored.</haxe_doc></class>
-	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
-		<listeners public="1" set="method">
-			<f a="event">
-				<c path="String"/>
-				<c path="Array"><d/></c>
-			</f>
-			<haxe_doc>* Return a list of assigned event listeners.
-	 *
-	 * @param {String} eventName
-	 * @returns {Array}</haxe_doc>
-		</listeners>
-		<emit public="1" set="method">
-			<f a="event:?a1:?a2:?a3:?a4:?a5">
-				<c path="String"/>
-				<d/>
-				<d/>
-				<d/>
-				<d/>
-				<d/>
-				<x path="Bool"/>
-			</f>
-			<haxe_doc>* Emit an event to all registered event listeners.
-     *
-     * @alias dispatchEvent
-     * @param eventName {String} The name of the event.
-     * @return {Bool} Indication if we've emitted an event.</haxe_doc>
-		</emit>
-		<on public="1" set="method">
-			<f a="event:fn:?context">
-				<c path="String"/>
-				<f a="">
-					<t path="pixi.interaction.EventTarget"/>
-					<x path="Void"/>
-				</f>
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-			<overloads>
-				<on public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a=""><x path="Void"/></f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</on>
-				<on public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a="">
-							<d/>
-							<x path="Void"/>
-						</f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</on>
-			</overloads>
-		</on>
-		<once public="1" set="method">
-			<f a="event:fn:?context">
-				<c path="String"/>
-				<f a="">
-					<t path="pixi.interaction.EventTarget"/>
-					<x path="Void"/>
-				</f>
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Add an EventListener that's only called once.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-			<overloads>
-				<once public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a=""><x path="Void"/></f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Add an EventListener that's only called once.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</once>
-				<once public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a="">
-							<d/>
-							<x path="Void"/>
-						</f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Add an EventListener that's only called once.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</once>
-			</overloads>
-		</once>
-		<addListener public="1" set="method">
-			<f a="event:fn:?context">
-				<c path="String"/>
-				<f a="">
-					<t path="pixi.interaction.EventTarget"/>
-					<x path="Void"/>
-				</f>
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-			<overloads>
-				<addListener public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a=""><x path="Void"/></f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</addListener>
-				<addListener public="1" set="method">
-					<f a="event:fn:?context">
-						<c path="String"/>
-						<f a="">
-							<d/>
-							<x path="Void"/>
-						</f>
-						<d/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {function} fn Callback function.
-	 * @param {Mixed} context The context of the function.</haxe_doc>
-				</addListener>
-			</overloads>
-		</addListener>
-		<off public="1" set="method">
-			<f a="event:fn:?once">
-				<c path="String"/>
-				<f a="">
-					<t path="pixi.interaction.EventTarget"/>
-					<x path="Void"/>
-				</f>
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-			<overloads>
-				<off public="1" set="method">
-					<f a="event:fn:?once">
-						<c path="String"/>
-						<f a=""><x path="Void"/></f>
-						<x path="Bool"/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-				</off>
-				<off public="1" set="method">
-					<f a="event:fn:?once">
-						<c path="String"/>
-						<f a="">
-							<d/>
-							<x path="Void"/>
-						</f>
-						<x path="Bool"/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-				</off>
-			</overloads>
-		</off>
-		<removeListener public="1" set="method">
-			<f a="event:fn:?once">
-				<c path="String"/>
-				<f a="">
-					<t path="pixi.interaction.EventTarget"/>
-					<x path="Void"/>
-				</f>
-				<x path="Bool"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-			<overloads>
-				<removeListener public="1" set="method">
-					<f a="event:fn:?once">
-						<c path="String"/>
-						<f a=""><x path="Void"/></f>
-						<x path="Bool"/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-				</removeListener>
-				<removeListener public="1" set="method">
-					<f a="event:fn:?once">
-						<c path="String"/>
-						<f a="">
-							<d/>
-							<x path="Void"/>
-						</f>
-						<x path="Bool"/>
-						<x path="Void"/>
-					</f>
-					<haxe_doc>* Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {function} fn The listener that we need to find.
-	 * @param {Bool} once Only remove once listeners.</haxe_doc>
-				</removeListener>
-			</overloads>
-		</removeListener>
-		<removeAllListeners public="1" set="method">
-			<f a="?event">
-				<c path="String"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
-	 *
-	 * @param {String} event The event want to remove all listeners for.</haxe_doc>
-		</removeAllListeners>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Minimal EventEmitter interface that is molded against the Node.js
-	 * EventEmitter interface.
-	 *
-	 * @constructor</haxe_doc>
-		</new>
-	</class>
-	<class path="pixi.loaders.ResourceLoader" params="" file="src/pixi/loaders/ResourceLoader.hx" extern="1">
-		<extends path="pixi.interaction.EventEmitter"/>
-		<baseUrl public="1">
-			<c path="String"/>
-			<haxe_doc>* The base url for all resources loaded by this loader.
-     *
-     * @member {String}</haxe_doc>
-		</baseUrl>
-		<progress public="1">
-			<x path="Float"/>
-			<haxe_doc>* The progress percent of the loader going through the queue.
-     *
-     * @member {Float}</haxe_doc>
-		</progress>
-		<loading public="1">
-			<x path="Bool"/>
-			<haxe_doc>* Loading state of the loader, true if it is currently loading resources.
-     *
-     * @member {Bool}</haxe_doc>
-		</loading>
-		<resources public="1">
-			<d/>
-			<haxe_doc><![CDATA[* All the resources for this loader keyed by name.
-     *
-     * @member {object<string, Resource>}]]></haxe_doc>
-		</resources>
-		<add public="1" set="method">
-			<f a="name:url:?options:?callback">
-				<c path="String"/>
-				<c path="String"/>
-				<t path="pixi.loaders.LoaderOptions"/>
-				<f a="">
-					<c path="pixi.loaders.Resource"/>
-					<x path="Void"/>
-				</f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
-	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
-	 * required the url to load. All the following will work:
-	 *
-	 * ```js
-	 * loader
-	 *     // normal param syntax
-	 *     .add('key', 'http://...', 	function () {})
-	 *     .add('http://...', 	function () {})
-	 *     .add('http://...')
-	 *
-	 *     // object syntax
-	 *     .add({
-	 *         name: 'key2',
-	 *         url: 'http://...'
-	 *     }, 	function () {})
-	 *     .add({
-	 *         url: 'http://...'
-	 *     }, function () {})
-	 *     .add({
-	 *         name: 'key3',
-	 *         url: 'http://...'
-	 *         onComplete: function () {}
-	 *     })
-	 *     .add({
-	 *         url: 'https://...',
-	 *         onComplete: function () {},
-	 *         crossOrigin: true
-	 *     })
-	 *
-	 *     // you can also pass an array of objects or urls or both
-	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
-	 *         'http://...'
-	 *     ]);
-	 * ```
-	 *
-	 * @alias enqueue
-	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
-	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} function to call when this specific resource completes loading.
-	 * @return {Loader}</haxe_doc>
-			<overloads>
-				<add public="1" set="method">
-					<f a="obj">
-						<t path="pixi.loaders.ResourceObject"/>
-						<c path="pixi.loaders.ResourceLoader"/>
-					</f>
-					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
-	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
-	 * required the url to load. All the following will work:
-	 *
-	 * ```js
-	 * loader
-	 *     // normal param syntax
-	 *     .add('key', 'http://...', 	function () {})
-	 *     .add('http://...', 	function () {})
-	 *     .add('http://...')
-	 *
-	 *     // object syntax
-	 *     .add({
-	 *         name: 'key2',
-	 *         url: 'http://...'
-	 *     }, 	function () {})
-	 *     .add({
-	 *         url: 'http://...'
-	 *     }, function () {})
-	 *     .add({
-	 *         name: 'key3',
-	 *         url: 'http://...'
-	 *         onComplete: function () {}
-	 *     })
-	 *     .add({
-	 *         url: 'https://...',
-	 *         onComplete: function () {},
-	 *         crossOrigin: true
-	 *     })
-	 *
-	 *     // you can also pass an array of objects or urls or both
-	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
-	 *         'http://...'
-	 *     ]);
-	 * ```
-	 *
-	 * @alias enqueue
-	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
-	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} function to call when this specific resource completes loading.
-	 * @return {Loader}</haxe_doc>
-				</add>
-				<add public="1" set="method">
-					<f a="urls">
-						<c path="Array"><t path="pixi.loaders.ResourceObject"/></c>
-						<c path="pixi.loaders.ResourceLoader"/>
-					</f>
-					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
-	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
-	 * required the url to load. All the following will work:
-	 *
-	 * ```js
-	 * loader
-	 *     // normal param syntax
-	 *     .add('key', 'http://...', 	function () {})
-	 *     .add('http://...', 	function () {})
-	 *     .add('http://...')
-	 *
-	 *     // object syntax
-	 *     .add({
-	 *         name: 'key2',
-	 *         url: 'http://...'
-	 *     }, 	function () {})
-	 *     .add({
-	 *         url: 'http://...'
-	 *     }, function () {})
-	 *     .add({
-	 *         name: 'key3',
-	 *         url: 'http://...'
-	 *         onComplete: function () {}
-	 *     })
-	 *     .add({
-	 *         url: 'https://...',
-	 *         onComplete: function () {},
-	 *         crossOrigin: true
-	 *     })
-	 *
-	 *     // you can also pass an array of objects or urls or both
-	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
-	 *         'http://...'
-	 *     ]);
-	 * ```
-	 *
-	 * @alias enqueue
-	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
-	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} function to call when this specific resource completes loading.
-	 * @return {Loader}</haxe_doc>
-				</add>
-				<add public="1" set="method">
-					<f a="urls">
-						<c path="Array"><c path="String"/></c>
-						<c path="pixi.loaders.ResourceLoader"/>
-					</f>
-					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
-	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
-	 * required the url to load. All the following will work:
-	 *
-	 * ```js
-	 * loader
-	 *     // normal param syntax
-	 *     .add('key', 'http://...', 	function () {})
-	 *     .add('http://...', 	function () {})
-	 *     .add('http://...')
-	 *
-	 *     // object syntax
-	 *     .add({
-	 *         name: 'key2',
-	 *         url: 'http://...'
-	 *     }, 	function () {})
-	 *     .add({
-	 *         url: 'http://...'
-	 *     }, function () {})
-	 *     .add({
-	 *         name: 'key3',
-	 *         url: 'http://...'
-	 *         onComplete: function () {}
-	 *     })
-	 *     .add({
-	 *         url: 'https://...',
-	 *         onComplete: function () {},
-	 *         crossOrigin: true
-	 *     })
-	 *
-	 *     // you can also pass an array of objects or urls or both
-	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
-	 *         'http://...'
-	 *     ]);
-	 * ```
-	 *
-	 * @alias enqueue
-	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
-	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} function to call when this specific resource completes loading.
-	 * @return {Loader}</haxe_doc>
-				</add>
-				<add public="1" set="method">
-					<f a="url:?options:?callback">
-						<c path="String"/>
-						<t path="pixi.loaders.LoaderOptions"/>
-						<f a="">
-							<c path="pixi.loaders.Resource"/>
-							<x path="Void"/>
-						</f>
-						<c path="pixi.loaders.ResourceLoader"/>
-					</f>
-					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
-	 *
-	 * This function can take a wide variety of different parameters. The only thing that is always
-	 * required the url to load. All the following will work:
-	 *
-	 * ```js
-	 * loader
-	 *     // normal param syntax
-	 *     .add('key', 'http://...', 	function () {})
-	 *     .add('http://...', 	function () {})
-	 *     .add('http://...')
-	 *
-	 *     // object syntax
-	 *     .add({
-	 *         name: 'key2',
-	 *         url: 'http://...'
-	 *     }, 	function () {})
-	 *     .add({
-	 *         url: 'http://...'
-	 *     }, function () {})
-	 *     .add({
-	 *         name: 'key3',
-	 *         url: 'http://...'
-	 *         onComplete: function () {}
-	 *     })
-	 *     .add({
-	 *         url: 'https://...',
-	 *         onComplete: function () {},
-	 *         crossOrigin: true
-	 *     })
-	 *
-	 *     // you can also pass an array of objects or urls or both
-	 *     .add([
-	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	 *         { url: 'http://...', onComplete: function () {} },
-	 *         'http://...'
-	 *     ]);
-	 * ```
-	 *
-	 * @alias enqueue
-	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
-	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
-	 * @param [options] {object} The options for the load.
-	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
-	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
-	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
-	 *      loaded be interpreted when using XHR?
-	 * @param [callback] {function} function to call when this specific resource completes loading.
-	 * @return {Loader}</haxe_doc>
-				</add>
-			</overloads>
-		</add>
-		<after public="1" set="method">
-			<f a="fn">
-				<f a=":">
-					<c path="pixi.loaders.Resource"/>
-					<d/>
-					<x path="Void"/>
-				</f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Sets up a middleware function that will run *after* the
-	 * resource is loaded.
-	 *
-	 * @alias use
-	 * @param middleware {function} The middleware function to register.
-	 * @return {Loader}</haxe_doc>
-		</after>
-		<before public="1" set="method">
-			<f a="fn">
-				<f a=":">
-					<c path="pixi.loaders.Resource"/>
-					<d/>
-					<x path="Void"/>
-				</f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Sets up a middleware function that will run *before* the
-	 * resource is loaded.
-	 *
-	 * @alias pre
-	 * @param middleware {function} The middleware function to register.
-	 * @return {Loader}</haxe_doc>
-		</before>
-		<reset public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Resets the queue of the loader to prepare for a new load.</haxe_doc>
-		</reset>
-		<load public="1" set="method">
-			<f a="?cb">
-				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Starts loading the queued resources.
-	 *
-	 * @fires start
-	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
-	 * @return {Loader}</haxe_doc>
-		</load>
-		<loadResource public="1" set="method">
-			<f a="resource:?cb">
-				<c path="String"/>
-				<f a=""><x path="Void"/></f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Loads a single resource.
-	 *
-	 * @fires progress</haxe_doc>
-		</loadResource>
-		<use public="1" set="method">
-			<f a="fn">
-				<f a=":">
-					<c path="pixi.loaders.Resource"/>
-					<d/>
-					<x path="Void"/>
-				</f>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Middleware function to use
-	 *
-	 * @param {function} function to call</haxe_doc>
-		</use>
-		<pre public="1" set="method">
-			<f a="fn">
-				<f a=":">
-					<c path="pixi.loaders.Resource"/>
-					<d/>
-					<x path="Void"/>
-				</f>
-				<c path="pixi.loaders.ResourceLoader"/>
-			</f>
-			<haxe_doc>* Middleware function
-	 *
-	 * @param {function} function to call</haxe_doc>
-		</pre>
-		<new public="1" set="method">
-			<f a="?baseUrl:?concurrency">
-				<c path="String"/>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Manages the state and loading of multiple resources to load.
-	 *
-	 * @class
-	 * @param [baseUrl=''] {string} The base url for all resources loaded by this loader.
-	 * @param [concurrency=10] {number} The number of resources to load concurrently.</haxe_doc>
-		</new>
-	</class>
-	<class path="pixi.loaders.Loader" params="" file="src/pixi/loaders/Loader.hx" extern="1">
-		<extends path="pixi.loaders.ResourceLoader"/>
-		<new public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>*
-	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
-	 *
-	 * ```js
-	 * 	var loader = new PIXI.loader();
-	 *
-	 * loader.add('spineboy',"data/spineboy.json");
-	 *
-	 * loader.once('complete',onAssetsLoaded);
-	 *
-	 * loader.load();
-	 * ```
-	 *
-	 * @class
-	 * @extends ResourceLoader
-	 * @memberof PIXI.loaders</haxe_doc>
-		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.loaders.Loader"</e></m>
-		</meta>
-	</class>
-	<class path="core.AssetLoader" params="" file="samples/core/AssetLoader.hx">
-		<extends path="pixi.loaders.Loader"/>
-		<pixelRatio public="1" get="null"><x path="Float"/></pixelRatio>
-		<count public="1" set="null"><x path="Int"/></count>
-		<_audioAssets><x path="Map">
-	<c path="String"/>
-	<c path="core.AudioAsset"/>
-</x></_audioAssets>
-		<start public="1" set="method" line="25"><f a="?onComplete:?onProgress">
-	<f a=""><x path="Void"/></f>
-	<f a=""><x path="Void"/></f>
-	<x path="Void"/>
-</f></start>
-		<addAsset public="1" set="method" line="34"><f a="id:path:?usePixelRatio:?onAssetLoaded">
-	<c path="String"/>
-	<c path="String"/>
-	<x path="Bool"/>
-	<f a="">
-		<c path="pixi.loaders.Resource"/>
-		<x path="Void"/>
-	</f>
-	<x path="Void"/>
-</f></addAsset>
-		<getAudio public="1" set="method" line="75"><f a="id">
-	<c path="String"/>
-	<c path="core.AudioAsset"/>
-</f></getAudio>
-		<_getLoadtype set="method" line="106"><f a="asset">
-	<c path="String"/>
-	<x path="Int"/>
-</f></_getLoadtype>
-		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<class path="core.AudioAsset" params="" file="samples/core/AudioAsset.hx">
-		<mute public="1"><x path="Bool"/></mute>
-		<loop public="1" set="accessor"><x path="Bool"/></loop>
-		<_src><c path="js.html.Audio"/></_src>
-		<play public="1" set="method" line="18"><f a=""><x path="Void"/></f></play>
-		<stop public="1" set="method" line="22"><f a=""><x path="Void"/></f></stop>
-		<set_loop set="method" line="26"><f a="val">
-	<x path="Bool"/>
-	<x path="Bool"/>
-</f></set_loop>
-		<new public="1" set="method" line="12"><f a="src">
-	<c path="js.html.Audio"/>
-	<x path="Void"/>
-</f></new>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<class path="core.MultipackParser" params="" file="samples/core/MultipackParser.hx">
-		<loader public="1" static="1"><c path="core.AssetLoader"/></loader>
-		<parse public="1" set="method" line="12" static="1"><f a="resource:next">
-	<c path="pixi.loaders.Resource"/>
-	<f a=""><x path="Void"/></f>
-	<x path="Void"/>
-</f></parse>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<typedef path="core.MultipackSpriteSheet" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<textures><c path="Array"><t path="core.MultipackTexture"/></c></textures>
-	<multipack><x path="Bool"/></multipack>
-</a></typedef>
-	<typedef path="core.MultipackTexture" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<meta><t path="core.MetaData"/></meta>
-	<frames><c path="Array"><t path="core.FrameData"/></c></frames>
-</a></typedef>
-	<typedef path="core.FrameData" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<trimmed><x path="Bool"/></trimmed>
-	<spriteSourceSize><t path="core.SpriteSourceSize"/></spriteSourceSize>
-	<sourceSize><t path="core.SourceSize"/></sourceSize>
-	<rotated><x path="Bool"/></rotated>
-	<frame><t path="core.Frame"/></frame>
-	<format><c path="String"/></format>
-</a></typedef>
-	<typedef path="core.Frame" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<y><x path="Float"/></y>
-	<x><x path="Float"/></x>
-	<w><x path="Float"/></w>
-	<h><x path="Float"/></h>
-</a></typedef>
-	<typedef path="core.SpriteSourceSize" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<y><x path="Float"/></y>
-	<x><x path="Float"/></x>
-	<w><x path="Float"/></w>
-	<h><x path="Float"/></h>
-</a></typedef>
-	<typedef path="core.SourceSize" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<w><x path="Float"/></w>
-	<h><x path="Float"/></h>
-</a></typedef>
-	<typedef path="core.MetaData" params="" file="samples/core/MultipackParser.hx" module="core.MultipackParser"><a>
-	<version><c path="String"/></version>
-	<smartupdate><c path="String"/></smartupdate>
-	<size><c path="String"/></size>
-	<scale><c path="String"/></scale>
-	<image><c path="String"/></image>
-	<format><c path="String"/></format>
-	<app><c path="String"/></app>
-</a></typedef>
 	<abstract path="haxe.Function" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
 		<haxe_doc>This type unifies with any function type.
@@ -1608,7 +600,6 @@
 	type, the underlying type will be `Dynamic`.</haxe_doc>
 		<impl><class path="haxe._Constraints.FlatEnum_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
-	<class path="haxe.IMap" params="K:V" file="/usr/local/lib/haxe/std/haxe/Constraints.hx" module="haxe.Constraints" interface="1"><meta><m n=":keep"/></meta></class>
 	<class path="haxe.EnumTools" params="" file="/usr/local/lib/haxe/std/haxe/EnumTools.hx" extern="1">
 		<getName public="1" params="T" get="inline" set="null" line="41" static="1">
 			<f a="e">
@@ -1798,55 +789,51 @@
 	This can be used to track positions of calls in e.g. a unit testing
 	framework.</haxe_doc>
 	</typedef>
-	<abstract path="haxe.ds.HashMap" params="K:V" file="/usr/local/lib/haxe/std/haxe/ds/HashMap.hx">
-		<this><c path="haxe.ds._HashMap.HashMapData">
-	<c path="haxe.ds.HashMap.K"/>
-	<c path="haxe.ds.HashMap.V"/>
-</c></this>
-		<impl><class path="haxe.ds._HashMap.HashMap_Impl_" params="" file="/usr/local/lib/haxe/std/haxe/ds/HashMap.hx" private="1" module="haxe.ds.HashMap"><meta><m n=":keep"/></meta></class></impl>
-	</abstract>
-	<class path="haxe.ds.StringMap" params="T" file="/usr/local/lib/haxe/std/js/_std/haxe/ds/StringMap.hx">
-		<implements path="haxe.IMap">
-			<c path="String"/>
-			<c path="haxe.ds.StringMap.T"/>
-		</implements>
-		<h><d/></h>
-		<rh><d/></rh>
-		<set public="1" get="inline" set="null" line="56">
-			<f a="key:value">
-				<c path="String"/>
-				<c path="haxe.ds.StringMap.T"/>
+	<class path="haxe.Timer" params="" file="/usr/local/lib/haxe/std/haxe/Timer.hx">
+		<id><t path="Null"><x path="Int"/></t></id>
+		<run public="1" set="dynamic" line="108">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>This method is invoked repeatedly on `this` Timer.
+
+		It can be overridden in a subclass, or rebound directly to a custom
+		function:
+			var timer = new haxe.Timer(1000); // 1000ms delay
+			timer.run = function() { ... }
+
+		Once bound, it can still be rebound to different functions until `this`
+		Timer is stopped through a call to `this.stop`.</haxe_doc>
+		</run>
+		<new public="1" set="method" line="59">
+			<f a="time_ms">
+				<x path="Int"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>See `Map.set`</haxe_doc>
-		</set>
-		<get public="1" get="inline" set="null" line="63">
-			<f a="key">
-				<c path="String"/>
-				<t path="Null"><c path="haxe.ds.StringMap.T"/></t>
-			</f>
-			<haxe_doc>See `Map.get`</haxe_doc>
-		</get>
-		<setReserved set="method" line="75"><f a="key:value">
-	<c path="String"/>
-	<c path="haxe.ds.StringMap.T"/>
-	<x path="Void"/>
-</f></setReserved>
-		<getReserved set="method" line="80"><f a="key">
-	<c path="String"/>
-	<t path="Null"><c path="haxe.ds.StringMap.T"/></t>
-</f></getReserved>
-		<new public="1" get="inline" set="null" line="48">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Creates a new StringMap.</haxe_doc>
-		</new>
-		<haxe_doc>StringMap allows mapping of String keys to arbitrary values.
+			<meta><m n=":has_untyped"/></meta>
+			<haxe_doc>Creates a new timer that will run every `time_ms` milliseconds.
 
-	See `Map` for documentation details.</haxe_doc>
+		After creating the Timer instance, it calls `this].run` repeatedly,
+		with delays of `time_ms` milliseconds, until `this.stop` is called.
+
+		The first invocation occurs after `time_ms` milliseconds, not
+		immediately.
+
+		The accuracy of this may be platform-dependent.</haxe_doc>
+		</new>
+		<haxe_doc>The Timer class allows you to create asynchronous timers on platforms that
+	support events.
+
+	The intended usage is to create an instance of the Timer class with a given
+	interval, set its run() method to a custom function to be invoked and
+	eventually call stop() to stop the Timer.
+
+	Note that a running Timer may or may not prevent the program to exit
+	automatically when main() returns.
+
+	It is also possible to extend this class and override its run() method in
+	the child class.</haxe_doc>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>
-			<m n=":coreApi"/>
 		</meta>
 	</class>
 	<abstract path="haxe.extern.EitherType" params="T1:T2" file="/usr/local/lib/haxe/std/haxe/extern/EitherType.hx">
@@ -1885,25 +872,7 @@
 	<c path="String"/>
 	<x path="Void"/>
 </f></new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"Error"</e></m>
-		</meta>
-	</class>
-	<class path="js._Boot.HaxeError" params="" file="/usr/local/lib/haxe/std/js/Boot.hx" private="1" module="js.Boot">
-		<extends path="js.Error"/>
-		<val><d/></val>
-		<new public="1" set="method" line="28">
-			<f a="val">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-		</new>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
+		<meta><m n=":native"><e>"Error"</e></m></meta>
 	</class>
 	<class path="js.EvalError" params="" file="/usr/local/lib/haxe/std/js/Error.hx" module="js.Error" extern="1">
 		<extends path="js.Error"/>
@@ -2064,11 +1033,6 @@
 		<x path="Void"/>
 	</f>
 </x></then></a></typedef>
-	<class path="js.RegExpMatch" params="" file="/usr/local/lib/haxe/std/js/RegExp.hx" module="js.RegExp" extern="1">
-		<extends path="Array"><c path="String"/></extends>
-		<index public="1"><x path="Int"/></index>
-		<input public="1"><c path="String"/></input>
-	</class>
 	<abstract path="js.html.AlignSetting" params="" file="/usr/local/lib/haxe/std/js/html/AlignSetting.hx">
 		<this><c path="String"/></this>
 		<meta><m n=":enum"/></meta>
@@ -2963,17 +1927,6 @@
 	<class path="js.html.AudioElement" params="" file="/usr/local/lib/haxe/std/js/html/AudioElement.hx" extern="1">
 		<extends path="js.html.MediaElement"/>
 		<meta><m n=":native"><e>"HTMLAudioElement"</e></m></meta>
-	</class>
-	<class path="js.html.Audio" params="" file="/usr/local/lib/haxe/std/js/html/Audio.hx" extern="1">
-		<extends path="js.html.AudioElement"/>
-		<new public="1" set="method">
-			<f a="?src">
-				<c path="String"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>@throws DOMError</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"Audio"</e></m></meta>
 	</class>
 	<class path="js.html.AudioTrack" params="" file="/usr/local/lib/haxe/std/js/html/AudioTrack.hx" extern="1">
 		<id public="1" set="null"><c path="String"/></id>
@@ -9136,6 +8089,75 @@
 		</new>
 		<meta><m n=":native"><e>"URLSearchParams"</e></m></meta>
 	</class>
+	<class path="js.html.Uint16Array" params="" file="/usr/local/lib/haxe/std/js/html/Uint16Array.hx" extern="1">
+		<extends path="js.html.ArrayBufferView"/>
+		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="2" line="30" static="1">
+			<x path="Int"/>
+			<meta><m n=":value"><e>2</e></m></meta>
+		</BYTES_PER_ELEMENT>
+		<length public="1" set="null"><x path="Int"/></length>
+		<get public="1" set="method"><f a="index">
+	<x path="Int"/>
+	<x path="Int"/>
+</f></get>
+		<set public="1" set="method">
+			<f a="array:?offset">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<overloads>
+				<set public="1" set="method"><f a="index:value">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+				<set public="1" set="method"><f a="array:?offset">
+	<c path="js.html.Uint16Array"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+			</overloads>
+		</set>
+		<subarray public="1" set="method"><f a="start:end">
+	<x path="Int"/>
+	<x path="Int"/>
+	<c path="js.html.Uint16Array"/>
+</f></subarray>
+		<new public="1" set="method">
+			<f a="buffer:?byteOffset:?length">
+				<c path="js.html.ArrayBuffer"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+			<overloads>
+				<new public="1" set="method">
+					<f a="length">
+						<x path="Int"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="js.html.Uint16Array"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="Array"><x path="Int"/></c>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+			</overloads>
+		</new>
+		<meta><m n=":native"><e>"Uint16Array"</e></m></meta>
+	</class>
 	<class path="js.html.Uint8ClampedArray" params="" file="/usr/local/lib/haxe/std/js/html/Uint8ClampedArray.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="1" line="30" static="1">
@@ -12636,450 +11658,6 @@
 	</class>
 	<class path="js.html.webgl.Texture" params="" file="/usr/local/lib/haxe/std/js/html/webgl/Texture.hx" extern="1"><meta><m n=":native"><e>"WebGLTexture"</e></m></meta></class>
 	<class path="js.html.webgl.UniformLocation" params="" file="/usr/local/lib/haxe/std/js/html/webgl/UniformLocation.hx" extern="1"><meta><m n=":native"><e>"WebGLUniformLocation"</e></m></meta></class>
-	<typedef path="msignal.AnySignal" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
-		<c path="msignal.Signal">
-			<d/>
-			<d/>
-		</c>
-		<haxe_doc>A convenience type describing any kind of signal.</haxe_doc>
-	</typedef>
-	<class path="msignal.Signal" params="TSlot:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx">
-		<valueClasses public="1"><c path="Array"><d/></c></valueClasses>
-		<numListeners public="1" get="accessor" set="null">
-			<x path="Int"/>
-			<haxe_doc>The current number of listeners for the signal.</haxe_doc>
-		</numListeners>
-		<slots><c path="msignal.SlotList">
-	<c path="msignal.Signal.TSlot"/>
-	<c path="msignal.Signal.TListener"/>
-</c></slots>
-		<priorityBased><x path="Bool"/></priorityBased>
-		<add public="1" set="method" line="63">
-			<f a="listener">
-				<c path="msignal.Signal.TListener"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<haxe_doc>Subscribes a listener for the signal.
-		
-		@param listener A function matching the signature of TListener
-		@return The added listener slot</haxe_doc>
-		</add>
-		<addOnce public="1" set="method" line="76">
-			<f a="listener">
-				<c path="msignal.Signal.TListener"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<haxe_doc>Subscribes a one-time listener for this signal.
-		The signal will remove the listener automatically the first time it is called,
-		after the dispatch to all listeners is complete.
-		
-		@param listener A function matching the signature of TListener
-		@return The added listener slot</haxe_doc>
-		</addOnce>
-		<addWithPriority public="1" set="method" line="91">
-			<f a="listener:?priority">
-				<c path="msignal.Signal.TListener"/>
-				<x path="Int"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<haxe_doc>Subscribes a listener for the signal.
-		After you successfully register an event listener,
-		you cannot change its priority through additional calls to add().
-		To change a listener's priority, you must first call remove().
-		Then you can register the listener again with the new priority level.
-		
-		@param listener A function matching the signature of TListener
-		@return The added listener slot</haxe_doc>
-		</addWithPriority>
-		<addOnceWithPriority public="1" set="method" line="104">
-			<f a="listener:?priority">
-				<c path="msignal.Signal.TListener"/>
-				<x path="Int"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<haxe_doc>Subscribes a one-time listener for this signal.
-		The signal will remove the listener automatically the first time it is 
-		called, after the dispatch to all listeners is complete.
-		
-		@param listener A function matching the signature of TListener
-		@return The added listener slot</haxe_doc>
-		</addOnceWithPriority>
-		<remove public="1" set="method" line="115">
-			<f a="listener">
-				<c path="msignal.Signal.TListener"/>
-				<c path="msignal.Signal.TSlot"/>
-			</f>
-			<haxe_doc>Unsubscribes a listener from the signal.
-		
-		@param listener The listener to remove
-		@return The removed listener slot</haxe_doc>
-		</remove>
-		<removeAll public="1" set="method" line="127">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Unsubscribes all listeners from the signal.</haxe_doc>
-		</removeAll>
-		<registerListener set="method" line="132"><f a="listener:?once:?priority">
-	<c path="msignal.Signal.TListener"/>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<c path="msignal.Signal.TSlot"/>
-</f></registerListener>
-		<registrationPossible set="method" line="148"><f a="listener:once">
-	<c path="msignal.Signal.TListener"/>
-	<x path="Bool"/>
-	<x path="Bool"/>
-</f></registrationPossible>
-		<createSlot set="method" line="167"><f a="listener:?once:?priority">
-	<c path="msignal.Signal.TListener"/>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<c path="msignal.Signal.TSlot"/>
-</f></createSlot>
-		<get_numListeners set="method" line="172"><f a=""><x path="Int"/></f></get_numListeners>
-		<new set="method" line="49"><f a="?valueClasses">
-	<c path="Array"><d/></c>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>A Signal manages a list of listeners, which are executed when the signal is 
-	dispatched.</haxe_doc>
-		<meta><m n=":keepSub"/></meta>
-	</class>
-	<class path="msignal.Signal0" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
-		<extends path="msignal.Signal">
-			<c path="msignal.Slot0"/>
-			<f a=""><x path="Void"/></f>
-		</extends>
-		<dispatch public="1" set="method" line="191">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Executes the signals listeners with no arguements.</haxe_doc>
-		</dispatch>
-		<createSlot set="method" line="202" override="1"><f a="listener:?once:?priority">
-	<f a=""><x path="Void"/></f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<c path="msignal.Slot0"/>
-</f></createSlot>
-		<new public="1" set="method" line="183"><f a=""><x path="Void"/></f></new>
-		<haxe_doc>Signal that executes listeners with no arguments.</haxe_doc>
-	</class>
-	<class path="msignal.Signal1" params="TValue" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
-		<extends path="msignal.Signal">
-			<c path="msignal.Slot1"><c path="msignal.Signal1.TValue"/></c>
-			<f a="">
-				<c path="msignal.Signal1.TValue"/>
-				<x path="Void"/>
-			</f>
-		</extends>
-		<dispatch public="1" set="method" line="221">
-			<f a="value">
-				<c path="msignal.Signal1.TValue"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>Executes the signals listeners with one arguement.</haxe_doc>
-		</dispatch>
-		<createSlot set="method" line="232" override="1"><f a="listener:?once:?priority">
-	<f a="">
-		<c path="msignal.Signal1.TValue"/>
-		<x path="Void"/>
-	</f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<c path="msignal.Slot1"><c path="msignal.Signal1.TValue"/></c>
-</f></createSlot>
-		<new public="1" set="method" line="213"><f a="?type">
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>Signal that executes listeners with one arguments.</haxe_doc>
-		<meta><m n=":directlyUsed"/></meta>
-	</class>
-	<class path="msignal.Signal2" params="TValue1:TValue2" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Signal.hx" module="msignal.Signal">
-		<extends path="msignal.Signal">
-			<c path="msignal.Slot2">
-				<c path="msignal.Signal2.TValue1"/>
-				<c path="msignal.Signal2.TValue2"/>
-			</c>
-			<f a=":">
-				<c path="msignal.Signal2.TValue1"/>
-				<c path="msignal.Signal2.TValue2"/>
-				<x path="Void"/>
-			</f>
-		</extends>
-		<dispatch public="1" set="method" line="251">
-			<f a="value1:value2">
-				<c path="msignal.Signal2.TValue1"/>
-				<c path="msignal.Signal2.TValue2"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>Executes the signals listeners with two arguements.</haxe_doc>
-		</dispatch>
-		<createSlot set="method" line="262" override="1"><f a="listener:?once:?priority">
-	<f a=":">
-		<c path="msignal.Signal2.TValue1"/>
-		<c path="msignal.Signal2.TValue2"/>
-		<x path="Void"/>
-	</f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<c path="msignal.Slot2">
-		<c path="msignal.Signal2.TValue1"/>
-		<c path="msignal.Signal2.TValue2"/>
-	</c>
-</f></createSlot>
-		<new public="1" set="method" line="243"><f a="?type1:?type2">
-	<d/>
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>Signal that executes listeners with two arguments.</haxe_doc>
-	</class>
-	<typedef path="msignal.AnySlot" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
-		<c path="msignal.Slot">
-			<d/>
-			<d/>
-		</c>
-		<haxe_doc>A convenience type describing any kind of slot.</haxe_doc>
-	</typedef>
-	<class path="msignal.Slot" params="TSignal:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx">
-		<listener public="1" set="accessor">
-			<c path="msignal.Slot.TListener"/>
-			<meta><m n=":isVar"/></meta>
-			<haxe_doc>The listener associated with this slot.
-		Note: for hxcpp 2.10 this requires a getter method to compile</haxe_doc>
-		</listener>
-		<once public="1" set="null">
-			<x path="Bool"/>
-			<haxe_doc>Whether this slot is automatically removed after it has been used once.</haxe_doc>
-		</once>
-		<priority public="1" set="null">
-			<x path="Int"/>
-			<haxe_doc>The priority of this slot should be given in the execution order.
-		An Signal will call higher numbers before lower ones.
-		Defaults to 0.</haxe_doc>
-		</priority>
-		<enabled public="1">
-			<x path="Bool"/>
-			<haxe_doc>Whether the listener is called on execution. Defaults to true.</haxe_doc>
-		</enabled>
-		<signal><c path="msignal.Slot.TSignal"/></signal>
-		<remove public="1" set="method" line="85">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Removes the slot from its signal.</haxe_doc>
-		</remove>
-		<set_listener set="method" line="101"><f a="value">
-	<c path="msignal.Slot.TListener"/>
-	<c path="msignal.Slot.TListener"/>
-</f></set_listener>
-		<new set="method" line="73"><f a="signal:listener:?once:?priority">
-	<c path="msignal.Slot.TSignal"/>
-	<c path="msignal.Slot.TListener"/>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>Defines the basic properties of a listener associated with a Signal.</haxe_doc>
-		<meta><m n=":keep"/></meta>
-	</class>
-	<class path="msignal.Slot0" params="" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
-		<extends path="msignal.Slot">
-			<c path="msignal.Signal0"/>
-			<f a=""><x path="Void"/></f>
-		</extends>
-		<execute public="1" set="method" line="123">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>Executes a listener with no arguments.</haxe_doc>
-		</execute>
-		<new public="1" set="method" line="115"><f a="signal:listener:?once:?priority">
-	<c path="msignal.Signal0"/>
-	<f a=""><x path="Void"/></f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>A slot that executes a listener with no arguments.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<class path="msignal.Slot1" params="TValue" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
-		<extends path="msignal.Slot">
-			<c path="msignal.Signal1"><c path="msignal.Slot1.TValue"/></c>
-			<f a="">
-				<c path="msignal.Slot1.TValue"/>
-				<x path="Void"/>
-			</f>
-		</extends>
-		<param public="1">
-			<c path="msignal.Slot1.TValue"/>
-			<haxe_doc>Allows the slot to inject the argument to dispatch.</haxe_doc>
-		</param>
-		<execute public="1" set="method" line="150">
-			<f a="value1">
-				<c path="msignal.Slot1.TValue"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[Executes a listener with one argument.
-		If <code>param</code> is not null, it overrides the value provided.]]></haxe_doc>
-		</execute>
-		<new public="1" set="method" line="141"><f a="signal:listener:?once:?priority">
-	<c path="msignal.Signal1"><c path="msignal.Slot1.TValue"/></c>
-	<f a="">
-		<c path="msignal.Slot1.TValue"/>
-		<x path="Void"/>
-	</f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>A slot that executes a listener with one argument.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<class path="msignal.Slot2" params="TValue1:TValue2" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/Slot.hx" module="msignal.Slot">
-		<extends path="msignal.Slot">
-			<c path="msignal.Signal2">
-				<c path="msignal.Slot2.TValue1"/>
-				<c path="msignal.Slot2.TValue2"/>
-			</c>
-			<f a=":">
-				<c path="msignal.Slot2.TValue1"/>
-				<c path="msignal.Slot2.TValue2"/>
-				<x path="Void"/>
-			</f>
-		</extends>
-		<param1 public="1">
-			<c path="msignal.Slot2.TValue1"/>
-			<haxe_doc>Allows the slot to inject the first argument to dispatch.</haxe_doc>
-		</param1>
-		<param2 public="1">
-			<c path="msignal.Slot2.TValue2"/>
-			<haxe_doc>Allows the slot to inject the second argument to dispatch.</haxe_doc>
-		</param2>
-		<execute public="1" set="method" line="184">
-			<f a="value1:value2">
-				<c path="msignal.Slot2.TValue1"/>
-				<c path="msignal.Slot2.TValue2"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[Executes a listener with two arguments.
-		If <code>param1</code> or <code>param2</code> is set, 
-		they override the values provided.]]></haxe_doc>
-		</execute>
-		<new public="1" set="method" line="174"><f a="signal:listener:?once:?priority">
-	<c path="msignal.Signal2">
-		<c path="msignal.Slot2.TValue1"/>
-		<c path="msignal.Slot2.TValue2"/>
-	</c>
-	<f a=":">
-		<c path="msignal.Slot2.TValue1"/>
-		<c path="msignal.Slot2.TValue2"/>
-		<x path="Void"/>
-	</f>
-	<x path="Bool"/>
-	<x path="Int"/>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>A slot that executes a listener with two arguments.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
-	<class path="msignal.SlotList" params="TSlot:TListener" file="/projects/pixi-haxe/.haxelib/msignal/1,2,4/msignal/SlotList.hx">
-		<NIL public="1" static="1">
-			<c path="msignal.SlotList">
-				<d/>
-				<d/>
-			</c>
-			<haxe_doc>Represents an empty list. Used as the list terminator.</haxe_doc>
-		</NIL>
-		<head public="1"><c path="msignal.SlotList.TSlot"/></head>
-		<tail public="1"><c path="msignal.SlotList">
-	<c path="msignal.SlotList.TSlot"/>
-	<c path="msignal.SlotList.TListener"/>
-</c></tail>
-		<nonEmpty public="1"><x path="Bool"/></nonEmpty>
-		<get_length set="method" line="81">
-			<f a=""><x path="Int"/></f>
-			<meta><m n=":accessor"/></meta>
-		</get_length>
-		<prepend public="1" set="method" line="107">
-			<f a="slot">
-				<c path="msignal.SlotList.TSlot"/>
-				<c path="msignal.SlotList">
-					<c path="msignal.SlotList.TSlot"/>
-					<c path="msignal.SlotList.TListener"/>
-				</c>
-			</f>
-			<haxe_doc>Prepends a slot to this list.
-		@param	slot The item to be prepended.
-		@return	A list consisting of slot followed by all elements of this list.</haxe_doc>
-		</prepend>
-		<insertWithPriority public="1" set="method" line="154">
-			<f a="slot">
-				<c path="msignal.SlotList.TSlot"/>
-				<c path="msignal.SlotList">
-					<c path="msignal.SlotList.TSlot"/>
-					<c path="msignal.SlotList.TListener"/>
-				</c>
-			</f>
-			<haxe_doc>Insert a slot into the list in a position according to its priority.
-		The higher the priority, the closer the item will be inserted to the 
-		list head.
-		@param slot The item to be inserted.</haxe_doc>
-		</insertWithPriority>
-		<filterNot public="1" set="method" line="192">
-			<f a="listener">
-				<c path="msignal.SlotList.TListener"/>
-				<c path="msignal.SlotList">
-					<c path="msignal.SlotList.TSlot"/>
-					<c path="msignal.SlotList.TListener"/>
-				</c>
-			</f>
-			<haxe_doc>Returns the slots in this list that do not contain the supplied 
-		listener. Note: assumes the listener is not repeated within the list.
-		@param	listener The function to remove.
-		@return A list consisting of all elements of this list that do not 
-				have listener.</haxe_doc>
-		</filterNot>
-		<find public="1" set="method" line="245">
-			<f a="listener">
-				<c path="msignal.SlotList.TListener"/>
-				<c path="msignal.SlotList.TSlot"/>
-			</f>
-			<haxe_doc>Retrieves the Slot associated with a supplied listener within the SlotList.
-		@param   listener The Function being searched for
-		@return  The ISlot in this list associated with the listener parameter 
-				 through the ISlot.listener property. Returns null if no such 
-				 ISlot instance exists or the list is empty.</haxe_doc>
-		</find>
-		<new public="1" set="method" line="50">
-			<f a="head:?tail">
-				<c path="msignal.SlotList.TSlot"/>
-				<c path="msignal.SlotList">
-					<c path="msignal.SlotList.TSlot"/>
-					<c path="msignal.SlotList.TListener"/>
-				</c>
-				<x path="Void"/>
-			</f>
-			<haxe_doc><![CDATA[Creates and returns a new SlotList object.
-
-		<p>A user never has to create a SlotList manually. 
-		Use the <code>NIL</code> element to represent an empty list. 
-		<code>NIL.prepend(value)</code> would create a list containing 
-		<code>value</code></p>.
-
-		@param head The first slot in the list.
-		@param tail A list containing all slots except head.]]></haxe_doc>
-		</new>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
 	<class path="pixi.accessibility.AccessibilityManager" params="" file="src/pixi/accessibility/AccessibilityManager.hx" extern="1">
 		<debug public="1">
 			<x path="Bool"/>
@@ -13300,8 +11878,32 @@
 	 * @property {Int} SHAPES.ELIP=3
 	 * @property {Int} SHAPES.RREC=4</haxe_doc>
 		</SHAPES>
+		<TRANSFORM_MODE public="1" static="1">
+			<t path="pixi.core.TransformModes"/>
+			<haxe_doc>* Constants that specify float precision in shaders.
+     *
+     * @static
+     * @constant
+     * @property {object} PRECISION
+     * @property {String} PRECISION.DEFAULT='mediump'
+     * @property {String} PRECISION.LOW='lowp'
+     * @property {String} PRECISION.MEDIUM='mediump'
+     * @property {String} PRECISION.HIGH='highp'</haxe_doc>
+		</TRANSFORM_MODE>
+		<PRECISION public="1" static="1"><t path="pixi.core.Precisions"/></PRECISION>
+		<TEXT_GRADIENT public="1" static="1">
+			<t path="pixi.core.TextGradients"/>
+			<haxe_doc>* Constants that define the type of gradient on text.
+     *
+     * @static
+     * @constant
+     * @property {object} TEXT_GRADIENT
+     * @property {Int} TEXT_GRADIENT.LINEAR_VERTICAL=0
+     * @property {Int} TEXT_GRADIENT.LINEAR_HORIZONTAL=1</haxe_doc>
+		</TEXT_GRADIENT>
 		<SPRITE_BATCH_SIZE public="1" static="1"><x path="Int"/></SPRITE_BATCH_SIZE>
 		<SPRITE_MAX_TEXTURES public="1" static="1"><x path="Int"/></SPRITE_MAX_TEXTURES>
+		<TEXT_STYLE_CHANGED public="1" static="1"><c path="String"/></TEXT_STYLE_CHANGED>
 		<meta><m n=":native"><e>"PIXI"</e></m></meta>
 	</class>
 	<typedef path="pixi.core.RendererType" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
@@ -13398,6 +12000,393 @@
 	<ELIP><x path="Int"/></ELIP>
 	<CIRC><x path="Int"/></CIRC>
 </a></typedef>
+	<typedef path="pixi.core.Precisions" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<MEDIUM><c path="String"/></MEDIUM>
+	<LOW><c path="String"/></LOW>
+	<HIGH><c path="String"/></HIGH>
+	<DEFAULT><c path="String"/></DEFAULT>
+</a></typedef>
+	<typedef path="pixi.core.TextGradients" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<LINEAR_VERTICAL><x path="Int"/></LINEAR_VERTICAL>
+	<LINEAR_HORIZONTAL><x path="Int"/></LINEAR_HORIZONTAL>
+</a></typedef>
+	<typedef path="pixi.core.TransformModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
+	<STATIC><x path="Int"/></STATIC>
+	<DYNAMIC><x path="Int"/></DYNAMIC>
+	<DEFAULT><x path="Int"/></DEFAULT>
+</a></typedef>
+	<class path="pixi.core.Shader" params="" file="src/pixi/core/Shader.hx" extern="1">
+		<checkPrecision public="1" set="method">
+			<f a="src">
+				<d/>
+				<d/>
+			</f>
+			<haxe_doc>*
+	 * @param	src {string|string[]}
+	 * @return {string|string[]}</haxe_doc>
+		</checkPrecision>
+		<new public="1" set="method">
+			<f a="gl:vertexSrc:framentSrc">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Wrapper class, webGL Shader for Pixi.
+	 * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param gl {WebGLRenderingContext} The current WebGL rendering context
+	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
+	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Shader"</e></m></meta>
+	</class>
+	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
+		<listeners public="1" set="method">
+			<f a="event">
+				<c path="String"/>
+				<c path="Array"><d/></c>
+			</f>
+			<haxe_doc>* Return a list of assigned event listeners.
+	 *
+	 * @param {String} eventName
+	 * @returns {Array}</haxe_doc>
+		</listeners>
+		<emit public="1" set="method">
+			<f a="event:?a1:?a2:?a3:?a4:?a5">
+				<c path="String"/>
+				<d/>
+				<d/>
+				<d/>
+				<d/>
+				<d/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Emit an event to all registered event listeners.
+     *
+     * @alias dispatchEvent
+     * @param eventName {String} The name of the event.
+     * @return {Bool} Indication if we've emitted an event.</haxe_doc>
+		</emit>
+		<on public="1" set="method">
+			<f a="event:fn:?context">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.interaction.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
+				<on public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</on>
+			</overloads>
+		</on>
+		<once public="1" set="method">
+			<f a="event:fn:?context">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.interaction.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+				<once public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</once>
+			</overloads>
+		</once>
+		<addListener public="1" set="method">
+			<f a="event:fn:?context">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.interaction.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+			<overloads>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
+				<addListener public="1" set="method">
+					<f a="event:fn:?context">
+						<c path="String"/>
+						<d/>
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {function} fn Callback function.
+	 * @param {Mixed} context The context of the function.</haxe_doc>
+				</addListener>
+			</overloads>
+		</addListener>
+		<off public="1" set="method">
+			<f a="event:fn:?once">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.interaction.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+			<overloads>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</off>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</off>
+				<off public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<d/>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</off>
+			</overloads>
+		</off>
+		<removeListener public="1" set="method">
+			<f a="event:fn:?once">
+				<c path="String"/>
+				<f a="">
+					<t path="pixi.interaction.EventTarget"/>
+					<x path="Void"/>
+				</f>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+			<overloads>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a=""><x path="Void"/></f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<f a="">
+							<d/>
+							<x path="Void"/>
+						</f>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+				<removeListener public="1" set="method">
+					<f a="event:fn:?once">
+						<c path="String"/>
+						<d/>
+						<x path="Bool"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {function} fn The listener that we need to find.
+	 * @param {Bool} once Only remove once listeners.</haxe_doc>
+				</removeListener>
+			</overloads>
+		</removeListener>
+		<removeAllListeners public="1" set="method">
+			<f a="?event">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove all listeners or only the listeners for the specified event.
+	 *
+	 * @param {String} event The event want to remove all listeners for.</haxe_doc>
+		</removeAllListeners>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Minimal EventEmitter interface that is molded against the Node.js
+	 * EventEmitter interface.
+	 *
+	 * @constructor</haxe_doc>
+		</new>
+	</class>
 	<class path="pixi.interaction.InteractionManager" params="" file="src/pixi/interaction/InteractionManager.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<renderer public="1">
@@ -13585,16 +12574,6 @@
 	</class>
 	<class path="pixi.core.display.DisplayObject" params="" file="src/pixi/core/display/DisplayObject.hx" extern="1">
 		<extends path="pixi.interaction.InteractionManager"/>
-		<getGlobalPosition public="1" set="method">
-			<f a="point">
-				<c path="pixi.core.math.Point"/>
-				<c path="pixi.core.math.Point"/>
-			</f>
-			<haxe_doc>* Returns the global position of the displayObject
-	 *
-	 * @param point {Point} the point to write the global value to. If null a new point will be returned
-	 * @return {Point}</haxe_doc>
-		</getGlobalPosition>
 		<getBounds public="1" set="method">
 			<f a="?matrix">
 				<c path="pixi.core.math.Matrix"/>
@@ -13622,47 +12601,19 @@
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toGlobal>
 		<toLocal public="1" set="method">
-			<f a="position:?frm">
+			<f a="position:?frm:?point">
 				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.math.Point"/>
 				<c path="pixi.core.math.Point"/>
 			</f>
 			<haxe_doc>* Calculates the local position of the display object relative to another point
 	 *
 	 * @param position {Point} The world origin to calculate from
 	 * @param [from] {DisplayObject} The DisplayObject to calculate the global position from
+	 * @param [point] {Point} A Point object in which to store the value, optional (otherwise will create a new Point)
 	 * @return {Point} A point object representing the position of this object</haxe_doc>
 		</toLocal>
-		<generateTexture public="1" set="method">
-			<f a="renderer:?resolution:?scaleMode">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-				<x path="Float"/>
-				<x path="Int"/>
-				<c path="pixi.core.textures.Texture"/>
-			</f>
-			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
-	 * @return {Texture} a texture of the display object</haxe_doc>
-			<overloads><generateTexture public="1" set="method">
-	<f a="renderer:?resolution:?scaleMode">
-		<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-		<x path="Float"/>
-		<x path="Int"/>
-		<c path="pixi.core.textures.Texture"/>
-	</f>
-	<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
-	 * This can be quite useful if your displayObject is static / complicated and needs to be reused multiple times.
-	 *
-	 * @param renderer {CanvasRenderer|WebGLRenderer} The renderer used to generate the texture.
-	 * @param resolution {Float} The resolution of the texture being generated
-	 * @param scaleMode {Int} See {@link SCALE_MODES} for possible values
-	 * @return {Texture} a texture of the display object</haxe_doc>
-</generateTexture></overloads>
-		</generateTexture>
 		<updateTransform public="1" set="method"><f a=""><x path="Void"/></f></updateTransform>
 		<displayObjectUpdateTransform public="1" set="method"><f a=""><x path="Void"/></f></displayObjectUpdateTransform>
 		<setParent public="1" set="method">
@@ -13746,36 +12697,6 @@
 	 * @member {Bool}
 	 * @memberof DisplayObject#</haxe_doc>
 		</cacheAsBitmap>
-		<position public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
-	 *
-	 * @member {Point}</haxe_doc>
-		</position>
-		<scale public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The scale factor of the object.
-	 *
-	 * @member {Point}</haxe_doc>
-		</scale>
-		<pivot public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The pivot point of the displayObject that it rotates around
-	 *
-	 * @member {Point}</haxe_doc>
-		</pivot>
-		<skew public="1">
-			<c path="pixi.core.math.Point"/>
-			<haxe_doc>* The skew factor for the object in radians.
-     *
-     * @member {Point}</haxe_doc>
-		</skew>
-		<rotation public="1">
-			<x path="Float"/>
-			<haxe_doc>* The rotation of the object in radians.
-	 *
-	 * @member {Float}</haxe_doc>
-		</rotation>
 		<alpha public="1">
 			<x path="Float"/>
 			<haxe_doc>* The opacity of the object.
@@ -13810,20 +12731,21 @@
 	 * @member {Float}
 	 * @readOnly</haxe_doc>
 		</worldAlpha>
-		<worldTransform public="1">
-			<c path="pixi.core.math.Matrix"/>
-			<haxe_doc>* Current transform of the object based on world (parent) factors
-	 *
-	 * @member {Matrix}
-	 * @readOnly</haxe_doc>
-		</worldTransform>
 		<filterArea public="1">
 			<c path="pixi.core.math.shapes.Rectangle"/>
 			<haxe_doc>* The area the filter is applied to. This is used as more of an optimisation
 	 * rather than figuring out the dimensions of the displayObject each frame you can set this rectangle
 	 *
+	 * Also works as an interaction mask
+	 *
 	 * @member {Rectangle}</haxe_doc>
 		</filterArea>
+		<hitArea public="1">
+			<d/>
+			<haxe_doc>* Interaction shape. Children will be hit first, then this shape will be checked.
+	 *
+	 * @memberof DisplayObject#</haxe_doc>
+		</hitArea>
 		<x public="1">
 			<x path="Float"/>
 			<haxe_doc>* The position of the displayObject on the x axis relative to the local coordinates of the parent.
@@ -13838,6 +12760,50 @@
 	 * @member {Float}
 	 * @memberof DisplayObject#</haxe_doc>
 		</y>
+		<worldTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* Current transform of the object based on world (parent) factors
+	 *
+	 * @member {Matrix}
+	 * @readOnly</haxe_doc>
+		</worldTransform>
+		<localTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* Current transform of the object based on local factors: position, scale, other stuff
+     *
+     * @member {PIXI.Matrix}
+     * @readOnly</haxe_doc>
+		</localTransform>
+		<position public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
+	 *
+	 * @member {Point}</haxe_doc>
+		</position>
+		<scale public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The scale factor of the object.
+	 *
+	 * @member {Point}</haxe_doc>
+		</scale>
+		<pivot public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The pivot point of the displayObject that it rotates around
+	 *
+	 * @member {Point}</haxe_doc>
+		</pivot>
+		<skew public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The skew factor for the object in radians.
+     *
+     * @member {Point}</haxe_doc>
+		</skew>
+		<rotation public="1">
+			<x path="Float"/>
+			<haxe_doc>* The rotation of the object in radians.
+	 *
+	 * @member {Float}</haxe_doc>
+		</rotation>
 		<worldVisible public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Indicates if the displayObject is globally visible.
@@ -13849,11 +12815,13 @@
 		<mask public="1">
 			<d/>
 			<haxe_doc>* Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
-	 * In PIXI a regular mask must be a PIXI.Graphics object. This allows for much faster masking in canvas as it utilises shape clipping.
-	 * To remove a mask, set this property to null.
-	 *
-	 * @member {Graphics or Sprite}
-	 * @memberof DisplayObject#</haxe_doc>
+     * In PIXI a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping.
+     * To remove a mask, set this property to null.
+     *
+     * @todo For the moment, PIXI.CanvasRenderer doesn't support PIXI.Sprite as mask.
+     *
+     * @member {Graphics|Sprite}
+     * @memberof DisplayObject#</haxe_doc>
 		</mask>
 		<filters public="1">
 			<c path="Array"><c path="pixi.core.renderers.webgl.filters.Filter"/></c>
@@ -13896,12 +12864,6 @@
 	 * @default pointer
 	 * @memberof DisplayObject#</haxe_doc>
 		</defaultCursor>
-		<hitArea public="1">
-			<d/>
-			<haxe_doc>* Hit area
-	 *
-	 * @memberof DisplayObject#</haxe_doc>
-		</hitArea>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.
@@ -13937,10 +12899,12 @@
 		</height>
 		<addChild public="1" set="method">
 			<f a="child">
-				<c path="pixi.core.display.DisplayObject"/>
+				<x path="haxe.extern.Rest"><c path="pixi.core.display.DisplayObject"/></x>
 				<c path="pixi.core.display.DisplayObject"/>
 			</f>
 			<haxe_doc>* Adds a child to the container.
+	 *
+	 * You can also add multple items like so: myContainer.addChild(thinkOne, thingTwo, thingThree)
 	 *
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	 * @return {DisplayObject} The child that was added.</haxe_doc>
@@ -13951,7 +12915,8 @@
 				<x path="Int"/>
 				<c path="pixi.core.display.DisplayObject"/>
 			</f>
-			<haxe_doc>* Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
+			<haxe_doc>* Adds a child to the container at a specified index.
+	 * If the index is out of bounds an error will be thrown.
 	 *
 	 * @param child {DisplayObject} The child to add
 	 * @param index {Int} The index to place the child in
@@ -14077,6 +13042,12 @@
 	 * @member {Int}
 	 * @default 0</haxe_doc>
 		</lineColor>
+		<graphicsData public="1">
+			<c path="Array"><c path="pixi.core.graphics.GraphicsData"/></c>
+			<haxe_doc><![CDATA[* Graphics data
+     *
+     * @member {Array<GraphicsData>}]]></haxe_doc>
+		</graphicsData>
 		<tint public="1">
 			<x path="Int"/>
 			<haxe_doc>* The tint applied to the graphic shape. This is a hex value. Apply a value of 0xFFFFFF to reset the tint.
@@ -14106,6 +13077,7 @@
 		<clone public="1" set="method">
 			<f a=""><c path="pixi.core.graphics.Graphics"/></f>
 			<haxe_doc>* Creates a new Graphics object with the same values as this one.
+	 * Note that the only the properties of the object are cloned, not its transform (position,scale,etc)
 	 *
 	 * @return {Graphics}</haxe_doc>
 		</clone>
@@ -14321,6 +13293,16 @@
 	 *
 	 * @return {Graphics}</haxe_doc>
 		</clear>
+		<containsPoint public="1" set="method">
+			<f a="point">
+				<c path="pixi.core.math.Point"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* Tests if a point is inside this graphics object
+	*
+	* @param point {Point} the point to test
+	* @return {Bool} the result of the test</haxe_doc>
+		</containsPoint>
 		<updateLocalBounds public="1" set="method">
 			<f a=""><c path="pixi.core.graphics.Graphics"/></f>
 			<haxe_doc>* Update the bounds of the object
@@ -14377,18 +13359,15 @@
 	 * @extends Container
 	 * @namespace PIXI</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Graphics"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Graphics"</e></m></meta>
 	</class>
 	<class path="pixi.core.graphics.GraphicsData" params="" file="src/pixi/core/graphics/GraphicsData.hx" extern="1">
 		<lineWidth public="1"><x path="Float"/></lineWidth>
-		<lineColor public="1"><c path="String"/></lineColor>
+		<lineColor public="1"><x path="Int"/></lineColor>
 		<lineAlpha public="1"><x path="Float"/></lineAlpha>
-		<fillColor public="1"><c path="String"/></fillColor>
+		<fillColor public="1"><x path="Int"/></fillColor>
 		<fillAlpha public="1"><x path="Float"/></fillAlpha>
-		<fill public="1"><c path="String"/></fill>
+		<fill public="1"><x path="Bool"/></fill>
 		<shape public="1"><d/></shape>
 		<type public="1"><x path="Int"/></type>
 		<clone public="1" set="method">
@@ -14397,6 +13376,10 @@
 	 *
 	 * @return {GraphicsData}</haxe_doc>
 		</clone>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys the Graphics data.</haxe_doc>
+		</destroy>
 		<new public="1" set="method">
 			<f a="lineWidth:lineColor:lineAlpha:fillColor:fillAlpha:fill:shape">
 				<x path="Float"/>
@@ -14411,7 +13394,14 @@
 			<haxe_doc>* A GraphicsData object.
 	 *
 	 * @class
-	 * @namespace PIXI</haxe_doc>
+	 * @memberof PIXI
+	 * @param lineWidth {Float} the width of the line to draw
+	 * @param lineColor {Int} the color of the line to draw
+	 * @param lineAlpha {Float} the alpha of the line to draw
+	 * @param fillColor {Int} the color of the fill
+	 * @param fillAlpha {Float} the alpha of the fill
+	 * @param fill      {Bool} whether or not the shape is filled with a colour
+	 * @param shape     {Circle|Rectangle|Ellipse|Line|Polygon} The shape object to draw.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.GraphicsData"</e></m></meta>
 	</class>
@@ -14898,10 +13888,7 @@
 	 * @param width {Float} The overall width of this rectangle
 	 * @param height {Float} The overall height of this rectangle</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Rectangle"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Rectangle"</e></m></meta>
 	</class>
 	<class path="pixi.core.math.shapes.RoundedRectangle" params="" file="src/pixi/core/math/shapes/RoundedRectangle.hx" extern="1">
 		<clone public="1" set="method">
@@ -15110,10 +14097,13 @@
 	 * @default</haxe_doc>
 		</clearBeforeRender>
 		<backgroundColor public="1">
-			<x path="Int"/>
+			<x path="haxe.extern.EitherType">
+				<c path="String"/>
+				<x path="Int"/>
+			</x>
 			<haxe_doc>* The background color to fill if not transparent
 	 *
-	 * @member {Int}
+	 * @member {String|Int}
 	 * @default 0x000000</haxe_doc>
 		</backgroundColor>
 		<roundPixels public="1">
@@ -15251,64 +14241,6 @@
 			<m n=":native"><e>"PIXI.CanvasRenderer"</e></m>
 		</meta>
 	</class>
-	<class path="pixi.core.renderers.canvas.utils.CanvasBuffer" params="" file="src/pixi/core/renderers/canvas/utils/CanvasBuffer.hx" extern="1">
-		<canvas public="1">
-			<c path="js.html.CanvasElement"/>
-			<haxe_doc>* The Canvas object that belongs to this CanvasBuffer.
-     *
-     * @member {HTMLCanvasElement}</haxe_doc>
-		</canvas>
-		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
-			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
-	 *
-	 * @member {CanvasRenderingContext2D}</haxe_doc>
-		</context>
-		<width public="1">
-			<x path="Float"/>
-			<haxe_doc>* The width of the canvas buffer in pixels.
-	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#</haxe_doc>
-		</width>
-		<height public="1">
-			<x path="Float"/>
-			<haxe_doc>* The height of the canvas buffer in pixels.
-	 *
-	 * @member {number}
-	 * @memberof CanvasBuffer#</haxe_doc>
-		</height>
-		<resize public="1" set="method">
-			<f a="width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Resizes the canvas to the specified width and height.
-	 *
-	 * @param width {number} the new width of the canvas
-	 * @param height {number} the new height of the canvas</haxe_doc>
-		</resize>
-		<destroy public="1" set="method">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>* Destroys this canvas.
-	 *</haxe_doc>
-		</destroy>
-		<new public="1" set="method">
-			<f a="width:height">
-				<x path="Float"/>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Creates a Canvas element of the given size.
-	 *
-	 * @class
-	 * @memberof PIXI
-	 * @param width {Float} the width for the newly created canvas
-	 * @param height {Float} the height for the newly created canvas</haxe_doc>
-		</new>
-		<meta><m n=":native"><e>"PIXI.CanvasBuffer"</e></m></meta>
-	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="src/pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
 	<c path="pixi.core.graphics.Graphics"/>
@@ -15360,6 +14292,73 @@
 		</popMask>
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 		<meta><m n=":native"><e>"PIXI.CanvasMaskManager"</e></m></meta>
+	</class>
+	<class path="pixi.core.renderers.canvas.utils.CanvasRenderTarget" params="" file="src/pixi/core/renderers/canvas/utils/CanvasRenderTarget.hx" extern="1">
+		<canvas public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* The Canvas object that belongs to this to this CanvasRenderTarget.
+     *
+     * @member {HTMLCanvasElement}</haxe_doc>
+		</canvas>
+		<context public="1">
+			<c path="js.html.CanvasRenderingContext2D"/>
+			<haxe_doc>* A CanvasRenderingContext2D object representing a two-dimensional rendering context.
+	 *
+	 * @member {CanvasRenderingContext2D}</haxe_doc>
+		</context>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* The width of the canvas buffer in pixels.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* The height of the canvas buffer in pixels.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</height>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of this CanvasRenderTarget.
+	 *
+	 * @member {Float}
+	 * @memberof CanvasRenderTarget#</haxe_doc>
+		</resolution>
+		<resize public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the canvas to the specified width and height.
+	 *
+	 * @param width {Float} the new width of the canvas
+	 * @param height {Float} the new height of the canvas</haxe_doc>
+		</resize>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys this canvas.
+	 *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="width:height:?resolution">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Creates a Canvas element of the given size.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param width {number} the width for the newly created canvas
+	 * @param height {number} the height for the newly created canvas
+	 * @param [resolution=1] The resolution / device pixel ratio of the canvas</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"CanvasRenderTarget"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasTinter" params="" file="src/pixi/core/renderers/canvas/utils/CanvasTinter.hx" extern="1">
 		<getTintedTexture public="1" set="method" static="1">
@@ -15809,6 +14808,45 @@
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
 		</new>
 	</class>
+	<class path="pixi.core.renderers.webgl.utils.ObjectRenderer" params="" file="src/pixi/core/renderers/webgl/utils/ObjectRenderer.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<start public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Starts the renderer and sets the shader
+	 *</haxe_doc>
+		</start>
+		<stop public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the renderer
+	 *</haxe_doc>
+		</stop>
+		<flush public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stub method for rendering content and emptying the current batch.
+	 *</haxe_doc>
+		</flush>
+		<render public="1" set="method">
+			<f a="object">
+				<c path="pixi.core.display.DisplayObject"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Renders an object
+	 *
+	 * @param object {PIXI.DisplayObject} The object to render.</haxe_doc>
+		</render>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Base for a common object renderer that can be used as a system renderer plugin.
+	 *
+	 * @class
+	 * @extends PIXI.WebGLManager
+	 * @memberof PIXI
+	 * @param renderer {PIXI.WebGLRenderer} The renderer this object renderer works for.</haxe_doc>
+		</new>
+	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="src/pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<fromFrame public="1" set="method" static="1">
@@ -15882,6 +14920,18 @@
 	*
 	* @param renderer {CanvasRenderer} The renderer</haxe_doc>
 		</renderCanvas>
+		<from public="1" set="method">
+			<f a="source">
+				<d/>
+				<c path="pixi.core.sprites.Sprite"/>
+			</f>
+			<haxe_doc>* Helper function that creates a new sprite based on the source you provide.
+	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+	 *
+	 * @static
+	 * @param source {}
+	 * @return {Sprite} A Texture</haxe_doc>
+		</from>
 		<new public="1" set="method">
 			<f a="?texture">
 				<c path="pixi.core.textures.Texture"/>
@@ -15891,7 +14941,7 @@
 	 *
 	 * A sprite can be created directly from an image like this:
 	 *
-	 * ```js
+	 * ```haxe
 	 * 	var sprite = new Sprite.fromImage('assets/image.png');
 	 * ```
 	 *
@@ -15920,31 +14970,6 @@
 			<haxe_doc>* The resolution of the canvas.
 	 * @member {Float}</haxe_doc>
 		</resolution>
-		<style public="1">
-			<t path="pixi.core.text.TextStyle"/>
-			<haxe_doc>* Set the style of the text
-     *
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
-	 * @param [style.padding=0] {Float} Occasionally some fonts are cropped on top or bottom. Adding some padding will
-	 *      prevent this from happening by adding padding to the top and bottom of text height.
-	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
-	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
-	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
-	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
-	 *      or increase the spikiness of rendered text.
-     * @memberof Text#</haxe_doc>
-		</style>
 		<text public="1">
 			<c path="String"/>
 			<haxe_doc>* Set the copy for the text object. To split a line you can use '\n'.
@@ -15952,10 +14977,22 @@
      * @param text {String} The copy that you would like the text to display
      * @memberof Text#</haxe_doc>
 		</text>
+		<style public="1">
+			<x path="haxe.extern.EitherType">
+				<t path="pixi.core.text.TextStyleObject"/>
+				<c path="pixi.core.text.TextStyle"/>
+			</x>
+			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
+     * @member {TextStyleObj|TextStyle}
+     *</haxe_doc>
+		</style>
 		<new public="1" set="method">
 			<f a="text:?style:?resolution">
 				<c path="String"/>
-				<t path="pixi.core.text.TextStyle"/>
+				<x path="haxe.extern.EitherType">
+					<t path="pixi.core.text.TextStyleObject"/>
+					<c path="pixi.core.text.TextStyle"/>
+				</x>
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
@@ -15965,40 +15002,23 @@
 	 * A Text can be created directly from a string and a style object
 	 *
 	 * ```js
-	 * var text = new Text('This is a pixi text', {font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * var text = new Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
 	 * ```
 	 *
 	 * @class
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
-	 * @param text {String} The copy that you would like the text to display
-	 * @param [style] {TextStyle} The style parameters
-	 * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
-	 * @param [style.fill='black'] {String} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
-	 * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
-	 * @param [style.stroke] {String} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
-	 * @param [style.strokeThickness=0] {Float} A number that represents the thickness of the stroke. Default is 0 (no stroke)
-	 * @param [style.wordWrap=false] {Bool} Indicates if word wrap should be used
-	 * @param [style.wordWrapWidth=100] {Float} The width at which text will wrap, it needs wordWrap to be set to true
-	 * @param [style.lineHeight] {Float} The line height, a number that represents the vertical space that a letter uses
-	 * @param [style.dropShadow=false] {Bool} Set a drop shadow for the text
-	 * @param [style.dropShadowColor='#000000'] {String} A fill style to be used on the dropshadow e.g 'red', '#00FF00'
-	 * @param [style.dropShadowAngle=Math.PI/4] {Float} Set a angle of the drop shadow
-	 * @param [style.dropShadowDistance=5] {Float} Set a distance of the drop shadow
-	 * @param [style.padding=0] {number} Occasionally some fonts are cropped on top or bottom. Adding some padding will
-	 *      prevent this from happening by adding padding to the top and bottom of text height.
-	 * @param [style.textBaseline='alphabetic'] {String} The baseline of the text that is rendered.
-	 * @param [style.lineJoin='miter'] {String} The lineJoin property sets the type of corner created, it can resolve
-	 *      spiked text issues. Default is 'miter' (creates a sharp corner).
-	 * @param [style.miterLimit=10] {Int} The miter limit to use when using the 'miter' lineJoin mode. This can reduce
-	 *      or increase the spikiness of rendered text.</haxe_doc>
+	 * @param text {String} The string that you would like the text to display
+	 * @param [style] {TextStyleObj|TextStyle} The style parameters
+	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Text"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
 	</class>
-	<typedef path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/Text.hx" module="pixi.core.text.Text"><a>
+	<class path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/TextStyle.hx" extern="1">
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":native"><e>""</e></m></meta>
+	</class>
+	<typedef path="pixi.core.text.TextStyleObject" params="" file="src/pixi/core/text/TextStyleObject.hx"><a>
 	<wordWrapWidth>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16016,7 +15036,10 @@
 		<meta><m n=":optional"/></meta>
 	</strokeThickness>
 	<stroke>
-		<t path="Null"><d/></t>
+		<t path="Null"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Int"/>
+</x></t>
 		<meta><m n=":optional"/></meta>
 	</stroke>
 	<padding>
@@ -16024,7 +15047,7 @@
 		<meta><m n=":optional"/></meta>
 	</padding>
 	<miterLimit>
-		<t path="Null"><x path="Int"/></t>
+		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
 	</miterLimit>
 	<lineJoin>
@@ -16035,10 +15058,37 @@
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
 	</lineHeight>
-	<font>
+	<letterSpacing>
+		<t path="Null"><x path="Float"/></t>
+		<meta><m n=":optional"/></meta>
+	</letterSpacing>
+	<fontWeight>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
-	</font>
+	</fontWeight>
+	<fontVariant>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontVariant>
+	<fontStyle>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontStyle>
+	<fontSize>
+		<t path="Null"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Float"/>
+</x></t>
+		<meta><m n=":optional"/></meta>
+	</fontSize>
+	<fontFamily>
+		<t path="Null"><c path="String"/></t>
+		<meta><m n=":optional"/></meta>
+	</fontFamily>
+	<fillGradientType>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</fillGradientType>
 	<fill>
 		<t path="Null"><d/></t>
 		<meta><m n=":optional"/></meta>
@@ -16051,6 +15101,10 @@
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
 	</dropShadowColor>
+	<dropShadowBlur>
+		<t path="Null"><x path="Float"/></t>
+		<meta><m n=":optional"/></meta>
+	</dropShadowBlur>
 	<dropShadowAngle>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16059,6 +15113,10 @@
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
 	</dropShadow>
+	<breakWords>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</breakWords>
 	<align>
 		<t path="Null"><c path="String"/></t>
 		<meta><m n=":optional"/></meta>
@@ -16574,10 +15632,7 @@
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )</haxe_doc>
 </new></overloads>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Texture"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Texture"</e></m></meta>
 	</class>
 	<class path="pixi.core.textures.RenderTexture" params="" file="src/pixi/core/textures/RenderTexture.hx" extern="1">
 		<extends path="pixi.core.textures.Texture"/>
@@ -16587,7 +15642,7 @@
 				<x path="Float"/>
 				<x path="Int"/>
 				<x path="Float"/>
-				<x path="Void"/>
+				<c path="pixi.core.textures.RenderTexture"/>
 			</f>
 			<haxe_doc>* A short hand way of creating a render texture..
 	 * @param [width=100] {Float} The width of the render texture
@@ -17040,10 +16095,7 @@
      * @param {Int} startIdx The index to begin removing from (inclusive)
      * @param {Int} removeCount How many items to remove</haxe_doc>
 		</removeItems>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.utils"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.utils"</e></m></meta>
 	</class>
 	<class path="pixi.extras.BitmapText" params="" file="src/pixi/extras/BitmapText.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
@@ -17827,6 +16879,442 @@
 		<meta><m n=":optional"/></meta>
 	</autoPreventDefault>
 </a></typedef>
+	<class path="pixi.loaders.ResourceLoader" params="" file="src/pixi/loaders/ResourceLoader.hx" extern="1">
+		<extends path="pixi.interaction.EventEmitter"/>
+		<baseUrl public="1">
+			<c path="String"/>
+			<haxe_doc>* The base url for all resources loaded by this loader.
+     *
+     * @member {String}</haxe_doc>
+		</baseUrl>
+		<progress public="1">
+			<x path="Float"/>
+			<haxe_doc>* The progress percent of the loader going through the queue.
+     *
+     * @member {Float}</haxe_doc>
+		</progress>
+		<loading public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Loading state of the loader, true if it is currently loading resources.
+     *
+     * @member {Bool}</haxe_doc>
+		</loading>
+		<resources public="1">
+			<d/>
+			<haxe_doc><![CDATA[* All the resources for this loader keyed by name.
+     *
+     * @member {object<string, Resource>}]]></haxe_doc>
+		</resources>
+		<add public="1" set="method">
+			<f a="name:url:?options:?callback">
+				<c path="String"/>
+				<c path="String"/>
+				<t path="pixi.loaders.LoaderOptions"/>
+				<f a="">
+					<c path="pixi.loaders.Resource"/>
+					<x path="Void"/>
+				</f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+			<overloads>
+				<add public="1" set="method">
+					<f a="obj">
+						<t path="pixi.loaders.ResourceObject"/>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><t path="pixi.loaders.ResourceObject"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="urls">
+						<c path="Array"><c path="String"/></c>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+				<add public="1" set="method">
+					<f a="url:?options:?callback">
+						<c path="String"/>
+						<t path="pixi.loaders.LoaderOptions"/>
+						<f a="">
+							<c path="pixi.loaders.Resource"/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', 	function () {})
+	 *     .add('http://...', 	function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, 	function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ]);
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param [name] {string} The name of the resource to load, if not passed the url is used.
+	 * @param url {string} The url for this resource, relative to the baseUrl of this loader.
+	 * @param [options] {object} The options for the load.
+	 * @param [options.crossOrigin] {boolean} Is this request cross-origin? Default is to determine automatically.
+	 * @param [options.loadType=Resource.LOAD_TYPE.XHR] {Resource.XHR_LOAD_TYPE} How should this resource be loaded?
+	 * @param [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] {Resource.XHR_RESPONSE_TYPE} How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param [callback] {function} function to call when this specific resource completes loading.
+	 * @return {Loader}</haxe_doc>
+				</add>
+			</overloads>
+		</add>
+		<after public="1" set="method">
+			<f a="fn">
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Sets up a middleware function that will run *after* the
+	 * resource is loaded.
+	 *
+	 * @alias use
+	 * @param middleware {function} The middleware function to register.
+	 * @return {Loader}</haxe_doc>
+		</after>
+		<before public="1" set="method">
+			<f a="fn">
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Sets up a middleware function that will run *before* the
+	 * resource is loaded.
+	 *
+	 * @alias pre
+	 * @param middleware {function} The middleware function to register.
+	 * @return {Loader}</haxe_doc>
+		</before>
+		<reset public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Resets the queue of the loader to prepare for a new load.</haxe_doc>
+		</reset>
+		<load public="1" set="method">
+			<f a="?cb">
+				<d/>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+		</load>
+		<loadResource public="1" set="method">
+			<f a="resource:?cb">
+				<c path="String"/>
+				<f a=""><x path="Void"/></f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Loads a single resource.
+	 *
+	 * @fires progress</haxe_doc>
+		</loadResource>
+		<use public="1" set="method">
+			<f a="fn">
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Middleware function to use
+	 *
+	 * @param {function} function to call</haxe_doc>
+		</use>
+		<pre public="1" set="method">
+			<f a="fn">
+				<f a=":">
+					<c path="pixi.loaders.Resource"/>
+					<d/>
+					<x path="Void"/>
+				</f>
+				<c path="pixi.loaders.ResourceLoader"/>
+			</f>
+			<haxe_doc>* Middleware function
+	 *
+	 * @param {function} function to call</haxe_doc>
+		</pre>
+		<new public="1" set="method">
+			<f a="?baseUrl:?concurrency">
+				<c path="String"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Manages the state and loading of multiple resources to load.
+	 *
+	 * @class
+	 * @param [baseUrl=''] {string} The base url for all resources loaded by this loader.
+	 * @param [concurrency=10] {number} The number of resources to load concurrently.</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.loaders.Loader" params="" file="src/pixi/loaders/Loader.hx" extern="1">
+		<extends path="pixi.loaders.ResourceLoader"/>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*
+	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
+	 *
+	 * ```js
+	 * 	var loader = new PIXI.loader();
+	 *
+	 * loader.add('spineboy',"data/spineboy.json");
+	 *
+	 * loader.once('complete',onAssetsLoaded);
+	 *
+	 * loader.load();
+	 * ```
+	 *
+	 * @class
+	 * @extends ResourceLoader
+	 * @memberof PIXI.loaders</haxe_doc>
+		</new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.loaders.Loader"</e></m>
+		</meta>
+	</class>
 	<typedef path="pixi.loaders.LoaderOptions" params="" file="src/pixi/loaders/LoaderOptions.hx"><a>
 	<xhrType>
 		<t path="Null"><c path="String"/></t>
@@ -18341,9 +17829,10 @@
 	<x path="Bool"/>
 </f></set_skipFrame>
 		<start public="1" set="method" line="182">
-			<f a="?rendererType:?parentDom">
+			<f a="?rendererType:?parentDom:?canvasElement">
 				<c path="String"/>
 				<c path="js.html.Element"/>
+				<c path="js.html.CanvasElement"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
@@ -18353,22 +17842,22 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="223"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="228">
+		<resumeRendering public="1" set="method" line="227"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="232">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="238">
+		<_onRequestAnimationFrame set="method" line="242">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="248">
+		<addStats public="1" set="method" line="252">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
@@ -18447,101 +17936,228 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
 	</class>
-	<class path="samples.audio.Button" params="" file="samples/audio/Button.hx">
+	<class path="pixi.tilemap.CanvasTileRenderer" params="" file="src/pixi/tilemap/CanvasTileRenderer.hx" extern="1">
+		<renderer public="1"><c path="pixi.core.renderers.canvas.CanvasRenderer"/></renderer>
+		<tileAnim public="1"><c path="Array"><x path="Float"/></c></tileAnim>
+		<new public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.CompositeRectTileLayer" params="" file="src/pixi/tilemap/CompositeRectTileLayer.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
-		<_data><d/></_data>
-		<_label><c path="pixi.core.text.Text"/></_label>
-		<_rect><c path="pixi.core.math.shapes.Rectangle"/></_rect>
-		<_background><c path="pixi.core.graphics.Graphics"/></_background>
-		<_enabled><x path="Bool"/></_enabled>
-		<action public="1"><c path="msignal.Signal1"><d/></c></action>
-		<_setupBackground set="method" line="36"><f a="width:height">
+		<useSquare public="1"><x path="Bool"/></useSquare>
+		<modificationMarker public="1"><x path="Int"/></modificationMarker>
+		<initialize public="1" set="method"><f a="zIndex:bitmaps:useSquare">
 	<x path="Float"/>
-	<x path="Float"/>
+	<c path="Array"><c path="pixi.core.textures.Texture"/></c>
+	<x path="Bool"/>
 	<x path="Void"/>
-</f></_setupBackground>
-		<_setupLabel set="method" line="54"><f a="width:height:fontSize">
+</f></initialize>
+		<setBitmaps public="1" set="method"><f a="bitmaps">
+	<c path="Array"><c path="pixi.core.textures.Texture"/></c>
+	<x path="Void"/>
+</f></setBitmaps>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<addRect public="1" set="method"><f a="num:u:v:x:y:tileWidth:tileHeight">
+	<x path="Int"/>
+	<x path="Float"/>
+	<x path="Float"/>
 	<x path="Float"/>
 	<x path="Float"/>
 	<x path="Int"/>
-	<x path="Void"/>
-</f></_setupLabel>
-		<_redraw set="method" line="66"><f a="colour">
 	<x path="Int"/>
 	<x path="Void"/>
-</f></_redraw>
-		<_onMouseDown set="method" line="81"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></addRect>
+		<addFrame public="1" set="method">
+			<f a="texture:x:y">
+				<d/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* "hello world!" of pixi-tilemap library. Pass it texture and it will be added
+	 * @param texture {string|Texture}
+	 * @param x {number}
+	 * @param y {number}
+	 * @returns {boolean}</haxe_doc>
+		</addFrame>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
 	<x path="Void"/>
-</f></_onMouseDown>
-		<_onMouseUp set="method" line="85"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></renderCanvas>
+		<renderWebGL public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 	<x path="Void"/>
-</f></_onMouseUp>
-		<_onMouseUpOutside set="method" line="92"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></renderWebGL>
+		<isModified public="1" set="method"><f a="anim">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></isModified>
+		<clearModify public="1" set="method"><f a=""><x path="Void"/></f></clearModify>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.tilemap.CompositeRectTileLayer"</e></m>
+		</meta>
+	</class>
+	<class path="pixi.tilemap.GraphicsLayer" params="" file="src/pixi/tilemap/GraphicsLayer.hx" extern="1">
+		<extends path="pixi.core.graphics.Graphics"/>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
 	<x path="Void"/>
-</f></_onMouseUpOutside>
-		<_onMouseOver set="method" line="96"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></renderCanvas>
+		<renderWebGL public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
 	<x path="Void"/>
-</f></_onMouseOver>
-		<_onMouseOut set="method" line="100"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></renderWebGL>
+		<isModified public="1" set="method"><f a="anim">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></isModified>
+		<clearModify public="1" set="method"><f a=""><x path="Void"/></f></clearModify>
+		<new public="1" set="method"><f a="zIndex">
+	<x path="Float"/>
 	<x path="Void"/>
-</f></_onMouseOut>
-		<_onTouchEndOutside set="method" line="104"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.RectTileLayer" params="" file="src/pixi/tilemap/RectTileLayer.hx" extern="1">
+		<extends path="pixi.core.display.DisplayObject"/>
+		<pointsBuf public="1"><c path="Array"><x path="Float"/></c></pointsBuf>
+		<modificationMarker public="1"><x path="Int"/></modificationMarker>
+		<hasAnim public="1"><x path="Bool"/></hasAnim>
+		<initialize public="1" set="method"><f a="zIndex:texture">
+	<x path="Float"/>
+	<c path="pixi.core.textures.Texture"/>
 	<x path="Void"/>
-</f></_onTouchEndOutside>
-		<_onTouchEnd set="method" line="108"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
+</f></initialize>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
 	<x path="Void"/>
-</f></_onTouchEnd>
-		<_onTouchStart set="method" line="115"><f a="target">
-	<t path="pixi.interaction.EventTarget"/>
-	<x path="Void"/>
-</f></_onTouchStart>
-		<new public="1" set="method" line="27"><f a="label:width:height:?data:?fontSize">
-	<c path="String"/>
+</f></renderCanvas>
+		<addRect public="1" set="method"><f a="u:v:x:y:tileWidth:tileHeight:animX:animY">
 	<x path="Float"/>
 	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></addRect>
+		<renderWebGL public="1" set="method"><f a="renderer:useSquare">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></renderWebGL>
+		<new public="1" set="method"><f a="zIndex:texture">
+	<x path="Float"/>
+	<c path="pixi.core.textures.Texture"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.RectTileShader" params="" file="src/pixi/tilemap/RectTileShader.hx" extern="1">
+		<extends path="pixi.core.Shader"/>
+		<vertSize public="1"><x path="Int"/></vertSize>
+		<vertPerQuad public="1"><x path="Int"/></vertPerQuad>
+		<stride public="1"><x path="Int"/></stride>
+		<createVao public="1" set="method"><f a="renderer:vb">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+	<d/>
+</f></createVao>
+		<new public="1" set="method"><f a="gl">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.SquareTileShader" params="" file="src/pixi/tilemap/SquareTileShader.hx" extern="1">
+		<extends path="pixi.core.Shader"/>
+		<vertSize public="1"><x path="Int"/></vertSize>
+		<vertPerQuad public="1"><x path="Int"/></vertPerQuad>
+		<stride public="1"><x path="Int"/></stride>
+		<createVao public="1" set="method"><f a="renderer:vb">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+	<d/>
+</f></createVao>
+		<new public="1" set="method"><f a="gl">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.TileRenderer" params="" file="src/pixi/tilemap/TileRenderer.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.utils.ObjectRenderer"/>
+		<vbs public="1"><d/></vbs>
+		<lastTimeCheck public="1"><x path="Float"/></lastTimeCheck>
+		<tileAnim public="1"><c path="Array"><x path="Float"/></c></tileAnim>
+		<indices public="1"><c path="js.html.Uint16Array"/></indices>
+		<rectShader public="1"><c path="pixi.tilemap.RectTileShader"/></rectShader>
+		<squareShader public="1"><c path="pixi.tilemap.SquareTileShader"/></squareShader>
+		<indexBuffer public="1"><d/></indexBuffer>
+		<checkLeaks public="1" set="method"><f a=""><x path="Void"/></f></checkLeaks>
+		<getVb public="1" set="method"><f a=""><d/></f></getVb>
+		<createVb public="1" set="method"><f a="useSquare">
+	<x path="Bool"/>
+	<d/>
+</f></createVb>
+		<removeVb public="1" set="method"><f a="id">
+	<x path="Int"/>
+	<x path="Void"/>
+</f></removeVb>
+		<getShader public="1" set="method"><f a="useSquare">
+	<x path="Bool"/>
+	<c path="pixi.core.Shader"/>
+</f></getShader>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The default vertex shader source
+	 *
+	 * @static
+	 * @constant</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.tilemap.ZLayer" params="" file="src/pixi/tilemap/ZLayer.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<tilemap public="1"><d/></tilemap>
+		<initialize public="1" set="method"><f a="tilemap:zIndex">
 	<d/>
 	<x path="Int"/>
 	<x path="Void"/>
-</f></new>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
+</f></initialize>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<cacheIfDirty public="1" set="method"><f a=""><x path="Void"/></f></cacheIfDirty>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></renderCanvas>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 	</class>
-	<class path="samples.audio.Main" params="" file="samples/audio/Main.hx">
+	<class path="samples.tilemap.Main" params="" file="samples/tilemap/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="83" static="1">
+		<main set="method" line="84" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_loader><c path="core.AssetLoader"/></_loader>
-		<_baseURL><c path="String"/></_baseURL>
-		<_btnContainer><c path="pixi.core.display.Container"/></_btnContainer>
-		<_bgSound><c path="core.AudioAsset"/></_bgSound>
-		<_sound1><c path="core.AudioAsset"/></_sound1>
-		<_sound2><c path="core.AudioAsset"/></_sound2>
-		<_onLoadProgress set="method" line="43"><f a=""><x path="Void"/></f></_onLoadProgress>
-		<_onLoaded set="method" line="47"><f a=""><x path="Void"/></f></_onLoaded>
-		<_playSound1 get="inline" set="null" line="61"><f a=""><x path="Void"/></f></_playSound1>
-		<_playSound2 get="inline" set="null" line="65"><f a=""><x path="Void"/></f></_playSound2>
-		<_stopAll set="method" line="69"><f a=""><x path="Void"/></f></_stopAll>
-		<_addButton set="method" line="75"><f a="label:x:y:width:height:callback">
-	<c path="String"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<x path="Float"/>
-	<d/>
+		<_loader><c path="pixi.loaders.Loader"/></_loader>
+		<_tilemap><c path="pixi.tilemap.CompositeRectTileLayer"/></_tilemap>
+		<_frame><x path="Int"/></_frame>
+		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
+		<_onLoaded set="method" line="32"><f a=""><x path="Void"/></f></_onLoaded>
+		<buildTilemap set="method" line="50"><f a="frame">
+	<x path="Int"/>
 	<x path="Void"/>
-</f></_addButton>
-		<new public="1" set="method" line="23"><f a=""><x path="Void"/></f></new>
+</f></buildTilemap>
+		<_onUpdate set="method" line="80"><f a="elapsedTime">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></_onUpdate>
+		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>

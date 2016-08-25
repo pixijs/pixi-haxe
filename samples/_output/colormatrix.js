@@ -175,13 +175,15 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,parentDom) {
+	,start: function(rendererType,parentDom,canvasElement) {
 		if(rendererType == null) rendererType = "auto";
-		var _this = window.document;
-		this.canvas = _this.createElement("canvas");
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		this.canvas.style.position = "absolute";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
 		var renderingOptions = { };
@@ -253,7 +255,7 @@ var samples_filters_colormatrix_Main = function() {
 	this._container.filters = [this._filter];
 	this.stage.on("click",$bind(this,this._onClick));
 	this.stage.on("tap",$bind(this,this._onClick));
-	var style = { font : "bold 12pt Arial", fill : "#FFFFFF"};
+	var style = { fontSize : "12", fontFamily : "Arial", fontWeight : "bold", fill : 16777215};
 	var help = new PIXI.Text("Click to turn filters on / off.",style);
 	this.stage.addChild(help);
 };

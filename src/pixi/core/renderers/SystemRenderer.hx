@@ -1,5 +1,6 @@
 package pixi.core.renderers;
 
+import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
 import pixi.core.display.DisplayObject;
 import pixi.core.renderers.Detector;
@@ -108,10 +109,10 @@ extern class SystemRenderer extends EventEmitter {
 	/**
 	 * The background color to fill if not transparent
 	 *
-	 * @member {Int}
+	 * @member {String|Int}
 	 * @default 0x000000
 	 */
-	var backgroundColor:Int;
+	var backgroundColor:EitherType<String, Int>;
 
 	/**
      * If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.

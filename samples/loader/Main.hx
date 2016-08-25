@@ -27,11 +27,17 @@ class Main extends Application {
 
 		for (i in 1 ... 10) _loader.add("img" + i, i + ".png");
 		_loader.on("progress", _onLoadProgress);
+		_loader.once("complete", _onLoadComplete);
 		_loader.load(_onLoaded);
 	}
 
 	function _onLoadProgress() {
 		trace("Loaded: " + Math.round(_loader.progress));
+	}
+
+	function _onLoadComplete(a, b) {
+		trace(a);
+		trace(b);
 	}
 
 	function _onLoaded() {

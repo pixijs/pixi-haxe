@@ -175,13 +175,15 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,parentDom) {
+	,start: function(rendererType,parentDom,canvasElement) {
 		if(rendererType == null) rendererType = "auto";
-		var _this = window.document;
-		this.canvas = _this.createElement("canvas");
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		this.canvas.style.position = "absolute";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
 		var renderingOptions = { };
@@ -248,7 +250,8 @@ samples_events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.stage.addChild(this._img);
 		var style = { };
 		style.fill = "#000000";
-		style.font = "12px Courier";
+		style.fontSize = 12;
+		style.fontFamily = "Courier";
 		this._label = new PIXI.Text("EVENTS",style);
 		this._label.position.set(0,0);
 		this.stage.addChild(this._label);

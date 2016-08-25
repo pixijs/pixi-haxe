@@ -12,7 +12,7 @@ extern class Sprite extends Container {
 	 *
 	 * A sprite can be created directly from an image like this:
 	 *
-	 * ```js
+	 * ```haxe
 	 * 	var sprite = new Sprite.fromImage('assets/image.png');
 	 * ```
 	 *
@@ -70,6 +70,16 @@ extern class Sprite extends Container {
 	* @param renderer {CanvasRenderer} The renderer
 	*/
 	function renderCanvas(renderer:Dynamic):Void;
+
+	/**
+	 * Helper function that creates a new sprite based on the source you provide.
+	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+	 *
+	 * @static
+	 * @param source {}
+	 * @return {Sprite} A Texture
+	 */
+	function from(source:Dynamic):Sprite;
 
 	/**
 	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId

@@ -113,3 +113,11 @@
 -lib msignal
 -main samples.audio.Main
 -js samples/_output/audio.js
+
+--next
+-main samples.webglinfo.Main
+-js samples/_output/webglinfo.js
+
+--next
+-main samples.tilemap.Main
+-js samples/_output/tilemap.js

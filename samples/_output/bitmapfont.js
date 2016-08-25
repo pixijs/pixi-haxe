@@ -175,13 +175,15 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,parentDom) {
+	,start: function(rendererType,parentDom,canvasElement) {
 		if(rendererType == null) rendererType = "auto";
-		var _this = window.document;
-		this.canvas = _this.createElement("canvas");
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		this.canvas.style.position = "absolute";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
 		var renderingOptions = { };
@@ -238,7 +240,7 @@ samples_bitmapfont_Main.prototype = $extend(pixi_plugins_app_Application.prototy
 		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		var fontloader = new PIXI.loaders.Loader();
-		fontloader.add("font","assets/fonts/desyrel.xml");
+		fontloader.add("font","./assets/fonts/desyrel.xml");
 		fontloader.load($bind(this,this._onLoaded));
 	}
 	,_onLoaded: function() {

@@ -175,13 +175,15 @@ pixi_plugins_app_Application.prototype = {
 		}
 		return this.skipFrame = val;
 	}
-	,start: function(rendererType,parentDom) {
+	,start: function(rendererType,parentDom,canvasElement) {
 		if(rendererType == null) rendererType = "auto";
-		var _this = window.document;
-		this.canvas = _this.createElement("canvas");
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		this.canvas.style.position = "absolute";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
 		var renderingOptions = { };
@@ -245,10 +247,15 @@ samples_loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 			this._loader.add("img" + i,i + ".png");
 		}
 		this._loader.on("progress",$bind(this,this._onLoadProgress));
+		this._loader.once("complete",$bind(this,this._onLoadComplete));
 		this._loader.load($bind(this,this._onLoaded));
 	}
 	,_onLoadProgress: function() {
 		console.log("Loaded: " + Math.round(this._loader.progress));
+	}
+	,_onLoadComplete: function(a,b) {
+		console.log(a);
+		console.log(b);
 	}
 	,_onLoaded: function() {
 		var _container = new PIXI.Container();
