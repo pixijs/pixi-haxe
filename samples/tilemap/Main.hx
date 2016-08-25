@@ -1,4 +1,4 @@
-package samples.tilemap;
+package tilemap;
 
 import haxe.Timer;
 import pixi.core.textures.Texture;
@@ -10,7 +10,7 @@ class Main extends Application {
 
 	var _loader:Loader;
 	var _tilemap:CompositeRectTileLayer;
-	
+
 	var _frame:Int;
 
 	public function new() {
@@ -37,24 +37,24 @@ class Main extends Application {
 		_tilemap = new pixi.tilemap.CompositeRectTileLayer();
 		_tilemap.initialize(0, [_loader.resources.atlas_image.texture], true);
 		stage.addChild(_tilemap);
-		
+
 		_frame = 0;
-		
+
 		var timer = new Timer(400);
 		timer.run = function () {
 			_frame = _frame == 0 ? 1 : 0;
 			buildTilemap(_frame);
 		};
 	}
-	
+
 	function buildTilemap(frame:Int) {
-		
+
 		//Clear everything, like a PIXI.Graphics
 		_tilemap.clear();
-		
+
 		var resources = _loader.resources;
 		var size:Int = 32;
-		
+
 		// if you are too lazy, just specify filename and pixi will find it in cache
 		for (i in 0...7)
 			for (j in 0...7) {
@@ -76,9 +76,9 @@ class Main extends Application {
 		// buttons will appear above everything
 		_tilemap.addFrame(resources.button.texture, 6 * size, 2 * size);
 	}
-	
+
 	function _onUpdate(elapsedTime:Float) {
-		
+
 	}
 
 	static function main() {

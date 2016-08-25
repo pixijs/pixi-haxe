@@ -231,15 +231,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_spritesheet_Main = function() {
+var spritesheet_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_spritesheet_Main.main = function() {
-	new samples_spritesheet_Main();
+spritesheet_Main.main = function() {
+	new spritesheet_Main();
 };
-samples_spritesheet_Main.__super__ = pixi_plugins_app_Application;
-samples_spritesheet_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+spritesheet_Main.__super__ = pixi_plugins_app_Application;
+spritesheet_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi_plugins_app_Application.prototype.start.call(this,"auto");
@@ -318,7 +318,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_spritesheet_Main.main();
+spritesheet_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=spritesheet.js.map

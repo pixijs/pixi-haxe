@@ -1,4 +1,4 @@
-package samples.filters.colormatrix;
+package filters.colormatrix;
 
 import pixi.core.text.TextStyleObject;
 import pixi.interaction.EventTarget;

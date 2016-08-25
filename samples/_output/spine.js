@@ -227,7 +227,7 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_spine_Main = function() {
+var spine_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this.backgroundColor = 65382;
 	pixi_plugins_app_Application.prototype.start.call(this);
@@ -237,11 +237,11 @@ var samples_spine_Main = function() {
 	this._loader.add("spinedata","assets/spine/spineboy.json");
 	this._loader.load($bind(this,this.onAssetsLoaded));
 };
-samples_spine_Main.main = function() {
-	new samples_spine_Main();
+spine_Main.main = function() {
+	new spine_Main();
 };
-samples_spine_Main.__super__ = pixi_plugins_app_Application;
-samples_spine_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+spine_Main.__super__ = pixi_plugins_app_Application;
+spine_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	onAssetsLoaded: function() {
 		this._spine = new PIXI.spine.Spine(Reflect.field(this._loader.resources,"spinedata").spineData);
 		this._spine.position.set(400,600);
@@ -273,7 +273,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_spine_Main.main();
+spine_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=spine.js.map

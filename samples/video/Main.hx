@@ -1,4 +1,4 @@
-package samples.video;
+package video;
 
 import js.html.VideoElement;
 import js.Browser;

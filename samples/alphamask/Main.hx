@@ -1,4 +1,4 @@
-package samples.alphamask;
+package alphamask;
 
 import pixi.core.math.Point;
 import pixi.core.sprites.Sprite;

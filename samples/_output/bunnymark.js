@@ -151,6 +151,12 @@ var Std = function() { };
 Std.random = function(x) {
 	if(x <= 0) return 0; else return Math.floor(Math.random() * x);
 };
+var bunnymark_Bunny = function(texture) {
+	PIXI.Sprite.call(this,texture);
+};
+bunnymark_Bunny.__super__ = PIXI.Sprite;
+bunnymark_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
+});
 var pixi_plugins_app_Application = function() {
 	this._animationFrameId = null;
 	this.pixelRatio = 1;
@@ -231,13 +237,7 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_bunnymark_Bunny = function(texture) {
-	PIXI.Sprite.call(this,texture);
-};
-samples_bunnymark_Bunny.__super__ = PIXI.Sprite;
-samples_bunnymark_Bunny.prototype = $extend(PIXI.Sprite.prototype,{
-});
-var samples_bunnymark_Main = function() {
+var bunnymark_Main = function() {
 	this.amount = 100;
 	this.count = 0;
 	this.isAdding = false;
@@ -250,11 +250,11 @@ var samples_bunnymark_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_bunnymark_Main.main = function() {
-	new samples_bunnymark_Main();
+bunnymark_Main.main = function() {
+	new bunnymark_Main();
 };
-samples_bunnymark_Main.__super__ = pixi_plugins_app_Application;
-samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+bunnymark_Main.__super__ = pixi_plugins_app_Application;
+bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -299,7 +299,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 		var _g = this.startBunnyCount;
 		while(_g1 < _g) {
 			var i = _g1++;
-			var bunny = new samples_bunnymark_Bunny(this.currentTexture);
+			var bunny = new bunnymark_Bunny(this.currentTexture);
 			bunny.speedX = Math.random() * 5;
 			bunny.speedY = Math.random() * 5 - 3;
 			bunny.anchor.x = 0.5;
@@ -328,7 +328,7 @@ samples_bunnymark_Main.prototype = $extend(pixi_plugins_app_Application.prototyp
 				var _g = this.amount;
 				while(_g1 < _g) {
 					var i = _g1++;
-					var bunny = new samples_bunnymark_Bunny(this.currentTexture);
+					var bunny = new bunnymark_Bunny(this.currentTexture);
 					bunny.speedX = Math.random() * 5;
 					bunny.speedY = Math.random() * 5 - 3;
 					bunny.anchor.y = 1;
@@ -389,7 +389,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_bunnymark_Main.main();
+bunnymark_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=bunnymark.js.map

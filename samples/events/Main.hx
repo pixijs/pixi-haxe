@@ -1,4 +1,4 @@
-package samples.events;
+package events;
 
 import pixi.core.text.TextStyleObject;
 import pixi.interaction.EventTarget;

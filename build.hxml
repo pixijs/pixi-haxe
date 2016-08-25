@@ -17,107 +17,107 @@
 --each
 
 --next
--main samples.basics.Main
+-main basics.Main
 -js samples/_output/basics.js
 
 --next
--main samples.spine.Main
+-main spine.Main
 -js samples/_output/spine.js
 
 --next
--main samples.spritesheet.Main
+-main spritesheet.Main
 -js samples/_output/spritesheet.js
 
 --next
--main samples.movieclip.Main
+-main movieclip.Main
 -js samples/_output/movieclip.js
 
 --next
--main samples.graphics.Main
+-main graphics.Main
 -js samples/_output/graphics.js
 
 --next
--main samples.tiling.Main
+-main tiling.Main
 -js samples/_output/tiling.js
 
 --next
--main samples.bitmapfont.Main
+-main bitmapfont.Main
 -js samples/_output/bitmapfont.js
 
 --next
--main samples.dragging.Main
+-main dragging.Main
 -js samples/_output/dragging.js
 
 --next
--main samples.nape.Main
+-main nape.Main
 -js samples/_output/nape.js
 -lib nape
 
 --next
--main samples.rope.Main
+-main rope.Main
 -js samples/_output/rope.js
 
 --next
--main samples.retina.Main
+-main retina.Main
 -js samples/_output/retina.js
 
 --next
--main samples.bunnymark.Main
+-main bunnymark.Main
 -js samples/_output/bunnymark.js
 
 --next
--main samples.textureswap.Main
+-main textureswap.Main
 -js samples/_output/textureswap.js
 
 --next
--main samples.alphamask.Main
+-main alphamask.Main
 -js samples/_output/alphamask.js
 
 --next
--main samples.filters.colormatrix.Main
+-main filters.colormatrix.Main
 -js samples/_output/colormatrix.js
 
 --next
--main samples.filters.blur.Main
+-main filters.blur.Main
 -js samples/_output/blur.js
 
 --next
--main samples.loader.Main
+-main loader.Main
 -js samples/_output/loader.js
 
 --next
--main samples.video.Main
+-main video.Main
 -js samples/_output/video.js
 
 --next
--main samples.stream.Main
+-main stream.Main
 -js samples/_output/stream.js
 
 --next
--main samples.events.Main
+-main events.Main
 -js samples/_output/events.js
 
 --next
--main samples.mask.Main
+-main mask.Main
 -js samples/_output/mask.js
 
 --next
--main samples.deviceinfo.Main
+-main deviceinfo.Main
 -js samples/_output/deviceinfo.js
 
 --next
--main samples.devicedetection.Main
+-main devicedetection.Main
 -js samples/_output/devicedetection.js
 
 --next
 -lib msignal
--main samples.audio.Main
+-main audio.Main
 -js samples/_output/audio.js
 
 --next
--main samples.webglinfo.Main
+-main webglinfo.Main
 -js samples/_output/webglinfo.js
 
 --next
--main samples.tilemap.Main
+-main tilemap.Main
 -js samples/_output/tilemap.js

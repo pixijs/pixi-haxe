@@ -1,4 +1,4 @@
-package samples.textureswap;
+package textureswap;
 
 import pixi.interaction.EventTarget;
 import pixi.core.sprites.Sprite;

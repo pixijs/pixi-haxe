@@ -18138,7 +18138,7 @@
 </f></renderCanvas>
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 	</class>
-	<class path="samples.tilemap.Main" params="" file="samples/tilemap/Main.hx">
+	<class path="tilemap.Main" params="" file="samples/tilemap/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
 		<main set="method" line="84" static="1">
 			<f a=""><x path="Void"/></f>
