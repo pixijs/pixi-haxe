@@ -1,4 +1,4 @@
-package samples.dragging;
+package dragging;
 
 import pixi.interaction.EventTarget;
 import pixi.core.math.Point;

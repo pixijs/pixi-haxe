@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_bitmapfont_Main = function() {
+var bitmapfont_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_bitmapfont_Main.main = function() {
-	new samples_bitmapfont_Main();
+bitmapfont_Main.main = function() {
+	new bitmapfont_Main();
 };
-samples_bitmapfont_Main.__super__ = pixi_plugins_app_Application;
-samples_bitmapfont_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+bitmapfont_Main.__super__ = pixi_plugins_app_Application;
+bitmapfont_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
@@ -265,7 +265,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_bitmapfont_Main.main();
+bitmapfont_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=bitmapfont.js.map

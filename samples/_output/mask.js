@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_mask_Main = function() {
+var mask_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_mask_Main.main = function() {
-	new samples_mask_Main();
+mask_Main.main = function() {
+	new mask_Main();
 };
-samples_mask_Main.__super__ = pixi_plugins_app_Application;
-samples_mask_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+mask_Main.__super__ = pixi_plugins_app_Application;
+mask_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi_plugins_app_Application.prototype.start.call(this,"recommended");
@@ -280,7 +280,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_mask_Main.main();
+mask_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=mask.js.map

@@ -1,4 +1,4 @@
-package samples.audio;
+package audio;
 
 import core.AudioAsset;
 import core.AssetLoader;

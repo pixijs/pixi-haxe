@@ -1,4 +1,4 @@
-package samples.graphics;
+package graphics;
 
 import pixi.interaction.EventTarget;
 import pixi.core.graphics.Graphics;

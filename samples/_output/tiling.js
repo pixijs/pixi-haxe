@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_tiling_Main = function() {
+var tiling_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_tiling_Main.main = function() {
-	new samples_tiling_Main();
+tiling_Main.main = function() {
+	new tiling_Main();
 };
-samples_tiling_Main.__super__ = pixi_plugins_app_Application;
-samples_tiling_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+tiling_Main.__super__ = pixi_plugins_app_Application;
+tiling_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 9946478;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -268,7 +268,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_tiling_Main.main();
+tiling_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=tiling.js.map

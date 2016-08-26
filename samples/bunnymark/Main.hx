@@ -1,4 +1,4 @@
-package samples.bunnymark;
+package bunnymark;
 
 import pixi.particles.ParticleContainer;
 import pixi.core.math.shapes.Rectangle;

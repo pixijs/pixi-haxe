@@ -1,4 +1,4 @@
-package samples.basics;
+package basics;
 
 import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;

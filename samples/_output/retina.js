@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_retina_Main = function() {
+var retina_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_retina_Main.main = function() {
-	new samples_retina_Main();
+retina_Main.main = function() {
+	new retina_Main();
 };
-samples_retina_Main.__super__ = pixi_plugins_app_Application;
-samples_retina_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+retina_Main.__super__ = pixi_plugins_app_Application;
+retina_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 16777215;
 		this.pixelRatio = this._getPixelRatio();
@@ -276,7 +276,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_retina_Main.main();
+retina_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=retina.js.map

@@ -1,4 +1,4 @@
-package samples.loader;
+package loader;
 
 import pixi.loaders.Loader;
 import pixi.core.display.Container;

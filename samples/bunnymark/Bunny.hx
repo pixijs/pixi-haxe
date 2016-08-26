@@ -1,4 +1,4 @@
-package samples.bunnymark;
+package bunnymark;
 
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;

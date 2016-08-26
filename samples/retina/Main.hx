@@ -1,4 +1,4 @@
-package samples.retina;
+package retina;
 
 import pixi.core.text.TextStyleObject;
 import pixi.core.text.Text;

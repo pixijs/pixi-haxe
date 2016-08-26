@@ -227,7 +227,7 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_filters_colormatrix_Main = function() {
+var filters_colormatrix_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 	this.stage.interactive = true;
@@ -259,11 +259,11 @@ var samples_filters_colormatrix_Main = function() {
 	var help = new PIXI.Text("Click to turn filters on / off.",style);
 	this.stage.addChild(help);
 };
-samples_filters_colormatrix_Main.main = function() {
-	new samples_filters_colormatrix_Main();
+filters_colormatrix_Main.main = function() {
+	new filters_colormatrix_Main();
 };
-samples_filters_colormatrix_Main.__super__ = pixi_plugins_app_Application;
-samples_filters_colormatrix_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+filters_colormatrix_Main.__super__ = pixi_plugins_app_Application;
+filters_colormatrix_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 65382;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -306,7 +306,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_filters_colormatrix_Main.main();
+filters_colormatrix_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=colormatrix.js.map

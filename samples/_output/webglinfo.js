@@ -7,7 +7,7 @@ Reflect.field = function(o,field) {
 		return null;
 	}
 };
-var samples_webglinfo_Main = function() {
+var webglinfo_Main = function() {
 	this.contextName = "";
 	var checkSupport = this.detectWebGL({ stencil : true});
 	this.log("WebGL Support",(checkSupport == null?"null":"" + checkSupport) + " " + this.contextName);
@@ -16,10 +16,10 @@ var samples_webglinfo_Main = function() {
 	checkSupport = this.detectWebGL({ stencil : true, failIfMajorPerformanceCaveat : true});
 	this.log("WebGL Support (performance caveat set to true)",(checkSupport == null?"null":"" + checkSupport) + " " + this.contextName);
 };
-samples_webglinfo_Main.main = function() {
-	new samples_webglinfo_Main();
+webglinfo_Main.main = function() {
+	new webglinfo_Main();
 };
-samples_webglinfo_Main.prototype = {
+webglinfo_Main.prototype = {
 	detectWebGL: function(props) {
 		var ctx = Reflect.field(window,"WebGLRenderingContext");
 		if(ctx != null) {
@@ -85,7 +85,7 @@ samples_webglinfo_Main.prototype = {
 		window.document.writeln(msg + ": <b>" + val + "</b><br/>");
 	}
 };
-samples_webglinfo_Main.main();
+webglinfo_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=webglinfo.js.map

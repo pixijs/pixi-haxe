@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_video_Main = function() {
+var video_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_video_Main.main = function() {
-	new samples_video_Main();
+video_Main.main = function() {
+	new video_Main();
 };
-samples_video_Main.__super__ = pixi_plugins_app_Application;
-samples_video_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+video_Main.__super__ = pixi_plugins_app_Application;
+video_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -268,7 +268,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_video_Main.main();
+video_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=video.js.map
