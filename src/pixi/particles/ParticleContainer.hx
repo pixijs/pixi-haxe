@@ -28,7 +28,7 @@ extern class ParticleContainer extends Container {
 	 * @extends Container
 	 * @memberof PIXI
 	 *
-	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
+	 * @param [maxSize=15000] {Int} The number of images in the SpriteBatch before it flushes.
 	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
 	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
 	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
@@ -37,7 +37,7 @@ extern class ParticleContainer extends Container {
 	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
-	function new(?size:Int, ?properties:Array<Bool>, ?batchSize:Int);
+	function new(?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int);
 
 	/**
 	 * Sets the private properties array to dynamic / static based on the passed properties object

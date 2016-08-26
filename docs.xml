@@ -15209,7 +15209,7 @@
 		</source>
 		<premultipliedAlpha public="1">
 			<x path="Bool"/>
-			<haxe_doc>* Controls if RGB channels should be pre-multiplied by Alpha  (WebGL only)
+			<haxe_doc>* Controls if RGB channels should be pre-multiplied by Alpha (WebGL only)
 	 *
 	 * @member {Bool}
 	 * @default true</haxe_doc>
@@ -15226,6 +15226,14 @@
 	 *
 	 * @member {Bool}</haxe_doc>
 		</mipmap>
+		<wrapMode public="1">
+			<x path="Int"/>
+			<haxe_doc>*
+     * WebGL Texture wrap mode
+     *
+     * @member {Int}
+     * @see PIXI.WRAP_MODES</haxe_doc>
+		</wrapMode>
 		<update public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* Updates the texture on all the webgl renderers.
@@ -15292,7 +15300,7 @@
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
-	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture</haxe_doc>
 			<overloads>
 				<new public="1" set="method">
 					<f a="source:?scaleMode:?resolution">
@@ -15307,7 +15315,7 @@
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
-	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture</haxe_doc>
 				</new>
 				<new public="1" set="method">
 					<f a="source:?scaleMode:?resolution">
@@ -15322,7 +15330,7 @@
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
-	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios</haxe_doc>
+	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture</haxe_doc>
 				</new>
 			</overloads>
 		</new>
@@ -15390,7 +15398,7 @@
 	 * @param [width=100] {Float} The width of the base render texture
 	 * @param [height=100] {Float} The height of the base render texture
 	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
-	 * @param [resolution=1] {Float} The resolution of the texture being generated</haxe_doc>
+	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture being generated</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.BaseRenderTexture"</e></m></meta>
 	</class>
@@ -17683,7 +17691,7 @@
 	 * @param properties {object} The properties to be uploaded</haxe_doc>
 		</setProperties>
 		<new public="1" set="method">
-			<f a="?size:?properties:?batchSize">
+			<f a="?maxSize:?properties:?batchSize">
 				<x path="Int"/>
 				<c path="Array"><x path="Bool"/></c>
 				<x path="Int"/>
@@ -17711,7 +17719,7 @@
 	 * @extends Container
 	 * @memberof PIXI
 	 *
-	 * @param [size=15000] {Int} The number of images in the SpriteBatch before it flushes.
+	 * @param [maxSize=15000] {Int} The number of images in the SpriteBatch before it flushes.
 	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
 	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
 	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.

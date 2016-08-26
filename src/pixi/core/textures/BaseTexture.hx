@@ -14,7 +14,7 @@ extern class BaseTexture extends EventEmitter {
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
 	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
-	 * @param resolution {Float} the resolution of the texture for devices with different pixel ratios
+	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture
 	 */
 	@:overload(function(source:Dynamic,?scaleMode:Int, ?resolution:Float):Void {})
 	@:overload(function(source:CanvasElement,?scaleMode:Int, ?resolution:Float):Void {})
@@ -82,7 +82,7 @@ extern class BaseTexture extends EventEmitter {
 	var source:Dynamic;
 
 	/**
-	 * Controls if RGB channels should be pre-multiplied by Alpha  (WebGL only)
+	 * Controls if RGB channels should be pre-multiplied by Alpha (WebGL only)
 	 *
 	 * @member {Bool}
 	 * @default true
@@ -102,6 +102,15 @@ extern class BaseTexture extends EventEmitter {
 	 * @member {Bool}
 	 */
 	var mipmap:Bool;
+
+	/**
+     *
+     * WebGL Texture wrap mode
+     *
+     * @member {Int}
+     * @see PIXI.WRAP_MODES
+     */
+	var wrapMode:Int;
 
 	/**
 	 * Updates the texture on all the webgl renderers.
