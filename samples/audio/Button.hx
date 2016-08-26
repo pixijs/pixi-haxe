@@ -1,4 +1,4 @@
-package samples.audio;
+package audio;
 
 import pixi.core.text.TextStyleObject;
 import pixi.interaction.EventTarget;

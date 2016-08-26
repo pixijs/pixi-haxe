@@ -1,4 +1,4 @@
-package samples.webglinfo;
+package webglinfo;
 
 import js.html.CanvasElement;
 import js.Browser;

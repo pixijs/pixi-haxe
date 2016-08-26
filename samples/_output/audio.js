@@ -182,6 +182,222 @@ Reflect.compareMethods = function(f1,f2) {
 	if(!Reflect.isFunction(f1) || !Reflect.isFunction(f2)) return false;
 	return f1.scope == f2.scope && f1.method == f2.method && f1.method != null;
 };
+var audio_Button = function(label,width,height,data,fontSize) {
+	PIXI.Container.call(this);
+	this.action = new msignal_Signal1(Dynamic);
+	this._data = data;
+	this._setupBackground(width,height);
+	this._setupLabel(width,height,fontSize);
+	this._label.text = label;
+};
+audio_Button.__name__ = true;
+audio_Button.__super__ = PIXI.Container;
+audio_Button.prototype = $extend(PIXI.Container.prototype,{
+	_setupBackground: function(width,height) {
+		this._rect = new PIXI.Rectangle(0,0,width,height);
+		this._background = new PIXI.Graphics();
+		this._background.interactive = true;
+		this._redraw(3040510);
+		this.addChild(this._background);
+		this._background.interactive = true;
+		this._background.on("mouseover",$bind(this,this._onMouseOver));
+		this._background.on("mouseout",$bind(this,this._onMouseOut));
+		this._background.on("mousedown",$bind(this,this._onMouseDown));
+		this._background.on("mouseup",$bind(this,this._onMouseUp));
+		this._background.on("mouseupoutside",$bind(this,this._onMouseUpOutside));
+		this._background.on("touchstart",$bind(this,this._onTouchStart));
+		this._background.on("touchend",$bind(this,this._onTouchEnd));
+		this._background.on("touchendoutside",$bind(this,this._onTouchEndOutside));
+	}
+	,_setupLabel: function(width,height,fontSize) {
+		var size;
+		if(fontSize != null) size = fontSize; else size = 12;
+		var style = { };
+		style.fontSize = size;
+		style.fontFamily = "Arial";
+		style.fill = "#FFFFFF";
+		this._label = new PIXI.Text("",style);
+		this._label.anchor.set(0.5);
+		this._label.x = width / 2;
+		this._label.y = height / 2;
+		this.addChild(this._label);
+	}
+	,_redraw: function(colour) {
+		var border = 1;
+		this._background.clear();
+		this._background.beginFill(13158);
+		this._background.drawRect(this._rect.x,this._rect.y,this._rect.width,this._rect.height);
+		this._background.endFill();
+		this._background.beginFill(colour);
+		this._background.drawRect(this._rect.x + border / 2,this._rect.y + border / 2,this._rect.width - border,this._rect.height - border);
+		this._background.endFill();
+	}
+	,_onMouseDown: function(target) {
+		if(this._enabled) this._redraw(14644225);
+	}
+	,_onMouseUp: function(target) {
+		if(this._enabled) {
+			this.action.dispatch(this._data);
+			this._redraw(3040510);
+		}
+	}
+	,_onMouseUpOutside: function(target) {
+		if(this._enabled) this._redraw(3040510);
+	}
+	,_onMouseOver: function(target) {
+		if(this._enabled) this._redraw(14644225);
+	}
+	,_onMouseOut: function(target) {
+		if(this._enabled) this._redraw(3040510);
+	}
+	,_onTouchEndOutside: function(target) {
+		if(this._enabled) this._redraw(3040510);
+	}
+	,_onTouchEnd: function(target) {
+		if(this._enabled) {
+			this._redraw(3040510);
+			this.action.dispatch(this._data);
+		}
+	}
+	,_onTouchStart: function(target) {
+		if(this._enabled) this._redraw(14644225);
+	}
+});
+var pixi_plugins_app_Application = function() {
+	this._animationFrameId = null;
+	this.pixelRatio = 1;
+	this.set_skipFrame(false);
+	this.autoResize = true;
+	this.transparent = false;
+	this.antialias = false;
+	this.forceFXAA = false;
+	this.roundPixels = false;
+	this.clearBeforeRender = true;
+	this.preserveDrawingBuffer = false;
+	this.backgroundColor = 16777215;
+	this.width = window.innerWidth;
+	this.height = window.innerHeight;
+	this.set_fps(60);
+};
+pixi_plugins_app_Application.__name__ = true;
+pixi_plugins_app_Application.prototype = {
+	set_fps: function(val) {
+		this._frameCount = 0;
+		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
+	}
+	,set_skipFrame: function(val) {
+		if(val) {
+			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
+			this.set_fps(30);
+		}
+		return this.skipFrame = val;
+	}
+	,start: function(rendererType,parentDom,canvasElement) {
+		if(rendererType == null) rendererType = "auto";
+		if(canvasElement == null) {
+			var _this = window.document;
+			this.canvas = _this.createElement("canvas");
+			this.canvas.style.width = this.width + "px";
+			this.canvas.style.height = this.height + "px";
+			this.canvas.style.position = "absolute";
+		} else this.canvas = canvasElement;
+		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
+		this.stage = new PIXI.Container();
+		var renderingOptions = { };
+		renderingOptions.view = this.canvas;
+		renderingOptions.backgroundColor = this.backgroundColor;
+		renderingOptions.resolution = this.pixelRatio;
+		renderingOptions.antialias = this.antialias;
+		renderingOptions.forceFXAA = this.forceFXAA;
+		renderingOptions.autoResize = this.autoResize;
+		renderingOptions.transparent = this.transparent;
+		renderingOptions.clearBeforeRender = this.clearBeforeRender;
+		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
+		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
+		if(this.roundPixels) this.renderer.roundPixels = true;
+		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
+		this.resumeRendering();
+		this.addStats();
+	}
+	,resumeRendering: function() {
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
+		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,_onWindowResize: function(event) {
+		this.width = window.innerWidth;
+		this.height = window.innerHeight;
+		this.renderer.resize(this.width,this.height);
+		this.canvas.style.width = this.width + "px";
+		this.canvas.style.height = this.height + "px";
+		if(this.onResize != null) this.onResize();
+	}
+	,_onRequestAnimationFrame: function(elapsedTime) {
+		this._frameCount++;
+		if(this._frameCount == (60 / this.fps | 0)) {
+			this._frameCount = 0;
+			if(this.onUpdate != null) this.onUpdate(elapsedTime);
+			this.renderer.render(this.stage);
+		}
+		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	}
+	,addStats: function() {
+		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
+	}
+};
+var audio_Main = function() {
+	pixi_plugins_app_Application.call(this);
+	this.pixelRatio = Math.floor(window.devicePixelRatio);
+	this.backgroundColor = 6227124;
+	pixi_plugins_app_Application.prototype.start.call(this);
+	this._baseURL = "assets/audio/";
+	this._loader = new core_AssetLoader();
+	this._loader.baseUrl = this._baseURL;
+	this._loader.addAsset("loop","loop.mp3",false,null);
+	this._loader.addAsset("sound1","sound1.wav",false,null);
+	this._loader.addAsset("sound2","sound2.wav",false,null);
+	this._loader.start($bind(this,this._onLoaded),$bind(this,this._onLoadProgress));
+	this._btnContainer = new PIXI.Container();
+	this.stage.addChild(this._btnContainer);
+};
+audio_Main.__name__ = true;
+audio_Main.main = function() {
+	new audio_Main();
+};
+audio_Main.__super__ = pixi_plugins_app_Application;
+audio_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+	_onLoadProgress: function() {
+		console.log("Loaded: " + Math.round(this._loader.progress));
+	}
+	,_onLoaded: function() {
+		this._bgSound = this._loader.getAudio("loop");
+		this._bgSound.set_loop(true);
+		this._bgSound.play();
+		this._sound1 = this._loader.getAudio("sound1");
+		this._sound2 = this._loader.getAudio("sound2");
+		this._addButton("SOUND 1",0,0,100,30,$bind(this,this._playSound1));
+		this._addButton("SOUND 2",100,0,100,30,$bind(this,this._playSound2));
+		this._addButton("STOP ALL",220,0,100,30,$bind(this,this._stopAll));
+		this._btnContainer.position.set((window.innerWidth - 320) / 2,(window.innerHeight - 30) / 2);
+	}
+	,_playSound1: function() {
+		this._sound1.play();
+	}
+	,_playSound2: function() {
+		this._sound2.play();
+	}
+	,_stopAll: function() {
+		this._bgSound.stop();
+		this._sound1.stop();
+		this._sound2.stop();
+	}
+	,_addButton: function(label,x,y,width,height,callback) {
+		var button = new audio_Button(label,width,height);
+		button.position.set(x,y);
+		button.action.add(callback);
+		button._enabled = true;
+		this._btnContainer.addChild(button);
+	}
+});
 var core_AssetLoader = function() {
 	PIXI.loaders.Loader.call(this);
 	this.count = 0;
@@ -567,222 +783,6 @@ msignal_SlotList.prototype = {
 		return null;
 	}
 };
-var pixi_plugins_app_Application = function() {
-	this._animationFrameId = null;
-	this.pixelRatio = 1;
-	this.set_skipFrame(false);
-	this.autoResize = true;
-	this.transparent = false;
-	this.antialias = false;
-	this.forceFXAA = false;
-	this.roundPixels = false;
-	this.clearBeforeRender = true;
-	this.preserveDrawingBuffer = false;
-	this.backgroundColor = 16777215;
-	this.width = window.innerWidth;
-	this.height = window.innerHeight;
-	this.set_fps(60);
-};
-pixi_plugins_app_Application.__name__ = true;
-pixi_plugins_app_Application.prototype = {
-	set_fps: function(val) {
-		this._frameCount = 0;
-		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
-	}
-	,set_skipFrame: function(val) {
-		if(val) {
-			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
-			this.set_fps(30);
-		}
-		return this.skipFrame = val;
-	}
-	,start: function(rendererType,parentDom,canvasElement) {
-		if(rendererType == null) rendererType = "auto";
-		if(canvasElement == null) {
-			var _this = window.document;
-			this.canvas = _this.createElement("canvas");
-			this.canvas.style.width = this.width + "px";
-			this.canvas.style.height = this.height + "px";
-			this.canvas.style.position = "absolute";
-		} else this.canvas = canvasElement;
-		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
-		this.stage = new PIXI.Container();
-		var renderingOptions = { };
-		renderingOptions.view = this.canvas;
-		renderingOptions.backgroundColor = this.backgroundColor;
-		renderingOptions.resolution = this.pixelRatio;
-		renderingOptions.antialias = this.antialias;
-		renderingOptions.forceFXAA = this.forceFXAA;
-		renderingOptions.autoResize = this.autoResize;
-		renderingOptions.transparent = this.transparent;
-		renderingOptions.clearBeforeRender = this.clearBeforeRender;
-		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
-		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
-		if(this.roundPixels) this.renderer.roundPixels = true;
-		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
-		this.resumeRendering();
-		this.addStats();
-	}
-	,resumeRendering: function() {
-		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
-		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,_onWindowResize: function(event) {
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.renderer.resize(this.width,this.height);
-		this.canvas.style.width = this.width + "px";
-		this.canvas.style.height = this.height + "px";
-		if(this.onResize != null) this.onResize();
-	}
-	,_onRequestAnimationFrame: function(elapsedTime) {
-		this._frameCount++;
-		if(this._frameCount == (60 / this.fps | 0)) {
-			this._frameCount = 0;
-			if(this.onUpdate != null) this.onUpdate(elapsedTime);
-			this.renderer.render(this.stage);
-		}
-		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
-	}
-	,addStats: function() {
-		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
-	}
-};
-var samples_audio_Button = function(label,width,height,data,fontSize) {
-	PIXI.Container.call(this);
-	this.action = new msignal_Signal1(Dynamic);
-	this._data = data;
-	this._setupBackground(width,height);
-	this._setupLabel(width,height,fontSize);
-	this._label.text = label;
-};
-samples_audio_Button.__name__ = true;
-samples_audio_Button.__super__ = PIXI.Container;
-samples_audio_Button.prototype = $extend(PIXI.Container.prototype,{
-	_setupBackground: function(width,height) {
-		this._rect = new PIXI.Rectangle(0,0,width,height);
-		this._background = new PIXI.Graphics();
-		this._background.interactive = true;
-		this._redraw(3040510);
-		this.addChild(this._background);
-		this._background.interactive = true;
-		this._background.on("mouseover",$bind(this,this._onMouseOver));
-		this._background.on("mouseout",$bind(this,this._onMouseOut));
-		this._background.on("mousedown",$bind(this,this._onMouseDown));
-		this._background.on("mouseup",$bind(this,this._onMouseUp));
-		this._background.on("mouseupoutside",$bind(this,this._onMouseUpOutside));
-		this._background.on("touchstart",$bind(this,this._onTouchStart));
-		this._background.on("touchend",$bind(this,this._onTouchEnd));
-		this._background.on("touchendoutside",$bind(this,this._onTouchEndOutside));
-	}
-	,_setupLabel: function(width,height,fontSize) {
-		var size;
-		if(fontSize != null) size = fontSize; else size = 12;
-		var style = { };
-		style.fontSize = size;
-		style.fontFamily = "Arial";
-		style.fill = "#FFFFFF";
-		this._label = new PIXI.Text("",style);
-		this._label.anchor.set(0.5);
-		this._label.x = width / 2;
-		this._label.y = height / 2;
-		this.addChild(this._label);
-	}
-	,_redraw: function(colour) {
-		var border = 1;
-		this._background.clear();
-		this._background.beginFill(13158);
-		this._background.drawRect(this._rect.x,this._rect.y,this._rect.width,this._rect.height);
-		this._background.endFill();
-		this._background.beginFill(colour);
-		this._background.drawRect(this._rect.x + border / 2,this._rect.y + border / 2,this._rect.width - border,this._rect.height - border);
-		this._background.endFill();
-	}
-	,_onMouseDown: function(target) {
-		if(this._enabled) this._redraw(14644225);
-	}
-	,_onMouseUp: function(target) {
-		if(this._enabled) {
-			this.action.dispatch(this._data);
-			this._redraw(3040510);
-		}
-	}
-	,_onMouseUpOutside: function(target) {
-		if(this._enabled) this._redraw(3040510);
-	}
-	,_onMouseOver: function(target) {
-		if(this._enabled) this._redraw(14644225);
-	}
-	,_onMouseOut: function(target) {
-		if(this._enabled) this._redraw(3040510);
-	}
-	,_onTouchEndOutside: function(target) {
-		if(this._enabled) this._redraw(3040510);
-	}
-	,_onTouchEnd: function(target) {
-		if(this._enabled) {
-			this._redraw(3040510);
-			this.action.dispatch(this._data);
-		}
-	}
-	,_onTouchStart: function(target) {
-		if(this._enabled) this._redraw(14644225);
-	}
-});
-var samples_audio_Main = function() {
-	pixi_plugins_app_Application.call(this);
-	this.pixelRatio = Math.floor(window.devicePixelRatio);
-	this.backgroundColor = 6227124;
-	pixi_plugins_app_Application.prototype.start.call(this);
-	this._baseURL = "assets/audio/";
-	this._loader = new core_AssetLoader();
-	this._loader.baseUrl = this._baseURL;
-	this._loader.addAsset("loop","loop.mp3",false,null);
-	this._loader.addAsset("sound1","sound1.wav",false,null);
-	this._loader.addAsset("sound2","sound2.wav",false,null);
-	this._loader.start($bind(this,this._onLoaded),$bind(this,this._onLoadProgress));
-	this._btnContainer = new PIXI.Container();
-	this.stage.addChild(this._btnContainer);
-};
-samples_audio_Main.__name__ = true;
-samples_audio_Main.main = function() {
-	new samples_audio_Main();
-};
-samples_audio_Main.__super__ = pixi_plugins_app_Application;
-samples_audio_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
-	_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
-	}
-	,_onLoaded: function() {
-		this._bgSound = this._loader.getAudio("loop");
-		this._bgSound.set_loop(true);
-		this._bgSound.play();
-		this._sound1 = this._loader.getAudio("sound1");
-		this._sound2 = this._loader.getAudio("sound2");
-		this._addButton("SOUND 1",0,0,100,30,$bind(this,this._playSound1));
-		this._addButton("SOUND 2",100,0,100,30,$bind(this,this._playSound2));
-		this._addButton("STOP ALL",220,0,100,30,$bind(this,this._stopAll));
-		this._btnContainer.position.set((window.innerWidth - 320) / 2,(window.innerHeight - 30) / 2);
-	}
-	,_playSound1: function() {
-		this._sound1.play();
-	}
-	,_playSound2: function() {
-		this._sound2.play();
-	}
-	,_stopAll: function() {
-		this._bgSound.stop();
-		this._sound1.stop();
-		this._sound2.stop();
-	}
-	,_addButton: function(label,x,y,width,height,callback) {
-		var button = new samples_audio_Button(label,width,height);
-		button.position.set(x,y);
-		button.action.add(callback);
-		button._enabled = true;
-		this._btnContainer.addChild(button);
-	}
-});
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.__name__ = true;
@@ -804,7 +804,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_audio_Main.main();
+audio_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=audio.js.map

@@ -1,4 +1,4 @@
-package samples.movieclip;
+package movieclip;
 
 import pixi.extras.MovieClip;
 import pixi.loaders.Loader;

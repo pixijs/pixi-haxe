@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_textureswap_Main = function() {
+var textureswap_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_textureswap_Main.main = function() {
-	new samples_textureswap_Main();
+textureswap_Main.main = function() {
+	new textureswap_Main();
 };
-samples_textureswap_Main.__super__ = pixi_plugins_app_Application;
-samples_textureswap_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+textureswap_Main.__super__ = pixi_plugins_app_Application;
+textureswap_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 14739192;
 		this.onUpdate = $bind(this,this._onUpdate);
@@ -275,7 +275,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_textureswap_Main.main();
+textureswap_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=textureswap.js.map

@@ -1,4 +1,4 @@
-package samples.mask;
+package mask;
 
 import pixi.core.graphics.Graphics;
 import pixi.core.math.Point;

@@ -1,4 +1,4 @@
-package samples.nape;
+package nape;
 
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;

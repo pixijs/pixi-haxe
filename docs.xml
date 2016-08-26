@@ -1,9 +1,5 @@
 <haxe>
 	<class path="Array" params="T" file="/usr/local/lib/haxe/std/js/_std/Array.hx" extern="1">
-		<length public="1" set="null">
-			<x path="Int"/>
-			<haxe_doc>The length of `this` Array.</haxe_doc>
-		</length>
 		<push public="1" set="method">
 			<f a="x">
 				<c path="Array.T"/>
@@ -137,7 +133,10 @@
 
 	In the context of haxe dates, a timestamp is defined as the number of
 	milliseconds elapsed since 1st January 1970.</haxe_doc>
-		<meta><m n=":coreApi"/></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":coreApi"/>
+		</meta>
 	</class>
 	<abstract path="Enum" params="T" file="/usr/local/lib/haxe/std/Enum.hx">
 		<this><x path="Enum"><c path="Enum.T"/></x></this>
@@ -157,11 +156,114 @@
 	See `Type` for the Haxe Reflection API.</haxe_doc>
 		<meta><m n=":coreType"/></meta>
 	</abstract>
-	<class path="Math" params="" file="/usr/local/lib/haxe/std/js/_std/Math.hx" extern="1"><meta>
-	<m n=":keep"/>
-	<m n=":directlyUsed"/>
-	<m n=":keepInit"/>
-</meta></class>
+	<class path="Math" params="" file="/usr/local/lib/haxe/std/js/_std/Math.hx" extern="1">
+		<floor public="1" set="method" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Int"/>
+</f></floor>
+		<log public="1" set="method" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Float"/>
+</f></log>
+		<max public="1" set="method" static="1"><f a="a:b">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></max>
+		<min public="1" set="method" static="1"><f a="a:b">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></min>
+		<pow public="1" set="method" static="1"><f a="v:exp">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+</f></pow>
+		<round public="1" set="method" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Int"/>
+</f></round>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+			<m n=":keepInit"/>
+		</meta>
+	</class>
+	<class path="Perf" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx">
+		<MEASUREMENT_INTERVAL public="1" line="7" static="1"><x path="Int"/></MEASUREMENT_INTERVAL>
+		<FONT_FAMILY public="1" line="9" static="1"><c path="String"/></FONT_FAMILY>
+		<FPS_BG_CLR public="1" line="11" static="1"><c path="String"/></FPS_BG_CLR>
+		<FPS_WARN_BG_CLR public="1" line="12" static="1"><c path="String"/></FPS_WARN_BG_CLR>
+		<FPS_PROB_BG_CLR public="1" line="13" static="1"><c path="String"/></FPS_PROB_BG_CLR>
+		<MS_BG_CLR public="1" line="15" static="1"><c path="String"/></MS_BG_CLR>
+		<MEM_BG_CLR public="1" line="16" static="1"><c path="String"/></MEM_BG_CLR>
+		<INFO_BG_CLR public="1" line="17" static="1"><c path="String"/></INFO_BG_CLR>
+		<FPS_TXT_CLR public="1" line="18" static="1"><c path="String"/></FPS_TXT_CLR>
+		<MS_TXT_CLR public="1" line="19" static="1"><c path="String"/></MS_TXT_CLR>
+		<MEM_TXT_CLR public="1" line="20" static="1"><c path="String"/></MEM_TXT_CLR>
+		<INFO_TXT_CLR public="1" line="21" static="1"><c path="String"/></INFO_TXT_CLR>
+		<DELAY_TIME line="28" static="1"><x path="Int"/></DELAY_TIME>
+		<fps public="1"><c path="js.html.DivElement"/></fps>
+		<ms public="1"><c path="js.html.DivElement"/></ms>
+		<memory public="1"><c path="js.html.DivElement"/></memory>
+		<info public="1"><c path="js.html.DivElement"/></info>
+		<lowFps public="1"><x path="Float"/></lowFps>
+		<avgFps public="1"><x path="Float"/></avgFps>
+		<currentFps public="1"><x path="Float"/></currentFps>
+		<currentMs public="1"><x path="Float"/></currentMs>
+		<currentMem public="1"><c path="String"/></currentMem>
+		<_time><x path="Float"/></_time>
+		<_startTime><x path="Float"/></_startTime>
+		<_prevTime><x path="Float"/></_prevTime>
+		<_ticks><x path="Int"/></_ticks>
+		<_fpsMin><x path="Float"/></_fpsMin>
+		<_fpsMax><x path="Float"/></_fpsMax>
+		<_memCheck><x path="Bool"/></_memCheck>
+		<_pos><c path="String"/></_pos>
+		<_offset><x path="Float"/></_offset>
+		<_measureCount><x path="Int"/></_measureCount>
+		<_totalFps><x path="Float"/></_totalFps>
+		<_perfObj><c path="js.html.Performance"/></_perfObj>
+		<_memoryObj><t path="Memory"/></_memoryObj>
+		<_raf><x path="Int"/></_raf>
+		<RAF><d/></RAF>
+		<CAF><d/></CAF>
+		<_tick set="method" line="108"><f a="val">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></_tick>
+		<_createDiv set="method" line="144"><f a="id:?top">
+	<c path="String"/>
+	<x path="Float"/>
+	<c path="js.html.DivElement"/>
+</f></_createDiv>
+		<_createFpsDom set="method" line="177"><f a=""><x path="Void"/></f></_createFpsDom>
+		<_createMsDom set="method" line="185"><f a=""><x path="Void"/></f></_createMsDom>
+		<_createMemoryDom set="method" line="193"><f a=""><x path="Void"/></f></_createMemoryDom>
+		<_getFormattedSize set="method" line="201"><f a="bytes:?frac">
+	<x path="Float"/>
+	<x path="Int"/>
+	<c path="String"/>
+</f></_getFormattedSize>
+		<addInfo public="1" set="method" line="209"><f a="val">
+	<c path="String"/>
+	<x path="Void"/>
+</f></addInfo>
+		<new public="1" set="method" line="60">
+			<f a="?pos:?offset">
+				<c path="String"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+		</new>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+			<m n=":expose"/>
+		</meta>
+	</class>
 	<typedef path="Memory" params="" file="/projects/pixi-haxe/.haxelib/perf,js/1,1,8/src/Perf.hx" module="Perf"><a>
 	<usedJSHeapSize><x path="Float"/></usedJSHeapSize>
 	<totalJSHeapSize><x path="Float"/></totalJSHeapSize>
@@ -188,6 +290,16 @@
 		(As3) If used on a property field, the getter will be invoked. It is
 		not possible to obtain the value directly.</haxe_doc>
 		</field>
+		<callMethod public="1" get="inline" set="null" line="46" static="1">
+			<f a="o:func:args">
+				<d/>
+				<x path="haxe.Function"/>
+				<c path="Array"><d/></c>
+				<d/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+			<haxe_doc>Call a method with the given object and arguments.</haxe_doc>
+		</callMethod>
 		<haxe_doc>The Reflect API is a way to manipulate values dynamically through an
 	abstract interface in an untyped manner. Use with care.</haxe_doc>
 		<meta>
@@ -677,6 +789,53 @@
 	This can be used to track positions of calls in e.g. a unit testing
 	framework.</haxe_doc>
 	</typedef>
+	<class path="haxe.Timer" params="" file="/usr/local/lib/haxe/std/haxe/Timer.hx">
+		<id><t path="Null"><x path="Int"/></t></id>
+		<run public="1" set="dynamic" line="108">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>This method is invoked repeatedly on `this` Timer.
+
+		It can be overridden in a subclass, or rebound directly to a custom
+		function:
+			var timer = new haxe.Timer(1000); // 1000ms delay
+			timer.run = function() { ... }
+
+		Once bound, it can still be rebound to different functions until `this`
+		Timer is stopped through a call to `this.stop`.</haxe_doc>
+		</run>
+		<new public="1" set="method" line="59">
+			<f a="time_ms">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":has_untyped"/></meta>
+			<haxe_doc>Creates a new timer that will run every `time_ms` milliseconds.
+
+		After creating the Timer instance, it calls `this].run` repeatedly,
+		with delays of `time_ms` milliseconds, until `this.stop` is called.
+
+		The first invocation occurs after `time_ms` milliseconds, not
+		immediately.
+
+		The accuracy of this may be platform-dependent.</haxe_doc>
+		</new>
+		<haxe_doc>The Timer class allows you to create asynchronous timers on platforms that
+	support events.
+
+	The intended usage is to create an instance of the Timer class with a given
+	interval, set its run() method to a custom function to be invoked and
+	eventually call stop() to stop the Timer.
+
+	Note that a running Timer may or may not prevent the program to exit
+	automatically when main() returns.
+
+	It is also possible to extend this class and override its run() method in
+	the child class.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+		</meta>
+	</class>
 	<abstract path="haxe.extern.EitherType" params="T1:T2" file="/usr/local/lib/haxe/std/haxe/extern/EitherType.hx">
 		<from>
 			<icast><c path="haxe.extern.EitherType.T2"/></icast>
@@ -7930,6 +8089,75 @@
 		</new>
 		<meta><m n=":native"><e>"URLSearchParams"</e></m></meta>
 	</class>
+	<class path="js.html.Uint16Array" params="" file="/usr/local/lib/haxe/std/js/html/Uint16Array.hx" extern="1">
+		<extends path="js.html.ArrayBufferView"/>
+		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="2" line="30" static="1">
+			<x path="Int"/>
+			<meta><m n=":value"><e>2</e></m></meta>
+		</BYTES_PER_ELEMENT>
+		<length public="1" set="null"><x path="Int"/></length>
+		<get public="1" set="method"><f a="index">
+	<x path="Int"/>
+	<x path="Int"/>
+</f></get>
+		<set public="1" set="method">
+			<f a="array:?offset">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<overloads>
+				<set public="1" set="method"><f a="index:value">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+				<set public="1" set="method"><f a="array:?offset">
+	<c path="js.html.Uint16Array"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></set>
+			</overloads>
+		</set>
+		<subarray public="1" set="method"><f a="start:end">
+	<x path="Int"/>
+	<x path="Int"/>
+	<c path="js.html.Uint16Array"/>
+</f></subarray>
+		<new public="1" set="method">
+			<f a="buffer:?byteOffset:?length">
+				<c path="js.html.ArrayBuffer"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+			<overloads>
+				<new public="1" set="method">
+					<f a="length">
+						<x path="Int"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="js.html.Uint16Array"/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+				<new public="1" set="method">
+					<f a="array">
+						<c path="Array"><x path="Int"/></c>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>@throws DOMError</haxe_doc>
+				</new>
+			</overloads>
+		</new>
+		<meta><m n=":native"><e>"Uint16Array"</e></m></meta>
+	</class>
 	<class path="js.html.Uint8ClampedArray" params="" file="/usr/local/lib/haxe/std/js/html/Uint8ClampedArray.hx" extern="1">
 		<extends path="js.html.ArrayBufferView"/>
 		<BYTES_PER_ELEMENT public="1" get="inline" set="null" expr="1" line="30" static="1">
@@ -11787,6 +12015,34 @@
 	<DYNAMIC><x path="Int"/></DYNAMIC>
 	<DEFAULT><x path="Int"/></DEFAULT>
 </a></typedef>
+	<class path="pixi.core.Shader" params="" file="src/pixi/core/Shader.hx" extern="1">
+		<checkPrecision public="1" set="method">
+			<f a="src">
+				<d/>
+				<d/>
+			</f>
+			<haxe_doc>*
+	 * @param	src {string|string[]}
+	 * @return {string|string[]}</haxe_doc>
+		</checkPrecision>
+		<new public="1" set="method">
+			<f a="gl:vertexSrc:framentSrc">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<d/>
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Wrapper class, webGL Shader for Pixi.
+	 * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param gl {WebGLRenderingContext} The current WebGL rendering context
+	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
+	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Shader"</e></m></meta>
+	</class>
 	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
@@ -12758,7 +13014,10 @@
 	 * @extends DisplayObject
 	 * @namespace PIXI</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Container"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.Container"</e></m>
+		</meta>
 	</class>
 	<class path="pixi.core.graphics.Graphics" params="" file="src/pixi/core/graphics/Graphics.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
@@ -13720,7 +13979,10 @@
 	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
 </f></autoDetectRenderer></overloads>
 		</autoDetectRenderer>
-		<meta><m n=":native"><e>"PIXI"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI"</e></m>
+		</meta>
 	</class>
 	<typedef path="pixi.core.renderers.RenderingOptions" params="" file="src/pixi/core/renderers/Detector.hx" module="pixi.core.renderers.Detector"><a>
 	<view>
@@ -13974,7 +14236,10 @@
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.CanvasRenderer"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.CanvasRenderer"</e></m>
+		</meta>
 	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="src/pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
@@ -14254,7 +14519,10 @@
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.WebGLRenderer"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.WebGLRenderer"</e></m>
+		</meta>
 	</class>
 	<class path="pixi.core.renderers.webgl.filters.Filter" params="" file="src/pixi/core/renderers/webgl/filters/Filter.hx" extern="1">
 		<defaultVertexSrc public="1" static="1">
@@ -14538,6 +14806,45 @@
 	 * @memberof PIXI
 	 * @extends WebGLManager
 	 * @param renderer {WebGLRenderer} The renderer this manager works for.</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.core.renderers.webgl.utils.ObjectRenderer" params="" file="src/pixi/core/renderers/webgl/utils/ObjectRenderer.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.managers.WebGLManager"/>
+		<start public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Starts the renderer and sets the shader
+	 *</haxe_doc>
+		</start>
+		<stop public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stops the renderer
+	 *</haxe_doc>
+		</stop>
+		<flush public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Stub method for rendering content and emptying the current batch.
+	 *</haxe_doc>
+		</flush>
+		<render public="1" set="method">
+			<f a="object">
+				<c path="pixi.core.display.DisplayObject"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Renders an object
+	 *
+	 * @param object {PIXI.DisplayObject} The object to render.</haxe_doc>
+		</render>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Base for a common object renderer that can be used as a system renderer plugin.
+	 *
+	 * @class
+	 * @extends PIXI.WebGLManager
+	 * @memberof PIXI
+	 * @param renderer {PIXI.WebGLRenderer} The renderer this object renderer works for.</haxe_doc>
 		</new>
 	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="src/pixi/core/sprites/Sprite.hx" extern="1">
@@ -17003,7 +17310,10 @@
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.loaders.Loader"</e></m>
+		</meta>
 	</class>
 	<typedef path="pixi.loaders.LoaderOptions" params="" file="src/pixi/loaders/LoaderOptions.hx"><a>
 	<xhrType>
@@ -17412,6 +17722,153 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.particles.ParticleContainer"</e></m></meta>
 	</class>
+	<class path="pixi.plugins.app.Application" params="" file="src/pixi/plugins/app/Application.hx">
+		<pixelRatio public="1">
+			<x path="Float"/>
+			<haxe_doc>* Sets the pixel ratio of the application.
+     * default - 1</haxe_doc>
+		</pixelRatio>
+		<skipFrame public="1" set="accessor">
+			<x path="Bool"/>
+			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
+	 * default - false</haxe_doc>
+		</skipFrame>
+		<fps public="1" set="accessor">
+			<x path="Int"/>
+			<haxe_doc>* Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
+	 * default - 60</haxe_doc>
+		</fps>
+		<width public="1">
+			<x path="Float"/>
+			<haxe_doc>* Width of the application.
+	 * default - Browser.window.innerWidth</haxe_doc>
+		</width>
+		<height public="1">
+			<x path="Float"/>
+			<haxe_doc>* Height of the application.
+	 * default - Browser.window.innerHeight</haxe_doc>
+		</height>
+		<transparent public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Renderer transparency property.
+	 * default - false</haxe_doc>
+		</transparent>
+		<antialias public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Graphics antialias property.
+	 * default - false</haxe_doc>
+		</antialias>
+		<forceFXAA public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Force FXAA shader antialias instead of native (faster).
+	 * default - false</haxe_doc>
+		</forceFXAA>
+		<roundPixels public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Force round pixels.
+	 * default - false</haxe_doc>
+		</roundPixels>
+		<clearBeforeRender public="1">
+			<x path="Bool"/>
+			<haxe_doc>* This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+     * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
+     * If the scene is transparent Pixi will use clearRect to clear the canvas every frame.
+     * Disable this by setting this to false. For example if your game has a canvas filling background image you often don't need this set.
+	 * default - true</haxe_doc>
+		</clearBeforeRender>
+		<preserveDrawingBuffer public="1">
+			<x path="Bool"/>
+			<haxe_doc>* enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context
+	 * default - false</haxe_doc>
+		</preserveDrawingBuffer>
+		<autoResize public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether you want to resize the canvas and renderer on browser resize.
+	 * Should be set to false when custom width and height are used for the application.
+	 * default - true</haxe_doc>
+		</autoResize>
+		<backgroundColor public="1">
+			<x path="Int"/>
+			<haxe_doc>* Sets the background color of the stage.
+	 * default - 0xFFFFFF</haxe_doc>
+		</backgroundColor>
+		<onUpdate public="1">
+			<f a="">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Update listener 	function</haxe_doc>
+		</onUpdate>
+		<onResize public="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Window resize listener 	function</haxe_doc>
+		</onResize>
+		<canvas public="1" set="null">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* Canvas Element
+	 * Read-only</haxe_doc>
+		</canvas>
+		<renderer public="1" set="null">
+			<d/>
+			<haxe_doc>* Renderer
+	 * Read-only</haxe_doc>
+		</renderer>
+		<stage public="1" set="null">
+			<c path="pixi.core.display.Container"/>
+			<haxe_doc>* Global Container.
+	 * Read-only</haxe_doc>
+		</stage>
+		<_frameCount><x path="Int"/></_frameCount>
+		<_animationFrameId><t path="Null"><x path="Int"/></t></_animationFrameId>
+		<set_fps set="method" line="143"><f a="val">
+	<x path="Int"/>
+	<x path="Int"/>
+</f></set_fps>
+		<set_skipFrame set="method" line="148"><f a="val">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></set_skipFrame>
+		<start public="1" set="method" line="182">
+			<f a="?rendererType:?parentDom:?canvasElement">
+				<c path="String"/>
+				<c path="js.html.Element"/>
+				<c path="js.html.CanvasElement"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* Starts pixi application setup using the properties set or default values
+	 * @param [rendererType] - Renderer type to use AUTO (default) | CANVAS | WEBGL
+	 * @param [stats] - Enable/disable stats for the application.
+	 * Note that stats.js is not part of pixi so don't forget to include it you html page
+	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
+	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
+		</start>
+		<resumeRendering public="1" set="method" line="227"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="232">
+			<f a="event">
+				<c path="js.html.Event"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onWindowResize>
+		<_onRequestAnimationFrame set="method" line="242">
+			<f a="elapsedTime">
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":noCompletion"/></meta>
+		</_onRequestAnimationFrame>
+		<addStats public="1" set="method" line="252">
+			<f a=""><x path="Void"/></f>
+			<meta><m n=":has_untyped"/></meta>
+		</addStats>
+		<new public="1" set="method" line="139"><f a=""><x path="Void"/></f></new>
+		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
+ * @author Adi Reddy Mora
+ * http://adireddy.github.io
+ * @license MIT
+ * @copyright 2015</haxe_doc>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="pixi.plugins.spine.Spine" params="" file="src/pixi/plugins/spine/Spine.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<autoUpdate public="1">
@@ -17479,23 +17936,228 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
 	</class>
-	<class path="samples.webglinfo.Main" params="" file="samples/webglinfo/Main.hx">
-		<main set="method" line="91" static="1">
+	<class path="pixi.tilemap.CanvasTileRenderer" params="" file="src/pixi/tilemap/CanvasTileRenderer.hx" extern="1">
+		<renderer public="1"><c path="pixi.core.renderers.canvas.CanvasRenderer"/></renderer>
+		<tileAnim public="1"><c path="Array"><x path="Float"/></c></tileAnim>
+		<new public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.CompositeRectTileLayer" params="" file="src/pixi/tilemap/CompositeRectTileLayer.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<useSquare public="1"><x path="Bool"/></useSquare>
+		<modificationMarker public="1"><x path="Int"/></modificationMarker>
+		<initialize public="1" set="method"><f a="zIndex:bitmaps:useSquare">
+	<x path="Float"/>
+	<c path="Array"><c path="pixi.core.textures.Texture"/></c>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></initialize>
+		<setBitmaps public="1" set="method"><f a="bitmaps">
+	<c path="Array"><c path="pixi.core.textures.Texture"/></c>
+	<x path="Void"/>
+</f></setBitmaps>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<addRect public="1" set="method"><f a="num:u:v:x:y:tileWidth:tileHeight">
+	<x path="Int"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></addRect>
+		<addFrame public="1" set="method">
+			<f a="texture:x:y">
+				<d/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>* "hello world!" of pixi-tilemap library. Pass it texture and it will be added
+	 * @param texture {string|Texture}
+	 * @param x {number}
+	 * @param y {number}
+	 * @returns {boolean}</haxe_doc>
+		</addFrame>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></renderCanvas>
+		<renderWebGL public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></renderWebGL>
+		<isModified public="1" set="method"><f a="anim">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></isModified>
+		<clearModify public="1" set="method"><f a=""><x path="Void"/></f></clearModify>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.tilemap.CompositeRectTileLayer"</e></m>
+		</meta>
+	</class>
+	<class path="pixi.tilemap.GraphicsLayer" params="" file="src/pixi/tilemap/GraphicsLayer.hx" extern="1">
+		<extends path="pixi.core.graphics.Graphics"/>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></renderCanvas>
+		<renderWebGL public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></renderWebGL>
+		<isModified public="1" set="method"><f a="anim">
+	<x path="Bool"/>
+	<x path="Bool"/>
+</f></isModified>
+		<clearModify public="1" set="method"><f a=""><x path="Void"/></f></clearModify>
+		<new public="1" set="method"><f a="zIndex">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.RectTileLayer" params="" file="src/pixi/tilemap/RectTileLayer.hx" extern="1">
+		<extends path="pixi.core.display.DisplayObject"/>
+		<pointsBuf public="1"><c path="Array"><x path="Float"/></c></pointsBuf>
+		<modificationMarker public="1"><x path="Int"/></modificationMarker>
+		<hasAnim public="1"><x path="Bool"/></hasAnim>
+		<initialize public="1" set="method"><f a="zIndex:texture">
+	<x path="Float"/>
+	<c path="pixi.core.textures.Texture"/>
+	<x path="Void"/>
+</f></initialize>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></renderCanvas>
+		<addRect public="1" set="method"><f a="u:v:x:y:tileWidth:tileHeight:animX:animY">
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Float"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></addRect>
+		<renderWebGL public="1" set="method"><f a="renderer:useSquare">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Bool"/>
+	<x path="Void"/>
+</f></renderWebGL>
+		<new public="1" set="method"><f a="zIndex:texture">
+	<x path="Float"/>
+	<c path="pixi.core.textures.Texture"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.RectTileShader" params="" file="src/pixi/tilemap/RectTileShader.hx" extern="1">
+		<extends path="pixi.core.Shader"/>
+		<vertSize public="1"><x path="Int"/></vertSize>
+		<vertPerQuad public="1"><x path="Int"/></vertPerQuad>
+		<stride public="1"><x path="Int"/></stride>
+		<createVao public="1" set="method"><f a="renderer:vb">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+	<d/>
+</f></createVao>
+		<new public="1" set="method"><f a="gl">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.SquareTileShader" params="" file="src/pixi/tilemap/SquareTileShader.hx" extern="1">
+		<extends path="pixi.core.Shader"/>
+		<vertSize public="1"><x path="Int"/></vertSize>
+		<vertPerQuad public="1"><x path="Int"/></vertPerQuad>
+		<stride public="1"><x path="Int"/></stride>
+		<createVao public="1" set="method"><f a="renderer:vb">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<d/>
+	<d/>
+</f></createVao>
+		<new public="1" set="method"><f a="gl">
+	<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+	<x path="Void"/>
+</f></new>
+	</class>
+	<class path="pixi.tilemap.TileRenderer" params="" file="src/pixi/tilemap/TileRenderer.hx" extern="1">
+		<extends path="pixi.core.renderers.webgl.utils.ObjectRenderer"/>
+		<vbs public="1"><d/></vbs>
+		<lastTimeCheck public="1"><x path="Float"/></lastTimeCheck>
+		<tileAnim public="1"><c path="Array"><x path="Float"/></c></tileAnim>
+		<indices public="1"><c path="js.html.Uint16Array"/></indices>
+		<rectShader public="1"><c path="pixi.tilemap.RectTileShader"/></rectShader>
+		<squareShader public="1"><c path="pixi.tilemap.SquareTileShader"/></squareShader>
+		<indexBuffer public="1"><d/></indexBuffer>
+		<checkLeaks public="1" set="method"><f a=""><x path="Void"/></f></checkLeaks>
+		<getVb public="1" set="method"><f a=""><d/></f></getVb>
+		<createVb public="1" set="method"><f a="useSquare">
+	<x path="Bool"/>
+	<d/>
+</f></createVb>
+		<removeVb public="1" set="method"><f a="id">
+	<x path="Int"/>
+	<x path="Void"/>
+</f></removeVb>
+		<getShader public="1" set="method"><f a="useSquare">
+	<x path="Bool"/>
+	<c path="pixi.core.Shader"/>
+</f></getShader>
+		<new public="1" set="method">
+			<f a="renderer">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* The default vertex shader source
+	 *
+	 * @static
+	 * @constant</haxe_doc>
+		</new>
+	</class>
+	<class path="pixi.tilemap.ZLayer" params="" file="src/pixi/tilemap/ZLayer.hx" extern="1">
+		<extends path="pixi.core.display.Container"/>
+		<tilemap public="1"><d/></tilemap>
+		<initialize public="1" set="method"><f a="tilemap:zIndex">
+	<d/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></initialize>
+		<clear public="1" set="method"><f a=""><x path="Void"/></f></clear>
+		<cacheIfDirty public="1" set="method"><f a=""><x path="Void"/></f></cacheIfDirty>
+		<renderCanvas public="1" set="method"><f a="renderer">
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+	<x path="Void"/>
+</f></renderCanvas>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+	</class>
+	<class path="tilemap.Main" params="" file="samples/tilemap/Main.hx">
+		<extends path="pixi.plugins.app.Application"/>
+		<main set="method" line="84" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<contextName><c path="String"/></contextName>
-		<detectWebGL set="method" line="21"><f a="?props">
-	<d/>
-	<x path="Bool"/>
-</f></detectWebGL>
-		<displayWebGLProperties set="method" line="44"><f a=""><x path="Void"/></f></displayWebGLProperties>
-		<log set="method" line="87"><f a="msg:?val">
-	<c path="String"/>
-	<c path="String"/>
+		<_loader><c path="pixi.loaders.Loader"/></_loader>
+		<_tilemap><c path="pixi.tilemap.CompositeRectTileLayer"/></_tilemap>
+		<_frame><x path="Int"/></_frame>
+		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
+		<_onLoaded set="method" line="32"><f a=""><x path="Void"/></f></_onLoaded>
+		<buildTilemap set="method" line="50"><f a="frame">
+	<x path="Int"/>
 	<x path="Void"/>
-</f></log>
-		<new public="1" set="method" line="10"><f a=""><x path="Void"/></f></new>
+</f></buildTilemap>
+		<_onUpdate set="method" line="80"><f a="elapsedTime">
+	<x path="Float"/>
+	<x path="Void"/>
+</f></_onUpdate>
+		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>

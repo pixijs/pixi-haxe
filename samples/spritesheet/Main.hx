@@ -1,4 +1,4 @@
-package samples.spritesheet;
+package spritesheet;
 
 import pixi.core.text.Text;
 import js.html.DivElement;

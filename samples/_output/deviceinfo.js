@@ -227,15 +227,15 @@ pixi_plugins_app_Application.prototype = {
 		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
 	}
 };
-var samples_deviceinfo_Main = function() {
+var deviceinfo_Main = function() {
 	pixi_plugins_app_Application.call(this);
 	this._init();
 };
-samples_deviceinfo_Main.main = function() {
-	new samples_deviceinfo_Main();
+deviceinfo_Main.main = function() {
+	new deviceinfo_Main();
 };
-samples_deviceinfo_Main.__super__ = pixi_plugins_app_Application;
-samples_deviceinfo_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
+deviceinfo_Main.__super__ = pixi_plugins_app_Application;
+deviceinfo_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
 		this.backgroundColor = 13158;
 		pixi_plugins_app_Application.prototype.start.call(this);
@@ -272,7 +272,7 @@ Perf.MS_TXT_CLR = "#000000";
 Perf.MEM_TXT_CLR = "#FFFFFF";
 Perf.INFO_TXT_CLR = "#000000";
 Perf.DELAY_TIME = 4000;
-samples_deviceinfo_Main.main();
+deviceinfo_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
 
 //# sourceMappingURL=deviceinfo.js.map

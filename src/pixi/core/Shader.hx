@@ -15,11 +15,11 @@ extern class Shader {
 	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.
 	 */
 	function new(gl:WebGLRenderer, vertexSrc:Dynamic, framentSrc:Dynamic);
-	
+
 	/**
-	 * 
+	 *
 	 * @param	src {string|string[]}
 	 * @return {string|string[]}
 	 */
-	function checkPrecision(src:Dynamic):Dynamic
+	function checkPrecision(src:Dynamic):Dynamic;
 }
