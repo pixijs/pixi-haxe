@@ -15,7 +15,7 @@ extern class ObservablePoint extends Point {
 	 * @param [x=0] {number} position of the point on the x axis
 	 * @param [y=0] {number} position of the point on the y axis
 	 */
-	function new(cb:Void->Void, scope:Dynamic, ?x:Float, ?y:Float);
+	function new(cb:Void -> Void, scope:Dynamic, ?x:Float, ?y:Float);
 	
     /**
      * The position of the displayObject on the x axis relative to the local coordinates of the parent.
