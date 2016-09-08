@@ -12386,6 +12386,7 @@
 	 *
 	 * @constructor</haxe_doc>
 		</new>
+		<meta><m n=":native"><e>"PIXI.utils.EventEmitter"</e></m></meta>
 	</class>
 	<class path="pixi.interaction.InteractionManager" params="" file="src/pixi/interaction/InteractionManager.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
