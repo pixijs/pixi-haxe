@@ -15,7 +15,7 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "exposed EventEmitter class",
+	"releasenote": "exposed EventEmitter class & text style bug fix",
 	"version": "4.0.1",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
