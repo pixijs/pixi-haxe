@@ -14981,7 +14981,7 @@
 		<style public="1">
 			<x path="haxe.extern.EitherType">
 				<t path="pixi.core.text.TextStyleObject"/>
-				<c path="pixi.core.text.TextStyle"/>
+				<d/>
 			</x>
 			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
      * @member {TextStyleObj|TextStyle}
@@ -14992,7 +14992,7 @@
 				<c path="String"/>
 				<x path="haxe.extern.EitherType">
 					<t path="pixi.core.text.TextStyleObject"/>
-					<c path="pixi.core.text.TextStyle"/>
+					<d/>
 				</x>
 				<x path="Float"/>
 				<x path="Void"/>
@@ -15014,10 +15014,6 @@
 	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
-	</class>
-	<class path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/TextStyle.hx" extern="1">
-		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":native"><e>""</e></m></meta>
 	</class>
 	<typedef path="pixi.core.text.TextStyleObject" params="" file="src/pixi/core/text/TextStyleObject.hx"><a>
 	<wordWrapWidth>
