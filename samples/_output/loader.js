@@ -287,31 +287,29 @@ loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 			}
 			if(e.lengthComputable) progress = e.loaded / e.total; else progress = e.loaded / totalSize;
 			if(progress > 1) progress = 1;
-			_g._label.text = "Loaded: " + Math.round(progress) * 100 + "%";
+			_g._label.text = "Loaded: " + Math.round(progress * 100) + "%";
 		};
-		xobj.onreadystatechange = function() {
-			if(xobj.readyState == 4 && xobj.status == 200) {
-				_g._b64response = JSON.parse(xobj.responseText);
-				_g._loadTime = new Date().getTime() - _g._startTime;
-				_g._label.text += "\nLoad Time: " + _g._loadTime / 1000 + " secs";
-				var _container = new PIXI.Container();
-				_g.stage.addChild(_container);
-				var _g1 = 0;
-				while(_g1 < 10) {
-					var i = _g1++;
-					var img = new Image();
-					img.src = Reflect.field(_g._b64response,i + 1 + ".png");
-					var base = new PIXI.BaseTexture(img);
-					var texture = new PIXI.Texture(base);
-					PIXI.utils.BaseTextureCache[i + 1 + ".png"] = base;
-					PIXI.utils.TextureCache[i + 1 + ".png"] = texture;
-					_g._img = new PIXI.Sprite(texture);
-					_g._img.name = "img" + (i + 1);
-					if(i < 6) _g._img.position.set(128 * i,0); else _g._img.position.set(128 * (i - 5),128);
-					_container.addChild(_g._img);
-				}
-				_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
+		xobj.onload = function() {
+			_g._b64response = JSON.parse(xobj.responseText);
+			_g._loadTime = new Date().getTime() - _g._startTime;
+			_g._label.text += "\nLoad Time: " + _g._loadTime / 1000 + " secs";
+			var _container = new PIXI.Container();
+			_g.stage.addChild(_container);
+			var _g1 = 0;
+			while(_g1 < 10) {
+				var i = _g1++;
+				var img = new Image();
+				img.src = Reflect.field(_g._b64response,i + 1 + ".png");
+				var base = new PIXI.BaseTexture(img);
+				var texture = new PIXI.Texture(base);
+				PIXI.utils.BaseTextureCache[i + 1 + ".png"] = base;
+				PIXI.utils.TextureCache[i + 1 + ".png"] = texture;
+				_g._img = new PIXI.Sprite(texture);
+				_g._img.name = "img" + (i + 1);
+				if(i < 6) _g._img.position.set(128 * i,0); else _g._img.position.set(128 * (i - 5),128);
+				_container.addChild(_g._img);
 			}
+			_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
 		};
 		xobj.send(null);
 	}

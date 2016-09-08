@@ -62,35 +62,33 @@ class Main extends Application {
 			}
 			progress = e.lengthComputable ? e.loaded / e.total : e.loaded / totalSize;
 			if (progress > 1) progress = 1;
-			_label.text = "Loaded: " + Math.round(progress) * 100 + "%";
+			_label.text = "Loaded: " + Math.round(progress * 100) + "%";
 		};
 
-		xobj.onreadystatechange = function() {
-			if (xobj.readyState == 4 && xobj.status == 200) {
-				_b64response = Json.parse(xobj.responseText);
-				_loadTime = Date.now().getTime() - _startTime;
-				_label.text += "\nLoad Time: " + (_loadTime / 1000) + " secs";
+		xobj.onload = function() {
+			_b64response = Json.parse(xobj.responseText);
+			_loadTime = Date.now().getTime() - _startTime;
+			_label.text += "\nLoad Time: " + (_loadTime / 1000) + " secs";
 
-				var _container:Container = new Container();
-				stage.addChild(_container);
-				for (i in 0 ... 10) {
+			var _container:Container = new Container();
+			stage.addChild(_container);
+			for (i in 0 ... 10) {
 
-					var img = new Image();
-					img.src = Reflect.field(_b64response, (i + 1) + ".png");
+				var img = new Image();
+				img.src = Reflect.field(_b64response, (i + 1) + ".png");
 
-					var base = new BaseTexture(img);
-					var texture = new Texture(base);
-					Reflect.setField(Utils.BaseTextureCache, (i + 1) + ".png", base);
-					Reflect.setField(Utils.TextureCache, (i + 1) + ".png", texture);
+				var base = new BaseTexture(img);
+				var texture = new Texture(base);
+				Reflect.setField(Utils.BaseTextureCache, (i + 1) + ".png", base);
+				Reflect.setField(Utils.TextureCache, (i + 1) + ".png", texture);
 
-					_img = new Sprite(texture);
-					_img.name = "img" + (i + 1);
-					if (i < 6) _img.position.set(128 * i, 0);
-					else _img.position.set(128 * (i - 5), 128);
-					_container.addChild(_img);
-				}
-				_container.position.set((Browser.window.innerWidth - _container.width) / 2, (Browser.window.innerHeight - _container.height) / 2);
+				_img = new Sprite(texture);
+				_img.name = "img" + (i + 1);
+				if (i < 6) _img.position.set(128 * i, 0);
+				else _img.position.set(128 * (i - 5), 128);
+				_container.addChild(_img);
 			}
+			_container.position.set((Browser.window.innerWidth - _container.width) / 2, (Browser.window.innerHeight - _container.height) / 2);
 		};
 		xobj.send(null);
 	}
