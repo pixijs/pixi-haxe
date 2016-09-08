@@ -1,10 +1,10 @@
 (function (console) { "use strict";
-var samples_basics_Main = function() {
+var basics_Main = function() {
 	var options = { };
 	options.backgroundColor = 26214;
 	options.resolution = 1;
 	options.transparent = true;
-	options.antialias = true;
+	options.antialias = false;
 	this._container = new PIXI.Container();
 	this._renderer = PIXI.autoDetectRenderer(800,600,options);
 	this._bunny = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
@@ -23,10 +23,10 @@ var samples_basics_Main = function() {
 	window.document.body.appendChild(this._renderer.view);
 	window.requestAnimationFrame($bind(this,this._animate));
 };
-samples_basics_Main.main = function() {
-	new samples_basics_Main();
+basics_Main.main = function() {
+	new basics_Main();
 };
-samples_basics_Main.prototype = {
+basics_Main.prototype = {
 	_animate: function() {
 		window.requestAnimationFrame($bind(this,this._animate));
 		this._bunny.rotation += 0.1;
@@ -35,7 +35,7 @@ samples_basics_Main.prototype = {
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-samples_basics_Main.main();
+basics_Main.main();
 })(typeof console != "undefined" ? console : {log:function(){}});
 
 //# sourceMappingURL=basics.js.map

@@ -1,4 +1,4 @@
-package samples.devicedetection;
+package devicedetection;
 
 import pixi.core.display.Container;
 import pixi.core.text.Text;

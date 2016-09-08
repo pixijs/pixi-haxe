@@ -1,4 +1,4 @@
-package samples.deviceinfo;
+package deviceinfo;
 
 import pixi.core.display.Container;
 import pixi.core.text.Text;

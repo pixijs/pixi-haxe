@@ -1,4 +1,4 @@
-package samples.tiling;
+package tiling;
 
 import pixi.core.textures.Texture;
 import pixi.extras.TilingSprite;

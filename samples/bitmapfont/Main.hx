@@ -1,4 +1,4 @@
-package samples.bitmapfont;
+package bitmapfont;
 
 import pixi.loaders.Loader;
 import pixi.extras.BitmapText;
@@ -17,7 +17,7 @@ class Main extends Application {
 		super.start();
 
 		var fontloader:Loader = new Loader();
-		fontloader.add("font", "assets/fonts/desyrel.xml");
+		fontloader.add("font", "./assets/fonts/desyrel.xml");
 		fontloader.load(_onLoaded);
 	}
 

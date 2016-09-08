@@ -1,6 +1,7 @@
 {
 	"name": "pixijs",
 	"license": "MIT",
+	"classPath": "src",
 	"tags": [
 		"js",
 		"haxe",
@@ -10,14 +11,14 @@
 		"extern",
 		"web"
 	],
-	"description": "Externs of pixi.js v3 for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
+	"description": "Externs of pixi.js v4.x for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "fixed the inappropriate array type of Mesh vertices, uvs and indices",
-	"version": "3.0.25",
+	"releasenote": "updated to 4.0.1, exposed EventEmitter class & text style bug fix",
+	"version": "4.0.1",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
-		"jsfps": ""
+		"perf.js": ""
 	}
 }

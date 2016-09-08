@@ -1,4 +1,4 @@
-package samples.spine;
+package spine;
 
 import pixi.loaders.Loader;
 import pixi.plugins.app.Application;

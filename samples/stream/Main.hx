@@ -1,4 +1,4 @@
-package samples.stream;
+package stream;
 
 import Reflect;
 import haxe.Json;

@@ -1,6 +1,6 @@
-package samples.events;
+package events;
 
-import pixi.core.math.shapes.Rectangle;
+import pixi.core.text.TextStyleObject;
 import pixi.interaction.EventTarget;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
@@ -32,9 +32,10 @@ class Main extends Application {
 
 		stage.addChild(_img);
 
-		var style:TextStyle = {};
+		var style:TextStyleObject = {};
 		style.fill = "#000000";
-		style.font = "12px Courier";
+		style.fontSize = 12;
+		style.fontFamily = "Courier";
 
 		_label = new Text("EVENTS", style);
 		_label.position.set(0, 0);

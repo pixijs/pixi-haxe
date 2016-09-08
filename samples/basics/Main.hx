@@ -1,4 +1,4 @@
-package samples.basics;
+package basics;
 
 import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;
@@ -22,7 +22,7 @@ class Main {
 		options.backgroundColor = 0x006666;
 		options.resolution = 1;
 		options.transparent = true;
-		options.antialias = true;
+		options.antialias = false;
 
 		_container = new Container();
 		_renderer = Detector.autoDetectRenderer(800, 600, options);

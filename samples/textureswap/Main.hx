@@ -1,4 +1,4 @@
-package samples.textureswap;
+package textureswap;
 
 import pixi.interaction.EventTarget;
 import pixi.core.sprites.Sprite;
@@ -35,6 +35,7 @@ class Main extends Application {
 		_bunny.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		_bunny.interactive = true;
 		_bunny.on("click", _onClick);
+		_bunny.on("tap", _onClick);
 		stage.addChild(_bunny);
 	}
 

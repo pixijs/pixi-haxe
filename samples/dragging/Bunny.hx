@@ -1,4 +1,4 @@
-package samples.dragging;
+package dragging;
 
 import pixi.interaction.InteractionData;
 import pixi.core.textures.Texture;

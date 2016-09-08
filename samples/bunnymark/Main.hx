@@ -1,6 +1,7 @@
-package samples.bunnymark;
+package bunnymark;
 
-import pixi.core.particles.ParticleContainer;
+import pixi.particles.ParticleContainer;
+import pixi.core.math.shapes.Rectangle;
 import js.html.DivElement;
 import js.Browser;
 import pixi.core.display.Container;
@@ -45,6 +46,7 @@ class Main extends Application {
 	}
 
 	function _setup() {
+		renderer.view.style.transform = "translatez(0)";
 		maxX = Browser.window.innerWidth;
 		maxY = Browser.window.innerHeight;
 
@@ -66,14 +68,16 @@ class Main extends Application {
 		count = startBunnyCount;
 		counter.innerHTML = count + " BUNNIES";
 
-		container = new ParticleContainer();
+		container = new ParticleContainer(200000, [false, true, false, false, false]);
 		stage.addChild(container);
 
-		var bunny1 = Texture.fromImage("assets/bunnymark/bunny1.png");
-		var bunny2 = Texture.fromImage("assets/bunnymark/bunny2.png");
-		var bunny3 = Texture.fromImage("assets/bunnymark/bunny3.png");
-		var bunny4 = Texture.fromImage("assets/bunnymark/bunny4.png");
-		var bunny5 = Texture.fromImage("assets/bunnymark/bunny5.png");
+		wabbitTexture = Texture.fromImage("assets/bunnymark/bunnys.png");
+
+		var bunny1 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 47, 26, 37));
+		var bunny2 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 86, 26, 37));
+		var bunny3 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 125, 26, 37));
+		var bunny4 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 164, 26, 37));
+		var bunny5 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 2, 26, 37));
 
 		bunnyTextures = [bunny1, bunny2, bunny3, bunny4, bunny5];
 		bunnyType = 1;
@@ -117,12 +121,9 @@ class Main extends Application {
 					bunny.speedX = Math.random() * 5;
 					bunny.speedY = (Math.random() * 5) - 3;
 					bunny.anchor.y = 1;
-					//bunny.alpha = 0.3 + Math.random() * 0.7;
 					bunnys.push(bunny);
 					bunny.scale.set(0.5 + Math.random() * 0.5, 0.5 + Math.random() * 0.5);
 					bunny.rotation = (Math.random() - 0.5);
-
-					//bunny.rotation = Math.random() - 0.5;
 					var random = Std.random(container.children.length - 2);
 					container.addChild(bunny);
 
@@ -134,7 +135,6 @@ class Main extends Application {
 
 		for (i in 0 ... bunnys.length) {
 			var bunny = bunnys[i];
-			//bunny.rotation += 0.1
 
 			bunny.position.x += bunny.speedX;
 			bunny.position.y += bunny.speedY;

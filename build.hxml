@@ -1,5 +1,5 @@
 -cmd haxelib newrepo
--cmd haxelib install jsfps || true
+-cmd haxelib install perf.js || true
 -cmd haxelib install nape || true
 -cmd haxelib install msignal || true
 -cmd haxelib install actuate || true
@@ -7,130 +7,117 @@
 
 --next
 -cp samples
--cp pixi
--lib jsfps
+-cp src
+-lib perf.js
 -dce full
+-D stats
 -D source-map-content
 -debug
 
 --each
 
 --next
--main samples.basics.Main
+-main basics.Main
 -js samples/_output/basics.js
 
 --next
--main samples.spine.Main
--D fps
+-main spine.Main
 -js samples/_output/spine.js
 
 --next
--main samples.spritesheet.Main
--D stats
+-main spritesheet.Main
 -js samples/_output/spritesheet.js
 
 --next
--main samples.movieclip.Main
--D stats
+-main movieclip.Main
 -js samples/_output/movieclip.js
 
 --next
--main samples.graphics.Main
--D fps
+-main graphics.Main
 -js samples/_output/graphics.js
 
 --next
--main samples.tiling.Main
--D stats
+-main tiling.Main
 -js samples/_output/tiling.js
 
 --next
--main samples.bitmapfont.Main
--D stats
+-main bitmapfont.Main
 -js samples/_output/bitmapfont.js
 
 --next
--main samples.dragging.Main
--D stats
+-main dragging.Main
 -js samples/_output/dragging.js
 
 --next
--main samples.nape.Main
--D stats
+-main nape.Main
 -js samples/_output/nape.js
 -lib nape
 
 --next
--main samples.rope.Main
--D stats
+-main rope.Main
 -js samples/_output/rope.js
 
 --next
--main samples.retina.Main
--D stats
+-main retina.Main
 -js samples/_output/retina.js
 
 --next
--main samples.bunnymark.Main
--D stats
+-main bunnymark.Main
 -js samples/_output/bunnymark.js
 
 --next
--main samples.textureswap.Main
+-main textureswap.Main
 -js samples/_output/textureswap.js
 
 --next
--main samples.alphamask.Main
--D stats
+-main alphamask.Main
 -js samples/_output/alphamask.js
 
 --next
--main samples.filters.colormatrix.Main
--D stats
+-main filters.colormatrix.Main
 -js samples/_output/colormatrix.js
 
 --next
--main samples.filters.blur.Main
--D fpsmeter
+-main filters.blur.Main
 -js samples/_output/blur.js
 
 --next
--main samples.loader.Main
--D stats
+-main loader.Main
 -js samples/_output/loader.js
 
 --next
--main samples.video.Main
--D stats
+-main video.Main
 -js samples/_output/video.js
 
 --next
--main samples.stream.Main
--D stats
+-main stream.Main
 -js samples/_output/stream.js
 
 --next
--main samples.events.Main
--D stats
+-main events.Main
 -js samples/_output/events.js
 
 --next
--main samples.mask.Main
--D stats
+-main mask.Main
 -js samples/_output/mask.js
 
 --next
--main samples.deviceinfo.Main
--D stats
+-main deviceinfo.Main
 -js samples/_output/deviceinfo.js
 
 --next
--main samples.devicedetection.Main
--D stats
+-main devicedetection.Main
 -js samples/_output/devicedetection.js
 
 --next
 -lib msignal
--main samples.audio.Main
--D stats
+-main audio.Main
 -js samples/_output/audio.js
+
+--next
+-main webglinfo.Main
+-js samples/_output/webglinfo.js
+
+--next
+-main tilemap.Main
+-js samples/_output/tilemap.js
