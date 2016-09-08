@@ -159,11 +159,11 @@ extern class Texture extends EventEmitter {
 	 * Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
-	 * @param video {VideoElement}
+	 * @param video {String}
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:VideoElement, ?scaleMode:Int):Texture;
+	static function fromVideo(video:String, ?scaleMode:Int):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
