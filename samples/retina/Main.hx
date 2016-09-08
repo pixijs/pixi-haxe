@@ -1,5 +1,6 @@
 package retina;
 
+import pixi.core.Pixi;
 import pixi.core.text.TextStyleObject;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
