@@ -1,5 +1,6 @@
 package pixi.interaction;
 
+@:native("PIXI.utils.EventEmitter")
 extern class EventEmitter {
 
 	/**

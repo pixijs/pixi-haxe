@@ -5,6 +5,21 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var EReg = function(r,opt) {
+	opt = opt.split("u").join("");
+	this.r = new RegExp(r,opt);
+};
+EReg.prototype = {
+	match: function(s) {
+		if(this.r.global) this.r.lastIndex = 0;
+		this.r.m = this.r.exec(s);
+		this.r.s = s;
+		return this.r.m != null;
+	}
+	,matched: function(n) {
+		if(this.r.m != null && n >= 0 && n < this.r.m.length) return this.r.m[n]; else throw new js__$Boot_HaxeError("EReg::matched");
+	}
+};
 var Perf = $hx_exports.Perf = function(pos,offset) {
 	if(offset == null) offset = 0;
 	if(pos == null) pos = "TR";
@@ -141,12 +156,22 @@ Reflect.field = function(o,field) {
 	try {
 		return o[field];
 	} catch( e ) {
+		if (e instanceof js__$Boot_HaxeError) e = e.val;
 		return null;
 	}
 };
 Reflect.callMethod = function(o,func,args) {
 	return func.apply(o,args);
 };
+var js__$Boot_HaxeError = function(val) {
+	Error.call(this);
+	this.val = val;
+	this.message = String(val);
+	if(Error.captureStackTrace) Error.captureStackTrace(this,js__$Boot_HaxeError);
+};
+js__$Boot_HaxeError.__super__ = Error;
+js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
+});
 var pixi_plugins_app_Application = function() {
 	this._animationFrameId = null;
 	this.pixelRatio = 1;
@@ -229,43 +254,91 @@ pixi_plugins_app_Application.prototype = {
 };
 var loader_Main = function() {
 	pixi_plugins_app_Application.call(this);
-	this._init();
+	pixi_plugins_app_Application.prototype.start.call(this);
+	var urlStr = window.location.href.split("?");
+	var style = { };
+	style.fill = 13158;
+	style.fontSize = 24;
+	style.fontFamily = "Courier";
+	this._label = new PIXI.Text("",style);
+	this._label.position.set(0,0);
+	this.stage.addChild(this._label);
+	this._startTime = new Date().getTime();
+	this._loadTime = 0;
+	if(urlStr.length > 1 && (urlStr[1] == "base64" || urlStr[1] == "64" || urlStr[1] == "b64")) this._loadBase64Assets(); else this._loadIndividialAssets();
 };
 loader_Main.main = function() {
 	new loader_Main();
 };
 loader_Main.__super__ = pixi_plugins_app_Application;
 loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
-	_init: function() {
-		pixi_plugins_app_Application.prototype.start.call(this);
+	_loadBase64Assets: function() {
+		var _g = this;
+		var progress = 0;
+		var totalSize = 0;
+		var m = new EReg("\"meta\":.[0-9]*,[0-9]*.","i");
+		var xobj = new XMLHttpRequest();
+		xobj.open("GET","assets/base64assets.json",true);
+		xobj.onprogress = function(e) {
+			var meta = m.match(xobj.responseText);
+			if(meta && totalSize == 0) {
+				var metaInfo = JSON.parse("{" + m.matched(0) + "}");
+				totalSize = metaInfo.meta[1];
+			}
+			if(e.lengthComputable) progress = e.loaded / e.total; else progress = e.loaded / totalSize;
+			if(progress > 1) progress = 1;
+			_g._label.text = "Loaded: " + Math.round(progress * 100) + "%";
+		};
+		xobj.onload = function() {
+			_g._b64response = JSON.parse(xobj.responseText);
+			_g._loadTime = new Date().getTime() - _g._startTime;
+			_g._label.text += "\nLoad Time: " + _g._loadTime / 1000 + " secs";
+			var _container = new PIXI.Container();
+			_g.stage.addChild(_container);
+			var _g1 = 0;
+			while(_g1 < 10) {
+				var i = _g1++;
+				var img = new Image();
+				img.src = Reflect.field(_g._b64response,i + 1 + ".png");
+				var base = new PIXI.BaseTexture(img);
+				var texture = new PIXI.Texture(base);
+				PIXI.utils.BaseTextureCache[i + 1 + ".png"] = base;
+				PIXI.utils.TextureCache[i + 1 + ".png"] = texture;
+				_g._img = new PIXI.Sprite(texture);
+				_g._img.name = "img" + (i + 1);
+				if(i < 6) _g._img.position.set(128 * i,0); else _g._img.position.set(128 * (i - 5),128);
+				_container.addChild(_g._img);
+			}
+			_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);
+		};
+		xobj.send(null);
+	}
+	,_loadIndividialAssets: function() {
 		this._baseURL = "assets/loader/";
 		this._loader = new PIXI.loaders.Loader();
 		this._loader.baseUrl = this._baseURL;
-		var _g = 1;
-		while(_g < 10) {
+		var _g = 0;
+		while(_g < 50) {
 			var i = _g++;
-			this._loader.add("img" + i,i + ".png");
+			this._loader.add("img" + (i + 1),i + 1 + ".png");
 		}
 		this._loader.on("progress",$bind(this,this._onLoadProgress));
-		this._loader.once("complete",$bind(this,this._onLoadComplete));
 		this._loader.load($bind(this,this._onLoaded));
 	}
 	,_onLoadProgress: function() {
-		console.log("Loaded: " + Math.round(this._loader.progress));
-	}
-	,_onLoadComplete: function(a,b) {
-		console.log(a);
-		console.log(b);
+		this._label.text = "Loaded: " + Math.round(this._loader.progress) + "%";
 	}
 	,_onLoaded: function() {
+		this._loadTime = new Date().getTime() - this._startTime;
+		this._label.text += "\nLoad Time: " + this._loadTime / 1000 + " secs";
 		var _container = new PIXI.Container();
 		this.stage.addChild(_container);
-		var _g = 1;
-		while(_g < 11) {
+		var _g = 0;
+		while(_g < 10) {
 			var i = _g++;
-			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + i + ".png"));
-			this._img.name = "img" + i;
-			if(i < 6) this._img.position.set(128 * (i - 1),0); else this._img.position.set(128 * (i - 6),128);
+			this._img = new PIXI.Sprite(PIXI.Texture.fromImage(this._baseURL + (i + 1) + ".png"));
+			this._img.name = "img" + (i + 1);
+			if(i < 6) this._img.position.set(128 * i,0); else this._img.position.set(128 * (i - 5),128);
 			_container.addChild(this._img);
 		}
 		_container.position.set((window.innerWidth - _container.width) / 2,(window.innerHeight - _container.height) / 2);

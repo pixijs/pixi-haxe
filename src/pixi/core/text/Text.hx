@@ -25,7 +25,7 @@ extern class Text extends Sprite {
 	 * @param [style] {TextStyleObj|TextStyle} The style parameters
 	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas
 	 */
-	function new(text:String, ?style:EitherType<TextStyleObject, TextStyle>, ?resolution:Float):Void;
+	function new(text:String, ?style:EitherType<TextStyleObject, Dynamic>, ?resolution:Float):Void;
 
 	/**
 	 * The canvas element that everything is drawn to
@@ -59,5 +59,5 @@ extern class Text extends Sprite {
      * @member {TextStyleObj|TextStyle}
      *
      */
-	var style:EitherType<TextStyleObject, TextStyle>;
+	var style:EitherType<TextStyleObject, Dynamic>;
 }
