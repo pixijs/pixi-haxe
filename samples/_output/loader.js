@@ -265,14 +265,30 @@ var loader_Main = function() {
 	this.stage.addChild(this._label);
 	this._startTime = new Date().getTime();
 	this._loadTime = 0;
-	if(urlStr.length > 1 && (urlStr[1] == "base64" || urlStr[1] == "64" || urlStr[1] == "b64")) this._loadBase64Assets(); else this._loadIndividialAssets();
+	if(urlStr.length > 1 && (urlStr[1] == "base64" || urlStr[1] == "64" || urlStr[1] == "b64")) this._loadBase64Assets(); else if(urlStr.length > 1 && (urlStr[1] == "bin" || urlStr[1] == "binary")) this._loadBinaryssets(); else this._loadIndividialAssets();
 };
 loader_Main.main = function() {
 	new loader_Main();
 };
 loader_Main.__super__ = pixi_plugins_app_Application;
 loader_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
-	_loadBase64Assets: function() {
+	_loadBinaryssets: function() {
+		var _g = this;
+		var progress = 0;
+		var xobj = new XMLHttpRequest();
+		xobj.open("GET","assets/binaryassets.txt",true);
+		xobj.onprogress = function(e) {
+			if(e.lengthComputable) progress = e.loaded / e.total; else progress = 0;
+			if(progress > 1) progress = 1;
+			_g._label.text = "Loaded: " + Math.round(progress * 100) + "%";
+		};
+		xobj.onload = function() {
+			_g._loadTime = new Date().getTime() - _g._startTime;
+			_g._label.text += "\nLoad Time: " + _g._loadTime / 1000 + " secs";
+		};
+		xobj.send(null);
+	}
+	,_loadBase64Assets: function() {
 		var _g = this;
 		var progress = 0;
 		var totalSize = 0;

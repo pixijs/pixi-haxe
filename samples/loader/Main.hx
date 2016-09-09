@@ -1,5 +1,8 @@
 package loader;
 
+import js.html.URL;
+import js.html.Blob;
+import js.html.Uint8Array;
 import pixi.core.utils.Utils;
 import pixi.core.textures.BaseTexture;
 import js.html.Image;
@@ -44,7 +47,26 @@ class Main extends Application {
 		_loadTime = 0;
 
 		if (urlStr.length > 1 && (urlStr[1] == "base64" || urlStr[1] == "64" || urlStr[1] == "b64")) _loadBase64Assets();
+		else if (urlStr.length > 1 && (urlStr[1] == "bin" || urlStr[1] == "binary")) _loadBinaryssets();
 		else _loadIndividialAssets();
+	}
+
+	function _loadBinaryssets() {
+		var progress:Float = 0;
+		var xobj = new XMLHttpRequest();
+		xobj.open("GET", "assets/binaryassets.txt", true);
+
+		xobj.onprogress = function(e:Dynamic) {
+			progress = e.lengthComputable ? e.loaded / e.total : 0;
+			if (progress > 1) progress = 1;
+			_label.text = "Loaded: " + Math.round(progress * 100) + "%";
+		};
+
+		xobj.onload = function() {
+			_loadTime = Date.now().getTime() - _startTime;
+			_label.text += "\nLoad Time: " + (_loadTime / 1000) + " secs";
+		};
+		xobj.send(null);
 	}
 
 	function _loadBase64Assets() {
@@ -127,4 +149,28 @@ class Main extends Application {
 	static function main() {
 		new Main();
 	}
+}
+
+@:native("Bytes")
+extern class Bytes {
+
+	var position:Int;
+	var remainingLength:Int;
+	var length:Int;
+
+	function new(s:String, pos:Int);
+
+	function readByte():Bool;
+
+	public function readUInt32BE():Bool;
+
+	public function readUInt16BE():Bool;
+
+	public function readString(size:Int):String;
+
+	public function readBlob(size:Int, opts:Dynamic):Blob;
+
+	public function readBytes(size:Int):Uint8Array;
+
+	public function setPosition(value:Int):Void;
 }
