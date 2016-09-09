@@ -15444,14 +15444,17 @@
 		</fromCanvas>
 		<fromVideo public="1" set="method" static="1">
 			<f a="video:?scaleMode">
-				<c path="js.html.VideoElement"/>
+				<x path="haxe.extern.EitherType">
+					<c path="js.html.VideoElement"/>
+					<c path="String"/>
+				</x>
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
 			<haxe_doc>* Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
-	 * @param video {VideoElement}
+	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture</haxe_doc>
 		</fromVideo>
@@ -15581,7 +15584,10 @@
 		</update>
 		<new public="1" set="method">
 			<f a="baseTexture:?frame:?crop:?trim:?rotate">
-				<c path="pixi.core.textures.BaseTexture"/>
+				<x path="haxe.extern.EitherType">
+					<c path="pixi.core.textures.BaseTexture"/>
+					<c path="pixi.core.textures.VideoBaseTexture"/>
+				</x>
 				<c path="pixi.core.math.shapes.Rectangle"/>
 				<c path="pixi.core.math.shapes.Rectangle"/>
 				<c path="pixi.core.math.shapes.Rectangle"/>
@@ -15607,35 +15613,6 @@
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="baseTexture:?frame:?crop:?trim:?rotate">
-		<c path="pixi.core.textures.VideoBaseTexture"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<x path="Bool"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* A texture stores the information that represents an image or part of an image. It cannot be added
-	 * to the display list directly. Instead use it as the texture for a Sprite. If no frame is provided then the whole image is used.
-	 *
-	 * You can directly create a texture from an image and then reuse it multiple times like this :
-	 *
-	 * ```js
-	 * 	var texture = PIXI.Texture.fromImage('assets/image.png');
-	 * 	var sprite1 = new PIXI.Sprite(texture);
-	 * 	var sprite2 = new PIXI.Sprite(texture);
-	 * ```
-	 *
-	 * @class
-	 * @mixes eventTarget
-	 * @memberof PIXI
-	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
-	 * @param [frame] {Rectangle} The rectangle frame of the texture to show
-	 * @param [crop] {Rectangle} The area of original texture
-	 * @param [trim] {Rectangle} Trimmed texture rectangle
-	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )</haxe_doc>
-</new></overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Texture"</e></m></meta>
 	</class>
@@ -17244,6 +17221,48 @@
 	 * @fires start
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}</haxe_doc>
+			<overloads>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a=":">
+							<c path="pixi.loaders.ResourceLoader"/>
+							<d/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a="">
+							<c path="pixi.loaders.ResourceLoader"/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a=""><x path="Void"/></f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+			</overloads>
 		</load>
 		<loadResource public="1" set="method">
 			<f a="resource:?cb">

@@ -1,5 +1,7 @@
 package pixi.core.textures;
 
+import haxe.extern.EitherType;
+import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
 import pixi.core.math.Point;
 import js.html.VideoElement;
@@ -29,8 +31,7 @@ extern class Texture extends EventEmitter {
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
 	 */
-	@:overload(function(baseTexture:VideoBaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool):Void {})
-	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
+	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
 
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -159,11 +160,11 @@ extern class Texture extends EventEmitter {
 	 * Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
-	 * @param video {VideoElement}
+	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:VideoElement, ?scaleMode:Int):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:Int):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
@@ -192,12 +193,12 @@ extern class Texture extends EventEmitter {
 	 * @return {Texture} The texture that was removed
 	 */
 	static function removeTextureFromCache(id:String):Texture;
-	
+
 	/**
 	 * An empty texture, used often to not have to create multiple empty textures.
 	 * @static
 	 * @constant
 	 * @member {Texture}
 	 */
-	static var EMPTY:Texture;	
+	static var EMPTY:Texture;
 }
