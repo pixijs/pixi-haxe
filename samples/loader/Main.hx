@@ -63,6 +63,7 @@ class Main extends Application {
 		};
 
 		xobj.onload = function() {
+			_label.text = "Loaded: " + "100%";
 			_loadTime = Date.now().getTime() - _startTime;
 			_label.text += "\nLoad Time: " + (_loadTime / 1000) + " secs";
 		};
