@@ -789,53 +789,6 @@
 	This can be used to track positions of calls in e.g. a unit testing
 	framework.</haxe_doc>
 	</typedef>
-	<class path="haxe.Timer" params="" file="/usr/local/lib/haxe/std/haxe/Timer.hx">
-		<id><t path="Null"><x path="Int"/></t></id>
-		<run public="1" set="dynamic" line="108">
-			<f a=""><x path="Void"/></f>
-			<haxe_doc>This method is invoked repeatedly on `this` Timer.
-
-		It can be overridden in a subclass, or rebound directly to a custom
-		function:
-			var timer = new haxe.Timer(1000); // 1000ms delay
-			timer.run = function() { ... }
-
-		Once bound, it can still be rebound to different functions until `this`
-		Timer is stopped through a call to `this.stop`.</haxe_doc>
-		</run>
-		<new public="1" set="method" line="59">
-			<f a="time_ms">
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<meta><m n=":has_untyped"/></meta>
-			<haxe_doc>Creates a new timer that will run every `time_ms` milliseconds.
-
-		After creating the Timer instance, it calls `this].run` repeatedly,
-		with delays of `time_ms` milliseconds, until `this.stop` is called.
-
-		The first invocation occurs after `time_ms` milliseconds, not
-		immediately.
-
-		The accuracy of this may be platform-dependent.</haxe_doc>
-		</new>
-		<haxe_doc>The Timer class allows you to create asynchronous timers on platforms that
-	support events.
-
-	The intended usage is to create an instance of the Timer class with a given
-	interval, set its run() method to a custom function to be invoked and
-	eventually call stop() to stop the Timer.
-
-	Note that a running Timer may or may not prevent the program to exit
-	automatically when main() returns.
-
-	It is also possible to extend this class and override its run() method in
-	the child class.</haxe_doc>
-		<meta>
-			<m n=":keep"/>
-			<m n=":directlyUsed"/>
-		</meta>
-	</class>
 	<abstract path="haxe.extern.EitherType" params="T1:T2" file="/usr/local/lib/haxe/std/haxe/extern/EitherType.hx">
 		<from>
 			<icast><c path="haxe.extern.EitherType.T2"/></icast>
@@ -15013,7 +14966,10 @@
 	 * @param [style] {TextStyleObj|TextStyle} The style parameters
 	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Text"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.Text"</e></m>
+		</meta>
 	</class>
 	<typedef path="pixi.core.text.TextStyleObject" params="" file="src/pixi/core/text/TextStyleObject.hx"><a>
 	<wordWrapWidth>
@@ -15444,14 +15400,17 @@
 		</fromCanvas>
 		<fromVideo public="1" set="method" static="1">
 			<f a="video:?scaleMode">
-				<c path="js.html.VideoElement"/>
+				<x path="haxe.extern.EitherType">
+					<c path="js.html.VideoElement"/>
+					<c path="String"/>
+				</x>
 				<x path="Int"/>
 				<c path="pixi.core.textures.Texture"/>
 			</f>
 			<haxe_doc>* Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
-	 * @param video {VideoElement}
+	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture</haxe_doc>
 		</fromVideo>
@@ -15581,7 +15540,10 @@
 		</update>
 		<new public="1" set="method">
 			<f a="baseTexture:?frame:?crop:?trim:?rotate">
-				<c path="pixi.core.textures.BaseTexture"/>
+				<x path="haxe.extern.EitherType">
+					<c path="pixi.core.textures.BaseTexture"/>
+					<c path="pixi.core.textures.VideoBaseTexture"/>
+				</x>
 				<c path="pixi.core.math.shapes.Rectangle"/>
 				<c path="pixi.core.math.shapes.Rectangle"/>
 				<c path="pixi.core.math.shapes.Rectangle"/>
@@ -15607,35 +15569,6 @@
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="baseTexture:?frame:?crop:?trim:?rotate">
-		<c path="pixi.core.textures.VideoBaseTexture"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<c path="pixi.core.math.shapes.Rectangle"/>
-		<x path="Bool"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>* A texture stores the information that represents an image or part of an image. It cannot be added
-	 * to the display list directly. Instead use it as the texture for a Sprite. If no frame is provided then the whole image is used.
-	 *
-	 * You can directly create a texture from an image and then reuse it multiple times like this :
-	 *
-	 * ```js
-	 * 	var texture = PIXI.Texture.fromImage('assets/image.png');
-	 * 	var sprite1 = new PIXI.Sprite(texture);
-	 * 	var sprite2 = new PIXI.Sprite(texture);
-	 * ```
-	 *
-	 * @class
-	 * @mixes eventTarget
-	 * @memberof PIXI
-	 * @param baseTexture {BaseTexture} The base texture source to create the texture from
-	 * @param [frame] {Rectangle} The rectangle frame of the texture to show
-	 * @param [crop] {Rectangle} The area of original texture
-	 * @param [trim] {Rectangle} Trimmed texture rectangle
-	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )</haxe_doc>
-</new></overloads>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Texture"</e></m></meta>
 	</class>
@@ -17244,6 +17177,48 @@
 	 * @fires start
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}</haxe_doc>
+			<overloads>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a=":">
+							<c path="pixi.loaders.ResourceLoader"/>
+							<d/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a="">
+							<c path="pixi.loaders.ResourceLoader"/>
+							<x path="Void"/>
+						</f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+				<load public="1" set="method">
+					<f a="?cb">
+						<f a=""><x path="Void"/></f>
+						<c path="pixi.loaders.ResourceLoader"/>
+					</f>
+					<haxe_doc>* Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
+	 * @return {Loader}</haxe_doc>
+				</load>
+			</overloads>
 		</load>
 		<loadResource public="1" set="method">
 			<f a="resource:?cb">
@@ -17315,10 +17290,7 @@
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.loaders.Loader"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.loaders.Loader"</e></m></meta>
 	</class>
 	<typedef path="pixi.loaders.LoaderOptions" params="" file="src/pixi/loaders/LoaderOptions.hx"><a>
 	<xhrType>
@@ -17583,6 +17555,25 @@
 	 *
 	 * @member {Int}</haxe_doc>
 		</drawMode>
+		<shader public="1">
+			<c path="pixi.core.Shader"/>
+			<haxe_doc>* The default shader that is used if a mesh doesn't have a more specific one.
+     *
+     * @member {Shader}</haxe_doc>
+		</shader>
+		<tintRgb public="1">
+			<c path="js.html.Float32Array"/>
+			<haxe_doc>* The tint applied to the mesh. This is a [r,g,b] value. A value of [1,1,1] will remove any tint effect.
+     *
+     * @member {Float32Array}
+     * @memberof PIXI.mesh.Mesh#</haxe_doc>
+		</tintRgb>
+		<tint public="1">
+			<x path="Int"/>
+			<haxe_doc>* The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+	 *
+	 * @member {Int}</haxe_doc>
+		</tint>
 		<new public="1" set="method">
 			<f a="texture:?vertices:?uvs:?indices:?drawMode">
 				<c path="pixi.core.textures.Texture"/>
@@ -18001,10 +17992,7 @@
 </f></isModified>
 		<clearModify public="1" set="method"><f a=""><x path="Void"/></f></clearModify>
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.tilemap.CompositeRectTileLayer"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.tilemap.CompositeRectTileLayer"</e></m></meta>
 	</class>
 	<class path="pixi.tilemap.GraphicsLayer" params="" file="src/pixi/tilemap/GraphicsLayer.hx" extern="1">
 		<extends path="pixi.core.graphics.Graphics"/>
@@ -18143,26 +18131,17 @@
 </f></renderCanvas>
 		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
 	</class>
-	<class path="tilemap.Main" params="" file="samples/tilemap/Main.hx">
+	<class path="text.Main" params="" file="samples/text/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="84" static="1">
+		<main set="method" line="47" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>
-		<_loader><c path="pixi.loaders.Loader"/></_loader>
-		<_tilemap><c path="pixi.tilemap.CompositeRectTileLayer"/></_tilemap>
-		<_frame><x path="Int"/></_frame>
-		<_init set="method" line="21"><f a=""><x path="Void"/></f></_init>
-		<_onLoaded set="method" line="32"><f a=""><x path="Void"/></f></_onLoaded>
-		<buildTilemap set="method" line="50"><f a="frame">
-	<x path="Int"/>
-	<x path="Void"/>
-</f></buildTilemap>
-		<_onUpdate set="method" line="80"><f a="elapsedTime">
-	<x path="Float"/>
-	<x path="Void"/>
-</f></_onUpdate>
-		<new public="1" set="method" line="16"><f a=""><x path="Void"/></f></new>
+		<_label1><c path="pixi.core.text.Text"/></_label1>
+		<_label2><c path="pixi.core.text.Text"/></_label2>
+		<_label3><c path="pixi.core.text.Text"/></_label3>
+		<_init set="method" line="18"><f a=""><x path="Void"/></f></_init>
+		<new public="1" set="method" line="13"><f a=""><x path="Void"/></f></new>
 		<meta>
 			<m n=":keep"/>
 			<m n=":directlyUsed"/>

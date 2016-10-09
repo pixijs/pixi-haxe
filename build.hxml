@@ -121,3 +121,7 @@
 --next
 -main tilemap.Main
 -js samples/_output/tilemap.js
+
+--next
+-main text.Main
+-js samples/_output/text.js

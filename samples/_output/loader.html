@@ -11,6 +11,163 @@
 
     <script type="text/javascript" src="libs/pixi.min.js"></script>
 
+	<script>
+		window.Bytes = Bytes;
+
+		function Bytes(str, pos){
+
+			var self = this,
+				position = 0,
+				length = str.length;
+
+
+			if(!str){
+				throw new Error('Cannot create a Bytes object with empty string');
+			}
+
+			setPosition(pos || 0);
+
+
+			Object.defineProperties(self, {
+				readByte : {
+					value : readByte
+				},
+
+				readBytes : {
+					value : readBytes
+				},
+
+				readUInt32BE : {
+					value : readUInt32BE
+				},
+
+				readUInt16BE : {
+					value : readUInt16BE
+				},
+
+				readString : {
+					value : readString
+				},
+
+				readBlob : {
+					value : readBlob
+				},
+
+				length : {
+					value : length
+				},
+
+				remainingLength : {
+					get : function(){
+						return length - position;
+					}
+				},
+
+				position : {
+					get : function(){
+						return position;
+					},
+
+					set : setPosition
+				}
+			});
+
+
+			function readByte(){
+				if(position > length - 1){
+					return false;
+				}
+
+				return str.charCodeAt(position ++) & 0xff;
+			}
+
+
+			function readUInt32BE(){
+				if(position > length - 4){
+					return false;
+				}
+
+				return (
+					((str.charCodeAt(position ++) & 0xff) << 24)   |
+					((str.charCodeAt(position ++) & 0xff) << 16)   |
+					((str.charCodeAt(position ++) & 0xff) << 8)    |
+					(str.charCodeAt(position ++) & 0xff)
+				);
+			}
+
+
+			function readUInt16BE(){
+				if(position > length - 2){
+					return false;
+				}
+
+				return ((str.charCodeAt(position ++) & 0xff) << 8) | (str.charCodeAt(position ++) & 0xff);
+			}
+
+
+			function readString(size){
+				var ret = '',
+					bytes, byte, ret;
+
+				if(size){
+					bytes = readBytes(size);
+				}
+				else if(position > length - 1){
+					return false;
+				}
+				else{
+					bytes = [];
+
+					while((byte = str.charCodeAt(position ++) & 0xff) !== 0){
+						bytes.push(byte);
+					}
+				}
+
+				for(var i = 0, iLen = bytes.length; i < iLen; i += 10000){
+					ret += String.fromCharCode.apply(null, (bytes.subarray ? bytes.subarray : bytes.slice).call(bytes, i, i + 10000));
+				}
+
+				return ret;
+			}
+
+
+			function readBlob(size, opts){
+				return new Blob([readBytes(size)], opts);
+			}
+
+
+			function readBytes(size){
+				var bytes;
+
+				if(position > length - size){
+					return false;
+				}
+
+				bytes = window.Uint8Array ? new Uint8Array(size) : [];
+
+				for(var i = 0; i < size; i ++){
+					bytes[i] = str.charCodeAt(position ++) & 0xff;
+				}
+
+				return bytes;
+			}
+
+
+			function setPosition(value){
+				if(typeof value != 'number'){
+					throw new Error('Position must be a number');
+				}
+
+				if(value < 0){
+					throw new Error('Position must be at least 0');
+				}
+
+				position = value;
+			}
+
+		}
+	</script>
+
     <style>
         html,body { margin: 0; padding: 0; width: 100%; height: 100%; }
     </style>

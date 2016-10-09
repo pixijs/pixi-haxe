@@ -237,13 +237,16 @@ events_Main.main = function() {
 events_Main.__super__ = pixi_plugins_app_Application;
 events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
+		var _g = this;
 		this.backgroundColor = 16777215;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		this._img = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
 		this._img.position.set(400,300);
 		this._img.interactive = true;
 		this._img.scale.set(4);
+		this._img.anchor.set(0.5);
 		this._img.on("mouseover",$bind(this,this._onEvent));
+		this._img.on("mouseout",$bind(this,this._onEvent));
 		this._img.on("touchstart",$bind(this,this._onEvent));
 		this._img.tap = $bind(this,this._onEvent);
 		this._img.click = $bind(this,this._onEvent);
@@ -255,6 +258,9 @@ events_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._label = new PIXI.Text("EVENTS",style);
 		this._label.position.set(0,0);
 		this.stage.addChild(this._label);
+		this.onUpdate = function(t) {
+			_g._img.rotation += 0.1;
+		};
 	}
 	,_onEvent: function(target) {
 		this._label.text = target.type;
