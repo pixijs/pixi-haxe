@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "updated to 4.0.1, exposed EventEmitter class & text style bug fix",
-	"version": "4.0.1",
+	"releasenote": "updated to latest pixi & minor bug fixes",
+	"version": "4.0.2",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
