@@ -38,6 +38,13 @@ extern class Mesh extends Container {
 	 * @member {Texture}
 	 */
 	var texture:Texture;
+	
+	/**
+	 * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+	 *
+	 * @member {Float}
+	 */
+	var tint:Float;
 
 	/**
 	 * The Uvs of the Mesh
