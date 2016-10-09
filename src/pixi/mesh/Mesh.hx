@@ -1,5 +1,6 @@
 package pixi.mesh;
 
+import pixi.core.Shader;
 import js.html.Float32Array;
 import js.html.Int16Array;
 import pixi.core.display.Container;
@@ -38,13 +39,6 @@ extern class Mesh extends Container {
 	 * @member {Texture}
 	 */
 	var texture:Texture;
-	
-	/**
-	 * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
-	 *
-	 * @member {Float}
-	 */
-	var tint:Float;
 
 	/**
 	 * The Uvs of the Mesh
@@ -93,6 +87,28 @@ extern class Mesh extends Container {
 	 * @member {Int}
 	 */
 	var drawMode:Int;
+
+	/**
+     * The default shader that is used if a mesh doesn't have a more specific one.
+     *
+     * @member {Shader}
+     */
+	var shader:Shader;
+
+	/**
+     * The tint applied to the mesh. This is a [r,g,b] value. A value of [1,1,1] will remove any tint effect.
+     *
+     * @member {Float32Array}
+     * @memberof PIXI.mesh.Mesh#
+     */
+	var tintRgb:Float32Array;
+
+	/**
+	 * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+	 *
+	 * @member {Int}
+	 */
+	var tint:Int;
 }
 
 typedef DrawModes = {

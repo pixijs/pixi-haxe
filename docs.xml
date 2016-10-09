@@ -17555,6 +17555,25 @@
 	 *
 	 * @member {Int}</haxe_doc>
 		</drawMode>
+		<shader public="1">
+			<c path="pixi.core.Shader"/>
+			<haxe_doc>* The default shader that is used if a mesh doesn't have a more specific one.
+     *
+     * @member {Shader}</haxe_doc>
+		</shader>
+		<tintRgb public="1">
+			<c path="js.html.Float32Array"/>
+			<haxe_doc>* The tint applied to the mesh. This is a [r,g,b] value. A value of [1,1,1] will remove any tint effect.
+     *
+     * @member {Float32Array}
+     * @memberof PIXI.mesh.Mesh#</haxe_doc>
+		</tintRgb>
+		<tint public="1">
+			<x path="Int"/>
+			<haxe_doc>* The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+	 *
+	 * @member {Int}</haxe_doc>
+		</tint>
 		<new public="1" set="method">
 			<f a="texture:?vertices:?uvs:?indices:?drawMode">
 				<c path="pixi.core.textures.Texture"/>
