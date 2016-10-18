@@ -4,7 +4,6 @@ engines:
 
 exclude_paths:
   - libs/**/*
-  - samples/**/*
 
 ratings:
   paths:
