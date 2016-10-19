@@ -11978,21 +11978,34 @@
 	 * @param	src {string|string[]}
 	 * @return {string|string[]}</haxe_doc>
 		</checkPrecision>
+		<bind public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Uses this shader</haxe_doc>
+		</bind>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys this shader</haxe_doc>
+		</destroy>
+		<gl public="1"><d/></gl>
+		<program public="1"><d/></program>
+		<attributes public="1"><d/></attributes>
+		<uniforms public="1"><d/></uniforms>
 		<new public="1" set="method">
 			<f a="gl:vertexSrc:framentSrc">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<d/>
 				<d/>
 				<d/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Wrapper class, webGL Shader for Pixi.
+			<haxe_doc><![CDATA[* Wrapper class, webGL Shader for Pixi.
 	 * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
 	 *
 	 * @class
+	 * @extends GLShader
 	 * @memberof PIXI
 	 * @param gl {WebGLRenderingContext} The current WebGL rendering context
-	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
-	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.</haxe_doc>
+	 * @param vertexSrc {String|Array<String>} The vertex shader source as an array of strings.
+	 * @param fragmentSrc {String|Array<String>} The fragment shader source as an array of strings.]]></haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.Shader"</e></m></meta>
 	</class>
