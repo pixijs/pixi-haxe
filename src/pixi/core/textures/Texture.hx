@@ -177,6 +177,16 @@ extern class Texture extends EventEmitter {
 	static function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
 
 	/**
+     * Helper function that creates a new Texture based on the source you provide.
+     * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+     *
+     * @static
+     * @param {String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source - Source to create texture from
+     * @return {Texture} The newly created texture
+     */
+	static function from(source:Dynamic):Texture;
+
+	/**
 	 * Adds a texture to the global utils.TextureCache. This cache is shared across the whole PIXI object.
 	 *
 	 * @static

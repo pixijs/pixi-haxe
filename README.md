@@ -1,4 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)
+[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe) [![Issue Count](https://codeclimate.com/github/pixijs/pixi-haxe/badges/issue_count.svg)](https://codeclimate.com/github/pixijs/pixi-haxe)
 =========
 ![haxe pixi logo](logo.png)
 
@@ -8,10 +8,6 @@ Externs of Pixi.js v4.x for Haxe - A fast and lightweight 2D javascript renderin
 
 ```
 haxelib install pixijs
-
-or via npm
-
-npm install hxpixijs
 ```
 
 ### Issues

@@ -246,16 +246,16 @@ spine_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._spine = new PIXI.spine.Spine(Reflect.field(this._loader.resources,"spinedata").spineData);
 		this._spine.position.set(400,600);
 		this._spine.scale.set(1.5);
-		this._spine.stateData.setMixByName("walk","jump",0.2);
-		this._spine.stateData.setMixByName("jump","walk",0.4);
-		this._spine.state.setAnimationByName(0,"walk",true);
+		this._spine.stateData.setMix("walk","jump",0.2);
+		this._spine.stateData.setMix("jump","walk",0.4);
+		this._spine.state.setAnimation(0,"walk",true);
 		this.stage.addChild(this._spine);
 		this.stage.on("click",$bind(this,this._stageOnClick));
 		this.stage.on("tap",$bind(this,this._stageOnClick));
 	}
 	,_stageOnClick: function() {
-		this._spine.state.setAnimationByName(0,"jump",false);
-		this._spine.state.addAnimationByName(0,"walk",true,0);
+		this._spine.state.setAnimation(0,"jump",false);
+		this._spine.state.addAnimation(0,"walk",true,0);
 	}
 });
 var $_, $fid = 0;

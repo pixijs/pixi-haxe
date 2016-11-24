@@ -54,6 +54,14 @@ extern class MovieClip extends Sprite {
 	var onComplete:Void -> Void;
 
 	/**
+	 * Function to call when a MovieClip changes which texture is being rendered
+	 *
+	 * @method
+	 * @memberof MovieClip#
+	 */
+	var onFrameChange:Void -> Void;
+
+	/**
 	 * The MovieClips current frame index (this may not have to be a whole number)
 	 *
 	 * @member {Int}
