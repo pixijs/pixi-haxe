@@ -1,5 +1,7 @@
 package pixi.plugins.spine;
 
+import pixi.plugins.spine.core.SkeletonData;
+import pixi.plugins.spine.core.AnimationStateData;
 import pixi.core.display.Container;
 
 @:native("PIXI.spine.Spine")
@@ -33,7 +35,7 @@ extern class Spine extends Container {
      *
      * @member {object}
      */
-	var spineData:Dynamic;
+	var spineData:SkeletonData;
 
 	/**
      * A spine Skeleton object
@@ -47,7 +49,7 @@ extern class Spine extends Container {
      *
      * @member {object}
      */
-	var stateData:Dynamic;
+	var stateData:AnimationStateData;
 
 	/**
      * A spine AnimationState object created from the spine AnimationStateData object

@@ -15440,6 +15440,18 @@
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture</haxe_doc>
 		</fromVideoUrl>
+		<from public="1" set="method" static="1">
+			<f a="source">
+				<d/>
+				<c path="pixi.core.textures.Texture"/>
+			</f>
+			<haxe_doc>* Helper function that creates a new Texture based on the source you provide.
+     * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+     *
+     * @static
+     * @param {String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source - Source to create texture from
+     * @return {Texture} The newly created texture</haxe_doc>
+		</from>
 		<addTextureToCache public="1" set="method" static="1">
 			<f a="texture:id">
 				<c path="pixi.core.textures.Texture"/>
@@ -16200,6 +16212,13 @@
 	 * @method
 	 * @memberof MovieClip#</haxe_doc>
 		</onComplete>
+		<onFrameChange public="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Function to call when a MovieClip changes which texture is being rendered
+	 *
+	 * @method
+	 * @memberof MovieClip#</haxe_doc>
+		</onFrameChange>
 		<currentFrame public="1">
 			<x path="Int"/>
 			<haxe_doc>* The MovieClips current frame index (this may not have to be a whole number)
@@ -17887,7 +17906,7 @@
      * @member {boolean}</haxe_doc>
 		</autoUpdate>
 		<spineData public="1">
-			<d/>
+			<c path="pixi.plugins.spine.core.SkeletonData"/>
 			<haxe_doc>* The spineData object
      *
      * @member {object}</haxe_doc>
@@ -17899,7 +17918,7 @@
      * @member {object}</haxe_doc>
 		</skeleton>
 		<stateData public="1">
-			<d/>
+			<c path="pixi.plugins.spine.core.AnimationStateData"/>
 			<haxe_doc>* A spine AnimationStateData object created from the spine data passed in the constructor
      *
      * @member {object}</haxe_doc>
@@ -17944,6 +17963,285 @@
 	 * @param spineData {object} The spine data loaded from a spine atlas.</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.spine.Spine"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.AnimationStateData" params="" file="src/pixi/plugins/spine/core/AnimationStateData.hx" extern="1">
+		<setMix public="1" set="method"><f a="fromName:toName:duration">
+	<c path="String"/>
+	<c path="String"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></setMix>
+		<setMixByName public="1" set="method"><f a="fromName:toName:duration">
+	<c path="String"/>
+	<c path="String"/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></setMixByName>
+		<setMixWith public="1" set="method"><f a="from:to:duration">
+	<d/>
+	<d/>
+	<x path="Float"/>
+	<x path="Void"/>
+</f></setMixWith>
+		<getMix public="1" set="method"><f a="from:to">
+	<d/>
+	<d/>
+	<d/>
+</f></getMix>
+		<new public="1" set="method"><f a="skeletonData">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.AnimationStateData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.BoneData" params="" file="src/pixi/plugins/spine/core/BoneData.hx" extern="1">
+		<index public="1"><x path="Int"/></index>
+		<name public="1"><c path="String"/></name>
+		<parent public="1"><c path="pixi.plugins.spine.core.BoneData"/></parent>
+		<length public="1"><x path="Int"/></length>
+		<x public="1"><x path="Float"/></x>
+		<y public="1"><x path="Float"/></y>
+		<rotation public="1"><x path="Float"/></rotation>
+		<scaleX public="1"><x path="Float"/></scaleX>
+		<scaleY public="1"><x path="Float"/></scaleY>
+		<shearX public="1"><x path="Float"/></shearX>
+		<shearY public="1"><x path="Float"/></shearY>
+		<transformMode public="1"><d/></transformMode>
+		<new public="1" set="method"><f a="index:name:parent">
+	<x path="Int"/>
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.BoneData"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.BoneData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.Event" params="" file="src/pixi/plugins/spine/core/Event.hx" extern="1">
+		<data public="1"><c path="pixi.plugins.spine.core.EventData"/></data>
+		<intValue public="1"><x path="Int"/></intValue>
+		<floatValue public="1"><x path="Float"/></floatValue>
+		<stringValue public="1"><c path="String"/></stringValue>
+		<time public="1"><x path="Float"/></time>
+		<new public="1" set="method"><f a="time:data">
+	<x path="Float"/>
+	<c path="pixi.plugins.spine.core.EventData"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.Event"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.EventData" params="" file="src/pixi/plugins/spine/core/EventData.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<intValue public="1"><x path="Int"/></intValue>
+		<floatValue public="1"><x path="Float"/></floatValue>
+		<stringValue public="1"><c path="String"/></stringValue>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.EventData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.IkConstraintData" params="" file="src/pixi/plugins/spine/core/IkConstraintData.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<order public="1"><x path="Int"/></order>
+		<bones public="1"><c path="Array"><c path="pixi.plugins.spine.core.BoneData"/></c></bones>
+		<target public="1"><c path="pixi.plugins.spine.core.BoneData"/></target>
+		<bendDirection public="1"><x path="Int"/></bendDirection>
+		<mix public="1"><x path="Float"/></mix>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.IkConstraintData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.PathConstraintData" params="" file="src/pixi/plugins/spine/core/PathConstraintData.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<order public="1"><x path="Int"/></order>
+		<bones public="1"><c path="Array"><c path="pixi.plugins.spine.core.BoneData"/></c></bones>
+		<target public="1"><c path="pixi.plugins.spine.core.BoneData"/></target>
+		<positionMode public="1"><e path="pixi.plugins.spine.core.PositionMode"/></positionMode>
+		<spacingMode public="1"><e path="pixi.plugins.spine.core.SpacingMode"/></spacingMode>
+		<rotateMode public="1"><e path="pixi.plugins.spine.core.RotateMode"/></rotateMode>
+		<shearMix public="1"><x path="Float"/></shearMix>
+		<offsetRotation public="1"><x path="Float"/></offsetRotation>
+		<position public="1"><x path="Float"/></position>
+		<spacing public="1"><x path="Float"/></spacing>
+		<rotateMix public="1"><x path="Float"/></rotateMix>
+		<translateMix public="1"><x path="Float"/></translateMix>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.PathConstraintData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.SkeletonData" params="" file="src/pixi/plugins/spine/core/SkeletonData.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<bones public="1"><c path="Array"><c path="pixi.plugins.spine.core.BoneData"/></c></bones>
+		<slots public="1"><c path="Array"><c path="pixi.plugins.spine.core.SlotData"/></c></slots>
+		<skins public="1"><c path="Array"><c path="pixi.plugins.spine.core.Skin"/></c></skins>
+		<defaultSkin public="1"><c path="pixi.plugins.spine.core.Skin"/></defaultSkin>
+		<events public="1"><c path="Array"><c path="pixi.plugins.spine.core.EventData"/></c></events>
+		<animations public="1"><c path="Array"><d/></c></animations>
+		<ikConstraints public="1"><c path="Array"><c path="pixi.plugins.spine.core.IkConstraintData"/></c></ikConstraints>
+		<transformConstraints public="1"><c path="Array"><c path="pixi.plugins.spine.core.TransformConstraintData"/></c></transformConstraints>
+		<pathConstraints public="1"><c path="Array"><c path="pixi.plugins.spine.core.PathConstraintData"/></c></pathConstraints>
+		<width public="1"><x path="Float"/></width>
+		<height public="1"><x path="Float"/></height>
+		<version public="1"><c path="String"/></version>
+		<hash public="1"><c path="String"/></hash>
+		<fps public="1"><x path="Float"/></fps>
+		<imagesPath public="1"><c path="String"/></imagesPath>
+		<findBone public="1" set="method"><f a="boneName">
+	<c path="String"/>
+	<d/>
+</f></findBone>
+		<findBoneIndex public="1" set="method"><f a="boneName">
+	<c path="String"/>
+	<x path="Int"/>
+</f></findBoneIndex>
+		<findSlot public="1" set="method"><f a="slotName">
+	<c path="String"/>
+	<d/>
+</f></findSlot>
+		<findSlotIndex public="1" set="method"><f a="slotName">
+	<c path="String"/>
+	<x path="Int"/>
+</f></findSlotIndex>
+		<findSkin public="1" set="method"><f a="skinName">
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.Skin"/>
+</f></findSkin>
+		<findEvent public="1" set="method"><f a="eventDataName">
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.Event"/>
+</f></findEvent>
+		<findAnimation public="1" set="method"><f a="animationName">
+	<c path="String"/>
+	<d/>
+</f></findAnimation>
+		<findIkConstraint public="1" set="method"><f a="constraintName">
+	<c path="String"/>
+	<d/>
+</f></findIkConstraint>
+		<findTransformConstraint public="1" set="method"><f a="constraintName">
+	<c path="String"/>
+	<d/>
+</f></findTransformConstraint>
+		<findPathConstraint public="1" set="method"><f a="constraintName">
+	<c path="String"/>
+	<d/>
+</f></findPathConstraint>
+		<findPathConstraintIndex public="1" set="method"><f a="pathConstraintName">
+	<c path="String"/>
+	<x path="Int"/>
+</f></findPathConstraintIndex>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.SkeletonData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.Skin" params="" file="src/pixi/plugins/spine/core/Skin.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<attachments public="1"><c path="Array"><d/></c></attachments>
+		<addAttachment public="1" set="method"><f a="slotIndex:name:attachment">
+	<x path="Int"/>
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.attachments.Attachment"/>
+	<x path="Void"/>
+</f></addAttachment>
+		<getAttachment public="1" set="method"><f a="slotIndex:name">
+	<x path="Int"/>
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.attachments.Attachment"/>
+</f></getAttachment>
+		<attachAll public="1" set="method"><f a="skeleton:oldSkin">
+	<d/>
+	<c path="pixi.plugins.spine.core.Skin"/>
+	<x path="Void"/>
+</f></attachAll>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.Skin"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.SlotData" params="" file="src/pixi/plugins/spine/core/SlotData.hx" extern="1">
+		<index public="1"><x path="Int"/></index>
+		<name public="1"><c path="String"/></name>
+		<boneData public="1"><c path="pixi.plugins.spine.core.BoneData"/></boneData>
+		<color public="1"><c path="pixi.plugins.spine.core.utils.Color"/></color>
+		<attachmentName public="1"><c path="String"/></attachmentName>
+		<blendMode public="1"><x path="Int"/></blendMode>
+		<new public="1" set="method"><f a="index:name:boneData">
+	<x path="Int"/>
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.BoneData"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.SlotData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.TransformConstraintData" params="" file="src/pixi/plugins/spine/core/TransformConstraintData.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<order public="1"><x path="Int"/></order>
+		<bones public="1"><c path="Array"><c path="pixi.plugins.spine.core.BoneData"/></c></bones>
+		<target public="1"><c path="pixi.plugins.spine.core.BoneData"/></target>
+		<rotateMix public="1"><x path="Float"/></rotateMix>
+		<translateMix public="1"><x path="Float"/></translateMix>
+		<scaleMix public="1"><x path="Float"/></scaleMix>
+		<shearMix public="1"><x path="Float"/></shearMix>
+		<offsetRotation public="1"><x path="Float"/></offsetRotation>
+		<offsetX public="1"><x path="Float"/></offsetX>
+		<offsetY public="1"><x path="Float"/></offsetY>
+		<offsetScaleX public="1"><x path="Float"/></offsetScaleX>
+		<offsetScaleY public="1"><x path="Float"/></offsetScaleY>
+		<offsetShearY public="1"><x path="Float"/></offsetShearY>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.TransformConstraintData"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.attachments.Attachment" params="" file="src/pixi/plugins/spine/core/attachments/Attachment.hx" extern="1">
+		<name public="1"><c path="String"/></name>
+		<new public="1" set="method"><f a="name">
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.Attachment"</e></m></meta>
+	</class>
+	<class path="pixi.plugins.spine.core.utils.Color" params="" file="src/pixi/plugins/spine/core/utils/Color.hx" extern="1">
+		<WHITE public="1" static="1"><c path="pixi.plugins.spine.core.utils.Color"/></WHITE>
+		<RED public="1" static="1"><c path="pixi.plugins.spine.core.utils.Color"/></RED>
+		<GREEN public="1" static="1"><c path="pixi.plugins.spine.core.utils.Color"/></GREEN>
+		<BLUE public="1" static="1"><c path="pixi.plugins.spine.core.utils.Color"/></BLUE>
+		<MAGENTA public="1" static="1"><c path="pixi.plugins.spine.core.utils.Color"/></MAGENTA>
+		<set public="1" set="method"><f a="r:g:b:a">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<c path="pixi.plugins.spine.core.utils.Color"/>
+</f></set>
+		<setFromColor public="1" set="method"><f a="c">
+	<c path="pixi.plugins.spine.core.utils.Color"/>
+	<c path="pixi.plugins.spine.core.utils.Color"/>
+</f></setFromColor>
+		<setFromString public="1" set="method"><f a="hex">
+	<c path="String"/>
+	<c path="pixi.plugins.spine.core.utils.Color"/>
+</f></setFromString>
+		<add public="1" set="method"><f a="r:g:b:a">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<c path="pixi.plugins.spine.core.utils.Color"/>
+</f></add>
+		<clamp public="1" set="method"><f a=""><x path="Void"/></f></clamp>
+		<new public="1" set="method"><f a="?r:?g:?b:?a">
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.spine.core.Color"</e></m></meta>
 	</class>
 	<class path="pixi.tilemap.CanvasTileRenderer" params="" file="src/pixi/tilemap/CanvasTileRenderer.hx" extern="1">
 		<renderer public="1"><c path="pixi.core.renderers.canvas.CanvasRenderer"/></renderer>

@@ -29,10 +29,10 @@ class Main extends Application {
 
 		_spine.scale.set(1.5);
 
-		_spine.stateData.setMixByName("walk", "jump", 0.2);
-		_spine.stateData.setMixByName("jump", "walk", 0.4);
+		_spine.stateData.setMix("walk", "jump", 0.2);
+		_spine.stateData.setMix("jump", "walk", 0.4);
 
-		_spine.state.setAnimationByName(0, "walk", true);
+		_spine.state.setAnimation(0, "walk", true);
 
 		stage.addChild(_spine);
 
@@ -41,8 +41,8 @@ class Main extends Application {
 	}
 
 	function _stageOnClick() {
-		_spine.state.setAnimationByName(0, "jump", false);
-		_spine.state.addAnimationByName(0, "walk", true, 0);
+		_spine.state.setAnimation(0, "jump", false);
+		_spine.state.addAnimation(0, "walk", true, 0);
 	}
 
 	static function main() {
