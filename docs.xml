@@ -17666,6 +17666,24 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.mesh.Plane"</e></m></meta>
 	</class>
+	<class path="pixi.mesh.NineSlicePlane" params="" file="src/pixi/mesh/NineSlicePlane.hx" extern="1">
+		<extends path="pixi.mesh.Plane"/>
+		<leftWidth public="1"><x path="Int"/></leftWidth>
+		<rightWidth public="1"><x path="Int"/></rightWidth>
+		<topHeight public="1"><x path="Int"/></topHeight>
+		<bottomHeight public="1"><x path="Int"/></bottomHeight>
+		<updateHorizontalVertices public="1" set="method"><f a=""><x path="Void"/></f></updateHorizontalVertices>
+		<updateVerticalVertices public="1" set="method"><f a=""><x path="Void"/></f></updateVerticalVertices>
+		<new public="1" set="method"><f a="texture:?leftWidth:?topHeight:?rightWidth:?bottomHeight">
+	<c path="pixi.core.textures.Texture"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Int"/>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":native"><e>"PIXI.mesh.NineSlicePlane"</e></m></meta>
+	</class>
 	<class path="pixi.mesh.Rope" params="" file="src/pixi/mesh/Rope.hx" extern="1">
 		<extends path="pixi.mesh.Mesh"/>
 		<points public="1"><c path="Array"><c path="pixi.core.math.Point"/></c></points>

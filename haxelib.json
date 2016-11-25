@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "updated to latest pixi 4.2.2 and spine externs",
-	"version": "4.2.0",
+	"releasenote": "added NineSlicePlane class in mesh package",
+	"version": "4.2.1",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
