@@ -11801,7 +11801,7 @@
 		<RESOLUTION public="1" static="1"><x path="Float"/></RESOLUTION>
 		<FILTER_RESOLUTION public="1" static="1"><x path="Float"/></FILTER_RESOLUTION>
 		<DEFAULT_RENDER_OPTIONS public="1" static="1">
-			<t path="pixi.core.DefaultRenderOptions"/>
+			<t path="pixi.core.RenderOptions"/>
 			<haxe_doc>* The default render options if none are supplied to {@link PIXI.WebGLRenderer}
 	 * or {@link PIXI.CanvasRenderer}.
 	 *
@@ -11863,44 +11863,6 @@
 	<WEBGL><x path="Int"/></WEBGL>
 	<UNKNOWN><x path="Int"/></UNKNOWN>
 	<CANVAS><x path="Int"/></CANVAS>
-</a></typedef>
-	<typedef path="pixi.core.DefaultRenderOptions" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
-	<view>
-		<t path="Null"><d/></t>
-		<meta><m n=":optional"/></meta>
-	</view>
-	<transparent>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</transparent>
-	<resolution>
-		<t path="Null"><x path="Float"/></t>
-		<meta><m n=":optional"/></meta>
-	</resolution>
-	<preserveDrawingBuffer>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</preserveDrawingBuffer>
-	<forceFXAA>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</forceFXAA>
-	<clearBeforeRender>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</clearBeforeRender>
-	<backgroundColor>
-		<t path="Null"><x path="Int"/></t>
-		<meta><m n=":optional"/></meta>
-	</backgroundColor>
-	<autoResize>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</autoResize>
-	<antialias>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</antialias>
 </a></typedef>
 	<typedef path="pixi.core.ScaleModes" params="" file="src/pixi/core/Pixi.hx" module="pixi.core.Pixi"><a>
 	<NEAREST><x path="Int"/></NEAREST>
@@ -11968,6 +11930,206 @@
 	<DYNAMIC><x path="Int"/></DYNAMIC>
 	<DEFAULT><x path="Int"/></DEFAULT>
 </a></typedef>
+	<typedef path="pixi.core.RenderOptions" params="" file="src/pixi/core/RenderOptions.hx"><a>
+	<view>
+		<t path="Null"><d/></t>
+		<meta><m n=":optional"/></meta>
+	</view>
+	<transparent>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</transparent>
+	<resolution>
+		<t path="Null"><x path="Float"/></t>
+		<meta><m n=":optional"/></meta>
+	</resolution>
+	<preserveDrawingBuffer>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</preserveDrawingBuffer>
+	<forceFXAA>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</forceFXAA>
+	<clearBeforeRender>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</clearBeforeRender>
+	<backgroundColor>
+		<t path="Null"><x path="Int"/></t>
+		<meta><m n=":optional"/></meta>
+	</backgroundColor>
+	<autoResize>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</autoResize>
+	<antialias>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</antialias>
+</a></typedef>
+	<class path="pixi.core.Settings" params="" file="src/pixi/core/Settings.hx" extern="1">
+		<TARGET_FPMS public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Target frames per millisecond.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Float}
+     * @default 0.06</haxe_doc>
+		</TARGET_FPMS>
+		<MIPMAP_TEXTURES public="1" static="1">
+			<x path="Bool"/>
+			<haxe_doc>* If set to true WebGL will attempt make textures mimpaped by default.
+     * Mipmapping will only succeed if the base texture uploaded has power of two dimensions.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Bool}
+     * @default true</haxe_doc>
+		</MIPMAP_TEXTURES>
+		<RESOLUTION public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Default resolution / device pixel ratio of the renderer.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Float}
+     * @default 1</haxe_doc>
+		</RESOLUTION>
+		<FILTER_RESOLUTION public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Default filter resolution.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Float}
+     * @default 1</haxe_doc>
+		</FILTER_RESOLUTION>
+		<SPRITE_MAX_TEXTURES public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* The maximum textures that this device supports.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Int}
+     * @default 32</haxe_doc>
+		</SPRITE_MAX_TEXTURES>
+		<SPRITE_BATCH_SIZE public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* The default sprite batch size.
+     *
+     * The default aims to balance desktop and mobile devices.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Int}
+     * @default 4096</haxe_doc>
+		</SPRITE_BATCH_SIZE>
+		<RETINA_PREFIX public="1" static="1">
+			<c path="String"/>
+			<haxe_doc>* The prefix that denotes a URL is for a retina asset.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {RegExp|String}
+     * @example `@2x`
+     * @default /@(.+)x/</haxe_doc>
+		</RETINA_PREFIX>
+		<RENDER_OPTIONS public="1" static="1">
+			<t path="pixi.core.RenderOptions"/>
+			<haxe_doc>* The default render options if none are supplied to {@link PIXI.WebGLRenderer}
+     * or {@link PIXI.CanvasRenderer}.
+     *
+     * @static
+     * @constant
+     * @memberof PIXI.settings
+     * @type {RenderOptions}
+     * @property {HTMLCanvasElement} view=null
+     * @property {number} resolution=1
+     * @property {boolean} antialias=false
+     * @property {boolean} forceFXAA=false
+     * @property {boolean} autoResize=false
+     * @property {boolean} transparent=false
+     * @property {number} backgroundColor=0x000000
+     * @property {boolean} clearBeforeRender=true
+     * @property {boolean} preserveDrawingBuffer=false
+     * @property {boolean} roundPixels=false</haxe_doc>
+		</RENDER_OPTIONS>
+		<TRANSFORM_MODE public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* Default transform type.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.TRANSFORM_MODE}
+     * @default PIXI.TRANSFORM_MODE.STATIC</haxe_doc>
+		</TRANSFORM_MODE>
+		<GC_MODE public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* Default Garbage Collection mode.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.GC_MODES}
+     * @default PIXI.GC_MODES.AUTO</haxe_doc>
+		</GC_MODE>
+		<GC_MAX_IDLE public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Default Garbage Collection max idle.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Float}
+     * @default 3600</haxe_doc>
+		</GC_MAX_IDLE>
+		<GC_MAX_CHECK_COUNT public="1" static="1">
+			<x path="Float"/>
+			<haxe_doc>* Default Garbage Collection maximum check count.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {Float}
+     * @default 600</haxe_doc>
+		</GC_MAX_CHECK_COUNT>
+		<WRAP_MODE public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* Default wrap modes that are supported by pixi.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.WRAP_MODES}
+     * @default PIXI.WRAP_MODES.CLAMP</haxe_doc>
+		</WRAP_MODE>
+		<SCALE_MODE public="1" static="1">
+			<x path="Int"/>
+			<haxe_doc>* The scale modes that are supported by pixi.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.SCALE_MODES}
+     * @default PIXI.SCALE_MODES.LINEAR</haxe_doc>
+		</SCALE_MODE>
+		<PRECISION public="1" static="1">
+			<c path="String"/>
+			<haxe_doc>* Default specify float precision in shaders.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.PRECISION}
+     * @default PIXI.PRECISION.MEDIUM</haxe_doc>
+		</PRECISION>
+		<CAN_UPLOAD_SAME_BUFFER public="1" static="1">
+			<x path="Bool"/>
+			<haxe_doc>* Can we upload the same buffer in a single frame?
+     *
+     * @static
+     * @constant
+     * @memberof PIXI
+     * @type {Bool}</haxe_doc>
+		</CAN_UPLOAD_SAME_BUFFER>
+		<meta><m n=":native"><e>"PIXI.settings"</e></m></meta>
+	</class>
 	<class path="pixi.core.Shader" params="" file="src/pixi/core/Shader.hx" extern="1">
 		<checkPrecision public="1" set="method">
 			<f a="src">

@@ -188,7 +188,7 @@ extern class Pixi {
 	 * @property {Bool} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
 	 * @property {Bool} DEFAULT_RENDER_OPTIONS.autoResize=false
 	 */
-	static var DEFAULT_RENDER_OPTIONS:DefaultRenderOptions;
+	static var DEFAULT_RENDER_OPTIONS:RenderOptions;
 
 	/**
 	 * Constants that identify shapes, mainly to prevent `instanceof` calls.
@@ -242,18 +242,6 @@ typedef RendererType = {
 	var UNKNOWN:Int;
 	var WEBGL:Int;
 	var CANVAS:Int;
-}
-
-typedef DefaultRenderOptions = {
-	@:optional var view:Dynamic;
-	@:optional var resolution:Float;
-	@:optional var antialias:Bool;
-	@:optional var forceFXAA:Bool;
-	@:optional var autoResize:Bool;
-	@:optional var transparent:Bool;
-	@:optional var backgroundColor:Int;
-	@:optional var clearBeforeRender:Bool;
-	@:optional var preserveDrawingBuffer:Bool;
 }
 
 typedef ScaleModes = {
