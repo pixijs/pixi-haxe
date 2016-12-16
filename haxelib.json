@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added NineSlicePlane class in mesh package",
-	"version": "4.2.1",
+	"releasenote": "added Settings class",
+	"version": "4.2.2",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
