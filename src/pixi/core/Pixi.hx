@@ -12,6 +12,8 @@ extern class Pixi {
 	 */
 	static var VERSION:String;
 
+	static var settings:Settings;
+
 	/**
      * @property {Float} PI_2 - Two Pi
      * @constant
