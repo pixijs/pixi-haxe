@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added Settings class",
-	"version": "4.2.2",
+	"releasenote": "added settings to Pixi class",
+	"version": "4.2.3",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
