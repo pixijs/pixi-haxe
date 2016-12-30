@@ -11624,6 +11624,7 @@
      *
      * @member {SystemRenderer}</haxe_doc>
 		</renderer>
+		<createTouchHook public="1" set="method"><f a=""><x path="Void"/></f></createTouchHook>
 		<capHitArea public="1" set="method"><f a="hitArea">
 	<c path="pixi.core.math.shapes.Rectangle"/>
 	<x path="Void"/>
@@ -11638,12 +11639,15 @@
 				<c path="pixi.core.renderers.SystemRenderer"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* The Accessibility manager reacreates the ability to tab and and have content read by screen readers. This is very important as it can possibly help people with disabilities access pixi content.
-	 * Much like interaction any DisplayObject can be made accessible. This manager will map the events as if the mouse was being used, minimizing the efferot required to implement.
+			<haxe_doc>* The Accessibility manager reacreates the ability to tab and and have content read by screen
+	 * readers. This is very important as it can possibly help people with disabilities access pixi
+	 * content.
+	 *
+	 * Much like interaction any DisplayObject can be made accessible. This manager will map the
+	 * events as if the mouse was being used, minimizing the efferot required to implement.
 	 *
 	 * @class
-	 * @memberof PIXI
-	 * @param renderer {SystemRenderer} A reference to the current renderer</haxe_doc>
+	 * @memberof PIXI</haxe_doc>
 		</new>
 		<meta><m n=":native"><e>"PIXI.accessibility.AccessibilityManager"</e></m></meta>
 	</class>
@@ -11656,6 +11660,7 @@
 	 * @constant
 	 * @property {String} VERSION</haxe_doc>
 		</VERSION>
+		<settings public="1" static="1"><c path="pixi.core.Settings"/></settings>
 		<PI_2 public="1" static="1">
 			<x path="Float"/>
 			<haxe_doc>* @property {Float} PI_2 - Two Pi
@@ -12993,6 +12998,30 @@
 	 * @default pointer
 	 * @memberof DisplayObject#</haxe_doc>
 		</defaultCursor>
+		<accessible public="1">
+			<x path="Bool"/>
+			<haxe_doc>*  Flag for if the object is accessible. If true AccessibilityManager will overlay a
+     *   shadow div with attributes set
+     *
+     * @member {Bool}</haxe_doc>
+		</accessible>
+		<accessibleTitle public="1">
+			<c path="String"/>
+			<haxe_doc>* Sets the title attribute of the shadow div
+     * If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+     *
+     * @member {String}</haxe_doc>
+		</accessibleTitle>
+		<accessibleHint public="1">
+			<c path="String"/>
+			<haxe_doc>* Sets the aria-label attribute of the shadow div
+     *
+     * @member {String}</haxe_doc>
+		</accessibleHint>
+		<tabIndex public="1">
+			<x path="Int"/>
+			<haxe_doc>* @todo Needs docs.</haxe_doc>
+		</tabIndex>
 		<new public="1" set="method">
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>* The base class for all objects that are rendered on the screen.

@@ -298,4 +298,32 @@ extern class DisplayObject extends InteractionManager {
 	 * @memberof DisplayObject#
 	 */
 	var defaultCursor:String;
+
+	/**
+     *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
+     *   shadow div with attributes set
+     *
+     * @member {Bool}
+     */
+	var accessible:Bool;
+
+	/**
+     * Sets the title attribute of the shadow div
+     * If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+     *
+     * @member {String}
+     */
+	var accessibleTitle:String;
+
+	/**
+     * Sets the aria-label attribute of the shadow div
+     *
+     * @member {String}
+     */
+	var accessibleHint:String;
+
+	/**
+     * @todo Needs docs.
+     */
+	var tabIndex:Int;
 }
