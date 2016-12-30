@@ -7,12 +7,15 @@ import pixi.core.renderers.SystemRenderer;
 extern class AccessibilityManager {
 
 	/**
-	 * The Accessibility manager reacreates the ability to tab and and have content read by screen readers. This is very important as it can possibly help people with disabilities access pixi content.
-	 * Much like interaction any DisplayObject can be made accessible. This manager will map the events as if the mouse was being used, minimizing the efferot required to implement.
+	 * The Accessibility manager reacreates the ability to tab and and have content read by screen
+	 * readers. This is very important as it can possibly help people with disabilities access pixi
+	 * content.
+	 *
+	 * Much like interaction any DisplayObject can be made accessible. This manager will map the
+	 * events as if the mouse was being used, minimizing the efferot required to implement.
 	 *
 	 * @class
 	 * @memberof PIXI
-	 * @param renderer {SystemRenderer} A reference to the current renderer
 	 */
 	function new(renderer:SystemRenderer);
 
@@ -29,6 +32,8 @@ extern class AccessibilityManager {
      * @member {SystemRenderer}
      */
 	var renderer:SystemRenderer;
+
+	function createTouchHook():Void;
 
 	function capHitArea(hitArea:Rectangle):Void;
 
