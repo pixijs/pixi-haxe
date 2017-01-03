@@ -16,7 +16,7 @@
 		"adireddy"
 	],
 	"releasenote": "minor update",
-	"version": "4.2.5",
+	"version": "4.2.6",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

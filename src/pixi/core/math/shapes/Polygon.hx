@@ -34,8 +34,8 @@ extern class Polygon {
 	/**
 	 * An array of the points of this polygon
 	 * @property points
-	 * @type Array<Point>
+	 * @type Array<Float>
 	 *
 	 */
-	var points:Array<Point>;
+	var points:Array<Float>;
 }
