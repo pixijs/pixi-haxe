@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added AccessibilityManager properties in DisplayObject",
-	"version": "4.2.4",
+	"releasenote": "minor update",
+	"version": "4.2.5",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
