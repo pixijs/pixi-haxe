@@ -13950,10 +13950,10 @@
 	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
 		</contains>
 		<points public="1">
-			<c path="Array"><c path="pixi.core.math.Point"/></c>
+			<c path="Array"><x path="Float"/></c>
 			<haxe_doc><![CDATA[* An array of the points of this polygon
 	 * @property points
-	 * @type Array<Point>
+	 * @type Array<Float>
 	 *]]></haxe_doc>
 		</points>
 		<new public="1" set="method">
