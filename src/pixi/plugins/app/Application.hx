@@ -184,7 +184,7 @@ class Application {
 			canvas = Browser.document.createCanvasElement();
 			canvas.style.width = width + "px";
 			canvas.style.height = height + "px";
-			canvas.style.position = "absolute";
+			canvas.style.position = "fixed";
 		}
 		else canvas = canvasElement;
 
