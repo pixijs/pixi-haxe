@@ -1,6 +1,6 @@
 package events;
 
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.DefaultStyle;
 import pixi.interaction.EventTarget;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
@@ -35,7 +35,7 @@ class Main extends Application {
 
 		stage.addChild(_img);
 
-		var style:TextStyleObject = {};
+		var style:DefaultStyle = {};
 		style.fill = "#000000";
 		style.fontSize = 12;
 		style.fontFamily = "Courier";

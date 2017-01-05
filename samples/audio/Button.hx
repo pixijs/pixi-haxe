@@ -1,6 +1,6 @@
 package audio;
 
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.DefaultStyle;
 import pixi.interaction.EventTarget;
 import pixi.core.graphics.Graphics;
 import pixi.core.math.shapes.Rectangle;
@@ -54,7 +54,7 @@ class Button extends Container {
 
 	function _setupLabel(width:Float, height:Float, fontSize:Int) {
 		var size:Int = (fontSize != null) ? fontSize : Button.FONT_SIZE;
-		var style:TextStyleObject = {};
+		var style:DefaultStyle = {};
 		style.fontSize = size;
 		style.fontFamily = "Arial";
 		style.fill = Button.TEXT_COLOUR;

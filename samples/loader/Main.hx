@@ -10,7 +10,7 @@ import haxe.Json;
 import js.html.XMLHttpRequest;
 import js.Browser;
 import pixi.core.textures.Texture;
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
 import pixi.loaders.Loader;
 import pixi.core.display.Container;
@@ -34,7 +34,7 @@ class Main extends Application {
 
 		var urlStr = Browser.window.location.href.split("?");
 
-		var style:TextStyleObject = {};
+		var style:DefaultStyle = {};
 		style.fill = 0x003366;
 		style.fontSize = 24;
 		style.fontFamily = "Courier";

@@ -22,10 +22,9 @@ extern class Text extends Sprite {
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
 	 * @param text {String} The string that you would like the text to display
-	 * @param [style] {TextStyleObj|TextStyle} The style parameters
-	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas
+	 * @param [style] {object|TextStyle} The style parameters
 	 */
-	function new(text:String, ?style:EitherType<TextStyleObject, Dynamic>, ?resolution:Float):Void;
+	function new(text:String, ?style:EitherType<Dynamic, DefaultStyle>):Void;
 
 	/**
 	 * The canvas element that everything is drawn to
@@ -59,5 +58,28 @@ extern class Text extends Sprite {
      * @member {TextStyleObj|TextStyle}
      *
      */
-	var style:EitherType<TextStyleObject, Dynamic>;
+	var style:EitherType<DefaultStyle, Dynamic>;
+
+	/**
+     * Generates a font style string to use for Text.calculateFontProperties(). Takes the same parameter
+     * as Text.style.
+     *
+     * @static
+     * @param {object|TextStyle} style - String representing the style of the font
+     * @return {String} Font style string, for passing to Text.calculateFontProperties()
+     */
+	static function getFontStyle(?style:EitherType<Dynamic, DefaultStyle>):String;
+
+	/**
+     * Calculates the ascent, descent and fontSize of a given fontStyle
+     *
+     * @static
+     * @param {string} fontStyle - String representing the style of the font
+     * @return {Object} Font properties object
+     */
+	static function calculateFontProperties(fontStyle:String):Dynamic;
+
+	static var fontPropertiesCache:Dynamic;
+	static var fontPropertiesCanvas:CanvasElement;
+	static var fontPropertiesContext:CanvasRenderingContext2D;
 }
