@@ -11,6 +11,7 @@ class Main extends Application {
 
 	public function new() {
 		super();
+		position = "fixed";
 		backgroundColor = 0x00FF66;
 		super.start();
 

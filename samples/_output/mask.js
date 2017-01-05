@@ -161,6 +161,7 @@ var pixi_plugins_app_Application = function() {
 	this.backgroundColor = 16777215;
 	this.width = window.innerWidth;
 	this.height = window.innerHeight;
+	this.position = "static";
 	this.set_fps(60);
 };
 pixi_plugins_app_Application.prototype = {
@@ -182,7 +183,7 @@ pixi_plugins_app_Application.prototype = {
 			this.canvas = _this.createElement("canvas");
 			this.canvas.style.width = this.width + "px";
 			this.canvas.style.height = this.height + "px";
-			this.canvas.style.position = "absolute";
+			this.canvas.style.position = this.position;
 		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
@@ -237,6 +238,7 @@ mask_Main.main = function() {
 mask_Main.__super__ = pixi_plugins_app_Application;
 mask_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
+		this.position = "fixed";
 		this.onUpdate = $bind(this,this._onUpdate);
 		pixi_plugins_app_Application.prototype.start.call(this,"recommended");
 		this._bg = PIXI.Sprite.fromImage("assets/alphamask/bkg.jpg");

@@ -16,6 +16,7 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		backgroundColor = 0xFFFFFF;
 		super.start();
 

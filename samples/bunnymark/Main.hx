@@ -37,7 +37,8 @@ class Main extends Application {
 	}
 
 	function _init() {
-		backgroundColor = 0xE0E6F8;
+		position = "fixed";
+		backgroundColor = 0x8BDDCE;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
 		fps = 50;

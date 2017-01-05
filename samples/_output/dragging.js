@@ -179,6 +179,7 @@ var pixi_plugins_app_Application = function() {
 	this.backgroundColor = 16777215;
 	this.width = window.innerWidth;
 	this.height = window.innerHeight;
+	this.position = "static";
 	this.set_fps(60);
 };
 pixi_plugins_app_Application.__name__ = true;
@@ -201,7 +202,7 @@ pixi_plugins_app_Application.prototype = {
 			this.canvas = _this.createElement("canvas");
 			this.canvas.style.width = this.width + "px";
 			this.canvas.style.height = this.height + "px";
-			this.canvas.style.position = "absolute";
+			this.canvas.style.position = this.position;
 		} else this.canvas = canvasElement;
 		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
 		this.stage = new PIXI.Container();
@@ -258,6 +259,7 @@ dragging_Main.main = function() {
 dragging_Main.__super__ = pixi_plugins_app_Application;
 dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	_init: function() {
+		this.position = "fixed";
 		this.backgroundColor = 16777215;
 		pixi_plugins_app_Application.prototype.start.call(this);
 		this._texture = PIXI.Texture.fromImage("assets/basics/bunny.png");

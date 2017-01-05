@@ -17,6 +17,7 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		backgroundColor = 0x003366;
 		antialias = true;
 		onUpdate = _onUpdate;

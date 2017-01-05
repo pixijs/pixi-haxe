@@ -34,6 +34,7 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		backgroundColor = 0x6699FF;
 		autoResize = false;
 		width = 800;
