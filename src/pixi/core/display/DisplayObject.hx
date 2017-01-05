@@ -90,6 +90,7 @@ extern class DisplayObject extends InteractionManager {
 	 */
 	@:overload(function(?destroyTexture:Bool, ?destroyBaseTexture:Bool):Void {})
 	@:overload(function(?destroyChildren:Bool):Void {})
+	@:overload(function(?options:Dynamic):Void {})
 	function destroy():Void;
 
 	/**

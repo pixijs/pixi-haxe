@@ -12814,6 +12814,16 @@
 	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
 	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)</haxe_doc>
 				</destroy>
+				<destroy public="1" set="method">
+					<f a="?options">
+						<d/>
+						<x path="Void"/>
+					</f>
+					<haxe_doc>* Base destroy method for generic display objects
+	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
+	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
+	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)</haxe_doc>
+				</destroy>
 			</overloads>
 		</destroy>
 		<name public="1">
@@ -13950,10 +13960,10 @@
 	 * @return {Bool} Whether the x/y coordinates are within this polygon</haxe_doc>
 		</contains>
 		<points public="1">
-			<c path="Array"><c path="pixi.core.math.Point"/></c>
+			<c path="Array"><x path="Float"/></c>
 			<haxe_doc><![CDATA[* An array of the points of this polygon
 	 * @property points
-	 * @type Array<Point>
+	 * @type Array<Float>
 	 *]]></haxe_doc>
 		</points>
 		<new public="1" set="method">
@@ -15098,72 +15108,7 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Sprite"</e></m></meta>
 	</class>
-	<class path="pixi.core.text.Text" params="" file="src/pixi/core/text/Text.hx" extern="1">
-		<extends path="pixi.core.sprites.Sprite"/>
-		<canvas public="1">
-			<c path="js.html.CanvasElement"/>
-			<haxe_doc>* The canvas element that everything is drawn to
-	 *
-	 * @member {HTMLCanvasElement}</haxe_doc>
-		</canvas>
-		<context public="1">
-			<c path="js.html.CanvasRenderingContext2D"/>
-			<haxe_doc>* The canvas 2d context that everything is drawn with
-	 * @member {HTMLCanvasElement}</haxe_doc>
-		</context>
-		<resolution public="1">
-			<x path="Float"/>
-			<haxe_doc>* The resolution of the canvas.
-	 * @member {Float}</haxe_doc>
-		</resolution>
-		<text public="1">
-			<c path="String"/>
-			<haxe_doc>* Set the copy for the text object. To split a line you can use '\n'.
-     *
-     * @param text {String} The copy that you would like the text to display
-     * @memberof Text#</haxe_doc>
-		</text>
-		<style public="1">
-			<x path="haxe.extern.EitherType">
-				<t path="pixi.core.text.TextStyleObject"/>
-				<d/>
-			</x>
-			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
-     * @member {TextStyleObj|TextStyle}
-     *</haxe_doc>
-		</style>
-		<new public="1" set="method">
-			<f a="text:?style:?resolution">
-				<c path="String"/>
-				<x path="haxe.extern.EitherType">
-					<t path="pixi.core.text.TextStyleObject"/>
-					<d/>
-				</x>
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
-	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
-	 *
-	 * A Text can be created directly from a string and a style object
-	 *
-	 * ```js
-	 * var text = new Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
-	 * ```
-	 *
-	 * @class
-	 * @extends PIXI.Sprite
-	 * @memberof PIXI
-	 * @param text {String} The string that you would like the text to display
-	 * @param [style] {TextStyleObj|TextStyle} The style parameters
-	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas</haxe_doc>
-		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Text"</e></m>
-		</meta>
-	</class>
-	<typedef path="pixi.core.text.TextStyleObject" params="" file="src/pixi/core/text/TextStyleObject.hx"><a>
+	<typedef path="pixi.core.text.DefaultStyle" params="" file="src/pixi/core/text/DefaultStyle.hx"><a>
 	<wordWrapWidth>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -15227,7 +15172,10 @@
 		<meta><m n=":optional"/></meta>
 	</fontSize>
 	<fontFamily>
-		<t path="Null"><c path="String"/></t>
+		<t path="Null"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<c path="Array"><c path="String"/></c>
+</x></t>
 		<meta><m n=":optional"/></meta>
 	</fontFamily>
 	<fillGradientType>
@@ -15267,6 +15215,190 @@
 		<meta><m n=":optional"/></meta>
 	</align>
 </a></typedef>
+	<class path="pixi.core.text.Text" params="" file="src/pixi/core/text/Text.hx" extern="1">
+		<extends path="pixi.core.sprites.Sprite"/>
+		<getFontStyle public="1" set="method" static="1">
+			<f a="?style">
+				<x path="haxe.extern.EitherType">
+					<d/>
+					<t path="pixi.core.text.DefaultStyle"/>
+				</x>
+				<c path="String"/>
+			</f>
+			<haxe_doc>* Generates a font style string to use for Text.calculateFontProperties(). Takes the same parameter
+     * as Text.style.
+     *
+     * @static
+     * @param {object|TextStyle} style - String representing the style of the font
+     * @return {String} Font style string, for passing to Text.calculateFontProperties()</haxe_doc>
+		</getFontStyle>
+		<calculateFontProperties public="1" set="method" static="1">
+			<f a="fontStyle">
+				<c path="String"/>
+				<d/>
+			</f>
+			<haxe_doc>* Calculates the ascent, descent and fontSize of a given fontStyle
+     *
+     * @static
+     * @param {string} fontStyle - String representing the style of the font
+     * @return {Object} Font properties object</haxe_doc>
+		</calculateFontProperties>
+		<fontPropertiesCache public="1" static="1"><d/></fontPropertiesCache>
+		<fontPropertiesCanvas public="1" static="1"><c path="js.html.CanvasElement"/></fontPropertiesCanvas>
+		<fontPropertiesContext public="1" static="1"><c path="js.html.CanvasRenderingContext2D"/></fontPropertiesContext>
+		<canvas public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* The canvas element that everything is drawn to
+	 *
+	 * @member {HTMLCanvasElement}</haxe_doc>
+		</canvas>
+		<context public="1">
+			<c path="js.html.CanvasRenderingContext2D"/>
+			<haxe_doc>* The canvas 2d context that everything is drawn with
+	 * @member {HTMLCanvasElement}</haxe_doc>
+		</context>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The resolution of the canvas.
+	 * @member {Float}</haxe_doc>
+		</resolution>
+		<text public="1">
+			<c path="String"/>
+			<haxe_doc>* Set the copy for the text object. To split a line you can use '\n'.
+     *
+     * @param text {String} The copy that you would like the text to display
+     * @memberof Text#</haxe_doc>
+		</text>
+		<style public="1">
+			<x path="haxe.extern.EitherType">
+				<t path="pixi.core.text.DefaultStyle"/>
+				<d/>
+			</x>
+			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
+     * @member {TextStyleObj|TextStyle}
+     *</haxe_doc>
+		</style>
+		<new public="1" set="method">
+			<f a="text:?style">
+				<c path="String"/>
+				<x path="haxe.extern.EitherType">
+					<d/>
+					<t path="pixi.core.text.DefaultStyle"/>
+				</x>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
+	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
+	 *
+	 * A Text can be created directly from a string and a style object
+	 *
+	 * ```js
+	 * var text = new Text('This is a pixi text',{font : '24px Arial', fill : 0xff1010, align : 'center'});
+	 * ```
+	 *
+	 * @class
+	 * @extends PIXI.Sprite
+	 * @memberof PIXI
+	 * @param text {String} The string that you would like the text to display
+	 * @param [style] {object|TextStyle} The style parameters</haxe_doc>
+		</new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.Text"</e></m>
+		</meta>
+	</class>
+	<class path="pixi.core.text.TextStyle" params="" file="src/pixi/core/text/TextStyle.hx" extern="1">
+		<clone public="1" set="method">
+			<f a=""><c path="pixi.core.text.TextStyle"/></f>
+			<haxe_doc>* Creates a new TextStyle object with the same values as this one.
+     * Note that the only the properties of the object are cloned.
+     *
+     * @return {PIXI.TextStyle} New cloned TextStyle object</haxe_doc>
+		</clone>
+		<reset public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Resets all properties to the defaults specified in TextStyle.prototype._default</haxe_doc>
+		</reset>
+		<styleID public="1"><x path="Int"/></styleID>
+		<align public="1"><c path="String"/></align>
+		<breakWords public="1"><x path="Bool"/></breakWords>
+		<dropShadow public="1"><x path="Bool"/></dropShadow>
+		<dropShadowAngle public="1"><x path="Float"/></dropShadowAngle>
+		<dropShadowBlur public="1"><x path="Float"/></dropShadowBlur>
+		<dropShadowColor public="1"><c path="String"/></dropShadowColor>
+		<dropShadowDistance public="1"><x path="Float"/></dropShadowDistance>
+		<fill public="1"><d/></fill>
+		<fillGradientType public="1"><x path="Int"/></fillGradientType>
+		<fontFamily public="1"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<c path="Array"><c path="String"/></c>
+</x></fontFamily>
+		<fontSize public="1"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Float"/>
+</x></fontSize>
+		<fontStyle public="1"><c path="String"/></fontStyle>
+		<fontVariant public="1"><c path="String"/></fontVariant>
+		<fontWeight public="1"><c path="String"/></fontWeight>
+		<letterSpacing public="1"><x path="Float"/></letterSpacing>
+		<lineHeight public="1"><x path="Float"/></lineHeight>
+		<lineJoin public="1"><c path="String"/></lineJoin>
+		<miterLimit public="1"><x path="Float"/></miterLimit>
+		<padding public="1"><x path="Float"/></padding>
+		<stroke public="1"><x path="haxe.extern.EitherType">
+	<c path="String"/>
+	<x path="Int"/>
+</x></stroke>
+		<strokeThickness public="1"><x path="Float"/></strokeThickness>
+		<textBaseline public="1"><c path="String"/></textBaseline>
+		<wordWrap public="1"><x path="Bool"/></wordWrap>
+		<wordWrapWidth public="1"><x path="Float"/></wordWrapWidth>
+		<new public="1" set="method">
+			<f a="?style">
+				<t path="pixi.core.text.DefaultStyle"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @param {DefaultStyle} [style] - The style parameters
+     * @param {String} [style.align='left'] - Alignment for multiline text ('left', 'center' or 'right'),
+     *  does not affect single line text
+     * @param {Bool} [style.breakWords=false] - Indicates if lines can be wrapped within words, it
+     *  needs wordWrap to be set to true
+     * @param {Bool} [style.dropShadow=false] - Set a drop shadow for the text
+     * @param {Float} [style.dropShadowAngle=Math.PI/6] - Set a angle of the drop shadow
+     * @param {Float} [style.dropShadowBlur=0] - Set a shadow blur radius
+     * @param {String} [style.dropShadowColor='#000000'] - A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+     * @param {Float} [style.dropShadowDistance=5] - Set a distance of the drop shadow
+     * @param {String|String[]|Float|Float[]|CanvasGradient|CanvasPattern} [style.fill='black'] - A canvas
+     *  fillstyle that will be used on the text e.g 'red', '#00FF00'. Can be an array to create a gradient
+     *  eg ['#000000','#FFFFFF']
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle|MDN}
+     * @param {Int} [style.fillGradientType=PIXI.TEXT_GRADIENT.LINEAR_VERTICAL] - If fills styles are
+     *  supplied, this can change the type/direction of the gradient. See {@link PIXI.TEXT_GRADIENT} for possible values
+     * @param {String|String[]} [style.fontFamily='Arial'] - The font family
+     * @param {Float|String} [style.fontSize=26] - The font size (as a Float it converts to px, but as a String,
+     *  equivalents are '26px','20pt','160%' or '1.6em')
+     * @param {String} [style.fontStyle='normal'] - The font style ('normal', 'italic' or 'oblique')
+     * @param {String} [style.fontVariant='normal'] - The font variant ('normal' or 'small-caps')
+     * @param {String} [style.fontWeight='normal'] - The font weight ('normal', 'bold', 'bolder', 'lighter' and '100',
+     *  '200', '300', '400', '500', '600', '700', 800' or '900')
+     * @param {Float} [style.letterSpacing=0] - The amount of spacing between letters, default is 0
+     * @param {Float} [style.lineHeight] - The line height, a Float that represents the vertical space that a letter uses
+     * @param {String} [style.lineJoin='miter'] - The lineJoin property sets the type of corner created, it can resolve
+     *      spiked text issues. Default is 'miter' (creates a sharp corner).
+     * @param {Float} [style.miterLimit=10] - The miter limit to use when using the 'miter' lineJoin mode. This can reduce
+     *      or increase the spikiness of rendered text.
+     * @param {Float} [style.padding=0] - Occasionally some fonts are cropped. Adding some padding will prevent this from
+     *     happening by adding padding to all sides of the text.
+     * @param {String|Int} [style.stroke='black'] - A canvas fillstyle that will be used on the text stroke
+     *  e.g 'blue', '#FCFF00'
+     * @param {Float} [style.strokeThickness=0] - A Float that represents the thickness of the stroke.
+     *  Default is 0 (no stroke)
+     * @param {String} [style.textBaseline='alphabetic'] - The baseline of the text that is rendered.
+     * @param {Bool} [style.wordWrap=false] - Indicates if word wrap should be used
+     * @param {Float} [style.wordWrapWidth=100] - The width at which text will wrap, it needs wordWrap to be set to true</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.TextStyle"</e></m></meta>
+	</class>
 	<class path="pixi.core.textures.BaseTexture" params="" file="src/pixi/core/textures/BaseTexture.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<fromImage public="1" set="method" static="1">
@@ -17973,6 +18105,11 @@
 			<haxe_doc>* Height of the application.
 	 * default - Browser.window.innerHeight</haxe_doc>
 		</height>
+		<position public="1">
+			<c path="String"/>
+			<haxe_doc>* Position of canvas element
+	 * default - static</haxe_doc>
+		</position>
 		<transparent public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Renderer transparency property.
@@ -18045,15 +18182,15 @@
 		</stage>
 		<_frameCount><x path="Int"/></_frameCount>
 		<_animationFrameId><t path="Null"><x path="Int"/></t></_animationFrameId>
-		<set_fps set="method" line="143"><f a="val">
+		<set_fps set="method" line="149"><f a="val">
 	<x path="Int"/>
 	<x path="Int"/>
 </f></set_fps>
-		<set_skipFrame set="method" line="148"><f a="val">
+		<set_skipFrame set="method" line="154"><f a="val">
 	<x path="Bool"/>
 	<x path="Bool"/>
 </f></set_skipFrame>
-		<start public="1" set="method" line="182">
+		<start public="1" set="method" line="189">
 			<f a="?rendererType:?parentDom:?canvasElement">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -18067,26 +18204,26 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="227"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="232">
+		<resumeRendering public="1" set="method" line="234"><f a=""><x path="Void"/></f></resumeRendering>
+		<_onWindowResize set="method" line="239">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="242">
+		<_onRequestAnimationFrame set="method" line="249">
 			<f a="elapsedTime">
 				<x path="Float"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="252">
+		<addStats public="1" set="method" line="259">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>
-		<new public="1" set="method" line="139"><f a=""><x path="Void"/></f></new>
+		<new public="1" set="method" line="145"><f a=""><x path="Void"/></f></new>
 		<haxe_doc>* Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
  * http://adireddy.github.io
@@ -18641,7 +18778,7 @@
 	</class>
 	<class path="text.Main" params="" file="samples/text/Main.hx">
 		<extends path="pixi.plugins.app.Application"/>
-		<main set="method" line="47" static="1">
+		<main set="method" line="48" static="1">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":keep"/></meta>
 		</main>

@@ -1,7 +1,7 @@
 package retina;
 
 import pixi.core.Pixi;
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
@@ -19,6 +19,7 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		backgroundColor = 0xFFFFFF;
 		pixelRatio = _getPixelRatio();
 		super.start();
@@ -30,7 +31,7 @@ class Main extends Application {
 		_img.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		stage.addChild(_img);
 
-		var style:TextStyleObject = {};
+		var style:DefaultStyle = {};
 		style.fill = 0xF78181;
 		style.fontSize = 12;
 		style.fontFamily = "Courier";

@@ -49,6 +49,12 @@ class Application {
 	public var height:Float;
 
 	/**
+	 * Position of canvas element
+	 * default - static
+	 */
+	public var position:String;
+
+	/**
 	 * Renderer transparency property.
 	 * default - false
 	 */
@@ -167,6 +173,7 @@ class Application {
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
+		position = "static";
 		fps = 60;
 	}
 
@@ -184,7 +191,7 @@ class Application {
 			canvas = Browser.document.createCanvasElement();
 			canvas.style.width = width + "px";
 			canvas.style.height = height + "px";
-			canvas.style.position = "absolute";
+			canvas.style.position = position;
 		}
 		else canvas = canvasElement;
 

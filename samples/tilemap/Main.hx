@@ -19,6 +19,7 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		onUpdate = _onUpdate;
 		super.start(Application.AUTO);
 

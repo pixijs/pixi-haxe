@@ -1,6 +1,6 @@
 package text;
 
-import pixi.core.text.TextStyleObject;
+import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 
@@ -16,10 +16,11 @@ class Main extends Application {
 	}
 
 	function _init() {
+		position = "fixed";
 		backgroundColor = 0xFFFFFF;
 		super.start();
 
-		var style1:TextStyleObject = {};
+		var style1:DefaultStyle = {};
 		style1.fill = 0xF78181;
 		style1.fontSize = 18;
 		style1.fontFamily = "Courier";
