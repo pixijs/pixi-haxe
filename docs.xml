@@ -13187,6 +13187,93 @@
 			<m n=":native"><e>"PIXI.Container"</e></m>
 		</meta>
 	</class>
+	<class path="pixi.core.display.TransformBase" params="" file="src/pixi/core/display/TransformBase.hx" extern="1">
+		<IDENTITY public="1" static="1"><c path="pixi.core.display.TransformBase"/></IDENTITY>
+		<worldTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* The global matrix transform. It can be swapped temporarily by some functions like getLocalBounds()
+	 *
+	 * @member {PIXI.Matrix}</haxe_doc>
+		</worldTransform>
+		<localTransform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* The local matrix transform
+	 *
+	 * @member {PIXI.Matrix}</haxe_doc>
+		</localTransform>
+		<updateLocalTransform public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* TransformBase does not have decomposition, so this function wont do anything</haxe_doc>
+		</updateLocalTransform>
+		<updateTransform public="1" set="method">
+			<f a="parentTransform">
+				<c path="pixi.core.display.TransformBase"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Updates the values of the object and applies the parent's transform.
+     *
+     * @param {PIXI.TransformBase} parentTransform - The transform of the parent of this object</haxe_doc>
+		</updateTransform>
+		<updateWorldTransform public="1" set="method"><f a="parentTransform">
+	<c path="pixi.core.display.TransformBase"/>
+	<x path="Void"/>
+</f></updateWorldTransform>
+		<new public="1" set="method"><f a=""><x path="Void"/></f></new>
+		<meta><m n=":native"><e>"PIXI.TransformBase"</e></m></meta>
+	</class>
+	<class path="pixi.core.display.Transform" params="" file="src/pixi/core/display/Transform.hx" extern="1">
+		<extends path="pixi.core.display.TransformBase"/>
+		<position public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The coordinate of the object relative to the local coordinates of the parent.
+	 *
+	 * @member {PIXI.Point}</haxe_doc>
+		</position>
+		<scale public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The scale factor of the object.
+	 *
+	 * @member {PIXI.Point}</haxe_doc>
+		</scale>
+		<skew public="1">
+			<d/>
+			<haxe_doc>* The skew amount, on the x and y axis.
+	 *
+	 * @member {PIXI.ObservablePoint}</haxe_doc>
+		</skew>
+		<pivot public="1">
+			<c path="pixi.core.math.Point"/>
+			<haxe_doc>* The pivot point of the displayObject that it rotates around
+	 *
+	 * @member {PIXI.Point}</haxe_doc>
+		</pivot>
+		<rotation public="1">
+			<x path="Float"/>
+			<haxe_doc>* The rotation of the object in radians.
+     *
+     * @member {Float}
+     * @memberof PIXI.Transform#</haxe_doc>
+		</rotation>
+		<setFromMatrix public="1" set="method">
+			<f a="matrix">
+				<c path="pixi.core.math.Matrix"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Decomposes a matrix and sets the transforms properties based on it.
+     *
+     * @param {PIXI.Matrix} matrix - The matrix to decompose</haxe_doc>
+		</setFromMatrix>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Generic class to deal with traditional 2D matrix transforms
+	 * local transformation is calculated from position,scale,skew and rotation
+	 *
+	 * @class
+	 * @extends PIXI.TransformBase
+	 * @memberof PIXI</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Transform"</e></m></meta>
+	</class>
 	<class path="pixi.core.graphics.Graphics" params="" file="src/pixi/core/graphics/Graphics.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
 		<fillAlpha public="1">
@@ -14284,6 +14371,21 @@
 	 * @param width {Float} the new width of the canvas view
 	 * @param height {Float} the new height of the canvas view</haxe_doc>
 		</resize>
+		<generateTexture public="1" set="method">
+			<f a="displayObject:scaleMode:resolution">
+				<c path="pixi.core.display.DisplayObject"/>
+				<x path="Int"/>
+				<x path="Float"/>
+				<c path="pixi.core.textures.Texture"/>
+			</f>
+			<haxe_doc>* Useful function that returns a texture of the display object that can then be used to create sprites
+     * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
+     *
+     * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from
+     * @param {Int} scaleMode - Should be one of the scaleMode consts
+     * @param {Float} resolution - The resolution / device pixel ratio of the texture being generated
+     * @return {PIXI.Texture} a texture of the graphics object</haxe_doc>
+		</generateTexture>
 		<destroy public="1" set="method">
 			<f a="?removeView" v="false">
 				<x path="Bool"/>
@@ -14295,13 +14397,22 @@
 	 * @param [removeView=false] {Bool} Removes the Canvas element from the DOM.</haxe_doc>
 		</destroy>
 		<render public="1" set="method">
-			<f a="object">
+			<f a="displayObject:?renderTexture:?clear:?transform:?skipUpdateTransform">
 				<c path="pixi.core.display.DisplayObject"/>
+				<c path="pixi.core.textures.RenderTexture"/>
+				<x path="Bool"/>
+				<d/>
+				<x path="Bool"/>
 				<x path="Void"/>
 			</f>
-			<haxe_doc>* Renders the object to canvas/webGL view
-	 *
-	 * @param object {DisplayObject} the object to be rendered</haxe_doc>
+			<haxe_doc>* Renders the object to this canvas view
+     *
+     * @param {PIXI.DisplayObject} displayObject - The object to be rendered
+     * @param {PIXI.RenderTexture} [renderTexture] - A render texture to be rendered to.
+     *  If unset, it will render to the root context.
+     * @param {boolean} [clear=false] - Whether to clear the canvas before drawing
+     * @param {PIXI.Transform} [transform] - A transformation to be applied
+     * @param {boolean} [skipUpdateTransform=false] - Whether to skip the update transform</haxe_doc>
 		</render>
 		<new public="1" set="method">
 			<f a="system:?width:?height:?options" v=":800:600:">
@@ -14332,6 +14443,15 @@
 	</class>
 	<class path="pixi.core.renderers.canvas.CanvasRenderer" params="" file="src/pixi/core/renderers/canvas/CanvasRenderer.hx" extern="1">
 		<extends path="pixi.core.renderers.SystemRenderer"/>
+		<clear public="1" set="method">
+			<f a="?clearColor">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Clear the canvas of renderer.
+     *
+     * @param {String} [clearColor] - Clear the canvas with this color, except the canvas is transparent.</haxe_doc>
+		</clear>
 		<context public="1">
 			<c path="js.html.CanvasRenderingContext2D"/>
 			<haxe_doc>* The canvas 2d context that everything is drawn with.
@@ -14345,11 +14465,17 @@
 	 * @member {Bool}</haxe_doc>
 		</refresh>
 		<maskManager public="1">
-			<d/>
+			<c path="pixi.core.renderers.canvas.utils.CanvasMaskManager"/>
 			<haxe_doc>* Instance of a CanvasMaskManager, handles masking when using the canvas renderer.
 	 *
 	 * @member {CanvasMaskManager}</haxe_doc>
 		</maskManager>
+		<smoothProperty public="1">
+			<c path="String"/>
+			<haxe_doc>* The canvas property used to set the canvas smoothing property.
+	 *
+	 * @member {String}</haxe_doc>
+		</smoothProperty>
 		<currentScaleMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* Tracks the active scale mode for this renderer.
@@ -14362,12 +14488,6 @@
 	 *
 	 * @member {BLEND_MODES}</haxe_doc>
 		</currentBlendMode>
-		<smoothProperty public="1">
-			<c path="String"/>
-			<haxe_doc>* The canvas property used to set the canvas smoothing property.
-	 *
-	 * @member {String}</haxe_doc>
-		</smoothProperty>
 		<new public="1" set="method">
 			<f a="width:height:?options">
 				<x path="Float"/>
@@ -14604,18 +14724,6 @@
 	</class>
 	<class path="pixi.core.renderers.webgl.WebGLRenderer" params="" file="src/pixi/core/renderers/webgl/WebGLRenderer.hx" extern="1">
 		<extends path="pixi.core.renderers.SystemRenderer"/>
-		<drawCount public="1">
-			<x path="Int"/>
-			<haxe_doc>* Counter for the number of draws made each frame
-	 *
-	 * @member {Int}</haxe_doc>
-		</drawCount>
-		<shaderManager public="1">
-			<d/>
-			<haxe_doc>* Deals with managing the shader programs and their attribs.
-     *
-     * @member {ShaderManager}</haxe_doc>
-		</shaderManager>
 		<maskManager public="1">
 			<c path="pixi.core.renderers.webgl.managers.MaskManager"/>
 			<haxe_doc>* Manages the masks using the stencil buffer.
@@ -14628,27 +14736,157 @@
      *
      * @member {StencilManager}</haxe_doc>
 		</stencilManager>
+		<emptyRenderer public="1">
+			<d/>
+			<haxe_doc>* An empty renderer.
+	 *
+	 * @member {PIXI.ObjectRenderer}</haxe_doc>
+		</emptyRenderer>
+		<state public="1">
+			<d/>
+			<haxe_doc>* The currently active ObjectRenderer.
+	 *
+	 * @member {PIXI.WebGLState}</haxe_doc>
+		</state>
+		<boundTextures public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc>* Holds the current state of textures bound to the GPU.
+	 * @type {Array}</haxe_doc>
+		</boundTextures>
 		<filterManager public="1">
 			<c path="pixi.core.renderers.webgl.managers.FilterManager"/>
 			<haxe_doc>* Manages the filters.
      *
      * @member {FilterManager}</haxe_doc>
 		</filterManager>
-		<blendModeManager public="1">
-			<c path="pixi.core.renderers.webgl.managers.BlendModeManager"/>
-			<haxe_doc>* Manages the blendModes
-     * @member {BlendModeManager}</haxe_doc>
-		</blendModeManager>
-		<currentRenderTarget public="1">
-			<d/>
-			<haxe_doc>* Holds the current render target
-     * @member {Object}</haxe_doc>
-		</currentRenderTarget>
 		<currentRenderer public="1">
 			<d/>
 			<haxe_doc>* object renderer @alvin
      * @member {ObjectRenderer}</haxe_doc>
 		</currentRenderer>
+		<setObjectRenderer public="1" set="method">
+			<f a="objectRenderer">
+				<d/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Changes the current renderer to the one given in parameter
+     *
+     * @param {PIXI.ObjectRenderer} objectRenderer - The object renderer to use.</haxe_doc>
+		</setObjectRenderer>
+		<flush public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* This should be called if you wish to do some custom rendering
+     * It will basically render anything that may be batched up such as sprites
+     *</haxe_doc>
+		</flush>
+		<setBlendMode public="1" set="method">
+			<f a="blendMode">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the webGL view to the specified width and height.
+     *
+     * @param {Int} blendMode - the desired blend mode</haxe_doc>
+		</setBlendMode>
+		<clear public="1" set="method">
+			<f a="clearColor">
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Erases the active render target and fills the drawing area with a colour
+     *
+     * @param {Int} [clearColor] - The colour</haxe_doc>
+		</clear>
+		<setTransform public="1" set="method">
+			<f a="matrix">
+				<c path="pixi.core.math.Matrix"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the transform of the active render target to the given matrix
+     *
+     * @param {PIXI.Matrix} matrix - The transformation matrix</haxe_doc>
+		</setTransform>
+		<bindRenderTexture public="1" set="method">
+			<f a="renderTexture:transform">
+				<c path="pixi.core.textures.RenderTexture"/>
+				<c path="pixi.core.display.Transform"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* Binds a render texture for rendering
+     *
+     * @param {PIXI.RenderTexture} renderTexture - The render texture to render
+     * @param {PIXI.Transform} transform - The transform to be applied to the render texture
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</bindRenderTexture>
+		<bindRenderTarget public="1" set="method">
+			<f a="renderTarget">
+				<c path="pixi.core.renderers.webgl.utils.RenderTarget"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* Changes the current render target to the one given in parameter
+     *
+     * @param {PIXI.RenderTarget} renderTarget - the new render target
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</bindRenderTarget>
+		<bindShader public="1" set="method">
+			<f a="shader">
+				<c path="pixi.core.Shader"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* Changes the current shader to the one given in parameter
+     *
+     * @param {PIXI.Shader} shader - the new shader
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</bindShader>
+		<bindTexture public="1" set="method">
+			<f a="texture:location:forceLocation">
+				<c path="pixi.core.textures.Texture"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* Binds the texture. This will return the location of the bound texture.
+     * It may not be the same as the one you pass in. This is due to optimisation that prevents
+     * needless binding of textures. For example if the texture is already bound it will return the
+     * current location of the texture instead of the one provided. To bypass this use force location
+     *
+     * @param {PIXI.Texture} texture - the new texture
+     * @param {Float} location - the suggested texture location
+     * @param {Bool} forceLocation - force the location
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</bindTexture>
+		<unbindTexture public="1" set="method">
+			<f a="texture">
+				<c path="pixi.core.textures.Texture"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* unbinds the texture ...
+     *
+     * @param {PIXI.Texture} texture - the texture to unbind
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</unbindTexture>
+		<createVao public="1" set="method">
+			<f a=""><d/></f>
+			<haxe_doc>* Creates a new VAO from this renderer's context and state.
+     *
+     * @return {VertexArrayObject} The new VAO.</haxe_doc>
+		</createVao>
+		<bindVao public="1" set="method">
+			<f a="vao">
+				<d/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<haxe_doc>* Changes the current Vao to the one given in parameter
+     *
+     * @param {PIXI.VertexArrayObject} vao - the new Vao
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</bindVao>
+		<reset public="1" set="method">
+			<f a=""><c path="pixi.core.renderers.webgl.WebGLRenderer"/></f>
+			<haxe_doc>* Resets the WebGL state so you can render things however you fancy!
+     *
+     * @return {PIXI.WebGLRenderer} Returns itself.</haxe_doc>
+		</reset>
 		<new public="1" set="method">
 			<f a="width:height:?options">
 				<x path="Float"/>
@@ -15002,6 +15240,170 @@
 	 * @memberof PIXI
 	 * @param renderer {PIXI.WebGLRenderer} The renderer this object renderer works for.</haxe_doc>
 		</new>
+	</class>
+	<class path="pixi.core.renderers.webgl.utils.RenderTarget" params="" file="src/pixi/core/renderers/webgl/utils/RenderTarget.hx" extern="1">
+		<gl public="1">
+			<d/>
+			<haxe_doc>* The current WebGL drawing context.
+	 *
+	 * @member {WebGLRenderingContext}</haxe_doc>
+		</gl>
+		<frameBuffer public="1">
+			<d/>
+			<haxe_doc>* A frame buffer
+	 *
+	 * @member {PIXI.glCore.GLFramebuffer}</haxe_doc>
+		</frameBuffer>
+		<texture public="1">
+			<d/>
+			<haxe_doc>* The texture
+	 *
+	 * @member {PIXI.glCore.GLTexture}</haxe_doc>
+		</texture>
+		<clearColor public="1">
+			<c path="Array"><x path="Int"/></c>
+			<haxe_doc><![CDATA[* The background colour of this render target, as an array of [r,g,b,a] values
+	 *
+	 * @member {Array<Int>}]]></haxe_doc>
+		</clearColor>
+		<size public="1">
+			<c path="pixi.core.math.shapes.Rectangle"/>
+			<haxe_doc>* The size of the object as a rectangle
+	 *
+	 * @member {PIXI.Rectangle}</haxe_doc>
+		</size>
+		<resolution public="1">
+			<x path="Float"/>
+			<haxe_doc>* The current resolution / device pixel ratio
+	 *
+	 * @member {Float}
+	 * @default 1</haxe_doc>
+		</resolution>
+		<projectionMatrix public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* The projection matrix
+	 *
+	 * @member {PIXI.Matrix}</haxe_doc>
+		</projectionMatrix>
+		<transform public="1">
+			<c path="pixi.core.math.Matrix"/>
+			<haxe_doc>* The object's transform
+	 *
+	 * @member {PIXI.Matrix}</haxe_doc>
+		</transform>
+		<frame public="1">
+			<c path="pixi.core.math.shapes.Rectangle"/>
+			<haxe_doc>* The frame.
+	 *
+	 * @member {PIXI.Rectangle}</haxe_doc>
+		</frame>
+		<stencilBuffer public="1">
+			<d/>
+			<haxe_doc>* The stencil buffer stores masking data for the render target
+	 *
+	 * @member {glCore.GLBuffer}</haxe_doc>
+		</stencilBuffer>
+		<stencilMaskStack public="1">
+			<c path="Array"><c path="pixi.core.graphics.Graphics"/></c>
+			<haxe_doc><![CDATA[* The data structure for the stencil masks
+	 *
+	 * @member {Array<Graphics>}]]></haxe_doc>
+		</stencilMaskStack>
+		<filterData public="1">
+			<c path="Array"><d/></c>
+			<haxe_doc><![CDATA[* Stores filter data for the render target
+	 *
+	 * @member {Array<Dynamic>}]]></haxe_doc>
+		</filterData>
+		<scaleMode public="1">
+			<x path="Int"/>
+			<haxe_doc>* The scale mode.
+	 *
+	 * @member {number}
+	 * @default PIXI.settings.SCALE_MODE
+	 * @see PIXI.SCALE_MODES</haxe_doc>
+		</scaleMode>
+		<root public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Whether this object is the root element or not
+	 *
+	 * @member {Bool}</haxe_doc>
+		</root>
+		<clear public="1" set="method">
+			<f a="?clearColor">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[* Clears the filter texture.
+     *
+     * @param {Array<Int>} [clearColor=this.clearColor] - Array of [r,g,b,a] to clear the framebuffer]]></haxe_doc>
+		</clear>
+		<attachStencilBuffer public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Binds the stencil buffer.
+     *</haxe_doc>
+		</attachStencilBuffer>
+		<setFrame public="1" set="method">
+			<f a="destinationFrame:sourceFrame">
+				<c path="pixi.core.math.shapes.Rectangle"/>
+				<c path="pixi.core.math.shapes.Rectangle"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Sets the frame of the render target.
+     *
+     * @param {Rectangle} destinationFrame - The destination frame.
+     * @param {Rectangle} sourceFrame - The source frame.</haxe_doc>
+		</setFrame>
+		<activate public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Binds the buffers and initialises the viewport.
+     *</haxe_doc>
+		</activate>
+		<calculateProjection public="1" set="method">
+			<f a="destinationFrame:sourceFrame">
+				<c path="pixi.core.math.shapes.Rectangle"/>
+				<c path="pixi.core.math.shapes.Rectangle"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Updates the projection matrix based on a projection frame (which is a rectangle)
+     *
+     * @param {Rectangle} destinationFrame - The destination frame.
+     * @param {Rectangle} sourceFrame - The source frame.</haxe_doc>
+		</calculateProjection>
+		<resize public="1" set="method">
+			<f a="width:height">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Resizes the texture to the specified width and height
+     *
+     * @param {Float} width - the new width of the texture
+     * @param {Float} height - the new height of the texture</haxe_doc>
+		</resize>
+		<destroy public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Destroys the render target.
+     *</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="gl:?width:?height:?scaleMode:?resolution:?root">
+				<d/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* @param {WebGLRenderingContext} gl - The current WebGL drawing context
+     * @param {Float} [width=0] - the horizontal range of the filter
+     * @param {Float} [height=0] - the vertical range of the filter
+     * @param {Int} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+     * @param {Float} [resolution=1] - The current resolution / device pixel ratio
+     * @param {Bool} [root=false] - Whether this object is the root element or not</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.RenderTarget"</e></m></meta>
 	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="src/pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>

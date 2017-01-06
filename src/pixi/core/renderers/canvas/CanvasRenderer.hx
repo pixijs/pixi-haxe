@@ -1,5 +1,6 @@
 package pixi.core.renderers.canvas;
 
+import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
 import pixi.core.renderers.Detector;
 
@@ -27,6 +28,13 @@ extern class CanvasRenderer extends SystemRenderer {
 	function new(width:Float, height:Float, ?options:RenderingOptions);
 
 	/**
+     * Clear the canvas of renderer.
+     *
+     * @param {String} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
+     */
+	function clear(?clearColor:String):Void;
+
+	/**
 	 * The canvas 2d context that everything is drawn with.
 	 *
 	 * @member {CanvasRenderingContext2D}
@@ -45,7 +53,14 @@ extern class CanvasRenderer extends SystemRenderer {
 	 *
 	 * @member {CanvasMaskManager}
 	 */
-	var maskManager:Dynamic;
+	var maskManager:CanvasMaskManager;
+
+	/**
+	 * The canvas property used to set the canvas smoothing property.
+	 *
+	 * @member {String}
+	 */
+	var smoothProperty:String;
 
 	/**
 	 * Tracks the active scale mode for this renderer.
@@ -60,11 +75,4 @@ extern class CanvasRenderer extends SystemRenderer {
 	 * @member {BLEND_MODES}
 	 */
 	var currentBlendMode:Int;
-
-	/**
-	 * The canvas property used to set the canvas smoothing property.
-	 *
-	 * @member {String}
-	 */
-	var smoothProperty:String;
 }
