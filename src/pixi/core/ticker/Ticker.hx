@@ -4,6 +4,55 @@ import pixi.interaction.EventEmitter;
 
 @:native("PIXI.ticker.Ticker")
 extern class Ticker extends EventEmitter {
+	
+	
+	/**
+	 * The shared ticker instance used by {@link pixi.extras.AnimatedSprite}.
+	 * and by {@link pixi.interaction.InteractionManager}.
+	 * The property {@link pixi.ticker.Ticker#autoStart} is set to `true`
+	 * for this instance. Please follow the examples for usage, including
+	 * how to opt-out of auto-starting the shared ticker.
+	 *
+	 * @example
+	 * var ticker = Ticker.shared;
+	 * // Set this to prevent starting this ticker when listeners are added.
+	 * // By default this is true only for the PIXI.ticker.shared instance.
+	 * ticker.autoStart = false;
+	 * // FYI, call this to ensure the ticker is stopped. It should be stopped
+	 * // if you have not attempted to render anything yet.
+	 * ticker.stop();
+	 * // Call this when you are ready for a running shared ticker.
+	 * ticker.start();
+	 *
+	 * @example
+	 * // You may use the shared ticker to render...
+	 * var renderer = Detector.autoDetectRenderer(800, 600);
+	 * var stage = new Container();
+	 * let interactionManager = InteractionManager(renderer);
+	 * document.body.appendChild(renderer.view);
+	 * ticker.add(function (time) {
+	 *     renderer.render(stage);
+	 * });
+	 *
+	 * @example
+	 * // Or you can just update it manually.
+	 * ticker.autoStart = false;
+	 * ticker.stop();
+	 * function animate(time) {
+	 *     ticker.update(time);
+	 *     renderer.render(stage);
+	 *     requestAnimationFrame(animate);
+	 * }
+	 * animate(performance.now());
+	 *
+	 * @type {Ticker#}
+	 * @memberof Ticker
+	 */
+	static var shared(get, never):Ticker;
+	
+	@:noCompletion inline static function get_shared():Ticker {
+		return untyped PIXI.ticker.shared;
+	}
 
 	/**
 	 * A Ticker class that runs an update loop that other objects listen to.
