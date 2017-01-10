@@ -71,9 +71,15 @@ extern class ParticleContainer extends Container {
 	 * @memberof PIXI
 	 *
 	 * @param [maxSize=15000] {Int} The number of images in the SpriteBatch before it flushes.
-	 * @param [properties] {ParticleContainerProperties} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties] {ParticleContainerProperties} or {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.	 
+	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
+	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
+	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
+	 * @param [properties.uvs=false] {Bool} When true, uvs be uploaded and applied.
+	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
+	@:overload(function (?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int {})
 	function new(?maxSize:Int, ?properties:ParticleContainerProperties, ?batchSize:Int);
 
 	/**
@@ -81,5 +87,6 @@ extern class ParticleContainer extends Container {
 	 *
 	 * @param properties {object} The properties to be uploaded
 	 */
+	@:overload(function (?properties:Array<Bool>) {})
 	function setProperties(properties:ParticleContainerProperties):Void;
 }
