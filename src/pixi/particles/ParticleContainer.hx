@@ -79,7 +79,7 @@ extern class ParticleContainer extends Container {
 	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
-	@:overload(function (?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int {})
+	@:overload(function (?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int):Void {})
 	function new(?maxSize:Int, ?properties:ParticleContainerProperties, ?batchSize:Int);
 
 	/**
@@ -87,6 +87,6 @@ extern class ParticleContainer extends Container {
 	 *
 	 * @param properties {object} The properties to be uploaded
 	 */
-	@:overload(function (?properties:Array<Bool>) {})
+	@:overload(function (?properties:Array<Bool>):Void {})
 	function setProperties(properties:ParticleContainerProperties):Void;
 }
