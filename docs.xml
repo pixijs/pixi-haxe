@@ -12176,6 +12176,112 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.Shader"</e></m></meta>
 	</class>
+	<class path="pixi.core.display.Bounds" params="" file="src/pixi/core/display/Bounds.hx" extern="1">
+		<minX public="1">
+			<x path="Float"/>
+			<haxe_doc>* @member {number}
+     * @default 0</haxe_doc>
+		</minX>
+		<minY public="1">
+			<x path="Float"/>
+			<haxe_doc>* @member {number}
+     * @default 0</haxe_doc>
+		</minY>
+		<maxX public="1">
+			<x path="Float"/>
+			<haxe_doc>* @member {number}
+     * @default 0</haxe_doc>
+		</maxX>
+		<maxY public="1">
+			<x path="Float"/>
+			<haxe_doc>* @member {number}
+     * @default 0</haxe_doc>
+		</maxY>
+		<isEmpty public="1" set="method">
+			<f a=""><x path="Bool"/></f>
+			<haxe_doc>* 
+	 * @return</haxe_doc>
+		</isEmpty>
+		<clear public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>*</haxe_doc>
+		</clear>
+		<getRectangle public="1" set="method">
+			<f a="rect">
+				<c path="pixi.core.math.shapes.Rectangle"/>
+				<c path="pixi.core.math.shapes.Rectangle"/>
+			</f>
+			<haxe_doc>* Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle
+	 * It is not guaranteed that it will return tempRect
+	 * @param tempRect {PIXI.Rectangle} temporary object will be used if AABB is not empty
+	 * @returns {PIXI.Rectangle}</haxe_doc>
+		</getRectangle>
+		<addPoint public="1" set="method">
+			<f a="point">
+				<c path="pixi.core.math.Point"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* This function should be inlined when its possible
+	 * @param point {PIXI.Point}</haxe_doc>
+		</addPoint>
+		<addQuad public="1" set="method">
+			<f a="vertices">
+				<c path="js.html.Float32Array"/>
+				<c path="pixi.core.display.Bounds"/>
+			</f>
+			<haxe_doc>* Adds a quad, not transformed
+	 * @param vertices {Float32Array}
+	 * @returns {PIXI.Bounds}</haxe_doc>
+		</addQuad>
+		<addFrame public="1" set="method">
+			<f a="transform:x0:y0:x1:y1">
+				<c path="pixi.core.display.TransformBase"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Adds sprite frame, transformed
+	 * @param transform {PIXI.TransformBase}
+	 * @param x0 {number}
+	 * @param y0 {number}
+	 * @param x1 {number}
+	 * @param y1 {number}</haxe_doc>
+		</addFrame>
+		<addVertices public="1" set="method">
+			<f a="transform:vertices:beginOffset:endOffset">
+				<c path="pixi.core.display.TransformBase"/>
+				<c path="js.html.Float32Array"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* add an array of vertices
+	 * @param transform {PIXI.TransformBase}
+	 * @param vertices {Float32Array}
+	 * @param beginOffset {number}
+	 * @param endOffset {number}</haxe_doc>
+		</addVertices>
+		<addBounds public="1" set="method">
+			<f a="bounds">
+				<c path="pixi.core.display.Bounds"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* 
+	 * @param	bounds {PIXI.Bounds}</haxe_doc>
+		</addBounds>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* 'Builder' pattern for bounds rectangles
+	 * Axis-Aligned Bounding Box
+	 * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
+	 *
+	 * @class
+	 * @memberof PIXI</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Bounds"</e></m></meta>
+	</class>
 	<class path="pixi.interaction.EventEmitter" params="" file="src/pixi/interaction/EventEmitter.hx" extern="1">
 		<listeners public="1" set="method">
 			<f a="event">
