@@ -1,13 +1,13 @@
 package pixi.core.display;
 
 import pixi.core.renderers.webgl.filters.Filter;
-import pixi.interaction.InteractionManager;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
+import pixi.interaction.InteractiveTarget;
 
 @:native("PIXI.DisplayObject")
-extern class DisplayObject extends InteractionManager {
+extern class DisplayObject extends InteractiveTarget {
 
 	/**
 	 * The base class for all objects that are rendered on the screen.
@@ -160,13 +160,6 @@ extern class DisplayObject extends InteractionManager {
 	var filterArea:Rectangle;
 
 	/**
-	 * Interaction shape. Children will be hit first, then this shape will be checked.
-	 *
-	 * @memberof DisplayObject#
-	 */
-	var hitArea:Dynamic;
-
-	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
 	 *
 	 * @member {Float}
@@ -263,42 +256,6 @@ extern class DisplayObject extends InteractionManager {
 	 * @memberof DisplayObject#
 	 */
 	var filters:Array<Filter>;
-
-	/**
-	 * Indicates if the displayObject is interactive or not.
-	 *
-	 * @member {Bool}
-	 * @default false
-	 * @memberof DisplayObject#
-	 */
-	var interactive:Bool;
-
-	/**
-	 * Indicates if the displayObject uses button mode or normal mode.
-	 *
-	 * @member {Bool}
-	 * @default false
-	 * @memberof DisplayObject#
-	 */
-	var buttonMode:Bool;
-
-	/**
-	 * Indicates if the children of displayObject are interactive or not.
-	 *
-	 * @member {Bool}
-	 * @default true
-	 * @memberof DisplayObject#
-	 */
-	var interactiveChildren:Bool;
-
-	/**
-	 * Default cursor.
-	 *
-	 * @member {String}
-	 * @default pointer
-	 * @memberof DisplayObject#
-	 */
-	var defaultCursor:String;
 
 	/**
      *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
