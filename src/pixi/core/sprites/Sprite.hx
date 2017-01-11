@@ -79,7 +79,7 @@ extern class Sprite extends Container {
 	 * @param source {}
 	 * @return {Sprite} A Texture
 	 */
-	function from(source:Dynamic):Sprite;
+	static function from(source:Dynamic):Sprite;
 
 	/**
 	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
