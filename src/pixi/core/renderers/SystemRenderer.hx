@@ -1,5 +1,7 @@
 package pixi.core.renderers;
 
+import pixi.core.textures.RenderTexture;
+import pixi.core.textures.Texture;
 import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
 import pixi.core.display.DisplayObject;
@@ -136,6 +138,18 @@ extern class SystemRenderer extends EventEmitter {
 	function resize(width:Float, height:Float):Void;
 
 	/**
+     * Useful function that returns a texture of the display object that can then be used to create sprites
+     * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
+     *
+     * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from
+     * @param {Int} scaleMode - Should be one of the scaleMode consts
+     * @param {Float} resolution - The resolution / device pixel ratio of the texture being generated
+     * @return {PIXI.Texture} a texture of the graphics object
+     */
+	function generateTexture(displayObject:DisplayObject, scaleMode:Int, resolution:Float):Texture;
+
+
+	/**
 	 * Removes everything from the renderer and optionally removes the Canvas DOM element.
 	 *
 	 * @param [removeView=false] {Bool} Removes the Canvas element from the DOM.
@@ -143,9 +157,14 @@ extern class SystemRenderer extends EventEmitter {
 	function destroy(?removeView:Bool = false):Void;
 
 	/**
-	 * Renders the object to canvas/webGL view
-	 *
-	 * @param object {DisplayObject} the object to be rendered
-	 */
-	function render(object:DisplayObject):Void;
+     * Renders the object to this canvas view
+     *
+     * @param {PIXI.DisplayObject} displayObject - The object to be rendered
+     * @param {PIXI.RenderTexture} [renderTexture] - A render texture to be rendered to.
+     *  If unset, it will render to the root context.
+     * @param {boolean} [clear=false] - Whether to clear the canvas before drawing
+     * @param {PIXI.Transform} [transform] - A transformation to be applied
+     * @param {boolean} [skipUpdateTransform=false] - Whether to skip the update transform
+     */
+	function render(displayObject:DisplayObject, ?renderTexture:RenderTexture, ?clear:Bool, ?transform:Dynamic, ?skipUpdateTransform:Bool):Void;
 }

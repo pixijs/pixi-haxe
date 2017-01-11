@@ -2,6 +2,48 @@ package pixi.particles;
 
 import pixi.core.display.Container;
 
+
+/**
+ * The properties of children that should be uploaded to the gpu and applied.
+ */
+typedef ParticleContainerProperties = {
+	
+	/**
+	 * When true, scale be uploaded and applied
+	 * @default false
+	 * @member {Bool}	 
+	 */
+	?scale:Bool,
+	
+	/**
+	 * When true, position be uploaded and applied
+	 * @default true
+	 * @member {Bool}
+	 */
+	?position:Bool,
+	
+	/**
+	 * When true, rotation be uploaded and applied
+	 * @default false
+	 * @member {Bool}
+	 */
+	?rotation:Bool,
+	
+	/**
+	 * When true, uvs be uploaded and applied
+	 * @default false
+	 * @member {Bool}
+	 */
+	?uvs:Bool,
+	
+	/**
+	 * When true, alpha be uploaded and applied
+	 * @default false
+	 * @member {Bool}
+	 */
+	?alpha:Bool
+}
+
 @:native("PIXI.particles.ParticleContainer")
 extern class ParticleContainer extends Container {
 
@@ -29,7 +71,7 @@ extern class ParticleContainer extends Container {
 	 * @memberof PIXI
 	 *
 	 * @param [maxSize=15000] {Int} The number of images in the SpriteBatch before it flushes.
-	 * @param [properties] {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.
+	 * @param [properties] {ParticleContainerProperties} or {Array<Bool>} The properties of children that should be uploaded to the gpu and applied.	 
 	 * @param [properties.scale=false] {Bool} When true, scale be uploaded and applied.
 	 * @param [properties.position=true] {Bool} When true, position be uploaded and applied.
 	 * @param [properties.rotation=false] {Bool} When true, rotation be uploaded and applied.
@@ -37,12 +79,14 @@ extern class ParticleContainer extends Container {
 	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
-	function new(?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int);
+	@:overload(function (?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int):Void {})
+	function new(?maxSize:Int, ?properties:ParticleContainerProperties, ?batchSize:Int);
 
 	/**
 	 * Sets the private properties array to dynamic / static based on the passed properties object
 	 *
 	 * @param properties {object} The properties to be uploaded
 	 */
-	function setProperties(properties:Array<Bool>):Void;
+	@:overload(function (?properties:Array<Bool>):Void {})
+	function setProperties(properties:ParticleContainerProperties):Void;
 }
