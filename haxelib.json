@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added position property in Application class",
-	"version": "4.2.7",
+	"releasenote": "minor updates",
+	"version": "4.2.8",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

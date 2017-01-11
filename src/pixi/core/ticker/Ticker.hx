@@ -4,8 +4,8 @@ import pixi.interaction.EventEmitter;
 
 @:native("PIXI.ticker.Ticker")
 extern class Ticker extends EventEmitter {
-	
-	
+
+
 	/**
 	 * The shared ticker instance used by {@link pixi.extras.AnimatedSprite}.
 	 * and by {@link pixi.interaction.InteractionManager}.
@@ -49,9 +49,9 @@ extern class Ticker extends EventEmitter {
 	 * @memberof Ticker
 	 */
 	static var shared(get, never):Ticker;
-	
+
 	@:noCompletion inline static function get_shared():Ticker {
-		return untyped PIXI.ticker.shared;
+		return cast untyped __js__("PIXI.ticker.shared");
 	}
 
 	/**
