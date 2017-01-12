@@ -15648,6 +15648,18 @@
 	</class>
 	<class path="pixi.core.sprites.Sprite" params="" file="src/pixi/core/sprites/Sprite.hx" extern="1">
 		<extends path="pixi.core.display.Container"/>
+		<from public="1" set="method" static="1">
+			<f a="source">
+				<d/>
+				<c path="pixi.core.sprites.Sprite"/>
+			</f>
+			<haxe_doc>* Helper function that creates a new sprite based on the source you provide.
+     * The source can be - frame id, image url, video url, canvas element, video element, base texture
+     *
+     * @static
+     * @param {Int|String|PIXI.BaseTexture|HTMLCanvasElement|HTMLVideoElement} source Source to create texture from
+     * @return {Sprite} The newly created sprite</haxe_doc>
+		</from>
 		<fromFrame public="1" set="method" static="1">
 			<f a="frameId">
 				<c path="String"/>
@@ -15705,32 +15717,22 @@
 	 * @default CONST.blendModes.NORMAL;</haxe_doc>
 		</blendMode>
 		<shader public="1">
-			<d/>
+			<x path="haxe.extern.EitherType">
+				<c path="pixi.core.Shader"/>
+				<d/>
+			</x>
 			<haxe_doc>* The shader that will be used to render the sprite. Set to null to remove a current shader.
 	 *
-	 * @member {AbstractFilter}</haxe_doc>
+	 * @member {Shader}</haxe_doc>
 		</shader>
-		<renderCanvas public="1" set="method">
-			<f a="renderer">
-				<d/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Renders the object using the Canvas renderer
-	*
-	* @param renderer {CanvasRenderer} The renderer</haxe_doc>
-		</renderCanvas>
-		<from public="1" set="method">
-			<f a="source">
-				<d/>
-				<c path="pixi.core.sprites.Sprite"/>
-			</f>
-			<haxe_doc>* Helper function that creates a new sprite based on the source you provide.
-	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+		<pluginName public="1">
+			<c path="String"/>
+			<haxe_doc><![CDATA[* Plugin that is responsible for rendering this element.
+	 * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
 	 *
-	 * @static
-	 * @param source {}
-	 * @return {Sprite} A Texture</haxe_doc>
-		</from>
+	 * @member {String}
+	 * @default 'sprite']]></haxe_doc>
+		</pluginName>
 		<new public="1" set="method">
 			<f a="?texture">
 				<c path="pixi.core.textures.Texture"/>

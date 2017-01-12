@@ -1,5 +1,6 @@
 package pixi.core.sprites;
 
+import haxe.extern.EitherType;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.display.Container;
@@ -60,26 +61,28 @@ extern class Sprite extends Container {
 	/**
 	 * The shader that will be used to render the sprite. Set to null to remove a current shader.
 	 *
-	 * @member {AbstractFilter}
+	 * @member {Shader}
 	 */
-	var shader:Dynamic;
+	var shader:EitherType<Shader, Dynamic>;
 
 	/**
-	* Renders the object using the Canvas renderer
-	*
-	* @param renderer {CanvasRenderer} The renderer
-	*/
-	function renderCanvas(renderer:Dynamic):Void;
-
-	/**
-	 * Helper function that creates a new sprite based on the source you provide.
-	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+	 * Plugin that is responsible for rendering this element.
+	 * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
 	 *
-	 * @static
-	 * @param source {}
-	 * @return {Sprite} A Texture
+	 * @member {String}
+	 * @default 'sprite'
 	 */
-	function from(source:Dynamic):Sprite;
+	var pluginName:String;
+
+	/**
+     * Helper function that creates a new sprite based on the source you provide.
+     * The source can be - frame id, image url, video url, canvas element, video element, base texture
+     *
+     * @static
+     * @param {Int|String|PIXI.BaseTexture|HTMLCanvasElement|HTMLVideoElement} source Source to create texture from
+     * @return {Sprite} The newly created sprite
+     */
+	static function from(source:Dynamic):Sprite;
 
 	/**
 	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
