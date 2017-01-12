@@ -1,6 +1,5 @@
 package pixi.core.sprites;
 
-import pixi.core.math.shapes.Rectangle;
 import haxe.extern.EitherType;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
