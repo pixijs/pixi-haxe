@@ -1,5 +1,6 @@
 package pixi.core;
 
+import haxe.extern.EitherType;
 @:native("PIXI.Shader")
 extern class Shader {
 
@@ -14,14 +15,14 @@ extern class Shader {
 	 * @param vertexSrc {String|Array<String>} The vertex shader source as an array of strings.
 	 * @param fragmentSrc {String|Array<String>} The fragment shader source as an array of strings.
 	 */
-	function new(gl:Dynamic, vertexSrc:Dynamic, framentSrc:Dynamic);
+	function new(gl:Dynamic, vertexSrc:EitherType<String, Array<String>>, framentSrc:EitherType<String, Array<String>>);
 
 	/**
 	 *
-	 * @param	src {string|string[]}
-	 * @return {string|string[]}
+	 * @param	src {String|Array<String>}
+	 * @return {String|Array<String>}
 	 */
-	function checkPrecision(src:Dynamic):Dynamic;
+	function checkPrecision(src:EitherType<String, Array<String>>):EitherType<String, Array<String>>;
 
 	/**
 	 * Uses this shader

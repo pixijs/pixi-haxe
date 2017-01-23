@@ -1,5 +1,6 @@
 package basics;
 
+import pixi.core.Application;
 import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
@@ -11,9 +12,8 @@ import js.Browser;
 class Main {
 
 	var _bunny:Sprite;
-	var _renderer:SystemRenderer;
 	var _container:Container;
-
+	var _app:Application;
 	var _graphic:Graphics;
 
 	public function new() {
@@ -24,8 +24,9 @@ class Main {
 		options.transparent = true;
 		options.antialias = false;
 
+		_app = new Application(800, 600, options);
 		_container = new Container();
-		_renderer = Detector.autoDetectRenderer(800, 600, options);
+		_app.stage.addChild(_container);
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5);
@@ -43,14 +44,12 @@ class Main {
 
 		_container.addChild(_graphic);
 
-		Browser.document.body.appendChild(_renderer.view);
-		Browser.window.requestAnimationFrame(cast _animate);
+		Browser.document.body.appendChild(_app.view);
+		_app.ticker.add(_animate);
 	}
 
 	function _animate() {
-		Browser.window.requestAnimationFrame(cast _animate);
 		_bunny.rotation += 0.1;
-		_renderer.render(_container);
 	}
 
 	static function main() {

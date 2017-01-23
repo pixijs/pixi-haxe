@@ -11651,6 +11651,82 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.accessibility.AccessibilityManager"</e></m></meta>
 	</class>
+	<class path="pixi.core.Application" params="" file="src/pixi/core/Application.hx" extern="1">
+		<renderer public="1">
+			<x path="haxe.extern.EitherType">
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+				<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+			</x>
+			<haxe_doc>* WebGL renderer if available, otherwise CanvasRenderer
+	 * @member {WebGLRenderer|CanvasRenderer}</haxe_doc>
+		</renderer>
+		<stage public="1">
+			<c path="pixi.core.display.Container"/>
+			<haxe_doc>* The root display container that's renderered.
+	 * @member {Container}</haxe_doc>
+		</stage>
+		<ticker public="1">
+			<c path="pixi.core.ticker.Ticker"/>
+			<haxe_doc>* Ticker for doing render updates.
+	 * @member {Ticker}</haxe_doc>
+		</ticker>
+		<view public="1">
+			<c path="js.html.CanvasElement"/>
+			<haxe_doc>* Reference to the renderer's canvas element.
+     * @member {HTMLCanvasElement}
+     * @readonly</haxe_doc>
+		</view>
+		<render public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Render the current stage.</haxe_doc>
+		</render>
+		<stop public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Convenience method for stopping the render.</haxe_doc>
+		</stop>
+		<start public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>* Convenience method for starting the render.</haxe_doc>
+		</start>
+		<destroy public="1" set="method">
+			<f a="?removeView">
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Destroy and don't use after this.
+     * @param {Boolean} [removeView=false] Automatically remove canvas from DOM.</haxe_doc>
+		</destroy>
+		<new public="1" set="method">
+			<f a="?width:?height:?options:?noWebGL">
+				<x path="Float"/>
+				<x path="Float"/>
+				<t path="pixi.core.RenderOptions"/>
+				<x path="Bool"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Convenience class to create a new PIXI application.
+	 * This class automatically creates the renderer, ticker
+	 * and root container.
+	 *
+	 * @example
+	 * // Create the application
+	 * var app = new Application();
+	 *
+	 * // Add the view to the DOM
+	 * document.body.appendChild(app.view);
+	 *
+	 * // ex, add display objects
+	 * app.stage.addChild(PIXI.Sprite.fromImage('something.png'));
+	 *
+	 * @class
+	 * @memberof PIXI
+	 * @param {Float} [width=800] - the width of the renderers view
+     * @param {Float} [height=600] - the height of the renderers view
+     * @param {RenderOptions} [options] - The optional renderer parameters
+     * @param {Bool} [noWebGL=false] - prevents selection of WebGL renderer, even if such is present</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"PIXI.Application"</e></m></meta>
+	</class>
 	<class path="pixi.core.Pixi" params="" file="src/pixi/core/Pixi.hx" extern="1">
 		<VERSION public="1" static="1">
 			<c path="String"/>
@@ -12138,12 +12214,18 @@
 	<class path="pixi.core.Shader" params="" file="src/pixi/core/Shader.hx" extern="1">
 		<checkPrecision public="1" set="method">
 			<f a="src">
-				<d/>
-				<d/>
+				<x path="haxe.extern.EitherType">
+					<c path="String"/>
+					<c path="Array"><c path="String"/></c>
+				</x>
+				<x path="haxe.extern.EitherType">
+					<c path="String"/>
+					<c path="Array"><c path="String"/></c>
+				</x>
 			</f>
-			<haxe_doc>*
-	 * @param	src {string|string[]}
-	 * @return {string|string[]}</haxe_doc>
+			<haxe_doc><![CDATA[*
+	 * @param	src {String|Array<String>}
+	 * @return {String|Array<String>}]]></haxe_doc>
 		</checkPrecision>
 		<bind public="1" set="method">
 			<f a=""><x path="Void"/></f>
@@ -12160,8 +12242,14 @@
 		<new public="1" set="method">
 			<f a="gl:vertexSrc:framentSrc">
 				<d/>
-				<d/>
-				<d/>
+				<x path="haxe.extern.EitherType">
+					<c path="String"/>
+					<c path="Array"><c path="String"/></c>
+				</x>
+				<x path="haxe.extern.EitherType">
+					<c path="String"/>
+					<c path="Array"><c path="String"/></c>
+				</x>
 				<x path="Void"/>
 			</f>
 			<haxe_doc><![CDATA[* Wrapper class, webGL Shader for Pixi.
