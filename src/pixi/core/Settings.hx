@@ -180,5 +180,4 @@ extern class Settings {
      * @type {Bool}
      */
 	static var CAN_UPLOAD_SAME_BUFFER:Bool;
-
 }

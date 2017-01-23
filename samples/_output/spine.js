@@ -236,7 +236,7 @@ var spine_Main = function() {
 	this.stage.interactive = true;
 	var assetsToLoader = [];
 	this._loader = new PIXI.loaders.Loader();
-	this._loader.add("spinedata","assets/spine/spineboy.json");
+	this._loader.add("spineboy","assets/spine/spineboy.json");
 	this._loader.load($bind(this,this.onAssetsLoaded));
 };
 spine_Main.main = function() {
@@ -245,8 +245,8 @@ spine_Main.main = function() {
 spine_Main.__super__ = pixi_plugins_app_Application;
 spine_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 	onAssetsLoaded: function() {
-		this._spine = new PIXI.spine.Spine(Reflect.field(this._loader.resources,"spinedata").spineData);
-		this._spine.position.set(400,600);
+		this._spine = new PIXI.spine.Spine(Reflect.field(this._loader.resources,"spineboy").spineData);
+		this._spine.position.set(this.renderer.width / 2,this.renderer.height);
 		this._spine.scale.set(1.5);
 		this._spine.stateData.setMix("walk","jump",0.2);
 		this._spine.stateData.setMix("jump","walk",0.4);
