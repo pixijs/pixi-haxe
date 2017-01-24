@@ -13,7 +13,8 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
+		position = Application.POSITION_FIXED;
+		autoResize = true;
 		backgroundColor = 0x003366;
 		super.start();
 

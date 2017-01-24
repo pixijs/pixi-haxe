@@ -1,11 +1,9 @@
 package pixi.core;
 
+import pixi.core.renderers.SystemRenderer;
 import js.html.CanvasElement;
 import pixi.core.ticker.Ticker;
 import pixi.core.display.Container;
-import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
-import haxe.extern.EitherType;
 
 @:native("PIXI.Application")
 extern class Application {
@@ -38,7 +36,7 @@ extern class Application {
 	 * WebGL renderer if available, otherwise CanvasRenderer
 	 * @member {WebGLRenderer|CanvasRenderer}
 	 */
-	var renderer:EitherType<WebGLRenderer, CanvasRenderer>;
+	var renderer:SystemRenderer;
 
 	/**
 	 * The root display container that's renderered.

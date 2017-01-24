@@ -1,11 +1,10 @@
 package basics;
 
+import pixi.core.RenderOptions;
 import pixi.core.Application;
 import pixi.core.graphics.Graphics;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
-import pixi.core.renderers.SystemRenderer;
-import pixi.core.renderers.Detector;
 import pixi.core.sprites.Sprite;
 import js.Browser;
 
@@ -18,7 +17,7 @@ class Main {
 
 	public function new() {
 		// Rendering options usage sample
-		var options:RenderingOptions = {};
+		var options:RenderOptions = {};
 		options.backgroundColor = 0x006666;
 		options.resolution = 1;
 		options.transparent = true;

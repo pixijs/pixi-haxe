@@ -266,7 +266,6 @@ audio_Button.prototype = $extend(PIXI.Container.prototype,{
 var pixi_plugins_app_Application = function() {
 	this._animationFrameId = null;
 	this.pixelRatio = 1;
-	this.set_skipFrame(false);
 	this.autoResize = true;
 	this.transparent = false;
 	this.antialias = false;
@@ -278,22 +277,10 @@ var pixi_plugins_app_Application = function() {
 	this.width = window.innerWidth;
 	this.height = window.innerHeight;
 	this.position = "static";
-	this.set_fps(60);
 };
 pixi_plugins_app_Application.__name__ = true;
 pixi_plugins_app_Application.prototype = {
-	set_fps: function(val) {
-		this._frameCount = 0;
-		return val >= 1 && val < 60?this.fps = val | 0:this.fps = 60;
-	}
-	,set_skipFrame: function(val) {
-		if(val) {
-			console.log("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
-			this.set_fps(30);
-		}
-		return this.skipFrame = val;
-	}
-	,start: function(rendererType,parentDom,canvasElement) {
+	start: function(rendererType,parentDom,canvasElement) {
 		if(rendererType == null) rendererType = "auto";
 		if(canvasElement == null) {
 			var _this = window.document;
@@ -302,8 +289,7 @@ pixi_plugins_app_Application.prototype = {
 			this.canvas.style.height = this.height + "px";
 			this.canvas.style.position = this.position;
 		} else this.canvas = canvasElement;
-		if(parentDom == null) window.document.body.appendChild(this.canvas); else parentDom.appendChild(this.canvas);
-		this.stage = new PIXI.Container();
+		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
 		var renderingOptions = { };
 		renderingOptions.view = this.canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
@@ -314,35 +300,33 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.transparent = this.transparent;
 		renderingOptions.clearBeforeRender = this.clearBeforeRender;
 		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
-		if(rendererType == "auto") this.renderer = PIXI.autoDetectRenderer(this.width,this.height,renderingOptions); else if(rendererType == "canvas") this.renderer = new PIXI.CanvasRenderer(this.width,this.height,renderingOptions); else this.renderer = new PIXI.WebGLRenderer(this.width,this.height,renderingOptions);
-		if(this.roundPixels) this.renderer.roundPixels = true;
-		if(parentDom == null) window.document.body.appendChild(this.renderer.view); else parentDom.appendChild(this.renderer.view);
-		this.resumeRendering();
+		renderingOptions.roundPixels = this.roundPixels;
+		if(rendererType != null) switch(rendererType) {
+		case "canvas":
+			this.app = new PIXI.Application(this.width,this.height,renderingOptions,true);
+			break;
+		default:
+			this.app = new PIXI.Application(this.width,this.height,renderingOptions);
+		} else this.app = new PIXI.Application(this.width,this.height,renderingOptions);
+		this.stage = this.app.stage;
+		this.renderer = this.app.renderer;
+		if(parentDom == null) window.document.body.appendChild(this.app.view); else parentDom.appendChild(this.app.view);
+		this.app.ticker.add($bind(this,this._onRequestAnimationFrame));
 		this.addStats();
-	}
-	,resumeRendering: function() {
-		if(this.autoResize) window.onresize = $bind(this,this._onWindowResize);
-		if(this._animationFrameId == null) this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
 	}
 	,_onWindowResize: function(event) {
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
-		this.renderer.resize(this.width,this.height);
+		this.app.renderer.resize(this.width,this.height);
 		this.canvas.style.width = this.width + "px";
 		this.canvas.style.height = this.height + "px";
 		if(this.onResize != null) this.onResize();
 	}
-	,_onRequestAnimationFrame: function(elapsedTime) {
-		this._frameCount++;
-		if(this._frameCount == (60 / this.fps | 0)) {
-			this._frameCount = 0;
-			if(this.onUpdate != null) this.onUpdate(elapsedTime);
-			this.renderer.render(this.stage);
-		}
-		this._animationFrameId = window.requestAnimationFrame($bind(this,this._onRequestAnimationFrame));
+	,_onRequestAnimationFrame: function() {
+		if(this.onUpdate != null) this.onUpdate(this.app.ticker.deltaTime);
 	}
 	,addStats: function() {
-		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.renderer.type] + " - " + this.pixelRatio);
+		if(window.Perf != null) new Perf().addInfo(["UNKNOWN","WEBGL","CANVAS"][this.app.renderer.type] + " - " + this.pixelRatio);
 	}
 };
 var audio_Main = function() {

@@ -11653,10 +11653,7 @@
 	</class>
 	<class path="pixi.core.Application" params="" file="src/pixi/core/Application.hx" extern="1">
 		<renderer public="1">
-			<x path="haxe.extern.EitherType">
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-				<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-			</x>
+			<c path="pixi.core.renderers.SystemRenderer"/>
 			<haxe_doc>* WebGL renderer if available, otherwise CanvasRenderer
 	 * @member {WebGLRenderer|CanvasRenderer}</haxe_doc>
 		</renderer>
@@ -11725,7 +11722,10 @@
      * @param {RenderOptions} [options] - The optional renderer parameters
      * @param {Bool} [noWebGL=false] - prevents selection of WebGL renderer, even if such is present</haxe_doc>
 		</new>
-		<meta><m n=":native"><e>"PIXI.Application"</e></m></meta>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":native"><e>"PIXI.Application"</e></m>
+		</meta>
 	</class>
 	<class path="pixi.core.Pixi" params="" file="src/pixi/core/Pixi.hx" extern="1">
 		<VERSION public="1" static="1">
@@ -12013,13 +12013,17 @@
 </a></typedef>
 	<typedef path="pixi.core.RenderOptions" params="" file="src/pixi/core/RenderOptions.hx"><a>
 	<view>
-		<t path="Null"><d/></t>
+		<t path="Null"><c path="js.html.CanvasElement"/></t>
 		<meta><m n=":optional"/></meta>
 	</view>
 	<transparent>
 		<t path="Null"><x path="Bool"/></t>
 		<meta><m n=":optional"/></meta>
 	</transparent>
+	<roundPixels>
+		<t path="Null"><x path="Bool"/></t>
+		<meta><m n=":optional"/></meta>
+	</roundPixels>
 	<resolution>
 		<t path="Null"><x path="Float"/></t>
 		<meta><m n=":optional"/></meta>
@@ -13405,10 +13409,7 @@
 	 * @extends DisplayObject
 	 * @namespace PIXI</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.Container"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.Container"</e></m></meta>
 	</class>
 	<class path="pixi.core.display.TransformBase" params="" file="src/pixi/core/display/TransformBase.hx" extern="1">
 		<IDENTITY public="1" static="1"><c path="pixi.core.display.TransformBase"/></IDENTITY>
@@ -14428,70 +14429,6 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
-	<class path="pixi.core.renderers.Detector" params="" file="src/pixi/core/renderers/Detector.hx" extern="1">
-		<autoDetectRenderer public="1" set="method" static="1">
-			<f a="width:height:?options:?noWebGL">
-				<x path="Float"/>
-				<x path="Float"/>
-				<t path="pixi.core.renderers.RenderingOptions"/>
-				<x path="Bool"/>
-				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
-			</f>
-			<overloads><autoDetectRenderer public="1" set="method"><f a="width:height:?options:?noWebGL">
-	<x path="Float"/>
-	<x path="Float"/>
-	<t path="pixi.core.renderers.RenderingOptions"/>
-	<x path="Bool"/>
-	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
-</f></autoDetectRenderer></overloads>
-		</autoDetectRenderer>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI"</e></m>
-		</meta>
-	</class>
-	<typedef path="pixi.core.renderers.RenderingOptions" params="" file="src/pixi/core/renderers/Detector.hx" module="pixi.core.renderers.Detector"><a>
-	<view>
-		<t path="Null"><c path="js.html.CanvasElement"/></t>
-		<meta><m n=":optional"/></meta>
-	</view>
-	<transparent>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</transparent>
-	<roundPixels>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</roundPixels>
-	<resolution>
-		<t path="Null"><x path="Float"/></t>
-		<meta><m n=":optional"/></meta>
-	</resolution>
-	<preserveDrawingBuffer>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</preserveDrawingBuffer>
-	<forceFXAA>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</forceFXAA>
-	<clearBeforeRender>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</clearBeforeRender>
-	<backgroundColor>
-		<t path="Null"><x path="Int"/></t>
-		<meta><m n=":optional"/></meta>
-	</backgroundColor>
-	<autoResize>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</autoResize>
-	<antialias>
-		<t path="Null"><x path="Bool"/></t>
-		<meta><m n=":optional"/></meta>
-	</antialias>
-</a></typedef>
 	<class path="pixi.core.renderers.SystemRenderer" params="" file="src/pixi/core/renderers/SystemRenderer.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<type public="1">
@@ -14642,7 +14579,7 @@
 				<c path="String"/>
 				<x path="Float"/>
 				<x path="Float"/>
-				<t path="pixi.core.renderers.RenderingOptions"/>
+				<t path="pixi.core.RenderOptions"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":value"><e>{height:600,width:800}</e></m></meta>
@@ -14715,7 +14652,7 @@
 			<f a="width:height:?options">
 				<x path="Float"/>
 				<x path="Float"/>
-				<t path="pixi.core.renderers.RenderingOptions"/>
+				<t path="pixi.core.RenderOptions"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
@@ -14735,10 +14672,7 @@
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.CanvasRenderer"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.CanvasRenderer"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.canvas.utils.CanvasGraphics" params="" file="src/pixi/core/renderers/canvas/utils/CanvasGraphics.hx" extern="1">
 		<renderGraphics public="1" set="method" static="1"><f a="graphics:context">
@@ -15114,7 +15048,7 @@
 			<f a="width:height:?options">
 				<x path="Float"/>
 				<x path="Float"/>
-				<t path="pixi.core.renderers.RenderingOptions"/>
+				<t path="pixi.core.RenderOptions"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* The WebGLRenderer draws the scene and all its content onto a webGL enabled canvas. This renderer
@@ -15136,10 +15070,7 @@
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.</haxe_doc>
 		</new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":native"><e>"PIXI.WebGLRenderer"</e></m>
-		</meta>
+		<meta><m n=":native"><e>"PIXI.WebGLRenderer"</e></m></meta>
 	</class>
 	<class path="pixi.core.renderers.webgl.filters.Filter" params="" file="src/pixi/core/renderers/webgl/filters/Filter.hx" extern="1">
 		<defaultVertexSrc public="1" static="1">
@@ -19019,16 +18950,6 @@
 			<haxe_doc>* Sets the pixel ratio of the application.
      * default - 1</haxe_doc>
 		</pixelRatio>
-		<skipFrame public="1" set="accessor">
-			<x path="Bool"/>
-			<haxe_doc>* Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
-	 * default - false</haxe_doc>
-		</skipFrame>
-		<fps public="1" set="accessor">
-			<x path="Int"/>
-			<haxe_doc>* Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
-	 * default - 60</haxe_doc>
-		</fps>
 		<width public="1">
 			<x path="Float"/>
 			<haxe_doc>* Width of the application.
@@ -19105,7 +19026,7 @@
 	 * Read-only</haxe_doc>
 		</canvas>
 		<renderer public="1" set="null">
-			<d/>
+			<c path="pixi.core.renderers.SystemRenderer"/>
 			<haxe_doc>* Renderer
 	 * Read-only</haxe_doc>
 		</renderer>
@@ -19114,17 +19035,13 @@
 			<haxe_doc>* Global Container.
 	 * Read-only</haxe_doc>
 		</stage>
-		<_frameCount><x path="Int"/></_frameCount>
+		<app public="1" set="null">
+			<c path="pixi.core.Application"/>
+			<haxe_doc>* Pixi Application
+	 * Read-only</haxe_doc>
+		</app>
 		<_animationFrameId><t path="Null"><x path="Int"/></t></_animationFrameId>
-		<set_fps set="method" line="149"><f a="val">
-	<x path="Int"/>
-	<x path="Int"/>
-</f></set_fps>
-		<set_skipFrame set="method" line="154"><f a="val">
-	<x path="Bool"/>
-	<x path="Bool"/>
-</f></set_skipFrame>
-		<start public="1" set="method" line="189">
+		<start public="1" set="method" line="174">
 			<f a="?rendererType:?parentDom:?canvasElement">
 				<c path="String"/>
 				<c path="js.html.Element"/>
@@ -19138,22 +19055,18 @@
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed]]></haxe_doc>
 		</start>
-		<resumeRendering public="1" set="method" line="234"><f a=""><x path="Void"/></f></resumeRendering>
-		<_onWindowResize set="method" line="239">
+		<_onWindowResize set="method" line="221">
 			<f a="event">
 				<c path="js.html.Event"/>
 				<x path="Void"/>
 			</f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onWindowResize>
-		<_onRequestAnimationFrame set="method" line="249">
-			<f a="elapsedTime">
-				<x path="Float"/>
-				<x path="Void"/>
-			</f>
+		<_onRequestAnimationFrame set="method" line="231">
+			<f a=""><x path="Void"/></f>
 			<meta><m n=":noCompletion"/></meta>
 		</_onRequestAnimationFrame>
-		<addStats public="1" set="method" line="259">
+		<addStats public="1" set="method" line="235">
 			<f a=""><x path="Void"/></f>
 			<meta><m n=":has_untyped"/></meta>
 		</addStats>

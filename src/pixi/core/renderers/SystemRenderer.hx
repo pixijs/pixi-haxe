@@ -5,7 +5,6 @@ import pixi.core.textures.Texture;
 import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
 import pixi.core.display.DisplayObject;
-import pixi.core.renderers.Detector;
 import js.html.CanvasElement;
 
 @:native("PIXI.SystemRenderer")
@@ -28,7 +27,7 @@ extern class SystemRenderer extends EventEmitter {
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
 	 */
-	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderingOptions);
+	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderOptions);
 
 	/**
 	 * The type of the renderer.
