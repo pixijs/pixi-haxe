@@ -19,14 +19,14 @@ class Main extends Application {
 		var assetsToLoader:Array<String> = [];
 
 		_loader = new Loader();
-		_loader.add("spinedata", "assets/spine/spineboy.json");
+		_loader.add("spineboy", "assets/spine/spineboy.json");
 		_loader.load(onAssetsLoaded);
 	}
 
 	function onAssetsLoaded() {
-		_spine = new Spine(Reflect.field(_loader.resources, "spinedata").spineData);
+		_spine = new Spine(Reflect.field(_loader.resources, "spineboy").spineData);
 
-		_spine.position.set(400, 600);
+		_spine.position.set(renderer.width / 2, renderer.height);
 
 		_spine.scale.set(1.5);
 

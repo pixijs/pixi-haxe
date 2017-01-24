@@ -4,7 +4,6 @@ import pixi.particles.ParticleContainer;
 import pixi.core.math.shapes.Rectangle;
 import js.html.DivElement;
 import js.Browser;
-import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 import pixi.plugins.app.Application;
 
@@ -41,7 +40,7 @@ class Main extends Application {
 		backgroundColor = 0x8BDDCE;
 		onUpdate = _onUpdate;
 		onResize = _onResize;
-		fps = 50;
+		autoResize = true;
 		super.start();
 		_setup();
 	}

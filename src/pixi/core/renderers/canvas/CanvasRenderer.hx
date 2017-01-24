@@ -2,7 +2,6 @@ package pixi.core.renderers.canvas;
 
 import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
-import pixi.core.renderers.Detector;
 
 @:native("PIXI.CanvasRenderer")
 extern class CanvasRenderer extends SystemRenderer {
@@ -25,7 +24,7 @@ extern class CanvasRenderer extends SystemRenderer {
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
 	 */
-	function new(width:Float, height:Float, ?options:RenderingOptions);
+	function new(width:Float, height:Float, ?options:RenderOptions);
 
 	/**
      * Clear the canvas of renderer.

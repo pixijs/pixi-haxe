@@ -1,6 +1,6 @@
 package stream;
 
-import Reflect;
+import pixi.core.renderers.webgl.WebGLRenderer;
 import haxe.Json;
 import js.html.XMLHttpRequest;
 import js.html.TextTrackMode;
@@ -16,7 +16,7 @@ import pixi.core.sprites.Sprite;
 import js.html.Element;
 import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.Container;
-import pixi.core.renderers.Detector;
+import pixi.core.RenderOptions;
 
 import js.Browser;
 import js.html.VideoElement;
@@ -50,13 +50,13 @@ class Main {
 	}
 
 	function _init() {
-		var options:RenderingOptions = {};
+		var options:RenderOptions = {};
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
 		options.transparent = true;
 
 		_stage = new Container();
-		_renderer = Detector.autoDetectRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
+		_renderer = new WebGLRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
 		_wrapper = Browser.document.createDivElement();
 
 		_videoElement = Browser.document.createVideoElement();

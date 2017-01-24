@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor updates",
-	"version": "4.2.9",
+	"releasenote": "updated to use pixi's new Application class",
+	"version": "4.3.0",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""

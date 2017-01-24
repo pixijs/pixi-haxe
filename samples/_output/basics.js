@@ -5,8 +5,9 @@ var basics_Main = function() {
 	options.resolution = 1;
 	options.transparent = true;
 	options.antialias = false;
+	this._app = new PIXI.Application(800,600,options);
 	this._container = new PIXI.Container();
-	this._renderer = PIXI.autoDetectRenderer(800,600,options);
+	this._app.stage.addChild(this._container);
 	this._bunny = new PIXI.Sprite(PIXI.Texture.fromImage("assets/basics/bunny.png"));
 	this._bunny.anchor.set(0.5);
 	this._bunny.position.set(400,300);
@@ -20,17 +21,15 @@ var basics_Main = function() {
 		console.log(evt);
 	});
 	this._container.addChild(this._graphic);
-	window.document.body.appendChild(this._renderer.view);
-	window.requestAnimationFrame($bind(this,this._animate));
+	window.document.body.appendChild(this._app.view);
+	this._app.ticker.add($bind(this,this._animate));
 };
 basics_Main.main = function() {
 	new basics_Main();
 };
 basics_Main.prototype = {
 	_animate: function() {
-		window.requestAnimationFrame($bind(this,this._animate));
 		this._bunny.rotation += 0.1;
-		this._renderer.render(this._container);
 	}
 };
 var $_, $fid = 0;
