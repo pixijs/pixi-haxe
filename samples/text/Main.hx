@@ -32,7 +32,7 @@ class Main extends Application {
 			fontSize:52
 		};
 		_label2 = new Text("TEXT 2");
-		_label2.style = style2;
+		_label2.style.fill ="#99ff33";
 		_label2.position.set(0, 80);
 		stage.addChild(_label2);
 

@@ -15883,10 +15883,7 @@
 		<extends path="pixi.core.sprites.Sprite"/>
 		<getFontStyle public="1" set="method" static="1">
 			<f a="?style">
-				<x path="haxe.extern.EitherType">
-					<d/>
-					<t path="pixi.core.text.DefaultStyle"/>
-				</x>
+				<t path="pixi.core.text.DefaultStyle"/>
 				<c path="String"/>
 			</f>
 			<haxe_doc>* Generates a font style string to use for Text.calculateFontProperties(). Takes the same parameter
@@ -15934,10 +15931,7 @@
      * @memberof Text#</haxe_doc>
 		</text>
 		<style public="1">
-			<x path="haxe.extern.EitherType">
-				<t path="pixi.core.text.DefaultStyle"/>
-				<d/>
-			</x>
+			<t path="pixi.core.text.DefaultStyle"/>
 			<haxe_doc>* Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
      * @member {TextStyleObj|TextStyle}
      *</haxe_doc>
@@ -15945,10 +15939,7 @@
 		<new public="1" set="method">
 			<f a="text:?style">
 				<c path="String"/>
-				<x path="haxe.extern.EitherType">
-					<d/>
-					<t path="pixi.core.text.DefaultStyle"/>
-				</x>
+				<t path="pixi.core.text.DefaultStyle"/>
 				<x path="Void"/>
 			</f>
 			<haxe_doc>* A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
@@ -15964,7 +15955,7 @@
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
 	 * @param text {String} The string that you would like the text to display
-	 * @param [style] {object|TextStyle} The style parameters</haxe_doc>
+	 * @param [style] {DefaultStyle|TextStyle} The style parameters</haxe_doc>
 		</new>
 		<meta>
 			<m n=":directlyUsed"/>

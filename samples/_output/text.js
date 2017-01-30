@@ -232,9 +232,9 @@ text_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this._label1 = new PIXI.Text("TEXT 1",style1);
 		this._label1.position.set(0,0);
 		this.stage.addChild(this._label1);
-		var style2 = { fontSize : 52};
+		var style2_fontSize = 52;
 		this._label2 = new PIXI.Text("TEXT 2");
-		this._label2.style = style2;
+		this._label2.style.fill = "#99ff33";
 		this._label2.position.set(0,80);
 		this.stage.addChild(this._label2);
 		var style3 = { fontSize : "52px"};
