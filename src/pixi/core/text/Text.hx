@@ -1,6 +1,5 @@
 package pixi.core.text;
 
-import haxe.extern.EitherType;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 import pixi.core.sprites.Sprite;
@@ -22,9 +21,9 @@ extern class Text extends Sprite {
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
 	 * @param text {String} The string that you would like the text to display
-	 * @param [style] {object|TextStyle} The style parameters
+	 * @param [style] {DefaultStyle|TextStyle} The style parameters
 	 */
-	function new(text:String, ?style:EitherType<Dynamic, DefaultStyle>):Void;
+	function new(text:String, ?style:DefaultStyle):Void;
 
 	/**
 	 * The canvas element that everything is drawn to
@@ -58,7 +57,7 @@ extern class Text extends Sprite {
      * @member {TextStyleObj|TextStyle}
      *
      */
-	var style:EitherType<DefaultStyle, Dynamic>;
+	var style:DefaultStyle;
 
 	/**
      * Generates a font style string to use for Text.calculateFontProperties(). Takes the same parameter
@@ -68,7 +67,7 @@ extern class Text extends Sprite {
      * @param {object|TextStyle} style - String representing the style of the font
      * @return {String} Font style string, for passing to Text.calculateFontProperties()
      */
-	static function getFontStyle(?style:EitherType<Dynamic, DefaultStyle>):String;
+	static function getFontStyle(?style:DefaultStyle):String;
 
 	/**
      * Calculates the ascent, descent and fontSize of a given fontStyle
