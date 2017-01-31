@@ -14535,6 +14535,25 @@
 		</new>
 		<meta><m n=":native"><e>"PIXI.RoundedRectangle"</e></m></meta>
 	</class>
+	<class path="pixi.core.renderers.Detector" params="" file="src/pixi/core/renderers/Detector.hx" extern="1">
+		<autoDetectRenderer public="1" set="method" static="1">
+			<f a="width:height:?options:?noWebGL">
+				<x path="Float"/>
+				<x path="Float"/>
+				<t path="pixi.core.RenderOptions"/>
+				<x path="Bool"/>
+				<c path="pixi.core.renderers.webgl.WebGLRenderer"/>
+			</f>
+			<overloads><autoDetectRenderer public="1" set="method"><f a="width:height:?options:?noWebGL">
+	<x path="Float"/>
+	<x path="Float"/>
+	<t path="pixi.core.RenderOptions"/>
+	<x path="Bool"/>
+	<c path="pixi.core.renderers.canvas.CanvasRenderer"/>
+</f></autoDetectRenderer></overloads>
+		</autoDetectRenderer>
+		<meta><m n=":native"><e>"PIXI"</e></m></meta>
+	</class>
 	<class path="pixi.core.renderers.SystemRenderer" params="" file="src/pixi/core/renderers/SystemRenderer.hx" extern="1">
 		<extends path="pixi.interaction.EventEmitter"/>
 		<type public="1">
