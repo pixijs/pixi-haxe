@@ -2,6 +2,7 @@ package pixi.core.display;
 
 import pixi.core.math.Matrix;
 import pixi.core.math.Point;
+
 @:native("PIXI.Transform")
 extern class Transform extends TransformBase {
 
