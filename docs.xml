@@ -17745,6 +17745,12 @@
      *
      * @member {Event}</haxe_doc>
 		</originalEvent>
+		<identifier public="1">
+			<x path="Int"/>
+			<haxe_doc>* Unique identifier for this interaction
+	 *
+	 * @member {Int}</haxe_doc>
+		</identifier>
 		<getLocalPosition public="1" set="method">
 			<f a="displayObject:?point:?globalPos">
 				<c path="pixi.core.display.DisplayObject"/>

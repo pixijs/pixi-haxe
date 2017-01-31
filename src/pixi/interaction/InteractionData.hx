@@ -38,6 +38,13 @@ extern class InteractionData {
 	var originalEvent:Event;
 
 	/**
+	 * Unique identifier for this interaction
+	 *
+	 * @member {Int}
+	 */
+	var identifier:Int;
+
+	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData
 	 *
 	 * @param displayObject {DisplayObject} The DisplayObject that you would like the local coords off

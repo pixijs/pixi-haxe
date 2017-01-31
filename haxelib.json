@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "minor bug fixes",
-	"version": "4.3.2",
+	"releasenote": "added identifier property in InteractionData",
+	"version": "4.3.3",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
