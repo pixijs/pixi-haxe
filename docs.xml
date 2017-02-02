@@ -5992,29 +5992,6 @@
 		<getSVGDocument public="1" set="method"><f a=""><c path="js.html.HTMLDocument"/></f></getSVGDocument>
 		<meta><m n=":native"><e>"HTMLIFrameElement"</e></m></meta>
 	</class>
-	<class path="js.html.ImageData" params="" file="/usr/local/lib/haxe/std/js/html/ImageData.hx" extern="1">
-		<width public="1" set="null"><x path="Int"/></width>
-		<height public="1" set="null"><x path="Int"/></height>
-		<data public="1" set="null"><c path="js.html.Uint8ClampedArray"/></data>
-		<new public="1" set="method">
-			<f a="data:sw:?sh">
-				<c path="js.html.Uint8ClampedArray"/>
-				<x path="Int"/>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>@throws DOMError</haxe_doc>
-			<overloads><new public="1" set="method">
-	<f a="sw:sh">
-		<x path="Int"/>
-		<x path="Int"/>
-		<x path="Void"/>
-	</f>
-	<haxe_doc>@throws DOMError</haxe_doc>
-</new></overloads>
-		</new>
-		<meta><m n=":native"><e>"ImageData"</e></m></meta>
-	</class>
 	<class path="js.html.ImageElement" params="" file="/usr/local/lib/haxe/std/js/html/ImageElement.hx" extern="1">
 		<extends path="js.html.Element"/>
 		<alt public="1"><c path="String"/></alt>
@@ -6040,6 +6017,41 @@
 		<x public="1" set="null"><x path="Int"/></x>
 		<y public="1" set="null"><x path="Int"/></y>
 		<meta><m n=":native"><e>"HTMLImageElement"</e></m></meta>
+	</class>
+	<class path="js.html.Image" params="" file="/usr/local/lib/haxe/std/js/html/Image.hx" extern="1">
+		<extends path="js.html.ImageElement"/>
+		<new public="1" set="method">
+			<f a="?width:?height">
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+		</new>
+		<meta><m n=":native"><e>"Image"</e></m></meta>
+	</class>
+	<class path="js.html.ImageData" params="" file="/usr/local/lib/haxe/std/js/html/ImageData.hx" extern="1">
+		<width public="1" set="null"><x path="Int"/></width>
+		<height public="1" set="null"><x path="Int"/></height>
+		<data public="1" set="null"><c path="js.html.Uint8ClampedArray"/></data>
+		<new public="1" set="method">
+			<f a="data:sw:?sh">
+				<c path="js.html.Uint8ClampedArray"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>@throws DOMError</haxe_doc>
+			<overloads><new public="1" set="method">
+	<f a="sw:sh">
+		<x path="Int"/>
+		<x path="Int"/>
+		<x path="Void"/>
+	</f>
+	<haxe_doc>@throws DOMError</haxe_doc>
+</new></overloads>
+		</new>
+		<meta><m n=":native"><e>"ImageData"</e></m></meta>
 	</class>
 	<class path="js.html.InputElement" params="" file="/usr/local/lib/haxe/std/js/html/InputElement.hx" extern="1">
 		<extends path="js.html.Element"/>
@@ -16018,6 +16030,20 @@
 	 * @member {Float}
 	 * @readOnly</haxe_doc>
 		</height>
+		<realWidth public="1">
+			<x path="Float"/>
+			<haxe_doc>* Used to store the actual width of the source of this texture
+	 *
+	 * @readonly
+	 * @member {Float}</haxe_doc>
+		</realWidth>
+		<realHeight public="1">
+			<x path="Float"/>
+			<haxe_doc>* Used to store the actual height of the source of this texture
+	 *
+	 * @readonly
+	 * @member {Float}</haxe_doc>
+		</realHeight>
 		<scaleMode public="1">
 			<x path="Int"/>
 			<haxe_doc>* The scale mode to apply when scaling this texture
@@ -16052,6 +16078,30 @@
 	 * @member {Image|Canvas}
 	 * @readonly</haxe_doc>
 		</source>
+		<origSource public="1">
+			<c path="js.html.Image"/>
+			<haxe_doc>* The image source that is used to create the texture. This is used to
+	 * store the original Svg source when it is replaced with a canvas element.
+	 *
+	 * TODO: Currently not in use but could be used when re-scaling svg.
+	 *
+	 * @readonly
+	 * @member {Image}</haxe_doc>
+		</origSource>
+		<imageType public="1">
+			<c path="String"/>
+			<haxe_doc>* Type of image defined in source, eg. `png` or `svg`
+	 *
+	 * @readonly
+	 * @member {String}</haxe_doc>
+		</imageType>
+		<sourceScale public="1">
+			<x path="Float"/>
+			<haxe_doc>* Scale for source image. Used with Svg images to scale them before rasterization.
+	 *
+	 * @readonly
+	 * @member {Float}</haxe_doc>
+		</sourceScale>
 		<premultipliedAlpha public="1">
 			<x path="Bool"/>
 			<haxe_doc>* Controls if RGB channels should be pre-multiplied by Alpha (WebGL only)
@@ -16602,6 +16652,20 @@
 	<x path="Int"/>
 	<c path="pixi.core.textures.VideoBaseTexture"/>
 </f></fromUrls>
+		<autoPlay public="1">
+			<x path="Bool"/>
+			<haxe_doc>* When set to true will automatically play videos used by this texture once
+	 * they are loaded. If false, it will not modify the playing state.
+	 *
+	 * @member {Bool}
+	 * @default true</haxe_doc>
+		</autoPlay>
+		<autoUpdate public="1">
+			<x path="Bool"/>
+			<haxe_doc>* Should the base texture automatically update itself, set to true by default
+     *
+     * @member {Bool}</haxe_doc>
+		</autoUpdate>
 		<new public="1" set="method">
 			<f a="source:?scaleMode">
 				<c path="js.html.VideoElement"/>
