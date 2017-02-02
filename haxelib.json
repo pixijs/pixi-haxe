@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added identifier property in InteractionData",
-	"version": "4.3.3",
+	"releasenote": "added missing members in Basetexture and VideoBasetexture",
+	"version": "4.3.4",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
