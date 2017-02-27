@@ -13,4 +13,5 @@ typedef RenderOptions = {
 	@:optional var clearBeforeRender:Bool;
 	@:optional var preserveDrawingBuffer:Bool;
 	@:optional var roundPixels:Bool;
+	@:optional var legacy:Bool;
 }

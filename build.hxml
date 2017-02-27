@@ -110,11 +110,6 @@
 -js samples/_output/devicedetection.js
 
 --next
--lib msignal
--main audio.Main
--js samples/_output/audio.js
-
---next
 -main webglinfo.Main
 -js samples/_output/webglinfo.js
 
