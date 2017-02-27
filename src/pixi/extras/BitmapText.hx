@@ -1,5 +1,7 @@
 package pixi.extras;
 
+import pixi.core.textures.Texture;
+import js.html.XMLDocument;
 import pixi.core.display.Container;
 
 @:native("PIXI.extras.BitmapText")
@@ -100,10 +102,27 @@ extern class BitmapText extends Container {
 	 * @memberof BitmapText#
 	 */
 	var text:String;
+
+	/**
+     * Register a bitmap font with data and a texture.
+     *
+     * @static
+     * @param {XMLDocument} xml - The XML document data.
+     * @param {PIXI.Texture} texture - Texture with all symbols.
+     * @return {Object} Result font object with font, size, lineHeight and char fields.
+     */
+	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;
 	@:optional var align:String;
 	@:optional var tint:Int;
+}
+
+typedef FontObj = {
+	var font:Dynamic;
+	var size:Int;
+	var lineHeight:Int;
+	var chars:Dynamic;
 }

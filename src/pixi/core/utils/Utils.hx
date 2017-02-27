@@ -110,4 +110,14 @@ extern class Utils {
      * @param {Int} removeCount How many items to remove
      */
 	static function removeItems(arr:Array<Dynamic>, startIdx:Int, removeCount:Int):Void;
+
+	/**
+	 * Destroys all texture in the cache
+	 */
+	static function destroyTextureCache():Void;
+
+	/**
+	 * Removes all textures from cache, but does not destroy them
+	 */
+	static function clearTextureCache():Void;
 }

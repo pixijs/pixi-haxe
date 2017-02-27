@@ -231,4 +231,16 @@ extern class BaseTexture extends EventEmitter {
 	 * @return BaseTexture
 	 */
 	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
+
+	/**
+     * Helper function that creates a base texture based on the source you provide.
+     * The source can be - image url, image element, canvas element.
+     *
+     * @static
+     * @param {string|HTMLImageElement|HTMLCanvasElement} source - The source to create base texture from.
+     * @param {number} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+     * @param {number} [sourceScale=(auto)] - Scale for the original image, used with Svg images.
+     * @return {PIXI.BaseTexture} The new base texture.
+     */
+	static function from(source:Dynamic, scaleMode:Float, ?sourceScale:Float):BaseTexture;
 }

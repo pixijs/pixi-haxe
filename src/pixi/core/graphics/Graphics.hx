@@ -14,11 +14,13 @@ extern class Graphics extends Container {
 	 * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
 	 * rectangles to the display, and color and fill them.
 	 *
+	 * @param {Bool} [nativeLines=false] - If true the lines will be draw using LINES instead of TRIANGLE_STRIP
+	 *
 	 * @class
 	 * @extends Container
 	 * @namespace PIXI
 	 */
-	function new();
+	function new(?nativeLines:Bool = false);
 
 	/**
 	 * The alpha value used when filling the Graphics object.
@@ -35,6 +37,13 @@ extern class Graphics extends Container {
 	 * @default 0
 	 */
 	var lineWidth:Float;
+
+	/**
+	 * If true the lines will be draw using LINES instead of TRIANGLE_STRIP
+	 *
+	 * @member {Bool}
+	 */
+	var nativeLines:Bool;
 
 	/**
 	 * The color of any lines drawn.

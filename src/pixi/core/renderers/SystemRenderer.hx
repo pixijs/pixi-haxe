@@ -26,6 +26,8 @@ extern class SystemRenderer extends EventEmitter {
 	 *      not before the new render pass.
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
+	 * @param {Bool} [options.legacy=false] - If true Pixi will aim to ensure compatibility with older / less advanced devices.
+	 *      If you experience unexplained flickering try setting this to true.
 	 */
 	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderOptions);
 
