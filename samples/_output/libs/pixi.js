@@ -1,6 +1,6 @@
 /*!
- * pixi.js - v4.4.0
- * Compiled Wed, 22 Feb 2017 17:50:51 UTC
+ * pixi.js - v4.4.1
+ * Compiled Tue, 28 Feb 2017 13:42:01 UTC
  *
  * pixi.js is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -8089,7 +8089,7 @@
 	 * @name VERSION
 	 * @type {string}
 	 */
-	var VERSION = exports.VERSION = '4.4.0';
+	var VERSION = exports.VERSION = '4.4.1';
 
 	/**
 	 * Two Pi.
@@ -24972,7 +24972,7 @@
 
 
 		Texture.fromLoader = function fromLoader(source, imageUrl, name) {
-			var baseTexture = new _BaseTexture2.default(source, null, (0, _utils.getResolutionOfUrl)(imageUrl));
+			var baseTexture = new _BaseTexture2.default(source, undefined, (0, _utils.getResolutionOfUrl)(imageUrl));
 			var texture = new Texture(baseTexture);
 
 			baseTexture.imageUrl = imageUrl;
@@ -32901,7 +32901,7 @@
 			for (var i = 0; i < eventLen; i++) {
 				var event = events[i];
 
-				var interactionData = this.getInteractionDataForPointerId(event.pointerId);
+				var interactionData = this.getInteractionDataForPointerId(event);
 
 				var interactionEvent = this.configureInteractionEventForDOMEvent(this.eventData, event, interactionData);
 
@@ -32975,7 +32975,7 @@
 			for (var i = 0; i < eventLen; i++) {
 				var event = events[i];
 
-				var interactionData = this.getInteractionDataForPointerId(event.pointerId);
+				var interactionData = this.getInteractionDataForPointerId(event);
 
 				var interactionEvent = this.configureInteractionEventForDOMEvent(this.eventData, event, interactionData);
 
@@ -33073,7 +33073,7 @@
 
 				var test = isRightButton ? flags.RIGHT_DOWN : flags.LEFT_DOWN;
 
-				var isDown = trackingData !== undefined && trackingData.flags | test;
+				var isDown = trackingData !== undefined && trackingData.flags & test;
 
 				if (hit) {
 					this.dispatchEvent(displayObject, isRightButton ? 'rightup' : 'mouseup', interactionEvent);
@@ -33140,7 +33140,7 @@
 			for (var i = 0; i < eventLen; i++) {
 				var event = events[i];
 
-				var interactionData = this.getInteractionDataForPointerId(event.pointerId);
+				var interactionData = this.getInteractionDataForPointerId(event);
 
 				var interactionEvent = this.configureInteractionEventForDOMEvent(this.eventData, event, interactionData);
 
@@ -33208,7 +33208,7 @@
 				this.setCursorMode(null);
 			}
 
-			var interactionData = this.getInteractionDataForPointerId(event.pointerId);
+			var interactionData = this.getInteractionDataForPointerId(event);
 
 			var interactionEvent = this.configureInteractionEventForDOMEvent(this.eventData, event, interactionData);
 
@@ -33289,7 +33289,7 @@
 			// Only mouse and pointer can call onPointerOver, so events will always be length 1
 			var event = events[0];
 
-			var interactionData = this.getInteractionDataForPointerId(event.pointerId);
+			var interactionData = this.getInteractionDataForPointerId(event);
 
 			var interactionEvent = this.configureInteractionEventForDOMEvent(this.eventData, event, interactionData);
 
@@ -33309,13 +33309,15 @@
 		 * Get InteractionData for a given pointerId. Store that data as well
 		 *
 		 * @private
-		 * @param {number} pointerId - Identifier from a pointer event
+		 * @param {PointerEvent} event - Normalized pointer event, output from normalizeToPointerData
 		 * @return {InteractionData} - Interaction data for the given pointer identifier
 		 */
 
 
-		InteractionManager.prototype.getInteractionDataForPointerId = function getInteractionDataForPointerId(pointerId) {
-			if (pointerId === MOUSE_POINTER_ID) {
+		InteractionManager.prototype.getInteractionDataForPointerId = function getInteractionDataForPointerId(event) {
+			var pointerId = event.pointerId;
+
+			if (pointerId === MOUSE_POINTER_ID || event.pointerType === 'mouse') {
 				return this.mouse;
 			} else if (this.activeInteractionData[pointerId]) {
 				return this.activeInteractionData[pointerId];
