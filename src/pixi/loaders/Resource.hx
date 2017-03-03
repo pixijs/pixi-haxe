@@ -21,7 +21,9 @@ extern class Resource {
 
 	var texture:Texture;
 
-	var textures:Dynamic;
+	var textures:Dynamic<Texture>;
+	
+	var bitmapFont:Dynamic;
 
 	/**
      * The name of this resource.
