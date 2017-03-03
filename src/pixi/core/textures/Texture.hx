@@ -1,7 +1,6 @@
 package pixi.core.textures;
 
 import haxe.extern.EitherType;
-import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
 import pixi.core.math.Point;
 import js.html.VideoElement;
