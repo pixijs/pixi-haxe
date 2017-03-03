@@ -1,6 +1,7 @@
 package pixi.core.sprites;
 
 import haxe.extern.EitherType;
+import pixi.core.display.BlendMode;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.display.Container;
@@ -56,7 +57,7 @@ extern class Sprite extends Container {
 	 * @member {Int}
 	 * @default CONST.blendModes.NORMAL;
 	 */
-	var blendMode:Int;
+	var blendMode:BlendMode;
 
 	/**
 	 * The shader that will be used to render the sprite. Set to null to remove a current shader.
