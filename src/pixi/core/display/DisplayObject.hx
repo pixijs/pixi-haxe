@@ -5,6 +5,28 @@ import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
 import pixi.interaction.InteractiveTarget;
+import haxe.extern.EitherType;
+
+typedef DestroyOptions = {
+	/**
+	* {boolean} [options.children=false] - if set to true, all the children will have their destroy
+	*  method called as well. 'options' will be passed on to those calls.
+	*/
+	?children:Bool,
+	
+	/**
+    * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the texture of the child sprite
+	*/
+	?texture:Bool,
+	
+	/**
+    * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the base texture of the child sprite
+	*/
+	?baseTexture:Bool,
+}
+
 
 @:native("PIXI.DisplayObject")
 extern class DisplayObject extends InteractiveTarget {
@@ -84,14 +106,18 @@ extern class DisplayObject extends InteractiveTarget {
 
 	/**
 	 * Base destroy method for generic display objects
-	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
-	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
-	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)
-	 */
-	@:overload(function(?destroyTexture:Bool, ?destroyBaseTexture:Bool):Void {})
-	@:overload(function(?destroyChildren:Bool):Void {})
-	@:overload(function(?options:Dynamic):Void {})
-	function destroy():Void;
+     * Removes all internal references and listeners as well as removes children from the display list.
+     * 
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+     *  have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+     *  method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+     *  Should it destroy the texture of the child sprite
+     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+     *  Should it destroy the base texture of the child sprite
+     */	
+	function destroy(?options:EitherType<Bool, DestroyOptions>):Void;
 
 	/**
 	 * The instance name of the object.
