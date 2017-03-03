@@ -30,6 +30,8 @@ extern class WebGLRenderer extends SystemRenderer {
 	 *      not before the new render pass.
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
+	 * @param {Bool} [options.legacy=false] - If true Pixi will aim to ensure compatibility with older / less advanced devices.
+	 *      If you experience unexplained flickering try setting this to true.
 	 */
 	function new(width:Float, height:Float, ?options:RenderOptions);
 
@@ -116,6 +118,15 @@ extern class WebGLRenderer extends SystemRenderer {
 	function setTransform(matrix:Matrix):Void;
 
 	/**
+     * Erases the render texture and fills the drawing area with a colour
+     *
+     * @param {PIXI.RenderTexture} renderTexture - The render texture to clear
+     * @param {Int} [clearColor] - The colour
+     * @return {PIXI.WebGLRenderer} Returns itself.
+     */
+	function clearRenderTexture(renderTexture:RenderTexture, ?clearColor:Int):WebGLRenderer;
+
+	/**
      * Binds a render texture for rendering
      *
      * @param {PIXI.RenderTexture} renderTexture - The render texture to render
@@ -136,9 +147,10 @@ extern class WebGLRenderer extends SystemRenderer {
      * Changes the current shader to the one given in parameter
      *
      * @param {PIXI.Shader} shader - the new shader
+     * @param {Bool} [autoProject=true] - Whether automatically set the projection matrix
      * @return {PIXI.WebGLRenderer} Returns itself.
      */
-	function bindShader(shader:Shader):WebGLRenderer;
+	function bindShader(shader:Shader, ?autoProject:Bool):WebGLRenderer;
 
 	/**
      * Binds the texture. This will return the location of the bound texture.

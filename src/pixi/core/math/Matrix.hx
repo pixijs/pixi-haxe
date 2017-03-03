@@ -10,10 +10,17 @@ extern class Matrix {
 	 * | c | d | ty|
 	 * | 0 | 0 | 1 |
 	 *
+	 * @param {number} [a=1] - x scale
+     * @param {number} [b=0] - y skew
+     * @param {number} [c=0] - x skew
+     * @param {number} [d=1] - y scale
+     * @param {number} [tx=0] - x translation
+     * @param {number} [ty=0] - y translation
+	 *
 	 * @class
 	 * @namespace PIXI
 	 */
-	function new():Void;
+	function new(?a:Float = 1, ?b:Float = 0, ?c:Float = 0, ?d:Float = 1, ?tx:Float = 0, ?ty:Float = 0):Void;
 
 	/**
 	 * @member {Float}

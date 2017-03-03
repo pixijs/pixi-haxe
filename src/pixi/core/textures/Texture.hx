@@ -186,6 +186,18 @@ extern class Texture extends EventEmitter {
 	static function from(source:Dynamic):Texture;
 
 	/**
+     * Create a texture from a source and add to the cache.
+     *
+     * @static
+     * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
+     * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
+     * @param {String} [name] - Human readible name for the texture cache. If no name is
+     *        specified, only `imageUrl` will be used as the cache ID.
+     * @return {PIXI.Texture} Output texture
+     */
+	static function fromLoader(source:Dynamic, imageUrl:String, ?name:String):Texture;
+
+	/**
 	 * Adds a texture to the global utils.TextureCache. This cache is shared across the whole PIXI object.
 	 *
 	 * @static
