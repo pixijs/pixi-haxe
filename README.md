@@ -39,6 +39,9 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
 * [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
 
+**Filters (pixi-extra-filters)**
+* [Glow](http://adireddy.github.io/demos/pixi-haxe/glow.html)
+
 **[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using Haxe and Pixi.js
 
 Look at the `samples` folder for the source code of above examples.

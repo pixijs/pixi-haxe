@@ -1,7 +1,7 @@
 package pixi.core.math.shapes;
 
 @:native("PIXI.RoundedRectangle")
-extern class RoundedRectangle {
+extern class RoundedRectangle extends Shape {
 
 	/**
 	 * The Rounded Rectangle object is an area defined by its position and has nice rounded corners, as indicated by its top-left corner point (x, y) and by its width and its height.
@@ -23,16 +23,6 @@ extern class RoundedRectangle {
 	 * @return {RoundedRectangle} a copy of the rounded rectangle
 	 */
 	function clone():RoundedRectangle;
-
-	/**
-	 * Checks whether the x and y coordinates given are contained within this Rounded Rectangle
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Boolean} Whether the x/y coordinates are within this Rounded Rectangle
-	 */
-	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * @property x
