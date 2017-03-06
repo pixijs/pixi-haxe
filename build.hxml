@@ -82,6 +82,10 @@
 -js samples/_output/blur.js
 
 --next
+-main filters.glow.Main
+-js samples/_output/glow.js
+
+--next
 -main loader.Main
 -js samples/_output/loader.js
 
