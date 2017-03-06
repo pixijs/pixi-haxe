@@ -1,7 +1,7 @@
 package pixi.core.math.shapes;
 
 @:native("PIXI.Rectangle")
-extern class Rectangle {
+extern class Rectangle extends Shape {
 
 	/**
 	 * the Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its width and its height.
@@ -22,16 +22,6 @@ extern class Rectangle {
 	 * @return {Rectangle} a copy of the rectangle
 	 */
 	function clone():Rectangle;
-
-	/**
-	 * Checks whether the x and y coordinates passed to this function are contained within this Rectangle
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coords are within this Rectangle
-	 */
-	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * @property x
