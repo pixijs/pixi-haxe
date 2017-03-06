@@ -2,7 +2,7 @@ package pixi.core.math.shapes;
 
 import haxe.extern.EitherType;
 @:native("PIXI.Polygon")
-extern class Polygon {
+extern class Polygon extends Shape{
 
 	/**
      * @param {PIXI.Point[]|number[]} points - This can be an array of Points
@@ -20,16 +20,6 @@ extern class Polygon {
 	 * @return {Polygon} a copy of the polygon
 	 */
 	function clone():Polygon;
-
-	/**
-	 * Checks whether the x and y coordinates passed to this function are contained within this polygon
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coordinates are within this polygon
-	 */
-	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * An array of the points of this polygon
