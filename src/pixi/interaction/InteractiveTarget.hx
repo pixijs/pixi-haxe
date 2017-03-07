@@ -4,8 +4,8 @@ import pixi.core.math.shapes.Ellipse;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.shapes.RoundedRectangle;
+import pixi.core.math.shapes.Shape;
 import pixi.interaction.EventEmitter;
-import haxe.extern.EitherType;
 
 @:native("PIXI.interaction.interactiveTarget")
 extern class InteractiveTarget extends EventEmitter
@@ -229,16 +229,11 @@ extern class InteractiveTarget extends EventEmitter
 	/**
 	 * Interaction shape. Children will be hit first, then this shape will be checked.
 	 *
-	 * @member {EitherType<Rectangle, EitherType<Circle, EitherType<Ellipse, EitherType<Polygon, RoundedRectangle>>>>}
+	 * @member {Shape}
 	 * @memberof InteractiveTarget#
 	 * @default null
 	 */
-	var hitArea: EitherType< Rectangle,
-				 EitherType< Circle,
-				 EitherType< Ellipse,
-				 EitherType< Polygon,
-							 RoundedRectangle
-				 >>>>;
+	var hitArea: Shape;
 
 	/**
 	 * Indicates if the displayObject uses button mode or normal mode.
