@@ -10,16 +10,15 @@ extern class MovieClip extends Sprite {
 	 * A MovieClip is a simple way to display an animation depicted by a list of textures.
 	 *
 	 * ```js
-	 * 	var alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
-	 * 	var textureArray = [];
+	 * 	var alienImages:Array<String> = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
+	 * 	var textureArray:Array<Texture> = [];
 	 *
-	 * for (	var i=0; i < 4; i++)
-	 * {
-	 *      	var texture = PIXI.Texture.fromImage(alienImages[i]);
+	 * for (i in 0 ... 4) {
+	 *      var texture = Texture.fromImage(alienImages[i]);
 	 *      textureArray.push(texture);
 	 * };
 	 *
-	 * 	var mc = new PIXI.MovieClip(textureArray);
+	 * 	var mc = new MovieClip(textureArray);
 	 * ```
 	 *
 	 * @class

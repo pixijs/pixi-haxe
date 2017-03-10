@@ -4,13 +4,13 @@ import pixi.core.math.shapes.Ellipse;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.shapes.RoundedRectangle;
+import pixi.core.math.shapes.Shape;
 import pixi.interaction.EventEmitter;
-import haxe.extern.EitherType;
 
 @:native("PIXI.interaction.interactiveTarget")
 extern class InteractiveTarget extends EventEmitter
 {
-	
+
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is pressed on the display
 	 * object.
@@ -19,7 +19,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function mousedown(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a pointer device secondary button (usually a mouse right-button) is pressed
 	 * on the display object.
@@ -149,7 +149,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function pointermove(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a pointer device is moved onto the display object
 	 *
@@ -157,7 +157,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function pointerover(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a pointer device is moved off the display object
 	 *
@@ -165,7 +165,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function pointerout(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a touch point is placed on the display object.
 	 *
@@ -173,7 +173,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function touchstart(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a touch point is removed from the display object.
 	 *
@@ -181,7 +181,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function touchend(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a touch point is placed and removed from the display object.
 	 *
@@ -189,7 +189,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function tap(event:EventTarget):Void;
-	
+
 	/**
 	 * Fired when a touch point is removed outside of the display object that initially
 	 * registered a [touchstart]{@link PIXI.interaction.InteractionManager#event:touchstart}.
@@ -198,7 +198,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function touchendoutside(event:EventTarget):Void;
-	 
+
 	/**
 	 * Fired when a touch point is moved along the display object.
 	 *
@@ -206,8 +206,8 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 */
 	dynamic function touchmove(event:EventTarget):Void;
-	
-	
+
+
 	/**
 	 * Indicates if the displayObject is interactive or not.
 	 *
@@ -228,17 +228,12 @@ extern class InteractiveTarget extends EventEmitter
 
 	/**
 	 * Interaction shape. Children will be hit first, then this shape will be checked.
-	 *	 
-	 * @member {EitherType<Rectangle, EitherType<Circle, EitherType<Ellipse, EitherType<Polygon, RoundedRectangle>>>>}
+	 *
+	 * @member {Shape}
 	 * @memberof InteractiveTarget#
 	 * @default null
 	 */
-	var hitArea: EitherType< Rectangle, 
-				 EitherType< Circle, 
-				 EitherType< Ellipse,
-				 EitherType< Polygon,
-							 RoundedRectangle 
-				 >>>>;
+	var hitArea: Shape;
 
 	/**
 	 * Indicates if the displayObject uses button mode or normal mode.
