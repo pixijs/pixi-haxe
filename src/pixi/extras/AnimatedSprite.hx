@@ -10,16 +10,16 @@ extern class AnimatedSprite extends Sprite
      * An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
      *
      * ```js
-     * let alienImages = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
-     * let textureArray = [];
+     * var alienImages:Array<String> = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
+     * var textureArray:Array<Texture> = [];
      *
-     * for (let i=0; i < 4; i++)
+     * for (iin 0 ... 4)
      * {
-     *      let texture = PIXI.Texture.fromImage(alienImages[i]);
+     *      let texture = Texture.fromImage(alienImages[i]);
      *      textureArray.push(texture);
      * };
      *
-     * let mc = new PIXI.AnimatedSprite(textureArray);
+     * var mc = new AnimatedSprite(textureArray);
      * ```
      *
      * @class
