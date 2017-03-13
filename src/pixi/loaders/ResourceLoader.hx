@@ -106,7 +106,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function after(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function after(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *before* the
@@ -116,7 +116,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function before(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
@@ -147,14 +147,14 @@ extern class ResourceLoader extends EventEmitter {
 	 *
 	 * @param {function} function to call
 	 */
-	function use(fn:Resource -> Dynamic -> Void):Void;
+	function use(fn:Resource -> (Void->Void) -> Void):Void;
 
 	/**
 	 * Middleware function
 	 *
 	 * @param {function} function to call
 	 */
-	function pre(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function pre(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 }
 
 typedef ResourceObject = {

@@ -1,5 +1,6 @@
 package pixi.loaders;
 
+import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 
 extern class Resource {
@@ -22,6 +23,8 @@ extern class Resource {
 	var texture:Texture;
 
 	var textures:Dynamic<Texture>;
+	
+	var spritesheet:Spritesheet;
 	
 	var bitmapFont:Dynamic;
 
