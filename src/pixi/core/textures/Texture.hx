@@ -90,13 +90,6 @@ extern class Texture extends EventEmitter {
 	var crop:Rectangle;
 
 	/**
-	 * The pivot point to used for a sprite this texture belongs to.
-	 *
-	 * @member {Point}
-	 */
-	var spritePivot:Point;
-
-	/**
 	 * The rotation value of the texture, copied to a sprite when assigned to it.
 	 *
 	 * @member {Float}
