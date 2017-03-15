@@ -1,5 +1,6 @@
 package pixi.core.graphics;
 
+import pixi.core.textures.Texture;
 import pixi.core.math.Point;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Ellipse;
@@ -276,4 +277,27 @@ extern class Graphics extends Container {
 	@:overload(function(shape:Ellipse):GraphicsData {})
 	@:overload(function(shape:Polygon):GraphicsData {})
 	function drawShape(shape:Circle):GraphicsData;
+
+	/**
+     * Generates a canvas texture.
+     *
+     * @param {Int} scaleMode - The scale mode of the texture.
+     * @param {Float} resolution - The resolution of the texture.
+     * @return {Texture} The new texture.
+     */
+	function generateCanvasTexture(scaleMode:Int, ?resolution:Float):Texture;
+
+	/**
+     * Closes the current path.
+     *
+     * @return {Graphics} Returns itself.
+     */
+	function closePath():Graphics;
+
+	/**
+     * Adds a hole in the current path.
+     *
+     * @return {Graphics} Returns itself.
+     */
+	function addHole():Graphics;
 }
