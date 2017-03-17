@@ -1,11 +1,10 @@
 package textureswap;
 
-import pixi.interaction.EventTarget;
-import pixi.core.sprites.Sprite;
-import pixi.core.display.Container;
-import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
 import js.Browser;
+import pixi.core.sprites.Sprite;
+import pixi.core.textures.Texture;
+import pixi.interaction.InteractionEvent;
+import pixi.plugins.app.Application;
 
 class Main extends Application {
 
@@ -39,7 +38,7 @@ class Main extends Application {
 		stage.addChild(_bunny);
 	}
 
-	function _onClick(target:EventTarget) {
+	function _onClick(target:InteractionEvent) {
 		_swap = !_swap;
 		_bunny.texture = (_swap) ? _texture2 : _texture1;
 	}

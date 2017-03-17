@@ -1,7 +1,7 @@
 package events;
 
 import pixi.core.text.DefaultStyle;
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
@@ -49,7 +49,7 @@ class Main extends Application {
 		}
 	}
 
-	function _onEvent(target:EventTarget) {
+	function _onEvent(target:InteractionEvent) {
 		_label.text = target.type;
 	}
 

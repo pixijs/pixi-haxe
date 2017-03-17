@@ -320,18 +320,27 @@ dragging_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		this.stage.addChild(bunny);
 	}
 	,_onDragStart: function(event) {
+		if(event.target == null) {
+			return;
+		}
 		var bunny = js_Boot.__cast(event.target , dragging_Bunny);
 		bunny.data = event.data;
 		bunny.alpha = 0.5;
 		bunny.dragging = true;
 	}
 	,_onDragEnd: function(event) {
+		if(event.target == null) {
+			return;
+		}
 		var bunny = js_Boot.__cast(event.target , dragging_Bunny);
 		bunny.alpha = 1;
 		bunny.dragging = false;
 		bunny.data = null;
 	}
 	,_onDragMove: function(event) {
+		if(event.target == null) {
+			return;
+		}
 		var bunny = js_Boot.__cast(event.target , dragging_Bunny);
 		if(bunny.dragging) {
 			var newPosition = bunny.data.getLocalPosition(bunny.parent);

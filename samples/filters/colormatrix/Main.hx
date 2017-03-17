@@ -1,7 +1,7 @@
 package filters.colormatrix;
 
 import pixi.core.text.DefaultStyle;
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 import pixi.core.display.Container;
 import pixi.filters.colormatrix.ColorMatrixFilter;
 import pixi.core.text.Text;
@@ -101,7 +101,7 @@ class Main extends Application {
 		_filter.matrix = _colorMatrix;
 	}
 
-	function _onClick(data:EventTarget) {
+	function _onClick(data:InteractionEvent) {
 		_switchy = !_switchy;
 		if (!_switchy) _container.filters = [_filter];
 		else _container.filters = null;
