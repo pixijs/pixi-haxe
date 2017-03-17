@@ -8,7 +8,7 @@ import js.html.TextTrackKind;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 import haxe.Timer;
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 import pixi.core.text.Text;
 import js.html.ImageElement;
 import pixi.core.textures.Texture;
@@ -101,7 +101,7 @@ class Main {
 		movie = "1_400_400_750000";
 	}
 
-	function _onTap(data:EventTarget) {
+	function _onTap(data:InteractionEvent) {
 		_playBtn.visible = false;
 		_videoElement.play();
 		_timer.run = _draw;

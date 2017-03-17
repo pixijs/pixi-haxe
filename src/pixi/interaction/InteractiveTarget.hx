@@ -1,15 +1,10 @@
 package pixi.interaction;
-import pixi.core.math.shapes.Circle;
-import pixi.core.math.shapes.Ellipse;
-import pixi.core.math.shapes.Polygon;
-import pixi.core.math.shapes.Rectangle;
-import pixi.core.math.shapes.RoundedRectangle;
+
 import pixi.core.math.shapes.Shape;
 import pixi.interaction.EventEmitter;
 
 @:native("PIXI.interaction.interactiveTarget")
-extern class InteractiveTarget extends EventEmitter
-{
+extern class InteractiveTarget extends EventEmitter {
 
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is pressed on the display
@@ -18,7 +13,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mousedown
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mousedown(event:EventTarget):Void;
+	dynamic function mousedown(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device secondary button (usually a mouse right-button) is pressed
@@ -27,7 +22,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event rightdown
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function rightdown(event:EventTarget):Void;
+	dynamic function rightdown(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is released over the display
@@ -36,7 +31,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mouseup
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mouseup(event:EventTarget):Void;
+	dynamic function mouseup(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device secondary button (usually a mouse right-button) is released
@@ -45,7 +40,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event rightup
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function rightup(event:EventTarget):Void;
+	dynamic function rightup(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is pressed and released on
@@ -54,7 +49,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event click
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function click(event:EventTarget):Void;
+	dynamic function click(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device secondary button (usually a mouse right-button) is pressed
@@ -63,7 +58,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event rightclick
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function rightclick(event:EventTarget):Void;
+	dynamic function rightclick(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is released outside the
@@ -73,7 +68,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mouseupoutside
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mouseupoutside(event:EventTarget):Void;
+	dynamic function mouseupoutside(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device secondary button (usually a mouse right-button) is released
@@ -83,7 +78,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event rightupoutside
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function rightupoutside(event:EventTarget):Void;
+	dynamic function rightupoutside(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device (usually a mouse) is moved while over the display object
@@ -91,7 +86,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mousemove
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mousemove(event:EventTarget):Void;
+	dynamic function mousemove(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device (usually a mouse) is moved onto the display object
@@ -99,7 +94,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mouseover
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mouseover(event:EventTarget):Void;
+	dynamic function mouseover(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device (usually a mouse) is moved off the display object
@@ -107,7 +102,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event mouseout
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function mouseout(event:EventTarget):Void;
+	dynamic function mouseout(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button is pressed on the display object.
@@ -115,7 +110,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointerdown
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointerdown(event:EventTarget):Void;
+	dynamic function pointerdown(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button is released over the display object.
@@ -123,7 +118,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointerup
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointerup(event:EventTarget):Void;
+	dynamic function pointerup(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button is pressed and released on the display object.
@@ -131,7 +126,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointertap
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointertap(event:EventTarget):Void;
+	dynamic function pointertap(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device button is released outside the display object that initially
@@ -140,7 +135,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointerupoutside
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointerupoutside(event:EventTarget):Void;
+	dynamic function pointerupoutside(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device is moved while over the display object
@@ -148,7 +143,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointermove
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointermove(event:EventTarget):Void;
+	dynamic function pointermove(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device is moved onto the display object
@@ -156,7 +151,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointerover
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointerover(event:EventTarget):Void;
+	dynamic function pointerover(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a pointer device is moved off the display object
@@ -164,7 +159,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event pointerout
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function pointerout(event:EventTarget):Void;
+	dynamic function pointerout(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a touch point is placed on the display object.
@@ -172,7 +167,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event touchstart
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function touchstart(event:EventTarget):Void;
+	dynamic function touchstart(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a touch point is removed from the display object.
@@ -180,7 +175,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event touchend
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function touchend(event:EventTarget):Void;
+	dynamic function touchend(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a touch point is placed and removed from the display object.
@@ -188,7 +183,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event tap
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function tap(event:EventTarget):Void;
+	dynamic function tap(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a touch point is removed outside of the display object that initially
@@ -197,7 +192,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event touchendoutside
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function touchendoutside(event:EventTarget):Void;
+	dynamic function touchendoutside(event:InteractionEvent):Void;
 
 	/**
 	 * Fired when a touch point is moved along the display object.
@@ -205,8 +200,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @event touchmove
 	 * @memberof InteractiveTarget#
 	 */
-	dynamic function touchmove(event:EventTarget):Void;
-
+	dynamic function touchmove(event:InteractionEvent):Void;
 
 	/**
 	 * Indicates if the displayObject is interactive or not.
@@ -224,7 +218,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @default true
 	 * @memberof InteractiveTarget#
 	 */
-	var interactiveChildren: Bool;
+	var interactiveChildren:Bool;
 
 	/**
 	 * Interaction shape. Children will be hit first, then this shape will be checked.
@@ -233,7 +227,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @memberof InteractiveTarget#
 	 * @default null
 	 */
-	var hitArea: Shape;
+	var hitArea:Shape;
 
 	/**
 	 * Indicates if the displayObject uses button mode or normal mode.
@@ -260,7 +254,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _over: Bool;
+	@:noCompletion var _over:Bool;
 
 	/**
 	 * Internal check to detect if the left mouse button is pressed on the displayObject
@@ -268,7 +262,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _isLeftDown: Bool;
+	@:noCompletion var _isLeftDown:Bool;
 
 	/**
 	 * Internal check to detect if the right mouse button is pressed on the displayObject
@@ -276,7 +270,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _isRightDown: Bool;
+	@:noCompletion var _isRightDown:Bool;
 
 	/**
 	 * Internal check to detect if the pointer cursor is hovered over the displayObject
@@ -284,7 +278,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _pointerOver: Bool;
+	@:noCompletion var _pointerOver:Bool;
 
 	/**
 	 * Internal check to detect if the pointer is down on the displayObject
@@ -292,7 +286,7 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _pointerDown: Bool;
+	@:noCompletion var _pointerDown:Bool;
 
 	/**
 	 * Internal check to detect if a user has touched the displayObject
@@ -300,5 +294,5 @@ extern class InteractiveTarget extends EventEmitter
 	 * @member {Bool}
 	 * @private
 	 */
-	@:noCompletion var _touchDown: Bool;
+	@:noCompletion var _touchDown:Bool;
 }

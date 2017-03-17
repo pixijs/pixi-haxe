@@ -1,6 +1,6 @@
 package graphics;
 
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 import pixi.core.graphics.Graphics;
 import pixi.plugins.app.Application;
 import js.Browser;
@@ -88,7 +88,7 @@ class Main extends Application {
 		_thing.rotation = _count * 0.1;
 	}
 
-	function _onStageClick(target:EventTarget) {
+	function _onStageClick(target:InteractionEvent) {
 		_graphics.lineStyle(Math.random() * 30, Std.int(Math.random() * 0xFFFFFF), 1);
 		_graphics.moveTo(Math.random() * 620, Math.random() * 380);
 		_graphics.lineTo(Math.random() * 620, Math.random() * 380);

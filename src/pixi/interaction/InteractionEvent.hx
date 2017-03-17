@@ -5,52 +5,54 @@ import pixi.interaction.InteractionData;
 
 @:native("PIXI.interaction.InteractionEvent")
 extern class InteractionEvent {
+
 	/**
-     * Constructor
-     *
-     */
+	 * Event class that mimics native DOM events.
+	 *
+	 * @class
+	 * @memberof PIXI.interaction
+	 */
 	function new();
 
 	/**
 	 * Whether this event will continue propagating in the tree
 	 *
-	 * @member {boolean}
+	 * @member {Bool}
 	 */
 	var stopped:Bool;
 
 	/**
-         * The object which caused this event to be dispatched.
-         * For listener callback see {@link PIXI.interaction.InteractionEvent.currentTarget}.
-         *
-         * @member {PIXI.DisplayObject}
-         */
-    var target:DisplayObject;
+	 * The object which caused this event to be dispatched.
+	 * For listener callback see {@link PIXI.interaction.InteractionEvent.currentTarget}.
+	 *
+	 * @member {DisplayObject}
+	 */
+	var target:DisplayObject;
 
-    /**
+	/**
      * The object whose event listener’s callback is currently being invoked.
      *
-     * @member {PIXI.DisplayObject}
+     * @member {DisplayObject}
      */
-    var currentTarget:DisplayObject;
+	var currentTarget:DisplayObject;
 
-    /*
+	/*
      * Type of the event
      *
-     * @member {string}
+     * @member {String}
      */
-    var type:String;
+	var type:String;
 
-    /*
+	/*
      * InteractionData related to this event
      *
-     * @member {PIXI.interaction.InteractionData}
+     * @member {InteractionData}
      */
-    var data:InteractionData;
-
+	var data:InteractionData;
 
 	/**
      * Prevents event from reaching any objects other than the current object.
      *
      */
-    function stopPropagation():Void;
+	function stopPropagation():Void;
 }

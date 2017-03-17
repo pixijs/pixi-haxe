@@ -1,6 +1,6 @@
 package dragging;
 
-import pixi.interaction.EventTarget;
+import pixi.interaction.InteractionEvent;
 import pixi.core.math.Point;
 import pixi.core.text.Text;
 import pixi.plugins.app.Application;
@@ -61,7 +61,8 @@ class Main extends Application {
 		stage.addChild(bunny);
 	}
 
-	function _onDragStart(event:EventTarget) {
+	function _onDragStart(event:InteractionEvent) {
+		if (event.target == null) return;
 		var bunny:Bunny = cast(event.target, Bunny);
 		// store a reference to the data
 		// the reason for this is because of multitouch
@@ -71,7 +72,8 @@ class Main extends Application {
 		bunny.dragging = true;
 	}
 
-	function _onDragEnd(event:EventTarget) {
+	function _onDragEnd(event:InteractionEvent) {
+		if (event.target == null) return;
 		var bunny:Bunny = cast(event.target, Bunny);
 		bunny.alpha = 1;
 		bunny.dragging = false;
@@ -80,7 +82,8 @@ class Main extends Application {
 		bunny.data = null;
 	}
 
-	function _onDragMove(event:EventTarget) {
+	function _onDragMove(event:InteractionEvent) {
+		if (event.target == null) return;
 		var bunny:Bunny = cast(event.target, Bunny);
 		if (bunny.dragging) {
 			var newPosition:Point = bunny.data.getLocalPosition(bunny.parent);
