@@ -320,7 +320,7 @@ spritesheet_Main.prototype = $extend(pixi_plugins_app_Application.prototype,{
 		}
 	}
 	,_addFighter: function(x,y) {
-		var fighter = new PIXI.extras.MovieClip(this._fighterTextures);
+		var fighter = new PIXI.extras.AnimatedSprite(this._fighterTextures);
 		fighter.anchor.set(0.5);
 		fighter.position.set(x,y);
 		fighter.play();
