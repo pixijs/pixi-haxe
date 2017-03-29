@@ -1,6 +1,6 @@
-package movieclip;
+package animatedsprite;
 
-import pixi.extras.MovieClip;
+import pixi.extras.AnimatedSprite;
 import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
 import pixi.core.textures.Texture;
@@ -32,9 +32,9 @@ class Main extends Application {
 			explosionTextures.push(texture);
 		}
 
-		var explosion:MovieClip;
+		var explosion:AnimatedSprite;
 		for (i in 0 ... 80) {
-			explosion = new MovieClip(explosionTextures);
+			explosion = new AnimatedSprite(explosionTextures);
 			explosion.position.x = Math.random() * Browser.window.innerWidth;
 			explosion.position.y = Math.random() * Browser.window.innerHeight;
 			explosion.anchor.set(0.5, 0.5);
