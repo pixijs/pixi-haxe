@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "updated to v4.4.2",
-	"version": "4.4.2",
+	"releasenote": "updated to v4.4.3",
+	"version": "4.4.3",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
