@@ -18,7 +18,7 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 
 * [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
 * [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
-* [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
+* [Animated Sprite](http://adireddy.github.io/demos/pixi-haxe/animatedsprite.html)
 * [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
 * [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
 * [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
