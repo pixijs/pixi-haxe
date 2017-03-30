@@ -3,6 +3,7 @@ package pixi.loaders;
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 
+@:native("PIXI.loaders.Resource")
 extern class Resource {
 
 	/**
