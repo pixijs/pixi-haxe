@@ -3,7 +3,7 @@ package spritesheet;
 import pixi.core.text.Text;
 import js.html.DivElement;
 import pixi.loaders.Loader;
-import pixi.extras.MovieClip;
+import pixi.extras.AnimatedSprite;
 import pixi.core.textures.Texture;
 import pixi.plugins.app.Application;
 import js.Browser;
@@ -66,7 +66,7 @@ class Main extends Application {
 	}
 
 	function _addFighter(x:Float, y:Float) {
-		var fighter:MovieClip = new MovieClip(_fighterTextures);
+		var fighter:AnimatedSprite = new AnimatedSprite(_fighterTextures);
 		fighter.anchor.set(0.5);
 		fighter.position.set(x, y);
 		fighter.play();

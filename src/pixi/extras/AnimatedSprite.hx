@@ -24,11 +24,10 @@ extern class AnimatedSprite extends Sprite {
      * @class
      * @extends Sprite
      * @memberof PIXI.extras
-     * @param {Array<Texture>|Array<FrameObject>} textures - an array of {Texture} or frame
-     *  objects that make up the animation
+     * @param {Array<Texture>|Array<FrameObject>} textures - an array of {Texture} or frame objects that make up the animation
      * @param {Bool} [autoUpdate=true] - Whether use PIXI.ticker.shared to auto update animation time.
      */
-	function new(textures:Array<Texture>, autoUpdate:Bool = true);
+	function new(textures:Array<Texture>, ?autoUpdate:Bool = true);
 
 	/**
      * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
