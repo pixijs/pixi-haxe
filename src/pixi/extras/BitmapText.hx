@@ -86,7 +86,7 @@ extern class BitmapText extends Container {
 	 * @default 'left'
 	 * @memberof BitmapText#
 	 */
-	var align:String;
+	var align:BitmapTextAlign;
 
 	/**
      * The font descriptor of the BitmapText object
