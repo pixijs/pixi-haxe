@@ -9,6 +9,12 @@ extern class Utils {
 	static var TextureCache:Dynamic;
 	static var BaseTextureCache:Dynamic;
 
+	
+	/**
+	 * True if pixi is running on mobile device
+	 */
+	static var isMobile:Bool;
+	
 	/**
      * Gets the next unique identifier
      *
