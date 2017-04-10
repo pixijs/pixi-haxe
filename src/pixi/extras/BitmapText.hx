@@ -4,6 +4,7 @@ import pixi.core.textures.Texture;
 import js.html.XMLDocument;
 import pixi.core.display.Container;
 
+
 @:native("PIXI.extras.BitmapText")
 extern class BitmapText extends Container {
 
@@ -36,6 +37,24 @@ extern class BitmapText extends Container {
 	 * @param [style.tint=0xFFFFFF] {Int} The tint color
 	 */
 	function new(text:String, ?style:BitmapTextStyle):Void;
+
+	/**
+	 * The anchor sets the origin point of the text.
+	 * The default is 0,0 this means the text's origin is the top left
+	 * Setting the anchor to 0.5,0.5 means the text's origin is centered
+	 * Setting the anchor to 1,1 would mean the text's origin point will be the bottom right corner
+	 *
+	 * @member {PIXI.Point | number}
+	 */
+	var anchor:Point;
+	
+	/**
+	* The max line height. This is useful when trying to use the total height of the Text,
+	* ie: when trying to vertically align.
+	*
+	* @member {number}
+	*/
+	var maxLineHeight:Float;
 
 	/**
 	 * The width of the overall text, different from fontSize,
@@ -85,7 +104,7 @@ extern class BitmapText extends Container {
 	 * @default 'left'
 	 * @memberof BitmapText#
 	 */
-	var align:String;
+	var align:BitmapTextAlign;
 
 	/**
      * The font descriptor of the BitmapText object
@@ -114,9 +133,17 @@ extern class BitmapText extends Container {
 	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
+@:enum abstract BitmapTextAlign(String)
+{
+	var LEFT = "left";
+	var RIGHT = "right";
+	var CENTER = "center";
+}
+
+
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;
-	@:optional var align:String;
+	@:optional var align:BitmapTextAlign;
 	@:optional var tint:Int;
 }
 

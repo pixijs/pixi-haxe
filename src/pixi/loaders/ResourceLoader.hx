@@ -136,13 +136,6 @@ extern class ResourceLoader extends EventEmitter {
 	function load(?cb:Dynamic):ResourceLoader;
 
 	/**
-	 * Loads a single resource.
-	 *
-	 * @fires progress
-	 */
-	function loadResource(resource:String, ?cb:Void -> Void):ResourceLoader;
-
-	/**
 	 * Middleware function to use
 	 *
 	 * @param {function} function to call
