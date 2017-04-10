@@ -4,6 +4,7 @@ import pixi.core.textures.Texture;
 import js.html.XMLDocument;
 import pixi.core.display.Container;
 
+
 @:native("PIXI.extras.BitmapText")
 extern class BitmapText extends Container {
 
@@ -85,7 +86,7 @@ extern class BitmapText extends Container {
 	 * @default 'left'
 	 * @memberof BitmapText#
 	 */
-	var align:String;
+	var align:BitmapTextAlign;
 
 	/**
      * The font descriptor of the BitmapText object
@@ -114,9 +115,17 @@ extern class BitmapText extends Container {
 	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
+@:enum abstract BitmapTextAlign(String)
+{
+	var LEFT = "left";
+	var RIGHT = "right";
+	var CENTER = "center";
+}
+
+
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;
-	@:optional var align:String;
+	@:optional var align:BitmapTextAlign;
 	@:optional var tint:Int;
 }
 
