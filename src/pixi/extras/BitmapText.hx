@@ -1,5 +1,6 @@
 package pixi.extras;
 
+import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import js.html.XMLDocument;
 import pixi.core.display.Container;
@@ -47,7 +48,7 @@ extern class BitmapText extends Container {
 	 * @member {PIXI.Point | number}
 	 */
 	var anchor:Point;
-	
+
 	/**
 	* The max line height. This is useful when trying to use the total height of the Text,
 	* ie: when trying to vertically align.
@@ -133,13 +134,11 @@ extern class BitmapText extends Container {
 	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
-@:enum abstract BitmapTextAlign(String)
-{
+@:enum abstract BitmapTextAlign(String) {
 	var LEFT = "left";
 	var RIGHT = "right";
 	var CENTER = "center";
 }
-
 
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;
