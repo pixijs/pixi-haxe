@@ -20,6 +20,8 @@ extern class Loader extends ResourceLoader {
 	 * @class
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders
+	 * @param baseUrl {String} the base url for all resources loaded by this loader
+	 * @param concurrency {Number} the number of resources to load concurrently
 	 */
-	function new();
+	function new(?baseUrl:String, ?concurrency:Int);
 }
