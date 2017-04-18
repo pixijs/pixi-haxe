@@ -39,7 +39,7 @@ extern class ResourceLoader extends EventEmitter {
      *
      * @member {object<string, Resource>}
      */
-	var resources:Dynamic;
+	var resources:haxe.DynamicAccess<Resource>;
 
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.
@@ -134,13 +134,6 @@ extern class ResourceLoader extends EventEmitter {
 	@:overload(function(?cb:ResourceLoader -> Void):ResourceLoader {})
 	@:overload(function(?cb:Void -> Void):ResourceLoader {})
 	function load(?cb:Dynamic):ResourceLoader;
-
-	/**
-	 * Loads a single resource.
-	 *
-	 * @fires progress
-	 */
-	function loadResource(resource:String, ?cb:Void -> Void):ResourceLoader;
 
 	/**
 	 * Middleware function to use

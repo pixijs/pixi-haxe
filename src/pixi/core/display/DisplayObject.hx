@@ -43,10 +43,12 @@ extern class DisplayObject extends InteractiveTarget {
 	/**
 	 * Retrieves the bounds of the displayObject as a rectangle object
 	 *
-	 * @param matrix {Matrix}
+	 * @param skipUpdate {Matrix} setting to true will stop the transforms of the scene graph from being updated. 
+	 * This means the calculation returned MAY be out of date BUT will give you a nice performance boost
+	 * @param rect {Rectangle} Optional rectangle to store the result of the bounds calculation
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getBounds(?matrix:Matrix):Rectangle;
+	function getBounds(?skipUpdate:Bool, ?rect:Rectangle):Rectangle;
 
 	/**
 	 * Retrieves the local bounds of the displayObject as a rectangle object

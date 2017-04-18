@@ -36,7 +36,7 @@ class Main extends Application {
 		//third parameter means that all our tiles are squares or at least 2x1 dominoes
 		//   and we can optimize it with gl.POINTS
 		_tilemap = new pixi.tilemap.CompositeRectTileLayer();
-		_tilemap.initialize(0, [_loader.resources.atlas_image.texture], true);
+		_tilemap.initialize(0, [_loader.resources.get("atlas_image").texture], true);
 		stage.addChild(_tilemap);
 
 		_frame = 0;
@@ -65,7 +65,7 @@ class Main extends Application {
 			}
 
 		// if you are lawful citizen, please use textures from
-		var textures:Dynamic = resources.atlas.textures;
+		var textures:Dynamic = resources.get("atlas").textures;
 		_tilemap.addFrame(Reflect.field(textures, "brick.png"), 2 * size, 2 * size);
 		_tilemap.addFrame(Reflect.field(textures, "brick_wall.png"), 2 * size, 3 * size);
 
@@ -75,7 +75,7 @@ class Main extends Application {
 
 		// button does not appear in the atlas, but tilemap wont surrender, it will create second layer for special for buttons
 		// buttons will appear above everything
-		_tilemap.addFrame(resources.button.texture, 6 * size, 2 * size);
+		_tilemap.addFrame(resources.get("button").texture, 6 * size, 2 * size);
 	}
 
 	function _onUpdate(elapsedTime:Float) {

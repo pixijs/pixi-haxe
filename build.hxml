@@ -29,8 +29,8 @@
 -js samples/_output/spritesheet.js
 
 --next
--main movieclip.Main
--js samples/_output/movieclip.js
+-main animatedsprite.Main
+-js samples/_output/animatedsprite.js
 
 --next
 -main graphics.Main
