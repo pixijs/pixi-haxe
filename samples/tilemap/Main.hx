@@ -1,7 +1,6 @@
 package tilemap;
 
 import haxe.Timer;
-import pixi.core.textures.Texture;
 import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
 import pixi.tilemap.CompositeRectTileLayer;
@@ -42,7 +41,7 @@ class Main extends Application {
 		_frame = 0;
 
 		var timer = new Timer(400);
-		timer.run = function () {
+		timer.run = function() {
 			_frame = _frame == 0 ? 1 : 0;
 			buildTilemap(_frame);
 		};
