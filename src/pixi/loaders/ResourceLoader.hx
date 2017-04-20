@@ -39,7 +39,7 @@ extern class ResourceLoader extends EventEmitter {
      *
      * @member {object<string, Resource>}
      */
-	var resources:Dynamic;
+	var resources:haxe.DynamicAccess<Resource>;
 
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.
