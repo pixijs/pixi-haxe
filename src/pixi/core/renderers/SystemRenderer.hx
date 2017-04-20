@@ -1,5 +1,6 @@
 package pixi.core.renderers;
 
+import pixi.core.display.Transform;
 import pixi.core.textures.RenderTexture;
 import pixi.core.textures.Texture;
 import haxe.extern.EitherType;
@@ -167,5 +168,5 @@ extern class SystemRenderer extends EventEmitter {
      * @param {PIXI.Transform} [transform] - A transformation to be applied
      * @param {boolean} [skipUpdateTransform=false] - Whether to skip the update transform
      */
-	function render(displayObject:DisplayObject, ?renderTexture:RenderTexture, ?clear:Bool, ?transform:Dynamic, ?skipUpdateTransform:Bool):Void;
+	function render(displayObject:DisplayObject, ?renderTexture:RenderTexture, ?clear:Bool, ?transform:Transform, ?skipUpdateTransform:Bool):Void;
 }
