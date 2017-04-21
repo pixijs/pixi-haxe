@@ -197,6 +197,7 @@ extern class Texture extends EventEmitter {
 	 * @param texture {Texture} The Texture to add to the cache.
 	 * @param id {String} The id that the texture will be stored against.
 	 */
+	static function addToCache(texture:Texture, id:String):Void;
 	static function addTextureToCache(texture:Texture, id:String):Void;
 
 	/**
@@ -206,6 +207,7 @@ extern class Texture extends EventEmitter {
 	 * @param id {String} The id of the texture to be removed
 	 * @return {Texture} The texture that was removed
 	 */
+	static function removeFromCache(id:String):Texture;
 	static function removeTextureFromCache(id:String):Texture;
 
 	/**

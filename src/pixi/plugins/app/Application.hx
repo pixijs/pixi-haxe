@@ -183,6 +183,8 @@ class Application {
 		if (autoResize) Browser.window.onresize = _onWindowResize;
 
 		var renderingOptions:RenderOptions = {};
+		renderingOptions.width = width;
+		renderingOptions.height = height;
 		renderingOptions.view = canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
@@ -195,8 +197,10 @@ class Application {
 		renderingOptions.roundPixels = roundPixels;
 
 		switch (rendererType) {
-			case CANVAS: app = new pixi.core.Application(width, height, renderingOptions, true);
-			default: app = new pixi.core.Application(width, height, renderingOptions);
+			case CANVAS:
+				renderingOptions.noWebGL = true;
+				app = new pixi.core.Application(renderingOptions);
+			default: app = new pixi.core.Application(renderingOptions);
 		}
 
 		stage = app.stage;
