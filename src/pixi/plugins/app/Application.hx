@@ -11,9 +11,9 @@ import js.Browser;
 /**
  * Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
- * http://adireddy.github.io
+ * http://github.com/adireddy
  * @license MIT
- * @copyright 2015
+ * @copyright 2015-2017
  */
 class Application {
 
@@ -170,7 +170,6 @@ class Application {
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-
 	public function start(?rendererType:String = "auto", ?parentDom:Element, ?canvasElement:CanvasElement) {
 		if (canvasElement == null) {
 			canvas = Browser.document.createCanvasElement();
