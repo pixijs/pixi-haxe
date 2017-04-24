@@ -252,6 +252,8 @@ pixi_plugins_app_Application.prototype = {
 			window.onresize = $bind(this,this._onWindowResize);
 		}
 		var renderingOptions = { };
+		renderingOptions.width = this.width;
+		renderingOptions.height = this.height;
 		renderingOptions.view = this.canvas;
 		renderingOptions.backgroundColor = this.backgroundColor;
 		renderingOptions.resolution = this.pixelRatio;
@@ -263,11 +265,12 @@ pixi_plugins_app_Application.prototype = {
 		renderingOptions.preserveDrawingBuffer = this.preserveDrawingBuffer;
 		renderingOptions.roundPixels = this.roundPixels;
 		if(rendererType == null) {
-			this.app = new PIXI.Application(this.width,this.height,renderingOptions);
+			this.app = new PIXI.Application(renderingOptions);
 		} else if(rendererType == "canvas") {
-			this.app = new PIXI.Application(this.width,this.height,renderingOptions,true);
+			renderingOptions.noWebGL = true;
+			this.app = new PIXI.Application(renderingOptions);
 		} else {
-			this.app = new PIXI.Application(this.width,this.height,renderingOptions);
+			this.app = new PIXI.Application(renderingOptions);
 		}
 		this.stage = this.app.stage;
 		this.renderer = this.app.renderer;

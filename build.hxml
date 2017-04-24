@@ -124,3 +124,7 @@
 --next
 -main text.Main
 -js samples/_output/text.js
+
+--next
+-main scaletest.Main
+-js samples/_output/scaletest.js
