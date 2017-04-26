@@ -10,8 +10,8 @@ module.exports = function (grunt) {
 		},
 
 		exec: {
-			copy_libs: "cp -R ./libs/*.min.js ./samples/_output/libs/",
-			copy_samples: "cp -R samples/_output/** ../adireddy.github.io/demos/pixi-haxe/"
+			copy_libs: "cp -R ./libs/*.min.js ./samples/output/libs/",
+			copy_samples: "cp -R samples/output/** ../adireddy.github.io/demos/pixi-haxe/"
 		},
 
 		zip: {
