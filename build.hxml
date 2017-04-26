@@ -6,7 +6,7 @@
 -cmd haxelib install chxdoc || true
 
 --next
--cp samples
+-cp samples/src
 -cp src
 -lib perf.js
 -dce full
@@ -18,113 +18,113 @@
 
 --next
 -main basics.Main
--js samples/_output/basics.js
+-js samples/output/basics.js
 
 --next
 -main spine.Main
--js samples/_output/spine.js
+-js samples/output/spine.js
 
 --next
 -main spritesheet.Main
--js samples/_output/spritesheet.js
+-js samples/output/spritesheet.js
 
 --next
 -main animatedsprite.Main
--js samples/_output/animatedsprite.js
+-js samples/output/animatedsprite.js
 
 --next
 -main graphics.Main
--js samples/_output/graphics.js
+-js samples/output/graphics.js
 
 --next
 -main tiling.Main
--js samples/_output/tiling.js
+-js samples/output/tiling.js
 
 --next
 -main bitmapfont.Main
--js samples/_output/bitmapfont.js
+-js samples/output/bitmapfont.js
 
 --next
 -main dragging.Main
--js samples/_output/dragging.js
+-js samples/output/dragging.js
 
 --next
 -main nape.Main
--js samples/_output/nape.js
+-js samples/output/nape.js
 -lib nape
 
 --next
 -main rope.Main
--js samples/_output/rope.js
+-js samples/output/rope.js
 
 --next
 -main retina.Main
--js samples/_output/retina.js
+-js samples/output/retina.js
 
 --next
 -main bunnymark.Main
--js samples/_output/bunnymark.js
+-js samples/output/bunnymark.js
 
 --next
 -main textureswap.Main
--js samples/_output/textureswap.js
+-js samples/output/textureswap.js
 
 --next
 -main alphamask.Main
--js samples/_output/alphamask.js
+-js samples/output/alphamask.js
 
 --next
 -main filters.colormatrix.Main
--js samples/_output/colormatrix.js
+-js samples/output/colormatrix.js
 
 --next
 -main filters.blur.Main
--js samples/_output/blur.js
+-js samples/output/blur.js
 
 --next
 -main filters.glow.Main
--js samples/_output/glow.js
+-js samples/output/glow.js
 
 --next
 -main loader.Main
--js samples/_output/loader.js
+-js samples/output/loader.js
 
 --next
 -main video.Main
--js samples/_output/video.js
+-js samples/output/video.js
 
 --next
 -main stream.Main
--js samples/_output/stream.js
+-js samples/output/stream.js
 
 --next
 -main events.Main
--js samples/_output/events.js
+-js samples/output/events.js
 
 --next
 -main mask.Main
--js samples/_output/mask.js
+-js samples/output/mask.js
 
 --next
 -main deviceinfo.Main
--js samples/_output/deviceinfo.js
+-js samples/output/deviceinfo.js
 
 --next
 -main devicedetection.Main
--js samples/_output/devicedetection.js
+-js samples/output/devicedetection.js
 
 --next
 -main webglinfo.Main
--js samples/_output/webglinfo.js
+-js samples/output/webglinfo.js
 
 --next
 -main tilemap.Main
--js samples/_output/tilemap.js
+-js samples/output/tilemap.js
 
 --next
 -main text.Main
--js samples/_output/text.js
+-js samples/output/text.js
 
 --next
 -main scaletest.Main
--js samples/_output/scaletest.js
+-js samples/output/scaletest.js
