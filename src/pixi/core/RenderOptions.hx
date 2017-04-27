@@ -5,7 +5,7 @@ import js.html.CanvasElement;
 typedef RenderOptions = {
 	@:optional var width:Float;
 	@:optional var height:Float;
-	@:optional var noWebGL:Bool;
+	@:optional var forceCanvas:Bool;
 	@:optional var sharedTicker:Bool;
 	@:optional var view:CanvasElement;
 	@:optional var resolution:Float;
