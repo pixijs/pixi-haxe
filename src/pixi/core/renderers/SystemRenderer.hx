@@ -38,7 +38,7 @@ extern class SystemRenderer extends EventEmitter {
 	 * @member {CONST.RENDERER_TYPE}
 	 * @default CONT.RENDERER_TYPE.UNKNOWN
 	 */
-	var type:Int;
+	var type:RendererType;
 
 	/**
 	 * The width of the canvas view

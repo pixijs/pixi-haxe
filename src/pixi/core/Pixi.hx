@@ -240,12 +240,6 @@ extern class Pixi {
 	static var TEXT_STYLE_CHANGED:String;
 }
 
-typedef RendererType = {
-	var UNKNOWN:Int;
-	var WEBGL:Int;
-	var CANVAS:Int;
-}
-
 typedef ScaleModes = {
 	var DEFAULT:Int;
 	var LINEAR:Int;
