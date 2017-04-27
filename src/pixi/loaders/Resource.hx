@@ -1,6 +1,5 @@
 package pixi.loaders;
 
-import js.html.rtc.SdpType;
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 import pixi.loaders.LoaderOptions.LoaderMetadata;
@@ -17,14 +16,12 @@ import pixi.loaders.LoaderOptions.LoaderMetadata;
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
  */
 @:native("PIXI.loaders.Resource.LOAD_TYPE")
-extern enum LoadType
-{
+extern enum LoadType {
 	XHR; IMAGE; AUDIO; VIDEO;
 }
 
 @:native("PIXI.loaders.Resource.TYPE")
-extern enum ResourceType
-{
+extern enum ResourceType {
 	JSON; XML; IMAGE; AUDIO; VIDEO;
 }
 
@@ -49,22 +46,22 @@ extern class Resource {
 	var texture:Texture;
 
 	var textures:Dynamic<Texture>;
-	
+
 	var spritesheet:Spritesheet;
-	
+
 	var bitmapFont:Dynamic;
-	
+
 	var options:LoaderOptions;
-	
+
 	var metadata:LoaderMetadata;
-	
+
 	var type:ResourceType;
-	
+
 	/**
 	 * Extension of this resource
-	 * @member {string}	 
+	 * @member {string}
 	 */
-	
+
 	var extension:String;
 	/**
      * The name of this resource.

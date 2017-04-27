@@ -34,6 +34,13 @@ extern class TilingSprite extends Sprite {
 	 * @member {Point}
 	 */
 	var tilePosition:Point;
+	
+	/**
+	 * Changes frame clamping in corresponding textureTransform, shortcut
+	 * Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
+	 * @default 0.5
+	 */
+	var clampMargin:Float;
 
 	/**
 	 * Checks if a point is inside this tiling sprite
