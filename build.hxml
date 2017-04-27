@@ -126,5 +126,9 @@
 -js samples/output/text.js
 
 --next
+-main dragonbones.Main
+-js samples/output/dragonbones.js
+
+--next
 -main scaletest.Main
 -js samples/output/scaletest.js
