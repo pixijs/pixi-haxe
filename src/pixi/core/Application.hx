@@ -1,5 +1,6 @@
 package pixi.core;
 
+import pixi.core.math.shapes.Rectangle;
 import pixi.core.renderers.SystemRenderer;
 import js.html.CanvasElement;
 import pixi.core.ticker.Ticker;
@@ -53,6 +54,13 @@ extern class Application {
      * @readonly
      */
 	var view:CanvasElement;
+
+	/**
+     * Reference to the renderer's screen rectangle. Its safe to use as filterArea or hitArea for whole screen
+     * @member {Rectangle}
+     * @readonly
+     */
+	var screen:Rectangle;
 
 	/**
      * Render the current stage.
