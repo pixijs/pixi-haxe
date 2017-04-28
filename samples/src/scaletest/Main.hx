@@ -54,12 +54,14 @@ class Main extends Application {
 		_loader.add("ex3/scale-" + _scale + "/background/images/background.png");
 		_loader.add("ex3/scale-" + _scale + "/symbols/images/symbols.png");
 
-		_loader.add("ex1/scale-" + _scale2 + "/background/images/background.png");
-		_loader.add("ex1/scale-" + _scale2 + "/symbols/images/symbols.png");
-		_loader.add("ex2/scale-" + _scale2 + "/background/images/background.png");
-		_loader.add("ex2/scale-" + _scale2 + "/symbols/images/symbols.png");
-		_loader.add("ex3/scale-" + _scale2 + "/background/images/background.png");
-		_loader.add("ex3/scale-" + _scale2 + "/symbols/images/symbols.png");
+		if (_scale != _scale2) {
+			_loader.add("ex1/scale-" + _scale2 + "/background/images/background.png");
+			_loader.add("ex1/scale-" + _scale2 + "/symbols/images/symbols.png");
+			_loader.add("ex2/scale-" + _scale2 + "/background/images/background.png");
+			_loader.add("ex2/scale-" + _scale2 + "/symbols/images/symbols.png");
+			_loader.add("ex3/scale-" + _scale2 + "/background/images/background.png");
+			_loader.add("ex3/scale-" + _scale2 + "/symbols/images/symbols.png");
+		}
 
 		_loader.load(_onLoaded);
 	}
