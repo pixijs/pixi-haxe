@@ -1,13 +1,11 @@
 package scaletest;
 
-import pixi.interaction.InteractionEvent;
-import js.html.EventTarget;
-import pixi.loaders.Loader;
 import js.Browser;
 import pixi.core.sprites.Sprite;
 import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
-import pixi.core.textures.Texture;
+import pixi.interaction.InteractionEvent;
+import pixi.loaders.Loader;
 import pixi.plugins.app.Application;
 
 class Main extends Application {
@@ -94,14 +92,11 @@ class Main extends Application {
 		stage.interactive = true;
 		stage.click = stage.tap = _changeTextures;
 
-		/*var scaleFactor = ((Browser.window.innerWidth - _reels.width) / Browser.window.innerWidth) - (24 * _scale / Browser.window.innerHeight);
-		_reels.scale.set((1 / _pr) + scaleFactor);
-		_bg.scale.set((1 / _pr) + scaleFactor);*/
-
 		_onResize();
 	}
 
 	function _changeTextures(e:InteractionEvent) {
+		_label.text = "Scale: " + _scale + " DPR: " + _pr;
 		if (e.data.global.y < Browser.window.innerHeight / 2) {
 			if (_ex < 3) _ex++;
 			else _ex = 1;
@@ -110,8 +105,6 @@ class Main extends Application {
 			var reelspath:String = "ex" + _ex + "/scale-" + _scale + "/symbols/images/symbols.png";
 			_bg.texture = _loader.resources[bgPath].texture;
 			_reels.texture = _loader.resources[reelspath].texture;
-
-			_label.text = "Scale: " + _scale + " DPR: " + _pr;
 		}
 		else {
 			var bgPath:String = "";
@@ -121,15 +114,12 @@ class Main extends Application {
 				_switchedScale = true;
 				bgPath = "ex" + _ex + "/scale-" + _scale2 + "/background/images/background.png";
 				reelspath = "ex" + _ex + "/scale-" + _scale2 + "/symbols/images/symbols.png";
-
 				_label.text = "Scale: " + _scale2 + " DPR: " + _pr;
 			}
 			else {
 				_switchedScale = false;
 				bgPath = "ex" + _ex + "/scale-" + _scale + "/background/images/background.png";
 				reelspath = "ex" + _ex + "/scale-" + _scale + "/symbols/images/symbols.png";
-
-				_label.text = "Scale: " + _scale + " DPR: " + _pr;
 			}
 
 			_bg.texture = _loader.resources[bgPath].texture;
