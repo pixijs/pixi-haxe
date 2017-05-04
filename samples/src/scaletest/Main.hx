@@ -15,7 +15,7 @@ class Main extends Application {
 	var _reels:Sprite;
 	var _label:Text;
 	var _pr = Math.min(Math.floor(Browser.window.devicePixelRatio), 2);
-	var _baseSize:Int = 480;
+	var _baseSize:Int = 320;
 	var _ex:Int = 1;
 	var _scale:Int;
 	var _scale2:Int;
@@ -30,6 +30,9 @@ class Main extends Application {
 		_scale = _getScale(_baseSize);
 		_scale2 = _getScale2(_baseSize);
 		_switchedScale = false;
+
+		if (_scale > 8) _scale = 8;
+		if (_scale2 > 8) _scale2 = 8;
 
 		position = "fixed";
 		backgroundColor = 0xFFFFFF;
@@ -51,6 +54,9 @@ class Main extends Application {
 		_loader.add("ex2/scale-" + _scale + "/symbols/images/symbols.png");
 		_loader.add("ex3/scale-" + _scale + "/background/images/background.png");
 		_loader.add("ex3/scale-" + _scale + "/symbols/images/symbols.png");
+		_loader.add("ex4/scale-" + _scale + "/symbols/images/symbols.png");
+		_loader.add("ex5/scale-" + _scale + "/symbols/images/symbols.png");
+
 
 		if (_scale != _scale2) {
 			_loader.add("ex1/scale-" + _scale2 + "/background/images/background.png");
@@ -59,6 +65,8 @@ class Main extends Application {
 			_loader.add("ex2/scale-" + _scale2 + "/symbols/images/symbols.png");
 			_loader.add("ex3/scale-" + _scale2 + "/background/images/background.png");
 			_loader.add("ex3/scale-" + _scale2 + "/symbols/images/symbols.png");
+			_loader.add("ex4/scale-" + _scale2 + "/symbols/images/symbols.png");
+			_loader.add("ex5/scale-" + _scale2 + "/symbols/images/symbols.png");
 		}
 
 		_loader.load(_onLoaded);
@@ -98,12 +106,12 @@ class Main extends Application {
 	function _changeTextures(e:InteractionEvent) {
 		_label.text = "Scale: " + _scale + " DPR: " + _pr;
 		if (e.data.global.y < Browser.window.innerHeight / 2) {
-			if (_ex < 3) _ex++;
+			if (_ex < 5) _ex++;
 			else _ex = 1;
 
 			var bgPath:String = "ex" + _ex + "/scale-" + _scale + "/background/images/background.png";
 			var reelspath:String = "ex" + _ex + "/scale-" + _scale + "/symbols/images/symbols.png";
-			_bg.texture = _loader.resources[bgPath].texture;
+			if (_ex < 4) _bg.texture = _loader.resources[bgPath].texture;
 			_reels.texture = _loader.resources[reelspath].texture;
 		}
 		else {
@@ -122,9 +130,11 @@ class Main extends Application {
 				reelspath = "ex" + _ex + "/scale-" + _scale + "/symbols/images/symbols.png";
 			}
 
-			_bg.texture = _loader.resources[bgPath].texture;
+			if (_ex < 4) _bg.texture = _loader.resources[bgPath].texture;
 			_reels.texture = _loader.resources[reelspath].texture;
 		}
+
+		_bg.visible = (_ex < 4);
 
 		_onResize();
 	}
@@ -145,10 +155,15 @@ class Main extends Application {
 		_bg.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		_reels.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
-		_reels.width = Browser.window.innerWidth;
-		_reels.scale.y = _reels.scale.x;
-
-		_bg.scale.set(_reels.scale.x);
+		if (_ex < 4) {
+			_reels.width = Browser.window.innerWidth - (24 * _scale);
+			_reels.scale.y = _reels.scale.x;
+			_bg.scale.set(_reels.scale.x);
+		}
+		else {
+			_reels.height = Browser.window.innerHeight - (24 * _scale);
+			_reels.scale.x = _reels.scale.y;
+		}
 	}
 
 	static function main() {
