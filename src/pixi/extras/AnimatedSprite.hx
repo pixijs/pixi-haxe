@@ -27,7 +27,8 @@ extern class AnimatedSprite extends Sprite {
      * @param {Array<Texture>|Array<FrameObject>} textures - an array of {Texture} or frame objects that make up the animation
      * @param {Bool} [autoUpdate=true] - Whether use PIXI.ticker.shared to auto update animation time.
      */
-	function new(textures:Array<Texture>, ?autoUpdate:Bool = true);
+	@:overload(function(textures:Dynamic, ?autoUpdate:Bool):Void {})
+	function new(textures:Array<Texture>, ?autoUpdate:Bool);
 
 	/**
      * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
@@ -123,6 +124,14 @@ extern class AnimatedSprite extends Sprite {
      * @param {Int} frameNumber - frame index to start at
      */
 	function gotoAndPlay(frameNumber:Int):Void;
+
+	/**
+     * Updates the object transform for rendering.
+     *
+     * @private
+     * @param {Float} deltaTime - Time since last tick.
+     */
+	function update(deltaTime:Float):Void;
 
 	/**
      * A short hand way of creating a movieclip from an array of frame ids
