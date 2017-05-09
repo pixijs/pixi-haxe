@@ -219,7 +219,7 @@ extern class Ticker extends EventEmitter {
 	 * frame callbacks if the ticker instance has been started
 	 * and listeners are added.
 	 *
-	 * @param [currentTime=performance.now()] {DOMHighResTimeStamp|number} the current time of execution
+	 * @param [currentTime=performance.now()] {Float} the current time of execution
 	 */
 	function update(?currentTime:Float):Void;
 }
