@@ -13,13 +13,13 @@ typedef DestroyOptions = {
 	*  method called as well. 'options' will be passed on to those calls.
 	*/
 	?children:Bool,
-	
+
 	/**
     * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
     * Should it destroy the texture of the child sprite
 	*/
 	?texture:Bool,
-	
+
 	/**
     * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
     * Should it destroy the base texture of the child sprite
@@ -59,9 +59,11 @@ extern class DisplayObject extends InteractiveTarget {
 	 * Calculates the global position of the display object
 	 *
 	 * @param position {Point} The world origin to calculate from
+	 * @param point {Point} A Point in which to store the value, optional (otherwise a new Point is created)
+	 * @param skipUpdate {Bool} Should we skip the update transform
 	 * @return {Point} A point object representing the position of this object
 	 */
-	function toGlobal(position:Point):Point;
+	function toGlobal(position:Point, ?point:Point, skipUpdate:Bool = false):Point;
 
 	/**
 	 * Calculates the local position of the display object relative to another point
@@ -107,7 +109,7 @@ extern class DisplayObject extends InteractiveTarget {
 	/**
 	 * Base destroy method for generic display objects
      * Removes all internal references and listeners as well as removes children from the display list.
-     * 
+     *
      * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
      *  have been set to that value
      * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
@@ -116,7 +118,7 @@ extern class DisplayObject extends InteractiveTarget {
      *  Should it destroy the texture of the child sprite
      * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
      *  Should it destroy the base texture of the child sprite
-     */	
+     */
 	function destroy(?options:EitherType<Bool, DestroyOptions>):Void;
 
 	/**
