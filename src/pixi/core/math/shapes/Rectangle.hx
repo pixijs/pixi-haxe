@@ -38,7 +38,7 @@ extern class Rectangle extends Shape {
 	 * @param  y {Float} y coordinate of the point to test.
 	 * @return {Bool} whether the x and y coordinates are within this Rectangle.
 	 */
-	function contains(x:Float, y:Float):Bool;
+	override function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * Pads this rectangle, making it grow in all directions.
