@@ -28,7 +28,7 @@ extern class BaseRenderTexture extends BaseTexture {
 	 * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
 	 * position a Container should be used:
 	 *
-	 * ```haxe
+	 * ```js
 	 * var doc = new Container();
 	 *
 	 * doc.addChild(sprite);
@@ -56,4 +56,11 @@ extern class BaseRenderTexture extends BaseTexture {
 	 * @param height {Float} The height to resize to.
 	 */
 	function resize(width:Float, height:Float):Void;
+
+	/**
+	 * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
+	 *
+	 * @member {Bool}
+	 */
+	var valid:Bool;
 }

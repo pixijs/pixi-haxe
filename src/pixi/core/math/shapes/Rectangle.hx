@@ -24,6 +24,45 @@ extern class Rectangle extends Shape {
 	function clone():Rectangle;
 
 	/**
+	 * Copies another Rectangle to this one.
+	 *
+	 * @param  rectangle {Rectangle} The rectangle to copy
+	 * @return {Rectangle} Returns itself.
+	 */
+	function copy(rectangle:Rectangle):Rectangle;
+
+	/**
+	 * Checks whether the x and y coordinates given are contained within the rectangle.
+	 *
+	 * @param  x {Float} x coordinate of the point to test.
+	 * @param  y {Float} y coordinate of the point to test.
+	 * @return {Bool} whether the x and y coordinates are within this Rectangle.
+	 */
+	override function contains(x:Float, y:Float):Bool;
+
+	/**
+	 * Pads this rectangle, making it grow in all directions.
+	 *
+	 * @param  padX {Float} The horizontal padding amount.
+	 * @param  padY {Float} The vertical padding amount.
+	 */
+	function pad(padX:Float, padY:Float):Void;
+
+	/**
+	 * Fits this rectangle around the passed one.
+	 *
+	 * @param  rectangle {Rectangle} The rectangle to fit.
+	 */
+	function fit(rectangle:Rectangle):Void;
+
+	/**
+	 * Enlarges this rectangle to fit around the passed one.
+	 *
+	 * @param  rectangle {Rectangle} The rectangle to include.
+	 */
+	function enlarge(rectangle:Rectangle):Void;
+
+	/**
 	 * @property x
 	 * @type Float
 	 * @default 0
@@ -50,4 +89,32 @@ extern class Rectangle extends Shape {
 	 * @default 0
 	 */
 	var height:Float;
+
+	/**
+	 * @property left
+	 * @type Float
+	 * @default 0
+	 */
+	var left:Float;
+
+	/**
+	 * @property right
+	 * @type Float
+	 * @default 0
+	 */
+	var right:Float;
+
+	/**
+	 * @property top
+	 * @type Float
+	 * @default 0
+	 */
+	var top:Float;
+
+	/**
+	 * @property bottom
+	 * @type Float
+	 * @default 0
+	 */
+	var bottom:Float;
 }

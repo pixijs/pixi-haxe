@@ -7,27 +7,6 @@ import pixi.core.math.Point;
 import pixi.interaction.InteractiveTarget;
 import haxe.extern.EitherType;
 
-typedef DestroyOptions = {
-	/**
-	* {boolean} [options.children=false] - if set to true, all the children will have their destroy
-	*  method called as well. 'options' will be passed on to those calls.
-	*/
-	?children:Bool,
-	
-	/**
-    * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
-    * Should it destroy the texture of the child sprite
-	*/
-	?texture:Bool,
-	
-	/**
-    * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
-    * Should it destroy the base texture of the child sprite
-	*/
-	?baseTexture:Bool,
-}
-
-
 @:native("PIXI.DisplayObject")
 extern class DisplayObject extends InteractiveTarget {
 
@@ -43,7 +22,7 @@ extern class DisplayObject extends InteractiveTarget {
 	/**
 	 * Retrieves the bounds of the displayObject as a rectangle object
 	 *
-	 * @param skipUpdate {Matrix} setting to true will stop the transforms of the scene graph from being updated. 
+	 * @param skipUpdate {Matrix} setting to true will stop the transforms of the scene graph from being updated.
 	 * This means the calculation returned MAY be out of date BUT will give you a nice performance boost
 	 * @param rect {Rectangle} Optional rectangle to store the result of the bounds calculation
 	 * @return {Rectangle} the rectangular bounding area
@@ -61,9 +40,11 @@ extern class DisplayObject extends InteractiveTarget {
 	 * Calculates the global position of the display object
 	 *
 	 * @param position {Point} The world origin to calculate from
+	 * @param point {Point} A Point in which to store the value, optional (otherwise a new Point is created)
+	 * @param skipUpdate {Bool} Should we skip the update transform
 	 * @return {Point} A point object representing the position of this object
 	 */
-	function toGlobal(position:Point):Point;
+	function toGlobal(position:Point, ?point:Point, ?skipUpdate:Bool):Point;
 
 	/**
 	 * Calculates the local position of the display object relative to another point
@@ -104,12 +85,12 @@ extern class DisplayObject extends InteractiveTarget {
 	 * @param [pivotY=0] {Float} The Y pivot value
 	 * @return {DisplayObject}
 	 */
-	function setTransform(?x:Float = 0, ?y:Float = 0, ?scaleX:Float = 0, ?scaleY:Float = 0, ?rotation:Float = 0, ?skewX:Float = 0, ?skewY:Float = 0, ?pivotX:Float = 0, ?pivotY:Float = 0):DisplayObject;
+	function setTransform(?x:Float, ?y:Float, ?scaleX:Float, ?scaleY:Float, ?rotation:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):DisplayObject;
 
 	/**
 	 * Base destroy method for generic display objects
      * Removes all internal references and listeners as well as removes children from the display list.
-     * 
+     *
      * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
      *  have been set to that value
      * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
@@ -118,7 +99,7 @@ extern class DisplayObject extends InteractiveTarget {
      *  Should it destroy the texture of the child sprite
      * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
      *  Should it destroy the base texture of the child sprite
-     */	
+     */
 	function destroy(?options:EitherType<Bool, DestroyOptions>):Void;
 
 	/**
@@ -312,4 +293,24 @@ extern class DisplayObject extends InteractiveTarget {
      * @todo Needs docs.
      */
 	var tabIndex:Int;
+}
+
+typedef DestroyOptions = {
+	/**
+	* {boolean} [options.children=false] - if set to true, all the children will have their destroy
+	*  method called as well. 'options' will be passed on to those calls.
+	*/
+	@:optional var children:Bool;
+
+	/**
+    * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the texture of the child sprite
+	*/
+	@:optional var texture:Bool;
+
+	/**
+    * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the base texture of the child sprite
+	*/
+	@:optional var baseTexture:Bool;
 }
