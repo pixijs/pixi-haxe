@@ -13,7 +13,7 @@ extern class Rectangle extends Shape {
 	 * @param width {Float} The overall width of this rectangle
 	 * @param height {Float} The overall height of this rectangle
 	 */
-	function new(x:Float, y:Float, width:Float, height:Float):Void;
+	function new(?x:Float, ?y:Float, ?width:Float, ?height:Float):Void;
 
 	/**
 	 * Creates a clone of this Rectangle instance

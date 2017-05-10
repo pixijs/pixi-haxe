@@ -15,7 +15,7 @@ extern class GraphicsData {
      * @param {Float} fillAlpha - the alpha of the fill
      * @param {Bool} fill - whether or not the shape is filled with a colour
      * @param {Bool} nativeLines - the method for drawing lines
-     * @param {PIXI.Circle|PIXI.Rectangle|PIXI.Ellipse|PIXI.Polygon} shape - The shape object to draw.
+     * @param {Circle|Rectangle|Ellipse|Polygon} shape - The shape object to draw.
 	 */
 	function new(lineWidth:Float, lineColor:Int, lineAlpha:Float, fillColor:Int, fillAlpha:Float, fill:Bool, nativeLines:Bool, shape:Dynamic);
 
@@ -56,6 +56,8 @@ extern class GraphicsData {
      */
 	var fill:Bool;
 
+	var holes:Array<Dynamic>;
+
 	/*
      * @member {Circle|Ellipse|Polygon|Rectangle|RoundedRectangle} The shape object to draw.
      */
@@ -65,6 +67,13 @@ extern class GraphicsData {
      * @member {Int} The type of the shape, see the Const.Shapes file for all the existing types,
      */
 	var type:Int;
+
+	/**
+     * Adds a hole to the shape.
+     *
+     * @param {Rectangle|Circle} shape - The shape of the hole.
+     */
+	function addHole(shape:Dynamic):Void;
 
 	/**
 	 * Creates a new GraphicsData object with the same values as this one.

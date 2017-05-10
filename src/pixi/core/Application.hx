@@ -1,5 +1,6 @@
 package pixi.core;
 
+import pixi.core.math.shapes.Rectangle;
 import pixi.core.renderers.SystemRenderer;
 import js.html.CanvasElement;
 import pixi.core.ticker.Ticker;
@@ -25,14 +26,9 @@ extern class Application {
 	 *
 	 * @class
 	 * @memberof PIXI
-	 * @param {Float} [width=800] - the width of the renderers view
-     * @param {Float} [height=600] - the height of the renderers view
-     * @param {RenderOptions} [options] - The optional renderer parameters
-     * @param {Bool} [noWebGL=false] - prevents selection of WebGL renderer, even if such is present
-     * @param {Bool} [options.legacy=false] - If true Pixi will aim to ensure compatibility with older / less advanced devices.
-     *       If you experience unexplained flickering try setting this to true.
+	 * @param {RenderOptions} [options] - The optional renderer parameters
 	 */
-	function new(?width:Float, ?height:Float, ?options:RenderOptions, ?noWebGL:Bool);
+	function new(?options:RenderOptions);
 
 	/**
 	 * WebGL renderer if available, otherwise CanvasRenderer
@@ -58,6 +54,13 @@ extern class Application {
      * @readonly
      */
 	var view:CanvasElement;
+
+	/**
+     * Reference to the renderer's screen rectangle. Its safe to use as filterArea or hitArea for whole screen
+     * @member {Rectangle}
+     * @readonly
+     */
+	var screen:Rectangle;
 
 	/**
      * Render the current stage.

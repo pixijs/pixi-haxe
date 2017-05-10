@@ -2,7 +2,30 @@ package pixi.loaders;
 
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
+import pixi.loaders.LoaderOptions.LoaderMetadata;
 
+/**
+ * The types of loading a resource can use.
+ *
+ * @static
+ * @constant
+ * @property {object} LOAD_TYPE
+ * @property {number} LOAD_TYPE.XHR - Uses XMLHttpRequest to load the resource.
+ * @property {number} LOAD_TYPE.IMAGE - Uses an `Image` object to load the resource.
+ * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
+ * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
+ */
+@:native("PIXI.loaders.Resource.LOAD_TYPE")
+extern enum LoadType {
+	XHR; IMAGE; AUDIO; VIDEO;
+}
+
+@:native("PIXI.loaders.Resource.TYPE")
+extern enum ResourceType {
+	JSON; XML; IMAGE; AUDIO; VIDEO;
+}
+
+@:native("PIXI.loaders.Resource")
 extern class Resource {
 
 	/**
@@ -23,11 +46,23 @@ extern class Resource {
 	var texture:Texture;
 
 	var textures:Dynamic<Texture>;
-	
+
 	var spritesheet:Spritesheet;
-	
+
 	var bitmapFont:Dynamic;
 
+	var options:LoaderOptions;
+
+	var metadata:LoaderMetadata;
+
+	var type:ResourceType;
+
+	/**
+	 * Extension of this resource
+	 * @member {string}
+	 */
+
+	var extension:String;
 	/**
      * The name of this resource.
      *
@@ -78,7 +113,7 @@ extern class Resource {
      *
      * @member {Resource.LOAD_TYPE}
      */
-	var loadType:Int;
+	var loadType:LoadType;
 
 	/**
      * The error that occurred while loading (if any).
@@ -118,6 +153,7 @@ extern class Resource {
      *
      * @member {Bool}
      */
+	@:deprecated
 	var isAudio:Bool;
 
 	/**
@@ -127,24 +163,6 @@ extern class Resource {
      * @member {Bool}
      */
 	var isVideo:Bool;
-}
-
-/**
- * The types of loading a resource can use.
- *
- * @static
- * @constant
- * @property {object} LOAD_TYPE
- * @property {number} LOAD_TYPE.XHR - Uses XMLHttpRequest to load the resource.
- * @property {number} LOAD_TYPE.IMAGE - Uses an `Image` object to load the resource.
- * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
- * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
- */
-typedef LOAD_TYPE = {
-	var XHR:Int;
-	var IMAGE:Int;
-	var AUDIO:Int;
-	var VIDEO:Int;
 }
 
 /**

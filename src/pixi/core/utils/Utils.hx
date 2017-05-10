@@ -1,5 +1,24 @@
 package pixi.core.utils;
 
+typedef IsMobile = {
+	any: Bool,
+	phone: Bool,
+	seven_inch: Bool,
+	tablet: Bool,
+	amazon: { tablet:Bool, phone: Bool, device:Bool },
+	android: { tablet:Bool, phone: Bool, device:Bool },
+	windows: { tablet:Bool, phone: Bool, device:Bool },
+	apple: { tablet:Bool, phone: Bool, device:Bool, ipod: Bool },
+	other: {
+		blackberry: Bool,
+		blackberry10: Bool,
+		chrome: Bool,
+		device: Bool,
+		firefox: Bool,
+		opera: Bool
+	}
+}
+
 @:native("PIXI.utils")
 extern class Utils {
 
@@ -8,6 +27,12 @@ extern class Utils {
 	static var async:Dynamic;
 	static var TextureCache:Dynamic;
 	static var BaseTextureCache:Dynamic;
+
+
+	/**
+	 * True if pixi is running on mobile device
+	 */
+	static var isMobile:IsMobile;
 
 	/**
      * Gets the next unique identifier

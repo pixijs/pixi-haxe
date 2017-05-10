@@ -92,6 +92,24 @@ extern class Graphics extends Container {
 	var boundsPadding:Float;
 
 	/**
+	 * Used to detect if we need to do a fast rect check using the id compare method
+	 * @type {Int}
+	 */
+	var fastRectDirty:Int;
+
+	/**
+	 * Used to detect if we clear the graphics webGL data
+	 * @type {Int}
+	 */
+	var clearDirty:Int;
+
+	/**
+	 * Used to detect if we we need to recalculate local bounds
+	 * @type {Int}
+	 */
+	var boundsDirty:Int;
+
+	/**
 	 * Creates a new Graphics object with the same values as this one.
 	 * Note that the only the properties of the object are cloned, not its transform (position,scale,etc)
 	 *
@@ -252,6 +270,14 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function clear():Graphics;
+
+	/**
+     * True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and
+     * masked with gl.scissor.
+     *
+     * @returns {Bool} True if only 1 rect.
+     */
+	function isFastRect():Bool;
 
 	/**
 	* Tests if a point is inside this graphics object

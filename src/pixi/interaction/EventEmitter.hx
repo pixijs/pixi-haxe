@@ -38,7 +38,7 @@ extern class EventEmitter {
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
-	function on(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
+	function on(event:String, fn:InteractionEvent -> Void, ?context:Dynamic):Void;
 
 	/**
 	 * Add an EventListener that's only called once.
@@ -50,7 +50,7 @@ extern class EventEmitter {
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
-	function once(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
+	function once(event:String, fn:InteractionEvent -> Void, ?context:Dynamic):Void;
 
 	/**
 	 * Register a new EventListener for the given event.
@@ -62,7 +62,7 @@ extern class EventEmitter {
 	@:overload(function(event:String, fn:Void -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?context:Dynamic):Void {})
 	@:overload(function(event:String, fn:Dynamic, ?context:Dynamic):Void {})
-	function addListener(event:String, fn:EventTarget -> Void, ?context:Dynamic):Void;
+	function addListener(event:String, fn:InteractionEvent -> Void, ?context:Dynamic):Void;
 
 	/**
 	 * Remove event listeners.
@@ -74,7 +74,7 @@ extern class EventEmitter {
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic, ?once:Bool):Void {})
-	function off(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
+	function off(event:String, fn:InteractionEvent -> Void, ?once:Bool):Void;
 
 	/**
 	 * Remove event listeners.
@@ -86,7 +86,7 @@ extern class EventEmitter {
 	@:overload(function(event:String, fn:Void -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic -> Void, ?once:Bool):Void {})
 	@:overload(function(event:String, fn:Dynamic, ?once:Bool):Void {})
-	function removeListener(event:String, fn:EventTarget -> Void, ?once:Bool):Void;
+	function removeListener(event:String, fn:InteractionEvent -> Void, ?once:Bool):Void;
 
 	/**
 	 * Remove all listeners or only the listeners for the specified event.
