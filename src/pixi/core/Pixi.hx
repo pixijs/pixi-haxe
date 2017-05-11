@@ -2,6 +2,7 @@ package pixi.core;
 
 import haxe.extern.EitherType;
 import js.RegExp;
+import pixi.core.renderers.RendererType;
 
 @:native("PIXI")
 extern class Pixi {
