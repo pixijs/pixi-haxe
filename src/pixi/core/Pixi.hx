@@ -280,12 +280,6 @@ extern class Pixi {
 	static var UPDATE_PRIORITY:UpdatePriotities;
 }
 
-typedef RendererType = {
-	var UNKNOWN:Int;
-	var WEBGL:Int;
-	var CANVAS:Int;
-}
-
 typedef ScaleModes = {
 	var DEFAULT:Int;
 	var LINEAR:Int;
