@@ -1,13 +1,14 @@
 package pixi.core.display;
 
 import pixi.core.renderers.webgl.filters.Filter;
-import pixi.interaction.InteractionManager;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.math.Point;
+import pixi.interaction.InteractiveTarget;
+import haxe.extern.EitherType;
 
 @:native("PIXI.DisplayObject")
-extern class DisplayObject extends InteractionManager {
+extern class DisplayObject extends InteractiveTarget {
 
 	/**
 	 * The base class for all objects that are rendered on the screen.
@@ -21,10 +22,12 @@ extern class DisplayObject extends InteractionManager {
 	/**
 	 * Retrieves the bounds of the displayObject as a rectangle object
 	 *
-	 * @param matrix {Matrix}
+	 * @param skipUpdate {Matrix} setting to true will stop the transforms of the scene graph from being updated.
+	 * This means the calculation returned MAY be out of date BUT will give you a nice performance boost
+	 * @param rect {Rectangle} Optional rectangle to store the result of the bounds calculation
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getBounds(?matrix:Matrix):Rectangle;
+	function getBounds(?skipUpdate:Bool, ?rect:Rectangle):Rectangle;
 
 	/**
 	 * Retrieves the local bounds of the displayObject as a rectangle object
@@ -37,9 +40,11 @@ extern class DisplayObject extends InteractionManager {
 	 * Calculates the global position of the display object
 	 *
 	 * @param position {Point} The world origin to calculate from
+	 * @param point {Point} A Point in which to store the value, optional (otherwise a new Point is created)
+	 * @param skipUpdate {Bool} Should we skip the update transform
 	 * @return {Point} A point object representing the position of this object
 	 */
-	function toGlobal(position:Point):Point;
+	function toGlobal(position:Point, ?point:Point, ?skipUpdate:Bool):Point;
 
 	/**
 	 * Calculates the local position of the display object relative to another point
@@ -80,17 +85,22 @@ extern class DisplayObject extends InteractionManager {
 	 * @param [pivotY=0] {Float} The Y pivot value
 	 * @return {DisplayObject}
 	 */
-	function setTransform(?x:Float = 0, ?y:Float = 0, ?scaleX:Float = 0, ?scaleY:Float = 0, ?rotation:Float = 0, ?skewX:Float = 0, ?skewY:Float = 0, ?pivotX:Float = 0, ?pivotY:Float = 0):DisplayObject;
+	function setTransform(?x:Float, ?y:Float, ?scaleX:Float, ?scaleY:Float, ?rotation:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):DisplayObject;
 
 	/**
 	 * Base destroy method for generic display objects
-	 * @param [destroyChildren] {Bool} if set to true, all the children will have their destroy method called as well (Container)
-	 * @param [destroyTexture] {Bool} Should it destroy the current texture of the sprite as well (Sprite)
-	 * @param [destroyBaseTexture] {Bool} whether to destroy the base texture as well (Text, Sprite)
-	 */
-	@:overload(function(?destroyTexture:Bool, ?destroyBaseTexture:Bool):Void {})
-	@:overload(function(?destroyChildren:Bool):Void {})
-	function destroy():Void;
+     * Removes all internal references and listeners as well as removes children from the display list.
+     *
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+     *  have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+     *  method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+     *  Should it destroy the texture of the child sprite
+     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+     *  Should it destroy the base texture of the child sprite
+     */
+	function destroy(?options:EitherType<Bool, DestroyOptions>):Void;
 
 	/**
 	 * The instance name of the object.
@@ -157,13 +167,6 @@ extern class DisplayObject extends InteractionManager {
 	 * @member {Rectangle}
 	 */
 	var filterArea:Rectangle;
-
-	/**
-	 * Interaction shape. Children will be hit first, then this shape will be checked.
-	 *
-	 * @memberof DisplayObject#
-	 */
-	var hitArea:Dynamic;
 
 	/**
 	 * The position of the displayObject on the x axis relative to the local coordinates of the parent.
@@ -264,38 +267,50 @@ extern class DisplayObject extends InteractionManager {
 	var filters:Array<Filter>;
 
 	/**
-	 * Indicates if the displayObject is interactive or not.
-	 *
-	 * @member {Bool}
-	 * @default false
-	 * @memberof DisplayObject#
-	 */
-	var interactive:Bool;
+     *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
+     *   shadow div with attributes set
+     *
+     * @member {Bool}
+     */
+	var accessible:Bool;
 
 	/**
-	 * Indicates if the displayObject uses button mode or normal mode.
-	 *
-	 * @member {Bool}
-	 * @default false
-	 * @memberof DisplayObject#
-	 */
-	var buttonMode:Bool;
+     * Sets the title attribute of the shadow div
+     * If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+     *
+     * @member {String}
+     */
+	var accessibleTitle:String;
 
 	/**
-	 * Indicates if the children of displayObject are interactive or not.
-	 *
-	 * @member {Bool}
-	 * @default true
-	 * @memberof DisplayObject#
-	 */
-	var interactiveChildren:Bool;
+     * Sets the aria-label attribute of the shadow div
+     *
+     * @member {String}
+     */
+	var accessibleHint:String;
 
 	/**
-	 * Default cursor.
-	 *
-	 * @member {String}
-	 * @default pointer
-	 * @memberof DisplayObject#
-	 */
-	var defaultCursor:String;
+     * @todo Needs docs.
+     */
+	var tabIndex:Int;
+}
+
+typedef DestroyOptions = {
+	/**
+	* {boolean} [options.children=false] - if set to true, all the children will have their destroy
+	*  method called as well. 'options' will be passed on to those calls.
+	*/
+	@:optional var children:Bool;
+
+	/**
+    * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the texture of the child sprite
+	*/
+	@:optional var texture:Bool;
+
+	/**
+    * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+    * Should it destroy the base texture of the child sprite
+	*/
+	@:optional var baseTexture:Bool;
 }

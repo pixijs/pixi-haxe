@@ -1,7 +1,7 @@
 package pixi.core.renderers.canvas;
 
+import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
-import pixi.core.renderers.Detector;
 
 @:native("PIXI.CanvasRenderer")
 extern class CanvasRenderer extends SystemRenderer {
@@ -24,7 +24,14 @@ extern class CanvasRenderer extends SystemRenderer {
 	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
 	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
 	 */
-	function new(width:Float, height:Float, ?options:RenderingOptions);
+	function new(width:Float, height:Float, ?options:RenderOptions);
+
+	/**
+     * Clear the canvas of renderer.
+     *
+     * @param {String} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
+     */
+	function clear(?clearColor:String):Void;
 
 	/**
 	 * The canvas 2d context that everything is drawn with.
@@ -45,7 +52,14 @@ extern class CanvasRenderer extends SystemRenderer {
 	 *
 	 * @member {CanvasMaskManager}
 	 */
-	var maskManager:Dynamic;
+	var maskManager:CanvasMaskManager;
+
+	/**
+	 * The canvas property used to set the canvas smoothing property.
+	 *
+	 * @member {String}
+	 */
+	var smoothProperty:String;
 
 	/**
 	 * Tracks the active scale mode for this renderer.
@@ -60,11 +74,4 @@ extern class CanvasRenderer extends SystemRenderer {
 	 * @member {BLEND_MODES}
 	 */
 	var currentBlendMode:Int;
-
-	/**
-	 * The canvas property used to set the canvas smoothing property.
-	 *
-	 * @member {String}
-	 */
-	var smoothProperty:String;
 }

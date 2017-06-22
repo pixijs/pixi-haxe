@@ -47,7 +47,8 @@ extern class Container extends DisplayObject {
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	 * @return {DisplayObject} The child that was added.
 	 */
-	function addChild(child:Rest<DisplayObject>):DisplayObject;
+	@:overload(function (child:Rest<DisplayObject>):DisplayObject {})
+	function addChild<T:DisplayObject>(child:T):T;
 
 	/**
 	 * Adds a child to the container at a specified index.
@@ -57,7 +58,7 @@ extern class Container extends DisplayObject {
 	 * @param index {Int} The index to place the child in
 	 * @return {DisplayObject} The child that was added.
 	 */
-	function addChildAt(child:DisplayObject, index:Int):DisplayObject;
+	function addChildAt<T:DisplayObject>(child:T, index:Int):T;
 
 	/**
 	 * Swaps the position of 2 Display Objects within this container.

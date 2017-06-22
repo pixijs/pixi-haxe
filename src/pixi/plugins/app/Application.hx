@@ -1,10 +1,9 @@
 package pixi.plugins.app;
 
-import pixi.core.renderers.webgl.WebGLRenderer;
-import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.Detector;
-import pixi.core.display.Container;
+import pixi.core.renderers.SystemRenderer;
 import js.html.Event;
+import pixi.core.RenderOptions;
+import pixi.core.display.Container;
 import js.html.Element;
 import js.html.CanvasElement;
 import js.Browser;
@@ -12,9 +11,9 @@ import js.Browser;
 /**
  * Pixi Boilerplate Helper class that can be used by any application
  * @author Adi Reddy Mora
- * http://adireddy.github.io
+ * http://github.com/adireddy
  * @license MIT
- * @copyright 2015
+ * @copyright 2015-2017
  */
 class Application {
 
@@ -23,18 +22,6 @@ class Application {
      * default - 1
      */
 	public var pixelRatio:Float;
-
-	/**
-	 * Default frame rate is 60 FPS and this can be set to true to get 30 FPS.
-	 * default - false
-	 */
-	public var skipFrame(default, set):Bool;
-
-	/**
-	 * Default frame rate is 60 FPS and this can be set to anything between 1 - 60.
-	 * default - 60
-	 */
-	public var fps(default, set):Int;
 
 	/**
 	 * Width of the application.
@@ -47,6 +34,12 @@ class Application {
 	 * default - Browser.window.innerHeight
 	 */
 	public var height:Float;
+
+	/**
+	 * Position of canvas element
+	 * default - static
+	 */
+	public var position:String;
 
 	/**
 	 * Renderer transparency property.
@@ -120,7 +113,7 @@ class Application {
 	 * Renderer
 	 * Read-only
 	 */
-	public var renderer(default, null):Dynamic;
+	public var renderer(default, null):SystemRenderer;
 
 	/**
 	 * Global Container.
@@ -128,10 +121,23 @@ class Application {
 	 */
 	public var stage(default, null):Container;
 
+	/**
+	 * Pixi Application
+	 * Read-only
+	 */
+	public var app(default, null):pixi.core.Application;
+
 	public static inline var AUTO:String = "auto";
 	public static inline var RECOMMENDED:String = "recommended";
 	public static inline var CANVAS:String = "canvas";
 	public static inline var WEBGL:String = "webgl";
+
+	public static inline var POSITION_STATIC:String = "static";
+	public static inline var POSITION_ABSOLUTE:String = "absolute";
+	public static inline var POSITION_FIXED:String = "fixed";
+	public static inline var POSITION_RELATIVE:String = "relative";
+	public static inline var POSITION_INITIAL:String = "initial";
+	public static inline var POSITION_INHERIT:String = "inherit";
 
 	var _frameCount:Int;
 	var _animationFrameId:Null<Int>;
@@ -140,23 +146,9 @@ class Application {
 		_setDefaultValues();
 	}
 
-	function set_fps(val:Int):Int {
-		_frameCount = 0;
-		return fps = (val >= 1 && val < 60) ? Std.int(val) : 60;
-	}
-
-	function set_skipFrame(val:Bool):Bool {
-		if (val) {
-			trace("pixi.plugins.app.Application > Deprecated: skipFrame - use fps property and set it to 30 instead");
-			fps = 30;
-		}
-		return skipFrame = val;
-	}
-
 	inline function _setDefaultValues() {
 		_animationFrameId = null;
 		pixelRatio = 1;
-		skipFrame = false;
 		autoResize = true;
 		transparent = false;
 		antialias = false;
@@ -167,7 +159,7 @@ class Application {
 		backgroundColor = 0xFFFFFF;
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		fps = 60;
+		position = "static";
 	}
 
 	/**
@@ -178,22 +170,20 @@ class Application {
 	 * Can be found in libs folder. "libs/stats.min.js" <script type="text/javascript" src="libs/stats.min.js"></script>
 	 * @param [parentDom] - By default canvas will be appended to body or it can be appended to custom element if passed
 	 */
-
 	public function start(?rendererType:String = "auto", ?parentDom:Element, ?canvasElement:CanvasElement) {
 		if (canvasElement == null) {
 			canvas = Browser.document.createCanvasElement();
 			canvas.style.width = width + "px";
 			canvas.style.height = height + "px";
-			canvas.style.position = "absolute";
+			canvas.style.position = position;
 		}
 		else canvas = canvasElement;
 
-		if (parentDom == null) Browser.document.body.appendChild(canvas);
-		else parentDom.appendChild(canvas);
+		if (autoResize) Browser.window.onresize = _onWindowResize;
 
-		stage = new Container();
-
-		var renderingOptions:RenderingOptions = {};
+		var renderingOptions:RenderOptions = {};
+		renderingOptions.width = width;
+		renderingOptions.height = height;
 		renderingOptions.view = canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
@@ -203,55 +193,51 @@ class Application {
 		renderingOptions.transparent = transparent;
 		renderingOptions.clearBeforeRender = clearBeforeRender;
 		renderingOptions.preserveDrawingBuffer = preserveDrawingBuffer;
+		renderingOptions.roundPixels = roundPixels;
 
-		if (rendererType == AUTO) renderer = Detector.autoDetectRenderer(width, height, renderingOptions);
-		else if (rendererType == CANVAS) renderer = new CanvasRenderer(width, height, renderingOptions);
-		else renderer = new WebGLRenderer(width, height, renderingOptions);
+		switch (rendererType) {
+			case CANVAS:
+				renderingOptions.noWebGL = true;
+				app = new pixi.core.Application(renderingOptions);
+			default: app = new pixi.core.Application(renderingOptions);
+		}
 
-		if (roundPixels) renderer.roundPixels = true;
+		stage = app.stage;
+		renderer = app.renderer;
 
-		if (parentDom == null) Browser.document.body.appendChild(renderer.view);
-		else parentDom.appendChild(renderer.view);
-		resumeRendering();
+		if (parentDom == null) Browser.document.body.appendChild(app.view);
+		else parentDom.appendChild(app.view);
+
+		app.ticker.add(_onRequestAnimationFrame);
+
 		#if stats addStats(); #end
 	}
 
 	public function pauseRendering() {
-		Browser.window.onresize = null;
-		if (_animationFrameId != null) {
-			Browser.window.cancelAnimationFrame(_animationFrameId);
-			_animationFrameId = null;
-		}
+		app.stop();
 	}
 
 	public function resumeRendering() {
-		if (autoResize) Browser.window.onresize = _onWindowResize;
-		if (_animationFrameId == null) _animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
+		app.start();
 	}
 
 	@:noCompletion function _onWindowResize(event:Event) {
 		width = Browser.window.innerWidth;
 		height = Browser.window.innerHeight;
-		renderer.resize(width, height);
+		app.renderer.resize(width, height);
 		canvas.style.width = width + "px";
 		canvas.style.height = height + "px";
 
 		if (onResize != null) onResize();
 	}
 
-	@:noCompletion function _onRequestAnimationFrame(elapsedTime:Float) {
-		_frameCount++;
-		if (_frameCount == Std.int(60 / fps)) {
-			_frameCount = 0;
-			if (onUpdate != null) onUpdate(elapsedTime);
-			renderer.render(stage);
-		}
-		_animationFrameId = Browser.window.requestAnimationFrame(_onRequestAnimationFrame);
+	@:noCompletion function _onRequestAnimationFrame() {
+		if (onUpdate != null) onUpdate(app.ticker.deltaTime);
 	}
 
 	public function addStats() {
 		if (untyped __js__("window").Perf != null) {
-			new Perf().addInfo(["UNKNOWN", "WEBGL", "CANVAS"][renderer.type] + " - " + pixelRatio);
+			new Perf().addInfo(["UNKNOWN", "WEBGL", "CANVAS"][app.renderer.type] + " - " + pixelRatio);
 		}
 	}
 }

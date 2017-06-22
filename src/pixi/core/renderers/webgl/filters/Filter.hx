@@ -42,12 +42,48 @@ extern class Filter {
      */
 	var fragmentSrc:String;
 
+	/**
+	 * An object containing the current values of custom uniforms.
+	 * @example <caption>Updating the value of a custom uniform</caption>
+	 * filter.uniforms.time = performance.now();
+	 *
+	 * @member {Dynamic}
+	 */
+	var uniforms:Dynamic;
+
+	/**
+	 * The padding of the filter. Some filters require extra space to breath such as a blur.
+	 * Increasing this will add extra width and height to the bounds of the object that the
+	 * filter is applied to.
+	 *
+	 * @member {Float}
+	 */
+	var padding:Float;
+
+	/**
+	 * The resolution of the filter. Setting this to be lower will lower the quality but
+	 * increase the performance of the filter.
+	 *
+	 * @member {Float}
+	 */
+	var resolution:Float;
+
+	/**
+	 * If enabled is true the filter is applied, if false it will not.
+	 *
+	 * @member {Bool}
+	 */
+	var enabled:Bool;
+
 	/*
 	 * Applies the filter
 	 * @param filterManager {Dynamic}
 	 * @param input {RenderTarget}
 	 * @param output {RenderTarget}
 	 * @param clear {Bool} Whether or not we want to clear the outputTarget
+	 * @param {object} [currentState] - It's current state of filter.
+     *        There are some useful properties in the currentState :
+     *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
 	 */
-	function apply(filterManager:Dynamic, input:Dynamic, output:Dynamic, ?clear:Bool):Void;
+	function apply(filterManager:Dynamic, input:Dynamic, output:Dynamic, ?clear:Bool, ?currentState:Dynamic):Void;
 }

@@ -39,7 +39,7 @@ extern class ResourceLoader extends EventEmitter {
      *
      * @member {object<string, Resource>}
      */
-	var resources:Dynamic;
+	var resources:haxe.DynamicAccess<Resource>;
 
 	/**
 	 * Adds a resource (or multiple resources) to the loader queue.
@@ -106,7 +106,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function after(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function after(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *before* the
@@ -116,7 +116,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function before(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
@@ -130,28 +130,24 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}
 	 */
-	function load(?cb:Void->Void):ResourceLoader;
-
-	/**
-	 * Loads a single resource.
-	 *
-	 * @fires progress
-	 */
-	function loadResource(resource:String, ?cb:Void -> Void):ResourceLoader;
+	@:overload(function(?cb:ResourceLoader -> Dynamic -> Void):ResourceLoader {})
+	@:overload(function(?cb:ResourceLoader -> Void):ResourceLoader {})
+	@:overload(function(?cb:Void -> Void):ResourceLoader {})
+	function load(?cb:Dynamic):ResourceLoader;
 
 	/**
 	 * Middleware function to use
 	 *
 	 * @param {function} function to call
 	 */
-	function use(fn:Resource -> Dynamic -> Void):Void;
+	function use(fn:Resource -> (Void->Void) -> Void):Void;
 
 	/**
 	 * Middleware function
 	 *
 	 * @param {function} function to call
 	 */
-	function pre(fn:Resource -> Dynamic -> Void):ResourceLoader;
+	function pre(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
 }
 
 typedef ResourceObject = {

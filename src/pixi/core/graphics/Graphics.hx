@@ -1,5 +1,6 @@
 package pixi.core.graphics;
 
+import pixi.core.textures.Texture;
 import pixi.core.math.Point;
 import pixi.core.math.shapes.Polygon;
 import pixi.core.math.shapes.Ellipse;
@@ -14,11 +15,13 @@ extern class Graphics extends Container {
 	 * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
 	 * rectangles to the display, and color and fill them.
 	 *
+	 * @param {Bool} [nativeLines=false] - If true the lines will be draw using LINES instead of TRIANGLE_STRIP
+	 *
 	 * @class
 	 * @extends Container
 	 * @namespace PIXI
 	 */
-	function new();
+	function new(?nativeLines:Bool = false);
 
 	/**
 	 * The alpha value used when filling the Graphics object.
@@ -35,6 +38,13 @@ extern class Graphics extends Container {
 	 * @default 0
 	 */
 	var lineWidth:Float;
+
+	/**
+	 * If true the lines will be draw using LINES instead of TRIANGLE_STRIP
+	 *
+	 * @member {Bool}
+	 */
+	var nativeLines:Bool;
 
 	/**
 	 * The color of any lines drawn.
@@ -80,6 +90,24 @@ extern class Graphics extends Container {
 	 * @member {Float}
 	 */
 	var boundsPadding:Float;
+
+	/**
+	 * Used to detect if we need to do a fast rect check using the id compare method
+	 * @type {Int}
+	 */
+	var fastRectDirty:Int;
+
+	/**
+	 * Used to detect if we clear the graphics webGL data
+	 * @type {Int}
+	 */
+	var clearDirty:Int;
+
+	/**
+	 * Used to detect if we we need to recalculate local bounds
+	 * @type {Int}
+	 */
+	var boundsDirty:Int;
 
 	/**
 	 * Creates a new Graphics object with the same values as this one.
@@ -244,6 +272,14 @@ extern class Graphics extends Container {
 	function clear():Graphics;
 
 	/**
+     * True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and
+     * masked with gl.scissor.
+     *
+     * @returns {Bool} True if only 1 rect.
+     */
+	function isFastRect():Bool;
+
+	/**
 	* Tests if a point is inside this graphics object
 	*
 	* @param point {Point} the point to test
@@ -267,4 +303,27 @@ extern class Graphics extends Container {
 	@:overload(function(shape:Ellipse):GraphicsData {})
 	@:overload(function(shape:Polygon):GraphicsData {})
 	function drawShape(shape:Circle):GraphicsData;
+
+	/**
+     * Generates a canvas texture.
+     *
+     * @param {Int} scaleMode - The scale mode of the texture.
+     * @param {Float} resolution - The resolution of the texture.
+     * @return {Texture} The new texture.
+     */
+	function generateCanvasTexture(scaleMode:Int, ?resolution:Float):Texture;
+
+	/**
+     * Closes the current path.
+     *
+     * @return {Graphics} Returns itself.
+     */
+	function closePath():Graphics;
+
+	/**
+     * Adds a hole in the current path.
+     *
+     * @return {Graphics} Returns itself.
+     */
+	function addHole():Graphics;
 }

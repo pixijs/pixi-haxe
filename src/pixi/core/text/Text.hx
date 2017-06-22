@@ -1,6 +1,5 @@
 package pixi.core.text;
 
-import haxe.extern.EitherType;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 import pixi.core.sprites.Sprite;
@@ -22,10 +21,10 @@ extern class Text extends Sprite {
 	 * @extends PIXI.Sprite
 	 * @memberof PIXI
 	 * @param text {String} The string that you would like the text to display
-	 * @param [style] {TextStyleObj|TextStyle} The style parameters
-	 * @param [resolution=1] {Flpat} The current resolution / device pixel ratio of the canvas
+	 * @param [style] {DefaultStyle|TextStyle} The style parameters
+	 * @param {CanvasElement} [canvas] - The canvas element for drawing text
 	 */
-	function new(text:String, ?style:EitherType<TextStyleObject, Dynamic>, ?resolution:Float):Void;
+	function new(text:String, ?style:DefaultStyle, ?canvas:CanvasElement):Void;
 
 	/**
 	 * The canvas element that everything is drawn to
@@ -59,5 +58,5 @@ extern class Text extends Sprite {
      * @member {TextStyleObj|TextStyle}
      *
      */
-	var style:EitherType<TextStyleObject, Dynamic>;
+	var style:DefaultStyle;
 }

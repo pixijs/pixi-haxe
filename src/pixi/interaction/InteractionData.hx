@@ -24,11 +24,11 @@ extern class InteractionData {
 	var global:Point;
 
 	/**
-     * The target Sprite that was interacted with
+     * The target DisplayObject that was interacted with
      *
-     * @member {Sprite}
+     * @member {DisplayObject}
      */
-	var target:Sprite;
+	var target:DisplayObject;
 
 	/**
      * When passed to an event handler, this will be the original DOM Event that was captured
@@ -36,6 +36,13 @@ extern class InteractionData {
      * @member {Event}
      */
 	var originalEvent:Event;
+
+	/**
+	 * Unique identifier for this interaction
+	 *
+	 * @member {Int}
+	 */
+	var identifier:Int;
 
 	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData

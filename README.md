@@ -1,4 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![npm version](https://badge.fury.io/js/hxpixijs.svg)](http://badge.fury.io/js/hxpixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)
+[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe)
 =========
 ![haxe pixi logo](logo.png)
 
@@ -8,10 +8,6 @@ Externs of Pixi.js v4.x for Haxe - A fast and lightweight 2D javascript renderin
 
 ```
 haxelib install pixijs
-
-or via npm
-
-npm install hxpixijs
 ```
 
 ### Issues
@@ -22,8 +18,9 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 
 * [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
 * [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
-* [Movieclip](http://adireddy.github.io/demos/pixi-haxe/movieclip.html)
+* [Animated Sprite](http://adireddy.github.io/demos/pixi-haxe/animatedsprite.html)
 * [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
+* [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
 * [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
 * [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
 * [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
@@ -36,11 +33,15 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 * [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
 * [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
 * [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
+* [Dragon Bones](http://adireddy.github.io/demos/pixi-haxe/dragonbones.html)
 
 **Filters (WebGL only)**
 
 * [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
 * [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
+
+**Filters (pixi-extra-filters)**
+* [Glow](http://adireddy.github.io/demos/pixi-haxe/glow.html)
 
 **[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using Haxe and Pixi.js
 
@@ -50,44 +51,44 @@ Look at the `samples` folder for the source code of above examples.
 
 ```haxe
 
-package samples.basics;
-
-import pixi.core.display.Container;
+import pixi.plugins.app.Application;
+import pixi.core.graphics.Graphics;
 import pixi.core.textures.Texture;
-import pixi.core.renderers.SystemRenderer;
-import pixi.core.renderers.Detector;
 import pixi.core.sprites.Sprite;
 import js.Browser;
 
-class Main {
+class Main extends Application {
 
 	var _bunny:Sprite;
-	var _renderer:SystemRenderer;
-	var _stage:Container;
+	var _graphic:Graphics;
 
 	public function new() {
-		// Rendering options usage sample
-		var options:RenderingOptions = {};
-		options.backgroundColor = 0x003366;
-		options.resolution = 1;
+		super();
 
-		_stage = new Container();
-		_renderer = Detector.autoDetectRenderer(800, 600, options);
+		position = Application.POSITION_FIXED;
+		width = Browser.window.innerWidth;
+		height = Browser.window.innerHeight;
+		backgroundColor = 0x006666;
+		transparent = true;
+		antialias = false;
+		onUpdate = _animate;
+		super.start();
 
 		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
-		_bunny.anchor.set(0.5, 0.5);
+		_bunny.anchor.set(0.5);
 		_bunny.position.set(400, 300);
 
-		_stage.addChild(_bunny);
+		_graphic = new Graphics();
+		_graphic.beginFill(0xFF0000, 0.4);
+		_graphic.drawRect(200, 150, 400, 300);
+		_graphic.endFill();
 
-		Browser.document.body.appendChild(_renderer.view);
-		Browser.window.requestAnimationFrame(cast _animate);
+		stage.addChild(_graphic);
+		stage.addChild(_bunny);
 	}
 
-	function _animate() {
-		Browser.window.requestAnimationFrame(cast _animate);
+	function _animate(e:Float) {
 		_bunny.rotation += 0.1;
-		_renderer.render(_stage);
 	}
 
 	static function main() {

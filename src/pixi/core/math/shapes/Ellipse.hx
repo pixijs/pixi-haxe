@@ -1,7 +1,7 @@
 package pixi.core.math.shapes;
 
 @:native("PIXI.Ellipse")
-extern class Ellipse {
+extern class Ellipse extends Shape {
 
 	/**
 	 * The Ellipse object can be used to specify a hit area for displayObjects
@@ -22,16 +22,6 @@ extern class Ellipse {
 	 * @return {Ellipse} a copy of the ellipse
 	*/
 	function clone():Ellipse;
-
-	/**
-	 * Checks whether the x and y coordinates passed to this function are contained within this ellipse
-	 *
-	 * @method contains
-	 * @param x {Float} The X coordinate of the point to test
-	 * @param y {Float} The Y coordinate of the point to test
-	 * @return {Bool} Whether the x/y coords are within this ellipse
-	*/
-	function contains(x:Float, y:Float):Bool;
 
 	/**
 	 * Returns the framing rectangle of the circle as a PIXI.Rectangle object

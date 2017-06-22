@@ -1,5 +1,12 @@
 package pixi.core.sprites;
 
+import pixi.core.renderers.webgl.filters.Filter;
+import js.html.VideoElement;
+import js.html.CanvasElement;
+import pixi.core.textures.BaseTexture;
+import pixi.core.math.ObservablePoint;
+import haxe.extern.EitherType;
+import pixi.core.display.BlendMode;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.display.Container;
@@ -29,16 +36,15 @@ extern class Sprite extends Container {
 	 * Setting than anchor to 0.5,0.5 means the textures origin is centered
 	 * Setting the anchor to 1,1 would mean the textures origin points will be the bottom right corner
 	 *
-	 * @member {Point}
+	 * @member {ObservablePoint}
 	 */
-	var anchor:Point;
+	var anchor:ObservablePoint;
 
 	/**
-	 * The height of the sprite, setting this will actually modify the scale to achieve the value set
-	 *
-	 * @member
-	 * @memberof Sprite#
-	 */
+     * The texture that the sprite is using
+     *
+     * @member {Texture}
+     */
 	var texture:Texture;
 
 	/**
@@ -55,31 +61,46 @@ extern class Sprite extends Container {
 	 * @member {Int}
 	 * @default CONST.blendModes.NORMAL;
 	 */
-	var blendMode:Int;
+	var blendMode:BlendMode;
 
 	/**
 	 * The shader that will be used to render the sprite. Set to null to remove a current shader.
 	 *
-	 * @member {AbstractFilter}
+	 * @member {Shader|Filter}
 	 */
-	var shader:Dynamic;
+	var shader:EitherType<Shader, Filter>;
 
 	/**
-	* Renders the object using the Canvas renderer
-	*
-	* @param renderer {CanvasRenderer} The renderer
-	*/
-	function renderCanvas(renderer:Dynamic):Void;
-
-	/**
-	 * Helper function that creates a new sprite based on the source you provide.
-	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+	 * Plugin that is responsible for rendering this element.
+	 * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
 	 *
-	 * @static
-	 * @param source {}
-	 * @return {Sprite} A Texture
+	 * @member {String}
+	 * @default 'sprite'
 	 */
-	function from(source:Dynamic):Sprite;
+	var pluginName:String;
+
+	/**
+     * Tests if a point is inside this sprite
+     *
+     * @param {Point} point - the point to test
+     * @return {Bool} the result of the test
+     */
+	function containsPoint(point:Point):Bool;
+
+	/**
+     * Helper function that creates a new sprite based on the source you provide.
+     * The source can be - frame id, image url, video url, canvas element, video element, base texture
+     *
+     * @static
+     * @param {Int|String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source Source to create texture from
+     * @return {Sprite} The newly created sprite
+     */
+	@:overload(function(source:Int):Sprite {})
+	@:overload(function(source:String):Sprite {})
+	@:overload(function(source:BaseTexture):Sprite {})
+	@:overload(function(source:CanvasElement):Sprite {})
+	@:overload(function(source:VideoElement):Sprite {})
+	static function from(source:Dynamic):Sprite;
 
 	/**
 	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId

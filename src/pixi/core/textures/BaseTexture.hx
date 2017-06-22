@@ -1,5 +1,6 @@
 package pixi.core.textures;
 
+import js.html.Image;
 import pixi.interaction.EventEmitter;
 import js.html.ImageElement;
 import js.html.CanvasElement;
@@ -43,6 +44,24 @@ extern class BaseTexture extends EventEmitter {
 	 */
 	var height:Float;
 
+	// TODO docs
+	// used to store the actual dimensions of the source
+	/**
+	 * Used to store the actual width of the source of this texture
+	 *
+	 * @readonly
+	 * @member {Float}
+	 */
+	var realWidth:Float;
+
+	/**
+	 * Used to store the actual height of the source of this texture
+	 *
+	 * @readonly
+	 * @member {Float}
+	 */
+	var realHeight:Float;
+
 	/**
 	 * The scale mode to apply when scaling this texture
 	 *
@@ -80,6 +99,33 @@ extern class BaseTexture extends EventEmitter {
 	 * @readonly
 	 */
 	var source:Dynamic;
+
+	/**
+	 * The image source that is used to create the texture. This is used to
+	 * store the original Svg source when it is replaced with a canvas element.
+	 *
+	 * TODO: Currently not in use but could be used when re-scaling svg.
+	 *
+	 * @readonly
+	 * @member {Image}
+	 */
+	var origSource:Image; // set in loadSvg, if at all
+
+	/**
+	 * Type of image defined in source, eg. `png` or `svg`
+	 *
+	 * @readonly
+	 * @member {String}
+	 */
+	var imageType:String; // set in updateImageType
+
+	/**
+	 * Scale for source image. Used with Svg images to scale them before rasterization.
+	 *
+	 * @readonly
+	 * @member {Float}
+	 */
+	var sourceScale:Float;
 
 	/**
 	 * Controls if RGB channels should be pre-multiplied by Alpha (WebGL only)
@@ -185,4 +231,16 @@ extern class BaseTexture extends EventEmitter {
 	 * @return BaseTexture
 	 */
 	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
+
+	/**
+     * Helper function that creates a base texture based on the source you provide.
+     * The source can be - image url, image element, canvas element.
+     *
+     * @static
+     * @param {string|HTMLImageElement|HTMLCanvasElement} source - The source to create base texture from.
+     * @param {number} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+     * @param {number} [sourceScale=(auto)] - Scale for the original image, used with Svg images.
+     * @return {PIXI.BaseTexture} The new base texture.
+     */
+	static function from(source:Dynamic, scaleMode:Float, ?sourceScale:Float):BaseTexture;
 }

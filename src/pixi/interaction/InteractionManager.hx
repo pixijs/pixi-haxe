@@ -1,10 +1,8 @@
 package pixi.interaction;
 
-import js.html.Event;
-import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
-import pixi.core.renderers.canvas.CanvasRenderer;
+import pixi.core.renderers.SystemRenderer;
 import pixi.core.renderers.webgl.WebGLRenderer;
 
 @:native("PIXI.interaction.InteractionManager")
@@ -41,6 +39,14 @@ extern class InteractionManager extends EventEmitter {
 	var autoPreventDefault:Bool;
 
 	/**
+     * The current resolution / device pixel ratio.
+     *
+     * @member {Float}
+     * @default 1
+     */
+	var resolution:Float;
+
+	/**
      * As this frequency increases the interaction events will be checked more often.
      *
      * @member {Int}
@@ -58,9 +64,9 @@ extern class InteractionManager extends EventEmitter {
 	/**
      * An event data object to handle all the event tracking/dispatching
      *
-     * @member {EventTarget}
+     * @member {InteractionEvent}
      */
-	var eventData:EventTarget;
+	var eventData:InteractionEvent;
 
 	/**
      * Tiny little interactiveData pool !
@@ -72,47 +78,47 @@ extern class InteractionManager extends EventEmitter {
 	/**
      * @member {function}
      */
-	var onMouseUp:EventTarget -> Void;
+	var onMouseUp:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseDown:EventTarget -> Void;
+	var onMouseDown:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseMove:EventTarget -> Void;
+	var onMouseMove:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onMouseOut:EventTarget -> Void;
+	var onMouseOut:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchStart:EventTarget -> Void;
+	var onTouchStart:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchEnd:EventTarget -> Void;
+	var onTouchEnd:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var onTouchMove:EventTarget -> Void;
+	var onTouchMove:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var tap:EventTarget -> Void;
+	var tap:InteractionEvent -> Void;
 
 	/**
      * @member {function}
      */
-	var click:EventTarget -> Void;
+	var click:InteractionEvent -> Void;
 
 	/**
      * @member {Int}

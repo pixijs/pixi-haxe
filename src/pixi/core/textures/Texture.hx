@@ -1,7 +1,9 @@
 package pixi.core.textures;
 
+import haxe.extern.EitherType;
+import js.html.CanvasElement;
+import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
-import pixi.core.math.Point;
 import js.html.VideoElement;
 import pixi.core.math.shapes.Rectangle;
 
@@ -29,8 +31,7 @@ extern class Texture extends EventEmitter {
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
 	 */
-	@:overload(function(baseTexture:VideoBaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool):Void {})
-	function new(baseTexture:BaseTexture, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
+	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
 
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -68,11 +69,33 @@ extern class Texture extends EventEmitter {
 	var requiresUpdate:Bool;
 
 	/**
+	 * This is the area of original texture, before it was put in atlas
+	 *
+	 * @member {Rectangle}
+	 */
+	var orig:Rectangle;
+
+	/**
 	 * The width of the Texture in pixels.
 	 *
 	 * @member {Float}
 	 */
 	var width:Float;
+
+	/**
+	 * Extra field for extra plugins. May contain clamp settings and some matrices
+	 * @type {Object}
+	 */
+	var transform:Dynamic;
+
+	/**
+	 * The ids under which this Texture has been added to the texture cache. This is
+	 * automatically set as long as Texture.addToCache is used, but may not be set if a
+	 * Texture is added directly to the TextureCache array.
+	 *
+	 * @member {Array<String>}
+	 */
+	var textureCacheIds:Array<String>;
 
 	/**
 	 * The height of the Texture in pixels.
@@ -88,13 +111,6 @@ extern class Texture extends EventEmitter {
 	 * @member {Rectangle}
 	 */
 	var crop:Rectangle;
-
-	/**
-	 * The pivot point to used for a sprite this texture belongs to.
-	 *
-	 * @member {Point}
-	 */
-	var spritePivot:Point;
 
 	/**
 	 * The rotation value of the texture, copied to a sprite when assigned to it.
@@ -116,6 +132,13 @@ extern class Texture extends EventEmitter {
 	 * @param destroyBase {Bool} Whether to destroy the base texture as well
 	 */
 	function destroy(?destroyBase:Bool):Void;
+
+	/**
+     * Creates a new texture object that acts the same as this one.
+     *
+     * @return {Texture} The new texture
+     */
+	function clone():Texture;
 
 	/**
 	 * Updates this texture on the gpu.
@@ -151,19 +174,20 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param {String} [origin='canvas'] - A string origin of who created the base texture
 	 * @return {Texture}
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int):Texture;
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int, ?origin:String):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
-	 * @param video {String}
+	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:String, ?scaleMode:Int):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:Int):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
@@ -176,12 +200,39 @@ extern class Texture extends EventEmitter {
 	static function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
 
 	/**
+     * Helper function that creates a new Texture based on the source you provide.
+     * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+     *
+     * @static
+     * @param {String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source - Source to create texture from
+     * @return {Texture} The newly created texture
+     */
+	@:overload(function(source:String):Texture {})
+	@:overload(function(source:BaseTexture):Texture {})
+	@:overload(function(source:CanvasElement):Texture {})
+	@:overload(function(source:VideoElement):Texture {})
+	static function from(source:Dynamic):Texture;
+
+	/**
+     * Create a texture from a source and add to the cache.
+     *
+     * @static
+     * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
+     * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
+     * @param {String} [name] - Human readible name for the texture cache. If no name is
+     *        specified, only `imageUrl` will be used as the cache ID.
+     * @return {PIXI.Texture} Output texture
+     */
+	static function fromLoader(source:Dynamic, imageUrl:String, ?name:String):Texture;
+
+	/**
 	 * Adds a texture to the global utils.TextureCache. This cache is shared across the whole PIXI object.
 	 *
 	 * @static
 	 * @param texture {Texture} The Texture to add to the cache.
 	 * @param id {String} The id that the texture will be stored against.
 	 */
+	static function addToCache(texture:Texture, id:String):Void;
 	static function addTextureToCache(texture:Texture, id:String):Void;
 
 	/**
@@ -191,13 +242,23 @@ extern class Texture extends EventEmitter {
 	 * @param id {String} The id of the texture to be removed
 	 * @return {Texture} The texture that was removed
 	 */
-	static function removeTextureFromCache(id:String):Texture;
-	
+	static function removeFromCache(id:EitherType<String, Texture>):Texture;
+	static function removeTextureFromCache(id:EitherType<String, Texture>):Texture;
+
 	/**
 	 * An empty texture, used often to not have to create multiple empty textures.
 	 * @static
 	 * @constant
 	 * @member {Texture}
 	 */
-	static var EMPTY:Texture;	
+	static var EMPTY:Texture;
+
+	/**
+	 * A white texture of 10x10 size, used for graphics and other things
+	 * Can not be destroyed.
+	 *
+	 * @static
+	 * @constant
+	 */
+	static var WHITE:Texture;
 }

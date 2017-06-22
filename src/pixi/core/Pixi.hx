@@ -1,53 +1,60 @@
 package pixi.core;
 
+import haxe.extern.EitherType;
+import js.RegExp;
+
 @:native("PIXI")
 extern class Pixi {
 
 	/**
-	 * String of the current PIXI version
+	 * String of the current PIXI version.
 	 *
 	 * @static
 	 * @constant
-	 * @property {String} VERSION
+	 * @memberof PIXI
+	 * @name VERSION
+	 * @type {String}
 	 */
 	static var VERSION:String;
 
 	/**
-     * @property {Float} PI_2 - Two Pi
-     * @constant
-     * @static
-     */
+	 * Two Pi.
+	 *
+	 * @static
+	 * @constant
+	 * @memberof PIXI
+	 * @type {Float}
+	 */
 	static var PI_2:Float;
 
 	/**
-     * @property {Float} RAD_TO_DEG - Constant conversion factor for converting radians to degrees
-     * @constant
-     * @static
-     */
+	 * Conversion factor for converting radians to degrees.
+	 *
+	 * @static
+	 * @constant
+	 * @memberof PIXI
+	 * @type {Float}
+	 */
 	static var RAD_TO_DEG:Float;
 
 	/**
-     * @property {Float} DEG_TO_RAD - Constant conversion factor for converting degrees to radians
-     * @constant
-     * @static
-     */
+	 * Conversion factor for converting degrees to radians.
+	 *
+	 * @static
+	 * @constant
+	 * @memberof PIXI
+	 * @type {Float}
+	 */
 	static var DEG_TO_RAD:Float;
-
-	/**
-     * Target frames per millisecond.
-     *
-     * @static
-     * @constant
-     * @property {Float} TARGET_FPMS=0.06
-     */
-	static var TARGET_FPMS:Float;
 
 	/**
 	 * Constant to identify the Renderer Type.
 	 *
 	 * @static
 	 * @constant
-	 * @property {RendererType} RENDERER_TYPE
+	 * @memberof PIXI
+	 * @name RENDERER_TYPE
+	 * @type {RendererType}
 	 * @property {Int} RENDERER_TYPE.UNKNOWN
 	 * @property {Int} RENDERER_TYPE.WEBGL
 	 * @property {Int} RENDERER_TYPE.CANVAS
@@ -61,7 +68,9 @@ extern class Pixi {
 	 *
 	 * @static
 	 * @constant
-	 * @property {BlendModes} BLEND_MODES
+	 * @memberof PIXI
+	 * @name BLEND_MODES
+	 * @type {BlendModes}
 	 * @property {Int} BLEND_MODES.NORMAL
 	 * @property {Int} BLEND_MODES.ADD
 	 * @property {Int} BLEND_MODES.MULTIPLY
@@ -88,7 +97,9 @@ extern class Pixi {
      *
      * @static
      * @constant
-     * @property {DrawModes} DRAW_MODES
+     * @memberof PIXI
+     * @name DRAW_MODES
+     * @type {DrawModes}
      * @property {Int} DRAW_MODES.POINTS
      * @property {Int} DRAW_MODES.LINES
      * @property {Int} DRAW_MODES.LINE_LOOP
@@ -102,158 +113,177 @@ extern class Pixi {
 	/**
 	 * The scale modes that are supported by pixi.
 	 *
-	 * The DEFAULT scale mode affects the default scaling mode of future operations.
+	 * The {@link PIXI.settings.SCALE_MODE} scale mode affects the default scaling mode of future operations.
 	 * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
 	 *
 	 * @static
 	 * @constant
-	 * @property {ScaleModes} SCALE_MODES
-	 * @property {Int} SCALE_MODES.DEFAULT=LINEAR
-	 * @property {Int} SCALE_MODES.LINEAR Smooth scaling
-	 * @property {Int} SCALE_MODES.NEAREST Pixelating scaling
+	 * @memberof PIXI
+	 * @name SCALE_MODES
+	 * @type {ScaleModes}
+	 * @property {Int} LINEAR Smooth scaling
+	 * @property {Int} NEAREST Pixelating scaling
 	 */
 	static var SCALE_MODES:ScaleModes;
 
 	/**
-     * The wrap modes that are supported by pixi.
-     *
-     * The DEFAULT wrap mode affects the default wraping mode of future operations.
-     * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
-     * If the texture is non power of two then clamp will be used regardless as webGL can only use REPEAT if the texture is po2
-     * This property only affects WebGL
-     * @static
-     * @constant
-     * @property {WrapModes} WRAP_MODES
-     * @property {Int} WRAP_MODES.DEFAULT=CLAMP
-     * @property {Int} WRAP_MODES.CLAMP The textures uvs are clamped
-     * @property {Int} WRAP_MODES.REPEAT The texture uvs tile and repeat
-     * @property {Int} WRAP_MODES.MIRRORED_REPEAT The texture uvs tile and repeat with mirroring
-     */
+	 * The wrap modes that are supported by pixi.
+	 *
+	 * The {@link PIXI.settings.WRAP_MODE} wrap mode affects the default wraping mode of future operations.
+	 * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
+	 * If the texture is non power of two then clamp will be used regardless as webGL can
+	 * only use REPEAT if the texture is po2.
+	 *
+	 * This property only affects WebGL.
+	 *
+	 * @static
+	 * @constant
+	 * @name WRAP_MODES
+	 * @memberof PIXI
+	 * @type {WrapModes}
+	 * @property {Int} CLAMP - The textures uvs are clamped
+	 * @property {Int} REPEAT - The texture uvs tile and repeat
+	 * @property {Int} MIRRORED_REPEAT - The texture uvs tile and repeat with mirroring
+	 */
 	static var WRAP_MODES:WrapModes;
 
 	/**
-     * The gc modes that are supported by pixi.
-     *
-     * The DEFAULT Garbage Collection mode for pixi textures is MANUAL
-     * If set to DEFAULT, the renderer will occasianally check textures usage. If they are not used for a specified period of time they will be removed from the GPU.
-     * They will of corse be uploaded again when they are required. This is a silent behind the scenes process that should ensure that the GPU does not  get filled up.
-     * Handy for mobile devices!
-     * This property only affects WebGL
-     * @static
-     * @constant
-     * @property {GCModes} GC_MODES
-     * @property {Int} GC_MODES.DEFAULT=DEFAULT
-     * @property {Int} GC_MODES.AUTO Garbage collection will happen periodically automatically
-     * @property {Int} GC_MODES.MANUAL Garbage collection will need to be called manually
-     */
+	 * The gc modes that are supported by pixi.
+	 *
+	 * The {@link PIXI.settings.GC_MODE} Garbage Collection mode for pixi textures is AUTO
+	 * If set to GC_MODE, the renderer will occasionally check textures usage. If they are not
+	 * used for a specified period of time they will be removed from the GPU. They will of course
+	 * be uploaded again when they are required. This is a silent behind the scenes process that
+	 * should ensure that the GPU does not  get filled up.
+	 *
+	 * Handy for mobile devices!
+	 * This property only affects WebGL.
+	 *
+	 * @static
+	 * @constant
+	 * @name GC_MODES
+	 * @memberof PIXI
+	 * @type {GCModes}
+	 * @property {Int} AUTO - Garbage collection will happen periodically automatically
+	 * @property {Int} MANUAL - Garbage collection will need to be called manually
+	 */
 	static var GC_MODES:GCModes;
 
 	/**
-     * If set to true WebGL will attempt make textures mimpaped by default
-     * Mipmapping will only succeed if the base texture uploaded has power of two dimensions
-     * @static
-     * @constant
-     * @property {Bool} MIPMAP_TEXTURES
-     */
-	static var MIPMAP_TEXTURES:Bool;
-
-	/**
-	 * The prefix that denotes a URL is for a retina asset
+	 * Regexp for image type by extension.
 	 *
 	 * @static
 	 * @constant
-	 * @property {String} RETINA_PREFIX
+	 * @memberof PIXI
+	 * @type {RegExp|String}
+	 * @example `image.png`
 	 */
-	//example: '@2x', /@(.+)x/
-	static var RETINA_PREFIX:String;
-
-	static var RESOLUTION:Float;
-
-	static var FILTER_RESOLUTION:Float;
+	static var URL_FILE_EXTENSION:EitherType<String, RegExp>;
 
 	/**
-	 * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
-	 * or {@link PIXI.CanvasRenderer}.
+	 * Regexp for data URI.
+	 * Based on: {@link https://github.com/ragingwind/data-uri-regex}
 	 *
 	 * @static
 	 * @constant
-	 * @property {DefaultRenderOptions} DEFAULT_RENDER_OPTIONS
-	 * @property {HTMLCanvasElement} DEFAULT_RENDER_OPTIONS.view=null
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.transparent=false
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.antialias=false
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.forceFXAA=false
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.preserveDrawingBuffer=false
-	 * @property {Float} DEFAULT_RENDER_OPTIONS.resolution=1
-	 * @property {Int} DEFAULT_RENDER_OPTIONS.backgroundColor=0x000000
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.clearBeforeRender=true
-	 * @property {Bool} DEFAULT_RENDER_OPTIONS.autoResize=false
+	 * @name DATA_URI
+	 * @memberof PIXI
+	 * @type {RegExp|String}
+	 * @example data:image/png;base64
 	 */
-	static var DEFAULT_RENDER_OPTIONS:DefaultRenderOptions;
+	static var DATA_URI:EitherType<String, RegExp>;
+
+	/**
+	 * Regexp for SVG size.
+	 *
+	 * @static
+	 * @constant
+	 * @name SVG_SIZE
+	 * @memberof PIXI
+	 * @type {RegExp|String}
+	 * @example &lt;svg width="100" height="100"&gt;&lt;/svg&gt;
+	 */
+	static var SVG_SIZE:EitherType<String, RegExp>;
 
 	/**
 	 * Constants that identify shapes, mainly to prevent `instanceof` calls.
 	 *
 	 * @static
 	 * @constant
-	 * @property {Shapes} SHAPES
-	 * @property {Int} SHAPES.POLY=0
-	 * @property {Int} SHAPES.RECT=1
-	 * @property {Int} SHAPES.CIRC=2
-	 * @property {Int} SHAPES.ELIP=3
-	 * @property {Int} SHAPES.RREC=4
+	 * @name SHAPES
+	 * @memberof PIXI
+	 * @type {Shapes}
+	 * @property {Int} POLY Polygon
+	 * @property {Int} RECT Rectangle
+	 * @property {Int} CIRC Circle
+	 * @property {Int} ELIP Ellipse
+	 * @property {Int} RREC Rounded Rectangle
 	 */
 	static var SHAPES:Shapes;
 
 	/**
-     * Constants that specify float precision in shaders.
-     *
-     * @static
-     * @constant
-     * @property {object} PRECISION
-     * @property {String} PRECISION.DEFAULT='mediump'
-     * @property {String} PRECISION.LOW='lowp'
-     * @property {String} PRECISION.MEDIUM='mediump'
-     * @property {String} PRECISION.HIGH='highp'
-     */
-	static var TRANSFORM_MODE:TransformModes;
-
+	 * Constants that specify float precision in shaders.
+	 *
+	 * @static
+	 * @constant
+	 * @name PRECISION
+	 * @memberof PIXI
+	 * @type {Precisions}
+	 * @property {String} LOW='lowp'
+	 * @property {String} MEDIUM='mediump'
+	 * @property {String} HIGH='highp'
+	 */
 	static var PRECISION:Precisions;
 
 	/**
-     * Constants that define the type of gradient on text.
-     *
-     * @static
-     * @constant
-     * @property {object} TEXT_GRADIENT
-     * @property {Int} TEXT_GRADIENT.LINEAR_VERTICAL=0
-     * @property {Int} TEXT_GRADIENT.LINEAR_HORIZONTAL=1
-     */
+	 * Constants that specify the transform type.
+	 *
+	 * @static
+	 * @constant
+	 * @name TRANSFORM_MODE
+	 * @memberof PIXI
+	 * @type {TransformModes}
+	 * @property {Int} STATIC
+	 * @property {Int} DYNAMIC
+	 */
+	static var TRANSFORM_MODE:TransformModes;
+
+	/**
+	 * Constants that define the type of gradient on text.
+	 *
+	 * @static
+	 * @constant
+	 * @name TEXT_GRADIENT
+	 * @memberof PIXI
+	 * @type {TextGradients}
+	 * @property {Int} LINEAR_VERTICAL Vertical gradient
+	 * @property {Int} LINEAR_HORIZONTAL Linear gradient
+	 */
 	static var TEXT_GRADIENT:TextGradients;
 
-	//4096 - nice balance between mobile and desktop machines
-	static var SPRITE_BATCH_SIZE:Int;
-
-	static var SPRITE_MAX_TEXTURES:Int;
-
-	static var TEXT_STYLE_CHANGED:String;
+	/**
+	 * Represents the update priorities used by internal PIXI classes when registered with
+	 * the {@link PIXI.ticker.Ticker} object. Higher priority items are updated first and lower
+	 * priority items, such as render, should go later.
+	 *
+	 * @static
+	 * @constant
+	 * @name UPDATE_PRIORITY
+	 * @memberof PIXI
+	 * @type {UpdatePriotities}
+	 * @property {Float} INTERACTION=50 Highest priority, used for {@link PIXI.interaction.InteractionManager}
+	 * @property {Float} HIGH=25 High priority updating, {@link PIXI.VideoBaseTexture} and {@link PIXI.extras.AnimatedSprite}
+	 * @property {Float} NORMAL=0 Default priority for ticker events, see {@link PIXI.ticker.Ticker#add}.
+	 * @property {Float} LOW=-25 Low priority used for {@link PIXI.Application} rendering.
+	 * @property {Float} UTILITY=-50 Lowest priority used for {@link PIXI.prepare.BasePrepare} utility.
+	 */
+	static var UPDATE_PRIORITY:UpdatePriotities;
 }
 
 typedef RendererType = {
 	var UNKNOWN:Int;
 	var WEBGL:Int;
 	var CANVAS:Int;
-}
-
-typedef DefaultRenderOptions = {
-	@:optional var view:Dynamic;
-	@:optional var resolution:Float;
-	@:optional var antialias:Bool;
-	@:optional var forceFXAA:Bool;
-	@:optional var autoResize:Bool;
-	@:optional var transparent:Bool;
-	@:optional var backgroundColor:Int;
-	@:optional var clearBeforeRender:Bool;
-	@:optional var preserveDrawingBuffer:Bool;
 }
 
 typedef ScaleModes = {
@@ -314,7 +344,6 @@ typedef Shapes = {
 }
 
 typedef Precisions = {
-	var DEFAULT:String;
 	var LOW:String;
 	var MEDIUM:String;
 	var HIGH:String;
@@ -328,5 +357,12 @@ typedef TextGradients = {
 typedef TransformModes = {
 	var STATIC:Int;
 	var DYNAMIC:Int;
-	var DEFAULT:Int;
+}
+
+typedef UpdatePriotities = {
+	var INTERACTION:Float;
+	var HIGH:Float;
+	var NORMAL:Float;
+	var LOW:Float;
+	var UTILITY:Float;
 }

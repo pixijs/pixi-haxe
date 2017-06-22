@@ -36,6 +36,22 @@ extern class VideoBaseTexture extends BaseTexture {
 	function new(source:VideoElement, ?scaleMode:Int);
 
 	/**
+	 * When set to true will automatically play videos used by this texture once
+	 * they are loaded. If false, it will not modify the playing state.
+	 *
+	 * @member {Bool}
+	 * @default true
+	 */
+	var autoPlay:Bool;
+
+	/**
+     * Should the base texture automatically update itself, set to true by default
+     *
+     * @member {Bool}
+     */
+	var autoUpdate:Bool;
+
+	/**
 	 * Mimic Pixi BaseTexture.from.... method.
 	 *
 	 * @static
