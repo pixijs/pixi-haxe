@@ -172,7 +172,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context
 	 * @returns {Ticker} this
 	 */
-	function add(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	function add(fn:Float -> Void, ?context:Void -> Void):Ticker;
 
 	/**
 	 * Calls EventEmitter.once internally for the
@@ -183,7 +183,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context
 	 * @returns {Ticker} this
 	 */
-	function addOnce(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	function addOnce(fn:Float -> Void, ?context:Void -> Void):Ticker;
 
 	/**
 	 * Calls EventEmitter.off internally for 'tick' event.
@@ -194,7 +194,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context to be removed
 	 * @returns {Ticker} this
 	 */
-	function remove(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	function remove(fn:Float -> Void, ?context:Void -> Void):Ticker;
 
 	/**
 	 * Starts the ticker. If the ticker has listeners
