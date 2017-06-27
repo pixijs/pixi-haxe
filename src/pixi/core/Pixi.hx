@@ -2,7 +2,6 @@ package pixi.core;
 
 import haxe.extern.EitherType;
 import js.RegExp;
-import pixi.core.renderers.RendererType;
 
 @:native("PIXI")
 extern class Pixi {
@@ -281,83 +280,102 @@ extern class Pixi {
 	static var UPDATE_PRIORITY:UpdatePriotities;
 }
 
-typedef ScaleModes = {
-	var DEFAULT:Int;
-	var LINEAR:Int;
-	var NEAREST:Int;
+
+@:native("PIXI.RENDERER_TYPE")
+extern enum RendererType
+{
+	UNKNOWN;
+	WEBGL;
+	CANVAS;
 }
 
-typedef WrapModes = {
-	var DEFAULT:Int;
-	var CLAMP:Int;
-	var REPEAT:Int;
-	var MIRRORED_REPEAT:Int;
+@:native("PIXI.SCALE_MODES")
+extern enum ScaleModes {
+	DEFAULT;
+	LINEAR;
+	NEAREST;
 }
 
-typedef GCModes = {
-	var DEFAULT:Int;
-	var AUTO:Int;
-	var MANUAL:Int;
+@:native("PIXI.WRAP_MODES")
+extern enum WrapModes {
+	DEFAULT;
+	CLAMP;
+	REPEAT;
+	MIRRORED_REPEAT;
 }
 
-typedef BlendModes = {
-	var NORMAL:Int;
-	var ADD:Int;
-	var MULTIPLY:Int;
-	var SCREEN:Int;
-	var OVERLAY:Int;
-	var DARKEN:Int;
-	var LIGHTEN:Int;
-	var COLOR_DODGE:Int;
-	var COLOR_BURN:Int;
-	var HARD_LIGHT:Int;
-	var SOFT_LIGHT:Int;
-	var DIFFERENCE:Int;
-	var EXCLUSION:Int;
-	var HUE:Int;
-	var SATURATION:Int;
-	var COLOR:Int;
-	var LUMINOSITY:Int;
+@:native("PIXI.GC_MODES")
+extern enum GCModes {
+	DEFAULT;
+	AUTO;
+	MANUAL;
 }
 
-typedef DrawModes = {
-	var POINTS:Int;
-	var LINES:Int;
-	var LINE_LOOP:Int;
-	var LINE_STRIP:Int;
-	var TRIANGLES:Int;
-	var TRIANGLE_STRIP:Int;
-	var TRIANGLE_FAN:Int;
+@:native("PIXI.BLEND_MODES")
+extern enum BlendModes {
+	NORMAL;
+	ADD;
+	MULTIPLY;
+	SCREEN;
+	OVERLAY;
+	DARKEN;
+	LIGHTEN;
+	COLOR_DODGE;
+	COLOR_BURN;
+	HARD_LIGHT;
+	SOFT_LIGHT;
+	DIFFERENCE;
+	EXCLUSION;
+	HUE;
+	SATURATION;
+	COLOR;
+	LUMINOSITY;
 }
 
-typedef Shapes = {
-	var POLY:Int;
-	var RECT:Int;
-	var CIRC:Int;
-	var ELIP:Int;
-	var RREC:Int;
+@:native("PIXI.DRAW_MODES")
+extern enum DrawModes {
+	POINTS;
+	LINES;
+	LINE_LOOP;
+	LINE_STRIP;
+	TRIANGLES;
+	TRIANGLE_STRIP;
+	TRIANGLE_FAN;
 }
 
-typedef Precisions = {
-	var LOW:String;
-	var MEDIUM:String;
-	var HIGH:String;
+@:native("PIXI.SHAPES")
+extern enum Shapes {
+	POLY;
+	RECT;
+	CIRC;
+	ELIP;
+	RREC;
 }
 
-typedef TextGradients = {
-	var LINEAR_VERTICAL:Int;
-	var LINEAR_HORIZONTAL:Int;
+@:native("PIXI.PRECISIONS")
+extern enum Precisions {
+	LOW;
+	MEDIUM;
+	HIGH;
 }
 
-typedef TransformModes = {
-	var STATIC:Int;
-	var DYNAMIC:Int;
+@:native("PIXI.TEXT_GRADIENT")
+extern enum TextGradients {
+	LINEAR_VERTICAL;
+	LINEAR_HORIZONTAL;
 }
 
-typedef UpdatePriotities = {
-	var INTERACTION:Float;
-	var HIGH:Float;
-	var NORMAL:Float;
-	var LOW:Float;
-	var UTILITY:Float;
+@:native("PIXI.TRANSFORM_MODE")
+extern enum TransformModes {
+	STATIC;
+	DYNAMIC;
+}
+
+@:native("PIXI.UPDATE_PRIORITY")
+extern enum UpdatePriotities {
+	INTERACTION;
+	HIGH;
+	NORMAL;
+	LOW;
+	UTILITY;
 }

@@ -1,5 +1,6 @@
 package pixi.core.renderers;
 
+import pixi.core.Pixi.RendererType;
 import pixi.core.display.Transform;
 import pixi.core.textures.RenderTexture;
 import pixi.core.textures.Texture;
