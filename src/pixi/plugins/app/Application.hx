@@ -242,7 +242,8 @@ class Application {
 				case UNKNWON: "UNKNOWN";
 				case WEBGL: "WEBGL";
 				case CANVAS: "CANVAS";
-			});
+			};
+			
 			new Perf().addInfo(renderer + " - " + pixelRatio);
 		}
 	}
