@@ -239,7 +239,7 @@ class Application {
 		if (untyped __js__("window").Perf != null) {
 			var renderer = switch (app.renderer.type)
 			{
-				case UNKNWON: "UNKNOWN";
+				case UNKNOWN: "UNKNOWN";
 				case WEBGL: "WEBGL";
 				case CANVAS: "CANVAS";
 			};
