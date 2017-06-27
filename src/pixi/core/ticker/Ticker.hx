@@ -172,6 +172,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context
 	 * @returns {Ticker} this
 	 */
+	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
 	function add(fn:Void -> Void, ?context:Void -> Void):Ticker;
 
 	/**
@@ -183,6 +184,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context
 	 * @returns {Ticker} this
 	 */
+	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
 	function addOnce(fn:Void -> Void, ?context:Void -> Void):Ticker;
 
 	/**
@@ -194,6 +196,7 @@ extern class Ticker extends EventEmitter {
 	 * @param [context] {Function} The listener context to be removed
 	 * @returns {Ticker} this
 	 */
+	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
 	function remove(fn:Void -> Void, ?context:Void -> Void):Ticker;
 
 	/**

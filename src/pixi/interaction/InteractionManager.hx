@@ -39,6 +39,14 @@ extern class InteractionManager extends EventEmitter {
 	var autoPreventDefault:Bool;
 
 	/**
+     * The current resolution / device pixel ratio.
+     *
+     * @member {Float}
+     * @default 1
+     */
+	var resolution:Float;
+
+	/**
      * As this frequency increases the interaction events will be checked more often.
      *
      * @member {Int}
