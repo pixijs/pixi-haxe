@@ -29,7 +29,7 @@ extern class FilterManager extends WebGLManager {
 	 * @param buffer {ArrayBuffer}
 	 */
 	function setFilterStack(filterStack:Dynamic):Void;
-
+	
 	/**
 	 * Applies the filter and adds it to the current filter stack.
 	 *

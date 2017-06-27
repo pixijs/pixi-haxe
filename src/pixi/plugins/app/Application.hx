@@ -237,7 +237,13 @@ class Application {
 
 	public function addStats() {
 		if (untyped __js__("window").Perf != null) {
-			new Perf().addInfo(["UNKNOWN", "WEBGL", "CANVAS"][app.renderer.type] + " - " + pixelRatio);
+			var renderer = switch (app.renderer.type)
+			{
+				case UNKNWON: "UNKNOWN";
+				case WEBGL: "WEBGL";
+				case CANVAS: "CANVAS";
+			});
+			new Perf().addInfo(renderer + " - " + pixelRatio);
 		}
 	}
 }
