@@ -1,5 +1,6 @@
 package pixi.plugins.app;
 
+import pixi.core.Pixi.RendererType;
 import pixi.core.renderers.SystemRenderer;
 import js.html.Event;
 import pixi.core.RenderOptions;
@@ -239,9 +240,9 @@ class Application {
 		if (untyped __js__("window").Perf != null) {
 			var renderer = switch (app.renderer.type)
 			{
-				case UNKNOWN: "UNKNOWN";
-				case WEBGL: "WEBGL";
-				case CANVAS: "CANVAS";
+				case RendererType.UNKNOWN: "UNKNOWN";
+				case RendererType.WEBGL: "WEBGL";
+				case RendererType.CANVAS: "CANVAS";
 			};
 			
 			new Perf().addInfo(renderer + " - " + pixelRatio);
