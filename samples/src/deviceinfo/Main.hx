@@ -20,8 +20,6 @@ class Main extends Application {
 		backgroundColor = 0x003366;
 		super.start();
 
-		_rendererType = ["Unknown", "WebGL", "Canvas"];
-
 		_info = new Container();
 		stage.addChild(_info);
 
@@ -35,7 +33,12 @@ class Main extends Application {
 		_info.addChild(txt);
 
 		txt = new Text("", {fill: "#FFFFFF"});
-		txt.text = "Renderer: \t\t\t\t\t" + _rendererType[renderer.type];
+		txt.text = "Renderer: \t\t\t\t\t" + switch (renderer.type)
+		{
+			case UNKNOWN: "Unknown";
+			case WEBGL: "WebGL";
+			case CANVAS: "Canvas";
+		};
 		txt.y = 80;
 		_info.addChild(txt);
 

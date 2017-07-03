@@ -1,5 +1,6 @@
 package pixi.plugins.app;
 
+import pixi.core.Pixi.RendererType;
 import pixi.core.renderers.SystemRenderer;
 import js.html.Event;
 import pixi.core.RenderOptions;
@@ -237,7 +238,14 @@ class Application {
 
 	public function addStats() {
 		if (untyped __js__("window").Perf != null) {
-			new Perf().addInfo(["UNKNOWN", "WEBGL", "CANVAS"][app.renderer.type] + " - " + pixelRatio);
+			var renderer = switch (app.renderer.type)
+			{
+				case RendererType.UNKNOWN: "UNKNOWN";
+				case RendererType.WEBGL: "WEBGL";
+				case RendererType.CANVAS: "CANVAS";
+			};
+			
+			new Perf().addInfo(renderer + " - " + pixelRatio);
 		}
 	}
 }
