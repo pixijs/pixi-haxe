@@ -1,4 +1,5 @@
 package pixi.core.renderers.webgl.managers;
+import pixi.core.Pixi.BlendModes;
 
 extern class BlendModeManager extends WebGLManager {
 
@@ -15,5 +16,5 @@ extern class BlendModeManager extends WebGLManager {
 	 *
 	 * @param blendMode {number} the blendMode, should be a Pixi const, such as BlendModes.ADD
 	 */
-	function setBlendMode(blendMode:Int):Void;
+	function setBlendMode(blendMode:BlendModes):Void;
 }

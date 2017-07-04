@@ -1,5 +1,6 @@
 package pixi.mesh;
 
+import pixi.core.Pixi.BlendModes;
 import pixi.core.math.Point;
 import js.html.Uint16Array;
 import pixi.core.Shader;
@@ -121,7 +122,7 @@ extern class Mesh extends Container {
 	 * @member {Int}
 	 * @default CONST.BLEND_MODES.NORMAL;
 	 */
-	var blendMode:Int;
+	var blendMode:BlendModes;
 
 	/**
 	 * Triangles in canvas mode are automatically antialiased, use var value to force triangles to overlap a bit with each other.

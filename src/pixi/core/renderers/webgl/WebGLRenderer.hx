@@ -1,5 +1,6 @@
 package pixi.core.renderers.webgl;
 
+import pixi.core.Pixi.BlendModes;
 import pixi.core.display.Transform;
 import pixi.core.renderers.webgl.utils.RenderTarget;
 import pixi.core.textures.Texture;
@@ -101,7 +102,7 @@ extern class WebGLRenderer extends SystemRenderer {
      *
      * @param {Int} blendMode - the desired blend mode
      */
-	function setBlendMode(blendMode:Int):Void;
+	function setBlendMode(blendMode:BlendModes):Void;
 
 	/**
      * Erases the active render target and fills the drawing area with a colour
