@@ -1,5 +1,6 @@
 package pixi.particles;
 
+import pixi.core.Pixi.BlendModes;
 import pixi.core.textures.BaseTexture;
 import pixi.core.display.Container;
 
@@ -57,7 +58,7 @@ extern class ParticleContainer extends Container {
 	 * @default PIXI.BLEND_MODES.NORMAL
 	 * @see PIXI.BLEND_MODES
 	 */
-	var blendMode:Int;
+	var blendMode:BlendModes;
 
 	/**
 	 * Used for canvas renderering. If true then the elements will be positioned at the

@@ -1,12 +1,12 @@
 package pixi.core.sprites;
 
+import pixi.core.Pixi.BlendModes;
 import pixi.core.renderers.webgl.filters.Filter;
 import js.html.VideoElement;
 import js.html.CanvasElement;
 import pixi.core.textures.BaseTexture;
 import pixi.core.math.ObservablePoint;
 import haxe.extern.EitherType;
-import pixi.core.display.BlendMode;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.display.Container;
@@ -61,7 +61,7 @@ extern class Sprite extends Container {
 	 * @member {Int}
 	 * @default CONST.blendModes.NORMAL;
 	 */
-	var blendMode:BlendMode;
+	var blendMode:BlendModes;
 
 	/**
 	 * The shader that will be used to render the sprite. Set to null to remove a current shader.
