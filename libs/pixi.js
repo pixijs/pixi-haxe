@@ -1,6 +1,6 @@
 /*!
- * pixi.js - v4.5.1
- * Compiled Sat, 22 Apr 2017 13:46:35 UTC
+ * pixi.js - v4.5.3
+ * Compiled Mon, 12 Jun 2017 14:44:16 UTC
  *
  * pixi.js is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1310,6 +1310,173 @@ if ('undefined' !== typeof module) {
 })(this);
 
 },{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var MiniSignalBinding = (function () {
+  function MiniSignalBinding(fn, once, thisArg) {
+    if (once === undefined) once = false;
+
+    _classCallCheck(this, MiniSignalBinding);
+
+    this._fn = fn;
+    this._once = once;
+    this._thisArg = thisArg;
+    this._next = this._prev = this._owner = null;
+  }
+
+  _createClass(MiniSignalBinding, [{
+    key: 'detach',
+    value: function detach() {
+      if (this._owner === null) return false;
+      this._owner.detach(this);
+      return true;
+    }
+  }]);
+
+  return MiniSignalBinding;
+})();
+
+function _addMiniSignalBinding(self, node) {
+  if (!self._head) {
+    self._head = node;
+    self._tail = node;
+  } else {
+    self._tail._next = node;
+    node._prev = self._tail;
+    self._tail = node;
+  }
+
+  node._owner = self;
+
+  return node;
+}
+
+var MiniSignal = (function () {
+  function MiniSignal() {
+    _classCallCheck(this, MiniSignal);
+
+    this._head = this._tail = undefined;
+  }
+
+  _createClass(MiniSignal, [{
+    key: 'handlers',
+    value: function handlers() {
+      var exists = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+      var node = this._head;
+
+      if (exists) return !!node;
+
+      var ee = [];
+
+      while (node) {
+        ee.push(node);
+        node = node._next;
+      }
+
+      return ee;
+    }
+  }, {
+    key: 'has',
+    value: function has(node) {
+      if (!(node instanceof MiniSignalBinding)) {
+        throw new Error('MiniSignal#has(): First arg must be a MiniSignalBinding object.');
+      }
+
+      return node._owner === this;
+    }
+  }, {
+    key: 'dispatch',
+    value: function dispatch() {
+      var node = this._head;
+
+      if (!node) return false;
+
+      while (node) {
+        if (node._once) this.detach(node);
+        node._fn.apply(node._thisArg, arguments);
+        node = node._next;
+      }
+
+      return true;
+    }
+  }, {
+    key: 'add',
+    value: function add(fn) {
+      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+      if (typeof fn !== 'function') {
+        throw new Error('MiniSignal#add(): First arg must be a Function.');
+      }
+      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, false, thisArg));
+    }
+  }, {
+    key: 'once',
+    value: function once(fn) {
+      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+      if (typeof fn !== 'function') {
+        throw new Error('MiniSignal#once(): First arg must be a Function.');
+      }
+      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, true, thisArg));
+    }
+  }, {
+    key: 'detach',
+    value: function detach(node) {
+      if (!(node instanceof MiniSignalBinding)) {
+        throw new Error('MiniSignal#detach(): First arg must be a MiniSignalBinding object.');
+      }
+      if (node._owner !== this) return this;
+
+      if (node._prev) node._prev._next = node._next;
+      if (node._next) node._next._prev = node._prev;
+
+      if (node === this._head) {
+        this._head = node._next;
+        if (node._next === null) {
+          this._tail = null;
+        }
+      } else if (node === this._tail) {
+        this._tail = node._prev;
+        this._tail._next = null;
+      }
+
+      node._owner = null;
+      return this;
+    }
+  }, {
+    key: 'detachAll',
+    value: function detachAll() {
+      var node = this._head;
+      if (!node) return this;
+
+      this._head = this._tail = null;
+
+      while (node) {
+        node._owner = null;
+        node = node._next;
+      }
+      return this;
+    }
+  }]);
+
+  return MiniSignal;
+})();
+
+MiniSignal.MiniSignalBinding = MiniSignalBinding;
+
+exports['default'] = MiniSignal;
+module.exports = exports['default'];
+
+},{}],6:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -1401,7 +1568,268 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+'use strict'
+
+module.exports = function parseURI (str, opts) {
+  opts = opts || {}
+
+  var o = {
+    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
+    q: {
+      name: 'queryKey',
+      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    },
+    parser: {
+      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    }
+  }
+
+  var m = o.parser[opts.strictMode ? 'strict' : 'loose'].exec(str)
+  var uri = {}
+  var i = 14
+
+  while (i--) uri[o.key[i]] = m[i] || ''
+
+  uri[o.q.name] = {}
+  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+    if ($1) uri[o.q.name][$1] = $2
+  })
+
+  return uri
+}
+
+},{}],8:[function(require,module,exports){
+(function (process){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// Split a filename into [root, dir, basename, ext], unix version
+// 'root' is just a slash, or nothing.
+var splitPathRe =
+    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+var splitPath = function(filename) {
+  return splitPathRe.exec(filename).slice(1);
+};
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function(path) {
+  var result = splitPath(path),
+      root = result[0],
+      dir = result[1];
+
+  if (!root && !dir) {
+    // No dirname whatsoever
+    return '.';
+  }
+
+  if (dir) {
+    // It has a dirname, strip trailing slash
+    dir = dir.substr(0, dir.length - 1);
+  }
+
+  return root + dir;
+};
+
+
+exports.basename = function(path, ext) {
+  var f = splitPath(path)[2];
+  // TODO: make this comparison case-insensitive on windows?
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+
+exports.extname = function(path) {
+  return splitPath(path)[3];
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+}).call(this,require('_process'))
+
+},{"_process":26}],9:[function(require,module,exports){
 var EMPTY_ARRAY_BUFFER = new ArrayBuffer(0);
 
 /**
@@ -1522,7 +1950,7 @@ Buffer.prototype.destroy = function(){
 
 module.exports = Buffer;
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 var Texture = require('./GLTexture');
 
@@ -1749,7 +2177,7 @@ Framebuffer.createFloat32 = function(gl, width, height, data)
 
 module.exports = Framebuffer;
 
-},{"./GLTexture":9}],8:[function(require,module,exports){
+},{"./GLTexture":12}],11:[function(require,module,exports){
 
 var compileProgram = require('./shader/compileProgram'),
 	extractAttributes = require('./shader/extractAttributes'),
@@ -1842,7 +2270,7 @@ Shader.prototype.destroy = function()
 
 module.exports = Shader;
 
-},{"./shader/compileProgram":14,"./shader/extractAttributes":16,"./shader/extractUniforms":17,"./shader/generateUniformAccessObject":18,"./shader/setPrecision":22}],9:[function(require,module,exports){
+},{"./shader/compileProgram":17,"./shader/extractAttributes":19,"./shader/extractUniforms":20,"./shader/generateUniformAccessObject":21,"./shader/setPrecision":25}],12:[function(require,module,exports){
 
 /**
  * Helper class to create a WebGL Texture
@@ -2177,7 +2605,7 @@ Texture.fromData = function(gl, data, width, height)
 
 module.exports = Texture;
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 // state object//
 var setVertexAttribArrays = require( './setVertexAttribArrays' );
@@ -2441,7 +2869,7 @@ VertexArrayObject.prototype.getSize = function()
     return attrib.buffer.data.length / (( attrib.stride/4 ) || attrib.attribute.size);
 };
 
-},{"./setVertexAttribArrays":13}],11:[function(require,module,exports){
+},{"./setVertexAttribArrays":16}],14:[function(require,module,exports){
 
 /**
  * Helper class to create a webGL Context
@@ -2469,7 +2897,7 @@ var createContext = function(canvas, options)
 
 module.exports = createContext;
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var gl = {
     createContext:          require('./createContext'),
     setVertexAttribArrays:  require('./setVertexAttribArrays'),
@@ -2496,7 +2924,7 @@ if (typeof window !== 'undefined')
     window.PIXI.glCore = gl;
 }
 
-},{"./GLBuffer":6,"./GLFramebuffer":7,"./GLShader":8,"./GLTexture":9,"./VertexArrayObject":10,"./createContext":11,"./setVertexAttribArrays":13,"./shader":19}],13:[function(require,module,exports){
+},{"./GLBuffer":9,"./GLFramebuffer":10,"./GLShader":11,"./GLTexture":12,"./VertexArrayObject":13,"./createContext":14,"./setVertexAttribArrays":16,"./shader":22}],16:[function(require,module,exports){
 // var GL_MAP = {};
 
 /**
@@ -2553,7 +2981,7 @@ var setVertexAttribArrays = function (gl, attribs, state)
 
 module.exports = setVertexAttribArrays;
 
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 
 /**
  * @class
@@ -2635,7 +3063,7 @@ var compileShader = function (gl, type, src)
 
 module.exports = compileProgram;
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * @class
  * @memberof PIXI.glCore.shader
@@ -2715,7 +3143,7 @@ var booleanArray = function(size)
 
 module.exports = defaultValue;
 
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 
 var mapType = require('./mapType');
 var mapSize = require('./mapSize');
@@ -2758,7 +3186,7 @@ var pointer = function(type, normalized, stride, start){
 
 module.exports = extractAttributes;
 
-},{"./mapSize":20,"./mapType":21}],17:[function(require,module,exports){
+},{"./mapSize":23,"./mapType":24}],20:[function(require,module,exports){
 var mapType = require('./mapType');
 var defaultValue = require('./defaultValue');
 
@@ -2795,7 +3223,7 @@ var extractUniforms = function(gl, program)
 
 module.exports = extractUniforms;
 
-},{"./defaultValue":15,"./mapType":21}],18:[function(require,module,exports){
+},{"./defaultValue":18,"./mapType":24}],21:[function(require,module,exports){
 /**
  * Extracts the attributes
  * @class
@@ -2938,7 +3366,7 @@ var GLSL_TO_ARRAY_SETTERS = {
 
 module.exports = generateUniformAccessObject;
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports = {
     compileProgram: require('./compileProgram'),
     defaultValue: require('./defaultValue'),
@@ -2949,7 +3377,7 @@ module.exports = {
     mapSize: require('./mapSize'),
     mapType: require('./mapType')
 };
-},{"./compileProgram":14,"./defaultValue":15,"./extractAttributes":16,"./extractUniforms":17,"./generateUniformAccessObject":18,"./mapSize":20,"./mapType":21,"./setPrecision":22}],20:[function(require,module,exports){
+},{"./compileProgram":17,"./defaultValue":18,"./extractAttributes":19,"./extractUniforms":20,"./generateUniformAccessObject":21,"./mapSize":23,"./mapType":24,"./setPrecision":25}],23:[function(require,module,exports){
 /**
  * @class
  * @memberof PIXI.glCore.shader
@@ -2987,7 +3415,7 @@ var GLSL_TO_SIZE = {
 
 module.exports = mapSize;
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 
 
 var mapSize = function(gl, type) 
@@ -3035,7 +3463,7 @@ var GL_TO_GLSL_TYPES = {
 
 module.exports = mapSize;
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * Sets the float precision on the shader. If the precision is already present this function will do nothing
  * @param {string} src       the shader source
@@ -3055,236 +3483,7 @@ var setPrecision = function(src, precision)
 
 module.exports = setPrecision;
 
-},{}],23:[function(require,module,exports){
-(function (process){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-// resolves . and .. elements in a path array with directory names there
-// must be no slashes, empty elements, or device names (c:\) in the array
-// (so also no leading and trailing slashes - it does not distinguish
-// relative and absolute paths)
-function normalizeArray(parts, allowAboveRoot) {
-  // if the path tries to go above the root, `up` ends up > 0
-  var up = 0;
-  for (var i = parts.length - 1; i >= 0; i--) {
-    var last = parts[i];
-    if (last === '.') {
-      parts.splice(i, 1);
-    } else if (last === '..') {
-      parts.splice(i, 1);
-      up++;
-    } else if (up) {
-      parts.splice(i, 1);
-      up--;
-    }
-  }
-
-  // if the path is allowed to go above the root, restore leading ..s
-  if (allowAboveRoot) {
-    for (; up--; up) {
-      parts.unshift('..');
-    }
-  }
-
-  return parts;
-}
-
-// Split a filename into [root, dir, basename, ext], unix version
-// 'root' is just a slash, or nothing.
-var splitPathRe =
-    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-var splitPath = function(filename) {
-  return splitPathRe.exec(filename).slice(1);
-};
-
-// path.resolve([from ...], to)
-// posix version
-exports.resolve = function() {
-  var resolvedPath = '',
-      resolvedAbsolute = false;
-
-  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-    var path = (i >= 0) ? arguments[i] : process.cwd();
-
-    // Skip empty and invalid entries
-    if (typeof path !== 'string') {
-      throw new TypeError('Arguments to path.resolve must be strings');
-    } else if (!path) {
-      continue;
-    }
-
-    resolvedPath = path + '/' + resolvedPath;
-    resolvedAbsolute = path.charAt(0) === '/';
-  }
-
-  // At this point the path should be resolved to a full absolute path, but
-  // handle relative paths to be safe (might happen when process.cwd() fails)
-
-  // Normalize the path
-  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-    return !!p;
-  }), !resolvedAbsolute).join('/');
-
-  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-};
-
-// path.normalize(path)
-// posix version
-exports.normalize = function(path) {
-  var isAbsolute = exports.isAbsolute(path),
-      trailingSlash = substr(path, -1) === '/';
-
-  // Normalize the path
-  path = normalizeArray(filter(path.split('/'), function(p) {
-    return !!p;
-  }), !isAbsolute).join('/');
-
-  if (!path && !isAbsolute) {
-    path = '.';
-  }
-  if (path && trailingSlash) {
-    path += '/';
-  }
-
-  return (isAbsolute ? '/' : '') + path;
-};
-
-// posix version
-exports.isAbsolute = function(path) {
-  return path.charAt(0) === '/';
-};
-
-// posix version
-exports.join = function() {
-  var paths = Array.prototype.slice.call(arguments, 0);
-  return exports.normalize(filter(paths, function(p, index) {
-    if (typeof p !== 'string') {
-      throw new TypeError('Arguments to path.join must be strings');
-    }
-    return p;
-  }).join('/'));
-};
-
-
-// path.relative(from, to)
-// posix version
-exports.relative = function(from, to) {
-  from = exports.resolve(from).substr(1);
-  to = exports.resolve(to).substr(1);
-
-  function trim(arr) {
-    var start = 0;
-    for (; start < arr.length; start++) {
-      if (arr[start] !== '') break;
-    }
-
-    var end = arr.length - 1;
-    for (; end >= 0; end--) {
-      if (arr[end] !== '') break;
-    }
-
-    if (start > end) return [];
-    return arr.slice(start, end - start + 1);
-  }
-
-  var fromParts = trim(from.split('/'));
-  var toParts = trim(to.split('/'));
-
-  var length = Math.min(fromParts.length, toParts.length);
-  var samePartsLength = length;
-  for (var i = 0; i < length; i++) {
-    if (fromParts[i] !== toParts[i]) {
-      samePartsLength = i;
-      break;
-    }
-  }
-
-  var outputParts = [];
-  for (var i = samePartsLength; i < fromParts.length; i++) {
-    outputParts.push('..');
-  }
-
-  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-  return outputParts.join('/');
-};
-
-exports.sep = '/';
-exports.delimiter = ':';
-
-exports.dirname = function(path) {
-  var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
-
-  if (!root && !dir) {
-    // No dirname whatsoever
-    return '.';
-  }
-
-  if (dir) {
-    // It has a dirname, strip trailing slash
-    dir = dir.substr(0, dir.length - 1);
-  }
-
-  return root + dir;
-};
-
-
-exports.basename = function(path, ext) {
-  var f = splitPath(path)[2];
-  // TODO: make this comparison case-insensitive on windows?
-  if (ext && f.substr(-1 * ext.length) === ext) {
-    f = f.substr(0, f.length - ext.length);
-  }
-  return f;
-};
-
-
-exports.extname = function(path) {
-  return splitPath(path)[3];
-};
-
-function filter (xs, f) {
-    if (xs.filter) return xs.filter(f);
-    var res = [];
-    for (var i = 0; i < xs.length; i++) {
-        if (f(xs[i], i, xs)) res.push(xs[i]);
-    }
-    return res;
-}
-
-// String.prototype.substr - negative index don't work in IE8
-var substr = 'ab'.substr(-1) === 'b'
-    ? function (str, start, len) { return str.substr(start, len) }
-    : function (str, start, len) {
-        if (start < 0) start = str.length + start;
-        return str.substr(start, len);
-    }
-;
-
-}).call(this,require('_process'))
-
-},{"_process":24}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -3455,6 +3654,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -3466,7 +3669,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 ;(function(root) {
@@ -4004,7 +4207,7 @@ process.umask = function() { return 0; };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4090,7 +4293,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4177,765 +4380,43 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],28:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":26,"./encode":27}],29:[function(require,module,exports){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
+},{"./decode":28,"./encode":29}],31:[function(require,module,exports){
+'use strict'
 
-'use strict';
+/**
+ * Remove a range of items from an array
+ *
+ * @function removeItems
+ * @param {Array<*>} arr The target array
+ * @param {number} startIdx The index to begin removing from (inclusive)
+ * @param {number} removeCount How many items to remove
+ */
+module.exports = function removeItems(arr, startIdx, removeCount)
+{
+  var i, length = arr.length
 
-var punycode = require('punycode');
-var util = require('./util');
+  if (startIdx >= length || removeCount === 0) {
+    return
+  }
 
-exports.parse = urlParse;
-exports.resolve = urlResolve;
-exports.resolveObject = urlResolveObject;
-exports.format = urlFormat;
+  removeCount = (startIdx + removeCount > length ? length - startIdx : removeCount)
 
-exports.Url = Url;
+  var len = length - removeCount
 
-function Url() {
-  this.protocol = null;
-  this.slashes = null;
-  this.auth = null;
-  this.host = null;
-  this.port = null;
-  this.hostname = null;
-  this.hash = null;
-  this.search = null;
-  this.query = null;
-  this.pathname = null;
-  this.path = null;
-  this.href = null;
+  for (i = startIdx; i < len; ++i) {
+    arr[i] = arr[i + removeCount]
+  }
+
+  arr.length = len
 }
 
-// Reference: RFC 3986, RFC 1808, RFC 2396
-
-// define these here so at least they only have to be
-// compiled once on the first module load.
-var protocolPattern = /^([a-z0-9.+-]+:)/i,
-    portPattern = /:[0-9]*$/,
-
-    // Special case for a simple path URL
-    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
-
-    // RFC 2396: characters reserved for delimiting URLs.
-    // We actually just auto-escape these.
-    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
-
-    // RFC 2396: characters not allowed for various reasons.
-    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
-
-    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
-    autoEscape = ['\''].concat(unwise),
-    // Characters that are never ever allowed in a hostname.
-    // Note that any invalid chars are also handled, but these
-    // are the ones that are *expected* to be seen, so we fast-path
-    // them.
-    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
-    hostEndingChars = ['/', '?', '#'],
-    hostnameMaxLen = 255,
-    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
-    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
-    // protocols that can allow "unsafe" and "unwise" chars.
-    unsafeProtocol = {
-      'javascript': true,
-      'javascript:': true
-    },
-    // protocols that never have a hostname.
-    hostlessProtocol = {
-      'javascript': true,
-      'javascript:': true
-    },
-    // protocols that always contain a // bit.
-    slashedProtocol = {
-      'http': true,
-      'https': true,
-      'ftp': true,
-      'gopher': true,
-      'file': true,
-      'http:': true,
-      'https:': true,
-      'ftp:': true,
-      'gopher:': true,
-      'file:': true
-    },
-    querystring = require('querystring');
-
-function urlParse(url, parseQueryString, slashesDenoteHost) {
-  if (url && util.isObject(url) && url instanceof Url) return url;
-
-  var u = new Url;
-  u.parse(url, parseQueryString, slashesDenoteHost);
-  return u;
-}
-
-Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
-  if (!util.isString(url)) {
-    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
-  }
-
-  // Copy chrome, IE, opera backslash-handling behavior.
-  // Back slashes before the query string get converted to forward slashes
-  // See: https://code.google.com/p/chromium/issues/detail?id=25916
-  var queryIndex = url.indexOf('?'),
-      splitter =
-          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
-      uSplit = url.split(splitter),
-      slashRegex = /\\/g;
-  uSplit[0] = uSplit[0].replace(slashRegex, '/');
-  url = uSplit.join(splitter);
-
-  var rest = url;
-
-  // trim before proceeding.
-  // This is to support parse stuff like "  http://foo.com  \n"
-  rest = rest.trim();
-
-  if (!slashesDenoteHost && url.split('#').length === 1) {
-    // Try fast path regexp
-    var simplePath = simplePathPattern.exec(rest);
-    if (simplePath) {
-      this.path = rest;
-      this.href = rest;
-      this.pathname = simplePath[1];
-      if (simplePath[2]) {
-        this.search = simplePath[2];
-        if (parseQueryString) {
-          this.query = querystring.parse(this.search.substr(1));
-        } else {
-          this.query = this.search.substr(1);
-        }
-      } else if (parseQueryString) {
-        this.search = '';
-        this.query = {};
-      }
-      return this;
-    }
-  }
-
-  var proto = protocolPattern.exec(rest);
-  if (proto) {
-    proto = proto[0];
-    var lowerProto = proto.toLowerCase();
-    this.protocol = lowerProto;
-    rest = rest.substr(proto.length);
-  }
-
-  // figure out if it's got a host
-  // user@server is *always* interpreted as a hostname, and url
-  // resolution will treat //foo/bar as host=foo,path=bar because that's
-  // how the browser resolves relative URLs.
-  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
-    var slashes = rest.substr(0, 2) === '//';
-    if (slashes && !(proto && hostlessProtocol[proto])) {
-      rest = rest.substr(2);
-      this.slashes = true;
-    }
-  }
-
-  if (!hostlessProtocol[proto] &&
-      (slashes || (proto && !slashedProtocol[proto]))) {
-
-    // there's a hostname.
-    // the first instance of /, ?, ;, or # ends the host.
-    //
-    // If there is an @ in the hostname, then non-host chars *are* allowed
-    // to the left of the last @ sign, unless some host-ending character
-    // comes *before* the @-sign.
-    // URLs are obnoxious.
-    //
-    // ex:
-    // http://a@b@c/ => user:a@b host:c
-    // http://a@b?@c => user:a host:c path:/?@c
-
-    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
-    // Review our test case against browsers more comprehensively.
-
-    // find the first instance of any hostEndingChars
-    var hostEnd = -1;
-    for (var i = 0; i < hostEndingChars.length; i++) {
-      var hec = rest.indexOf(hostEndingChars[i]);
-      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-        hostEnd = hec;
-    }
-
-    // at this point, either we have an explicit point where the
-    // auth portion cannot go past, or the last @ char is the decider.
-    var auth, atSign;
-    if (hostEnd === -1) {
-      // atSign can be anywhere.
-      atSign = rest.lastIndexOf('@');
-    } else {
-      // atSign must be in auth portion.
-      // http://a@b/c@d => host:b auth:a path:/c@d
-      atSign = rest.lastIndexOf('@', hostEnd);
-    }
-
-    // Now we have a portion which is definitely the auth.
-    // Pull that off.
-    if (atSign !== -1) {
-      auth = rest.slice(0, atSign);
-      rest = rest.slice(atSign + 1);
-      this.auth = decodeURIComponent(auth);
-    }
-
-    // the host is the remaining to the left of the first non-host char
-    hostEnd = -1;
-    for (var i = 0; i < nonHostChars.length; i++) {
-      var hec = rest.indexOf(nonHostChars[i]);
-      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
-        hostEnd = hec;
-    }
-    // if we still have not hit it, then the entire thing is a host.
-    if (hostEnd === -1)
-      hostEnd = rest.length;
-
-    this.host = rest.slice(0, hostEnd);
-    rest = rest.slice(hostEnd);
-
-    // pull out port.
-    this.parseHost();
-
-    // we've indicated that there is a hostname,
-    // so even if it's empty, it has to be present.
-    this.hostname = this.hostname || '';
-
-    // if hostname begins with [ and ends with ]
-    // assume that it's an IPv6 address.
-    var ipv6Hostname = this.hostname[0] === '[' &&
-        this.hostname[this.hostname.length - 1] === ']';
-
-    // validate a little.
-    if (!ipv6Hostname) {
-      var hostparts = this.hostname.split(/\./);
-      for (var i = 0, l = hostparts.length; i < l; i++) {
-        var part = hostparts[i];
-        if (!part) continue;
-        if (!part.match(hostnamePartPattern)) {
-          var newpart = '';
-          for (var j = 0, k = part.length; j < k; j++) {
-            if (part.charCodeAt(j) > 127) {
-              // we replace non-ASCII char with a temporary placeholder
-              // we need this to make sure size of hostname is not
-              // broken by replacing non-ASCII by nothing
-              newpart += 'x';
-            } else {
-              newpart += part[j];
-            }
-          }
-          // we test again with ASCII char only
-          if (!newpart.match(hostnamePartPattern)) {
-            var validParts = hostparts.slice(0, i);
-            var notHost = hostparts.slice(i + 1);
-            var bit = part.match(hostnamePartStart);
-            if (bit) {
-              validParts.push(bit[1]);
-              notHost.unshift(bit[2]);
-            }
-            if (notHost.length) {
-              rest = '/' + notHost.join('.') + rest;
-            }
-            this.hostname = validParts.join('.');
-            break;
-          }
-        }
-      }
-    }
-
-    if (this.hostname.length > hostnameMaxLen) {
-      this.hostname = '';
-    } else {
-      // hostnames are always lower case.
-      this.hostname = this.hostname.toLowerCase();
-    }
-
-    if (!ipv6Hostname) {
-      // IDNA Support: Returns a punycoded representation of "domain".
-      // It only converts parts of the domain name that
-      // have non-ASCII characters, i.e. it doesn't matter if
-      // you call it with a domain that already is ASCII-only.
-      this.hostname = punycode.toASCII(this.hostname);
-    }
-
-    var p = this.port ? ':' + this.port : '';
-    var h = this.hostname || '';
-    this.host = h + p;
-    this.href += this.host;
-
-    // strip [ and ] from the hostname
-    // the host field still retains them, though
-    if (ipv6Hostname) {
-      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
-      if (rest[0] !== '/') {
-        rest = '/' + rest;
-      }
-    }
-  }
-
-  // now rest is set to the post-host stuff.
-  // chop off any delim chars.
-  if (!unsafeProtocol[lowerProto]) {
-
-    // First, make 100% sure that any "autoEscape" chars get
-    // escaped, even if encodeURIComponent doesn't think they
-    // need to be.
-    for (var i = 0, l = autoEscape.length; i < l; i++) {
-      var ae = autoEscape[i];
-      if (rest.indexOf(ae) === -1)
-        continue;
-      var esc = encodeURIComponent(ae);
-      if (esc === ae) {
-        esc = escape(ae);
-      }
-      rest = rest.split(ae).join(esc);
-    }
-  }
-
-
-  // chop off from the tail first.
-  var hash = rest.indexOf('#');
-  if (hash !== -1) {
-    // got a fragment string.
-    this.hash = rest.substr(hash);
-    rest = rest.slice(0, hash);
-  }
-  var qm = rest.indexOf('?');
-  if (qm !== -1) {
-    this.search = rest.substr(qm);
-    this.query = rest.substr(qm + 1);
-    if (parseQueryString) {
-      this.query = querystring.parse(this.query);
-    }
-    rest = rest.slice(0, qm);
-  } else if (parseQueryString) {
-    // no query string, but parseQueryString still requested
-    this.search = '';
-    this.query = {};
-  }
-  if (rest) this.pathname = rest;
-  if (slashedProtocol[lowerProto] &&
-      this.hostname && !this.pathname) {
-    this.pathname = '/';
-  }
-
-  //to support http.request
-  if (this.pathname || this.search) {
-    var p = this.pathname || '';
-    var s = this.search || '';
-    this.path = p + s;
-  }
-
-  // finally, reconstruct the href based on what has been validated.
-  this.href = this.format();
-  return this;
-};
-
-// format a parsed object into a url string
-function urlFormat(obj) {
-  // ensure it's an object, and not a string url.
-  // If it's an obj, this is a no-op.
-  // this way, you can call url_format() on strings
-  // to clean up potentially wonky urls.
-  if (util.isString(obj)) obj = urlParse(obj);
-  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
-  return obj.format();
-}
-
-Url.prototype.format = function() {
-  var auth = this.auth || '';
-  if (auth) {
-    auth = encodeURIComponent(auth);
-    auth = auth.replace(/%3A/i, ':');
-    auth += '@';
-  }
-
-  var protocol = this.protocol || '',
-      pathname = this.pathname || '',
-      hash = this.hash || '',
-      host = false,
-      query = '';
-
-  if (this.host) {
-    host = auth + this.host;
-  } else if (this.hostname) {
-    host = auth + (this.hostname.indexOf(':') === -1 ?
-        this.hostname :
-        '[' + this.hostname + ']');
-    if (this.port) {
-      host += ':' + this.port;
-    }
-  }
-
-  if (this.query &&
-      util.isObject(this.query) &&
-      Object.keys(this.query).length) {
-    query = querystring.stringify(this.query);
-  }
-
-  var search = this.search || (query && ('?' + query)) || '';
-
-  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
-
-  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
-  // unless they had them to begin with.
-  if (this.slashes ||
-      (!protocol || slashedProtocol[protocol]) && host !== false) {
-    host = '//' + (host || '');
-    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
-  } else if (!host) {
-    host = '';
-  }
-
-  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
-  if (search && search.charAt(0) !== '?') search = '?' + search;
-
-  pathname = pathname.replace(/[?#]/g, function(match) {
-    return encodeURIComponent(match);
-  });
-  search = search.replace('#', '%23');
-
-  return protocol + host + pathname + search + hash;
-};
-
-function urlResolve(source, relative) {
-  return urlParse(source, false, true).resolve(relative);
-}
-
-Url.prototype.resolve = function(relative) {
-  return this.resolveObject(urlParse(relative, false, true)).format();
-};
-
-function urlResolveObject(source, relative) {
-  if (!source) return relative;
-  return urlParse(source, false, true).resolveObject(relative);
-}
-
-Url.prototype.resolveObject = function(relative) {
-  if (util.isString(relative)) {
-    var rel = new Url();
-    rel.parse(relative, false, true);
-    relative = rel;
-  }
-
-  var result = new Url();
-  var tkeys = Object.keys(this);
-  for (var tk = 0; tk < tkeys.length; tk++) {
-    var tkey = tkeys[tk];
-    result[tkey] = this[tkey];
-  }
-
-  // hash is always overridden, no matter what.
-  // even href="" will remove it.
-  result.hash = relative.hash;
-
-  // if the relative url is empty, then there's nothing left to do here.
-  if (relative.href === '') {
-    result.href = result.format();
-    return result;
-  }
-
-  // hrefs like //foo/bar always cut to the protocol.
-  if (relative.slashes && !relative.protocol) {
-    // take everything except the protocol from relative
-    var rkeys = Object.keys(relative);
-    for (var rk = 0; rk < rkeys.length; rk++) {
-      var rkey = rkeys[rk];
-      if (rkey !== 'protocol')
-        result[rkey] = relative[rkey];
-    }
-
-    //urlParse appends trailing / to urls like http://www.example.com
-    if (slashedProtocol[result.protocol] &&
-        result.hostname && !result.pathname) {
-      result.path = result.pathname = '/';
-    }
-
-    result.href = result.format();
-    return result;
-  }
-
-  if (relative.protocol && relative.protocol !== result.protocol) {
-    // if it's a known url protocol, then changing
-    // the protocol does weird things
-    // first, if it's not file:, then we MUST have a host,
-    // and if there was a path
-    // to begin with, then we MUST have a path.
-    // if it is file:, then the host is dropped,
-    // because that's known to be hostless.
-    // anything else is assumed to be absolute.
-    if (!slashedProtocol[relative.protocol]) {
-      var keys = Object.keys(relative);
-      for (var v = 0; v < keys.length; v++) {
-        var k = keys[v];
-        result[k] = relative[k];
-      }
-      result.href = result.format();
-      return result;
-    }
-
-    result.protocol = relative.protocol;
-    if (!relative.host && !hostlessProtocol[relative.protocol]) {
-      var relPath = (relative.pathname || '').split('/');
-      while (relPath.length && !(relative.host = relPath.shift()));
-      if (!relative.host) relative.host = '';
-      if (!relative.hostname) relative.hostname = '';
-      if (relPath[0] !== '') relPath.unshift('');
-      if (relPath.length < 2) relPath.unshift('');
-      result.pathname = relPath.join('/');
-    } else {
-      result.pathname = relative.pathname;
-    }
-    result.search = relative.search;
-    result.query = relative.query;
-    result.host = relative.host || '';
-    result.auth = relative.auth;
-    result.hostname = relative.hostname || relative.host;
-    result.port = relative.port;
-    // to support http.request
-    if (result.pathname || result.search) {
-      var p = result.pathname || '';
-      var s = result.search || '';
-      result.path = p + s;
-    }
-    result.slashes = result.slashes || relative.slashes;
-    result.href = result.format();
-    return result;
-  }
-
-  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
-      isRelAbs = (
-          relative.host ||
-          relative.pathname && relative.pathname.charAt(0) === '/'
-      ),
-      mustEndAbs = (isRelAbs || isSourceAbs ||
-                    (result.host && relative.pathname)),
-      removeAllDots = mustEndAbs,
-      srcPath = result.pathname && result.pathname.split('/') || [],
-      relPath = relative.pathname && relative.pathname.split('/') || [],
-      psychotic = result.protocol && !slashedProtocol[result.protocol];
-
-  // if the url is a non-slashed url, then relative
-  // links like ../.. should be able
-  // to crawl up to the hostname, as well.  This is strange.
-  // result.protocol has already been set by now.
-  // Later on, put the first path part into the host field.
-  if (psychotic) {
-    result.hostname = '';
-    result.port = null;
-    if (result.host) {
-      if (srcPath[0] === '') srcPath[0] = result.host;
-      else srcPath.unshift(result.host);
-    }
-    result.host = '';
-    if (relative.protocol) {
-      relative.hostname = null;
-      relative.port = null;
-      if (relative.host) {
-        if (relPath[0] === '') relPath[0] = relative.host;
-        else relPath.unshift(relative.host);
-      }
-      relative.host = null;
-    }
-    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
-  }
-
-  if (isRelAbs) {
-    // it's absolute.
-    result.host = (relative.host || relative.host === '') ?
-                  relative.host : result.host;
-    result.hostname = (relative.hostname || relative.hostname === '') ?
-                      relative.hostname : result.hostname;
-    result.search = relative.search;
-    result.query = relative.query;
-    srcPath = relPath;
-    // fall through to the dot-handling below.
-  } else if (relPath.length) {
-    // it's relative
-    // throw away the existing file, and take the new path instead.
-    if (!srcPath) srcPath = [];
-    srcPath.pop();
-    srcPath = srcPath.concat(relPath);
-    result.search = relative.search;
-    result.query = relative.query;
-  } else if (!util.isNullOrUndefined(relative.search)) {
-    // just pull out the search.
-    // like href='?foo'.
-    // Put this after the other two cases because it simplifies the booleans
-    if (psychotic) {
-      result.hostname = result.host = srcPath.shift();
-      //occationaly the auth can get stuck only in host
-      //this especially happens in cases like
-      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-      var authInHost = result.host && result.host.indexOf('@') > 0 ?
-                       result.host.split('@') : false;
-      if (authInHost) {
-        result.auth = authInHost.shift();
-        result.host = result.hostname = authInHost.shift();
-      }
-    }
-    result.search = relative.search;
-    result.query = relative.query;
-    //to support http.request
-    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-      result.path = (result.pathname ? result.pathname : '') +
-                    (result.search ? result.search : '');
-    }
-    result.href = result.format();
-    return result;
-  }
-
-  if (!srcPath.length) {
-    // no path at all.  easy.
-    // we've already handled the other stuff above.
-    result.pathname = null;
-    //to support http.request
-    if (result.search) {
-      result.path = '/' + result.search;
-    } else {
-      result.path = null;
-    }
-    result.href = result.format();
-    return result;
-  }
-
-  // if a url ENDs in . or .., then it must get a trailing slash.
-  // however, if it ends in anything else non-slashy,
-  // then it must NOT get a trailing slash.
-  var last = srcPath.slice(-1)[0];
-  var hasTrailingSlash = (
-      (result.host || relative.host || srcPath.length > 1) &&
-      (last === '.' || last === '..') || last === '');
-
-  // strip single dots, resolve double dots to parent dir
-  // if the path tries to go above the root, `up` ends up > 0
-  var up = 0;
-  for (var i = srcPath.length; i >= 0; i--) {
-    last = srcPath[i];
-    if (last === '.') {
-      srcPath.splice(i, 1);
-    } else if (last === '..') {
-      srcPath.splice(i, 1);
-      up++;
-    } else if (up) {
-      srcPath.splice(i, 1);
-      up--;
-    }
-  }
-
-  // if the path is allowed to go above the root, restore leading ..s
-  if (!mustEndAbs && !removeAllDots) {
-    for (; up--; up) {
-      srcPath.unshift('..');
-    }
-  }
-
-  if (mustEndAbs && srcPath[0] !== '' &&
-      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
-    srcPath.unshift('');
-  }
-
-  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
-    srcPath.push('');
-  }
-
-  var isAbsolute = srcPath[0] === '' ||
-      (srcPath[0] && srcPath[0].charAt(0) === '/');
-
-  // put the host back
-  if (psychotic) {
-    result.hostname = result.host = isAbsolute ? '' :
-                                    srcPath.length ? srcPath.shift() : '';
-    //occationaly the auth can get stuck only in host
-    //this especially happens in cases like
-    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-    var authInHost = result.host && result.host.indexOf('@') > 0 ?
-                     result.host.split('@') : false;
-    if (authInHost) {
-      result.auth = authInHost.shift();
-      result.host = result.hostname = authInHost.shift();
-    }
-  }
-
-  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
-
-  if (mustEndAbs && !isAbsolute) {
-    srcPath.unshift('');
-  }
-
-  if (!srcPath.length) {
-    result.pathname = null;
-    result.path = null;
-  } else {
-    result.pathname = srcPath.join('/');
-  }
-
-  //to support request.http
-  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
-    result.path = (result.pathname ? result.pathname : '') +
-                  (result.search ? result.search : '');
-  }
-  result.auth = relative.auth || result.auth;
-  result.slashes = result.slashes || relative.slashes;
-  result.href = result.format();
-  return result;
-};
-
-Url.prototype.parseHost = function() {
-  var host = this.host;
-  var port = portPattern.exec(host);
-  if (port) {
-    port = port[0];
-    if (port !== ':') {
-      this.port = port.substr(1);
-    }
-    host = host.substr(0, host.length - port.length);
-  }
-  if (host) this.hostname = host;
-};
-
-},{"./util":30,"punycode":25,"querystring":28}],30:[function(require,module,exports){
-'use strict';
-
-module.exports = {
-  isString: function(arg) {
-    return typeof(arg) === 'string';
-  },
-  isObject: function(arg) {
-    return typeof(arg) === 'object' && arg !== null;
-  },
-  isNull: function(arg) {
-    return arg === null;
-  },
-  isNullOrUndefined: function(arg) {
-    return arg == null;
-  }
-};
-
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5490,7 +4971,7 @@ var Loader = function () {
                 resource._onLoadBinding = resource.onComplete.once(_this2._onLoad, _this2);
                 resource.load();
             }
-        });
+        }, true);
     };
 
     /**
@@ -5520,10 +5001,10 @@ var Loader = function () {
         resource._onLoadBinding = null;
 
         // remove this resource from the async queue, and add it to our list of resources that are being parsed
-        resource._dequeue();
         this._resourcesParsing.push(resource);
+        resource._dequeue();
 
-        // run middleware, this *must* happen before dequeue so sub-assets get added properly
+        // run all the after middleware for this resource
         async.eachSeries(this._afterMiddleware, function (fn, next) {
             fn.call(_this3, resource, next);
         }, function () {
@@ -5545,7 +5026,7 @@ var Loader = function () {
                 _this3.progress = MAX_PROGRESS;
                 _this3._onComplete();
             }
-        });
+        }, true);
     };
 
     return Loader;
@@ -5553,7 +5034,7 @@ var Loader = function () {
 
 exports.default = Loader;
 
-},{"./Resource":32,"./async":33,"mini-signals":37,"parse-uri":38}],32:[function(require,module,exports){
+},{"./Resource":33,"./async":34,"mini-signals":5,"parse-uri":7}],33:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6703,7 +6184,7 @@ function reqType(xhr) {
     return xhr.toString().replace('object ', '');
 }
 
-},{"mini-signals":37,"parse-uri":38}],33:[function(require,module,exports){
+},{"mini-signals":5,"parse-uri":7}],34:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6721,8 +6202,9 @@ function _noop() {} /* empty */
  * @param {Array.<*>} array - Array to iterate.
  * @param {function} iterator - Function to call for each element.
  * @param {function} callback - Function to call when done, or on error.
+ * @param {boolean} [deferNext=false] - Break synchronous each loop by calling next with a setTimeout of 1.
  */
-function eachSeries(array, iterator, callback) {
+function eachSeries(array, iterator, callback, deferNext) {
     var i = 0;
     var len = array.length;
 
@@ -6735,7 +6217,13 @@ function eachSeries(array, iterator, callback) {
             return;
         }
 
-        iterator(array[i++], next);
+        if (deferNext) {
+            setTimeout(function () {
+                iterator(array[i++], next);
+            }, 1);
+        } else {
+            iterator(array[i++], next);
+        }
     })();
 }
 
@@ -6905,7 +6393,7 @@ function queue(worker, concurrency) {
     return q;
 }
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -6973,40 +6461,31 @@ function encodeBinary(input) {
     return output;
 }
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
-exports.__esModule = true;
+// import Loader from './Loader';
+// import Resource from './Resource';
+// import * as async from './async';
+// import * as b64 from './b64';
 
-var _Loader = require('./Loader');
+/* eslint-disable no-undef */
 
-var _Loader2 = _interopRequireDefault(_Loader);
+var Loader = require('./Loader').default;
+var Resource = require('./Resource').default;
+var async = require('./async');
+var b64 = require('./b64');
 
-var _Resource = require('./Resource');
-
-var _Resource2 = _interopRequireDefault(_Resource);
-
-var _async = require('./async');
-
-var async = _interopRequireWildcard(_async);
-
-var _b = require('./b64');
-
-var b64 = _interopRequireWildcard(_b);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_Loader2.default.Resource = _Resource2.default;
-_Loader2.default.async = async;
-_Loader2.default.base64 = b64;
+Loader.Resource = Resource;
+Loader.async = async;
+Loader.base64 = b64;
 
 // export manually, and also as default
-module.exports = _Loader2.default; // eslint-disable-line no-undef
-exports.default = _Loader2.default;
+module.exports = Loader;
+// export default Loader;
+module.exports.default = Loader;
 
-},{"./Loader":31,"./Resource":32,"./async":33,"./b64":34}],36:[function(require,module,exports){
+},{"./Loader":32,"./Resource":33,"./async":34,"./b64":35}],37:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -7094,206 +6573,759 @@ function blobMiddlewareFactory() {
     };
 }
 
-},{"../../Resource":32,"../../b64":34}],37:[function(require,module,exports){
+},{"../../Resource":33,"../../b64":35}],38:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+var punycode = require('punycode');
+var util = require('./util');
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+exports.parse = urlParse;
+exports.resolve = urlResolve;
+exports.resolveObject = urlResolveObject;
+exports.format = urlFormat;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+exports.Url = Url;
 
-var MiniSignalBinding = (function () {
-  function MiniSignalBinding(fn, once, thisArg) {
-    if (once === undefined) once = false;
-
-    _classCallCheck(this, MiniSignalBinding);
-
-    this._fn = fn;
-    this._once = once;
-    this._thisArg = thisArg;
-    this._next = this._prev = this._owner = null;
-  }
-
-  _createClass(MiniSignalBinding, [{
-    key: 'detach',
-    value: function detach() {
-      if (this._owner === null) return false;
-      this._owner.detach(this);
-      return true;
-    }
-  }]);
-
-  return MiniSignalBinding;
-})();
-
-function _addMiniSignalBinding(self, node) {
-  if (!self._head) {
-    self._head = node;
-    self._tail = node;
-  } else {
-    self._tail._next = node;
-    node._prev = self._tail;
-    self._tail = node;
-  }
-
-  node._owner = self;
-
-  return node;
+function Url() {
+  this.protocol = null;
+  this.slashes = null;
+  this.auth = null;
+  this.host = null;
+  this.port = null;
+  this.hostname = null;
+  this.hash = null;
+  this.search = null;
+  this.query = null;
+  this.pathname = null;
+  this.path = null;
+  this.href = null;
 }
 
-var MiniSignal = (function () {
-  function MiniSignal() {
-    _classCallCheck(this, MiniSignal);
+// Reference: RFC 3986, RFC 1808, RFC 2396
 
-    this._head = this._tail = undefined;
-  }
+// define these here so at least they only have to be
+// compiled once on the first module load.
+var protocolPattern = /^([a-z0-9.+-]+:)/i,
+    portPattern = /:[0-9]*$/,
 
-  _createClass(MiniSignal, [{
-    key: 'handlers',
-    value: function handlers() {
-      var exists = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+    // Special case for a simple path URL
+    simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/,
 
-      var node = this._head;
+    // RFC 2396: characters reserved for delimiting URLs.
+    // We actually just auto-escape these.
+    delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
 
-      if (exists) return !!node;
+    // RFC 2396: characters not allowed for various reasons.
+    unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
 
-      var ee = [];
-
-      while (node) {
-        ee.push(node);
-        node = node._next;
-      }
-
-      return ee;
-    }
-  }, {
-    key: 'has',
-    value: function has(node) {
-      if (!(node instanceof MiniSignalBinding)) {
-        throw new Error('MiniSignal#has(): First arg must be a MiniSignalBinding object.');
-      }
-
-      return node._owner === this;
-    }
-  }, {
-    key: 'dispatch',
-    value: function dispatch() {
-      var node = this._head;
-
-      if (!node) return false;
-
-      while (node) {
-        if (node._once) this.detach(node);
-        node._fn.apply(node._thisArg, arguments);
-        node = node._next;
-      }
-
-      return true;
-    }
-  }, {
-    key: 'add',
-    value: function add(fn) {
-      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-
-      if (typeof fn !== 'function') {
-        throw new Error('MiniSignal#add(): First arg must be a Function.');
-      }
-      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, false, thisArg));
-    }
-  }, {
-    key: 'once',
-    value: function once(fn) {
-      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-
-      if (typeof fn !== 'function') {
-        throw new Error('MiniSignal#once(): First arg must be a Function.');
-      }
-      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, true, thisArg));
-    }
-  }, {
-    key: 'detach',
-    value: function detach(node) {
-      if (!(node instanceof MiniSignalBinding)) {
-        throw new Error('MiniSignal#detach(): First arg must be a MiniSignalBinding object.');
-      }
-      if (node._owner !== this) return this;
-
-      if (node._prev) node._prev._next = node._next;
-      if (node._next) node._next._prev = node._prev;
-
-      if (node === this._head) {
-        this._head = node._next;
-        if (node._next === null) {
-          this._tail = null;
-        }
-      } else if (node === this._tail) {
-        this._tail = node._prev;
-        this._tail._next = null;
-      }
-
-      node._owner = null;
-      return this;
-    }
-  }, {
-    key: 'detachAll',
-    value: function detachAll() {
-      var node = this._head;
-      if (!node) return this;
-
-      this._head = this._tail = null;
-
-      while (node) {
-        node._owner = null;
-        node = node._next;
-      }
-      return this;
-    }
-  }]);
-
-  return MiniSignal;
-})();
-
-MiniSignal.MiniSignalBinding = MiniSignalBinding;
-
-exports['default'] = MiniSignal;
-module.exports = exports['default'];
-
-},{}],38:[function(require,module,exports){
-'use strict'
-
-module.exports = function parseURI (str, opts) {
-  opts = opts || {}
-
-  var o = {
-    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
-    q: {
-      name: 'queryKey',
-      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
+    autoEscape = ['\''].concat(unwise),
+    // Characters that are never ever allowed in a hostname.
+    // Note that any invalid chars are also handled, but these
+    // are the ones that are *expected* to be seen, so we fast-path
+    // them.
+    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
+    hostEndingChars = ['/', '?', '#'],
+    hostnameMaxLen = 255,
+    hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/,
+    hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/,
+    // protocols that can allow "unsafe" and "unwise" chars.
+    unsafeProtocol = {
+      'javascript': true,
+      'javascript:': true
     },
-    parser: {
-      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    // protocols that never have a hostname.
+    hostlessProtocol = {
+      'javascript': true,
+      'javascript:': true
+    },
+    // protocols that always contain a // bit.
+    slashedProtocol = {
+      'http': true,
+      'https': true,
+      'ftp': true,
+      'gopher': true,
+      'file': true,
+      'http:': true,
+      'https:': true,
+      'ftp:': true,
+      'gopher:': true,
+      'file:': true
+    },
+    querystring = require('querystring');
+
+function urlParse(url, parseQueryString, slashesDenoteHost) {
+  if (url && util.isObject(url) && url instanceof Url) return url;
+
+  var u = new Url;
+  u.parse(url, parseQueryString, slashesDenoteHost);
+  return u;
+}
+
+Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+  if (!util.isString(url)) {
+    throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
+  }
+
+  // Copy chrome, IE, opera backslash-handling behavior.
+  // Back slashes before the query string get converted to forward slashes
+  // See: https://code.google.com/p/chromium/issues/detail?id=25916
+  var queryIndex = url.indexOf('?'),
+      splitter =
+          (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+      uSplit = url.split(splitter),
+      slashRegex = /\\/g;
+  uSplit[0] = uSplit[0].replace(slashRegex, '/');
+  url = uSplit.join(splitter);
+
+  var rest = url;
+
+  // trim before proceeding.
+  // This is to support parse stuff like "  http://foo.com  \n"
+  rest = rest.trim();
+
+  if (!slashesDenoteHost && url.split('#').length === 1) {
+    // Try fast path regexp
+    var simplePath = simplePathPattern.exec(rest);
+    if (simplePath) {
+      this.path = rest;
+      this.href = rest;
+      this.pathname = simplePath[1];
+      if (simplePath[2]) {
+        this.search = simplePath[2];
+        if (parseQueryString) {
+          this.query = querystring.parse(this.search.substr(1));
+        } else {
+          this.query = this.search.substr(1);
+        }
+      } else if (parseQueryString) {
+        this.search = '';
+        this.query = {};
+      }
+      return this;
     }
   }
 
-  var m = o.parser[opts.strictMode ? 'strict' : 'loose'].exec(str)
-  var uri = {}
-  var i = 14
+  var proto = protocolPattern.exec(rest);
+  if (proto) {
+    proto = proto[0];
+    var lowerProto = proto.toLowerCase();
+    this.protocol = lowerProto;
+    rest = rest.substr(proto.length);
+  }
 
-  while (i--) uri[o.key[i]] = m[i] || ''
+  // figure out if it's got a host
+  // user@server is *always* interpreted as a hostname, and url
+  // resolution will treat //foo/bar as host=foo,path=bar because that's
+  // how the browser resolves relative URLs.
+  if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
+    var slashes = rest.substr(0, 2) === '//';
+    if (slashes && !(proto && hostlessProtocol[proto])) {
+      rest = rest.substr(2);
+      this.slashes = true;
+    }
+  }
 
-  uri[o.q.name] = {}
-  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-    if ($1) uri[o.q.name][$1] = $2
-  })
+  if (!hostlessProtocol[proto] &&
+      (slashes || (proto && !slashedProtocol[proto]))) {
 
-  return uri
+    // there's a hostname.
+    // the first instance of /, ?, ;, or # ends the host.
+    //
+    // If there is an @ in the hostname, then non-host chars *are* allowed
+    // to the left of the last @ sign, unless some host-ending character
+    // comes *before* the @-sign.
+    // URLs are obnoxious.
+    //
+    // ex:
+    // http://a@b@c/ => user:a@b host:c
+    // http://a@b?@c => user:a host:c path:/?@c
+
+    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+    // Review our test case against browsers more comprehensively.
+
+    // find the first instance of any hostEndingChars
+    var hostEnd = -1;
+    for (var i = 0; i < hostEndingChars.length; i++) {
+      var hec = rest.indexOf(hostEndingChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+
+    // at this point, either we have an explicit point where the
+    // auth portion cannot go past, or the last @ char is the decider.
+    var auth, atSign;
+    if (hostEnd === -1) {
+      // atSign can be anywhere.
+      atSign = rest.lastIndexOf('@');
+    } else {
+      // atSign must be in auth portion.
+      // http://a@b/c@d => host:b auth:a path:/c@d
+      atSign = rest.lastIndexOf('@', hostEnd);
+    }
+
+    // Now we have a portion which is definitely the auth.
+    // Pull that off.
+    if (atSign !== -1) {
+      auth = rest.slice(0, atSign);
+      rest = rest.slice(atSign + 1);
+      this.auth = decodeURIComponent(auth);
+    }
+
+    // the host is the remaining to the left of the first non-host char
+    hostEnd = -1;
+    for (var i = 0; i < nonHostChars.length; i++) {
+      var hec = rest.indexOf(nonHostChars[i]);
+      if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
+        hostEnd = hec;
+    }
+    // if we still have not hit it, then the entire thing is a host.
+    if (hostEnd === -1)
+      hostEnd = rest.length;
+
+    this.host = rest.slice(0, hostEnd);
+    rest = rest.slice(hostEnd);
+
+    // pull out port.
+    this.parseHost();
+
+    // we've indicated that there is a hostname,
+    // so even if it's empty, it has to be present.
+    this.hostname = this.hostname || '';
+
+    // if hostname begins with [ and ends with ]
+    // assume that it's an IPv6 address.
+    var ipv6Hostname = this.hostname[0] === '[' &&
+        this.hostname[this.hostname.length - 1] === ']';
+
+    // validate a little.
+    if (!ipv6Hostname) {
+      var hostparts = this.hostname.split(/\./);
+      for (var i = 0, l = hostparts.length; i < l; i++) {
+        var part = hostparts[i];
+        if (!part) continue;
+        if (!part.match(hostnamePartPattern)) {
+          var newpart = '';
+          for (var j = 0, k = part.length; j < k; j++) {
+            if (part.charCodeAt(j) > 127) {
+              // we replace non-ASCII char with a temporary placeholder
+              // we need this to make sure size of hostname is not
+              // broken by replacing non-ASCII by nothing
+              newpart += 'x';
+            } else {
+              newpart += part[j];
+            }
+          }
+          // we test again with ASCII char only
+          if (!newpart.match(hostnamePartPattern)) {
+            var validParts = hostparts.slice(0, i);
+            var notHost = hostparts.slice(i + 1);
+            var bit = part.match(hostnamePartStart);
+            if (bit) {
+              validParts.push(bit[1]);
+              notHost.unshift(bit[2]);
+            }
+            if (notHost.length) {
+              rest = '/' + notHost.join('.') + rest;
+            }
+            this.hostname = validParts.join('.');
+            break;
+          }
+        }
+      }
+    }
+
+    if (this.hostname.length > hostnameMaxLen) {
+      this.hostname = '';
+    } else {
+      // hostnames are always lower case.
+      this.hostname = this.hostname.toLowerCase();
+    }
+
+    if (!ipv6Hostname) {
+      // IDNA Support: Returns a punycoded representation of "domain".
+      // It only converts parts of the domain name that
+      // have non-ASCII characters, i.e. it doesn't matter if
+      // you call it with a domain that already is ASCII-only.
+      this.hostname = punycode.toASCII(this.hostname);
+    }
+
+    var p = this.port ? ':' + this.port : '';
+    var h = this.hostname || '';
+    this.host = h + p;
+    this.href += this.host;
+
+    // strip [ and ] from the hostname
+    // the host field still retains them, though
+    if (ipv6Hostname) {
+      this.hostname = this.hostname.substr(1, this.hostname.length - 2);
+      if (rest[0] !== '/') {
+        rest = '/' + rest;
+      }
+    }
+  }
+
+  // now rest is set to the post-host stuff.
+  // chop off any delim chars.
+  if (!unsafeProtocol[lowerProto]) {
+
+    // First, make 100% sure that any "autoEscape" chars get
+    // escaped, even if encodeURIComponent doesn't think they
+    // need to be.
+    for (var i = 0, l = autoEscape.length; i < l; i++) {
+      var ae = autoEscape[i];
+      if (rest.indexOf(ae) === -1)
+        continue;
+      var esc = encodeURIComponent(ae);
+      if (esc === ae) {
+        esc = escape(ae);
+      }
+      rest = rest.split(ae).join(esc);
+    }
+  }
+
+
+  // chop off from the tail first.
+  var hash = rest.indexOf('#');
+  if (hash !== -1) {
+    // got a fragment string.
+    this.hash = rest.substr(hash);
+    rest = rest.slice(0, hash);
+  }
+  var qm = rest.indexOf('?');
+  if (qm !== -1) {
+    this.search = rest.substr(qm);
+    this.query = rest.substr(qm + 1);
+    if (parseQueryString) {
+      this.query = querystring.parse(this.query);
+    }
+    rest = rest.slice(0, qm);
+  } else if (parseQueryString) {
+    // no query string, but parseQueryString still requested
+    this.search = '';
+    this.query = {};
+  }
+  if (rest) this.pathname = rest;
+  if (slashedProtocol[lowerProto] &&
+      this.hostname && !this.pathname) {
+    this.pathname = '/';
+  }
+
+  //to support http.request
+  if (this.pathname || this.search) {
+    var p = this.pathname || '';
+    var s = this.search || '';
+    this.path = p + s;
+  }
+
+  // finally, reconstruct the href based on what has been validated.
+  this.href = this.format();
+  return this;
+};
+
+// format a parsed object into a url string
+function urlFormat(obj) {
+  // ensure it's an object, and not a string url.
+  // If it's an obj, this is a no-op.
+  // this way, you can call url_format() on strings
+  // to clean up potentially wonky urls.
+  if (util.isString(obj)) obj = urlParse(obj);
+  if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
+  return obj.format();
 }
 
-},{}],39:[function(require,module,exports){
+Url.prototype.format = function() {
+  var auth = this.auth || '';
+  if (auth) {
+    auth = encodeURIComponent(auth);
+    auth = auth.replace(/%3A/i, ':');
+    auth += '@';
+  }
+
+  var protocol = this.protocol || '',
+      pathname = this.pathname || '',
+      hash = this.hash || '',
+      host = false,
+      query = '';
+
+  if (this.host) {
+    host = auth + this.host;
+  } else if (this.hostname) {
+    host = auth + (this.hostname.indexOf(':') === -1 ?
+        this.hostname :
+        '[' + this.hostname + ']');
+    if (this.port) {
+      host += ':' + this.port;
+    }
+  }
+
+  if (this.query &&
+      util.isObject(this.query) &&
+      Object.keys(this.query).length) {
+    query = querystring.stringify(this.query);
+  }
+
+  var search = this.search || (query && ('?' + query)) || '';
+
+  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+
+  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+  // unless they had them to begin with.
+  if (this.slashes ||
+      (!protocol || slashedProtocol[protocol]) && host !== false) {
+    host = '//' + (host || '');
+    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
+  } else if (!host) {
+    host = '';
+  }
+
+  if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
+  if (search && search.charAt(0) !== '?') search = '?' + search;
+
+  pathname = pathname.replace(/[?#]/g, function(match) {
+    return encodeURIComponent(match);
+  });
+  search = search.replace('#', '%23');
+
+  return protocol + host + pathname + search + hash;
+};
+
+function urlResolve(source, relative) {
+  return urlParse(source, false, true).resolve(relative);
+}
+
+Url.prototype.resolve = function(relative) {
+  return this.resolveObject(urlParse(relative, false, true)).format();
+};
+
+function urlResolveObject(source, relative) {
+  if (!source) return relative;
+  return urlParse(source, false, true).resolveObject(relative);
+}
+
+Url.prototype.resolveObject = function(relative) {
+  if (util.isString(relative)) {
+    var rel = new Url();
+    rel.parse(relative, false, true);
+    relative = rel;
+  }
+
+  var result = new Url();
+  var tkeys = Object.keys(this);
+  for (var tk = 0; tk < tkeys.length; tk++) {
+    var tkey = tkeys[tk];
+    result[tkey] = this[tkey];
+  }
+
+  // hash is always overridden, no matter what.
+  // even href="" will remove it.
+  result.hash = relative.hash;
+
+  // if the relative url is empty, then there's nothing left to do here.
+  if (relative.href === '') {
+    result.href = result.format();
+    return result;
+  }
+
+  // hrefs like //foo/bar always cut to the protocol.
+  if (relative.slashes && !relative.protocol) {
+    // take everything except the protocol from relative
+    var rkeys = Object.keys(relative);
+    for (var rk = 0; rk < rkeys.length; rk++) {
+      var rkey = rkeys[rk];
+      if (rkey !== 'protocol')
+        result[rkey] = relative[rkey];
+    }
+
+    //urlParse appends trailing / to urls like http://www.example.com
+    if (slashedProtocol[result.protocol] &&
+        result.hostname && !result.pathname) {
+      result.path = result.pathname = '/';
+    }
+
+    result.href = result.format();
+    return result;
+  }
+
+  if (relative.protocol && relative.protocol !== result.protocol) {
+    // if it's a known url protocol, then changing
+    // the protocol does weird things
+    // first, if it's not file:, then we MUST have a host,
+    // and if there was a path
+    // to begin with, then we MUST have a path.
+    // if it is file:, then the host is dropped,
+    // because that's known to be hostless.
+    // anything else is assumed to be absolute.
+    if (!slashedProtocol[relative.protocol]) {
+      var keys = Object.keys(relative);
+      for (var v = 0; v < keys.length; v++) {
+        var k = keys[v];
+        result[k] = relative[k];
+      }
+      result.href = result.format();
+      return result;
+    }
+
+    result.protocol = relative.protocol;
+    if (!relative.host && !hostlessProtocol[relative.protocol]) {
+      var relPath = (relative.pathname || '').split('/');
+      while (relPath.length && !(relative.host = relPath.shift()));
+      if (!relative.host) relative.host = '';
+      if (!relative.hostname) relative.hostname = '';
+      if (relPath[0] !== '') relPath.unshift('');
+      if (relPath.length < 2) relPath.unshift('');
+      result.pathname = relPath.join('/');
+    } else {
+      result.pathname = relative.pathname;
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    result.host = relative.host || '';
+    result.auth = relative.auth;
+    result.hostname = relative.hostname || relative.host;
+    result.port = relative.port;
+    // to support http.request
+    if (result.pathname || result.search) {
+      var p = result.pathname || '';
+      var s = result.search || '';
+      result.path = p + s;
+    }
+    result.slashes = result.slashes || relative.slashes;
+    result.href = result.format();
+    return result;
+  }
+
+  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
+      isRelAbs = (
+          relative.host ||
+          relative.pathname && relative.pathname.charAt(0) === '/'
+      ),
+      mustEndAbs = (isRelAbs || isSourceAbs ||
+                    (result.host && relative.pathname)),
+      removeAllDots = mustEndAbs,
+      srcPath = result.pathname && result.pathname.split('/') || [],
+      relPath = relative.pathname && relative.pathname.split('/') || [],
+      psychotic = result.protocol && !slashedProtocol[result.protocol];
+
+  // if the url is a non-slashed url, then relative
+  // links like ../.. should be able
+  // to crawl up to the hostname, as well.  This is strange.
+  // result.protocol has already been set by now.
+  // Later on, put the first path part into the host field.
+  if (psychotic) {
+    result.hostname = '';
+    result.port = null;
+    if (result.host) {
+      if (srcPath[0] === '') srcPath[0] = result.host;
+      else srcPath.unshift(result.host);
+    }
+    result.host = '';
+    if (relative.protocol) {
+      relative.hostname = null;
+      relative.port = null;
+      if (relative.host) {
+        if (relPath[0] === '') relPath[0] = relative.host;
+        else relPath.unshift(relative.host);
+      }
+      relative.host = null;
+    }
+    mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+  }
+
+  if (isRelAbs) {
+    // it's absolute.
+    result.host = (relative.host || relative.host === '') ?
+                  relative.host : result.host;
+    result.hostname = (relative.hostname || relative.hostname === '') ?
+                      relative.hostname : result.hostname;
+    result.search = relative.search;
+    result.query = relative.query;
+    srcPath = relPath;
+    // fall through to the dot-handling below.
+  } else if (relPath.length) {
+    // it's relative
+    // throw away the existing file, and take the new path instead.
+    if (!srcPath) srcPath = [];
+    srcPath.pop();
+    srcPath = srcPath.concat(relPath);
+    result.search = relative.search;
+    result.query = relative.query;
+  } else if (!util.isNullOrUndefined(relative.search)) {
+    // just pull out the search.
+    // like href='?foo'.
+    // Put this after the other two cases because it simplifies the booleans
+    if (psychotic) {
+      result.hostname = result.host = srcPath.shift();
+      //occationaly the auth can get stuck only in host
+      //this especially happens in cases like
+      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                       result.host.split('@') : false;
+      if (authInHost) {
+        result.auth = authInHost.shift();
+        result.host = result.hostname = authInHost.shift();
+      }
+    }
+    result.search = relative.search;
+    result.query = relative.query;
+    //to support http.request
+    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+      result.path = (result.pathname ? result.pathname : '') +
+                    (result.search ? result.search : '');
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  if (!srcPath.length) {
+    // no path at all.  easy.
+    // we've already handled the other stuff above.
+    result.pathname = null;
+    //to support http.request
+    if (result.search) {
+      result.path = '/' + result.search;
+    } else {
+      result.path = null;
+    }
+    result.href = result.format();
+    return result;
+  }
+
+  // if a url ENDs in . or .., then it must get a trailing slash.
+  // however, if it ends in anything else non-slashy,
+  // then it must NOT get a trailing slash.
+  var last = srcPath.slice(-1)[0];
+  var hasTrailingSlash = (
+      (result.host || relative.host || srcPath.length > 1) &&
+      (last === '.' || last === '..') || last === '');
+
+  // strip single dots, resolve double dots to parent dir
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = srcPath.length; i >= 0; i--) {
+    last = srcPath[i];
+    if (last === '.') {
+      srcPath.splice(i, 1);
+    } else if (last === '..') {
+      srcPath.splice(i, 1);
+      up++;
+    } else if (up) {
+      srcPath.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (!mustEndAbs && !removeAllDots) {
+    for (; up--; up) {
+      srcPath.unshift('..');
+    }
+  }
+
+  if (mustEndAbs && srcPath[0] !== '' &&
+      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
+    srcPath.unshift('');
+  }
+
+  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+    srcPath.push('');
+  }
+
+  var isAbsolute = srcPath[0] === '' ||
+      (srcPath[0] && srcPath[0].charAt(0) === '/');
+
+  // put the host back
+  if (psychotic) {
+    result.hostname = result.host = isAbsolute ? '' :
+                                    srcPath.length ? srcPath.shift() : '';
+    //occationaly the auth can get stuck only in host
+    //this especially happens in cases like
+    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
+    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+                     result.host.split('@') : false;
+    if (authInHost) {
+      result.auth = authInHost.shift();
+      result.host = result.hostname = authInHost.shift();
+    }
+  }
+
+  mustEndAbs = mustEndAbs || (result.host && srcPath.length);
+
+  if (mustEndAbs && !isAbsolute) {
+    srcPath.unshift('');
+  }
+
+  if (!srcPath.length) {
+    result.pathname = null;
+    result.path = null;
+  } else {
+    result.pathname = srcPath.join('/');
+  }
+
+  //to support request.http
+  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+    result.path = (result.pathname ? result.pathname : '') +
+                  (result.search ? result.search : '');
+  }
+  result.auth = relative.auth || result.auth;
+  result.slashes = result.slashes || relative.slashes;
+  result.href = result.format();
+  return result;
+};
+
+Url.prototype.parseHost = function() {
+  var host = this.host;
+  var port = portPattern.exec(host);
+  if (port) {
+    port = port[0];
+    if (port !== ':') {
+      this.port = port.substr(1);
+    }
+    host = host.substr(0, host.length - port.length);
+  }
+  if (host) this.hostname = host;
+};
+
+},{"./util":39,"punycode":27,"querystring":30}],39:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+  isString: function(arg) {
+    return typeof(arg) === 'string';
+  },
+  isObject: function(arg) {
+    return typeof(arg) === 'object' && arg !== null;
+  },
+  isNull: function(arg) {
+    return arg === null;
+  },
+  isNullOrUndefined: function(arg) {
+    return arg == null;
+  }
+};
+
+},{}],40:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -7787,7 +7819,7 @@ exports.default = AccessibilityManager;
 core.WebGLRenderer.registerPlugin('accessibility', AccessibilityManager);
 core.CanvasRenderer.registerPlugin('accessibility', AccessibilityManager);
 
-},{"../core":64,"./accessibleTarget":40,"ismobilejs":4}],40:[function(require,module,exports){
+},{"../core":65,"./accessibleTarget":41,"ismobilejs":4}],41:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -7845,7 +7877,7 @@ exports.default = {
   _accessibleDiv: false
 };
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -7870,7 +7902,7 @@ Object.defineProperty(exports, 'AccessibilityManager', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./AccessibilityManager":39,"./accessibleTarget":40}],42:[function(require,module,exports){
+},{"./AccessibilityManager":40,"./accessibleTarget":41}],43:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -7923,11 +7955,19 @@ var Application = function () {
      * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
      * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
      * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation, enable this if you
-     *      need to call toDataUrl on the webgl context
+     *  need to call toDataUrl on the webgl context
      * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer, retina would be 2
      * @param {boolean} [options.forceCanvas=false] - prevents selection of WebGL renderer, even if such is present
-     * @param {boolean} [options.legacy=false] - If true Pixi will aim to ensure compatibility
-     * with older / less advanced devices. If you experience unexplained flickering try setting this to true.
+     * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
+     *  (shown if not transparent).
+     * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
+     *   not before the new render pass.
+     * @param {boolean} [options.roundPixels=false] - If true Pixi will Math.floor() x/y values when rendering,
+     *  stopping pixel interpolation.
+     * @param {boolean} [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
+     *  FXAA is faster, but may not always look as great **webgl only**
+     * @param {boolean} [options.legacy=false] - `true` to ensure compatibility with older / less advanced devices.
+     *  If you experience unexplained flickering try setting this to true. **webgl only**
      * @param {boolean} [options.sharedTicker=false] - `true` to use PIXI.ticker.shared, `false` to create new ticker.
      * @param {boolean} [options.sharedLoader=false] - `true` to use PIXI.loaders.shared, `false` to create new Loader.
      */
@@ -8077,7 +8117,7 @@ var Application = function () {
 
 exports.default = Application;
 
-},{"./autoDetectRenderer":44,"./const":45,"./display/Container":47,"./settings":100,"./ticker":119}],43:[function(require,module,exports){
+},{"./autoDetectRenderer":45,"./const":46,"./display/Container":48,"./settings":101,"./ticker":120}],44:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -8141,7 +8181,7 @@ var Shader = function (_GLShader) {
 
 exports.default = Shader;
 
-},{"./settings":100,"pixi-gl-core":12}],44:[function(require,module,exports){
+},{"./settings":101,"pixi-gl-core":15}],45:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -8178,9 +8218,19 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
  * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
  * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
  * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation, enable this if you
- *      need to call toDataUrl on the webgl context
+ *  need to call toDataUrl on the webgl context
+ * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
+ *  (shown if not transparent).
+ * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
+ *   not before the new render pass.
  * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer, retina would be 2
  * @param {boolean} [options.forceCanvas=false] - prevents selection of WebGL renderer, even if such is present
+ * @param {boolean} [options.roundPixels=false] - If true Pixi will Math.floor() x/y values when rendering,
+ *  stopping pixel interpolation.
+ * @param {boolean} [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
+ *  FXAA is faster, but may not always look as great **webgl only**
+ * @param {boolean} [options.legacy=false] - `true` to ensure compatibility with older / less advanced devices.
+ *  If you experience unexplained flickering try setting this to true. **webgl only**
  * @return {PIXI.WebGLRenderer|PIXI.CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
  */
 function autoDetectRenderer(options, arg1, arg2, arg3) {
@@ -8198,7 +8248,7 @@ function autoDetectRenderer(options, arg1, arg2, arg3) {
     return new _CanvasRenderer2.default(options, arg1, arg2);
 }
 
-},{"./renderers/canvas/CanvasRenderer":76,"./renderers/webgl/WebGLRenderer":83,"./utils":123}],45:[function(require,module,exports){
+},{"./renderers/canvas/CanvasRenderer":77,"./renderers/webgl/WebGLRenderer":84,"./utils":124}],46:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -8211,7 +8261,7 @@ exports.__esModule = true;
  * @name VERSION
  * @type {string}
  */
-var VERSION = exports.VERSION = '4.5.1';
+var VERSION = exports.VERSION = '4.5.3';
 
 /**
  * Two Pi.
@@ -8307,7 +8357,10 @@ var BLEND_MODES = exports.BLEND_MODES = {
   HUE: 13,
   SATURATION: 14,
   COLOR: 15,
-  LUMINOSITY: 16
+  LUMINOSITY: 16,
+  NORMAL_NPM: 17,
+  ADD_NPM: 18,
+  SCREEN_NPM: 19
 };
 
 /**
@@ -8538,7 +8591,7 @@ var UPDATE_PRIORITY = exports.UPDATE_PRIORITY = {
   UTILITY: -50
 };
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -8881,7 +8934,7 @@ var Bounds = function () {
 
 exports.default = Bounds;
 
-},{"../math":69}],47:[function(require,module,exports){
+},{"../math":70}],48:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -9499,7 +9552,7 @@ var Container = function (_DisplayObject) {
 exports.default = Container;
 Container.prototype.containerUpdateTransform = Container.prototype.updateTransform;
 
-},{"../utils":123,"./DisplayObject":48}],48:[function(require,module,exports){
+},{"../utils":124,"./DisplayObject":49}],49:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10191,7 +10244,7 @@ var DisplayObject = function (_EventEmitter) {
 exports.default = DisplayObject;
 DisplayObject.prototype.displayObjectUpdateTransform = DisplayObject.prototype.updateTransform;
 
-},{"../const":45,"../math":69,"../settings":100,"./Bounds":46,"./Transform":49,"./TransformStatic":51,"eventemitter3":3}],49:[function(require,module,exports){
+},{"../const":46,"../math":70,"../settings":101,"./Bounds":47,"./Transform":50,"./TransformStatic":52,"eventemitter3":3}],50:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10372,7 +10425,7 @@ var Transform = function (_TransformBase) {
 
 exports.default = Transform;
 
-},{"../math":69,"./TransformBase":50}],50:[function(require,module,exports){
+},{"../math":70,"./TransformBase":51}],51:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10459,7 +10512,7 @@ TransformBase.prototype.updateWorldTransform = TransformBase.prototype.updateTra
 
 TransformBase.IDENTITY = new TransformBase();
 
-},{"../math":69}],51:[function(require,module,exports){
+},{"../math":70}],52:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -10669,7 +10722,7 @@ var TransformStatic = function (_TransformBase) {
 
 exports.default = TransformStatic;
 
-},{"../math":69,"./TransformBase":50}],52:[function(require,module,exports){
+},{"../math":70,"./TransformBase":51}],53:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -11553,6 +11606,16 @@ var Graphics = function (_Container) {
             // only deal with fills..
             if (data.shape) {
                 if (data.shape.contains(tempPoint.x, tempPoint.y)) {
+                    if (data.holes) {
+                        for (var _i = 0; _i < data.holes.length; _i++) {
+                            var hole = data.holes[_i];
+
+                            if (hole.contains(tempPoint.x, tempPoint.y)) {
+                                return false;
+                            }
+                        }
+                    }
+
                     return true;
                 }
             }
@@ -11670,10 +11733,10 @@ var Graphics = function (_Container) {
         var padding = this.boundsPadding;
 
         this._localBounds.minX = minX - padding;
-        this._localBounds.maxX = maxX + padding * 2;
+        this._localBounds.maxX = maxX + padding;
 
         this._localBounds.minY = minY - padding;
-        this._localBounds.maxY = maxY + padding * 2;
+        this._localBounds.maxY = maxY + padding;
     };
 
     /**
@@ -11831,7 +11894,7 @@ exports.default = Graphics;
 
 Graphics._SPRITE_TEXTURE = null;
 
-},{"../const":45,"../display/Bounds":46,"../display/Container":47,"../math":69,"../renderers/canvas/CanvasRenderer":76,"../sprites/Sprite":101,"../textures/RenderTexture":112,"../textures/Texture":114,"../utils":123,"./GraphicsData":53,"./utils/bezierCurveTo":55}],53:[function(require,module,exports){
+},{"../const":46,"../display/Bounds":47,"../display/Container":48,"../math":70,"../renderers/canvas/CanvasRenderer":77,"../sprites/Sprite":102,"../textures/RenderTexture":113,"../textures/Texture":115,"../utils":124,"./GraphicsData":54,"./utils/bezierCurveTo":56}],54:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -11953,7 +12016,7 @@ var GraphicsData = function () {
 
 exports.default = GraphicsData;
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12222,7 +12285,7 @@ exports.default = CanvasGraphicsRenderer;
 
 _CanvasRenderer2.default.registerPlugin('graphics', CanvasGraphicsRenderer);
 
-},{"../../const":45,"../../renderers/canvas/CanvasRenderer":76}],55:[function(require,module,exports){
+},{"../../const":46,"../../renderers/canvas/CanvasRenderer":77}],56:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -12272,7 +12335,7 @@ function bezierCurveTo(fromX, fromY, cpX, cpY, cpX2, cpY2, toX, toY) {
     return path;
 }
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12537,7 +12600,7 @@ exports.default = GraphicsRenderer;
 
 _WebGLRenderer2.default.registerPlugin('graphics', GraphicsRenderer);
 
-},{"../../const":45,"../../renderers/webgl/WebGLRenderer":83,"../../renderers/webgl/utils/ObjectRenderer":93,"../../utils":123,"./WebGLGraphicsData":57,"./shaders/PrimitiveShader":58,"./utils/buildCircle":59,"./utils/buildPoly":61,"./utils/buildRectangle":62,"./utils/buildRoundedRectangle":63}],57:[function(require,module,exports){
+},{"../../const":46,"../../renderers/webgl/WebGLRenderer":84,"../../renderers/webgl/utils/ObjectRenderer":94,"../../utils":124,"./WebGLGraphicsData":58,"./shaders/PrimitiveShader":59,"./utils/buildCircle":60,"./utils/buildPoly":62,"./utils/buildRectangle":63,"./utils/buildRoundedRectangle":64}],58:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12680,7 +12743,7 @@ var WebGLGraphicsData = function () {
 
 exports.default = WebGLGraphicsData;
 
-},{"pixi-gl-core":12}],58:[function(require,module,exports){
+},{"pixi-gl-core":15}],59:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12725,7 +12788,7 @@ var PrimitiveShader = function (_Shader) {
 
 exports.default = PrimitiveShader;
 
-},{"../../../Shader":43}],59:[function(require,module,exports){
+},{"../../../Shader":44}],60:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -12818,7 +12881,7 @@ function buildCircle(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../const":45,"../../../utils":123,"./buildLine":60}],60:[function(require,module,exports){
+},{"../../../const":46,"../../../utils":124,"./buildLine":61}],61:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13088,7 +13151,7 @@ function buildNativeLine(graphicsData, webGLData) {
     }
 }
 
-},{"../../../math":69,"../../../utils":123}],61:[function(require,module,exports){
+},{"../../../math":70,"../../../utils":124}],62:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13174,7 +13237,7 @@ function buildPoly(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../utils":123,"./buildLine":60,"earcut":2}],62:[function(require,module,exports){
+},{"../../../utils":124,"./buildLine":61,"earcut":2}],63:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13250,7 +13313,7 @@ function buildRectangle(graphicsData, webGLData, webGLDataNativeLines) {
     }
 }
 
-},{"../../../utils":123,"./buildLine":60}],63:[function(require,module,exports){
+},{"../../../utils":124,"./buildLine":61}],64:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13406,7 +13469,7 @@ function quadraticBezierCurve(fromX, fromY, cpX, cpY, toX, toY) {
     return points;
 }
 
-},{"../../../utils":123,"./buildLine":60,"earcut":2}],64:[function(require,module,exports){
+},{"../../../utils":124,"./buildLine":61,"earcut":2}],65:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13783,7 +13846,7 @@ exports.WebGLRenderer = _WebGLRenderer2.default; /**
                                                   * @namespace PIXI
                                                   */
 
-},{"./Application":42,"./Shader":43,"./autoDetectRenderer":44,"./const":45,"./display/Bounds":46,"./display/Container":47,"./display/DisplayObject":48,"./display/Transform":49,"./display/TransformBase":50,"./display/TransformStatic":51,"./graphics/Graphics":52,"./graphics/GraphicsData":53,"./graphics/canvas/CanvasGraphicsRenderer":54,"./graphics/webgl/GraphicsRenderer":56,"./math":69,"./renderers/canvas/CanvasRenderer":76,"./renderers/canvas/utils/CanvasRenderTarget":78,"./renderers/webgl/WebGLRenderer":83,"./renderers/webgl/filters/Filter":85,"./renderers/webgl/filters/spriteMask/SpriteMaskFilter":88,"./renderers/webgl/managers/WebGLManager":92,"./renderers/webgl/utils/ObjectRenderer":93,"./renderers/webgl/utils/Quad":94,"./renderers/webgl/utils/RenderTarget":95,"./settings":100,"./sprites/Sprite":101,"./sprites/canvas/CanvasSpriteRenderer":102,"./sprites/canvas/CanvasTinter":103,"./sprites/webgl/SpriteRenderer":105,"./text/Text":107,"./text/TextMetrics":108,"./text/TextStyle":109,"./textures/BaseRenderTexture":110,"./textures/BaseTexture":111,"./textures/RenderTexture":112,"./textures/Spritesheet":113,"./textures/Texture":114,"./textures/TextureUvs":115,"./textures/VideoBaseTexture":116,"./ticker":119,"./utils":123,"pixi-gl-core":12}],65:[function(require,module,exports){
+},{"./Application":43,"./Shader":44,"./autoDetectRenderer":45,"./const":46,"./display/Bounds":47,"./display/Container":48,"./display/DisplayObject":49,"./display/Transform":50,"./display/TransformBase":51,"./display/TransformStatic":52,"./graphics/Graphics":53,"./graphics/GraphicsData":54,"./graphics/canvas/CanvasGraphicsRenderer":55,"./graphics/webgl/GraphicsRenderer":57,"./math":70,"./renderers/canvas/CanvasRenderer":77,"./renderers/canvas/utils/CanvasRenderTarget":79,"./renderers/webgl/WebGLRenderer":84,"./renderers/webgl/filters/Filter":86,"./renderers/webgl/filters/spriteMask/SpriteMaskFilter":89,"./renderers/webgl/managers/WebGLManager":93,"./renderers/webgl/utils/ObjectRenderer":94,"./renderers/webgl/utils/Quad":95,"./renderers/webgl/utils/RenderTarget":96,"./settings":101,"./sprites/Sprite":102,"./sprites/canvas/CanvasSpriteRenderer":103,"./sprites/canvas/CanvasTinter":104,"./sprites/webgl/SpriteRenderer":106,"./text/Text":108,"./text/TextMetrics":109,"./text/TextStyle":110,"./textures/BaseRenderTexture":111,"./textures/BaseTexture":112,"./textures/RenderTexture":113,"./textures/Spritesheet":114,"./textures/Texture":115,"./textures/TextureUvs":116,"./textures/VideoBaseTexture":117,"./ticker":120,"./utils":124,"pixi-gl-core":15}],66:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13975,7 +14038,7 @@ var GroupD8 = {
 
 exports.default = GroupD8;
 
-},{"./Matrix":66}],66:[function(require,module,exports){
+},{"./Matrix":67}],67:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14506,7 +14569,7 @@ var Matrix = function () {
 
 exports.default = Matrix;
 
-},{"./Point":68}],67:[function(require,module,exports){
+},{"./Point":69}],68:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14623,7 +14686,7 @@ var ObservablePoint = function () {
 
 exports.default = ObservablePoint;
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -14714,7 +14777,7 @@ var Point = function () {
 
 exports.default = Point;
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14802,7 +14865,7 @@ Object.defineProperty(exports, 'RoundedRectangle', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./GroupD8":65,"./Matrix":66,"./ObservablePoint":67,"./Point":68,"./shapes/Circle":70,"./shapes/Ellipse":71,"./shapes/Polygon":72,"./shapes/Rectangle":73,"./shapes/RoundedRectangle":74}],70:[function(require,module,exports){
+},{"./GroupD8":66,"./Matrix":67,"./ObservablePoint":68,"./Point":69,"./shapes/Circle":71,"./shapes/Ellipse":72,"./shapes/Polygon":73,"./shapes/Rectangle":74,"./shapes/RoundedRectangle":75}],71:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14916,7 +14979,7 @@ var Circle = function () {
 
 exports.default = Circle;
 
-},{"../../const":45,"./Rectangle":73}],71:[function(require,module,exports){
+},{"../../const":46,"./Rectangle":74}],72:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15038,7 +15101,7 @@ var Ellipse = function () {
 
 exports.default = Ellipse;
 
-},{"../../const":45,"./Rectangle":73}],72:[function(require,module,exports){
+},{"../../const":46,"./Rectangle":74}],73:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15169,7 +15232,7 @@ var Polygon = function () {
 
 exports.default = Polygon;
 
-},{"../../const":45,"../Point":68}],73:[function(require,module,exports){
+},{"../../const":46,"../Point":69}],74:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15432,7 +15495,7 @@ var Rectangle = function () {
 
 exports.default = Rectangle;
 
-},{"../../const":45}],74:[function(require,module,exports){
+},{"../../const":46}],75:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15565,7 +15628,7 @@ var RoundedRectangle = function () {
 
 exports.default = RoundedRectangle;
 
-},{"../../const":45}],75:[function(require,module,exports){
+},{"../../const":46}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15629,7 +15692,9 @@ var SystemRenderer = function (_EventEmitter) {
    * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
    * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer. The
    *  resolution of the renderer retina would be 2.
-   * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear the canvas or
+   * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation,
+   *  enable this if you need to call toDataUrl on the webgl context.
+   * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
    *      not before the new render pass.
    * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
    *  (shown if not transparent).
@@ -15878,7 +15943,6 @@ var SystemRenderer = function (_EventEmitter) {
     this._backgroundColorRgba = null;
     this._backgroundColorString = null;
 
-    this.backgroundColor = 0;
     this._tempDisplayObjectParent = null;
     this._lastObjectRendered = null;
   };
@@ -15927,7 +15991,7 @@ var SystemRenderer = function (_EventEmitter) {
 
 exports.default = SystemRenderer;
 
-},{"../const":45,"../display/Container":47,"../math":69,"../settings":100,"../textures/RenderTexture":112,"../utils":123,"eventemitter3":3}],76:[function(require,module,exports){
+},{"../const":46,"../display/Container":48,"../math":70,"../settings":101,"../textures/RenderTexture":113,"../utils":124,"eventemitter3":3}],77:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -15987,7 +16051,9 @@ var CanvasRenderer = function (_SystemRenderer) {
      * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
      * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer. The
      *  resolution of the renderer retina would be 2.
-     * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear the canvas or
+     * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation,
+     *  enable this if you need to call toDataUrl on the webgl context.
+     * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
      *      not before the new render pass.
      * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
      *  (shown if not transparent).
@@ -16002,11 +16068,18 @@ var CanvasRenderer = function (_SystemRenderer) {
         _this.type = _const.RENDERER_TYPE.CANVAS;
 
         /**
-         * The canvas 2d context that everything is drawn with.
+         * The root canvas 2d context that everything is drawn with.
          *
          * @member {CanvasRenderingContext2D}
          */
         _this.rootContext = _this.view.getContext('2d', { alpha: _this.transparent });
+
+        /**
+         * The currently active canvas 2d context (could change with renderTextures)
+         *
+         * @member {CanvasRenderingContext2D}
+         */
+        _this.context = _this.rootContext;
 
         /**
          * Boolean flag controlling canvas refresh.
@@ -16046,7 +16119,6 @@ var CanvasRenderer = function (_SystemRenderer) {
         _this.blendModes = (0, _mapCanvasBlendModesToPixi2.default)();
         _this._activeBlendMode = null;
 
-        _this.context = null;
         _this.renderingToScreen = false;
 
         _this.resize(_this.options.width, _this.options.height);
@@ -16271,7 +16343,7 @@ var CanvasRenderer = function (_SystemRenderer) {
 exports.default = CanvasRenderer;
 _utils.pluginTarget.mixin(CanvasRenderer);
 
-},{"../../const":45,"../../settings":100,"../../utils":123,"../SystemRenderer":75,"./utils/CanvasMaskManager":77,"./utils/CanvasRenderTarget":78,"./utils/mapCanvasBlendModesToPixi":80}],77:[function(require,module,exports){
+},{"../../const":46,"../../settings":101,"../../utils":124,"../SystemRenderer":76,"./utils/CanvasMaskManager":78,"./utils/CanvasRenderTarget":79,"./utils/mapCanvasBlendModesToPixi":81}],78:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -16439,7 +16511,7 @@ var CanvasMaskManager = function () {
 
 exports.default = CanvasMaskManager;
 
-},{"../../../const":45}],78:[function(require,module,exports){
+},{"../../../const":46}],79:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -16563,7 +16635,7 @@ var CanvasRenderTarget = function () {
 
 exports.default = CanvasRenderTarget;
 
-},{"../../../settings":100}],79:[function(require,module,exports){
+},{"../../../settings":101}],80:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -16624,7 +16696,7 @@ function canUseNewCanvasBlendModes() {
     return data[0] === 255 && data[1] === 0 && data[2] === 0;
 }
 
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -16688,11 +16760,15 @@ function mapCanvasBlendModesToPixi() {
         array[_const.BLEND_MODES.COLOR] = 'source-over';
         array[_const.BLEND_MODES.LUMINOSITY] = 'source-over';
     }
+    // not-premultiplied, only for webgl
+    array[_const.BLEND_MODES.NORMAL_NPM] = array[_const.BLEND_MODES.NORMAL];
+    array[_const.BLEND_MODES.ADD_NPM] = array[_const.BLEND_MODES.ADD];
+    array[_const.BLEND_MODES.SCREEN_NPM] = array[_const.BLEND_MODES.SCREEN];
 
     return array;
 }
 
-},{"../../../const":45,"./canUseNewCanvasBlendModes":79}],81:[function(require,module,exports){
+},{"../../../const":46,"./canUseNewCanvasBlendModes":80}],82:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -16812,7 +16888,7 @@ var TextureGarbageCollector = function () {
 
 exports.default = TextureGarbageCollector;
 
-},{"../../const":45,"../../settings":100}],82:[function(require,module,exports){
+},{"../../const":46,"../../settings":101}],83:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -17059,7 +17135,7 @@ var TextureManager = function () {
 
 exports.default = TextureManager;
 
-},{"../../const":45,"../../utils":123,"./utils/RenderTarget":95,"pixi-gl-core":12}],83:[function(require,module,exports){
+},{"../../const":46,"../../utils":124,"./utils/RenderTarget":96,"pixi-gl-core":15}],84:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -17159,13 +17235,15 @@ var WebGLRenderer = function (_SystemRenderer) {
      *  FXAA is faster, but may not always look as great
      * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer.
      *  The resolution of the renderer retina would be 2.
-     * @param {boolean} [options.clearBeforeRender=true] - This sets if the CanvasRenderer will clear
+     * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear
      *  the canvas or not before the new render pass. If you wish to set this to false, you *must* set
      *  preserveDrawingBuffer to `true`.
      * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation,
      *  enable this if you need to call toDataUrl on the webgl context.
      * @param {boolean} [options.roundPixels=false] - If true Pixi will Math.floor() x/y values when
      *  rendering, stopping pixel interpolation.
+     * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
+     *  (shown if not transparent).
      * @param {boolean} [options.legacy=false] - If true Pixi will aim to ensure compatibility
      * with older / less advanced devices. If you experiance unexplained flickering try setting this to true.
      */
@@ -17338,6 +17416,9 @@ var WebGLRenderer = function (_SystemRenderer) {
         }
 
         var maxTextures = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
+
+        this._activeShader = null;
+        this._activeVao = null;
 
         this.boundTextures = new Array(maxTextures);
         this.emptyTextures = new Array(maxTextures);
@@ -17632,7 +17713,7 @@ var WebGLRenderer = function (_SystemRenderer) {
      * @param {PIXI.Texture} texture - the new texture
      * @param {number} location - the suggested texture location
      * @param {boolean} forceLocation - force the location
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {number} bound texture location
      */
 
 
@@ -17776,8 +17857,8 @@ var WebGLRenderer = function (_SystemRenderer) {
 
 
     WebGLRenderer.prototype.handleContextRestored = function handleContextRestored() {
-        this._initContext();
         this.textureManager.removeAll();
+        this._initContext();
     };
 
     /**
@@ -17854,7 +17935,7 @@ var WebGLRenderer = function (_SystemRenderer) {
 exports.default = WebGLRenderer;
 _utils.pluginTarget.mixin(WebGLRenderer);
 
-},{"../../const":45,"../../textures/BaseTexture":111,"../../utils":123,"../SystemRenderer":75,"./TextureGarbageCollector":81,"./TextureManager":82,"./WebGLState":84,"./managers/FilterManager":89,"./managers/MaskManager":90,"./managers/StencilManager":91,"./utils/ObjectRenderer":93,"./utils/RenderTarget":95,"./utils/mapWebGLDrawModesToPixi":98,"./utils/validateContext":99,"pixi-gl-core":12}],84:[function(require,module,exports){
+},{"../../const":46,"../../textures/BaseTexture":112,"../../utils":124,"../SystemRenderer":76,"./TextureGarbageCollector":82,"./TextureManager":83,"./WebGLState":85,"./managers/FilterManager":90,"./managers/MaskManager":91,"./managers/StencilManager":92,"./utils/ObjectRenderer":94,"./utils/RenderTarget":96,"./utils/mapWebGLDrawModesToPixi":99,"./utils/validateContext":100,"pixi-gl-core":15}],85:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -18020,7 +18101,13 @@ var WebGLState = function () {
 
         this.activeState[BLEND_FUNC] = value;
 
-        this.gl.blendFunc(this.blendModes[value][0], this.blendModes[value][1]);
+        var mode = this.blendModes[value];
+
+        if (mode.length === 2) {
+            this.gl.blendFunc(mode[0], mode[1]);
+        } else {
+            this.gl.blendFuncSeparate(mode[0], mode[1], mode[2], mode[3]);
+        }
     };
 
     /**
@@ -18128,7 +18215,7 @@ var WebGLState = function () {
 
 exports.default = WebGLState;
 
-},{"./utils/mapWebGLBlendModesToPixi":97}],85:[function(require,module,exports){
+},{"./utils/mapWebGLBlendModesToPixi":98}],86:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -18304,7 +18391,7 @@ var Filter = function () {
 
 exports.default = Filter;
 
-},{"../../../const":45,"../../../settings":100,"../../../utils":123,"./extractUniformsFromSrc":86}],86:[function(require,module,exports){
+},{"../../../const":46,"../../../settings":101,"../../../utils":124,"./extractUniformsFromSrc":87}],87:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -18366,7 +18453,7 @@ function extractUniformsFromString(string) {
     return uniforms;
 }
 
-},{"pixi-gl-core":12}],87:[function(require,module,exports){
+},{"pixi-gl-core":15}],88:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -18448,7 +18535,7 @@ function calculateSpriteMatrix(outputMatrix, filterArea, textureSize, sprite) {
     return mappedMatrix;
 }
 
-},{"../../../math":69}],88:[function(require,module,exports){
+},{"../../../math":70}],89:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -18520,7 +18607,7 @@ var SpriteMaskFilter = function (_Filter) {
 
 exports.default = SpriteMaskFilter;
 
-},{"../../../../math":69,"../Filter":85,"path":23}],89:[function(require,module,exports){
+},{"../../../../math":70,"../Filter":86,"path":8}],90:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19090,7 +19177,7 @@ var FilterManager = function (_WebGLManager) {
 
 exports.default = FilterManager;
 
-},{"../../../Shader":43,"../../../math":69,"../filters/filterTransforms":87,"../utils/Quad":94,"../utils/RenderTarget":95,"./WebGLManager":92,"bit-twiddle":1}],90:[function(require,module,exports){
+},{"../../../Shader":44,"../../../math":70,"../filters/filterTransforms":88,"../utils/Quad":95,"../utils/RenderTarget":96,"./WebGLManager":93,"bit-twiddle":1}],91:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19300,7 +19387,7 @@ var MaskManager = function (_WebGLManager) {
 
 exports.default = MaskManager;
 
-},{"../filters/spriteMask/SpriteMaskFilter":88,"./WebGLManager":92}],91:[function(require,module,exports){
+},{"../filters/spriteMask/SpriteMaskFilter":89,"./WebGLManager":93}],92:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19434,7 +19521,7 @@ var StencilManager = function (_WebGLManager) {
 
 exports.default = StencilManager;
 
-},{"./WebGLManager":92}],92:[function(require,module,exports){
+},{"./WebGLManager":93}],93:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19489,7 +19576,7 @@ var WebGLManager = function () {
 
 exports.default = WebGLManager;
 
-},{}],93:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19567,7 +19654,7 @@ var ObjectRenderer = function (_WebGLManager) {
 
 exports.default = ObjectRenderer;
 
-},{"../managers/WebGLManager":92}],94:[function(require,module,exports){
+},{"../managers/WebGLManager":93}],95:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19748,7 +19835,7 @@ var Quad = function () {
 
 exports.default = Quad;
 
-},{"../../../utils/createIndicesForQuads":121,"pixi-gl-core":12}],95:[function(require,module,exports){
+},{"../../../utils/createIndicesForQuads":122,"pixi-gl-core":15}],96:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19963,7 +20050,7 @@ var RenderTarget = function () {
 
   RenderTarget.prototype.setFrame = function setFrame(destinationFrame, sourceFrame) {
     this.destinationFrame = destinationFrame || this.destinationFrame || this.defaultFrame;
-    this.sourceFrame = sourceFrame || this.sourceFrame || destinationFrame;
+    this.sourceFrame = sourceFrame || this.sourceFrame || this.destinationFrame;
   };
 
   /**
@@ -20075,7 +20162,7 @@ var RenderTarget = function () {
 
 exports.default = RenderTarget;
 
-},{"../../../const":45,"../../../math":69,"../../../settings":100,"pixi-gl-core":12}],96:[function(require,module,exports){
+},{"../../../const":46,"../../../math":70,"../../../settings":101,"pixi-gl-core":15}],97:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20148,7 +20235,7 @@ function generateIfTestSrc(maxIfs) {
     return src;
 }
 
-},{"pixi-gl-core":12}],97:[function(require,module,exports){
+},{"pixi-gl-core":15}],98:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20189,10 +20276,15 @@ function mapWebGLBlendModesToPixi(gl) {
     array[_const.BLEND_MODES.COLOR] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
     array[_const.BLEND_MODES.LUMINOSITY] = [gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
 
+    // not-premultiplied blend modes
+    array[_const.BLEND_MODES.NORMAL_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA];
+    array[_const.BLEND_MODES.ADD_NPM] = [gl.SRC_ALPHA, gl.DST_ALPHA, gl.ONE, gl.DST_ALPHA];
+    array[_const.BLEND_MODES.SCREEN_NPM] = [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_COLOR, gl.ONE, gl.ONE_MINUS_SRC_COLOR];
+
     return array;
 }
 
-},{"../../../const":45}],98:[function(require,module,exports){
+},{"../../../const":46}],99:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20224,7 +20316,7 @@ function mapWebGLDrawModesToPixi(gl) {
   return object;
 }
 
-},{"../../../const":45}],99:[function(require,module,exports){
+},{"../../../const":46}],100:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20240,7 +20332,7 @@ function validateContext(gl) {
     }
 }
 
-},{}],100:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20475,7 +20567,7 @@ exports.default = {
 
 };
 
-},{"./utils/canUploadSameBuffer":120,"./utils/maxRecommendedTextures":124}],101:[function(require,module,exports){
+},{"./utils/canUploadSameBuffer":121,"./utils/maxRecommendedTextures":126}],102:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -20888,10 +20980,10 @@ var Sprite = function (_Container) {
         var x1 = -width * this.anchor.x;
         var y1 = 0;
 
-        if (tempPoint.x > x1 && tempPoint.x < x1 + width) {
+        if (tempPoint.x >= x1 && tempPoint.x < x1 + width) {
             y1 = -height * this.anchor.y;
 
-            if (tempPoint.y > y1 && tempPoint.y < y1 + height) {
+            if (tempPoint.y >= y1 && tempPoint.y < y1 + height) {
                 return true;
             }
         }
@@ -21097,7 +21189,7 @@ var Sprite = function (_Container) {
 
 exports.default = Sprite;
 
-},{"../const":45,"../display/Container":47,"../math":69,"../textures/Texture":114,"../utils":123}],102:[function(require,module,exports){
+},{"../const":46,"../display/Container":48,"../math":70,"../textures/Texture":115,"../utils":124}],103:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -21218,7 +21310,7 @@ var CanvasSpriteRenderer = function () {
             var resolution = texture.baseTexture.resolution;
 
             if (sprite.tint !== 0xFFFFFF) {
-                if (sprite.cachedTint !== sprite.tint) {
+                if (sprite.cachedTint !== sprite.tint || sprite.tintedTexture.tintId !== sprite._texture._updateID) {
                     sprite.cachedTint = sprite.tint;
 
                     // TODO clean up caching - how to clean up the caches?
@@ -21250,7 +21342,7 @@ exports.default = CanvasSpriteRenderer;
 
 _CanvasRenderer2.default.registerPlugin('sprite', CanvasSpriteRenderer);
 
-},{"../../const":45,"../../math":69,"../../renderers/canvas/CanvasRenderer":76,"./CanvasTinter":103}],103:[function(require,module,exports){
+},{"../../const":46,"../../math":70,"../../renderers/canvas/CanvasRenderer":77,"./CanvasTinter":104}],104:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -21287,15 +21379,23 @@ var CanvasTinter = {
 
         texture.tintCache = texture.tintCache || {};
 
-        if (texture.tintCache[stringColor]) {
-            return texture.tintCache[stringColor];
+        var cachedTexture = texture.tintCache[stringColor];
+
+        var canvas = void 0;
+
+        if (cachedTexture) {
+            if (cachedTexture.tintId === texture._updateID) {
+                return texture.tintCache[stringColor];
+            }
+
+            canvas = texture.tintCache[stringColor];
+        } else {
+            canvas = CanvasTinter.canvas || document.createElement('canvas');
         }
 
-        // clone texture..
-        var canvas = CanvasTinter.canvas || document.createElement('canvas');
-
-        // CanvasTinter.tintWithPerPixel(texture, stringColor, canvas);
         CanvasTinter.tintMethod(texture, color, canvas);
+
+        canvas.tintId = texture._updateID;
 
         if (CanvasTinter.convertTintToImage) {
             // is this better?
@@ -21487,7 +21587,7 @@ CanvasTinter.tintMethod = CanvasTinter.canUseMultiply ? CanvasTinter.tintWithMul
 
 exports.default = CanvasTinter;
 
-},{"../../renderers/canvas/utils/canUseNewCanvasBlendModes":79,"../../utils":123}],104:[function(require,module,exports){
+},{"../../renderers/canvas/utils/canUseNewCanvasBlendModes":80,"../../utils":124}],105:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -21540,7 +21640,7 @@ var Buffer = function () {
 
 exports.default = Buffer;
 
-},{}],105:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -21572,6 +21672,8 @@ var _BatchBuffer2 = _interopRequireDefault(_BatchBuffer);
 var _settings = require('../../settings');
 
 var _settings2 = _interopRequireDefault(_settings);
+
+var _utils = require('../../utils');
 
 var _pixiGlCore = require('pixi-gl-core');
 
@@ -21801,7 +21903,7 @@ var SpriteRenderer = function (_ObjectRenderer) {
         var currentGroup = groups[0];
         var vertexData = void 0;
         var uvs = void 0;
-        var blendMode = sprites[0].blendMode;
+        var blendMode = _utils.premultiplyBlendMode[sprites[0]._texture.baseTexture.premultipliedAlpha ? 1 : 0][sprites[0].blendMode];
 
         currentGroup.textureCount = 0;
         currentGroup.start = 0;
@@ -21824,9 +21926,11 @@ var SpriteRenderer = function (_ObjectRenderer) {
 
             nextTexture = sprite._texture.baseTexture;
 
-            if (blendMode !== sprite.blendMode) {
+            var spriteBlendMode = _utils.premultiplyBlendMode[Number(nextTexture.premultipliedAlpha)][sprite.blendMode];
+
+            if (blendMode !== spriteBlendMode) {
                 // finish a group..
-                blendMode = sprite.blendMode;
+                blendMode = spriteBlendMode;
 
                 // force the batch to break!
                 currentTexture = null;
@@ -21925,10 +22029,12 @@ var SpriteRenderer = function (_ObjectRenderer) {
             uint32View[index + 7] = uvs[1];
             uint32View[index + 12] = uvs[2];
             uint32View[index + 17] = uvs[3];
-
             /* eslint-disable max-len */
-            uint32View[index + 3] = uint32View[index + 8] = uint32View[index + 13] = uint32View[index + 18] = sprite._tintRGB + (Math.min(sprite.worldAlpha, 1) * 255 << 24);
+            var alpha = Math.min(sprite.worldAlpha, 1.0);
+            // we dont call extra function if alpha is 1.0, that's faster
+            var argb = alpha < 1.0 && nextTexture.premultipliedAlpha ? (0, _utils.premultiplyTint)(sprite._tintRGB, alpha) : sprite._tintRGB + (alpha * 255 << 24);
 
+            uint32View[index + 3] = uint32View[index + 8] = uint32View[index + 13] = uint32View[index + 18] = argb;
             float32View[index + 4] = float32View[index + 9] = float32View[index + 14] = float32View[index + 19] = nextTexture._virtalBoundId;
             /* eslint-enable max-len */
 
@@ -22076,7 +22182,7 @@ exports.default = SpriteRenderer;
 
 _WebGLRenderer2.default.registerPlugin('sprite', SpriteRenderer);
 
-},{"../../renderers/webgl/WebGLRenderer":83,"../../renderers/webgl/utils/ObjectRenderer":93,"../../renderers/webgl/utils/checkMaxIfStatmentsInShader":96,"../../settings":100,"../../utils/createIndicesForQuads":121,"./BatchBuffer":104,"./generateMultiTextureShader":106,"bit-twiddle":1,"pixi-gl-core":12}],106:[function(require,module,exports){
+},{"../../renderers/webgl/WebGLRenderer":84,"../../renderers/webgl/utils/ObjectRenderer":94,"../../renderers/webgl/utils/checkMaxIfStatmentsInShader":97,"../../settings":101,"../../utils":124,"../../utils/createIndicesForQuads":122,"./BatchBuffer":105,"./generateMultiTextureShader":107,"bit-twiddle":1,"pixi-gl-core":15}],107:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22093,7 +22199,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var fragTemplate = ['varying vec2 vTextureCoord;', 'varying vec4 vColor;', 'varying float vTextureId;', 'uniform sampler2D uSamplers[%count%];', 'void main(void){', 'vec4 color;', 'float textureId = floor(vTextureId+0.5);', '%forloop%', 'gl_FragColor = color * vColor;', '}'].join('\n');
 
 function generateMultiTextureShader(gl, maxTextures) {
-    var vertexSrc = 'precision highp float;\nattribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\nattribute vec4 aColor;\nattribute float aTextureId;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\nvarying float vTextureId;\n\nvoid main(void){\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n\n    vTextureCoord = aTextureCoord;\n    vTextureId = aTextureId;\n    vColor = vec4(aColor.rgb * aColor.a, aColor.a);\n}\n';
+    var vertexSrc = 'precision highp float;\nattribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\nattribute vec4 aColor;\nattribute float aTextureId;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\nvarying float vTextureId;\n\nvoid main(void){\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n\n    vTextureCoord = aTextureCoord;\n    vTextureId = aTextureId;\n    vColor = aColor;\n}\n';
     var fragmentSrc = fragTemplate;
 
     fragmentSrc = fragmentSrc.replace(/%count%/gi, maxTextures);
@@ -22139,7 +22245,7 @@ function generateSampleSrc(maxTextures) {
     return src;
 }
 
-},{"../../Shader":43,"path":23}],107:[function(require,module,exports){
+},{"../../Shader":44,"path":8}],108:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22313,6 +22419,7 @@ var Text = function (_Sprite) {
 
         this._font = this._style.toFontString();
 
+        var context = this.context;
         var measured = _TextMetrics2.default.measureText(this._text, this._style, this._style.wordWrap, this.canvas);
         var width = measured.width;
         var height = measured.height;
@@ -22325,28 +22432,27 @@ var Text = function (_Sprite) {
         this.canvas.width = Math.ceil((width + style.padding * 2) * this.resolution);
         this.canvas.height = Math.ceil((height + style.padding * 2) * this.resolution);
 
-        this.context.scale(this.resolution, this.resolution);
+        context.scale(this.resolution, this.resolution);
 
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.context.font = this._font;
-        this.context.strokeStyle = style.stroke;
-        this.context.lineWidth = style.strokeThickness;
-        this.context.textBaseline = style.textBaseline;
-        this.context.lineJoin = style.lineJoin;
-        this.context.miterLimit = style.miterLimit;
+        context.font = this._font;
+        context.strokeStyle = style.stroke;
+        context.lineWidth = style.strokeThickness;
+        context.textBaseline = style.textBaseline;
+        context.lineJoin = style.lineJoin;
+        context.miterLimit = style.miterLimit;
 
         var linePositionX = void 0;
         var linePositionY = void 0;
 
         if (style.dropShadow) {
-            this.context.shadowBlur = style.dropShadowBlur;
-            this.context.globalAlpha = style.dropShadowAlpha;
+            context.fillStyle = style.dropShadowColor;
+            context.globalAlpha = style.dropShadowAlpha;
+            context.shadowBlur = style.dropShadowBlur;
 
             if (style.dropShadowBlur > 0) {
-                this.context.shadowColor = style.dropShadowColor;
-            } else {
-                this.context.fillStyle = style.dropShadowColor;
+                context.shadowColor = style.dropShadowColor;
             }
 
             var xShadowOffset = Math.cos(style.dropShadowAngle) * style.dropShadowDistance;
@@ -22366,20 +22472,20 @@ var Text = function (_Sprite) {
                     this.drawLetterSpacing(lines[i], linePositionX + xShadowOffset + style.padding, linePositionY + yShadowOffset + style.padding);
 
                     if (style.stroke && style.strokeThickness) {
-                        this.context.strokeStyle = style.dropShadowColor;
+                        context.strokeStyle = style.dropShadowColor;
                         this.drawLetterSpacing(lines[i], linePositionX + xShadowOffset + style.padding, linePositionY + yShadowOffset + style.padding, true);
-                        this.context.strokeStyle = style.stroke;
+                        context.strokeStyle = style.stroke;
                     }
                 }
             }
         }
 
         // reset the shadow blur and alpha that was set by the drop shadow, for the regular text
-        this.context.shadowBlur = 0;
-        this.context.globalAlpha = 1;
+        context.shadowBlur = 0;
+        context.globalAlpha = 1;
 
         // set canvas text styles
-        this.context.fillStyle = this._generateFillStyle(style, lines);
+        context.fillStyle = this._generateFillStyle(style, lines);
 
         // draw lines line by line
         for (var _i = 0; _i < lines.length; _i++) {
@@ -22457,28 +22563,31 @@ var Text = function (_Sprite) {
 
 
     Text.prototype.updateTexture = function updateTexture() {
-        if (this._style.trim) {
-            var trimmed = (0, _trimCanvas2.default)(this.canvas);
+        var canvas = this.canvas;
 
-            this.canvas.width = trimmed.width;
-            this.canvas.height = trimmed.height;
+        if (this._style.trim) {
+            var trimmed = (0, _trimCanvas2.default)(canvas);
+
+            canvas.width = trimmed.width;
+            canvas.height = trimmed.height;
             this.context.putImageData(trimmed.data, 0, 0);
         }
 
         var texture = this._texture;
         var style = this._style;
         var padding = style.trim ? 0 : style.padding;
+        var baseTexture = texture.baseTexture;
 
-        texture.baseTexture.hasLoaded = true;
-        texture.baseTexture.resolution = this.resolution;
+        baseTexture.hasLoaded = true;
+        baseTexture.resolution = this.resolution;
 
-        texture.baseTexture.realWidth = this.canvas.width;
-        texture.baseTexture.realHeight = this.canvas.height;
-        texture.baseTexture.width = this.canvas.width / this.resolution;
-        texture.baseTexture.height = this.canvas.height / this.resolution;
-        texture.trim.width = texture._frame.width = this.canvas.width / this.resolution;
-        texture.trim.height = texture._frame.height = this.canvas.height / this.resolution;
+        baseTexture.realWidth = canvas.width;
+        baseTexture.realHeight = canvas.height;
+        baseTexture.width = canvas.width / this.resolution;
+        baseTexture.height = canvas.height / this.resolution;
 
+        texture.trim.width = texture._frame.width = canvas.width / this.resolution;
+        texture.trim.height = texture._frame.height = canvas.height / this.resolution;
         texture.trim.x = -padding;
         texture.trim.y = -padding;
 
@@ -22488,7 +22597,7 @@ var Text = function (_Sprite) {
         // call sprite onTextureUpdate to update scale if _width or _height were set
         this._onTextureUpdate();
 
-        texture.baseTexture.emit('update', texture.baseTexture);
+        baseTexture.emit('update', baseTexture);
 
         this.dirty = false;
     };
@@ -22791,7 +22900,7 @@ var Text = function (_Sprite) {
 
 exports.default = Text;
 
-},{"../const":45,"../math":69,"../settings":100,"../sprites/Sprite":101,"../textures/Texture":114,"../utils":123,"../utils/trimCanvas":127,"./TextMetrics":108,"./TextStyle":109}],108:[function(require,module,exports){
+},{"../const":46,"../math":70,"../settings":101,"../sprites/Sprite":102,"../textures/Texture":115,"../utils":124,"../utils/trimCanvas":129,"./TextMetrics":109,"./TextStyle":110}],109:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23093,7 +23202,7 @@ TextMetrics._context = canvas.getContext('2d');
  */
 TextMetrics._fonts = {};
 
-},{}],109:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23114,7 +23223,7 @@ var defaultStyle = {
     dropShadowAlpha: 1,
     dropShadowAngle: Math.PI / 6,
     dropShadowBlur: 0,
-    dropShadowColor: '#000000',
+    dropShadowColor: 'black',
     dropShadowDistance: 5,
     fill: 'black',
     fillGradientType: _const.TEXT_GRADIENT.LINEAR_VERTICAL,
@@ -23156,7 +23265,7 @@ var TextStyle = function () {
      * @param {number} [style.dropShadowAlpha=1] - Set alpha for the drop shadow
      * @param {number} [style.dropShadowAngle=Math.PI/6] - Set a angle of the drop shadow
      * @param {number} [style.dropShadowBlur=0] - Set a shadow blur radius
-     * @param {string} [style.dropShadowColor='#000000'] - A fill style to be used on the dropshadow e.g 'red', '#00FF00'
+     * @param {string} [style.dropShadowColor='black'] - A fill style to be used on the dropshadow e.g 'red', '#00FF00'
      * @param {number} [style.dropShadowDistance=5] - Set a distance of the drop shadow
      * @param {string|string[]|number|number[]|CanvasGradient|CanvasPattern} [style.fill='black'] - A canvas
      *  fillstyle that will be used on the text e.g 'red', '#00FF00'. Can be an array to create a gradient
@@ -23627,7 +23736,7 @@ function areArraysEqual(array1, array2) {
     return true;
 }
 
-},{"../const":45,"../utils":123}],110:[function(require,module,exports){
+},{"../const":46,"../utils":124}],111:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23786,7 +23895,7 @@ var BaseRenderTexture = function (_BaseTexture) {
 
 exports.default = BaseRenderTexture;
 
-},{"../settings":100,"./BaseTexture":111}],111:[function(require,module,exports){
+},{"../settings":101,"./BaseTexture":112}],112:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24469,6 +24578,8 @@ var BaseTexture = function (_EventEmitter) {
 
             if (crossorigin === undefined && imageUrl.indexOf('data:') !== 0) {
                 image.crossOrigin = (0, _determineCrossOrigin2.default)(imageUrl);
+            } else if (crossorigin) {
+                image.crossOrigin = typeof crossorigin === 'string' ? crossorigin : 'anonymous';
             }
 
             baseTexture = new BaseTexture(image, scaleMode);
@@ -24626,7 +24737,7 @@ var BaseTexture = function (_EventEmitter) {
 
 exports.default = BaseTexture;
 
-},{"../settings":100,"../utils":123,"../utils/determineCrossOrigin":122,"bit-twiddle":1,"eventemitter3":3}],112:[function(require,module,exports){
+},{"../settings":101,"../utils":124,"../utils/determineCrossOrigin":123,"bit-twiddle":1,"eventemitter3":3}],113:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24777,7 +24888,7 @@ var RenderTexture = function (_Texture) {
 
 exports.default = RenderTexture;
 
-},{"./BaseRenderTexture":110,"./Texture":114}],113:[function(require,module,exports){
+},{"./BaseRenderTexture":111,"./Texture":115}],114:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25038,7 +25149,7 @@ var Spritesheet = function () {
 
 exports.default = Spritesheet;
 
-},{"../":64,"../utils":123}],114:[function(require,module,exports){
+},{"../":65,"../utils":124}],115:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25711,7 +25822,7 @@ Texture.WHITE = createWhiteTexture();
 removeAllHandlers(Texture.WHITE);
 removeAllHandlers(Texture.WHITE.baseTexture);
 
-},{"../math":69,"../settings":100,"../utils":123,"./BaseTexture":111,"./TextureUvs":115,"./VideoBaseTexture":116,"eventemitter3":3}],115:[function(require,module,exports){
+},{"../math":70,"../settings":101,"../utils":124,"./BaseTexture":112,"./TextureUvs":116,"./VideoBaseTexture":117,"eventemitter3":3}],116:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25816,7 +25927,7 @@ var TextureUvs = function () {
 
 exports.default = TextureUvs;
 
-},{"../math/GroupD8":65}],116:[function(require,module,exports){
+},{"../math/GroupD8":66}],117:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26141,7 +26252,7 @@ function createSource(path, type) {
     return source;
 }
 
-},{"../const":45,"../ticker":119,"../utils":123,"./BaseTexture":111}],117:[function(require,module,exports){
+},{"../const":46,"../ticker":120,"../utils":124,"./BaseTexture":112}],118:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26614,7 +26725,7 @@ var Ticker = function () {
 
 exports.default = Ticker;
 
-},{"../const":45,"../settings":100,"./TickerListener":118}],118:[function(require,module,exports){
+},{"../const":46,"../settings":101,"./TickerListener":119}],119:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -26788,7 +26899,7 @@ var TickerListener = function () {
 
 exports.default = TickerListener;
 
-},{}],119:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26868,7 +26979,7 @@ shared.destroy = function () {
 exports.shared = shared;
 exports.Ticker = _Ticker2.default;
 
-},{"./Ticker":117}],120:[function(require,module,exports){
+},{"./Ticker":118}],121:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -26882,7 +26993,7 @@ function canUploadSameBuffer() {
 	return !ios;
 }
 
-},{}],121:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -26916,7 +27027,7 @@ function createIndicesForQuads(size) {
     return indices;
 }
 
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26972,11 +27083,11 @@ function determineCrossOrigin(url) {
     return '';
 }
 
-},{"url":29}],123:[function(require,module,exports){
+},{"url":38}],124:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
-exports.BaseTextureCache = exports.TextureCache = exports.mixins = exports.pluginTarget = exports.EventEmitter = exports.isMobile = undefined;
+exports.premultiplyBlendMode = exports.BaseTextureCache = exports.TextureCache = exports.mixins = exports.pluginTarget = exports.EventEmitter = exports.removeItems = exports.isMobile = undefined;
 exports.uid = uid;
 exports.hex2rgb = hex2rgb;
 exports.hex2string = hex2string;
@@ -26989,9 +27100,12 @@ exports.skipHello = skipHello;
 exports.sayHello = sayHello;
 exports.isWebGLSupported = isWebGLSupported;
 exports.sign = sign;
-exports.removeItems = removeItems;
 exports.destroyTextureCache = destroyTextureCache;
 exports.clearTextureCache = clearTextureCache;
+exports.correctBlendMode = correctBlendMode;
+exports.premultiplyTint = premultiplyTint;
+exports.premultiplyRgba = premultiplyRgba;
+exports.premultiplyTintToRgba = premultiplyTintToRgba;
 
 var _const = require('../const');
 
@@ -27014,6 +27128,14 @@ var mixins = _interopRequireWildcard(_mixin);
 var _ismobilejs = require('ismobilejs');
 
 var isMobile = _interopRequireWildcard(_ismobilejs);
+
+var _removeArrayItems = require('remove-array-items');
+
+var _removeArrayItems2 = _interopRequireDefault(_removeArrayItems);
+
+var _mapPremultipliedBlendModes = require('./mapPremultipliedBlendModes');
+
+var _mapPremultipliedBlendModes2 = _interopRequireDefault(_mapPremultipliedBlendModes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -27041,6 +27163,7 @@ var saidHello = false;
  * @namespace PIXI.utils
  */
 exports.isMobile = isMobile;
+exports.removeItems = _removeArrayItems2.default;
 exports.EventEmitter = _eventemitter2.default;
 exports.pluginTarget = _pluginTarget2.default;
 exports.mixins = mixins;
@@ -27290,33 +27413,6 @@ function sign(n) {
 }
 
 /**
- * Remove a range of items from an array
- *
- * @memberof PIXI.utils
- * @function removeItems
- * @param {Array<*>} arr The target array
- * @param {number} startIdx The index to begin removing from (inclusive)
- * @param {number} removeCount How many items to remove
- */
-function removeItems(arr, startIdx, removeCount) {
-    var length = arr.length;
-
-    if (startIdx >= length || removeCount === 0) {
-        return;
-    }
-
-    removeCount = startIdx + removeCount > length ? length - startIdx : removeCount;
-
-    var len = length - removeCount;
-
-    for (var i = startIdx; i < len; ++i) {
-        arr[i] = arr[i + removeCount];
-    }
-
-    arr.length = len;
-}
-
-/**
  * @todo Describe property usage
  *
  * @memberof PIXI.utils
@@ -27366,7 +27462,144 @@ function clearTextureCache() {
     }
 }
 
-},{"../const":45,"../settings":100,"./mixin":125,"./pluginTarget":126,"eventemitter3":3,"ismobilejs":4}],124:[function(require,module,exports){
+/**
+ * @memberof PIXI.utils
+ * @const premultiplyBlendMode
+ * @type {Array<number[]>} maps premultiply flag and blendMode to adjusted blendMode
+ */
+var premultiplyBlendMode = exports.premultiplyBlendMode = (0, _mapPremultipliedBlendModes2.default)();
+
+/**
+ * changes blendMode according to texture format
+ *
+ * @memberof PIXI.utils
+ * @function correctBlendMode
+ * @param {number} blendMode supposed blend mode
+ * @param {boolean} premultiplied  whether source is premultiplied
+ * @returns {number} true blend mode for this texture
+ */
+function correctBlendMode(blendMode, premultiplied) {
+    return premultiplyBlendMode[premultiplied ? 1 : 0][blendMode];
+}
+
+/**
+ * premultiplies tint
+ *
+ * @param {number} tint integet RGB
+ * @param {number} alpha floating point alpha (0.0-1.0)
+ * @returns {number} tint multiplied by alpha
+ */
+function premultiplyTint(tint, alpha) {
+    if (alpha === 1.0) {
+        return (alpha * 255 << 24) + tint;
+    }
+    if (alpha === 0.0) {
+        return 0;
+    }
+    var R = tint >> 16 & 0xFF;
+    var G = tint >> 8 & 0xFF;
+    var B = tint & 0xFF;
+
+    R = R * alpha + 0.5 | 0;
+    G = G * alpha + 0.5 | 0;
+    B = B * alpha + 0.5 | 0;
+
+    return (alpha * 255 << 24) + (R << 16) + (G << 8) + B;
+}
+
+/**
+ * combines rgb and alpha to out array
+ *
+ * @param {Float32Array|number[]} rgb input rgb
+ * @param {number} alpha alpha param
+ * @param {Float32Array} [out] output
+ * @param {boolean} [premultiply=true] do premultiply it
+ * @returns {Float32Array} vec4 rgba
+ */
+function premultiplyRgba(rgb, alpha, out, premultiply) {
+    out = out || new Float32Array(4);
+    if (premultiply || premultiply === undefined) {
+        out[0] = rgb[0] * alpha;
+        out[1] = rgb[1] * alpha;
+        out[2] = rgb[2] * alpha;
+    } else {
+        out[0] = rgb[0];
+        out[1] = rgb[1];
+        out[2] = rgb[2];
+    }
+    out[3] = alpha;
+
+    return out;
+}
+
+/**
+ * converts integer tint and float alpha to vec4 form, premultiplies by default
+ *
+ * @param {number} tint input tint
+ * @param {number} alpha alpha param
+ * @param {Float32Array} [out] output
+ * @param {boolean} [premultiply=true] do premultiply it
+ * @returns {Float32Array} vec4 rgba
+ */
+function premultiplyTintToRgba(tint, alpha, out, premultiply) {
+    out = out || new Float32Array(4);
+    out[0] = (tint >> 16 & 0xFF) / 255.0;
+    out[1] = (tint >> 8 & 0xFF) / 255.0;
+    out[2] = (tint & 0xFF) / 255.0;
+    if (premultiply || premultiply === undefined) {
+        out[0] *= alpha;
+        out[1] *= alpha;
+        out[2] *= alpha;
+    }
+    out[3] = alpha;
+
+    return out;
+}
+
+},{"../const":46,"../settings":101,"./mapPremultipliedBlendModes":125,"./mixin":127,"./pluginTarget":128,"eventemitter3":3,"ismobilejs":4,"remove-array-items":31}],125:[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
+exports.default = mapPremultipliedBlendModes;
+
+var _const = require('../const');
+
+/**
+ * Corrects pixi blend, takes premultiplied alpha into account
+ *
+ * @memberof PIXI
+ * @function mapPremultipliedBlendModes
+ * @private
+ * @param {Array<number[]>} [array] - The array to output into.
+ * @return {Array<number[]>} Mapped modes.
+ */
+
+function mapPremultipliedBlendModes() {
+    var pm = [];
+    var npm = [];
+
+    for (var i = 0; i < 32; i++) {
+        pm[i] = i;
+        npm[i] = i;
+    }
+
+    pm[_const.BLEND_MODES.NORMAL_NPM] = _const.BLEND_MODES.NORMAL;
+    pm[_const.BLEND_MODES.ADD_NPM] = _const.BLEND_MODES.ADD;
+    pm[_const.BLEND_MODES.SCREEN_NPM] = _const.BLEND_MODES.SCREEN;
+
+    npm[_const.BLEND_MODES.NORMAL] = _const.BLEND_MODES.NORMAL_NPM;
+    npm[_const.BLEND_MODES.ADD] = _const.BLEND_MODES.ADD_NPM;
+    npm[_const.BLEND_MODES.SCREEN] = _const.BLEND_MODES.SCREEN_NPM;
+
+    var array = [];
+
+    array.push(npm);
+    array.push(pm);
+
+    return array;
+}
+
+},{"../const":46}],126:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -27388,7 +27621,7 @@ function maxRecommendedTextures(max) {
     return max;
 }
 
-},{"ismobilejs":4}],125:[function(require,module,exports){
+},{"ismobilejs":4}],127:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -27450,7 +27683,7 @@ function performMixins() {
     mixins.length = 0;
 }
 
-},{}],126:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -27516,7 +27749,7 @@ exports.default = {
     }
 };
 
-},{}],127:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -27592,7 +27825,7 @@ function trimCanvas(canvas) {
     };
 }
 
-},{}],128:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28107,23 +28340,25 @@ function deprecation(core) {
         }
     });
 
-    Object.defineProperties(extras, {
+    if (extras.AnimatedSprite) {
+        Object.defineProperties(extras, {
 
-        /**
-         * @class
-         * @name MovieClip
-         * @memberof PIXI.extras
-         * @see PIXI.extras.AnimatedSprite
-         * @deprecated since version 4.2.0
-         */
-        MovieClip: {
-            get: function get() {
-                warn('The MovieClip class has been renamed to AnimatedSprite, please use AnimatedSprite from now on.');
+            /**
+             * @class
+             * @name MovieClip
+             * @memberof PIXI.extras
+             * @see PIXI.extras.AnimatedSprite
+             * @deprecated since version 4.2.0
+             */
+            MovieClip: {
+                get: function get() {
+                    warn('The MovieClip class has been renamed to AnimatedSprite, please use AnimatedSprite from now on.');
 
-                return extras.AnimatedSprite;
+                    return extras.AnimatedSprite;
+                }
             }
-        }
-    });
+        });
+    }
 
     core.DisplayObject.prototype.generateTexture = function generateTexture(renderer, scaleMode, resolution) {
         warn('generateTexture has moved to the renderer, please use renderer.generateTexture(displayObject)');
@@ -28179,17 +28414,19 @@ function deprecation(core) {
         warn('setTexture is now deprecated, please use the texture property, e.g : sprite.texture = texture;');
     };
 
-    /**
-     * @method
-     * @name PIXI.extras.BitmapText#setText
-     * @see PIXI.extras.BitmapText#text
-     * @deprecated since version 3.0.0
-     * @param {string} text - The text to set to.
-     */
-    extras.BitmapText.prototype.setText = function setText(text) {
-        this.text = text;
-        warn('setText is now deprecated, please use the text property, e.g : myBitmapText.text = \'my text\';');
-    };
+    if (extras.BitmapText) {
+        /**
+         * @method
+         * @name PIXI.extras.BitmapText#setText
+         * @see PIXI.extras.BitmapText#text
+         * @deprecated since version 3.0.0
+         * @param {string} text - The text to set to.
+         */
+        extras.BitmapText.prototype.setText = function setText(text) {
+            this.text = text;
+            warn('setText is now deprecated, please use the text property, e.g : myBitmapText.text = \'my text\';');
+        };
+    }
 
     /**
      * @method
@@ -28485,74 +28722,80 @@ function deprecation(core) {
         }
     });
 
-    /**
-     * @method
-     * @name PIXI.prepare.BasePrepare#register
-     * @see PIXI.prepare.BasePrepare#registerFindHook
-     * @deprecated since version 4.4.2
-     * @param {Function} [addHook] - Function call that takes two parameters: `item:*, queue:Array`
-     *        function must return `true` if it was able to add item to the queue.
-     * @param {Function} [uploadHook] - Function call that takes two parameters: `prepare:CanvasPrepare, item:*` and
-     *        function must return `true` if it was able to handle upload of item.
-     * @return {PIXI.BasePrepare} Instance of plugin for chaining.
-     */
-    prepare.BasePrepare.prototype.register = function register(addHook, uploadHook) {
-        warn('renderer.plugins.prepare.register is now deprecated, ' + 'please use renderer.plugins.prepare.registerFindHook & renderer.plugins.prepare.registerUploadHook');
+    if (prepare.BasePrepare) {
+        /**
+         * @method
+         * @name PIXI.prepare.BasePrepare#register
+         * @see PIXI.prepare.BasePrepare#registerFindHook
+         * @deprecated since version 4.4.2
+         * @param {Function} [addHook] - Function call that takes two parameters: `item:*, queue:Array`
+         *        function must return `true` if it was able to add item to the queue.
+         * @param {Function} [uploadHook] - Function call that takes two parameters: `prepare:CanvasPrepare, item:*` and
+         *        function must return `true` if it was able to handle upload of item.
+         * @return {PIXI.BasePrepare} Instance of plugin for chaining.
+         */
+        prepare.BasePrepare.prototype.register = function register(addHook, uploadHook) {
+            warn('renderer.plugins.prepare.register is now deprecated, ' + 'please use renderer.plugins.prepare.registerFindHook & renderer.plugins.prepare.registerUploadHook');
 
-        if (addHook) {
-            this.registerFindHook(addHook);
-        }
+            if (addHook) {
+                this.registerFindHook(addHook);
+            }
 
-        if (uploadHook) {
-            this.registerUploadHook(uploadHook);
-        }
+            if (uploadHook) {
+                this.registerUploadHook(uploadHook);
+            }
 
-        return this;
-    };
+            return this;
+        };
+    }
 
-    /**
-     * The number of graphics or textures to upload to the GPU.
-     *
-     * @name PIXI.prepare.canvas.UPLOADS_PER_FRAME
-     * @static
-     * @type {number}
-     * @see PIXI.prepare.BasePrepare.limiter
-     * @deprecated since 4.2.0
-     */
-    Object.defineProperty(prepare.canvas, 'UPLOADS_PER_FRAME', {
-        set: function set() {
-            warn('PIXI.CanvasPrepare.UPLOADS_PER_FRAME has been removed. Please set ' + 'renderer.plugins.prepare.limiter.maxItemsPerFrame on your renderer');
-            // because we don't have a reference to the renderer, we can't actually set
-            // the uploads per frame, so we'll have to stick with the warning.
-        },
-        get: function get() {
-            warn('PIXI.CanvasPrepare.UPLOADS_PER_FRAME has been removed. Please use ' + 'renderer.plugins.prepare.limiter');
+    if (prepare.canvas) {
+        /**
+         * The number of graphics or textures to upload to the GPU.
+         *
+         * @name PIXI.prepare.canvas.UPLOADS_PER_FRAME
+         * @static
+         * @type {number}
+         * @see PIXI.prepare.BasePrepare.limiter
+         * @deprecated since 4.2.0
+         */
+        Object.defineProperty(prepare.canvas, 'UPLOADS_PER_FRAME', {
+            set: function set() {
+                warn('PIXI.CanvasPrepare.UPLOADS_PER_FRAME has been removed. Please set ' + 'renderer.plugins.prepare.limiter.maxItemsPerFrame on your renderer');
+                // because we don't have a reference to the renderer, we can't actually set
+                // the uploads per frame, so we'll have to stick with the warning.
+            },
+            get: function get() {
+                warn('PIXI.CanvasPrepare.UPLOADS_PER_FRAME has been removed. Please use ' + 'renderer.plugins.prepare.limiter');
 
-            return NaN;
-        }
-    });
+                return NaN;
+            }
+        });
+    }
 
-    /**
-     * The number of graphics or textures to upload to the GPU.
-     *
-     * @name PIXI.prepare.webgl.UPLOADS_PER_FRAME
-     * @static
-     * @type {number}
-     * @see PIXI.prepare.BasePrepare.limiter
-     * @deprecated since 4.2.0
-     */
-    Object.defineProperty(prepare.webgl, 'UPLOADS_PER_FRAME', {
-        set: function set() {
-            warn('PIXI.WebGLPrepare.UPLOADS_PER_FRAME has been removed. Please set ' + 'renderer.plugins.prepare.limiter.maxItemsPerFrame on your renderer');
-            // because we don't have a reference to the renderer, we can't actually set
-            // the uploads per frame, so we'll have to stick with the warning.
-        },
-        get: function get() {
-            warn('PIXI.WebGLPrepare.UPLOADS_PER_FRAME has been removed. Please use ' + 'renderer.plugins.prepare.limiter');
+    if (prepare.webgl) {
+        /**
+         * The number of graphics or textures to upload to the GPU.
+         *
+         * @name PIXI.prepare.webgl.UPLOADS_PER_FRAME
+         * @static
+         * @type {number}
+         * @see PIXI.prepare.BasePrepare.limiter
+         * @deprecated since 4.2.0
+         */
+        Object.defineProperty(prepare.webgl, 'UPLOADS_PER_FRAME', {
+            set: function set() {
+                warn('PIXI.WebGLPrepare.UPLOADS_PER_FRAME has been removed. Please set ' + 'renderer.plugins.prepare.limiter.maxItemsPerFrame on your renderer');
+                // because we don't have a reference to the renderer, we can't actually set
+                // the uploads per frame, so we'll have to stick with the warning.
+            },
+            get: function get() {
+                warn('PIXI.WebGLPrepare.UPLOADS_PER_FRAME has been removed. Please use ' + 'renderer.plugins.prepare.limiter');
 
-            return NaN;
-        }
-    });
+                return NaN;
+            }
+        });
+    }
 
     if (loaders.Loader) {
         var Resource = loaders.Resource;
@@ -28614,65 +28857,69 @@ function deprecation(core) {
         });
     }
 
-    /**
-     * @name PIXI.interaction.interactiveTarget#defaultCursor
-     * @static
-     * @type {number}
-     * @see PIXI.interaction.interactiveTarget#cursor
-     * @deprecated since 4.3.0
-     */
-    Object.defineProperty(interaction.interactiveTarget, 'defaultCursor', {
-        set: function set(value) {
-            warn('Property defaultCursor has been replaced with \'cursor\'. ');
-            this.cursor = value;
-        },
-        get: function get() {
-            warn('Property defaultCursor has been replaced with \'cursor\'. ');
+    if (interaction.interactiveTarget) {
+        /**
+         * @name PIXI.interaction.interactiveTarget#defaultCursor
+         * @static
+         * @type {number}
+         * @see PIXI.interaction.interactiveTarget#cursor
+         * @deprecated since 4.3.0
+         */
+        Object.defineProperty(interaction.interactiveTarget, 'defaultCursor', {
+            set: function set(value) {
+                warn('Property defaultCursor has been replaced with \'cursor\'. ');
+                this.cursor = value;
+            },
+            get: function get() {
+                warn('Property defaultCursor has been replaced with \'cursor\'. ');
 
-            return this.cursor;
-        }
-    });
+                return this.cursor;
+            }
+        });
+    }
 
-    /**
-     * @name PIXI.interaction.InteractionManager#defaultCursorStyle
-     * @static
-     * @type {string}
-     * @see PIXI.interaction.InteractionManager#cursorStyles
-     * @deprecated since 4.3.0
-     */
-    Object.defineProperty(interaction.InteractionManager, 'defaultCursorStyle', {
-        set: function set(value) {
-            warn('Property defaultCursorStyle has been replaced with \'cursorStyles.default\'. ');
-            this.cursorStyles.default = value;
-        },
-        get: function get() {
-            warn('Property defaultCursorStyle has been replaced with \'cursorStyles.default\'. ');
+    if (interaction.InteractionManager) {
+        /**
+         * @name PIXI.interaction.InteractionManager#defaultCursorStyle
+         * @static
+         * @type {string}
+         * @see PIXI.interaction.InteractionManager#cursorStyles
+         * @deprecated since 4.3.0
+         */
+        Object.defineProperty(interaction.InteractionManager, 'defaultCursorStyle', {
+            set: function set(value) {
+                warn('Property defaultCursorStyle has been replaced with \'cursorStyles.default\'. ');
+                this.cursorStyles.default = value;
+            },
+            get: function get() {
+                warn('Property defaultCursorStyle has been replaced with \'cursorStyles.default\'. ');
 
-            return this.cursorStyles.default;
-        }
-    });
+                return this.cursorStyles.default;
+            }
+        });
 
-    /**
-     * @name PIXI.interaction.InteractionManager#currentCursorStyle
-     * @static
-     * @type {string}
-     * @see PIXI.interaction.InteractionManager#cursorStyles
-     * @deprecated since 4.3.0
-     */
-    Object.defineProperty(interaction.InteractionManager, 'currentCursorStyle', {
-        set: function set(value) {
-            warn('Property currentCursorStyle has been removed.' + 'See the currentCursorMode property, which works differently.');
-            this.currentCursorMode = value;
-        },
-        get: function get() {
-            warn('Property currentCursorStyle has been removed.' + 'See the currentCursorMode property, which works differently.');
+        /**
+         * @name PIXI.interaction.InteractionManager#currentCursorStyle
+         * @static
+         * @type {string}
+         * @see PIXI.interaction.InteractionManager#cursorStyles
+         * @deprecated since 4.3.0
+         */
+        Object.defineProperty(interaction.InteractionManager, 'currentCursorStyle', {
+            set: function set(value) {
+                warn('Property currentCursorStyle has been removed.' + 'See the currentCursorMode property, which works differently.');
+                this.currentCursorMode = value;
+            },
+            get: function get() {
+                warn('Property currentCursorStyle has been removed.' + 'See the currentCursorMode property, which works differently.');
 
-            return this.currentCursorMode;
-        }
-    });
+                return this.currentCursorMode;
+            }
+        });
+    }
 }
 
-},{}],129:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28852,7 +29099,7 @@ exports.default = CanvasExtract;
 
 core.CanvasRenderer.registerPlugin('extract', CanvasExtract);
 
-},{"../../core":64}],130:[function(require,module,exports){
+},{"../../core":65}],132:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28877,7 +29124,7 @@ Object.defineProperty(exports, 'canvas', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./canvas/CanvasExtract":129,"./webgl/WebGLExtract":131}],131:[function(require,module,exports){
+},{"./canvas/CanvasExtract":131,"./webgl/WebGLExtract":133}],133:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29100,7 +29347,7 @@ exports.default = WebGLExtract;
 
 core.WebGLRenderer.registerPlugin('extract', WebGLExtract);
 
-},{"../../core":64}],132:[function(require,module,exports){
+},{"../../core":65}],134:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29208,6 +29455,13 @@ var AnimatedSprite = function (_core$Sprite) {
          * @member {Function}
          */
         _this.onFrameChange = null;
+
+        /**
+        * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
+        *
+        * @member {Function}
+        */
+        _this.onLoop = null;
 
         /**
          * Elapsed time since animation has been started, used internally to display current texture
@@ -29348,6 +29602,14 @@ var AnimatedSprite = function (_core$Sprite) {
                 this.onComplete();
             }
         } else if (previousFrame !== this.currentFrame) {
+            if (this.loop && this.onLoop) {
+                if (this.animationSpeed > 0 && this.currentFrame < previousFrame) {
+                    this.onLoop();
+                } else if (this.animationSpeed < 0 && this.currentFrame > previousFrame) {
+                    this.onLoop();
+                }
+            }
+
             this.updateTexture();
         }
     };
@@ -29371,12 +29633,18 @@ var AnimatedSprite = function (_core$Sprite) {
     /**
      * Stops the AnimatedSprite and destroys it
      *
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+     *  have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+     *      method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Should it destroy the current texture of the sprite as well
+     * @param {boolean} [options.baseTexture=false] - Should it destroy the base texture of the sprite as well
      */
 
 
-    AnimatedSprite.prototype.destroy = function destroy() {
+    AnimatedSprite.prototype.destroy = function destroy(options) {
         this.stop();
-        _core$Sprite.prototype.destroy.call(this);
+        _core$Sprite.prototype.destroy.call(this, options);
     };
 
     /**
@@ -29458,6 +29726,8 @@ var AnimatedSprite = function (_core$Sprite) {
                     this._durations.push(value[i].time);
                 }
             }
+            this.gotoAndStop(0);
+            this.updateTexture();
         }
 
         /**
@@ -29485,7 +29755,7 @@ var AnimatedSprite = function (_core$Sprite) {
 
 exports.default = AnimatedSprite;
 
-},{"../core":64}],133:[function(require,module,exports){
+},{"../core":65}],135:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29499,6 +29769,10 @@ var core = _interopRequireWildcard(_core);
 var _ObservablePoint = require('../core/math/ObservablePoint');
 
 var _ObservablePoint2 = _interopRequireDefault(_ObservablePoint);
+
+var _settings = require('../core/settings');
+
+var _settings2 = _interopRequireDefault(_settings);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29608,16 +29882,18 @@ var BitmapText = function (_core$Container) {
          * Disable by setting value to 0
          *
          * @member {number}
+         * @private
          */
-        _this.maxWidth = 0;
+        _this._maxWidth = 0;
 
         /**
          * The max line height. This is useful when trying to use the total height of the Text,
          * ie: when trying to vertically align.
          *
          * @member {number}
+         * @private
          */
-        _this.maxLineHeight = 0;
+        _this._maxLineHeight = 0;
 
         /**
          * Text anchor. read-only
@@ -29660,6 +29936,7 @@ var BitmapText = function (_core$Container) {
         var line = 0;
         var lastSpace = -1;
         var lastSpaceWidth = 0;
+        var spacesRemoved = 0;
         var maxLineHeight = 0;
 
         for (var i = 0; i < this.text.length; i++) {
@@ -29681,10 +29958,11 @@ var BitmapText = function (_core$Container) {
                 continue;
             }
 
-            if (lastSpace !== -1 && this.maxWidth > 0 && pos.x * scale > this.maxWidth) {
-                core.utils.removeItems(chars, lastSpace, i - lastSpace);
+            if (lastSpace !== -1 && this._maxWidth > 0 && pos.x * scale > this._maxWidth) {
+                core.utils.removeItems(chars, lastSpace - spacesRemoved, i - lastSpace);
                 i = lastSpace;
                 lastSpace = -1;
+                ++spacesRemoved;
 
                 lineWidths.push(lastSpaceWidth);
                 maxLineWidth = Math.max(maxLineWidth, lastSpaceWidth);
@@ -29773,7 +30051,7 @@ var BitmapText = function (_core$Container) {
                 this._glyphs[_i4].y -= this._textHeight * this.anchor.y;
             }
         }
-        this.maxLineHeight = maxLineHeight * scale;
+        this._maxLineHeight = maxLineHeight * scale;
     };
 
     /**
@@ -29834,10 +30112,11 @@ var BitmapText = function (_core$Container) {
         var data = {};
         var info = xml.getElementsByTagName('info')[0];
         var common = xml.getElementsByTagName('common')[0];
+        var res = texture.baseTexture.resolution || _settings2.default.RESOLUTION;
 
         data.font = info.getAttribute('face');
         data.size = parseInt(info.getAttribute('size'), 10);
-        data.lineHeight = parseInt(common.getAttribute('lineHeight'), 10);
+        data.lineHeight = parseInt(common.getAttribute('lineHeight'), 10) / res;
         data.chars = {};
 
         // parse letters
@@ -29847,12 +30126,12 @@ var BitmapText = function (_core$Container) {
             var letter = letters[i];
             var charCode = parseInt(letter.getAttribute('id'), 10);
 
-            var textureRect = new core.Rectangle(parseInt(letter.getAttribute('x'), 10) + texture.frame.x, parseInt(letter.getAttribute('y'), 10) + texture.frame.y, parseInt(letter.getAttribute('width'), 10), parseInt(letter.getAttribute('height'), 10));
+            var textureRect = new core.Rectangle(parseInt(letter.getAttribute('x'), 10) / res + texture.frame.x / res, parseInt(letter.getAttribute('y'), 10) / res + texture.frame.y / res, parseInt(letter.getAttribute('width'), 10) / res, parseInt(letter.getAttribute('height'), 10) / res);
 
             data.chars[charCode] = {
-                xOffset: parseInt(letter.getAttribute('xoffset'), 10),
-                yOffset: parseInt(letter.getAttribute('yoffset'), 10),
-                xAdvance: parseInt(letter.getAttribute('xadvance'), 10),
+                xOffset: parseInt(letter.getAttribute('xoffset'), 10) / res,
+                yOffset: parseInt(letter.getAttribute('yoffset'), 10) / res,
+                xAdvance: parseInt(letter.getAttribute('xadvance'), 10) / res,
                 kerning: {},
                 texture: new core.Texture(texture.baseTexture, textureRect)
 
@@ -29864,9 +30143,9 @@ var BitmapText = function (_core$Container) {
 
         for (var _i5 = 0; _i5 < kernings.length; _i5++) {
             var kerning = kernings[_i5];
-            var first = parseInt(kerning.getAttribute('first'), 10);
-            var second = parseInt(kerning.getAttribute('second'), 10);
-            var amount = parseInt(kerning.getAttribute('amount'), 10);
+            var first = parseInt(kerning.getAttribute('first'), 10) / res;
+            var second = parseInt(kerning.getAttribute('second'), 10) / res;
+            var amount = parseInt(kerning.getAttribute('amount'), 10) / res;
 
             if (data.chars[second]) {
                 data.chars[second].kerning[first] = amount;
@@ -29986,6 +30265,44 @@ var BitmapText = function (_core$Container) {
         }
 
         /**
+         * The max width of this bitmap text in pixels. If the text provided is longer than the
+         * value provided, line breaks will be automatically inserted in the last whitespace.
+         * Disable by setting value to 0
+         *
+         * @member {number}
+         */
+
+    }, {
+        key: 'maxWidth',
+        get: function get() {
+            return this._maxWidth;
+        },
+        set: function set(value) // eslint-disable-line require-jsdoc
+        {
+            if (this._maxWidth === value) {
+                return;
+            }
+            this._maxWidth = value;
+            this.dirty = true;
+        }
+
+        /**
+         * The max line height. This is useful when trying to use the total height of the Text,
+         * ie: when trying to vertically align.
+         *
+         * @member {number}
+         * @readonly
+         */
+
+    }, {
+        key: 'maxLineHeight',
+        get: function get() {
+            this.validate();
+
+            return this._maxLineHeight;
+        }
+
+        /**
          * The width of the overall text, different from fontSize,
          * which is defined in the style object
          *
@@ -30026,7 +30343,7 @@ exports.default = BitmapText;
 
 BitmapText.fonts = {};
 
-},{"../core":64,"../core/math/ObservablePoint":67}],134:[function(require,module,exports){
+},{"../core":65,"../core/math/ObservablePoint":68,"../core/settings":101}],136:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -30185,7 +30502,7 @@ var TextureTransform = function () {
 
 exports.default = TextureTransform;
 
-},{"../core/math/Matrix":66}],135:[function(require,module,exports){
+},{"../core/math/Matrix":67}],137:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -30377,7 +30694,7 @@ var TilingSprite = function (_core$Sprite) {
                 }
                 tempCanvas.context.drawImage(this.tintedTexture, 0, 0);
             } else {
-                tempCanvas.context.drawImage(baseTexture.source, -texture._frame.x, -texture._frame.y);
+                tempCanvas.context.drawImage(baseTexture.source, -texture._frame.x * baseTextureResolution, -texture._frame.y * baseTextureResolution);
             }
             this._canvasPattern = tempCanvas.context.createPattern(tempCanvas.canvas, 'repeat');
         }
@@ -30469,10 +30786,10 @@ var TilingSprite = function (_core$Sprite) {
         var height = this._height;
         var x1 = -width * this.anchor._x;
 
-        if (tempPoint.x > x1 && tempPoint.x < x1 + width) {
+        if (tempPoint.x >= x1 && tempPoint.x < x1 + width) {
             var y1 = -height * this.anchor._y;
 
-            if (tempPoint.y > y1 && tempPoint.y < y1 + height) {
+            if (tempPoint.y >= y1 && tempPoint.y < y1 + height) {
                 return true;
             }
         }
@@ -30481,13 +30798,19 @@ var TilingSprite = function (_core$Sprite) {
     };
 
     /**
-     * Destroys this tiling sprite
+     * Destroys this sprite and optionally its texture and children
      *
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+     *  have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+     *      method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Should it destroy the current texture of the sprite as well
+     * @param {boolean} [options.baseTexture=false] - Should it destroy the base texture of the sprite as well
      */
 
 
-    TilingSprite.prototype.destroy = function destroy() {
-        _core$Sprite.prototype.destroy.call(this);
+    TilingSprite.prototype.destroy = function destroy(options) {
+        _core$Sprite.prototype.destroy.call(this, options);
 
         this.tileTransform = null;
         this.uvTransform = null;
@@ -30631,7 +30954,7 @@ var TilingSprite = function (_core$Sprite) {
 
 exports.default = TilingSprite;
 
-},{"../core":64,"../core/sprites/canvas/CanvasTinter":103,"./TextureTransform":134}],136:[function(require,module,exports){
+},{"../core":65,"../core/sprites/canvas/CanvasTinter":104,"./TextureTransform":136}],138:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -31035,7 +31358,7 @@ DisplayObject.prototype._cacheAsBitmapDestroy = function _cacheAsBitmapDestroy(o
     this.destroy(options);
 };
 
-},{"../core":64,"../core/textures/BaseTexture":111,"../core/textures/Texture":114,"../core/utils":123}],137:[function(require,module,exports){
+},{"../core":65,"../core/textures/BaseTexture":112,"../core/textures/Texture":115,"../core/utils":124}],139:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -31069,7 +31392,7 @@ core.Container.prototype.getChildByName = function getChildByName(name) {
     return null;
 };
 
-},{"../core":64}],138:[function(require,module,exports){
+},{"../core":65}],140:[function(require,module,exports){
 'use strict';
 
 var _core = require('../core');
@@ -31102,11 +31425,11 @@ core.DisplayObject.prototype.getGlobalPosition = function getGlobalPosition() {
     return point;
 };
 
-},{"../core":64}],139:[function(require,module,exports){
+},{"../core":65}],141:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
-exports.BitmapText = exports.TilingSpriteRenderer = exports.TilingSprite = exports.AnimatedSprite = undefined;
+exports.BitmapText = exports.TilingSpriteRenderer = exports.TilingSprite = exports.TextureTransform = exports.AnimatedSprite = undefined;
 
 var _AnimatedSprite = require('./AnimatedSprite');
 
@@ -31114,6 +31437,15 @@ Object.defineProperty(exports, 'AnimatedSprite', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_AnimatedSprite).default;
+  }
+});
+
+var _TextureTransform = require('./TextureTransform');
+
+Object.defineProperty(exports, 'TextureTransform', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_TextureTransform).default;
   }
 });
 
@@ -31154,7 +31486,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // imported for side effect of extending the prototype only, contains no exports
 
-},{"./AnimatedSprite":132,"./BitmapText":133,"./TilingSprite":135,"./cacheAsBitmap":136,"./getChildByName":137,"./getGlobalPosition":138,"./webgl/TilingSpriteRenderer":140}],140:[function(require,module,exports){
+},{"./AnimatedSprite":134,"./BitmapText":135,"./TextureTransform":136,"./TilingSprite":137,"./cacheAsBitmap":138,"./getChildByName":139,"./getGlobalPosition":140,"./webgl/TilingSpriteRenderer":142}],142:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31176,7 +31508,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var tempMat = new core.Matrix();
-var tempArray = new Float32Array(4);
 
 /**
  * WebGL renderer plugin for tiling sprites
@@ -31299,17 +31630,12 @@ var TilingSpriteRenderer = function (_core$ObjectRenderer) {
         }
 
         shader.uniforms.uTransform = tempMat.toArray(true);
-
-        var color = tempArray;
-
-        core.utils.hex2rgb(ts.tint, color);
-        color[3] = ts.worldAlpha;
-        shader.uniforms.uColor = color;
+        shader.uniforms.uColor = core.utils.premultiplyTintToRgba(ts.tint, ts.worldAlpha, shader.uniforms.uColor, baseTex.premultipliedAlpha);
         shader.uniforms.translationMatrix = ts.transform.worldTransform.toArray(true);
 
         shader.uniforms.uSampler = renderer.bindTexture(tex);
 
-        renderer.setBlendMode(ts.blendMode);
+        renderer.setBlendMode(core.utils.correctBlendMode(ts.blendMode, baseTex.premultipliedAlpha));
 
         quad.vao.draw(this.renderer.gl.TRIANGLES, 6, 0);
     };
@@ -31322,7 +31648,7 @@ exports.default = TilingSpriteRenderer;
 
 core.WebGLRenderer.registerPlugin('tilingSprite', TilingSpriteRenderer);
 
-},{"../../core":64,"../../core/const":45,"path":23}],141:[function(require,module,exports){
+},{"../../core":65,"../../core/const":46,"path":8}],143:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31479,7 +31805,7 @@ var BlurFilter = function (_core$Filter) {
 
 exports.default = BlurFilter;
 
-},{"../../core":64,"./BlurXFilter":142,"./BlurYFilter":143}],142:[function(require,module,exports){
+},{"../../core":65,"./BlurXFilter":144,"./BlurYFilter":145}],144:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31645,7 +31971,7 @@ var BlurXFilter = function (_core$Filter) {
 
 exports.default = BlurXFilter;
 
-},{"../../core":64,"./generateBlurFragSource":144,"./generateBlurVertSource":145,"./getMaxBlurKernelSize":146}],143:[function(require,module,exports){
+},{"../../core":65,"./generateBlurFragSource":146,"./generateBlurVertSource":147,"./getMaxBlurKernelSize":148}],145:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31810,7 +32136,7 @@ var BlurYFilter = function (_core$Filter) {
 
 exports.default = BlurYFilter;
 
-},{"../../core":64,"./generateBlurFragSource":144,"./generateBlurVertSource":145,"./getMaxBlurKernelSize":146}],144:[function(require,module,exports){
+},{"../../core":65,"./generateBlurFragSource":146,"./generateBlurVertSource":147,"./getMaxBlurKernelSize":148}],146:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31857,7 +32183,7 @@ function generateFragBlurSource(kernelSize) {
     return fragSource;
 }
 
-},{}],145:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31901,7 +32227,7 @@ function generateVertBlurSource(kernelSize, x) {
     return vertSource;
 }
 
-},{}],146:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -31917,7 +32243,7 @@ function getMaxKernelSize(gl) {
     return kernelSize;
 }
 
-},{}],147:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32468,7 +32794,7 @@ var ColorMatrixFilter = function (_core$Filter) {
 exports.default = ColorMatrixFilter;
 ColorMatrixFilter.prototype.grayscale = ColorMatrixFilter.prototype.greyscale;
 
-},{"../../core":64,"path":23}],148:[function(require,module,exports){
+},{"../../core":65,"path":8}],150:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32578,7 +32904,7 @@ var DisplacementFilter = function (_core$Filter) {
 
 exports.default = DisplacementFilter;
 
-},{"../../core":64,"path":23}],149:[function(require,module,exports){
+},{"../../core":65,"path":8}],151:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32632,7 +32958,7 @@ var FXAAFilter = function (_core$Filter) {
 
 exports.default = FXAAFilter;
 
-},{"../../core":64,"path":23}],150:[function(require,module,exports){
+},{"../../core":65,"path":8}],152:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32711,7 +33037,7 @@ Object.defineProperty(exports, 'VoidFilter', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./blur/BlurFilter":141,"./blur/BlurXFilter":142,"./blur/BlurYFilter":143,"./colormatrix/ColorMatrixFilter":147,"./displacement/DisplacementFilter":148,"./fxaa/FXAAFilter":149,"./noise/NoiseFilter":151,"./void/VoidFilter":152}],151:[function(require,module,exports){
+},{"./blur/BlurFilter":143,"./blur/BlurXFilter":144,"./blur/BlurYFilter":145,"./colormatrix/ColorMatrixFilter":149,"./displacement/DisplacementFilter":150,"./fxaa/FXAAFilter":151,"./noise/NoiseFilter":153,"./void/VoidFilter":154}],153:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32808,7 +33134,7 @@ var NoiseFilter = function (_core$Filter) {
 
 exports.default = NoiseFilter;
 
-},{"../../core":64,"path":23}],152:[function(require,module,exports){
+},{"../../core":65,"path":8}],154:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32858,10 +33184,12 @@ var VoidFilter = function (_core$Filter) {
 
 exports.default = VoidFilter;
 
-},{"../../core":64,"path":23}],153:[function(require,module,exports){
+},{"../../core":65,"path":8}],155:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _core = require('../core');
 
@@ -32914,7 +33242,102 @@ var InteractionData = function () {
      * @member {number}
      */
     this.identifier = null;
+
+    /**
+     * Indicates whether or not the pointer device that created the event is the primary pointer.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
+     * @type {Boolean}
+     */
+    this.isPrimary = false;
+
+    /**
+     * Indicates which button was pressed on the mouse or pointer device to trigger the event.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+     * @type {number}
+     */
+    this.button = 0;
+
+    /**
+     * Indicates which buttons are pressed on the mouse or pointer device when the event is triggered.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
+     * @type {number}
+     */
+    this.buttons = 0;
+
+    /**
+     * The width of the pointer's contact along the x-axis, measured in CSS pixels.
+     * radiusX of TouchEvents will be represented by this value.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
+     * @type {number}
+     */
+    this.width = 0;
+
+    /**
+     * The height of the pointer's contact along the y-axis, measured in CSS pixels.
+     * radiusY of TouchEvents will be represented by this value.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
+     * @type {number}
+     */
+    this.height = 0;
+
+    /**
+     * The angle, in degrees, between the pointer device and the screen.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
+     * @type {number}
+     */
+    this.tiltX = 0;
+
+    /**
+     * The angle, in degrees, between the pointer device and the screen.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
+     * @type {number}
+     */
+    this.tiltY = 0;
+
+    /**
+     * The type of pointer that triggered the event.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
+     * @type {string}
+     */
+    this.pointerType = null;
+
+    /**
+     * Pressure applied by the pointing device during the event. A Touch's force property
+     * will be represented by this value.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
+     * @type {number}
+     */
+    this.pressure = 0;
+
+    /**
+     * From TouchEvents (not PointerEvents triggered by touches), the rotationAngle of the Touch.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Touch/rotationAngle
+     * @type {number}
+     */
+    this.rotationAngle = 0;
+
+    /**
+     * Twist of a stylus pointer.
+     * @see https://w3c.github.io/pointerevents/#pointerevent-interface
+     * @type {number}
+     */
+    this.twist = 0;
+
+    /**
+     * Barrel pressure on a stylus pointer.
+     * @see https://w3c.github.io/pointerevents/#pointerevent-interface
+     * @type {number}
+     */
+    this.tangentialPressure = 0;
   }
+
+  /**
+   * The unique identifier of the pointer. It will be the same as `identifier`.
+   * @readonly
+   * @member {number}
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId
+   */
+
 
   /**
    * This will return the local coordinates of the specified displayObject for this InteractionData
@@ -32928,18 +33351,64 @@ var InteractionData = function () {
    * @return {PIXI.Point} A point containing the coordinates of the InteractionData position relative
    *  to the DisplayObject
    */
-
-
   InteractionData.prototype.getLocalPosition = function getLocalPosition(displayObject, point, globalPos) {
     return displayObject.worldTransform.applyInverse(globalPos || this.global, point);
   };
+
+  /**
+   * Copies properties from normalized event data.
+   *
+   * @param {Touch|MouseEvent|PointerEvent} event The normalized event data
+   * @private
+   */
+
+
+  InteractionData.prototype._copyEvent = function _copyEvent(event) {
+    // isPrimary should only change on touchstart/pointerdown, so we don't want to overwrite
+    // it with "false" on later events when our shim for it on touch events might not be
+    // accurate
+    if (event.isPrimary) {
+      this.isPrimary = true;
+    }
+    this.button = event.button;
+    this.buttons = event.buttons;
+    this.width = event.width;
+    this.height = event.height;
+    this.tiltX = event.tiltX;
+    this.tiltY = event.tiltY;
+    this.pointerType = event.pointerType;
+    this.pressure = event.pressure;
+    this.rotationAngle = event.rotationAngle;
+    this.twist = event.twist || 0;
+    this.tangentialPressure = event.tangentialPressure || 0;
+  };
+
+  /**
+   * Resets the data for pooling.
+   *
+   * @private
+   */
+
+
+  InteractionData.prototype._reset = function _reset() {
+    // isPrimary is the only property that we really need to reset - everything else is
+    // guaranteed to be overwritten
+    this.isPrimary = false;
+  };
+
+  _createClass(InteractionData, [{
+    key: 'pointerId',
+    get: function get() {
+      return this.identifier;
+    }
+  }]);
 
   return InteractionData;
 }();
 
 exports.default = InteractionData;
 
-},{"../core":64}],154:[function(require,module,exports){
+},{"../core":65}],156:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -33024,7 +33493,7 @@ var InteractionEvent = function () {
 
 exports.default = InteractionEvent;
 
-},{}],155:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -33797,13 +34266,16 @@ var InteractionManager = function (_EventEmitter) {
             this.interactionDOMElement.addEventListener('mouseout', this.onPointerOut, true);
             this.interactionDOMElement.addEventListener('mouseover', this.onPointerOver, true);
             window.addEventListener('mouseup', this.onPointerUp, true);
+        }
 
-            if (this.supportsTouchEvents) {
-                this.interactionDOMElement.addEventListener('touchstart', this.onPointerDown, true);
-                this.interactionDOMElement.addEventListener('touchcancel', this.onPointerCancel, true);
-                this.interactionDOMElement.addEventListener('touchend', this.onPointerUp, true);
-                this.interactionDOMElement.addEventListener('touchmove', this.onPointerMove, true);
-            }
+        // always look directly for touch events so that we can provide original data
+        // In a future version we should change this to being just a fallback and rely solely on
+        // PointerEvents whenever available
+        if (this.supportsTouchEvents) {
+            this.interactionDOMElement.addEventListener('touchstart', this.onPointerDown, true);
+            this.interactionDOMElement.addEventListener('touchcancel', this.onPointerCancel, true);
+            this.interactionDOMElement.addEventListener('touchend', this.onPointerUp, true);
+            this.interactionDOMElement.addEventListener('touchmove', this.onPointerMove, true);
         }
 
         this.eventsAdded = true;
@@ -33843,13 +34315,13 @@ var InteractionManager = function (_EventEmitter) {
             this.interactionDOMElement.removeEventListener('mouseout', this.onPointerOut, true);
             this.interactionDOMElement.removeEventListener('mouseover', this.onPointerOver, true);
             window.removeEventListener('mouseup', this.onPointerUp, true);
+        }
 
-            if (this.supportsTouchEvents) {
-                this.interactionDOMElement.removeEventListener('touchstart', this.onPointerDown, true);
-                this.interactionDOMElement.removeEventListener('touchcancel', this.onPointerCancel, true);
-                this.interactionDOMElement.removeEventListener('touchend', this.onPointerUp, true);
-                this.interactionDOMElement.removeEventListener('touchmove', this.onPointerMove, true);
-            }
+        if (this.supportsTouchEvents) {
+            this.interactionDOMElement.removeEventListener('touchstart', this.onPointerDown, true);
+            this.interactionDOMElement.removeEventListener('touchcancel', this.onPointerCancel, true);
+            this.interactionDOMElement.removeEventListener('touchend', this.onPointerUp, true);
+            this.interactionDOMElement.removeEventListener('touchmove', this.onPointerMove, true);
         }
 
         this.interactionDOMElement = null;
@@ -33941,6 +34413,10 @@ var InteractionManager = function (_EventEmitter) {
                     Object.assign(this.interactionDOMElement.style, style);
                     break;
             }
+        } else if (typeof mode === 'string' && !Object.prototype.hasOwnProperty.call(this.cursorStyles, mode)) {
+            // if it mode is a string (not a Symbol) and cursorStyles doesn't have any entry
+            // for the mode, then assume that the dev wants it to be CSS for the cursor.
+            this.interactionDOMElement.style.cursor = mode;
         }
     };
 
@@ -34128,6 +34604,9 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.onPointerDown = function onPointerDown(originalEvent) {
+        // if we support touch events, then only use those for touch events, not pointer events
+        if (this.supportsTouchEvents && originalEvent.pointerType === 'touch') return;
+
         var events = this.normalizeToPointerData(originalEvent);
 
         /**
@@ -34158,11 +34637,13 @@ var InteractionManager = function (_EventEmitter) {
             this.emit('pointerdown', interactionEvent);
             if (event.pointerType === 'touch') {
                 this.emit('touchstart', interactionEvent);
-            } else if (event.pointerType === 'mouse') {
-                var isRightButton = event.button === 2 || event.which === 3;
-
-                this.emit(isRightButton ? 'rightdown' : 'mousedown', this.eventData);
             }
+            // emit a mouse event for "pen" pointers, the way a browser would emit a fallback event
+            else if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+                    var isRightButton = event.button === 2;
+
+                    this.emit(isRightButton ? 'rightdown' : 'mousedown', this.eventData);
+                }
         }
     };
 
@@ -34177,8 +34658,7 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.processPointerDown = function processPointerDown(interactionEvent, displayObject, hit) {
-        var e = interactionEvent.data.originalEvent;
-
+        var data = interactionEvent.data;
         var id = interactionEvent.data.identifier;
 
         if (hit) {
@@ -34187,10 +34667,10 @@ var InteractionManager = function (_EventEmitter) {
             }
             this.dispatchEvent(displayObject, 'pointerdown', interactionEvent);
 
-            if (e.type === 'touchstart' || e.pointerType === 'touch') {
+            if (data.pointerType === 'touch') {
                 this.dispatchEvent(displayObject, 'touchstart', interactionEvent);
-            } else if (e.type === 'mousedown' || e.pointerType === 'mouse') {
-                var isRightButton = e.button === 2 || e.which === 3;
+            } else if (data.pointerType === 'mouse' || data.pointerType === 'pen') {
+                var isRightButton = data.button === 2;
 
                 if (isRightButton) {
                     displayObject.trackedPointers[id].rightDown = true;
@@ -34236,8 +34716,8 @@ var InteractionManager = function (_EventEmitter) {
 
             this.emit(cancelled ? 'pointercancel' : 'pointerup' + eventAppend, interactionEvent);
 
-            if (event.pointerType === 'mouse') {
-                var isRightButton = event.button === 2 || event.which === 3;
+            if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+                var isRightButton = event.button === 2;
 
                 this.emit(isRightButton ? 'rightup' + eventAppend : 'mouseup' + eventAppend, interactionEvent);
             } else if (event.pointerType === 'touch') {
@@ -34256,6 +34736,9 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.onPointerCancel = function onPointerCancel(event) {
+        // if we support touch events, then only use those for touch events, not pointer events
+        if (this.supportsTouchEvents && event.pointerType === 'touch') return;
+
         this.onPointerComplete(event, true, this.processPointerCancel);
     };
 
@@ -34269,7 +34752,7 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.processPointerCancel = function processPointerCancel(interactionEvent, displayObject) {
-        var e = interactionEvent.data.originalEvent;
+        var data = interactionEvent.data;
 
         var id = interactionEvent.data.identifier;
 
@@ -34277,7 +34760,7 @@ var InteractionManager = function (_EventEmitter) {
             delete displayObject.trackedPointers[id];
             this.dispatchEvent(displayObject, 'pointercancel', interactionEvent);
 
-            if (e.type === 'touchcancel' || e.pointerType === 'touch') {
+            if (data.pointerType === 'touch') {
                 this.dispatchEvent(displayObject, 'touchcancel', interactionEvent);
             }
         }
@@ -34292,6 +34775,9 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.onPointerUp = function onPointerUp(event) {
+        // if we support touch events, then only use those for touch events, not pointer events
+        if (this.supportsTouchEvents && event.pointerType === 'touch') return;
+
         this.onPointerComplete(event, false, this.processPointerUp);
     };
 
@@ -34306,19 +34792,19 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.processPointerUp = function processPointerUp(interactionEvent, displayObject, hit) {
-        var e = interactionEvent.data.originalEvent;
+        var data = interactionEvent.data;
 
         var id = interactionEvent.data.identifier;
 
         var trackingData = displayObject.trackedPointers[id];
 
-        var isTouch = e.type === 'touchend' || e.pointerType === 'touch';
+        var isTouch = data.pointerType === 'touch';
 
-        var isMouse = e.type.indexOf('mouse') === 0 || e.pointerType === 'mouse';
+        var isMouse = data.pointerType === 'mouse' || data.pointerType === 'pen';
 
         // Mouse only
         if (isMouse) {
-            var isRightButton = e.button === 2 || e.which === 3;
+            var isRightButton = data.button === 2;
 
             var flags = _InteractionTrackingData2.default.FLAGS;
 
@@ -34378,6 +34864,9 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.onPointerMove = function onPointerMove(originalEvent) {
+        // if we support touch events, then only use those for touch events, not pointer events
+        if (this.supportsTouchEvents && originalEvent.pointerType === 'touch') return;
+
         var events = this.normalizeToPointerData(originalEvent);
 
         if (events[0].pointerType === 'mouse') {
@@ -34402,7 +34891,7 @@ var InteractionManager = function (_EventEmitter) {
             this.processInteractive(interactionEvent, this.renderer._lastObjectRendered, this.processPointerMove, interactive);
             this.emit('pointermove', interactionEvent);
             if (event.pointerType === 'touch') this.emit('touchmove', interactionEvent);
-            if (event.pointerType === 'mouse') this.emit('mousemove', interactionEvent);
+            if (event.pointerType === 'mouse' || event.pointerType === 'pen') this.emit('mousemove', interactionEvent);
         }
 
         if (events[0].pointerType === 'mouse') {
@@ -34423,11 +34912,11 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.processPointerMove = function processPointerMove(interactionEvent, displayObject, hit) {
-        var e = interactionEvent.data.originalEvent;
+        var data = interactionEvent.data;
 
-        var isTouch = e.type === 'touchmove' || e.pointerType === 'touch';
+        var isTouch = data.pointerType === 'touch';
 
-        var isMouse = e.type === 'mousemove' || e.pointerType === 'mouse';
+        var isMouse = data.pointerType === 'mouse' || data.pointerType === 'pen';
 
         if (isMouse) {
             this.processPointerOverOut(interactionEvent, displayObject, hit);
@@ -34449,6 +34938,9 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.onPointerOut = function onPointerOut(originalEvent) {
+        // if we support touch events, then only use those for touch events, not pointer events
+        if (this.supportsTouchEvents && originalEvent.pointerType === 'touch') return;
+
         var events = this.normalizeToPointerData(originalEvent);
 
         // Only mouse and pointer can call onPointerOut, so events will always be length 1
@@ -34468,7 +34960,7 @@ var InteractionManager = function (_EventEmitter) {
         this.processInteractive(interactionEvent, this.renderer._lastObjectRendered, this.processPointerOverOut, false);
 
         this.emit('pointerout', interactionEvent);
-        if (event.pointerType === 'mouse') {
+        if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
             this.emit('mouseout', interactionEvent);
         } else {
             // we can get touchleave events after touchend, so we want to make sure we don't
@@ -34488,11 +34980,11 @@ var InteractionManager = function (_EventEmitter) {
 
 
     InteractionManager.prototype.processPointerOverOut = function processPointerOverOut(interactionEvent, displayObject, hit) {
-        var e = interactionEvent.data.originalEvent;
+        var data = interactionEvent.data;
 
         var id = interactionEvent.data.identifier;
 
-        var isMouse = e.type === 'mouseover' || e.type === 'mouseout' || e.pointerType === 'mouse';
+        var isMouse = data.pointerType === 'mouse' || data.pointerType === 'pen';
 
         var trackingData = displayObject.trackedPointers[id];
 
@@ -34555,7 +35047,7 @@ var InteractionManager = function (_EventEmitter) {
         }
 
         this.emit('pointerover', interactionEvent);
-        if (event.pointerType === 'mouse') {
+        if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
             this.emit('mouseover', interactionEvent);
         }
     };
@@ -34572,16 +35064,20 @@ var InteractionManager = function (_EventEmitter) {
     InteractionManager.prototype.getInteractionDataForPointerId = function getInteractionDataForPointerId(event) {
         var pointerId = event.pointerId;
 
+        var interactionData = void 0;
+
         if (pointerId === MOUSE_POINTER_ID || event.pointerType === 'mouse') {
-            return this.mouse;
+            interactionData = this.mouse;
         } else if (this.activeInteractionData[pointerId]) {
-            return this.activeInteractionData[pointerId];
+            interactionData = this.activeInteractionData[pointerId];
+        } else {
+            interactionData = this.interactionDataPool.pop() || new _InteractionData2.default();
+            interactionData.identifier = pointerId;
+            this.activeInteractionData[pointerId] = interactionData;
         }
-
-        var interactionData = this.interactionDataPool.pop() || new _InteractionData2.default();
-
-        interactionData.identifier = pointerId;
-        this.activeInteractionData[pointerId] = interactionData;
+        // copy properties from the event, so that we can make sure that touch/pointer specific
+        // data is available
+        interactionData._copyEvent(event);
 
         return interactionData;
     };
@@ -34599,6 +35095,7 @@ var InteractionManager = function (_EventEmitter) {
 
         if (interactionData) {
             delete this.activeInteractionData[pointerId];
+            interactionData._reset();
             this.interactionDataPool.push(interactionData);
         }
     };
@@ -34659,7 +35156,9 @@ var InteractionManager = function (_EventEmitter) {
 
                 if (typeof touch.button === 'undefined') touch.button = event.touches.length ? 1 : 0;
                 if (typeof touch.buttons === 'undefined') touch.buttons = event.touches.length ? 1 : 0;
-                if (typeof touch.isPrimary === 'undefined') touch.isPrimary = event.touches.length === 1;
+                if (typeof touch.isPrimary === 'undefined') {
+                    touch.isPrimary = event.touches.length === 1 && event.type === 'touchstart';
+                }
                 if (typeof touch.width === 'undefined') touch.width = touch.radiusX || 1;
                 if (typeof touch.height === 'undefined') touch.height = touch.radiusY || 1;
                 if (typeof touch.tiltX === 'undefined') touch.tiltX = 0;
@@ -34667,8 +35166,12 @@ var InteractionManager = function (_EventEmitter) {
                 if (typeof touch.pointerType === 'undefined') touch.pointerType = 'touch';
                 if (typeof touch.pointerId === 'undefined') touch.pointerId = touch.identifier || 0;
                 if (typeof touch.pressure === 'undefined') touch.pressure = touch.force || 0.5;
-                if (typeof touch.rotation === 'undefined') touch.rotation = touch.rotationAngle || 0;
-
+                touch.twist = 0;
+                touch.tangentialPressure = 0;
+                // TODO: Remove these, as layerX/Y is not a standard, is deprecated, has uneven
+                // support, and the fill ins are not quite the same
+                // offsetX/Y might be okay, but is not the same as clientX/Y when the canvas's top
+                // left is not 0,0 on the page
                 if (typeof touch.layerX === 'undefined') touch.layerX = touch.offsetX = touch.clientX;
                 if (typeof touch.layerY === 'undefined') touch.layerY = touch.offsetY = touch.clientY;
 
@@ -34688,7 +35191,8 @@ var InteractionManager = function (_EventEmitter) {
                 if (typeof event.pointerType === 'undefined') event.pointerType = 'mouse';
                 if (typeof event.pointerId === 'undefined') event.pointerId = MOUSE_POINTER_ID;
                 if (typeof event.pressure === 'undefined') event.pressure = 0.5;
-                if (typeof event.rotation === 'undefined') event.rotation = 0;
+                event.twist = 0;
+                event.tangentialPressure = 0;
 
                 // mark the mouse event as normalized, just so that we know we did it
                 event.isNormalized = true;
@@ -34749,7 +35253,7 @@ exports.default = InteractionManager;
 core.WebGLRenderer.registerPlugin('interaction', InteractionManager);
 core.CanvasRenderer.registerPlugin('interaction', InteractionManager);
 
-},{"../core":64,"./InteractionData":153,"./InteractionEvent":154,"./InteractionTrackingData":156,"./interactiveTarget":158,"eventemitter3":3}],156:[function(require,module,exports){
+},{"../core":65,"./InteractionData":155,"./InteractionEvent":156,"./InteractionTrackingData":158,"./interactiveTarget":160,"eventemitter3":3}],158:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -34925,7 +35429,7 @@ InteractionTrackingData.FLAGS = Object.freeze({
     RIGHT_DOWN: 1 << 2
 });
 
-},{}],157:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -34959,7 +35463,7 @@ Object.defineProperty(exports, 'interactiveTarget', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./InteractionData":153,"./InteractionManager":155,"./interactiveTarget":158}],158:[function(require,module,exports){
+},{"./InteractionData":155,"./InteractionManager":157,"./interactiveTarget":160}],160:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35076,7 +35580,7 @@ exports.default = {
   _trackedPointers: undefined
 };
 
-},{}],159:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35168,7 +35672,7 @@ function parse(resource, texture) {
     resource.bitmapFont = _extras.BitmapText.registerFont(resource.data, texture);
 }
 
-},{"../core":64,"../extras":139,"path":23,"resource-loader":35}],160:[function(require,module,exports){
+},{"../core":65,"../extras":141,"path":8,"resource-loader":36}],162:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35288,15 +35792,15 @@ Object.defineProperty(AppPrototype, 'loader', {
 // Override the destroy function
 // making sure to destroy the current Loader
 AppPrototype._parentDestroy = AppPrototype.destroy;
-AppPrototype.destroy = function destroy() {
+AppPrototype.destroy = function destroy(removeView) {
     if (this._loader) {
         this._loader.destroy();
         this._loader = null;
     }
-    this._parentDestroy();
+    this._parentDestroy(removeView);
 };
 
-},{"../core/Application":42,"./bitmapFontParser":159,"./loader":161,"./spritesheetParser":162,"./textureParser":163,"resource-loader":35}],161:[function(require,module,exports){
+},{"../core/Application":43,"./bitmapFontParser":161,"./loader":163,"./spritesheetParser":164,"./textureParser":165,"resource-loader":36}],163:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35467,7 +35971,7 @@ var Resource = _resourceLoader2.default.Resource;
 
 Resource.setExtensionXhrType('fnt', Resource.XHR_RESPONSE_TYPE.DOCUMENT);
 
-},{"./bitmapFontParser":159,"./spritesheetParser":162,"./textureParser":163,"eventemitter3":3,"resource-loader":35,"resource-loader/lib/middlewares/parsing/blob":36}],162:[function(require,module,exports){
+},{"./bitmapFontParser":161,"./spritesheetParser":164,"./textureParser":165,"eventemitter3":3,"resource-loader":36,"resource-loader/lib/middlewares/parsing/blob":37}],164:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35526,7 +36030,7 @@ function getResourcePath(resource, baseUrl) {
     return _url2.default.resolve(resource.url.replace(baseUrl, ''), resource.data.meta.image);
 }
 
-},{"../core":64,"resource-loader":35,"url":29}],163:[function(require,module,exports){
+},{"../core":65,"resource-loader":36,"url":38}],165:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35549,7 +36053,7 @@ var _Texture2 = _interopRequireDefault(_Texture);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"../core/textures/Texture":114,"resource-loader":35}],164:[function(require,module,exports){
+},{"../core/textures/Texture":115,"resource-loader":36}],166:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35917,7 +36421,7 @@ Mesh.DRAW_MODES = {
   TRIANGLES: 1
 };
 
-},{"../core":64,"../extras/TextureTransform":134}],165:[function(require,module,exports){
+},{"../core":65,"../extras/TextureTransform":136}],167:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -35985,16 +36489,8 @@ var NineSlicePlane = function (_Plane) {
 
         var _this = _possibleConstructorReturn(this, _Plane.call(this, texture, 4, 4));
 
-        var uvs = _this.uvs;
-
-        // right and bottom uv's are always 1
-        uvs[6] = uvs[14] = uvs[22] = uvs[30] = 1;
-        uvs[25] = uvs[27] = uvs[29] = uvs[31] = 1;
-
         _this._origWidth = texture.orig.width;
         _this._origHeight = texture.orig.height;
-        _this._uvw = 1 / _this._origWidth;
-        _this._uvh = 1 / _this._origHeight;
 
         /**
          * The width of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
@@ -36003,7 +36499,7 @@ var NineSlicePlane = function (_Plane) {
          * @memberof PIXI.NineSlicePlane#
          * @override
          */
-        _this.width = _this._origWidth;
+        _this._width = _this._origWidth;
 
         /**
          * The height of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
@@ -36012,12 +36508,7 @@ var NineSlicePlane = function (_Plane) {
          * @memberof PIXI.NineSlicePlane#
          * @override
          */
-        _this.height = _this._origHeight;
-
-        uvs[2] = uvs[10] = uvs[18] = uvs[26] = _this._uvw * leftWidth;
-        uvs[4] = uvs[12] = uvs[20] = uvs[28] = 1 - _this._uvw * rightWidth;
-        uvs[9] = uvs[11] = uvs[13] = uvs[15] = _this._uvh * topHeight;
-        uvs[17] = uvs[19] = uvs[21] = uvs[23] = 1 - _this._uvh * bottomHeight;
+        _this._height = _this._origHeight;
 
         /**
          * The width of the left column (a)
@@ -36181,6 +36672,39 @@ var NineSlicePlane = function (_Plane) {
      */
 
 
+    /**
+     * Refreshes NineSlicePlane coords. All of them.
+     */
+    NineSlicePlane.prototype._refresh = function _refresh() {
+        _Plane.prototype._refresh.call(this);
+
+        var uvs = this.uvs;
+        var texture = this._texture;
+
+        this._origWidth = texture.orig.width;
+        this._origHeight = texture.orig.height;
+
+        var _uvw = 1.0 / this._origWidth;
+        var _uvh = 1.0 / this._origHeight;
+
+        uvs[0] = uvs[8] = uvs[16] = uvs[24] = 0;
+        uvs[1] = uvs[3] = uvs[5] = uvs[7] = 0;
+        uvs[6] = uvs[14] = uvs[22] = uvs[30] = 1;
+        uvs[25] = uvs[27] = uvs[29] = uvs[31] = 1;
+
+        uvs[2] = uvs[10] = uvs[18] = uvs[26] = _uvw * this._leftWidth;
+        uvs[4] = uvs[12] = uvs[20] = uvs[28] = 1 - _uvw * this._rightWidth;
+        uvs[9] = uvs[11] = uvs[13] = uvs[15] = _uvh * this._topHeight;
+        uvs[17] = uvs[19] = uvs[21] = uvs[23] = 1 - _uvh * this._bottomHeight;
+
+        this.updateHorizontalVertices();
+        this.updateVerticalVertices();
+
+        this.dirty = true;
+
+        this.multiplyUvs();
+    };
+
     _createClass(NineSlicePlane, [{
         key: 'width',
         get: function get() {
@@ -36189,7 +36713,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._width = value;
-            this.updateVerticalVertices();
+            this._refresh();
         }
 
         /**
@@ -36206,7 +36730,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._height = value;
-            this.updateHorizontalVertices();
+            this._refresh();
         }
 
         /**
@@ -36223,14 +36747,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._leftWidth = value;
-
-            var uvs = this.uvs;
-            var vertices = this.vertices;
-
-            uvs[2] = uvs[10] = uvs[18] = uvs[26] = this._uvw * value;
-            vertices[2] = vertices[10] = vertices[18] = vertices[26] = value;
-
-            this.dirty = true;
+            this._refresh();
         }
 
         /**
@@ -36247,14 +36764,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._rightWidth = value;
-
-            var uvs = this.uvs;
-            var vertices = this.vertices;
-
-            uvs[4] = uvs[12] = uvs[20] = uvs[28] = 1 - this._uvw * value;
-            vertices[4] = vertices[12] = vertices[20] = vertices[28] = this._width - value;
-
-            this.dirty = true;
+            this._refresh();
         }
 
         /**
@@ -36271,14 +36781,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._topHeight = value;
-
-            var uvs = this.uvs;
-            var vertices = this.vertices;
-
-            uvs[9] = uvs[11] = uvs[13] = uvs[15] = this._uvh * value;
-            vertices[9] = vertices[11] = vertices[13] = vertices[15] = value;
-
-            this.dirty = true;
+            this._refresh();
         }
 
         /**
@@ -36295,14 +36798,7 @@ var NineSlicePlane = function (_Plane) {
         set: function set(value) // eslint-disable-line require-jsdoc
         {
             this._bottomHeight = value;
-
-            var uvs = this.uvs;
-            var vertices = this.vertices;
-
-            uvs[17] = uvs[19] = uvs[21] = uvs[23] = 1 - this._uvh * value;
-            vertices[17] = vertices[19] = vertices[21] = vertices[23] = this._height - value;
-
-            this.dirty = true;
+            this._refresh();
         }
     }]);
 
@@ -36311,7 +36807,7 @@ var NineSlicePlane = function (_Plane) {
 
 exports.default = NineSlicePlane;
 
-},{"./Plane":166}],166:[function(require,module,exports){
+},{"./Plane":168}],168:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -36450,7 +36946,7 @@ var Plane = function (_Mesh) {
 
 exports.default = Plane;
 
-},{"./Mesh":164}],167:[function(require,module,exports){
+},{"./Mesh":166}],169:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -36686,7 +37182,7 @@ var Rope = function (_Mesh) {
 
 exports.default = Rope;
 
-},{"./Mesh":164}],168:[function(require,module,exports){
+},{"./Mesh":166}],170:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -36968,7 +37464,7 @@ exports.default = MeshSpriteRenderer;
 
 core.CanvasRenderer.registerPlugin('mesh', MeshSpriteRenderer);
 
-},{"../../core":64,"../Mesh":164}],169:[function(require,module,exports){
+},{"../../core":65,"../Mesh":166}],171:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -37029,7 +37525,7 @@ Object.defineProperty(exports, 'Rope', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./Mesh":164,"./NineSlicePlane":165,"./Plane":166,"./Rope":167,"./canvas/CanvasMeshRenderer":168,"./webgl/MeshRenderer":170}],170:[function(require,module,exports){
+},{"./Mesh":166,"./NineSlicePlane":167,"./Plane":168,"./Rope":169,"./canvas/CanvasMeshRenderer":170,"./webgl/MeshRenderer":172}],172:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -37095,7 +37591,7 @@ var MeshRenderer = function (_core$ObjectRenderer) {
     MeshRenderer.prototype.onContextChange = function onContextChange() {
         var gl = this.renderer.gl;
 
-        this.shader = new core.Shader(gl, 'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\nuniform mat3 uTransform;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n\n    vTextureCoord = (uTransform * vec3(aTextureCoord, 1.0)).xy;\n}\n', 'varying vec2 vTextureCoord;\nuniform float alpha;\nuniform vec3 tint;\n\nuniform sampler2D uSampler;\n\nvoid main(void)\n{\n    gl_FragColor = texture2D(uSampler, vTextureCoord) * vec4(tint * alpha, alpha);\n}\n');
+        this.shader = new core.Shader(gl, 'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\nuniform mat3 translationMatrix;\nuniform mat3 uTransform;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n\n    vTextureCoord = (uTransform * vec3(aTextureCoord, 1.0)).xy;\n}\n', 'varying vec2 vTextureCoord;\nuniform vec4 uColor;\n\nuniform sampler2D uSampler;\n\nvoid main(void)\n{\n    gl_FragColor = texture2D(uSampler, vTextureCoord) * uColor;\n}\n');
     };
 
     /**
@@ -37154,7 +37650,7 @@ var MeshRenderer = function (_core$ObjectRenderer) {
 
         glData.shader.uniforms.uSampler = renderer.bindTexture(texture);
 
-        renderer.state.setBlendMode(mesh.blendMode);
+        renderer.state.setBlendMode(core.utils.correctBlendMode(mesh.blendMode, texture.baseTexture.premultipliedAlpha));
 
         if (glData.shader.uniforms.uTransform) {
             if (mesh.uploadUvTransform) {
@@ -37164,8 +37660,8 @@ var MeshRenderer = function (_core$ObjectRenderer) {
             }
         }
         glData.shader.uniforms.translationMatrix = mesh.worldTransform.toArray(true);
-        glData.shader.uniforms.alpha = mesh.worldAlpha;
-        glData.shader.uniforms.tint = mesh.tintRgb;
+
+        glData.shader.uniforms.uColor = core.utils.premultiplyRgba(mesh.tintRgb, mesh.worldAlpha, glData.shader.uniforms.uColor, texture.baseTexture.premultipliedAlpha);
 
         var drawMode = mesh.drawMode === _Mesh2.default.DRAW_MODES.TRIANGLE_MESH ? gl.TRIANGLE_STRIP : gl.TRIANGLES;
 
@@ -37180,14 +37676,18 @@ exports.default = MeshRenderer;
 
 core.WebGLRenderer.registerPlugin('mesh', MeshRenderer);
 
-},{"../../core":64,"../Mesh":164,"path":23,"pixi-gl-core":12}],171:[function(require,module,exports){
+},{"../../core":65,"../Mesh":166,"path":8,"pixi-gl-core":15}],173:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _core = require('../core');
 
 var core = _interopRequireWildcard(_core);
+
+var _utils = require('../core/utils');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -37322,6 +37822,18 @@ var ParticleContainer = function (_core$Container) {
         _this.baseTexture = null;
 
         _this.setProperties(properties);
+
+        /**
+         * The tint applied to the container.
+         * This is a hex value. A value of 0xFFFFFF will remove any tint effect.
+         *
+         * @private
+         * @member {number}
+         * @default 0xFFFFFF
+         */
+        _this._tint = 0;
+        _this.tintRgb = new Float32Array(4);
+        _this.tint = 0xFFFFFF;
         return _this;
     }
 
@@ -37356,13 +37868,20 @@ var ParticleContainer = function (_core$Container) {
     };
 
     /**
+     * The tint applied to the container. This is a hex value.
+     * A value of 0xFFFFFF will remove any tint effect.
+     ** IMPORTANT: This is a webGL only feature and will be ignored by the canvas renderer.
+     * @member {number}
+     * @default 0xFFFFFF
+     */
+
+
+    /**
      * Renders the container using the WebGL renderer
      *
      * @private
      * @param {PIXI.WebGLRenderer} renderer - The webgl renderer
      */
-
-
     ParticleContainer.prototype.renderWebGL = function renderWebGL(renderer) {
         var _this2 = this;
 
@@ -37511,12 +38030,24 @@ var ParticleContainer = function (_core$Container) {
         this._buffers = null;
     };
 
+    _createClass(ParticleContainer, [{
+        key: 'tint',
+        get: function get() {
+            return this._tint;
+        },
+        set: function set(value) // eslint-disable-line require-jsdoc
+        {
+            this._tint = value;
+            (0, _utils.hex2rgb)(value, this.tintRgb);
+        }
+    }]);
+
     return ParticleContainer;
 }(core.Container);
 
 exports.default = ParticleContainer;
 
-},{"../core":64}],172:[function(require,module,exports){
+},{"../core":65,"../core/utils":124}],174:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -37541,7 +38072,7 @@ Object.defineProperty(exports, 'ParticleRenderer', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./ParticleContainer":171,"./webgl/ParticleRenderer":174}],173:[function(require,module,exports){
+},{"./ParticleContainer":173,"./webgl/ParticleRenderer":176}],175:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -37781,7 +38312,7 @@ var ParticleBuffer = function () {
 
 exports.default = ParticleBuffer;
 
-},{"../../core/utils/createIndicesForQuads":121,"pixi-gl-core":12}],174:[function(require,module,exports){
+},{"../../core/utils/createIndicesForQuads":122,"pixi-gl-core":15}],176:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -37949,8 +38480,10 @@ var ParticleRenderer = function (_core$ObjectRenderer) {
             buffers = container._glBuffers[renderer.CONTEXT_UID] = this.generateBuffers(container);
         }
 
+        var baseTexture = children[0]._texture.baseTexture;
+
         // if the uvs have not updated then no point rendering just yet!
-        this.renderer.setBlendMode(container.blendMode);
+        this.renderer.setBlendMode(core.utils.correctBlendMode(container.blendMode, baseTexture.premultipliedAlpha));
 
         var gl = renderer.gl;
 
@@ -37959,11 +38492,10 @@ var ParticleRenderer = function (_core$ObjectRenderer) {
         m.prepend(renderer._activeRenderTarget.projectionMatrix);
 
         this.shader.uniforms.projectionMatrix = m.toArray(true);
-        this.shader.uniforms.uAlpha = container.worldAlpha;
+
+        this.shader.uniforms.uColor = core.utils.premultiplyRgba(container.tintRgb, container.worldAlpha, this.shader.uniforms.uColor, baseTexture.premultipliedAlpha);
 
         // make sure the texture is bound..
-        var baseTexture = children[0]._texture.baseTexture;
-
         this.shader.uniforms.uSampler = renderer.bindTexture(baseTexture);
 
         // now lets upload and render the buffers..
@@ -38225,7 +38757,7 @@ exports.default = ParticleRenderer;
 
 core.WebGLRenderer.registerPlugin('particle', ParticleRenderer);
 
-},{"../../core":64,"./ParticleBuffer":173,"./ParticleShader":175}],175:[function(require,module,exports){
+},{"../../core":65,"./ParticleBuffer":175,"./ParticleShader":177}],177:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -38260,7 +38792,7 @@ var ParticleShader = function (_Shader) {
         // vertex shader
         ['attribute vec2 aVertexPosition;', 'attribute vec2 aTextureCoord;', 'attribute float aColor;', 'attribute vec2 aPositionCoord;', 'attribute vec2 aScale;', 'attribute float aRotation;', 'uniform mat3 projectionMatrix;', 'varying vec2 vTextureCoord;', 'varying float vColor;', 'void main(void){', '   vec2 v = aVertexPosition;', '   v.x = (aVertexPosition.x) * cos(aRotation) - (aVertexPosition.y) * sin(aRotation);', '   v.y = (aVertexPosition.x) * sin(aRotation) + (aVertexPosition.y) * cos(aRotation);', '   v = v + aPositionCoord;', '   gl_Position = vec4((projectionMatrix * vec3(v, 1.0)).xy, 0.0, 1.0);', '   vTextureCoord = aTextureCoord;', '   vColor = aColor;', '}'].join('\n'),
         // hello
-        ['varying vec2 vTextureCoord;', 'varying float vColor;', 'uniform sampler2D uSampler;', 'uniform float uAlpha;', 'void main(void){', '  vec4 color = texture2D(uSampler, vTextureCoord) * vColor * uAlpha;', '  if (color.a == 0.0) discard;', '  gl_FragColor = color;', '}'].join('\n')));
+        ['varying vec2 vTextureCoord;', 'varying float vColor;', 'uniform sampler2D uSampler;', 'uniform vec4 uColor;', 'void main(void){', '  vec4 color = texture2D(uSampler, vTextureCoord) * vColor * uColor;', '  if (color.a == 0.0) discard;', '  gl_FragColor = color;', '}'].join('\n')));
     }
 
     return ParticleShader;
@@ -38268,7 +38800,7 @@ var ParticleShader = function (_Shader) {
 
 exports.default = ParticleShader;
 
-},{"../../core/Shader":43}],176:[function(require,module,exports){
+},{"../../core/Shader":44}],178:[function(require,module,exports){
 "use strict";
 
 // References:
@@ -38286,7 +38818,7 @@ if (!Math.sign) {
     };
 }
 
-},{}],177:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 'use strict';
 
 var _objectAssign = require('object-assign');
@@ -38301,7 +38833,7 @@ if (!Object.assign) {
 // https://github.com/sindresorhus/object-assign
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-},{"object-assign":5}],178:[function(require,module,exports){
+},{"object-assign":6}],180:[function(require,module,exports){
 'use strict';
 
 require('./Object.assign');
@@ -38326,7 +38858,7 @@ if (!window.Uint16Array) {
     window.Uint16Array = Array;
 }
 
-},{"./Math.sign":176,"./Object.assign":177,"./requestAnimationFrame":179}],179:[function(require,module,exports){
+},{"./Math.sign":178,"./Object.assign":179,"./requestAnimationFrame":181}],181:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -38404,7 +38936,7 @@ if (!global.cancelAnimationFrame) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],180:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -38831,11 +39363,9 @@ function drawText(helper, item) {
  */
 function calculateTextStyle(helper, item) {
     if (item instanceof core.TextStyle) {
-        var font = core.Text.getFontStyle(item);
+        var font = item.toFontString();
 
-        if (!core.Text.fontPropertiesCache[font]) {
-            core.Text.calculateFontProperties(font);
-        }
+        core.TextMetrics.measureFont(font);
 
         return true;
     }
@@ -38894,7 +39424,7 @@ function findTextStyle(item, queue) {
     return false;
 }
 
-},{"../core":64,"./limiters/CountLimiter":183}],181:[function(require,module,exports){
+},{"../core":65,"./limiters/CountLimiter":185}],183:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -39014,7 +39544,7 @@ function uploadBaseTextures(prepare, item) {
 
 core.CanvasRenderer.registerPlugin('prepare', CanvasPrepare);
 
-},{"../../core":64,"../BasePrepare":180}],182:[function(require,module,exports){
+},{"../../core":65,"../BasePrepare":182}],184:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -39066,7 +39596,7 @@ Object.defineProperty(exports, 'TimeLimiter', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./BasePrepare":180,"./canvas/CanvasPrepare":181,"./limiters/CountLimiter":183,"./limiters/TimeLimiter":184,"./webgl/WebGLPrepare":185}],183:[function(require,module,exports){
+},{"./BasePrepare":182,"./canvas/CanvasPrepare":183,"./limiters/CountLimiter":185,"./limiters/TimeLimiter":186,"./webgl/WebGLPrepare":187}],185:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -39124,7 +39654,7 @@ var CountLimiter = function () {
 
 exports.default = CountLimiter;
 
-},{}],184:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -39182,7 +39712,7 @@ var TimeLimiter = function () {
 
 exports.default = TimeLimiter;
 
-},{}],185:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -39304,7 +39834,7 @@ function findGraphics(item, queue) {
 
 core.WebGLRenderer.registerPlugin('prepare', WebGLPrepare);
 
-},{"../../core":64,"../BasePrepare":180}],186:[function(require,module,exports){
+},{"../../core":65,"../BasePrepare":182}],188:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -39419,7 +39949,7 @@ global.PIXI = exports; // eslint-disable-line
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./accessibility":41,"./core":64,"./deprecation":128,"./extract":130,"./extras":139,"./filters":150,"./interaction":157,"./loaders":160,"./mesh":169,"./particles":172,"./polyfill":178,"./prepare":182}]},{},[186])(186)
+},{"./accessibility":42,"./core":65,"./deprecation":130,"./extract":132,"./extras":141,"./filters":152,"./interaction":159,"./loaders":162,"./mesh":171,"./particles":174,"./polyfill":180,"./prepare":184}]},{},[188])(188)
 });
 
 
