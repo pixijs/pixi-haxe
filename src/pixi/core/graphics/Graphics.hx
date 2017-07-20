@@ -1,5 +1,6 @@
 package pixi.core.graphics;
 
+import pixi.core.Pixi.BlendModes;
 import pixi.core.textures.Texture;
 import pixi.core.math.Point;
 import pixi.core.math.shapes.Polygon;
@@ -75,7 +76,7 @@ extern class Graphics extends Container {
 	 * @member {Int}
 	 * @default CONST.BLEND_MODES.NORMAL;
 	 */
-	var blendMode:Int;
+	var blendMode:BlendModes;
 
 	/**
 	 * Whether this shape is being used as a mask.

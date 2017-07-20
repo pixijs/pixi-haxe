@@ -1,6 +1,8 @@
 package pixi.core.renderers.webgl.managers;
 
+import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
+import pixi.core.sprites.Sprite;
 
 extern class FilterManager extends WebGLManager {
 
@@ -27,7 +29,7 @@ extern class FilterManager extends WebGLManager {
 	 * @param buffer {ArrayBuffer}
 	 */
 	function setFilterStack(filterStack:Dynamic):Void;
-
+	
 	/**
 	 * Applies the filter and adds it to the current filter stack.
 	 *
@@ -76,4 +78,24 @@ extern class FilterManager extends WebGLManager {
 	 * @param height {Float} the new height
 	 */
 	function resize(width:Float, height:Float):Void;
+	
+	/*
+	 * Multiply vTextureCoord to this matrix to achieve (0,0,1,1) for filterArea
+	 * @param output {PIXI.Matrix} The mapped matrix.
+	 */
+	function calculateNormalizedScreenSpaceMatrix(output:Matrix):Void;
+	
+	/**
+	 * Calculates the mapped matrix.
+	 * TODO playing around here.. this is temporary - (will end up in the shader) this returns a matrix that will normalise map filter cords in the filter to screen space
+	 * @param	output {PIXI.Matrix} The mapped matrix.
+	 */
+	function calculateScreenSpaceMatrix(output:Matrix):Void;	
+	
+	/**
+	 * This will map the filter coord so that a texture can be used based on the transform of a sprite
+	 * @param	output {PIXI.Matrix} The mapped matrix.
+	 * @param	sprite {PIXI.Sprite} The sprite to map to.
+	 */
+	function calculateSpriteMatrix(output:Matrix, sprite:Sprite):Void;
 }

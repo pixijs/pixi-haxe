@@ -1,5 +1,7 @@
 package pixi.core.renderers.canvas;
 
+import pixi.core.Pixi.BlendModes;
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
 
@@ -66,12 +68,12 @@ extern class CanvasRenderer extends SystemRenderer {
 	 *
 	 * @member {SCALE_MODE}
 	 */
-	var currentScaleMode:Int;
+	var currentScaleMode:ScaleModes;
 
 	/**
 	 * Tracks the active blend mode for this renderer.
 	 *
 	 * @member {BLEND_MODES}
 	 */
-	var currentBlendMode:Int;
+	var currentBlendMode:BlendModes;
 }
