@@ -130,7 +130,7 @@ extern class SystemRenderer extends EventEmitter {
 	/**
 	 * Plugins object
 	 */
-	var plugins:Dynamic;
+	var plugins:RendererPlugins;
 
 	/**
 	 * Resizes the canvas view to the specified width and height
