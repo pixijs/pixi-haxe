@@ -282,8 +282,7 @@ extern class Pixi {
 
 
 @:native("PIXI.RENDERER_TYPE")
-extern enum RendererType
-{
+extern enum RendererType {
 	UNKNOWN;
 	WEBGL;
 	CANVAS;
