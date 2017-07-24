@@ -1,5 +1,10 @@
 package pixi.core;
 
+import pixi.core.Pixi.ScaleModes;
+import pixi.core.Pixi.TransformModes;
+import pixi.core.Pixi.GCModes;
+import pixi.core.Pixi.WrapModes;
+
 @:native("PIXI.settings")
 extern class Settings {
 
@@ -109,7 +114,7 @@ extern class Settings {
      * @type {PIXI.TRANSFORM_MODE}
      * @default PIXI.TRANSFORM_MODE.STATIC
      */
-	static var TRANSFORM_MODE:Int;
+	static var TRANSFORM_MODE:TransformModes;
 
 	/**
      * Default Garbage Collection mode.
@@ -119,7 +124,7 @@ extern class Settings {
      * @type {PIXI.GC_MODES}
      * @default PIXI.GC_MODES.AUTO
      */
-	static var GC_MODE:Int;
+	static var GC_MODE:GCModes;
 
 	/**
      * Default Garbage Collection max idle.
@@ -149,7 +154,7 @@ extern class Settings {
      * @type {PIXI.WRAP_MODES}
      * @default PIXI.WRAP_MODES.CLAMP
      */
-	static var WRAP_MODE:Int;
+	static var WRAP_MODE:WrapModes;
 
 	/**
      * The scale modes that are supported by pixi.
@@ -159,7 +164,7 @@ extern class Settings {
      * @type {PIXI.SCALE_MODES}
      * @default PIXI.SCALE_MODES.LINEAR
      */
-	static var SCALE_MODE:Int;
+	static var SCALE_MODE:ScaleModes;
 
 	/**
      * Default specify float precision in shaders.
