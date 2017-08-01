@@ -15,13 +15,6 @@ extern class Point {
 	function new(?x:Float, ?y:Float);
 
 	/**
-	 * Creates a clone of this point
-	 *
-	 * @return {Point} a copy of the point
-	 */
-	function clone():Point;
-
-	/**
 	 * Copies x and y from the given point
 	 *
 	 * @method copy
