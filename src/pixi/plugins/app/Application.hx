@@ -1,13 +1,13 @@
 package pixi.plugins.app;
 
-import pixi.core.Pixi.RendererType;
-import pixi.core.renderers.SystemRenderer;
+import js.Browser;
+import js.html.CanvasElement;
+import js.html.Element;
 import js.html.Event;
+import pixi.core.Pixi.RendererType;
 import pixi.core.RenderOptions;
 import pixi.core.display.Container;
-import js.html.Element;
-import js.html.CanvasElement;
-import js.Browser;
+import pixi.core.renderers.SystemRenderer;
 
 /**
  * Pixi Boilerplate Helper class that can be used by any application
@@ -65,7 +65,14 @@ class Application {
 	 * default - false
 	 */
 	public var roundPixels:Bool;
-
+	
+	/**
+	 * `true` to ensure compatibility with older / less advanced devices.
+     * If you experience unexplained flickering try setting this to true. **webgl only**
+	 * default - false
+	 */
+	public var legacy:Bool;
+	
 	/**
 	 * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
@@ -155,6 +162,7 @@ class Application {
 		antialias = false;
 		forceFXAA = false;
 		roundPixels = false;
+		legacy = false;		
 		clearBeforeRender = true;
 		preserveDrawingBuffer = false;
 		backgroundColor = 0xFFFFFF;
@@ -195,6 +203,7 @@ class Application {
 		renderingOptions.clearBeforeRender = clearBeforeRender;
 		renderingOptions.preserveDrawingBuffer = preserveDrawingBuffer;
 		renderingOptions.roundPixels = roundPixels;
+		renderingOptions.legacy = legacy;		
 
 		switch (rendererType) {
 			case CANVAS:
