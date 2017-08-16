@@ -4,7 +4,6 @@ import js.Browser;
 import js.html.CanvasElement;
 import js.html.Element;
 import js.html.Event;
-import pixi.core.Pixi.RendererType;
 import pixi.core.RenderOptions;
 import pixi.core.display.Container;
 import pixi.core.renderers.SystemRenderer;
