@@ -65,14 +65,14 @@ class Application {
 	 * default - false
 	 */
 	public var roundPixels:Bool;
-	
+
 	/**
 	 * `true` to ensure compatibility with older / less advanced devices.
      * If you experience unexplained flickering try setting this to true. **webgl only**
 	 * default - false
 	 */
 	public var legacy:Bool;
-	
+
 	/**
 	 * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
      * If the scene is NOT transparent Pixi will use a canvas sized fillRect operation every frame to set the canvas background color.
@@ -162,7 +162,7 @@ class Application {
 		antialias = false;
 		forceFXAA = false;
 		roundPixels = false;
-		legacy = false;		
+		legacy = false;
 		clearBeforeRender = true;
 		preserveDrawingBuffer = false;
 		backgroundColor = 0xFFFFFF;
@@ -203,7 +203,7 @@ class Application {
 		renderingOptions.clearBeforeRender = clearBeforeRender;
 		renderingOptions.preserveDrawingBuffer = preserveDrawingBuffer;
 		renderingOptions.roundPixels = roundPixels;
-		renderingOptions.legacy = legacy;		
+		renderingOptions.legacy = legacy;
 
 		switch (rendererType) {
 			case CANVAS:
@@ -247,13 +247,13 @@ class Application {
 
 	public function addStats() {
 		if (untyped __js__("window").Perf != null) {
-			var renderer = switch (app.renderer.type)
-			{
-				case RendererType.UNKNOWN: "UNKNOWN";
-				case RendererType.WEBGL: "WEBGL";
-				case RendererType.CANVAS: "CANVAS";
+			var rendererType = cast app.renderer.type;
+			var renderer = switch (rendererType) {
+				case 1: "WEBGL";
+				case 2: "CANVAS";
+				default: "UNKNOWN";
 			};
-			
+
 			new Perf().addInfo(renderer + " - " + pixelRatio);
 		}
 	}
