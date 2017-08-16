@@ -1,11 +1,12 @@
 package pixi.extras;
 
-import pixi.core.textures.BaseTexture;
 import js.html.CanvasElement;
 import js.html.VideoElement;
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.display.TransformStatic;
 import pixi.core.math.ObservablePoint;
 import pixi.core.sprites.Sprite;
+import pixi.core.textures.BaseTexture;
 import pixi.core.textures.Texture;
 
 @:native("PIXI.extras.TilingSprite")
@@ -104,9 +105,9 @@ extern class TilingSprite extends Sprite {
      * @param {Float} width - the width of the tiling sprite
      * @param {Float} height - the height of the tiling sprite
      * @param {Bool} [crossorigin] - if you want to specify the cross-origin parameter
-     * @param {Int} [scaleMode=PIXI.settings.SCALE_MODE] - if you want to specify the scale mode,
+     * @param {ScaleModes} [scaleMode=PIXI.settings.SCALE_MODE] - if you want to specify the scale mode,
      *  see {@link PIXI.SCALE_MODES} for possible values
      * @return {TilingSprite} A new TilingSprite using a texture from the texture cache matching the image id
      */
-	static function fromImage(imageId:String, width:Float, height:Float, ?crossorigin:Bool, ?scaleMode:Int):TilingSprite;
+	static function fromImage(imageId:String, width:Float, height:Float, ?crossorigin:Bool, ?scaleMode:ScaleModes):TilingSprite;
 }

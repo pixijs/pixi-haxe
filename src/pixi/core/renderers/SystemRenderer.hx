@@ -1,13 +1,14 @@
 package pixi.core.renderers;
 
+import haxe.extern.EitherType;
+import js.html.CanvasElement;
 import pixi.core.Pixi.RendererType;
+import pixi.core.Pixi.ScaleModes;
+import pixi.core.display.DisplayObject;
 import pixi.core.display.Transform;
 import pixi.core.textures.RenderTexture;
 import pixi.core.textures.Texture;
-import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
-import pixi.core.display.DisplayObject;
-import js.html.CanvasElement;
 
 @:native("PIXI.SystemRenderer")
 extern class SystemRenderer extends EventEmitter {
@@ -145,11 +146,11 @@ extern class SystemRenderer extends EventEmitter {
      * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
      *
      * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from
-     * @param {Int} scaleMode - Should be one of the scaleMode consts
+     * @param {ScaleModes} scaleMode - Should be one of the scaleMode consts
      * @param {Float} resolution - The resolution / device pixel ratio of the texture being generated
      * @return {PIXI.Texture} a texture of the graphics object
      */
-	function generateTexture(displayObject:DisplayObject, scaleMode:Int, resolution:Float):Texture;
+	function generateTexture(displayObject:DisplayObject, scaleMode:ScaleModes, resolution:Float):Texture;
 
 
 	/**

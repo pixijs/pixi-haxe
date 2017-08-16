@@ -1,5 +1,6 @@
 package pixi.core.textures;
 
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.math.shapes.Rectangle;
 
 @:native("PIXI.RenderTexture")
@@ -58,8 +59,8 @@ extern class RenderTexture extends Texture {
 	 * A short hand way of creating a render texture..
 	 * @param [width=100] {Float} The width of the render texture
 	 * @param [height=100] {Float} The height of the render texture
-	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
+	 * @param [scaleMode] {ScaleModes} See {@link PIXI.SCALE_MODES} for possible values
 	 * @param [resolution=1] {Float} The resolution of the texture being generated
 	 */
-	static function create(?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float):RenderTexture;
+	static function create(?width:Float, ?height:Float, ?scaleMode:ScaleModes, ?resolution:Float):RenderTexture;
 }
