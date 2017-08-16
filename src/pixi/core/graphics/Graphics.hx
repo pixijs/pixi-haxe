@@ -1,13 +1,14 @@
 package pixi.core.graphics;
 
 import pixi.core.Pixi.BlendModes;
-import pixi.core.textures.Texture;
-import pixi.core.math.Point;
-import pixi.core.math.shapes.Polygon;
-import pixi.core.math.shapes.Ellipse;
-import pixi.core.math.shapes.Rectangle;
-import pixi.core.math.shapes.Circle;
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.display.Container;
+import pixi.core.math.Point;
+import pixi.core.math.shapes.Circle;
+import pixi.core.math.shapes.Ellipse;
+import pixi.core.math.shapes.Polygon;
+import pixi.core.math.shapes.Rectangle;
+import pixi.core.textures.Texture;
 
 @:native("PIXI.Graphics")
 extern class Graphics extends Container {
@@ -308,11 +309,11 @@ extern class Graphics extends Container {
 	/**
      * Generates a canvas texture.
      *
-     * @param {Int} scaleMode - The scale mode of the texture.
+     * @param {ScaleModes} scaleMode - The scale mode of the texture.
      * @param {Float} resolution - The resolution of the texture.
      * @return {Texture} The new texture.
      */
-	function generateCanvasTexture(scaleMode:Int, ?resolution:Float):Texture;
+	function generateCanvasTexture(scaleMode:ScaleModes, ?resolution:Float):Texture;
 
 	/**
      * Closes the current path.

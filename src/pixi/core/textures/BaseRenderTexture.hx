@@ -1,4 +1,5 @@
 package pixi.core.textures;
+import pixi.core.Pixi.ScaleModes;
 
 @:native("PIXI.BaseRenderTexture")
 extern class BaseRenderTexture extends BaseTexture {
@@ -44,10 +45,10 @@ extern class BaseRenderTexture extends BaseTexture {
 	 * @memberof PIXI
 	 * @param [width=100] {Float} The width of the base render texture
 	 * @param [height=100] {Float} The height of the base render texture
-	 * @param [scaleMode] {Int} See {@link PIXI.SCALE_MODES} for possible values
+	 * @param [scaleMode] {ScaleModes} See {@link PIXI.SCALE_MODES} for possible values
 	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture being generated
 	 */
-	function new(?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float);
+	function new(?width:Float, ?height:Float, ?scaleMode:ScaleModes, ?resolution:Float);
 
 	/**
 	 * Resizes the BaseRenderTexture.

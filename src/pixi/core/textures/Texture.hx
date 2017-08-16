@@ -2,10 +2,10 @@ package pixi.core.textures;
 
 import haxe.extern.EitherType;
 import js.html.CanvasElement;
-import haxe.extern.EitherType;
-import pixi.interaction.EventEmitter;
 import js.html.VideoElement;
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.math.shapes.Rectangle;
+import pixi.interaction.EventEmitter;
 
 @:native("PIXI.Texture")
 extern class Texture extends EventEmitter {
@@ -153,10 +153,10 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param imageUrl {String} The image url of the texture
 	 * @param crossorigin {Bool} Whether requests should be treated as crossorigin
-	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return Texture
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Texture;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:ScaleModes):Texture;
 
 	/**
 	 * Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId
@@ -173,31 +173,31 @@ extern class Texture extends EventEmitter {
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @param {String} [origin='canvas'] - A string origin of who created the base texture
 	 * @return {Texture}
 	 */
-	static function fromCanvas(canvas:Dynamic, ?scaleMode:Int, ?origin:String):Texture;
+	static function fromCanvas(canvas:Dynamic, ?scaleMode:ScaleModes, ?origin:String):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the given video element.
 	 *
 	 * @static
 	 * @param video {VideoElement|String} The URL or actual element of the video
-	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:Int):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
 	 *
 	 * @static
 	 * @param videoUrl {String}
-	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideoUrl(videoUrl:String, ?scaleMode:Int):Texture;
+	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes):Texture;
 
 	/**
      * Helper function that creates a new Texture based on the source you provide.
