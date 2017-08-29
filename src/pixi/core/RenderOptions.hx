@@ -3,6 +3,8 @@ package pixi.core;
 import js.html.CanvasElement;
 
 typedef RenderOptions = {
+	@:optional var autoStart:Bool;
+
 	@:optional var width:Float;
 	@:optional var height:Float;
 
@@ -12,6 +14,7 @@ typedef RenderOptions = {
 	@:optional var resolution:Float;
 	@:optional var forceCanvas:Bool;
 	@:optional var legacy:Bool;
+	@:optional var powerPreference:String;
 
 	@:optional var sharedTicker:Bool;
 	@:optional var sharedLoader:Bool;
