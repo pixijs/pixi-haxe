@@ -1,5 +1,6 @@
 package pixi.core.renderers.webgl.utils;
 
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.graphics.Graphics;
 import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Rectangle;
@@ -11,11 +12,11 @@ extern class RenderTarget {
      * @param {WebGLRenderingContext} gl - The current WebGL drawing context
      * @param {Float} [width=0] - the horizontal range of the filter
      * @param {Float} [height=0] - the vertical range of the filter
-     * @param {Int} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+     * @param {ScaleModes} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
      * @param {Float} [resolution=1] - The current resolution / device pixel ratio
      * @param {Bool} [root=false] - Whether this object is the root element or not
      */
-	function new(gl:Dynamic, ?width:Float, ?height:Float, ?scaleMode:Int, ?resolution:Float, ?root:Bool);
+	function new(gl:Dynamic, ?width:Float, ?height:Float, ?scaleMode:ScaleModes, ?resolution:Float, ?root:Bool);
 
 	/**
 	 * The current WebGL drawing context.
@@ -106,11 +107,11 @@ extern class RenderTarget {
 	/**
 	 * The scale mode.
 	 *
-	 * @member {number}
+	 * @member {ScaleModes}
 	 * @default PIXI.settings.SCALE_MODE
 	 * @see PIXI.SCALE_MODES
 	 */
-	var scaleMode:Int;
+	var scaleMode:ScaleModes;
 
 	/**
 	 * Whether this object is the root element or not

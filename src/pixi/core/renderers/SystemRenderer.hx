@@ -1,13 +1,14 @@
 package pixi.core.renderers;
 
+import haxe.extern.EitherType;
+import js.html.CanvasElement;
 import pixi.core.Pixi.RendererType;
+import pixi.core.Pixi.ScaleModes;
+import pixi.core.display.DisplayObject;
 import pixi.core.display.Transform;
 import pixi.core.textures.RenderTexture;
 import pixi.core.textures.Texture;
-import haxe.extern.EitherType;
 import pixi.interaction.EventEmitter;
-import pixi.core.display.DisplayObject;
-import js.html.CanvasElement;
 
 @:native("PIXI.SystemRenderer")
 extern class SystemRenderer extends EventEmitter {
@@ -19,19 +20,9 @@ extern class SystemRenderer extends EventEmitter {
 	 * @param [width=800] {Float} the width of the canvas view
 	 * @param [height=600] {Float} the height of the canvas view
 	 * @param [options] {RenderingOptions} The optional renderer parameters
-	 * @param [options.view] {HTMLCanvasElement} the canvas to use as a view, optional
-	 * @param [options.transparent=false] {Bool} If the render view is transparent, default false
-	 * @param [options.autoResize=false] {Bool} If the render view is automatically resized, default false
-	 * @param [options.antialias=false] {Bool} sets antialias (only applicable in chrome at the moment)
-	 * @param [options.resolution=1] {Float} the resolution of the renderer retina would be 2
-	 * @param [options.clearBeforeRender=true] {Bool} This sets if the CanvasRenderer will clear the canvas or
-	 *      not before the new render pass.
-	 * @param [options.backgroundColor=0x000000] {Int} The background color of the rendered area (shown if not transparent).
-	 * @param [options.roundPixels=false] {Bool} If true Pixi will Math.floor() x/y values when rendering, stopping pixel interpolation.
-	 * @param {Bool} [options.legacy=false] - If true Pixi will aim to ensure compatibility with older / less advanced devices.
-	 *      If you experience unexplained flickering try setting this to true.
 	 */
-	function new(system:String, ?width:Float = 800, ?height:Float = 600, ?options:RenderOptions);
+	@:overload(function(system:String, ?width:Float, ?height:Float, ?options:RenderOptions):Void {})
+	function new(system:String, ?options:RenderOptions, ?width:Float, ?height:Float);
 
 	/**
 	 * The type of the renderer.
@@ -145,11 +136,11 @@ extern class SystemRenderer extends EventEmitter {
      * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
      *
      * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from
-     * @param {Int} scaleMode - Should be one of the scaleMode consts
+     * @param {ScaleModes} scaleMode - Should be one of the scaleMode consts
      * @param {Float} resolution - The resolution / device pixel ratio of the texture being generated
      * @return {PIXI.Texture} a texture of the graphics object
      */
-	function generateTexture(displayObject:DisplayObject, scaleMode:Int, resolution:Float):Texture;
+	function generateTexture(displayObject:DisplayObject, scaleMode:ScaleModes, resolution:Float):Texture;
 
 
 	/**

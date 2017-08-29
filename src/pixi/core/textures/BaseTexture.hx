@@ -1,9 +1,10 @@
 package pixi.core.textures;
 
-import js.html.Image;
-import pixi.interaction.EventEmitter;
-import js.html.ImageElement;
 import js.html.CanvasElement;
+import js.html.Image;
+import js.html.ImageElement;
+import pixi.core.Pixi.ScaleModes;
+import pixi.interaction.EventEmitter;
 
 @:native("PIXI.BaseTexture")
 extern class BaseTexture extends EventEmitter {
@@ -14,12 +15,12 @@ extern class BaseTexture extends EventEmitter {
 	 * @class
 	 * @memberof PIXI
 	 * @param source {Image|Canvas} the source object of the texture.
-	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link SCALE_MODES} for possible values
+	 * @param [scaleMode=scaleModes.DEFAULT] {ScaleModes} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture
 	 */
-	@:overload(function(source:Dynamic,?scaleMode:Int, ?resolution:Float):Void {})
-	@:overload(function(source:CanvasElement,?scaleMode:Int, ?resolution:Float):Void {})
-	function new(source:ImageElement, ?scaleMode:Int, ?resolution:Float);
+	@:overload(function(source:Dynamic,?scaleMode:ScaleModes, ?resolution:Float):Void {})
+	@:overload(function(source:CanvasElement,?scaleMode:ScaleModes, ?resolution:Float):Void {})
+	function new(source:ImageElement, ?scaleMode:ScaleModes, ?resolution:Float);
 
 	/**
 	 * The Resolution of the texture.
@@ -65,10 +66,10 @@ extern class BaseTexture extends EventEmitter {
 	/**
 	 * The scale mode to apply when scaling this texture
 	 *
-	 * @member {Int}
+	 * @member {ScaleModes}
 	 * @default scaleModes.LINEAR
 	 */
-	var scaleMode:Int;
+	var scaleMode:ScaleModes;
 
 	/**
 	 * Set to true once the base texture has successfully loaded.
@@ -217,20 +218,20 @@ extern class BaseTexture extends EventEmitter {
 	 * @static
 	 * @param imageUrl {String} The image url of the texture
 	 * @param [crossorigin=(auto)] {Bool} Should use anonymouse CORS? Defaults to true if the URL is not a data-URI.
-	 * @param [scaleMode=scaleModes.DEFAULT] {Int} See {@link scaleModes} for possible values
+	 * @param [scaleMode=scaleModes.DEFAULT] {ScaleModes} See {@link scaleModes} for possible values
 	 * @return BaseTexture
 	 */
-	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:Int):BaseTexture;
+	static function fromImage(imageUrl:String, ?crossorigin:Bool, ?scaleMode:ScaleModes):BaseTexture;
 
 	/**
 	 * Helper function that creates a base texture from the given canvas element.
 	 *
 	 * @static
 	 * @param canvas {Canvas} The canvas element source of the texture
-	 * @param scaleMode {Int} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
 	 * @return BaseTexture
 	 */
-	static function fromCanvas(canvas:CanvasElement, ?scaleMode:Int):BaseTexture;
+	static function fromCanvas(canvas:CanvasElement, ?scaleMode:ScaleModes):BaseTexture;
 
 	/**
      * Helper function that creates a base texture based on the source you provide.
@@ -238,9 +239,9 @@ extern class BaseTexture extends EventEmitter {
      *
      * @static
      * @param {string|HTMLImageElement|HTMLCanvasElement} source - The source to create base texture from.
-     * @param {number} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+     * @param {ScaleModes} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
      * @param {number} [sourceScale=(auto)] - Scale for the original image, used with Svg images.
      * @return {PIXI.BaseTexture} The new base texture.
      */
-	static function from(source:Dynamic, scaleMode:Float, ?sourceScale:Float):BaseTexture;
+	static function from(source:Dynamic, scaleMode:ScaleModes, ?sourceScale:Float):BaseTexture;
 }

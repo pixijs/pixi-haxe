@@ -30,4 +30,5 @@ typedef DefaultStyle = {
 	@:optional var textBaseline:String;									//alphabetic
 	@:optional var wordWrap:Bool;										//false
 	@:optional var wordWrapWidth:Float;									//100
+	@:optional var leading:Float;										//0
 }

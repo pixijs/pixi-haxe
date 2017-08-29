@@ -1,15 +1,16 @@
 package pixi.core.sprites;
 
-import pixi.core.Pixi.BlendModes;
-import pixi.core.renderers.webgl.filters.Filter;
-import js.html.VideoElement;
-import js.html.CanvasElement;
-import pixi.core.textures.BaseTexture;
-import pixi.core.math.ObservablePoint;
 import haxe.extern.EitherType;
-import pixi.core.math.Point;
-import pixi.core.textures.Texture;
+import js.html.CanvasElement;
+import js.html.VideoElement;
+import pixi.core.Pixi.BlendModes;
+import pixi.core.Pixi.ScaleModes;
 import pixi.core.display.Container;
+import pixi.core.math.ObservablePoint;
+import pixi.core.math.Point;
+import pixi.core.renderers.webgl.filters.Filter;
+import pixi.core.textures.BaseTexture;
+import pixi.core.textures.Texture;
 
 @:native("PIXI.Sprite")
 extern class Sprite extends Container {
@@ -118,7 +119,9 @@ extern class Sprite extends Container {
 	 *
 	 * @static
 	 * @param imageId {String} The image url of the texture
+	 * @param [crossorigin=(auto)] {Bool} Should use anonymouse CORS? Defaults to true if the URL is not a data-URI.
+	 * @param [scaleMode=scaleModes.DEFAULT] {ScaleModes} See {@link scaleModes} for possible values
 	 * @return {Sprite} A new Sprite using a texture from the texture cache matching the image id
 	 */
-	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:Int):Sprite;
+	static function fromImage(imageId:String, ?crossorigin:Bool, ?scaleMode:ScaleModes):Sprite;
 }

@@ -45,6 +45,7 @@ extern class TextStyle {
      * @param {String} [style.textBaseline='alphabetic'] - The baseline of the text that is rendered.
      * @param {Bool} [style.wordWrap=false] - Indicates if word wrap should be used
      * @param {Float} [style.wordWrapWidth=100] - The width at which text will wrap, it needs wordWrap to be set to true
+     * @param {Float} [style.leading=0] - The space between lines
      */
 	function new(?style:DefaultStyle);
 
@@ -90,4 +91,5 @@ extern class TextStyle {
 	var textBaseline:String;
 	var wordWrap:Bool;
 	var wordWrapWidth:Float;
+	var leading:Float;
 }
