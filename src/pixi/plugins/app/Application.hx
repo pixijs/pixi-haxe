@@ -206,7 +206,7 @@ class Application {
 
 		switch (rendererType) {
 			case CANVAS:
-				renderingOptions.noWebGL = true;
+				renderingOptions.forceCanvas = true;
 				app = new pixi.core.Application(renderingOptions);
 			default: app = new pixi.core.Application(renderingOptions);
 		}
