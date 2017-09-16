@@ -4,6 +4,7 @@ import js.Browser;
 import js.html.CanvasElement;
 import js.html.Element;
 import js.html.Event;
+import pixi.core.Application.ApplicationOptions;
 import pixi.core.RenderOptions;
 import pixi.core.display.Container;
 import pixi.core.renderers.SystemRenderer;
@@ -189,9 +190,9 @@ class Application {
 
 		if (autoResize) Browser.window.onresize = _onWindowResize;
 
-		var renderingOptions:RenderOptions = {};
-		renderingOptions.width = width;
-		renderingOptions.height = height;
+		var renderingOptions:ApplicationOptions = {};
+		renderingOptions.width = Std.int(width);
+		renderingOptions.height = Std.int(height);
 		renderingOptions.view = canvas;
 		renderingOptions.backgroundColor = backgroundColor;
 		renderingOptions.resolution = pixelRatio;
