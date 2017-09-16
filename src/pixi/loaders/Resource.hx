@@ -1,5 +1,6 @@
 package pixi.loaders;
 
+import haxe.DynamicAccess;
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 import pixi.loaders.LoaderOptions.LoaderMetadata;
@@ -51,11 +52,19 @@ extern class Resource {
 
 	var bitmapFont:Dynamic;
 
-	var options:LoaderOptions;
-
 	var metadata:LoaderMetadata;
 
 	var type:ResourceType;
+	
+	/**
+	 * Since plugins like Spine can add additional fields to Resource
+	 * we need somewhat 'typed' method to retrieve those fields.	 
+	 * 
+	 * var data:SpineData = resource.get("spineData");
+	 */
+	inline function get<T>(name:String):T {
+		return untyped this[name];
+	}
 
 	/**
 	 * Extension of this resource
