@@ -1,4 +1,5 @@
 package pixi.plugins.spine.core;
+import haxe.DynamicAccess;
 import pixi.core.display.DisplayObject;
 import pixi.plugins.spine.core.attachments.Attachment;
 
@@ -12,7 +13,7 @@ extern class Slot
 	var clippingContainer: Dynamic;
 	var meshes: Dynamic;
 	var currentMeshName: String;
-	var sprites: Array<DisplayObject>;
+	var sprites: DynamicAccess<DisplayObject>;
 	var currentSpriteName: String;
 	var blendMode: Float;
 	//var tempRegion: TextureRegion;
