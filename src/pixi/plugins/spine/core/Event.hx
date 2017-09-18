@@ -10,4 +10,6 @@ extern class Event {
 	var time:Float;
 
 	function new(time:Float, data:EventData);
+	
+	
 }

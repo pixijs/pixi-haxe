@@ -1,4 +1,5 @@
 package pixi.core.textures;
+import haxe.DynamicAccess;
 
 @:native("PIXI.Spritesheet")
 extern class Spritesheet {
@@ -24,7 +25,7 @@ extern class Spritesheet {
 	 * Map of spritesheet textures.
 	 * @type {Object}
 	 */
-	var textures:Dynamic;
+	var textures:DynamicAccess<Texture>;
 
 	/**
 	 * Reference to the original JSON data.
