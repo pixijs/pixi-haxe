@@ -1,5 +1,7 @@
 package pixi.plugins.spine;
 
+import pixi.plugins.spine.core.AnimationState;
+import pixi.plugins.spine.core.Skeleton;
 import pixi.plugins.spine.core.SkeletonData;
 import pixi.plugins.spine.core.AnimationStateData;
 import pixi.core.display.Container;
@@ -42,7 +44,7 @@ extern class Spine extends Container {
      *
      * @member {object}
      */
-	var skeleton:Dynamic;
+	var skeleton:Skeleton;
 
 	/**
      * A spine AnimationStateData object created from the spine data passed in the constructor
@@ -56,7 +58,7 @@ extern class Spine extends Container {
      *
      * @member {object}
      */
-	var state:Dynamic;
+	var state:AnimationState;
 
 	/**
      * An array of containers

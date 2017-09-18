@@ -6,6 +6,25 @@ import js.html.CanvasElement;
 import pixi.core.ticker.Ticker;
 import pixi.core.display.Container;
 
+typedef ApplicationOptions = {
+	>RenderOptions,
+	
+	//automatically starts the rendering after the construction. Note that setting this parameter to false does NOT stop the shared ticker even if you set options.sharedTicker to true in case that it is already started. Stop it by your own.
+	//default: true
+	@:optional var autoStart:Bool;
+	
+	//true to use PIXI.ticker.shared, false to create new ticker.
+	//default: false
+
+	@:optional var sharedTicker:Bool;
+	
+	//true to use PIXI.loaders.shared, false to create new Loader.
+	//default: false
+
+	@:optional var sharedLoader:Bool;
+	
+}
+
 @:native("PIXI.Application")
 extern class Application {
 
@@ -26,9 +45,9 @@ extern class Application {
 	 *
 	 * @class
 	 * @memberof PIXI
-	 * @param {RenderOptions} [options] - The optional renderer parameters
+	 * @param {ApplicationOptions} [options] - The optional renderer parameters
 	 */
-	function new(?options:RenderOptions);
+	function new(?options:ApplicationOptions);
 
 	/**
 	 * WebGL renderer if available, otherwise CanvasRenderer
