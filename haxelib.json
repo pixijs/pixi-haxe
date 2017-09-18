@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "updated pixi version",
-	"version": "4.5.4",
+	"releasenote": "updated spine externs by @modjke",
+	"version": "4.5.5",
 	"url": "https://github.com/pixijs/pixi-haxe",
 	"dependencies": {
 		"perf.js": ""
