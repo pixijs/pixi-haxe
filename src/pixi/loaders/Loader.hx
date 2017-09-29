@@ -8,7 +8,7 @@ extern class Loader extends ResourceLoader {
 	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
 	 *
 	 * ```js
-	 * 	var loader = new PIXI.loader();
+	 * 	var loader = new Loader();
 	 *
 	 * loader.add('spineboy',"data/spineboy.json");
 	 *
@@ -21,8 +21,8 @@ extern class Loader extends ResourceLoader {
 	 * @extends ResourceLoader
 	 * @memberof PIXI.loaders
 	 *
-	 * @param [baseUrl=''] {string} The base url for all resources loaded by this loader.
-	 * @param [concurrency=10] {number} The number of resources to load concurrently.
+	 * @param [baseUrl=''] {String} The base url for all resources loaded by this loader.
+	 * @param [concurrency=10] {Int} The number of resources to load concurrently.
 	 */
 	function new(?baseUrl:String, ?concurrency:Int);
 }
