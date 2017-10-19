@@ -1,9 +1,9 @@
 package pixi.interaction;
 
+import haxe.extern.EitherType;
 import pixi.core.display.DisplayObject;
-import js.html.Event;
-import pixi.core.sprites.Sprite;
 import pixi.core.math.Point;
+import js.html.Event;
 
 @:native("PIXI.interaction.InteractionData")
 extern class InteractionData {
@@ -40,9 +40,9 @@ extern class InteractionData {
 	/**
 	 * Unique identifier for this interaction
 	 *
-	 * @member {Int}
+	 * @member {String|Int}
 	 */
-	var identifier:Int;
+	var identifier:EitherType<String, Int>;
 
 	/**
 	 * This will return the local coordinates of the specified displayObject for this InteractionData
