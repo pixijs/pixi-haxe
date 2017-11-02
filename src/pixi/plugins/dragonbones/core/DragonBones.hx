@@ -6,11 +6,18 @@ extern class DragonBones {
 }
 
 @:native("dragonBones.DragonBones.BoundingBoxType")
-extern enum BoundingBoxType {
-	None; Rectangle; Ellipse; Polygon;
+@:enum extern abstract BoundingBoxType(Int) {
+	var None; 
+	var Rectangle; 
+	var Ellipse; 
+	var Polygon;
 }
 
 @:native("dragonBones.DragonBones.AnimationFadeOutMode")
-extern enum AnimationFadeOutMode {
-	None; SameLayer; SameGroup; SameLayerAndGroup; All;
+@:enum extern abstract AnimationFadeOutMode(Int) {
+	var None; 
+	var SameLayer; 
+	var SameGroup; 
+	var SameLayerAndGroup; 
+	var All;
 }

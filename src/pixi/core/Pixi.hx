@@ -282,99 +282,99 @@ extern class Pixi {
 
 
 @:native("PIXI.RENDERER_TYPE")
-extern enum RendererType {
-	UNKNOWN;
-	WEBGL;
-	CANVAS;
+@:enum extern abstract RendererType(Int) {
+	var UNKNOWN;
+	var WEBGL;
+	var CANVAS;
 }
 
 @:native("PIXI.SCALE_MODES")
-extern enum ScaleModes {
-	DEFAULT;
-	LINEAR;
-	NEAREST;
+@:enum extern abstract ScaleModes(Int) {
+	var DEFAULT;
+	var LINEAR;
+	var NEAREST;
 }
 
 @:native("PIXI.WRAP_MODES")
-extern enum WrapModes {
-	DEFAULT;
-	CLAMP;
-	REPEAT;
-	MIRRORED_REPEAT;
+@:enum extern abstract WrapModes(Int) {
+	var DEFAULT;
+	var CLAMP;
+	var REPEAT;
+	var MIRRORED_REPEAT;
 }
 
 @:native("PIXI.GC_MODES")
-extern enum GCModes {
-	DEFAULT;
-	AUTO;
-	MANUAL;
+@:enum extern abstract GCModes(Int) {
+	var DEFAULT;
+	var AUTO;
+	var MANUAL;
 }
 
 @:native("PIXI.BLEND_MODES")
-extern enum BlendModes {
-	NORMAL;
-	ADD;
-	MULTIPLY;
-	SCREEN;
-	OVERLAY;
-	DARKEN;
-	LIGHTEN;
-	COLOR_DODGE;
-	COLOR_BURN;
-	HARD_LIGHT;
-	SOFT_LIGHT;
-	DIFFERENCE;
-	EXCLUSION;
-	HUE;
-	SATURATION;
-	COLOR;
-	LUMINOSITY;
+@:enum extern abstract BlendModes(Int) {
+	var NORMAL;
+	var ADD;
+	var MULTIPLY;
+	var SCREEN;
+	var OVERLAY;
+	var DARKEN;
+	var LIGHTEN;
+	var COLOR_DODGE;
+	var COLOR_BURN;
+	var HARD_LIGHT;
+	var SOFT_LIGHT;
+	var DIFFERENCE;
+	var EXCLUSION;
+	var HUE;
+	var SATURATION;
+	var COLOR;
+	var LUMINOSITY;
 }
 
 @:native("PIXI.DRAW_MODES")
-extern enum DrawModes {
-	POINTS;
-	LINES;
-	LINE_LOOP;
-	LINE_STRIP;
-	TRIANGLES;
-	TRIANGLE_STRIP;
-	TRIANGLE_FAN;
+@:enum extern abstract DrawModes(Int) {
+	var POINTS;
+	var LINES;
+	var LINE_LOOP;
+	var LINE_STRIP;
+	var TRIANGLES;
+	var TRIANGLE_STRIP;
+	var TRIANGLE_FAN;
 }
 
 @:native("PIXI.SHAPES")
-extern enum Shapes {
-	POLY;
-	RECT;
-	CIRC;
-	ELIP;
-	RREC;
+@:enum extern abstract Shapes(Int) {
+	var POLY;
+	var RECT;
+	var CIRC;
+	var ELIP;
+	var RREC;
 }
 
 @:native("PIXI.PRECISIONS")
-extern enum Precisions {
-	LOW;
-	MEDIUM;
-	HIGH;
+@:enum extern abstract Precisions(String) {
+	var LOW;
+	var MEDIUM;
+	var HIGH;
 }
 
 @:native("PIXI.TEXT_GRADIENT")
-extern enum TextGradients {
-	LINEAR_VERTICAL;
-	LINEAR_HORIZONTAL;
+@:enum extern abstract TextGradients(Int) {
+	var LINEAR_VERTICAL;
+	var LINEAR_HORIZONTAL;
 }
 
 @:native("PIXI.TRANSFORM_MODE")
-extern enum TransformModes {
-	STATIC;
-	DYNAMIC;
+@:enum extern abstract TransformModes(Int) {
+	var STATIC;
+	var DYNAMIC;
 }
 
 @:native("PIXI.UPDATE_PRIORITY")
-extern enum UpdatePriotities {
-	INTERACTION;
-	HIGH;
-	NORMAL;
-	LOW;
-	UTILITY;
+@:enum extern abstract UpdatePriotities(Int) {
+	var INTERACTION;
+	var HIGH;
+	var NORMAL;
+	var LOW;
+	var UTILITY;
 }
