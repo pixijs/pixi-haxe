@@ -76,6 +76,14 @@ extern class Filter {
 	 * @member {Bool}
 	 */
 	var enabled:Bool;
+	
+	/**
+	 * If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
+	 * Workaround for http://jsfiddle.net/xbmhh207/1/
+	 * @default true
+	 * @member {Bool}
+	 */
+	var autoFit:Bool;
 
 	/*
 	 * Applies the filter
