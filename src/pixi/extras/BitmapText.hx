@@ -134,11 +134,19 @@ extern class BitmapText extends Container {
 	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
-@:enum abstract BitmapTextAlign(String) {
-	var LEFT = "left";
-	var RIGHT = "right";
-	var CENTER = "center";
+#if (haxe_ver >= 3.3)
+@:enum extern abstract BitmapTextAlign(String) {
+	var LEFT;
+	var RIGHT;
+	var CENTER;
 }
+#else
+extern enum BitmapTextAlign {
+	LEFT;
+	RIGHT;
+	CENTER;
+}
+#end
 
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;

@@ -3,7 +3,7 @@ git:
 
 language: haxe
 haxe:
-  - "3.3.0-rc.1"
+  - "3.2.1"
 hxml:
   - build.hxml
 sudo: false

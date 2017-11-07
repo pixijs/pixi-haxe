@@ -280,37 +280,70 @@ extern class Pixi {
 	static var UPDATE_PRIORITY:UpdatePriotities;
 }
 
-
 @:native("PIXI.RENDERER_TYPE")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract RendererType(Int) {
 	var UNKNOWN;
 	var WEBGL;
 	var CANVAS;
-}
+} 
+#else
+extern enum RendererType {
+	UNKNOWN;
+	WEBGL;
+	CANVAS;
+} 
+#end
 
 @:native("PIXI.SCALE_MODES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract ScaleModes(Int) {
 	var DEFAULT;
 	var LINEAR;
 	var NEAREST;
 }
+#else
+extern enum ScaleModes {
+	DEFAULT;
+	LINEAR;
+	NEAREST;
+}
+#end
 
 @:native("PIXI.WRAP_MODES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract WrapModes(Int) {
 	var DEFAULT;
 	var CLAMP;
 	var REPEAT;
 	var MIRRORED_REPEAT;
 }
+#else
+extern enum WrapModes {
+	DEFAULT;
+	CLAMP;
+	REPEAT;
+	MIRRORED_REPEAT;
+}
+#end
 
 @:native("PIXI.GC_MODES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract GCModes(Int) {
 	var DEFAULT;
 	var AUTO;
 	var MANUAL;
 }
+#else
+extern enum GCModes {
+	DEFAULT;
+	AUTO;
+	MANUAL;
+}
+#end
 
 @:native("PIXI.BLEND_MODES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract BlendModes(Int) {
 	var NORMAL;
 	var ADD;
@@ -330,8 +363,30 @@ extern class Pixi {
 	var COLOR;
 	var LUMINOSITY;
 }
+#else
+extern enum BlendModes {
+	NORMAL;
+	ADD;
+	MULTIPLY;
+	SCREEN;
+	OVERLAY;
+	DARKEN;
+	LIGHTEN;
+	COLOR_DODGE;
+	COLOR_BURN;
+	HARD_LIGHT;
+	SOFT_LIGHT;
+	DIFFERENCE;
+	EXCLUSION;
+	HUE;
+	SATURATION;
+	COLOR;
+	LUMINOSITY;
+}
+#end
 
 @:native("PIXI.DRAW_MODES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract DrawModes(Int) {
 	var POINTS;
 	var LINES;
@@ -341,8 +396,20 @@ extern class Pixi {
 	var TRIANGLE_STRIP;
 	var TRIANGLE_FAN;
 }
+#else 
+extern enum DrawModes {
+	POINTS;
+	LINES;
+	LINE_LOOP;
+	LINE_STRIP;
+	TRIANGLES;
+	TRIANGLE_STRIP;
+	TRIANGLE_FAN;
+}
+#end
 
 @:native("PIXI.SHAPES")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract Shapes(Int) {
 	var POLY;
 	var RECT;
@@ -350,27 +417,63 @@ extern class Pixi {
 	var ELIP;
 	var RREC;
 }
+#else 
+extern enum Shapes {
+	POLY;
+	RECT;
+	CIRC;
+	ELIP;
+	RREC;
+}
+#end
+
 
 @:native("PIXI.PRECISIONS")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract Precisions(String) {
 	var LOW;
 	var MEDIUM;
 	var HIGH;
 }
+#else 
+extern enum Precisions {
+	LOW;
+	MEDIUM;
+	HIGH;
+}
+#end
+
 
 @:native("PIXI.TEXT_GRADIENT")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract TextGradients(Int) {
 	var LINEAR_VERTICAL;
 	var LINEAR_HORIZONTAL;
 }
+#else 
+extern enum TextGradients {
+	LINEAR_VERTICAL;
+	LINEAR_HORIZONTAL;
+}
+#end
+
 
 @:native("PIXI.TRANSFORM_MODE")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract TransformModes(Int) {
 	var STATIC;
 	var DYNAMIC;
 }
+#else 
+extern enum TransformModes {
+	STATIC;
+	DYNAMIC;
+}
+#end
+
 
 @:native("PIXI.UPDATE_PRIORITY")
+#if (haxe_ver >= 3.3)
 @:enum extern abstract UpdatePriotities(Int) {
 	var INTERACTION;
 	var HIGH;
@@ -378,3 +481,12 @@ extern class Pixi {
 	var LOW;
 	var UTILITY;
 }
+#else 
+extern enum UpdatePriotities {
+	INTERACTION;
+	HIGH;
+	NORMAL;
+	LOW;
+	UTILITY;
+}
+#end
