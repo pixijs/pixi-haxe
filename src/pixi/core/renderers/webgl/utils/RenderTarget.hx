@@ -81,6 +81,13 @@ extern class RenderTarget {
 	 * @member {PIXI.Rectangle}
 	 */
 	var frame:Rectangle;
+	
+	/**
+	 * Source frame
+	 *
+	 * @member {PIXI.Rectangle}
+	 */
+	var sourceFrame:Rectangle;
 
 
 	/**

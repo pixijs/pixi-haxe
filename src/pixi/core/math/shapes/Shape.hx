@@ -1,21 +1,12 @@
 package pixi.core.math.shapes;
-
-@:native("PIXI.SHAPES")
-extern enum ShapeType
-{
-	POLY;
-    RECT;
-    CIRC;
-    ELIP;
-    RREC;
-}
+import pixi.core.Pixi.Shapes;
 
 extern class Shape 
 {
 	/**
 	 * Defines the type of the shape to avoid instanceof (Std.is) checks
 	 */
-	var type:ShapeType;
+	var type:Shapes;
 
 	/**
 	 * Checks whether the x and y coordinates passed to this function are contained within this Shape
