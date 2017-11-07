@@ -1,4 +1,6 @@
 package pixi.core.renderers.webgl.filters;
+import pixi.core.display.DisplayObject;
+import pixi.core.math.shapes.Rectangle;
 import pixi.core.renderers.webgl.managers.FilterManager;
 import pixi.core.renderers.webgl.utils.RenderTarget;
 
@@ -95,5 +97,15 @@ extern class Filter {
      *        There are some useful properties in the currentState :
      *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
 	 */
-	function apply(filterManager:FilterManager, input:RenderTarget, output:RenderTarget, ?clear:Bool, ?currentState:Dynamic):Void;
+	function apply(filterManager:FilterManager, input:RenderTarget, output:RenderTarget, ?clear:Bool, ?currentState:CurrentState):Void;
+}
+
+interface CurrentState implements Dynamic
+{
+	var destinationFrame:Rectangle;
+	var filters:Array<Filter>;
+	var renderTarget:RenderTarget;
+	var resolution:Float;
+	var sourceFrame:Rectangle;
+	var target:DisplayObject;
 }
