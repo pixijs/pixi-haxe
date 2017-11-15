@@ -233,7 +233,7 @@ extern class Pixi {
 	 * @property {String} MEDIUM='mediump'
 	 * @property {String} HIGH='highp'
 	 */
-	static var PRECISION:Precisions;
+	static var PRECISION:Precision;
 
 	/**
 	 * Constants that specify the transform type.
@@ -286,13 +286,13 @@ extern class Pixi {
 	var UNKNOWN;
 	var WEBGL;
 	var CANVAS;
-} 
+}
 #else
 extern enum RendererType {
 	UNKNOWN;
 	WEBGL;
 	CANVAS;
-} 
+}
 #end
 
 @:native("PIXI.SCALE_MODES")
@@ -396,7 +396,7 @@ extern enum BlendModes {
 	var TRIANGLE_STRIP;
 	var TRIANGLE_FAN;
 }
-#else 
+#else
 extern enum DrawModes {
 	POINTS;
 	LINES;
@@ -417,7 +417,7 @@ extern enum DrawModes {
 	var ELIP;
 	var RREC;
 }
-#else 
+#else
 extern enum Shapes {
 	POLY;
 	RECT;
@@ -428,15 +428,15 @@ extern enum Shapes {
 #end
 
 
-@:native("PIXI.PRECISIONS")
+@:native("PIXI.PRECISION")
 #if (haxe_ver >= 3.3)
-@:enum extern abstract Precisions(String) {
+@:enum extern abstract Precision(String) {
 	var LOW;
 	var MEDIUM;
 	var HIGH;
 }
-#else 
-extern enum Precisions {
+#else
+extern enum Precision {
 	LOW;
 	MEDIUM;
 	HIGH;
@@ -450,7 +450,7 @@ extern enum Precisions {
 	var LINEAR_VERTICAL;
 	var LINEAR_HORIZONTAL;
 }
-#else 
+#else
 extern enum TextGradients {
 	LINEAR_VERTICAL;
 	LINEAR_HORIZONTAL;
@@ -464,7 +464,7 @@ extern enum TextGradients {
 	var STATIC;
 	var DYNAMIC;
 }
-#else 
+#else
 extern enum TransformModes {
 	STATIC;
 	DYNAMIC;
@@ -481,7 +481,7 @@ extern enum TransformModes {
 	var LOW;
 	var UTILITY;
 }
-#else 
+#else
 extern enum UpdatePriotities {
 	INTERACTION;
 	HIGH;
