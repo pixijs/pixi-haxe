@@ -1,5 +1,6 @@
 package pixi.core;
 
+import haxe.extern.EitherType;
 import pixi.core.Pixi.ScaleModes;
 import pixi.core.Pixi.TransformModes;
 import pixi.core.Pixi.GCModes;
@@ -83,7 +84,7 @@ extern class Settings {
      * @example `@2x`
      * @default /@(.+)x/
      */
-	static var RETINA_PREFIX:String;
+	static var RETINA_PREFIX:EitherType<EReg, String>;
 
 	/**
      * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
@@ -167,14 +168,24 @@ extern class Settings {
 	static var SCALE_MODE:ScaleModes;
 
 	/**
-     * Default specify float precision in shaders.
+     * Default specify float precision in vertex shader.
+     *
+     * @static
+     * @memberof PIXI.settings
+     * @type {PIXI.PRECISION}
+     * @default PIXI.PRECISION.HIGH
+     */
+	static var PRECISION_VERTEX:String;
+
+	/**
+     * Default specify float precision in fragment shader.
      *
      * @static
      * @memberof PIXI.settings
      * @type {PIXI.PRECISION}
      * @default PIXI.PRECISION.MEDIUM
      */
-	static var PRECISION:String;
+	static var PRECISION_FRAGMENT:String;
 
 	/**
      * Can we upload the same buffer in a single frame?

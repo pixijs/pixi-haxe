@@ -17,14 +17,40 @@ import pixi.loaders.LoaderOptions.LoaderMetadata;
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
  */
 @:native("PIXI.loaders.Resource.LOAD_TYPE")
-extern enum LoadType {
-	XHR; IMAGE; AUDIO; VIDEO;
+#if (haxe_ver >= 3.3)
+@:enum extern abstract LoadType(Int) {
+	var XHR; 
+	var IMAGE;
+	var AUDIO; 
+	var VIDEO;
 }
+#else 
+extern enum LoadType {
+	XHR; 
+	IMAGE;
+	AUDIO; 
+	VIDEO;
+}
+#end
 
 @:native("PIXI.loaders.Resource.TYPE")
-extern enum ResourceType {
-	JSON; XML; IMAGE; AUDIO; VIDEO;
+#if (haxe_ver >= 3.3)
+@:enum extern abstract ResourceType(Int) {
+	var JSON; 
+	var XML; 
+	var IMAGE;
+	var AUDIO; 
+	var VIDEO;
 }
+#else 
+extern enum ResourceType {
+	JSON; 
+	XML; 
+	IMAGE;
+	AUDIO; 
+	VIDEO;
+}
+#end
 
 @:native("PIXI.loaders.Resource")
 extern class Resource {
