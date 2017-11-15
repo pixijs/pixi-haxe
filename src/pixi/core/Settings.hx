@@ -176,7 +176,7 @@ extern class Settings {
      * @type {PIXI.PRECISION}
      * @default PIXI.PRECISION.HIGH
      */
-	static var PRECISION_VERTEX:String;
+	static var PRECISION_VERTEX:Precision;
 
 	/**
      * Default specify float precision in fragment shader.
@@ -186,7 +186,7 @@ extern class Settings {
      * @type {PIXI.PRECISION}
      * @default PIXI.PRECISION.MEDIUM
      */
-	static var PRECISION_FRAGMENT:String;
+	static var PRECISION_FRAGMENT:Precision;
 
 	/**
      * Can we upload the same buffer in a single frame?
