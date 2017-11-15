@@ -1,5 +1,6 @@
 package pixi.core;
 
+import js.RegExp;
 import haxe.extern.EitherType;
 import pixi.core.Pixi.ScaleModes;
 import pixi.core.Pixi.TransformModes;
@@ -84,7 +85,7 @@ extern class Settings {
      * @example `@2x`
      * @default /@(.+)x/
      */
-	static var RETINA_PREFIX:EitherType<EReg, String>;
+	static var RETINA_PREFIX:EitherType<RegExp, String>;
 
 	/**
      * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
