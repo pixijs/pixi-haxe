@@ -6,6 +6,7 @@ import pixi.core.Pixi.ScaleModes;
 import pixi.core.Pixi.TransformModes;
 import pixi.core.Pixi.GCModes;
 import pixi.core.Pixi.WrapModes;
+import pixi.core.Pixi.Precision;
 
 @:native("PIXI.settings")
 extern class Settings {
