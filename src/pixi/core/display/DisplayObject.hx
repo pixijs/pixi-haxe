@@ -32,9 +32,10 @@ extern class DisplayObject extends InteractiveTarget {
 	/**
 	 * Retrieves the local bounds of the displayObject as a rectangle object
 	 *
+	 * @param rect {Rectangle} Optional rectangle to store the result of the bounds calculation
 	 * @return {Rectangle} the rectangular bounding area
 	 */
-	function getLocalBounds():Rectangle;
+	function getLocalBounds(?rect:Rectangle):Rectangle;
 
 	/**
 	 * Calculates the global position of the display object
