@@ -194,8 +194,19 @@ extern class Settings {
      *
      * @static
      * @constant
-     * @memberof PIXI
+     * @memberof PIXI.settings
      * @type {Bool}
      */
 	static var CAN_UPLOAD_SAME_BUFFER:Bool;
+
+	/**
+     * Default Mesh `canvasPadding`.
+     *
+     * @see PIXI.mesh.Mesh#canvasPadding
+     * @static
+     * @constant
+     * @memberof PIXI.settings
+     * @type {Float}
+     */
+	static var MESH_CANVAS_PADDING:Float;
 }
