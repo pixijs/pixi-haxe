@@ -1,0 +1,38 @@
+package pixi.filters.alpha;
+
+import pixi.core.renderers.webgl.filters.Filter;
+
+@:native("PIXI.filters.AlphaFilter")
+extern class AlphaFilter extends Filter {
+
+	/**
+	 * Simplest filter - applies alpha
+	 *
+	 * Use this instead of Container's alpha property to avoid visual layering of individual elements.
+	 * AlphaFilter applies alpha evenly across the entire display object and any opaque elements it contains.
+	 * If elements are not opaque, they will blend with each other anyway.
+	 *
+	 * Very handy if you want to use common features of all filters:
+	 *
+	 * 1. Assign a blendMode to this filter, blend all elements inside display object with background.
+	 *
+	 * 2. To use clipping in display coordinates, assign a filterArea to the same container that has this filter.
+	 *
+	 * @class
+	 * @extends PIXI.Filter
+	 * @memberof PIXI.filters
+	 */
+
+	/**
+     * @param {Float} [alpha=1] Amount of alpha from 0 to 1, where 0 is transparent
+     */
+	function new(?alpha:Float);
+
+	/**
+     * Coefficient for alpha multiplication
+     *
+     * @member {Float}
+     * @default 1
+     */
+	var alpha:Float;
+}
