@@ -1,5 +1,6 @@
 package pixi.filters.displacement;
 
+import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import pixi.core.renderers.webgl.filters.Filter;
@@ -20,10 +21,15 @@ extern class DisplacementFilter extends Filter {
 	function new(sprite:Sprite, ?scale:Float);
 
 	/**
-     * The texture used for the displacement map. Must be power of 2 sized texture.
-     *
-     * @member {Texture}
-     * @memberof PIXI.filters.DisplacementFilter#
-     */
+	 * The texture used for the displacement map. Must be power of 2 sized texture.
+	 *
+	 * @member {Texture}
+	 * @memberof PIXI.filters.DisplacementFilter#
+	 */
 	var map:Texture;
+
+	/**
+	* The scale of the displacement.
+	*/
+	var scale:Point;
 }
