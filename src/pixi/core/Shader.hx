@@ -1,6 +1,7 @@
 package pixi.core;
 
 import haxe.extern.EitherType;
+
 @:native("PIXI.Shader")
 extern class Shader {
 
@@ -14,8 +15,10 @@ extern class Shader {
 	 * @param gl {WebGLRenderingContext} The current WebGL rendering context
 	 * @param vertexSrc {String|Array<String>} The vertex shader source as an array of strings.
 	 * @param fragmentSrc {String|Array<String>} The fragment shader source as an array of strings.
+	 * @param {object} [attributeLocations] - A key value pair showing which location eact attribute should sit. e.g. {position:0, uvs:1}.
+	 * @param {String} [precision] - The float precision of the shader. Options are 'lowp', 'mediump' or 'highp'.
 	 */
-	function new(gl:Dynamic, vertexSrc:EitherType<String, Array<String>>, framentSrc:EitherType<String, Array<String>>);
+	function new(gl:Dynamic, vertexSrc:EitherType<String, Array<String>>, framentSrc:EitherType<String, Array<String>>, ?attributeLocations:Dynamic, ?precision:String);
 
 	/**
 	 *

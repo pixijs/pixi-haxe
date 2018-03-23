@@ -145,4 +145,16 @@ extern class Utils {
 	 * Removes all textures from cache, but does not destroy them
 	 */
 	static function clearTextureCache():Void;
+
+	/**
+     * @see {@link https://github.com/mapbox/earcut}
+     *
+     * @memberof PIXI.utils
+     * @function earcut
+     * @param {number[]} vertices - A flat array of vertice coordinates
+     * @param {number[]} [holes] - An array of hole indices
+     * @param {number} [dimensions=2] The number of coordinates per vertice in the input array
+     * @return {number[]} Triangulated polygon
+     */
+	static function earcut(vertices:Array<Float>, ?holes:Array<Float>, ?dimensions:Float):Array<Float>;
 }

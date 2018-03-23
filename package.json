@@ -1,6 +1,6 @@
 {
 	"name": "pixijs",
-	"version": "4.5.5",
+	"version": "4.7.1",
 	"description": "Externs of pixi.js v4.x for Haxe - a fast and lightweight 2D rendering library that works across all devices",
 	"author": "Adi Reddy Mora",
 	"homepage": "http://adireddy.github.io",

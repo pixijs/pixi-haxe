@@ -267,6 +267,19 @@ extern class Graphics extends Container {
 	function drawPolygon(path:Array<Float>):Graphics;
 
 	/**
+     * Draw a star shape with an abitrary number of points.
+     *
+     * @param {Float} x - Center X position of the star
+     * @param {Float} y - Center Y position of the star
+     * @param {Int} points - The number of points of the star, must be > 1
+     * @param {Float} radius - The outer radius of the star
+     * @param {Float} [innerRadius] - The inner radius between points, default half `radius`
+     * @param {Float} [rotation=0] - The rotation of the star in radians, where 0 is vertical
+     * @return {Graphics} This Graphics object. Good for chaining method calls
+     */
+	function drawStar(x:Float, y:Float, points:Int, radius:Float, ?innerRadius:Float, ?rotation:Float = 0):Graphics;
+
+	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 	 *
 	 * @return {Graphics}

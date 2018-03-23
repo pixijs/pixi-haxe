@@ -1,5 +1,6 @@
 package pixi.core.renderers;
 
+import pixi.core.math.shapes.Rectangle;
 import haxe.extern.EitherType;
 import js.html.CanvasElement;
 import pixi.core.Pixi.RendererType;
@@ -138,9 +139,10 @@ extern class SystemRenderer extends EventEmitter {
      * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from
      * @param {ScaleModes} scaleMode - Should be one of the scaleMode consts
      * @param {Float} resolution - The resolution / device pixel ratio of the texture being generated
+     * @param {PIXI.Rectangle} [region] - The region of the displayObject, that shall be rendered, if no region is specified, defaults to the local bounds of the displayObject.
      * @return {PIXI.Texture} a texture of the graphics object
      */
-	function generateTexture(displayObject:DisplayObject, scaleMode:ScaleModes, resolution:Float):Texture;
+	function generateTexture(displayObject:DisplayObject, scaleMode:ScaleModes, resolution:Float, ?region:Rectangle):Texture;
 
 
 	/**
