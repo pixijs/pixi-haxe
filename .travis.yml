@@ -2,8 +2,12 @@ git:
     depth: 1
 
 language: haxe
+
 haxe:
   - "3.2.1"
+  - "3.4.7"
+  
 hxml:
   - build.hxml
+  
 sudo: false
