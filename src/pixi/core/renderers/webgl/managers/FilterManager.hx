@@ -82,20 +82,23 @@ extern class FilterManager extends WebGLManager {
 	/*
 	 * Multiply vTextureCoord to this matrix to achieve (0,0,1,1) for filterArea
 	 * @param output {PIXI.Matrix} The mapped matrix.
+     * @return {PIXI.Matrix} The mapped matrix.
 	 */
-	function calculateNormalizedScreenSpaceMatrix(output:Matrix):Void;
-	
+	function calculateNormalizedScreenSpaceMatrix(output:Matrix):Matrix;
+
 	/**
 	 * Calculates the mapped matrix.
 	 * TODO playing around here.. this is temporary - (will end up in the shader) this returns a matrix that will normalise map filter cords in the filter to screen space
 	 * @param	output {PIXI.Matrix} The mapped matrix.
+     * @return {PIXI.Matrix} The mapped matrix.
 	 */
-	function calculateScreenSpaceMatrix(output:Matrix):Void;	
-	
+	function calculateScreenSpaceMatrix(output:Matrix):Matrix;
+
 	/**
 	 * This will map the filter coord so that a texture can be used based on the transform of a sprite
 	 * @param	output {PIXI.Matrix} The mapped matrix.
 	 * @param	sprite {PIXI.Sprite} The sprite to map to.
+     * @return {PIXI.Matrix} The mapped matrix.
 	 */
-	function calculateSpriteMatrix(output:Matrix, sprite:Sprite):Void;
+	function calculateSpriteMatrix(output:Matrix, sprite:Sprite):Matrix;
 }
