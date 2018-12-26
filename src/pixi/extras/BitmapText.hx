@@ -135,10 +135,10 @@ extern class BitmapText extends Container {
 }
 
 #if (haxe_ver >= 3.3)
-@:enum extern abstract BitmapTextAlign(String) {
-	var LEFT;
-	var RIGHT;
-	var CENTER;
+@:enum abstract BitmapTextAlign(String) to String {
+	var LEFT = "left";
+	var RIGHT = "right";
+	var CENTER = "center";
 }
 #else
 extern enum BitmapTextAlign {
