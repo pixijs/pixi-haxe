@@ -61,6 +61,14 @@ extern class AnimatedSprite extends Sprite {
 	 * @memberof MovieClip#
 	 */
 	var onFrameChange:Void -> Void;
+	
+	 /**
+	 * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
+	 *
+ 	 * @method
+	 * @memberof MovieClip#
+	 */
+	var onLoop:Void -> Void;
 
 	/**
      * Indicates if the AnimatedSprite is currently playing
