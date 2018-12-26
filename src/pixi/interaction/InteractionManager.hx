@@ -159,6 +159,15 @@ extern class InteractionManager extends EventEmitter {
 	 * @return {Bool} returns true if the displayObject hit the point
 	 */
 	function processInteractive(point:Point, displayObject:DisplayObject, func:Void -> Void, hitTest:Bool, interactive:Bool):Bool;
+	
+	/**
+	 * Hit tests a point against the display tree, returning the first interactive object that is hit.
+	 * 
+	 * @param	{Point} globalPoint
+	 * @param	{Container} root
+	 * @return {DisplayObject} first interactive object being hit
+	 */
+	function hitTest(globalPoint:Point, root:pixi.core.display.Container):DisplayObject;
 }
 
 typedef InteractionManagerOptions = {
