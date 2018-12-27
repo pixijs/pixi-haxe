@@ -33,7 +33,7 @@ extern class Texture extends EventEmitter {
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
 	 * @param [anchor] {PIXI.Point} Default anchor point used for sprite placement / rotation
 	 */
-	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool, anchor:Point);
+	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool, ?anchor:Point);
 
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -191,7 +191,7 @@ extern class Texture extends EventEmitter {
      * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes, crossorigin:Bool, autoPlay:Bool):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
@@ -203,7 +203,7 @@ extern class Texture extends EventEmitter {
      * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes, crossorigin:Bool, autoPlay:Bool):Texture;
+	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
 
 	/**
      * Helper function that creates a new Texture based on the source you provide.
