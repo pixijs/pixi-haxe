@@ -1,7 +1,7 @@
 [![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/notboring/pixi-haxe.svg?branch=dev)](https://travis-ci.org/notboring/pixi-haxe) [![Support on Patreon](http://www.waudjs.com/images/patreon_btn.png)](https://www.patreon.com/adireddy)
 =========
 ### This fork
-This is not the official version! PIXI maintainers stopped accepting pull requests for the official haxe externs after the Adi Reddy sadly passed away. For that reason I created a fork that includes all pull requests from the official repository along with fixes from other forks. I also added a few pixi 4.8 changes myself.
+This is not the official version! PIXI maintainers stopped accepting pull requests for the official haxe externs after Adi Reddy sadly passed away. For that reason I created a fork that includes all pull requests from the official repository along with fixes from other forks. I also added a few pixi 4.8 changes myself.
 
 Feel free to submit pull requests or issues if you see errors or want to improve this project. I'll try to keep these externs updated and also implement the 5.0 changes when they come out.
 
