@@ -18,7 +18,7 @@ haxelib git pixijs https://github.com/notboring/pixi-haxe.git dev
 
 ### Issues
 
-Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
+Found any bug? Please create a new [issue](https://github.com/notboring/pixi-haxe/issues/new).
 
 ### Demos
 
