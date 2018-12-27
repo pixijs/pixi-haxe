@@ -4,6 +4,7 @@ import haxe.extern.EitherType;
 import js.html.CanvasElement;
 import js.html.VideoElement;
 import pixi.core.Pixi.ScaleModes;
+import pixi.core.math.Point;
 import pixi.core.math.shapes.Rectangle;
 import pixi.interaction.EventEmitter;
 
@@ -30,8 +31,9 @@ extern class Texture extends EventEmitter {
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
+	 * @param [anchor] {PIXI.Point} Default anchor point used for sprite placement / rotation
 	 */
-	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
+	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool, anchor:Point);
 
 	/**
 	 * Does this Texture have any frame data assigned to it?
