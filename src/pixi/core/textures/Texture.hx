@@ -185,9 +185,11 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes, crossorigin:Bool, autoPlay:Bool):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
@@ -195,9 +197,11 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param videoUrl {String}
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes):Texture;
+	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes, crossorigin:Bool, autoPlay:Bool):Texture;
 
 	/**
      * Helper function that creates a new Texture based on the source you provide.
