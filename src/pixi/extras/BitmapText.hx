@@ -124,6 +124,14 @@ extern class BitmapText extends Container {
 	var text:String;
 
 	/**
+	 * Additional space between characters.
+	 *
+	 * @member {Float}
+	 * @memberof BitmapText#
+	 */
+	var letterSpacing:Float;
+
+	/**
      * Register a bitmap font with data and a texture.
      *
      * @static
@@ -152,6 +160,7 @@ typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;
 	@:optional var align:BitmapTextAlign;
 	@:optional var tint:Int;
+	@:optional var letterSpacing:Float;
 }
 
 typedef FontObj = {

@@ -50,6 +50,16 @@ extern class Texture extends EventEmitter {
 	var baseTexture:BaseTexture;
 
 	/**
+	 * Anchor point that is used as default if sprite is created with this texture. 
+	 * Changing the defaultAnchor at a later point of time will not update Sprite's anchor point.
+	 * 
+	 * Default {0,0}
+	 *
+	 * @member {Point}
+	 */
+	var defaultAnchor:Point;
+
+	/**
 	 * The texture trim data.
 	 *
 	 * @member {Rectangle}
