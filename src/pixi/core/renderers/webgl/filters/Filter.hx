@@ -100,7 +100,7 @@ extern class Filter {
 	function apply(filterManager:FilterManager, input:RenderTarget, output:RenderTarget, ?clear:Bool, ?currentState:CurrentState):Void;
 }
 
-interface CurrentState implements Dynamic
+extern interface CurrentState implements Dynamic
 {
 	var destinationFrame:Rectangle;
 	var filters:Array<Filter>;
