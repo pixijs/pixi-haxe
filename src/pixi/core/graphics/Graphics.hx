@@ -94,6 +94,14 @@ extern class Graphics extends Container {
 	var boundsPadding:Float;
 
 	/**
+	 * Used to detect if the graphics object has changed. If this is set to true then the graphics
+	 * object will be recalculated.
+	 *
+	 * @member {boolean}
+	 */
+	var dirty: Int;
+
+	/**
 	 * Used to detect if we need to do a fast rect check using the id compare method
 	 * @type {Int}
 	 */
