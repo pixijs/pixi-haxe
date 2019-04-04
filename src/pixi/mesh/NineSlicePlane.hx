@@ -46,7 +46,6 @@ extern class NineSlicePlane extends Plane {
 	var rightWidth:Float;
 	var topHeight:Float;
 	var bottomHeight:Float;
-	var tint:Int;
 
 	function updateHorizontalVertices():Void;
 
