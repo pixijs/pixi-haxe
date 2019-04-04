@@ -39,6 +39,18 @@ extern class AnimatedSprite extends Sprite {
 	var animationSpeed:Float;
 
 	/**
+     * Update anchor to Texture's defaultAnchor when frame changes.
+	* 
+     * Useful with sprite sheet animations created with tools.
+	* Changing anchor for each frame allows to pin sprite origin to certain moving feature
+	* of the frame (e.g. left foot).
+	* 
+     * @member {Bool}
+     * @default false
+     */
+	var updateAnchor:Bool;
+
+	/**
      * Whether or not the animate sprite repeats after playing.
      *
      * @member {Bool}
