@@ -1,18 +1,4 @@
-[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/notboring/pixi-haxe.svg?branch=dev)](https://travis-ci.org/notboring/pixi-haxe)
-=========
-
-### This fork
-
-I am now one of maintainers for the official pixi repository. Find all future changes here: 
-
-[Official pixi-haxe repository](https://github.com/pixijs/pixi-haxe)
-
-~~This is not the official version! PIXI maintainers stopped accepting pull requests for the official haxe externs after [Adi Reddy sadly passed away](https://github.com/pixijs/pixi-haxe/issues/151). For that reason I created a fork that includes all pull requests from the official repository along with fixes from other forks. I also added a few pixi 4.8 changes myself.~~
-
-~~Feel free to submit pull requests or issues if you see errors or want to improve this project. I'll try to keep these externs updated and also implement the 5.0 changes when they come out.~~
-
-~~If you want to help with managing this reposity please contact me using an issue. It would be a good idea to have at least one more person that can handle pull requests in case I am not available as much as I would like to.~~
-
+[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe) [![Support on Patreon](http://www.waudjs.com/images/patreon_btn.png)](https://www.patreon.com/adireddy)
 =========
 ![haxe pixi logo](logo.png)
 
@@ -21,12 +7,12 @@ Externs of Pixi.js v4.x for Haxe - A fast and lightweight 2D javascript renderin
 ### Installation
 
 ```
-haxelib git pixijs https://github.com/notboring/pixi-haxe.git dev
+haxelib install pixijs
 ```
 
 ### Issues
 
-Found any bug? Please create a new [issue](https://github.com/notboring/pixi-haxe/issues/new).
+Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
 
 ### Demos
 
