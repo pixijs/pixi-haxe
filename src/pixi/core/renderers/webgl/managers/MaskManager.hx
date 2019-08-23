@@ -53,4 +53,11 @@ extern class MaskManager extends WebGLManager {
 	 * @param maskData {any[]}
 	 */
 	function popStencilMask(target:Dynamic, maskData:Dynamic):Void;
+
+	/**
+	 * Use only alpha value of the mask sprite instead of full color.
+	 * 
+	 * @member {Bool}
+	 */
+	var onlyAlpha:Bool;
 }

@@ -4,6 +4,7 @@ import haxe.extern.EitherType;
 import js.html.CanvasElement;
 import js.html.VideoElement;
 import pixi.core.Pixi.ScaleModes;
+import pixi.core.math.Point;
 import pixi.core.math.shapes.Rectangle;
 import pixi.interaction.EventEmitter;
 
@@ -30,8 +31,9 @@ extern class Texture extends EventEmitter {
 	 * @param [crop] {Rectangle} The area of original texture
 	 * @param [trim] {Rectangle} Trimmed texture rectangle
 	 * @param [rotate] {boolean} indicates whether the texture should be rotated by 90 degrees ( used by texture packer )
+	 * @param [anchor] {PIXI.Point} Default anchor point used for sprite placement / rotation
 	 */
-	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool);
+	function new(baseTexture:EitherType<BaseTexture, VideoBaseTexture>, ?frame:Rectangle, ?crop:Rectangle, ?trim:Rectangle, ?rotate:Bool, ?anchor:Point);
 
 	/**
 	 * Does this Texture have any frame data assigned to it?
@@ -46,6 +48,16 @@ extern class Texture extends EventEmitter {
 	 * @member {BaseTexture}
 	 */
 	var baseTexture:BaseTexture;
+
+	/**
+	 * Anchor point that is used as default if sprite is created with this texture. 
+	 * Changing the defaultAnchor at a later point of time will not update Sprite's anchor point.
+	 * 
+	 * Default {0,0}
+	 *
+	 * @member {Point}
+	 */
+	var defaultAnchor:Point;
 
 	/**
 	 * The texture trim data.
@@ -185,9 +197,11 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes):Texture;
+	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
 
 	/**
 	 * Helper function that creates a new Texture based on the video url.
@@ -195,9 +209,11 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param videoUrl {String}
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
+     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
-	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes):Texture;
+	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
 
 	/**
      * Helper function that creates a new Texture based on the source you provide.

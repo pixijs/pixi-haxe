@@ -7,26 +7,26 @@ import pixi.core.textures.Texture;
 extern class AnimatedSprite extends Sprite {
 
 	/**
-     * An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
-     *
-     * ```js
-     * var alienImages:Array<String> = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
-     * var textureArray:Array<Texture> = [];
-     *
-     * for (i in 0 ... 4) {
-     *      let texture = Texture.fromImage(alienImages[i]);
-     *      textureArray.push(texture);
-     * };
-     *
-     * var mc = new AnimatedSprite(textureArray);
-     * ```
-     *
-     * @class
-     * @extends Sprite
-     * @memberof PIXI.extras
-     * @param {Array<Texture>|Array<FrameObject>} textures - an array of {Texture} or frame objects that make up the animation
-     * @param {Bool} [autoUpdate=true] - Whether use PIXI.ticker.shared to auto update animation time.
-     */
+	 * An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
+	 *
+	 * ```js
+	 * var alienImages:Array<String> = ["image_sequence_01.png","image_sequence_02.png","image_sequence_03.png","image_sequence_04.png"];
+	 * var textureArray:Array<Texture> = [];
+	 *
+	 * for (i in 0 ... 4) {
+	 *      let texture = Texture.fromImage(alienImages[i]);
+	 *      textureArray.push(texture);
+	 * };
+	 *
+	 * var mc = new AnimatedSprite(textureArray);
+	 * ```
+	 *
+	 * @class
+	 * @extends Sprite
+	 * @memberof PIXI.extras
+	 * @param {Array<Texture>|Array<FrameObject>} textures - an array of {Texture} or frame objects that make up the animation
+	 * @param {Bool} [autoUpdate=true] - Whether use PIXI.ticker.shared to auto update animation time.
+	 */
 	@:overload(function(textures:Dynamic, ?autoUpdate:Bool):Void {})
 	function new(textures:Array<Texture>, ?autoUpdate:Bool);
 
@@ -37,6 +37,18 @@ extern class AnimatedSprite extends Sprite {
      * @default 1
      */
 	var animationSpeed:Float;
+
+	/**
+     * Update anchor to Texture's defaultAnchor when frame changes.
+	* 
+     * Useful with sprite sheet animations created with tools.
+	* Changing anchor for each frame allows to pin sprite origin to certain moving feature
+	* of the frame (e.g. left foot).
+	* 
+     * @member {Bool}
+     * @default false
+     */
+	var updateAnchor:Bool;
 
 	/**
      * Whether or not the animate sprite repeats after playing.
@@ -55,19 +67,27 @@ extern class AnimatedSprite extends Sprite {
 	var onComplete:Void -> Void;
 
 	/**
-     * Function to call when a AnimatedSprite changes which texture is being rendered
-     *
+	 * Function to call when a AnimatedSprite changes which texture is being rendered
+	 *
 	 * @method
 	 * @memberof MovieClip#
 	 */
 	var onFrameChange:Void -> Void;
+	
+	 /**
+	 * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
+	 *
+ 	 * @method
+	 * @memberof MovieClip#
+	 */
+	var onLoop:Void -> Void;
 
 	/**
-     * Indicates if the AnimatedSprite is currently playing
-     *
-     * @member {Bool}
-     * @readonly
-     */
+	 * Indicates if the AnimatedSprite is currently playing
+	 *
+	 * @member {Bool}
+	 * @readonly
+	 */
 	var playing:Bool;
 
 	/**

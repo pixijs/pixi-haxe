@@ -113,8 +113,9 @@ extern class Container extends DisplayObject {
 	 *
 	 * @param beginIndex {Int} The beginning position. Default value is 0.
 	 * @param endIndex {Int} The ending position. Default value is size of the container.
+	 * @return {Array<DisplayObject>} The children that are removed.
 	 */
-	function removeChildren(?beginIndex:Int, ?endIndex:Int):Void;
+	function removeChildren(?beginIndex:Int, ?endIndex:Int):Array<DisplayObject>;
 
 	/**
 	* Returns the display object in the container

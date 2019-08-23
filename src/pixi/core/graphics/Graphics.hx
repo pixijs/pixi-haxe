@@ -4,6 +4,7 @@ import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.ScaleModes;
 import pixi.core.display.Container;
 import pixi.core.math.Point;
+import pixi.core.math.Matrix;
 import pixi.core.math.shapes.Circle;
 import pixi.core.math.shapes.Ellipse;
 import pixi.core.math.shapes.Polygon;
@@ -12,6 +13,28 @@ import pixi.core.textures.Texture;
 
 @:native("PIXI.Graphics")
 extern class Graphics extends Container {
+	static var CURVES(default, never):{
+		/**
+		 * flag indicating if the resolution should be adaptive
+		 * @default false
+		 */
+		adaptive:Bool,
+		/**
+		 * maximal length of a single segment of the curve (if adaptive = false, ignored)
+		 * @default 10
+		 */
+		maxLength:Int,
+		/**
+		 * minimal number of segments in the curve (if adaptive = false, ignored)
+		 * @default 8
+		 */
+		minSegments:Int,
+		/**
+		 * maximal number of segments in the curve (if adaptive = false, ignored)
+		 * @default 2048
+		 */
+		maxSegments:Int,
+	};
 
 	/**
 	 * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
@@ -94,6 +117,14 @@ extern class Graphics extends Container {
 	var boundsPadding:Float;
 
 	/**
+	 * Used to detect if the graphics object has changed. If this is set to true then the graphics
+	 * object will be recalculated.
+	 *
+	 * @member {boolean}
+	 */
+	var dirty: Int;
+
+	/**
 	 * Used to detect if we need to do a fast rect check using the id compare method
 	 * @type {Int}
 	 */
@@ -125,9 +156,11 @@ extern class Graphics extends Container {
 	 * @param lineWidth {Float} width of the line to draw, will update the objects stored style
 	 * @param color {Int} color of the line to draw, will update the objects stored style
 	 * @param alpha {Float} alpha of the line to draw, will update the objects stored style
+	 * @param alignment {Float} alignment of the line to draw, (0 = inner, 0.5 = middle, 1 = outer)
+	 * @param native {Bool} If true the lines will be draw using `LINES` instead of `TRIANGLE_STRIP`
 	 * @return {Graphics}
 	 */
-	function lineStyle(?lineWidth:Float, ?color:Int, ?alpha:Float):Graphics;
+	function lineStyle(?lineWidth:Float, ?color:Int, ?alpha:Float, ?alignment:Float, ?native:Bool):Graphics;
 
 	/**
 	 * Moves the current drawing position to x, y.

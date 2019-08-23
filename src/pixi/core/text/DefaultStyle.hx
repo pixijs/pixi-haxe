@@ -28,6 +28,7 @@ typedef DefaultStyle = {
 	@:optional var strokeThickness:Float;								//0
 	@:optional var trim:Bool;											//false
 	@:optional var textBaseline:String;									//alphabetic
+	@:optional var whiteSpace:Bool;										//false
 	@:optional var wordWrap:Bool;										//false
 	@:optional var wordWrapWidth:Float;									//100
 	@:optional var leading:Float;										//0

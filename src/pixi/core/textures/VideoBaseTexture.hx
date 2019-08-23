@@ -33,8 +33,9 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @memberof PIXI
 	 * @param source {HTMLVideoElement}
 	 * @param [scaleMode] {ScaleModes} See {@link SCALE_MODES} for possible values
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 */
-	function new(source:VideoElement, ?scaleMode:ScaleModes);
+	function new(source:VideoElement, ?scaleMode:ScaleModes, ?autoPlay:Bool);
 
 	/**
 	 * When set to true will automatically play videos used by this texture once
@@ -58,9 +59,10 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @static
 	 * @param video {HTMLVideoElement}
 	 * @param scaleMode {ScaleModes} See {@link SCALE_MODES} for possible values
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {VideoBaseTexture}
 	 */
-	static function fromVideo(video:VideoElement, ?scaleMode:ScaleModes):VideoBaseTexture;
+	static function fromVideo(video:VideoElement, ?scaleMode:ScaleModes, ?autoPlay:Bool):VideoBaseTexture;
 
 	/**
 	 * Mimic Pixi BaseTexture.from.... method.
@@ -87,8 +89,9 @@ extern class VideoBaseTexture extends BaseTexture {
 	 * @param [videoSrc.mime] {String} The mimetype of the video (e.g. 'video/mp4'). If not specified
 	 *  the url's extension will be used as the second part of the mime type.
 	 * @param scaleMode {ScaleModes} See {@link SCALE_MODES} for possible values
+     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {VideoBaseTexture}
 	 */
-	static function fromUrl(videoSrc:String, ?scaleMode:ScaleModes):VideoBaseTexture;
+	static function fromUrl(videoSrc:String, ?scaleMode:ScaleModes, ?autoPlay:Bool):VideoBaseTexture;
 	static function fromUrls(videoSrc:Array<String>, ?scaleMode:ScaleModes):VideoBaseTexture;
 }
