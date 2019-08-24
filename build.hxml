@@ -51,7 +51,7 @@
 --next
 -main nape.Main
 -js samples/output/nape.js
--lib nape
+-lib nape-haxe4
 
 --next
 -main rope.Main
