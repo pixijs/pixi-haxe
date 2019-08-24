@@ -1,6 +1,10 @@
 package pixi.extras;
 
+#if (haxe_ver >= 4)
+import js.lib.Float32Array;
+#else
 import js.html.Float32Array;
+#end
 import pixi.core.textures.Texture;
 
 @:native("PIXI.extras.TextureTransform")

@@ -2,7 +2,11 @@ package loader;
 
 import js.html.URL;
 import js.html.Blob;
+#if (haxe_ver >= 4)
+import js.lib.Uint8Array;
+#else
 import js.html.Uint8Array;
+#end
 import pixi.core.utils.Utils;
 import pixi.core.textures.BaseTexture;
 import js.html.Image;
