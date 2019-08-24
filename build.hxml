@@ -1,5 +1,6 @@
 -cmd haxelib newrepo
 -cmd haxelib install perf.js || true
+-cmd haxelib install nape-haxe4 || true
 -cmd haxelib install msignal || true
 -cmd haxelib install actuate || true
 -cmd haxelib install chxdoc || true
@@ -46,6 +47,11 @@
 --next
 -main dragging.Main
 -js samples/output/dragging.js
+
+--next
+-main nape.Main
+-js samples/output/nape.js
+-lib nape
 
 --next
 -main rope.Main
