@@ -1,9 +1,19 @@
 package pixi.core.text;
 
 import js.html.CanvasElement;
+import pixi.core.text.TextStyle;
 
 @:native("PIXI.TextMetrics")
 extern class TextMetrics {
+
+     var height:Float;
+     var width:Float;
+     var lineHeight:Float;
+     var lines:Array<String>;
+     var lineWidth:Array<Float>;
+     var maxLineWidth:Float;
+     var style:TextStyle;
+     var text:String;
 
 	/**
      * @param {String} text - the text that was measured
