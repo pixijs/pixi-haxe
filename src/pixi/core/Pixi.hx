@@ -1,7 +1,12 @@
 package pixi.core;
 
 import haxe.extern.EitherType;
+
+#if (haxe_ver >= 4)
+import js.lib.RegExp;
+#else
 import js.RegExp;
+#end
 
 @:native("PIXI")
 extern class Pixi {

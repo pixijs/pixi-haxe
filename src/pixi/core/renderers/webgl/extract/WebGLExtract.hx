@@ -1,7 +1,11 @@
 package pixi.core.renderers.webgl.extract;
 import js.html.CanvasElement;
 import js.html.ImageElement;
+#if (haxe_ver >= 4)
+import js.lib.Uint8ClampedArray;
+#else
 import js.html.Uint8ClampedArray;
+#end
 import pixi.core.display.DisplayObject;
 import pixi.core.renderers.webgl.WebGLRenderer;
 import pixi.core.textures.RenderTexture;

@@ -2,10 +2,16 @@ package pixi.mesh;
 
 import pixi.core.Pixi.BlendModes;
 import pixi.core.math.Point;
+#if (haxe_ver >= 4)
+import js.lib.Uint16Array;
+import js.lib.Float32Array;
+import js.lib.Int16Array;
+#else
 import js.html.Uint16Array;
-import pixi.core.Shader;
 import js.html.Float32Array;
 import js.html.Int16Array;
+#end
+import pixi.core.Shader;
 import pixi.core.display.Container;
 import pixi.core.textures.Texture;
 
