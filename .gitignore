@@ -2,3 +2,5 @@ docs.xml
 node_modules/
 samples/output/
 .haxelib/
+Pixi5.hxproj
+bin/
