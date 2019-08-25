@@ -10,9 +10,9 @@ extern class FilterManager extends WebGLManager {
 	 * @class
 	 * @memberof PIXI
 	 * @extends WebGlManager
-	 * @param renderer {WebGLRenderer} The renderer this manager works for.
+	 * @param renderer {Renderer} The renderer this manager works for.
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
 	 * @member {any[]}
@@ -25,7 +25,7 @@ extern class FilterManager extends WebGLManager {
 	var texturePool:Array<Dynamic>;
 
 	/**
-	 * @param renderer {WebGLRenderer}
+	 * @param renderer {Renderer}
 	 * @param buffer {ArrayBuffer}
 	 */
 	function setFilterStack(filterStack:Dynamic):Void;

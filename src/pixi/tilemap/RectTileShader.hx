@@ -1,11 +1,11 @@
 package pixi.tilemap;
 import pixi.core.Shader;
 
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 
 extern class RectTileShader extends Shader {
 
-	function new(gl:WebGLRenderer);
+	function new(gl:Renderer);
 
 	var vertSize:Int;
 
@@ -13,5 +13,5 @@ extern class RectTileShader extends Shader {
 
 	var stride:Int;
 
-	function createVao(renderer:WebGLRenderer, vb:Dynamic):Dynamic;
+	function createVao(renderer:Renderer, vb:Dynamic):Dynamic;
 }

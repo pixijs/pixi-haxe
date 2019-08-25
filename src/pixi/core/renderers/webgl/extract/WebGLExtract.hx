@@ -7,7 +7,7 @@ import js.lib.Uint8ClampedArray;
 import js.html.Uint8ClampedArray;
 #end
 import pixi.core.display.DisplayObject;
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import pixi.core.textures.RenderTexture;
 import haxe.extern.EitherType;
 
@@ -23,9 +23,9 @@ extern class WebGLExtract
 	/**
      * Creates WebGLExtract
      *
-     * @param {PIXI.WebGLRenderer} renderer - A reference to the current renderer 
+     * @param {PIXI.Renderer} renderer - A reference to the current renderer 
      */
-	public function new(renderer:WebGLRenderer);	
+	public function new(renderer:Renderer);	
 
 	/**
      * Will return a a base64 encoded string of this target. It works by calling WebGLExtract.getCanvas and then running toDataURL on that.

@@ -9,11 +9,11 @@ import pixi.core.math.Matrix;
 import pixi.core.renderers.webgl.managers.FilterManager;
 import pixi.core.renderers.webgl.managers.MaskManager;
 
-@:native("PIXI.WebGLRenderer")
-extern class WebGLRenderer extends SystemRenderer {
+@:native("PIXI.Renderer")
+extern class Renderer extends SystemRenderer {
 
 	/**
-	 * The WebGLRenderer draws the scene and all its content onto a webGL enabled canvas. This renderer
+	 * The Renderer draws the scene and all its content onto a webGL enabled canvas. This renderer
 	 * should be used for browsers that support webGL. This Render works by automatically managing webGLBatchs.
 	 * So no need for Sprite Batches or Sprite Clouds.
 	 * Don't forget to add the view to your DOM or you will not see anything :)
@@ -23,8 +23,7 @@ extern class WebGLRenderer extends SystemRenderer {
 	 * @param [height=600] {Float} the height of the canvas view
 	 * @param [options] {RenderingOptions} The optional renderer parameters
 	 */
-	@:overload(function(?width:Float, ?height:Float, ?options:RenderOptions):Void {})
-	function new(?options:RenderOptions, ?width:Float, ?height:Float);
+	function new(?options:RenderOptions);
 
 	/**
      * Manages the masks using the stencil buffer.
@@ -113,35 +112,35 @@ extern class WebGLRenderer extends SystemRenderer {
      *
      * @param {PIXI.RenderTexture} renderTexture - The render texture to clear
      * @param {Int} [clearColor] - The colour
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function clearRenderTexture(renderTexture:RenderTexture, ?clearColor:Int):WebGLRenderer;
+	function clearRenderTexture(renderTexture:RenderTexture, ?clearColor:Int):Renderer;
 
 	/**
      * Binds a render texture for rendering
      *
      * @param {PIXI.RenderTexture} renderTexture - The render texture to render
      * @param {PIXI.Transform} transform - The transform to be applied to the render texture
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function bindRenderTexture(renderTexture:RenderTexture, transform:Transform):WebGLRenderer;
+	function bindRenderTexture(renderTexture:RenderTexture, transform:Transform):Renderer;
 
 	/**
      * Changes the current render target to the one given in parameter
      *
      * @param {PIXI.RenderTarget} renderTarget - the new render target
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function bindRenderTarget(renderTarget:RenderTarget):WebGLRenderer;
+	function bindRenderTarget(renderTarget:RenderTarget):Renderer;
 
 	/**
      * Changes the current shader to the one given in parameter
      *
      * @param {PIXI.Shader} shader - the new shader
      * @param {Bool} [autoProject=true] - Whether automatically set the projection matrix
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function bindShader(shader:Shader, ?autoProject:Bool):WebGLRenderer;
+	function bindShader(shader:Shader, ?autoProject:Bool):Renderer;
 
 	/**
      * Binds the texture. This will return the location of the bound texture.
@@ -152,17 +151,17 @@ extern class WebGLRenderer extends SystemRenderer {
      * @param {PIXI.Texture} texture - the new texture
      * @param {Float} location - the suggested texture location
      * @param {Bool} forceLocation - force the location
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function bindTexture(texture:Texture, location:Float, forceLocation:Bool):WebGLRenderer;
+	function bindTexture(texture:Texture, location:Float, forceLocation:Bool):Renderer;
 
 	/**
      * unbinds the texture ...
      *
      * @param {PIXI.Texture} texture - the texture to unbind
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function unbindTexture(texture:Texture):WebGLRenderer;
+	function unbindTexture(texture:Texture):Renderer;
 
 	/**
      * Creates a new VAO from this renderer's context and state.
@@ -175,14 +174,14 @@ extern class WebGLRenderer extends SystemRenderer {
      * Changes the current Vao to the one given in parameter
      *
      * @param {PIXI.VertexArrayObject} vao - the new Vao
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function bindVao(vao:Dynamic):WebGLRenderer;
+	function bindVao(vao:Dynamic):Renderer;
 
 	/**
      * Resets the WebGL state so you can render things however you fancy!
      *
-     * @return {PIXI.WebGLRenderer} Returns itself.
+     * @return {PIXI.Renderer} Returns itself.
      */
-	function reset():WebGLRenderer;
+	function reset():Renderer;
 }

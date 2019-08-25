@@ -1,6 +1,6 @@
 package stream;
 
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import haxe.Json;
 import js.html.XMLHttpRequest;
 import js.html.TextTrackMode;
@@ -54,9 +54,11 @@ class Main {
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
 		options.transparent = true;
+		options.width = Browser.window.innerWidth;
+		options.height = Browser.window.innerHeight;
 
 		_stage = new Container();
-		_renderer = new WebGLRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
+		_renderer = new Renderer(options);
 		_wrapper = Browser.document.createDivElement();
 
 		_videoElement = Browser.document.createVideoElement();

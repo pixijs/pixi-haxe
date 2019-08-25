@@ -2,7 +2,7 @@ package pixi.tilemap;
 
 import pixi.core.display.DisplayObject;
 import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import pixi.core.textures.Texture;
 
 extern class RectTileLayer extends DisplayObject {
@@ -23,5 +23,5 @@ extern class RectTileLayer extends DisplayObject {
 	
 	function addRect(u:Float, v:Float, x:Float, y:Float, tileWidth:Int, tileHeight:Int, animX:Float, animY:Float):Void;
 	
-	function renderWebGL(renderer:WebGLRenderer, useSquare:Bool):Void;
+	function render(renderer:Renderer, useSquare:Bool):Void;
 }

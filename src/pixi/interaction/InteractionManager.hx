@@ -3,7 +3,7 @@ package pixi.interaction;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
 import pixi.core.renderers.SystemRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 
 @:native("PIXI.interaction.InteractionManager")
 extern class InteractionManager extends EventEmitter {
@@ -21,7 +21,7 @@ extern class InteractionManager extends EventEmitter {
 	 * @param [options.interactionFrequency=10] {Int} Frequency increases the interaction events will be checked.
 	 */
 	@:overload(function(renderer:SystemRenderer, ?options:InteractionManagerOptions):Void {})
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
      * The renderer this interaction manager works for.

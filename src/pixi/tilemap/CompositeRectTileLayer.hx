@@ -2,7 +2,7 @@ package pixi.tilemap;
 
 import pixi.core.display.Container;
 import pixi.core.renderers.canvas.CanvasRenderer;
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import pixi.core.textures.Texture;
 
 @:native("PIXI.tilemap.CompositeRectTileLayer")
@@ -34,7 +34,7 @@ extern class CompositeRectTileLayer extends Container {
 	
 	function renderCanvas(renderer:CanvasRenderer):Void;
 	
-	function renderWebGL(renderer:WebGLRenderer):Void;
+	function render(renderer:Renderer):Void;
 	
 	function isModified(anim:Bool):Bool;	//TODO: Check if anim is really bool
 	

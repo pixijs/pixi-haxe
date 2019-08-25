@@ -51,7 +51,7 @@ extern class Application {
 
 	/**
 	 * WebGL renderer if available, otherwise CanvasRenderer
-	 * @member {WebGLRenderer|CanvasRenderer}
+	 * @member {Renderer|CanvasRenderer}
 	 */
 	var renderer:SystemRenderer;
 

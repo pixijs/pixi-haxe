@@ -2,7 +2,7 @@ package pixi.tilemap;
 
 import js.html.Uint16Array;
 import pixi.core.Shader;
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import pixi.core.renderers.webgl.utils.ObjectRenderer;
 
 extern class TileRenderer extends ObjectRenderer {
@@ -13,7 +13,7 @@ extern class TileRenderer extends ObjectRenderer {
 	 * @static
 	 * @constant
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	var vbs:Dynamic;
 

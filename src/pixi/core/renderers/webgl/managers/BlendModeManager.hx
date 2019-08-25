@@ -7,9 +7,9 @@ extern class BlendModeManager extends WebGLManager {
 	 * @class
 	 * @memberof PIXI
 	 * @extends WebGlManager
-	 * @param renderer {WebGLRenderer} The renderer this manager works for.
+	 * @param renderer {Renderer} The renderer this manager works for.
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
 	 * Sets-up the given blendMode from WebGL's point of view.
