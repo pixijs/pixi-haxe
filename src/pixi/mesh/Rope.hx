@@ -5,7 +5,7 @@ import js.html.Float32Array;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.mesh.Rope")
+@:native("PIXI.SimpleRope")
 extern class Rope extends Mesh {
 
 	/**

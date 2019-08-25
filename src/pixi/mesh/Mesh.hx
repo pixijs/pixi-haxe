@@ -22,7 +22,7 @@ import pixi.core.renderers.webgl.Renderer;
 import pixi.core.renderers.webgl.State;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.mesh.Mesh")
+@:native("PIXI.Mesh")
 extern class Mesh extends Container {
 
 	/**

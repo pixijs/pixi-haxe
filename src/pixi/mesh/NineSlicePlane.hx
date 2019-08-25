@@ -2,7 +2,7 @@ package pixi.mesh;
 
 import js.html.CanvasRenderingContext2D;
 import pixi.core.textures.Texture;
-@:native("PIXI.mesh.NineSlicePlane")
+@:native("PIXI.NineSlicePlane")
 extern class NineSlicePlane extends Plane {
 
 	/**

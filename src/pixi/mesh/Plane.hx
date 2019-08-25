@@ -2,7 +2,7 @@ package pixi.mesh;
 
 import pixi.core.textures.Texture;
 
-@:native("PIXI.mesh.Plane")
+@:native("PIXI.SimplePlane")
 extern class Plane extends Mesh {
 
 	/**
@@ -16,8 +16,8 @@ extern class Plane extends Mesh {
 	 *  ```
 	 *
 	 * @class
-	 * @extends PIXI.mesh.Mesh
-	 * @memberof PIXI.mesh
+	 * @extends PIXI.Mesh
+	 * @memberof PIXI
 	 * @param {Texture} texture - The texture to use on the Plane.
 	 * @param {Int} verticesX - The number of vertices in the x-axis
 	 * @param {Int} verticesY - The number of vertices in the y-axis

@@ -202,7 +202,7 @@ extern class Settings {
 	/**
      * Default Mesh `canvasPadding`.
      *
-     * @see PIXI.mesh.Mesh#canvasPadding
+     * @see PIXI.SimpleMesh#canvasPadding
      * @static
      * @constant
      * @memberof PIXI.settings
