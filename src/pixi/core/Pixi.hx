@@ -495,3 +495,97 @@ extern enum UpdatePriotities {
 	UTILITY;
 }
 #end
+
+@:native("PIXI.MIPMAP_MODES")
+#if (haxe_ver >= 3.3)
+@:enum extern abstract MipmapModes(Int) {
+	var OFF;
+	var POW2;
+	var ON;	
+}
+#else
+extern enum MipmapModes {
+	OFF;
+	POW2;
+	ON;
+}
+#end
+
+@:native("PIXI.TYPES")
+#if (haxe_ver >= 3.3)
+@:enum extern abstract Types(Int) {
+	var UNSIGNED_BYTE;
+	var UNSIGNED_SHORT;
+	var UNSIGNED_SHORT_5_6_5;
+	var UNSIGNED_SHORT_4_4_4_4;
+	var UNSIGNED_SHORT_5_5_5_1;
+	var FLOAT;
+	var HALF_FLOAT;
+}
+#else
+extern enum Types {
+	UNSIGNED_BYTE;
+	UNSIGNED_SHORT;
+	UNSIGNED_SHORT_5_6_5;
+	UNSIGNED_SHORT_4_4_4_4;
+	UNSIGNED_SHORT_5_5_5_1;
+	FLOAT;
+	HALF_FLOAT;
+}
+#end
+
+@:native("PIXI.FORMATS")
+#if (haxe_ver >= 3.3)
+@:enum extern abstract Formats(Int) {
+	var RGBA;
+	var RGB;
+	var ALPHA;
+	var LUMINANCE;
+	var LUMINANCE_ALPHA;
+	var DEPTH_COMPONENT;
+	var DEPTH_STENCIL;
+}
+#else
+extern enum Formats {
+	RGBA;
+	RGB;
+	ALPHA;
+	LUMINANCE;
+	LUMINANCE_ALPHA;
+	DEPTH_COMPONENT;
+	DEPTH_STENCIL;
+}
+#end
+
+@:native("PIXI.TARGETS")
+#if (haxe_ver >= 3.3)
+@:enum extern abstract Targets(Int) {
+	var TEXTURE_2D;
+	var TEXTURE_CUBE_MAP;
+	var TEXTURE_2D_ARRAY;
+	var TEXTURE_CUBE_MAP_POSITIVE_X;
+	var TEXTURE_CUBE_MAP_NEGATIVE_X;
+	var TEXTURE_CUBE_MAP_POSITIVE_Y;
+	var TEXTURE_CUBE_MAP_NEGATIVE_Y;
+	var TEXTURE_CUBE_MAP_POSITIVE_Z;
+	var TEXTURE_CUBE_MAP_NEGATIVE_Z;
+}
+#else
+extern enum Targets {
+	TEXTURE_2D;
+	TEXTURE_CUBE_MAP;
+	TEXTURE_2D_ARRAY;
+	TEXTURE_CUBE_MAP_POSITIVE_X;
+	TEXTURE_CUBE_MAP_NEGATIVE_X;
+	TEXTURE_CUBE_MAP_POSITIVE_Y;
+	TEXTURE_CUBE_MAP_NEGATIVE_Y;
+	TEXTURE_CUBE_MAP_POSITIVE_Z;
+	TEXTURE_CUBE_MAP_NEGATIVE_Z;
+}
+#end
+
+@:native("PIXI.ISize")
+typedef ISize = {
+	width:Float,
+	height:Float
+}
