@@ -22,7 +22,7 @@ class Main extends Application {
 		backgroundColor = 0xFFFFFF;
 		super.start();
 
-		_texture = Texture.fromImage("assets/basics/bunny.png");
+		_texture = Texture.from("assets/basics/bunny.png");
 		for (i in 0 ... 10) _createBunny(Math.floor(Math.random() * Browser.window.innerWidth), Math.floor(Math.random() * Browser.window.innerHeight));
 	}
 
