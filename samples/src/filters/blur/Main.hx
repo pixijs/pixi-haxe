@@ -26,16 +26,16 @@ class Main extends Application {
 		stage.addChild(_container);
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
-		_bg = Sprite.fromImage("assets/filters/depth_blur_BG.jpg");
+		_bg = Sprite.from("assets/filters/depth_blur_BG.jpg");
 		_bg.anchor.set(0.5);
 		_container.addChild(_bg);
 
-		_littleDudes = Sprite.fromImage("assets/filters/depth_blur_dudes.jpg");
+		_littleDudes = Sprite.from("assets/filters/depth_blur_dudes.jpg");
 		_littleDudes.anchor.set(0.5);
 		_littleDudes.y = 100;
 		_container.addChild(_littleDudes);
 
-		_littleRobot = Sprite.fromImage("assets/filters/depth_blur_moby.jpg");
+		_littleRobot = Sprite.from("assets/filters/depth_blur_moby.jpg");
 		_littleRobot.anchor.set(0.5);
 		_littleRobot.x = 120;
 		_container.addChild(_littleRobot);
