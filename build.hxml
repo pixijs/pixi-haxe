@@ -49,6 +49,10 @@
 -js samples/output/dragging.js
 
 --next
+-main mesh.Main
+-js samples/output/mesh.js
+
+--next
 -main nape.Main
 -js samples/output/nape.js
 -lib nape-haxe4
