@@ -71,7 +71,7 @@ class Main extends Application {
 		container = new ParticleContainer(200000, [false, true, false, false, false]);
 		stage.addChild(container);
 
-		wabbitTexture = Texture.fromImage("assets/bunnymark/bunnys.png");
+		wabbitTexture = Texture.from("assets/bunnymark/bunnys.png");
 
 		var bunny1 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 47, 26, 37));
 		var bunny2 = new Texture(wabbitTexture.baseTexture, new Rectangle(2, 86, 26, 37));
