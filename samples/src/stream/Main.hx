@@ -77,7 +77,7 @@ class Main {
 		_renderer.view.style.position = "absolute";
 		Browser.window.requestAnimationFrame(cast _animate);
 
-		_playBtn = new Sprite(Texture.fromImage("assets/stream/play.png"));
+		_playBtn = new Sprite(Texture.from("assets/stream/play.png"));
 		_playBtn.width = 400;
 		_playBtn.height = 400;
 		_playBtn.interactive = true;
