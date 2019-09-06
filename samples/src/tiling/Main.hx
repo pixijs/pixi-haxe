@@ -20,7 +20,7 @@ class Main extends Application {
 		onUpdate = _onUpdate;
 		super.start();
 
-		var texture = Texture.fromImage("assets/tiling/p2.jpeg");
+		var texture = Texture.from("assets/tiling/p2.jpeg");
 		_tilingSprite = new TilingSprite(texture, width, height);
 
 		stage.addChild(_tilingSprite);
