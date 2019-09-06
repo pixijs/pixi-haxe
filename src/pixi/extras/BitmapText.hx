@@ -6,7 +6,7 @@ import js.html.XMLDocument;
 import pixi.core.display.Container;
 
 
-@:native("PIXI.extras.BitmapText")
+@:native("PIXI.BitmapText")
 extern class BitmapText extends Container {
 
 	/**
