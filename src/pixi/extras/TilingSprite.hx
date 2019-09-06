@@ -9,7 +9,7 @@ import pixi.core.sprites.Sprite;
 import pixi.core.textures.BaseTexture;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.extras.TilingSprite")
+@:native("PIXI.TilingSprite")
 extern class TilingSprite extends Sprite {
 
 	/**
