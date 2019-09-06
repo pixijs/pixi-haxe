@@ -22,11 +22,11 @@ class Main extends Application {
 		onUpdate = _onUpdate;
 		super.start(Application.RECOMMENDED);
 
-		_bg = Sprite.fromImage("assets/alphamask/bkg.jpg");
+		_bg = Sprite.from("assets/alphamask/bkg.jpg");
 
 		stage.addChild(_bg);
 
-		_cells = Sprite.fromImage("assets/alphamask/cells.png");
+		_cells = Sprite.from("assets/alphamask/cells.png");
 		_cells.scale.set(1.5);
 
 		_mask = new Graphics();
