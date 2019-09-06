@@ -40,7 +40,7 @@ class Main extends Application {
 		for (i in 0 ... 29) {
 			var frame:String = "" + i;
 			if (i < 10) frame = "0" + frame;
-			_fighterTextures.push(Texture.fromFrame("rollSequence00" + frame + ".png"));
+			_fighterTextures.push(Texture.from("rollSequence00" + frame + ".png"));
 		}
 
 		renderer.view.onmouseup = _onTouchEnd;
