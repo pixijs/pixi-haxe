@@ -25,7 +25,7 @@ class Main extends Application {
 		super.start();
 
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";
-		_img = new Sprite(Texture.fromImage(imgPath));
+		_img = new Sprite(Texture.from(imgPath));
 		_img.anchor.set(0.5);
 		_img.name = "img";
 		_img.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
