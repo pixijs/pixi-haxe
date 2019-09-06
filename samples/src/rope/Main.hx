@@ -33,7 +33,7 @@ class Main extends Application {
 			_points.push(new Point(i * _length, 0));
 		};
 
-		var strip = new Rope(Texture.fromImage("assets/rope/snake.png"), _points);
+		var strip = new Rope(Texture.from("assets/snake/snake.png"), _points);
 		strip.x = -918 / 2;
 
 		var snakeContainer:Container = new Container();
