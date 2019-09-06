@@ -28,7 +28,7 @@ class Main extends Application {
 
 		var texture:Texture;
 		for (i in 0 ... 26) {
-			texture = Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
+			texture = Texture.from("Explosion_Sequence_A " + (i + 1) + ".png");
 			explosionTextures.push(texture);
 		}
 
