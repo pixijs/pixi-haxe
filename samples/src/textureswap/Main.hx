@@ -25,8 +25,8 @@ class Main extends Application {
 		super.start();
 
 		_swap = false;
-		_texture1 = Texture.fromImage("assets/bunnymark/bunny2.png");
-		_texture2 = Texture.fromImage("assets/bunnymark/bunny4.png");
+		_texture1 = Texture.from("assets/bunnymark/bunny2.png");
+		_texture2 = Texture.from("assets/bunnymark/bunny4.png");
 
 		_bunny = new Sprite(_texture1);
 		_bunny.anchor.set(0.5);
