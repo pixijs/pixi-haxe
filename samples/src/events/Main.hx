@@ -22,7 +22,7 @@ class Main extends Application {
 		backgroundColor = 0xFFFFFF;
 		super.start();
 
-		_img = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+		_img = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_img.position.set(400, 300);
 		_img.interactive = true;
 		_img.scale.set(4);
