@@ -4,7 +4,7 @@ import pixi.core.Pixi.BlendModes;
 import pixi.core.textures.BaseTexture;
 import pixi.core.display.Container;
 
-@:native("PIXI.particles.ParticleContainer")
+@:native("PIXI.ParticleContainer")
 extern class ParticleContainer extends Container {
 
 	/**
