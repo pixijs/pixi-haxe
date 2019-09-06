@@ -63,7 +63,7 @@ class Main extends Application {
 	}
 
 	function _addBall() {
-		var ball:Sprite = new Sprite(Texture.fromImage("assets/nape/ball.png"));
+		var ball:Sprite = new Sprite(Texture.from("assets/nape/ball.png"));
 		ball.anchor.set(0.5, 0.5);
 		_balls.push(ball);
 		stage.addChild(ball);
