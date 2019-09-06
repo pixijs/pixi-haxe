@@ -142,7 +142,7 @@ class Main extends Application {
 		var _container:Container = new Container();
 		stage.addChild(_container);
 		for (i in 0 ... 10) {
-			_img = new Sprite(Texture.fromImage(_baseURL + (i + 1) + ".png"));
+			_img = new Sprite(Texture.from(_baseURL + (i + 1) + ".png"));
 			_img.name = "img" + (i + 1);
 			if (i < 6) _img.position.set(128 * i, 0);
 			else _img.position.set(128 * (i - 5), 128);
