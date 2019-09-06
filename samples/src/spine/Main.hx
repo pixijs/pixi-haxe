@@ -19,7 +19,7 @@ class Main extends Application {
 		var assetsToLoader:Array<String> = [];
 
 		_loader = new Loader();
-		_loader.add("spineboy", "assets/spine/spineboy.json");
+		_loader.add("spineboy", "assets/spine/data/spineboy.json");
 		_loader.load(onAssetsLoaded);
 	}
 
