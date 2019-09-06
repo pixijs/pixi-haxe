@@ -3,7 +3,7 @@ package pixi.extras;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.extras.AnimatedSprite")
+@:native("PIXI.AnimatedSprite")
 extern class AnimatedSprite extends Sprite {
 
 	/**
@@ -40,11 +40,11 @@ extern class AnimatedSprite extends Sprite {
 
 	/**
      * Update anchor to Texture's defaultAnchor when frame changes.
-	* 
+	*
      * Useful with sprite sheet animations created with tools.
 	* Changing anchor for each frame allows to pin sprite origin to certain moving feature
 	* of the frame (e.g. left foot).
-	* 
+	*
      * @member {Bool}
      * @default false
      */
@@ -73,7 +73,7 @@ extern class AnimatedSprite extends Sprite {
 	 * @memberof MovieClip#
 	 */
 	var onFrameChange:Void -> Void;
-	
+
 	 /**
 	 * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
 	 *

@@ -224,7 +224,7 @@ extern class BaseTexture extends EventEmitter {
 	 * Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable for rendering with CanvasRenderer. Provided by @pixi/canvas-renderer package.
 	 * @return Source to render with CanvasRenderer
 	 */
-	function getDrawableSource():Dynamic; // TODO: actually returns PIXI.ICanvasImageSource, but there doesn't seem to be a defintion for it
+	function getDrawableSource():Dynamic; // TODO: actually returns PIXI.ICanvasImageSource, but there doesn't seem to be a definition for it
 
 	/**
 	 * Sets real size of baseTexture, preserves current resolution.
