@@ -23,7 +23,7 @@ class Main extends Application {
 		onUpdate = _animate;
 		super.start();
 
-		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+		_bunny = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5);
 		_bunny.position.set(400, 300);
 
