@@ -25,7 +25,7 @@ class Main extends Application {
 		stage.addChild(_container);
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
-		_littleRobot = Sprite.fromImage("assets/filters/depth_blur_moby.jpg");
+		_littleRobot = Sprite.from("assets/filters/depth_blur_moby.jpg");
 		_littleRobot.anchor.set(0.5);
 		_container.addChild(_littleRobot);
 
