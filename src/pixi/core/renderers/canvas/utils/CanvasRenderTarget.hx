@@ -3,7 +3,7 @@ package pixi.core.renderers.canvas.utils;
 import js.html.CanvasRenderingContext2D;
 import js.html.CanvasElement;
 
-@:native("PIXI.CanvasRenderTarget")
+@:native("PIXI.utils.CanvasRenderTarget")
 extern class CanvasRenderTarget {
 
 	/**

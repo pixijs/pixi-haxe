@@ -16,43 +16,43 @@ import pixi.loaders.LoaderOptions.LoaderMetadata;
  * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
  */
-@:native("PIXI.loaders.Resource.LOAD_TYPE")
+@:native("PIXI.Resource.LOAD_TYPE")
 #if (haxe_ver >= 3.3)
 @:enum extern abstract LoadType(Int) {
-	var XHR; 
+	var XHR;
 	var IMAGE;
-	var AUDIO; 
+	var AUDIO;
 	var VIDEO;
 }
-#else 
+#else
 extern enum LoadType {
-	XHR; 
+	XHR;
 	IMAGE;
-	AUDIO; 
+	AUDIO;
 	VIDEO;
 }
 #end
 
-@:native("PIXI.loaders.Resource.TYPE")
+@:native("PIXI.Resource.TYPE")
 #if (haxe_ver >= 3.3)
 @:enum extern abstract ResourceType(Int) {
-	var JSON; 
-	var XML; 
+	var JSON;
+	var XML;
 	var IMAGE;
-	var AUDIO; 
+	var AUDIO;
 	var VIDEO;
 }
-#else 
+#else
 extern enum ResourceType {
-	JSON; 
-	XML; 
+	JSON;
+	XML;
 	IMAGE;
-	AUDIO; 
+	AUDIO;
 	VIDEO;
 }
 #end
 
-@:native("PIXI.loaders.Resource")
+@:native("PIXI.Resource")
 extern class Resource {
 
 	/**
@@ -81,11 +81,11 @@ extern class Resource {
 	var metadata:LoaderMetadata;
 
 	var type:ResourceType;
-	
+
 	/**
 	 * Since plugins like Spine can add additional fields to Resource
-	 * we need somewhat 'typed' method to retrieve those fields.	 
-	 * 
+	 * we need somewhat 'typed' method to retrieve those fields.
+	 *
 	 * var data:SpineData = resource.get("spineData");
 	 */
 	inline function get<T>(name:String):T {

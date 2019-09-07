@@ -2,7 +2,7 @@ package pixi.core.ticker;
 
 import pixi.interaction.EventEmitter;
 
-@:native("PIXI.ticker.Ticker")
+@:native("PIXI.Ticker")
 extern class Ticker extends EventEmitter {
 
 
@@ -51,7 +51,7 @@ extern class Ticker extends EventEmitter {
 	static var shared(get, never):Ticker;
 
 	@:noCompletion inline static function get_shared():Ticker {
-		return cast untyped __js__("PIXI.ticker.shared");
+		return cast untyped __js__("PIXI.Ticker.shared");
 	}
 
 	/**
