@@ -16,30 +16,30 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 
 ### Demos
 
-* [Basics](http://notboring.github.io/demos/pixi-haxe/basics.html)
-* [Graphics](http://notboring.github.io/demos/pixi-haxe/graphics.html)
-* [Animated Sprite](http://notboring.github.io/demos/pixi-haxe/animatedsprite.html)
-* [Spritesheet](http://notboring.github.io/demos/pixi-haxe/spritesheet.html)
-* [Spine](http://notboring.github.io/demos/pixi-haxe/spine.html)
-* [Rope](http://notboring.github.io/demos/pixi-haxe/rope.html)
-* [Dragging](http://notboring.github.io/demos/pixi-haxe/dragging.html)
-* [Tiling](http://notboring.github.io/demos/pixi-haxe/tiling.html)
-* [Bitmap Font](http://notboring.github.io/demos/pixi-haxe/bitmapfont.html)
-* [Alpha Mask](http://notboring.github.io/demos/pixi-haxe/alphamask.html)
-* [Bunnymark](http://notboring.github.io/demos/pixi-haxe/bunnymark.html)
-* [Retina](http://notboring.github.io/demos/pixi-haxe/retina.html)
-* [Events](http://notboring.github.io/demos/pixi-haxe/events.html)
-* [Loader](http://notboring.github.io/demos/pixi-haxe/loader.html)
-* [Video](http://notboring.github.io/demos/pixi-haxe/video.html)
-* [Nape](http://notboring.github.io/demos/pixi-haxe/nape.html)
+* [Basics](http://notboring.github.io/demos/haxe-pixi/basics.html)
+* [Graphics](http://notboring.github.io/demos/haxe-pixi/graphics.html)
+* [Animated Sprite](http://notboring.github.io/demos/haxe-pixi/animatedsprite.html)
+* [Spritesheet](http://notboring.github.io/demos/haxe-pixi/spritesheet.html)
+* [Spine](http://notboring.github.io/demos/haxe-pixi/spine.html)
+* [Rope](http://notboring.github.io/demos/haxe-pixi/rope.html)
+* [Dragging](http://notboring.github.io/demos/haxe-pixi/dragging.html)
+* [Tiling](http://notboring.github.io/demos/haxe-pixi/tiling.html)
+* [Bitmap Font](http://notboring.github.io/demos/haxe-pixi/bitmapfont.html)
+* [Alpha Mask](http://notboring.github.io/demos/haxe-pixie/alphamask.html)
+* [Bunnymark](http://notboring.github.io/demos/haxe-pixi/bunnymark.html)
+* [Retina](http://notboring.github.io/demos/haxe-pixi/retina.html)
+* [Events](http://notboring.github.io/demos/haxe-pixi/events.html)
+* [Loader](http://notboring.github.io/demos/haxe-pixi/loader.html)
+* [Video](http://notboring.github.io/demos/haxe-pixi/video.html)
+* [Nape](http://notboring.github.io/demos/haxe-pixi/nape.html)
 
 **Filters (WebGL only)**
 
-* [ColorMatrix](http://notboring.github.io/demos/pixi-haxe/colormatrix.html)
-* [Blur](http://notboring.github.io/demos/pixi-haxe/blur.html)
+* [ColorMatrix](http://notboring.github.io/demos/haxe-pixi/colormatrix.html)
+* [Blur](http://notboring.github.io/demos/haxe-pixi/blur.html)
 
 **Filters (pixi-extra-filters)**
-* [Glow](http://notboring.github.io/demos/pixi-haxe/glow.html)
+* [Glow](http://notboring.github.io/demos/haxe-pixi/glow.html)
 
 Look at the `samples` folder for the source code of above examples.
 
