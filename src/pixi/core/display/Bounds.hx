@@ -74,23 +74,23 @@ extern class Bounds {
 	/**
      * Adds sprite frame, transformed.
      *
-     * @param {TransformBase} transform - TODO
+     * @param {Transform} transform
      * @param {Float} x0 - TODO
      * @param {Float} y0 - TODO
      * @param {Float} x1 - TODO
      * @param {Float} y1 - TODO
      */
-	function addFrame(transform:TransformBase, x0:Float, y0:Float, x1:Float, y1:Float):Void;
+	function addFrame(transform:Transform, x0:Float, y0:Float, x1:Float, y1:Float):Void;
 
 	/**
      * Add an array of vertices
      *
-     * @param {TransformBase} transform - TODO
+     * @param {Transform} transform
      * @param {Float32Array} vertices - TODO
      * @param {Float} beginOffset - TODO
      * @param {Float} endOffset - TODO
      */
-	function addVertices(transform:TransformBase, vertices:Float32Array, beginOffset:Float, endOffset:Float):Void;
+	function addVertices(transform:Transform, vertices:Float32Array, beginOffset:Float, endOffset:Float):Void;
 
 	/**
      * Adds other Bounds

@@ -145,7 +145,6 @@ extern class Graphics extends Container {
 	 * @param startAngle {Float} The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
 	 * @param endAngle {Float} The ending angle, in radians
 	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
-	 * @return {Graphics}
 	 */
 	function arc(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Graphics;
 	

@@ -3,7 +3,7 @@ package pixi.extras;
 import js.html.CanvasElement;
 import js.html.VideoElement;
 import pixi.core.Pixi.ScaleModes;
-import pixi.core.display.TransformStatic;
+import pixi.core.display.Transform;
 import pixi.core.math.ObservablePoint;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.BaseTexture;
@@ -23,20 +23,13 @@ extern class TilingSprite extends Sprite {
 	 * @param height {Float} [height=100] the height of the tiling sprite
 	 */
 	function new(texture:Texture, ?width:Float, ?height:Float);
-
+	
 	/**
 	 * Tile transform
 	 *
-	 * @member {TransformStatic}
+	 * @member {Transform}
 	 */
-	var tileTransform:TransformStatic;
-
-	/**
-	 * transform that is applied to UV to get the texture coords
-	 *
-	 * @member {TextureTransform}
-	 */
-	var uvTransform:TextureTransform;
+	var tileTransform:Transform;
 
 	/**
 	 * Whether or not anchor affects uvs
