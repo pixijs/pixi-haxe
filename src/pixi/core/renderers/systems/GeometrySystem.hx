@@ -17,11 +17,6 @@ import pixi.core.textures.RenderTexture;
 import pixi.core.textures.FrameBuffer;
 import pixi.mesh.Geometry;
 
-typedef TSize = {
-	height: Float,
-	width: Float
-};
-
 @:native("PIXI.systems.GeometrySystem")
 extern class GeometrySystem extends System{
 	

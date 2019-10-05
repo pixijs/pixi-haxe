@@ -18,7 +18,7 @@ extern class MaskSystem extends System{
 	 * Pool of used sprite mask filters
 	 * @param	renderer
 	 */
-	var alphaMaskPool(default, null):Array<SpriteMaskFilter>
+	var alphaMaskPool(default, null):Array<SpriteMaskFilter>;
 	
 	/**
 	 * Enable scissor
