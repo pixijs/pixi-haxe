@@ -1,6 +1,6 @@
 package basics;
 
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.graphics.Graphics;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
@@ -12,15 +12,19 @@ class Main extends Application {
 	var _graphic:Graphics;
 
 	public function new() {
-		super();
-
-		position = Application.POSITION_FIXED;
-		width = Browser.window.innerWidth;
-		height = Browser.window.innerHeight;
-		backgroundColor = 0x006666;
-		transparent = true;
-		antialias = false;
-		onUpdate = _animate;
+		
+		var options:ApplicationOptions = {
+			width: Browser.window.innerWidth,
+			height: Browser.window.innerHeight,
+			backgroundColor: 0x006666,
+			transparent: true,
+			antialias: false,
+		};
+		
+		super(options);
+		ticker.add(function(delta){
+			_animate(delta);
+		});
 		super.start();
 
 		_bunny = new Sprite(Texture.from("assets/basics/bunny.png"));

@@ -1,34 +1,35 @@
 package pixi.interaction;
 
+import haxe.extern.EitherType;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.Point;
-import pixi.core.renderers.SystemRenderer;
-import pixi.core.renderers.webgl.Renderer;
+import pixi.core.renderers.AbstractRenderer;
 
 @:native("PIXI.interaction.InteractionManager")
 extern class InteractionManager extends EventEmitter {
 
 	/**
-	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
-	 * if its interactive parameter is set to true
+	 * The interaction manager deals with mouse, touch and pointer events.
+	 * Any DisplayObject can be interactive if its interactive property is set to true.
 	 * This manager also supports multitouch.
+	 * An instance of this class is automatically created by default, and can be found at renderer.plugins.interaction
 	 *
 	 * @class
 	 * @memberof PIXI.interaction
-	 * @param renderer {SystemRenderer} A reference to the current renderer
+	 * @param renderer {AbstractRenderer} A reference to the current renderer
 	 * @param [options] {InteractionManagerOptions}
 	 * @param [options.autoPreventDefault=true] {Bool} Should the manager automatically prevent default browser actions.
 	 * @param [options.interactionFrequency=10] {Int} Frequency increases the interaction events will be checked.
 	 */
-	@:overload(function(renderer:SystemRenderer, ?options:InteractionManagerOptions):Void {})
+	@:overload(function(renderer:AbstractRenderer, ?options:InteractionManagerOptions):Void {})
 	function new(renderer:Renderer);
 
 	/**
      * The renderer this interaction manager works for.
      *
-     * @member {SystemRenderer}
+     * @member {AbstractRenderer}
      */
-	var renderer:SystemRenderer;
+	var renderer:AbstractRenderer;
 
 	/**
      * Should default browser actions automatically be prevented.

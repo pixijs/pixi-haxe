@@ -2,7 +2,7 @@ package tilemap;
 
 import haxe.Timer;
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.tilemap.CompositeRectTileLayer;
 
 class Main extends Application {
@@ -18,9 +18,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		onUpdate = _onUpdate;
-		super.start(Application.AUTO);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 
 		_loader = new Loader();
 		_loader.baseUrl = "assets/tilemap/";

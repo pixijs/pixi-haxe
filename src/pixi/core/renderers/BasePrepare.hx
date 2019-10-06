@@ -3,7 +3,7 @@ import haxe.Constraints.Function;
 import pixi.core.display.Container;
 import pixi.core.display.DisplayObject;
 import pixi.core.graphics.Graphics;
-import pixi.core.renderers.SystemRenderer;
+import pixi.core.renderers.AbstractRenderer;
 import pixi.core.text.Text;
 import pixi.core.textures.BaseTexture;
 import pixi.core.textures.Texture;
@@ -28,10 +28,9 @@ extern class BasePrepare
 {
 	/**
 	 * Creates BasePrepare
-	 * @param {PIXI.SystemRenderer} renderer - A reference to the current renderer
+	 * @param {PIXI.AbstractRenderer} renderer - A reference to the current renderer
 	 */
-	public function new(renderer:SystemRenderer);
-		
+	public function new(renderer:AbstractRenderer);
 	
 	/**
 	 * Manually add an item to the uploading queue.

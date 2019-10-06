@@ -2,7 +2,7 @@ package deviceinfo;
 
 import pixi.core.display.Container;
 import pixi.core.text.Text;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -12,12 +12,11 @@ class Main extends Application {
 	var _rendererType:Array<String>;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0x003366});
 		_init();
 	}
 
 	function _init() {
-		backgroundColor = 0x003366;
 		super.start();
 
 		_info = new Container();

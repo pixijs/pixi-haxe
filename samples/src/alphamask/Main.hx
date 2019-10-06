@@ -2,7 +2,7 @@ package alphamask;
 
 import pixi.core.math.Point;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -17,9 +17,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		onUpdate = _onUpdate;
-		super.start(Application.RECOMMENDED);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 
 		_bg = Sprite.from("assets/alphamask/bkg.jpg");
 

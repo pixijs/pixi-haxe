@@ -2,7 +2,7 @@ package mesh;
 
 import pixi.core.graphics.Graphics;
 import pixi.mesh.Rope;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.math.Point;
 import pixi.core.textures.Texture;
 
@@ -34,8 +34,10 @@ class Main extends Application {
 		g.y=strip.y;
 		stage.addChild(g);
 
-		onUpdate = _onUpdate;
-		super.start(Application.RECOMMENDED);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 	}
 
 	function _onUpdate(elapsedTime:Float):Void {

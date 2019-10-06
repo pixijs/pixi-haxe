@@ -1,8 +1,9 @@
 package tiling;
 
+import pixi.core.Application.ApplicationOptions;
 import pixi.core.textures.Texture;
 import pixi.extras.TilingSprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -10,18 +11,21 @@ class Main extends Application {
 	var _count:Float;
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0x97C56E
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x97C56E;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 
 		var texture = Texture.from("assets/tiling/p2.jpeg");
-		_tilingSprite = new TilingSprite(texture, width, height);
+		_tilingSprite = new TilingSprite(texture, screen.width, screen.height);
 
 		stage.addChild(_tilingSprite);
 

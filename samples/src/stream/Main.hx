@@ -1,5 +1,6 @@
 package stream;
 
+import pixi.core.renderers.AbstractRenderer;
 import pixi.core.renderers.webgl.Renderer;
 import haxe.Json;
 import js.html.XMLHttpRequest;
@@ -14,7 +15,6 @@ import js.html.ImageElement;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import js.html.Element;
-import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.Container;
 import pixi.core.RenderOptions;
 
@@ -27,7 +27,7 @@ class Main {
 	var _videoElement:VideoElement;
 	var _videoCover:ImageElement;
 
-	var _renderer:SystemRenderer;
+	var _renderer:AbstractRenderer;
 	var _stage:Container;
 
 	var _playBtn:Sprite;
@@ -191,7 +191,7 @@ class Main {
 
 	function _animate() {
 		Browser.window.requestAnimationFrame(cast _animate);
-		_renderer.render(_stage);
+		//_renderer.render(_stage);
 	}
 
 	static function main() {

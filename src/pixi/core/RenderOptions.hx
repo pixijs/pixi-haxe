@@ -4,10 +4,6 @@ import js.html.CanvasElement;
 
 typedef RenderOptions = {
 	
-	// Whether css dimensions of canvas view should be resized to screen dimensions automatically
-	// default: false
-	@:optional var autoResize:Bool;
-	
 	// the width of the renderers view
 	// default: 800 	
 	@:optional var width:Int;	
@@ -23,6 +19,11 @@ typedef RenderOptions = {
 	//If the render view is transparent
 	// default: false
 	@:optional var transparent:Bool;
+	
+	/**
+	 * Resizes renderer view in CSS pixels to allow for resolutions other than 1.
+	 */
+	@:optional var autoDensity:Bool;
 	
 	//sets antialias (only applicable in chrome at the moment)
 	//default: false
@@ -49,27 +50,17 @@ typedef RenderOptions = {
 	@:optional var resolution:Float;
 	
 	
-	//prevents selection of WebGL renderer, even if such is present
-	//default: false
-	@:optional var forceCanvas:Bool;
-	
-	
-	//If true PixiJS will Math.floor() x / y values when rendering, stopping pixel interpolation.
-	//default: false
-	@:optional var roundPixels:Bool;
-	
-	
 	//forces FXAA antialiasing to be used over native. FXAA is faster, but may not always look as great webgl only
 	//default: false;
 	@:optional var forceFXAA:Bool;
 	
 	
-	//true to ensure compatibility with older / less advanced devices. If you experience unexplained flickering try setting this to true. webgl only
-	//default: false
-	@:optional var legacy:Bool;
-	
-	
 	//Parameter passed to webgl context, set to "high-performance" for devices with dual graphics card webgl only
 	@:optional var powerPreference:String;
+	
+	/**
+	 * If WebGL context already exists, all parameters must be taken from it.
+	 */
+	@:optional var context:Dynamic;
 	
 }

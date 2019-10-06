@@ -1,9 +1,10 @@
 package retina;
 
+import pixi.core.Application.ApplicationOptions;
 import pixi.core.Pixi;
 import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import js.Browser;
@@ -14,14 +15,15 @@ class Main extends Application {
 	var _label:Text;
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0xFFFFFF,
+			autoDensity: true
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		pixelRatio = _getPixelRatio();
 		super.start();
 
 		var imgPath:String = "assets/retina/img" + _getResolutionStr() + ".jpg";

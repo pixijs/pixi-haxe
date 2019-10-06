@@ -1,7 +1,8 @@
 package pixi.accessibility;
 
+import haxe.extern.EitherType;
 import pixi.core.math.shapes.Rectangle;
-import pixi.core.renderers.SystemRenderer;
+import pixi.core.renderers.AbstractRenderer;
 
 @:native("PIXI.accessibility.AccessibilityManager")
 extern class AccessibilityManager {
@@ -17,7 +18,7 @@ extern class AccessibilityManager {
 	 * @class
 	 * @memberof PIXI
 	 */
-	function new(renderer:SystemRenderer);
+	function new(renderer:AbstractRenderer);
 
 	/**
    	 * Setting this to true will visually show the divs
@@ -27,14 +28,26 @@ extern class AccessibilityManager {
 	var debug:Bool;
 
 	/**
+	 * A flag
+	 */
+	var isActive(default, null):Bool;
+	
+	/**
+	 * A flag
+	 */
+	var isMobileAccessibility(default, null):Bool;
+	
+	/**
      * The renderer this accessibility manager works for.
      *
-     * @member {SystemRenderer}
+     * @member {AbstractRenderer}
      */
-	var renderer:SystemRenderer;
+	var renderer:AbstractRenderer;
 
-	function createTouchHook():Void;
-
+	/**
+	 * Adjust the hit area based on the bounds of a display object
+	 * @param	hitArea Bounds of the child
+	 */
 	function capHitArea(hitArea:Rectangle):Void;
 
 	/**

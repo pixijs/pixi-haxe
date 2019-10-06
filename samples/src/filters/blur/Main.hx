@@ -4,7 +4,7 @@ import js.Browser;
 import pixi.core.display.Container;
 import pixi.filters.blur.BlurFilter;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -19,7 +19,7 @@ class Main extends Application {
 	var _count:Float;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 
 		_container = new Container();
@@ -50,9 +50,9 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 	}
 

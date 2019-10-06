@@ -1,8 +1,8 @@
 package spine;
 
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
 import pixi.plugins.spine.Spine;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -10,9 +10,10 @@ class Main extends Application {
 	var _spine:Spine;
 
 	public function new() {
-		super();
-		position = "fixed";
-		backgroundColor = 0x00FF66;
+		var options:ApplicationOptions = {
+			backgroundColor: 0x00FF66
+		};
+		super(options);
 		super.start();
 
 		stage.interactive = true;

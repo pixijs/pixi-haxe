@@ -1,6 +1,6 @@
 package pixi.core.renderers;
 import pixi.accessibility.AccessibilityManager;
-import pixi.core.renderers.webgl.extract.WebGLExtract;
+import pixi.core.renderers.webgl.extract.Extract;
 import pixi.interaction.InteractionManager;
 
 /**
@@ -18,7 +18,7 @@ extern class RendererPlugins implements Dynamic
 	/**
 	 * Extract image data from renderer.
 	 */
-	public var extract:WebGLExtract;
+	public var extract:Extract;
 	
 	/**
 	 * Handles mouse, touch and pointer events.

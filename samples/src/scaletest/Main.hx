@@ -6,7 +6,7 @@ import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
 import pixi.interaction.InteractionEvent;
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -22,7 +22,7 @@ class Main extends Application {
 	var _switchedScale:Bool;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 	}
 
@@ -34,10 +34,7 @@ class Main extends Application {
 		if (_scale > 8) _scale = 8;
 		if (_scale2 > 8) _scale2 = 8;
 
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		pixelRatio = _pr;
-		onResize = _onResize;
+		//onResize = _onResize;
 		super.start();
 
 		_preload();
@@ -100,7 +97,7 @@ class Main extends Application {
 		stage.interactive = true;
 		stage.click = stage.tap = _changeTextures;
 
-		_onResize();
+		//_onResize();
 	}
 
 	function _changeTextures(e:InteractionEvent) {
@@ -136,7 +133,7 @@ class Main extends Application {
 
 		_bg.visible = (_ex < 4);
 
-		_onResize();
+		//_onResize();
 	}
 
 	function _getScale(base:Int):Int {
@@ -151,6 +148,7 @@ class Main extends Application {
 		return Math.round((px / base) * pr);
 	}
 
+	/*
 	function _onResize() {
 		_bg.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		_reels.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
@@ -165,6 +163,7 @@ class Main extends Application {
 			_reels.scale.x = _reels.scale.y;
 		}
 	}
+	*/
 
 	static function main() {
 		new Main();

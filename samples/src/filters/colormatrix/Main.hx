@@ -6,7 +6,7 @@ import pixi.core.display.Container;
 import pixi.filters.colormatrix.ColorMatrixFilter;
 import pixi.core.text.Text;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -25,7 +25,7 @@ class Main extends Application {
 	var _switchy:Bool;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0x00FF66});
 		_init();
 
 		stage.interactive = true;
@@ -72,9 +72,9 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x00FF66;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 	}
 

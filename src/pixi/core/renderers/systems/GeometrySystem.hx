@@ -33,7 +33,7 @@ extern class GeometrySystem extends System{
 	/**
 	 * true if has ANGLE_instanced_arrays extension
 	 */
-	var hasInstance(default, nul):Bool;
+	var hasInstance(default, null):Bool;
 	
 	/**
 	 * true if we has *_vertex_array_object extension

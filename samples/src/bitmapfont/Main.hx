@@ -2,20 +2,21 @@ package bitmapfont;
 
 import pixi.loaders.Loader;
 import pixi.extras.BitmapText;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			autoDensity: true,
+			backgroundColor: 0x003366
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = Application.POSITION_FIXED;
-		autoResize = true;
-		backgroundColor = 0x003366;
 		super.start();
 
 		var fontloader:Loader = new Loader();

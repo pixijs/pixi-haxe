@@ -41,7 +41,7 @@ extern class ContextSystem extends System{
 	/**
 	 * Auto-populate the extensions
 	 */
-	private function getExtensions();
+	private function getExtensions():Void;
 	
 	/**
 	 * Handles a lost webgl context

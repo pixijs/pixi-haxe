@@ -1,10 +1,14 @@
 package pixi.core;
 
+import haxe.extern.EitherType;
+import js.html.HtmlElement;
+import js.html.Window;
 import pixi.core.math.shapes.Rectangle;
-import pixi.core.renderers.SystemRenderer;
 import js.html.CanvasElement;
+import pixi.core.renderers.AbstractRenderer;
 import pixi.core.ticker.Ticker;
 import pixi.core.display.Container;
+import pixi.loaders.Loader;
 
 typedef ApplicationOptions = {
 	>RenderOptions,
@@ -22,6 +26,11 @@ typedef ApplicationOptions = {
 	//default: false
 
 	@:optional var sharedLoader:Bool;
+	
+	/**
+	 * Element to automatically resize stage to.
+	 */
+	@:optional var resizeTo:EitherType<HtmlElement, Window>;
 	
 }
 
@@ -50,10 +59,20 @@ extern class Application {
 	function new(?options:ApplicationOptions);
 
 	/**
-	 * WebGL renderer if available, otherwise CanvasRenderer
+	 * Loader instance to help with asset loading.
+	 */
+	var loader(default, null):Loader;
+	
+	/**
+	 * Renderer if available, otherwise CanvasRenderer
 	 * @member {Renderer|CanvasRenderer}
 	 */
-	var renderer:SystemRenderer;
+	var renderer:AbstractRenderer;
+	
+	/**
+	 * The element or window to resize the application to.
+	 */
+	var resizeTo:EitherType<HtmlElement, Window>;
 
 	/**
 	 * The root display container that's renderered.

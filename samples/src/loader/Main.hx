@@ -19,7 +19,7 @@ import pixi.core.text.Text;
 import pixi.loaders.Loader;
 import pixi.core.display.Container;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 

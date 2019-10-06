@@ -17,7 +17,7 @@ import haxe.extern.EitherType;
  * An instance of this class is automatically created by default, and can be found at renderer.plugins.extract
  */
 @:native("PIXI.extract.Extract")
-extern class WebGLExtract
+extern class Extract
 {
 
 	/**

@@ -2,11 +2,12 @@ package pixi.core.renderers.canvas;
 
 import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.ScaleModes;
+import pixi.core.renderers.AbstractRenderer;
 import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
 
 @:native("PIXI.CanvasRenderer")
-extern class CanvasRenderer extends SystemRenderer {
+extern class CanvasRenderer extends AbstractRenderer {
 
 	/**
 	 * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.

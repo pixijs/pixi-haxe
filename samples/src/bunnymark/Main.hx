@@ -5,7 +5,7 @@ import pixi.core.math.shapes.Rectangle;
 import js.html.DivElement;
 import js.Browser;
 import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -31,16 +31,19 @@ class Main extends Application {
 	var counter:DivElement;
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0x8BDDCE
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x8BDDCE;
-		onUpdate = _onUpdate;
-		onResize = _onResize;
-		autoResize = true;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		//onResize = _onResize;
+		//autoResize = true;
 		super.start();
 		_setup();
 	}
@@ -161,6 +164,7 @@ class Main extends Application {
 		}
 	}
 
+	/*
 	function _onResize() {
 		maxX = Browser.window.innerWidth;
 		maxY = Browser.window.innerHeight;
@@ -168,6 +172,7 @@ class Main extends Application {
 		counter.style.top = "1px";
 		counter.style.left = "1px";
 	}
+	*/
 
 	static function main() {
 		new Main();
