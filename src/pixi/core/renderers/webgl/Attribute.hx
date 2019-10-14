@@ -25,7 +25,7 @@ extern class Attribute {
 	 * @param	normalized {Int} How far into the array to start reading values (used for interleaving data)
 	 * @return {Attribute} A new PIXI.Attribute based on the information provided
 	 */
-	function from(buffer:String, ?size:Int, ?stride:Float, ?start:Int, normalized:Bool):Attribute;
+	function from(buffer:String, ?size:Int, normalized:Bool, ?start:Int, type:Float, ?stride:Float):Attribute;
 	
 	/**
 	 * Destroys the Attribute.
