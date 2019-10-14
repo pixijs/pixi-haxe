@@ -347,6 +347,21 @@ extern enum GCModes {
 }
 #end
 
+@:native("PIXI.ENV")
+#if (haxe_ver >= 3.3)
+@:enum extern abstract Env(Int) {
+	var WEBGL_LEGACY;
+	var WEBGL;
+	var WEBGL2;
+}
+#else
+extern enum Env {
+	WEBGL_LEGACY;
+	WEBGL;
+	WEBGL2;
+}
+#end
+
 @:native("PIXI.BLEND_MODES")
 #if (haxe_ver >= 3.3)
 @:enum extern abstract BlendModes(Int) {
