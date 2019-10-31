@@ -33,22 +33,27 @@ extern enum LoadType {
 }
 #end
 
-@:native("PIXI.Resource.TYPE")
-#if (haxe_ver >= 3.3)
-@:enum extern abstract ResourceType(Int) {
+
+#if haxe4
+enum abstract ResourceType(Int) {
+	var UNKNOWN;
 	var JSON;
 	var XML;
 	var IMAGE;
 	var AUDIO;
 	var VIDEO;
+	var TEXT;
 }
 #else
+@:native("PIXI.Resource.TYPE")
 extern enum ResourceType {
+	UNKNOWN;
 	JSON;
 	XML;
 	IMAGE;
 	AUDIO;
 	VIDEO;
+	TEXT;
 }
 #end
 
