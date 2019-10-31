@@ -92,5 +92,5 @@ extern class TextStyle {
 	var wordWrap:Bool;
 	var wordWrapWidth:Float;
 	var leading:Float;
-     var var whiteSpace:Bool;
+    var whiteSpace:Bool;
 }
