@@ -156,7 +156,7 @@ extern class Renderer extends AbstractRenderer{
 	 * @param	transform A transform to apply to the render texture before rendering.
 	 * @param	skipUpdateTransform Should we skip the update transform pass?
 	 */
-	function render(displayObject:DisplayObject, ?renderTexture:RenderTarget, ?clear:Bool = true, transform:Matrix , skipUpdateTransform:Bool = false):Void;
+	function render(displayObject:DisplayObject, ?renderTexture:RenderTarget, ?clear:Bool = true, ?transform:Matrix, skipUpdateTransform:Bool = false):Void;
 	
 	/**
 	 * Resets the WebGL state so you can render things however you fancy!
