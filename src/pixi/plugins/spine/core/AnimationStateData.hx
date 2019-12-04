@@ -5,6 +5,7 @@ extern class AnimationStateData {
 
 	function new(skeletonData:Dynamic);
 
+	var defaultMix:Float;
 	function setMix(fromName:String, toName:String, duration:Float):Void;
 	function setMixByName(fromName:String, toName:String, duration:Float):Void;
 
