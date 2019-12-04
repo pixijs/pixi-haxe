@@ -1,5 +1,4 @@
 package pixi.plugins.spine.core;
-package pixi.plugins.spine.core;
 
 extern class TrackEntry 
 {
