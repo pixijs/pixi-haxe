@@ -8,7 +8,8 @@ import pixi.core.display.Container;
 
 @:native("PIXI.spine.Spine")
 extern class Spine extends Container {
-
+	static var globalAutoUpdate:Bool;
+	static var globalDelayLimit:Float;
 	/**
 	 * A class that enables the you to import and run your spine animations in pixi.
 	 * The Spine animation data needs to be loaded using either the Loader or a SpineLoader before it can be used by this class
