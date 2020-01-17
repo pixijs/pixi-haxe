@@ -17,8 +17,8 @@ extern class Skeleton
 	public var skin: Skin;
 	public var color: Color;
 	public var time: Float;
-	public var flipX: Bool;
-	public var flipY: Bool;
+	public var scaleX: Bool;
+	public var scaleY: Bool;
 	public var x: Float;
 	public var y: Float;
 	public function new(data: SkeletonData);
