@@ -2,9 +2,7 @@ package pixi.plugins.spine.core;
 import pixi.plugins.spine.core.attachments.Attachment;
 
 @:native("PIXI.spine.core.Skeleton")
-extern class Skeleton 
-{
-
+extern class Skeleton {
 	public var data: SkeletonData;
 	public var bones: Array<Bone>;
 	public var slots: Array<Slot>;
