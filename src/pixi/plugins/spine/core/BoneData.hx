@@ -15,6 +15,8 @@ extern class BoneData {
 	var shearX:Float;
 	var shearY:Float;
 	var transformMode:Dynamic;
+	var skinRequired: Bool;
+	var color: Color;
 
 	function new(index:Int, name:String, parent:BoneData);
 }
