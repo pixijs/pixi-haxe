@@ -32,9 +32,18 @@ extern class ObservablePoint {
 	/**
      * Copies the data from another point
      *
-     * @param {Point|ObservablePoint} point - point to copy from
+     * @param {Point|ObservablePoint} point - point to copy from.
+     * @returns {ObservablePoint} Returns itself.
      */
-	function copy(point:EitherType<Point, ObservablePoint>):Void;
+	function copyFrom(point:EitherType<Point, ObservablePoint>):ObservablePoint;
+
+     /**
+     * Copies x and y into the given point
+     *
+     * @param {Point|ObservablePoint} point - point to copy.
+     * @returns {Point|ObservablePoint} Given point with values updated
+     */
+     function copyTo(point:EitherType<Point, ObservablePoint>):EitherType<Point, ObservablePoint>;
 
 	/**
      * The position of the displayObject on the x axis relative to the local coordinates of the parent.

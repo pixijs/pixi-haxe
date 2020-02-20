@@ -15,12 +15,20 @@ extern class Point {
 	function new(?x:Float, ?y:Float);
 
 	/**
-	 * Copies x and y from the given point
-	 *
-	 * @method copy
-	 * @param {Point} the point to copy
-	 */
-	function copy(p:Point):Void;
+     * Copies x and y from the given point
+     *
+     * @param {Point} The point to copy from
+     * @returns {Point} Returns itself.
+     */
+	function copyFrom(p:Point):Point;
+
+	/**
+     * Copies x and y into the given point
+     *
+     * @param {Point} p - The point to copy.
+     * @returns {Point} Given point with values updated
+     */
+    function copyTo(p:Point):Point;
 
 	/**
 	 * Returns true if the given point is equal to this point
