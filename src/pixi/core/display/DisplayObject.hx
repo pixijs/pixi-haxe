@@ -128,6 +128,14 @@ extern class DisplayObject extends InteractiveTarget {
 	var alpha:Float;
 
 	/**
+	 * World transform and local transform of this object. This will become read-only later,
+	 * please do not assign anything there unless you know what are you doing.
+	 *
+	 * @member {Transform}
+	 */
+	var transform:Transform;
+
+	/**
 	 * The visibility of the object. If false the object will not be drawn, and
 	 * the updateTransform function will not be called.
 	 *
