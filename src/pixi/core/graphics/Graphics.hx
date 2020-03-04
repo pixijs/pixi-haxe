@@ -71,6 +71,11 @@ extern class Graphics extends Container {
 	private var currentPath:Polygon;
 	
 	/**
+	 * The blend mode to be applied to the graphic shape. Apply a value of PIXI.BLEND_MODES.NORMAL to reset the blend mode.
+	 */
+	var blendMode:BlendModes;
+	
+	/**
 	 * The current fill style.
 	 */
 	var fill(default, null):FillStyle;
