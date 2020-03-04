@@ -55,11 +55,6 @@ extern class Settings {
 	static var PREFER_ENV:Env;
 	
 	/**
-	 * The default render options if none are supplied to PIXI.Renderer or PIXI.CanvasRenderer.
-	 */
-	static var RENDER_OPTIONS:RenderOptions;
-	
-	/**
 	 * If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can 
 	 * include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement 
 	 * of objects may appear less smooth. Default: false
@@ -152,16 +147,6 @@ extern class Settings {
      * @constant
      * @memberof PIXI.settings
      * @type {RenderOptions}
-     * @property {HTMLCanvasElement} view=null
-     * @property {number} resolution=1
-     * @property {boolean} antialias=false
-     * @property {boolean} forceFXAA=false
-     * @property {boolean} autoResize=false
-     * @property {boolean} transparent=false
-     * @property {number} backgroundColor=0x000000
-     * @property {boolean} clearBeforeRender=true
-     * @property {boolean} preserveDrawingBuffer=false
-     * @property {boolean} roundPixels=false
      */
 	static var RENDER_OPTIONS:RenderOptions;
 
