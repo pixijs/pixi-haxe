@@ -1,7 +1,7 @@
 package pixi.resources;
 #if (haxe_ver >= 4)
 import js.lib.Float32Array;
-import js.lib.Uint32Array;;
+import js.lib.Uint32Array;
 import js.lib.Uint8Array;
 #else
 import js.html.Float32Array;
