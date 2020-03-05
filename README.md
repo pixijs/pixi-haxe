@@ -1,4 +1,4 @@
-# Pixi.js 5 / Haxe 4
+# Pixi.js 5 / Haxe 4 [![Build Status](https://travis-ci.org/markknol/pixi-haxe.svg?branch=pixi5)](https://travis-ci.org/markknol/pixi-haxe)
 
 ![image](https://user-images.githubusercontent.com/576184/70228763-38c03100-1755-11ea-9f2a-b1afc30be237.png)
 
