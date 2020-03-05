@@ -4,6 +4,6 @@ package pixi.plugins.spine.core.attachments;
 extern class Attachment {
 	var name:String;
 	function new(name:String);
-	
+
 	function copy():Attachment;
 }

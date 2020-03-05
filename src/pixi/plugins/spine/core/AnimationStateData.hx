@@ -2,7 +2,6 @@ package pixi.plugins.spine.core;
 
 @:native("PIXI.spine.core.AnimationStateData")
 extern class AnimationStateData {
-
 	function new(skeletonData:Dynamic);
 
 	var defaultMix:Float;

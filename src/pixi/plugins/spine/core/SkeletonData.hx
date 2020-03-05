@@ -2,7 +2,6 @@ package pixi.plugins.spine.core;
 
 @:native("PIXI.spine.core.SkeletonData")
 extern class SkeletonData {
-
 	var name:String;
 	var bones:Array<BoneData>; // Ordered parents first.
 	var slots:Array<SlotData>; // Setup pose draw order.

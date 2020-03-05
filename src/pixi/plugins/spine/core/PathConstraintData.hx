@@ -2,7 +2,6 @@ package pixi.plugins.spine.core;
 
 @:native("PIXI.spine.core.PathConstraintData")
 extern class PathConstraintData {
-
 	var name:String;
 	var order:Int;
 	var bones:Array<BoneData>;
