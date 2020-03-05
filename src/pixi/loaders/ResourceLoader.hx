@@ -2,6 +2,7 @@ package pixi.loaders;
 
 import pixi.interaction.EventEmitter;
 
+@:native("PIXI.ResourceLoader")
 extern class ResourceLoader extends EventEmitter {
 	/**
 	 * Manages the state and loading of multiple resources to load.
