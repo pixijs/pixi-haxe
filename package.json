@@ -22,7 +22,12 @@
 		"library"
 	],
 	"scripts": {
+		"lix": "lix",
+		"format": "haxelib run formatter -s src/pixi",
+		"haxelib": "haxelib",
+		"haxe": "haxe"
 	},
 	"devDependencies": {
+		"lix": "latest"
 	}
 }
