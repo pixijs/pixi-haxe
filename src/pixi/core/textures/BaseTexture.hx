@@ -1,29 +1,18 @@
 package pixi.core.textures;
 
 import haxe.extern.EitherType;
-#if (haxe_ver >= 4)
 import js.lib.Float32Array;
 import js.lib.Uint8Array;
-#else
-import js.html.Float32Array;
-import js.html.Uint8Array;
-#end
-import js.html.CanvasElement;
-import js.html.Image;
-import js.html.ImageElement;
-import pixi.core.Pixi.ScaleModes;
-import pixi.core.Pixi.Types;
-import pixi.core.Pixi.Targets;
 import pixi.core.Pixi.Formats;
-import pixi.core.Pixi.Types;
 import pixi.core.Pixi.MipmapModes;
-import pixi.core.Pixi.WrapModes;
+import pixi.core.Pixi.ScaleModes;
+import pixi.core.Pixi.Targets;
+import pixi.core.Pixi.Types;
 import pixi.interaction.EventEmitter;
 import pixi.resources.Resource;
 
 @:native("PIXI.BaseTexture")
 extern class BaseTexture extends EventEmitter {
-
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture.
 	 *
@@ -33,7 +22,6 @@ extern class BaseTexture extends EventEmitter {
 	 * @param [scaleMode=scaleModes.DEFAULT] {ScaleModes} See {@link SCALE_MODES} for possible values
 	 * @param [resolution=1] {Float} The resolution / device pixel ratio of the texture
 	 */
-
 	function new(?resource:Dynamic, ?options:BaseTextureOptions);
 
 	/**
@@ -166,15 +154,15 @@ extern class BaseTexture extends EventEmitter {
 	 * @member {Float}
 	 * @readOnly
 	 */
-	var width(default,null):Float;
+	var width(default, null):Float;
 
 	/**
-     *
-     * WebGL Texture wrap mode
-     *
-     * @member {Int}
-     * @see PIXI.WRAP_MODES
-     */
+	 *
+	 * WebGL Texture wrap mode
+	 *
+	 * @member {Int}
+	 * @see PIXI.WRAP_MODES
+	 */
 	var wrapMode:Int;
 
 	/**
@@ -182,7 +170,7 @@ extern class BaseTexture extends EventEmitter {
 	 * @param	baseTexture
 	 * @param	id
 	 */
-	static function addToCache (baseTexture:BaseTexture, id:String):Void;
+	static function addToCache(baseTexture:BaseTexture, id:String):Void;
 
 	/**
 	 * Helper function that creates a base texture based on the source you provide. The source can be - image url, image element, canvas element. If the source is an image url or an image element and not in the base texture cache, it will be created and loaded.
@@ -201,7 +189,7 @@ extern class BaseTexture extends EventEmitter {
 	 * @param	options See PIXI.BaseTexture's constructor for options.
 	 * @return	The resulting new BaseTexture
 	 */
-	static function fromBuffer(buffer:EitherType<Float32Array,Uint8Array>, width:Float, height:Float, options:BaseTextureOptions):BaseTexture;
+	static function fromBuffer(buffer:EitherType<Float32Array, Uint8Array>, width:Float, height:Float, options:BaseTextureOptions):BaseTexture;
 
 	/**
 	 * Remove a BaseTexture from the global BaseTextureCache.
@@ -222,9 +210,9 @@ extern class BaseTexture extends EventEmitter {
 
 	/**
 	 * Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable for rendering with CanvasRenderer. Provided by @pixi/canvas-renderer package.
-	 * @return Source to render with CanvasRenderer
+	 * @return Source to render with CanvasRenderer (returns PIXI.ICanvasImageSource)
 	 */
-	function getDrawableSource():Dynamic; // TODO: actually returns PIXI.ICanvasImageSource, but there doesn't seem to be a definition for it
+	function getDrawableSource():Any;
 
 	/**
 	 * Sets real size of baseTexture, preserves current resolution.
@@ -265,16 +253,12 @@ extern class BaseTexture extends EventEmitter {
 }
 
 typedef BaseTextureOptions = {
-	?mipmap:MipmapModes,
-	?anisotropicLevel:Int, // TODO
-	?wrapMode:WrapModes,
-	?scaleMode:ScaleModes,
-	?format:Formats,
-	?type:Types,
-	?target:Targets,
-	?premultiplyAlpha:Bool,
-	width:Int,
-	height:Int,
-	resolution:Float,
-	resourceOptions:Dynamic // TODO: see https://pixijs.download/dev/docs/PIXI.resources.html#.autoDetectResource
+	?width:Int,
+	?height:Int,
+	?autoLoad:Bool,
+	?scale:Float,
+	?createBitmap:Bool,
+	?crossorigin:Bool,
+	?autoPlay:Bool,
+	?updateFPS:Float,
 }

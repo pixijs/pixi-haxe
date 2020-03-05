@@ -5,7 +5,6 @@ import pixi.core.graphics.Graphics;
 
 @:native("PIXI.CanvasGraphics")
 extern class CanvasGraphics {
-
 	/*
 	 * Renders a Graphics object to a canvas.
 	 *

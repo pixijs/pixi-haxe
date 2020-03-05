@@ -1,15 +1,10 @@
 package pixi.core.textures;
 
-#if (haxe_ver >= 4)
 import js.lib.Float32Array;
-#else
-import js.html.Float32Array;
-#end
 import pixi.core.math.Matrix;
 
 @:native("PIXI.TextureMatrix")
 extern class TextureMatrix {
-	
 	/**
 	 * Class controls uv mapping from Texture normal space to BaseTexture normal space.
 	 * Takes trim and rotate into account. May contain clamp settings for Meshes and TilingSprite.
@@ -24,42 +19,42 @@ extern class TextureMatrix {
 	 * Tracks Texture frame changes
 	 */
 	private var _updateID:Float;
-	
+
 	/**
 	 * Changes frame clamping Works with TilingSprite and Mesh Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
 	 */
 	var clampMargin:Float;
-	
+
 	/**
 	 * Changes frame clamping Works with TilingSprite and Mesh Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
 	 */
 	var clampOffset:Float;
-	
+
 	/**
 	 * If texture size is the same as baseTexture
 	 */
-	var isSimple(default,null):Bool;
-	
+	var isSimple(default, null):Bool;
+
 	/**
 	 * Matrix operation that converts texture region coords to texture coords
 	 */
-	var mapCoord(default,null):Matrix;
-	
+	var mapCoord(default, null):Matrix;
+
 	/**
 	 * texture property
 	 */
 	var texture:Texture;
-	
+
 	/**
 	 * Clamp region for normalized coords, left-top pixel center in xy , bottom-right in zw. Calculated based on clampOffset.
 	 */
 	var uClampFrame(default, null):Float32Array;
-	
+
 	/**
 	 * Normalized clamp offset. Calculated based on clampOffset.
 	 */
 	var uClampOffset(default, null):Float32Array;
-	
+
 	/**
 	 * Multiplies uvs array to transform
 	 * @param	uvs {Float32Array} mesh uvs
@@ -67,7 +62,7 @@ extern class TextureMatrix {
 	 * @return {Float32Array} output
 	 */
 	function multiplyUvs(uvs:Float32Array, ?out:Float32Array):Float32Array;
-	
+
 	/**
 	 * updates matrices if texture was changed
 	 * @param	forceUpdate {Bool} if true, matrices will be updated any case

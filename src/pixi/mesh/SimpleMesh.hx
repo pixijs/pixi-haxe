@@ -1,23 +1,11 @@
 package pixi.mesh;
 
-import pixi.core.Pixi.BlendModes;
-import pixi.core.math.Point;
-#if (haxe_ver >= 4)
-import js.lib.Uint16Array;
 import js.lib.Float32Array;
-import js.lib.Int16Array;
-#else
-import js.html.Uint16Array;
-import js.html.Float32Array;
-import js.html.Int16Array;
-#end
-import pixi.core.Shader;
-import pixi.core.display.Container;
+import js.lib.Uint16Array;
 import pixi.core.textures.Texture;
 
 @:native("PIXI.SimpleMesh")
 extern class SimpleMesh extends Mesh {
-
 	/**
 	 * Base mesh class
 	 * @class
@@ -30,10 +18,9 @@ extern class SimpleMesh extends Mesh {
 	 * @param [drawMode] {Int} the drawMode, can be any of the Mesh.DRAW_MODES consts
 	 */
 	function new(texture:Texture, ?vertices:Float32Array, ?uvs:Float32Array, ?indices:Uint16Array, ?drawMode:Int);
-	
+
 	/**
 	 * Triangles in canvas mode are automatically antialiased, use this value to force triangles to overlap a bit with each other. To set the global default, set PIXI.settings.MESH_CANVAS_PADDING
 	 */
 	var canvasPadding:Float;
-	
 }

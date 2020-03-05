@@ -1,12 +1,12 @@
 package pixi.resources;
-import js.Promise;
+
+import js.lib.Promise;
 import pixi.core.renderers.webgl.GLTexture;
 import pixi.core.renderers.webgl.Renderer;
 import pixi.core.textures.BaseTexture;
 
 @:native("PIXI.resources.Resource")
 extern class Resource {
-
 	/**
 	 * Base resource class for textures that manages validation and uploading, depending on its type.
 	 * Uploading of a base texture to the GPU is required.
@@ -105,5 +105,4 @@ extern class Resource {
 	 * @return true is success
 	 */
 	function upload(renderer:Renderer, baseTexture:BaseTexture, glTexture:GLTexture):Bool;
-
 }

@@ -1,9 +1,9 @@
 package pixi.core.textures;
+
 import pixi.core.Pixi.ScaleModes;
 
 @:native("PIXI.BaseRenderTexture")
 extern class BaseRenderTexture extends BaseTexture {
-
 	/**
 	 * A BaseRenderTexture is a special texture that allows any Pixi display object to be rendered to it.
 	 *

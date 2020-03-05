@@ -1,8 +1,8 @@
 package pixi.core.renderers.webgl.managers;
+
 import pixi.core.Pixi.BlendModes;
 
 extern class BlendModeManager extends WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI

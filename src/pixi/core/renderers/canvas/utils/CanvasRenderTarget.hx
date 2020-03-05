@@ -5,7 +5,6 @@ import js.html.CanvasElement;
 
 @:native("PIXI.utils.CanvasRenderTarget")
 extern class CanvasRenderTarget {
-
 	/**
 	 * Creates a Canvas element of the given size.
 	 *
@@ -18,10 +17,10 @@ extern class CanvasRenderTarget {
 	function new(width:Float, height:Float, ?resolution:Float);
 
 	/**
-     * The Canvas object that belongs to this to this CanvasRenderTarget.
-     *
-     * @member {HTMLCanvasElement}
-     */
+	 * The Canvas object that belongs to this to this CanvasRenderTarget.
+	 *
+	 * @member {HTMLCanvasElement}
+	 */
 	var canvas:CanvasElement;
 
 	/**

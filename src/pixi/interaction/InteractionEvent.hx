@@ -5,7 +5,6 @@ import pixi.interaction.InteractionData;
 
 @:native("PIXI.interaction.InteractionEvent")
 extern class InteractionEvent {
-
 	/**
 	 * Event class that mimics native DOM events.
 	 *
@@ -30,29 +29,29 @@ extern class InteractionEvent {
 	var target:DisplayObject;
 
 	/**
-     * The object whose event listener’s callback is currently being invoked.
-     *
-     * @member {DisplayObject}
-     */
+	 * The object whose event listener’s callback is currently being invoked.
+	 *
+	 * @member {DisplayObject}
+	 */
 	var currentTarget:DisplayObject;
 
 	/*
-     * Type of the event
-     *
-     * @member {String}
-     */
+	 * Type of the event
+	 *
+	 * @member {String}
+	 */
 	var type:String;
 
 	/*
-     * InteractionData related to this event
-     *
-     * @member {InteractionData}
-     */
+	 * InteractionData related to this event
+	 *
+	 * @member {InteractionData}
+	 */
 	var data:InteractionData;
 
 	/**
-     * Prevents event from reaching any objects other than the current object.
-     *
-     */
+	 * Prevents event from reaching any objects other than the current object.
+	 *
+	 */
 	function stopPropagation():Void;
 }

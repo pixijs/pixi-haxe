@@ -13,7 +13,6 @@ import pixi.core.textures.Texture;
 
 @:native("PIXI.LineStyle")
 extern class LineStyle extends FillStyle {
-
 	/**
 	 * Fill style object for Graphics.
 	 */
@@ -23,12 +22,12 @@ extern class LineStyle extends FillStyle {
 	 * The alignment of any lines drawn (0.5 = middle, 1 = outter, 0 = inner).
 	 */
 	var alignment:Float;
-	
+
 	/**
 	 * If true the lines will be draw using LINES instead of TRIANGLE_STRIP
 	 */
 	var native:Bool;
-	
+
 	/**
 	 * The width (thickness) of any lines drawn.
 	 */

@@ -1,4 +1,5 @@
 package pixi.core.renderers.systems;
+
 import haxe.extern.EitherType;
 import js.html.webgl.RenderingContext;
 import pixi.core.Shader;
@@ -12,8 +13,7 @@ import pixi.core.textures.RenderTexture;
 import pixi.filters.spritemask.SpriteMaskFilter;
 
 @:native("PIXI.systems.ShaderSystem")
-extern class ShaderSystem extends System{
-	
+extern class ShaderSystem extends System {
 	/**
 	 * The current WebGL rendering context
 	 */
@@ -24,7 +24,7 @@ extern class ShaderSystem extends System{
 	 * @param	renderer The renderer this system works for
 	 */
 	function new(renderer:Renderer);
-	
+
 	/**
 	 * Changes the current shader to the one given in parameter
 	 * @param	shader the new shader
@@ -32,22 +32,21 @@ extern class ShaderSystem extends System{
 	 * @return  the glProgram that belongs to the shader.
 	 */
 	function bind(shader:Shader, dontSync:Bool):Program;
-	
+
 	/**
 	 * Returns the underlying GLShade rof the currently bound shader. This can be handy for when you to have a little more control over the setting of your uniforms.
 	 * @return the glProgram for the currently bound Shader for this context
 	 */
 	function getGlProgram():Program;
-	
+
 	/**
 	 * Resets ShaderSystem state, does not affect WebGL state
 	 */
 	function reset():Void;
-	
+
 	/**
 	 * Uploads the uniforms values to the currently bound shader.
 	 * @param	uniforms the uniforms values that be applied to the current shader
 	 */
 	function setUniforms(uniforms:Dynamic):Void;
-
 }

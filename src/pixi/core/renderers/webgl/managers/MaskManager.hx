@@ -1,7 +1,6 @@
 package pixi.core.renderers.webgl.managers;
 
 extern class MaskManager extends WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI

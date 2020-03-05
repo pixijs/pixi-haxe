@@ -2,7 +2,6 @@ package pixi.core.math.shapes;
 
 @:native("PIXI.RoundedRectangle")
 extern class RoundedRectangle extends Shape {
-
 	/**
 	 * The Rounded Rectangle object is an area defined by its position and has nice rounded corners, as indicated by its top-left corner point (x, y) and by its width and its height.
 	 *

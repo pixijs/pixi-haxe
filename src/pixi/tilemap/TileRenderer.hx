@@ -1,12 +1,11 @@
 package pixi.tilemap;
 
-import js.html.Uint16Array;
+import js.lib.Uint16Array;
 import pixi.core.Shader;
 import pixi.core.renderers.webgl.Renderer;
 import pixi.core.renderers.webgl.utils.ObjectRenderer;
 
 extern class TileRenderer extends ObjectRenderer {
-
 	/**
 	 * The default vertex shader source
 	 *

@@ -1,6 +1,6 @@
 package pixi.core.renderers.webgl;
 
-import js.html.Uint16Array;
+import js.lib.Uint16Array;
 import js.html.webgl.RenderingContext;
 import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.ScaleModes;
@@ -33,11 +33,10 @@ import pixi.core.renderers.webgl.managers.MaskManager;
 import pixi.core.renderers.systems.FilterSystem;
 
 @:native("PIXI.AbstractBatchRenderer")
-extern class AbstractBatchRenderer extends ObjectRenderer{
-
+extern class AbstractBatchRenderer extends ObjectRenderer {
 	/**
 	 * Renderer dedicated to drawing and batching sprites.
-	 * This is the default batch renderer. It buffers objects with texture-based geometries and renders them 
+	 * This is the default batch renderer. It buffers objects with texture-based geometries and renders them
 	 * in batches. It uploads multiple textures to the GPU to reduce to the number of draw calls.
 	 * @param	renderer The renderer this works for.
 	 */
@@ -48,33 +47,33 @@ extern class AbstractBatchRenderer extends ObjectRenderer{
 	 * It is generated specifically to handle the required number of textures being batched together.
 	 */
 	private var _shader:Shader;
-	
+
 	/**
 	 * The class that represents the geometry of objects that are going to be batched with this. Default: PIXI.BatchGeometry
 	 */
 	private var geometryClass:Dynamic;
-	
+
 	/**
 	 * Maximum number of textures that can be uploaded to the GPU under the current context. It is initialized properly in this.contextChange.
 	 */
 	var MAX_TEXTURES(default, null):Int;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	var shaderGenerator:BatchShaderGenerator;
-	
+
 	/**
 	 * The number of bufferable objects before a flush occurs automatically.
 	 * Default: settings.SPRITE_MAX_TEXTURES
 	 */
 	var size:Int;
-	
+
 	/**
 	 * The WebGL state in which this renderer will work.
 	 */
 	var state(default, null):State;
-	
+
 	/**
 	 * Size of data being buffered per vertex in the attribute buffers (in floats). By default, the batch-renderer plugin uses 6:
 	 * aVertexPosition 2
@@ -83,19 +82,19 @@ extern class AbstractBatchRenderer extends ObjectRenderer{
 	 * aTextureId 1
 	 */
 	var vertexSize(default, null):Int;
-	
+
 	/**
 	 * Handles the contextChange signal.
 	 * It calculates this.MAX_TEXTURES and allocating the packed-geometry object pool.
 	 */
 	function contextChange():Void;
-	
+
 	/**
 	 * Handles the prerender signal.
 	 * It ensures that flushes start from the first geometry object again.
 	 */
 	function onPrerender():Void;
-	
+
 	/**
 	 * Takes the four batching parameters of element, interleaves and pushes them into the batching attribute/index buffers given.
 	 * It uses these properties: vertexData uvs, textureId and indicies. It also uses the "tint" of the base-texture, if present.

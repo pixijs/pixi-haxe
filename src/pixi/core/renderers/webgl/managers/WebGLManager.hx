@@ -3,7 +3,6 @@ package pixi.core.renderers.webgl.managers;
 import pixi.core.renderers.webgl.Renderer;
 
 extern class WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI

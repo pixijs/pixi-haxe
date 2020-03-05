@@ -1,18 +1,18 @@
 package pixi.resources;
+
 import haxe.extern.EitherType;
-import js.Promise;
+import js.lib.Promise;
 import js.html.ImageBitmap;
 import js.html.ImageElement;
 
 @:native("PIXI.resources.ImageResource")
-extern class ImageResource extends BaseImageResource{
-
+extern class ImageResource extends BaseImageResource {
 	/**
 	 * Resource type for HTMLImageElement.
 	 * @param	source Image element to use
 	 * @param	options options for this Resource
 	 */
-	function new(source:EitherType<ImageElement,String>, options:ImageResourceOptions);
+	function new(source:EitherType<ImageElement, String>, options:ImageResourceOptions);
 
 	/**
 	 * The ImageBitmap element created for HTMLImageElement

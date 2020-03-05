@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.ColorMatrixFilter")
 extern class ColorMatrixFilter extends Filter {
-
 	/**
 	 * The ColorMatrixFilter class lets you apply a 5x5 matrix transformation on the RGBA
 	 * color and alpha values of every pixel on your displayObject to produce a result
@@ -23,12 +22,12 @@ extern class ColorMatrixFilter extends Filter {
 	function new();
 
 	/**
-     * Sets the matrix of the color matrix filter
-     *
-     * @member {number[]}
-     * @memberof ColorMatrixFilter#
-     * @default [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-     */
+	 * Sets the matrix of the color matrix filter
+	 *
+	 * @member {number[]}
+	 * @memberof ColorMatrixFilter#
+	 * @default [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+	 */
 	var matrix:Array<Float>;
 
 	/**

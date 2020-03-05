@@ -6,7 +6,6 @@ import pixi.core.sprites.Sprite;
 
 @:native("PIXI.Text")
 extern class Text extends Sprite {
-
 	/**
 	 * A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
 	 * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
@@ -30,7 +29,7 @@ extern class Text extends Sprite {
 	 * The canvas element that everything is drawn to
 	 *
 	 * @member {HTMLCanvasElement}
- 	*/
+	 */
 	var canvas:CanvasElement;
 
 	/**
@@ -46,17 +45,17 @@ extern class Text extends Sprite {
 	var resolution:Float;
 
 	/**
-     * Set the copy for the text object. To split a line you can use '\n'.
-     *
-     * @param text {String} The copy that you would like the text to display
-     * @memberof Text#
-     */
+	 * Set the copy for the text object. To split a line you can use '\n'.
+	 *
+	 * @param text {String} The copy that you would like the text to display
+	 * @memberof Text#
+	 */
 	var text:String;
 
 	/**
-     * Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
-     * @member {TextStyleObj|TextStyle}
-     *
-     */
+	 * Set the style of the text. Set up an event listener to listen for changes on the style object and mark the text as dirty.
+	 * @member {TextStyleObj|TextStyle}
+	 *
+	 */
 	var style:DefaultStyle;
 }

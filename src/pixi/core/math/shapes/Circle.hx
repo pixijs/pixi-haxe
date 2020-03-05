@@ -2,7 +2,6 @@ package pixi.core.math.shapes;
 
 @:native("PIXI.Circle")
 extern class Circle extends Shape {
-
 	/**
 	 * The Circle object can be used to specify a hit area for displayObjects
 	 *

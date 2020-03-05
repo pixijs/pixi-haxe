@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.GlowFilter")
 extern class GlowFilter extends Filter {
-
 	/**
 	 * GlowFilter, originally by mishaa
 	 * http://www.html5gamedevs.com/topic/12756-glow-filter/?hl=mishaa#entry73578

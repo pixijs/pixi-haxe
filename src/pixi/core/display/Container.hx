@@ -4,7 +4,6 @@ import haxe.extern.Rest;
 
 @:native("PIXI.Container")
 extern class Container extends DisplayObject {
-
 	/**
 	 * A Container represents a collection of display objects.
 	 * It is the base class of all display objects that act as a container for other objects.
@@ -47,7 +46,7 @@ extern class Container extends DisplayObject {
 	 * @param child {DisplayObject} The DisplayObject to add to the container
 	 * @return {DisplayObject} The child that was added.
 	 */
-	@:overload(function (child:Rest<DisplayObject>):DisplayObject {})
+	@:overload(function(child:Rest<DisplayObject>):DisplayObject {})
 	function addChild<T:DisplayObject>(child:T):T;
 
 	/**
@@ -118,10 +117,10 @@ extern class Container extends DisplayObject {
 	function removeChildren(?beginIndex:Int, ?endIndex:Int):Array<DisplayObject>;
 
 	/**
-	* Returns the display object in the container
-	*
-	* @param name {string} instance name
-	* @return {DisplayObject}
-	*/
+	 * Returns the display object in the container
+	 *
+	 * @param name {string} instance name
+	 * @return {DisplayObject}
+	 */
 	function getChildByName(name:String):DisplayObject;
 }

@@ -7,15 +7,14 @@ import pixi.core.math.shapes.Rectangle;
 
 @:native("PIXI.RenderTarget")
 extern class RenderTarget {
-
 	/**
-     * @param {WebGLRenderingContext} gl - The current WebGL drawing context
-     * @param {Float} [width=0] - the horizontal range of the filter
-     * @param {Float} [height=0] - the vertical range of the filter
-     * @param {ScaleModes} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
-     * @param {Float} [resolution=1] - The current resolution / device pixel ratio
-     * @param {Bool} [root=false] - Whether this object is the root element or not
-     */
+	 * @param {WebGLRenderingContext} gl - The current WebGL drawing context
+	 * @param {Float} [width=0] - the horizontal range of the filter
+	 * @param {Float} [height=0] - the vertical range of the filter
+	 * @param {ScaleModes} [scaleMode=PIXI.settings.SCALE_MODE] - See {@link PIXI.SCALE_MODES} for possible values
+	 * @param {Float} [resolution=1] - The current resolution / device pixel ratio
+	 * @param {Bool} [root=false] - Whether this object is the root element or not
+	 */
 	function new(gl:Dynamic, ?width:Float, ?height:Float, ?scaleMode:ScaleModes, ?resolution:Float, ?root:Bool);
 
 	/**
@@ -81,14 +80,13 @@ extern class RenderTarget {
 	 * @member {PIXI.Rectangle}
 	 */
 	var frame:Rectangle;
-	
+
 	/**
 	 * Source frame
 	 *
 	 * @member {PIXI.Rectangle}
 	 */
 	var sourceFrame:Rectangle;
-
 
 	/**
 	 * The stencil buffer stores masking data for the render target
@@ -128,51 +126,51 @@ extern class RenderTarget {
 	var root:Bool;
 
 	/**
-     * Clears the filter texture.
-     *
-     * @param {Array<Int>} [clearColor=this.clearColor] - Array of [r,g,b,a] to clear the framebuffer
-     */
+	 * Clears the filter texture.
+	 *
+	 * @param {Array<Int>} [clearColor=this.clearColor] - Array of [r,g,b,a] to clear the framebuffer
+	 */
 	function clear(?clearColor:Array<Int>):Void;
 
 	/**
-     * Binds the stencil buffer.
-     *
-     */
+	 * Binds the stencil buffer.
+	 *
+	 */
 	function attachStencilBuffer():Void;
 
 	/**
-     * Sets the frame of the render target.
-     *
-     * @param {Rectangle} destinationFrame - The destination frame.
-     * @param {Rectangle} sourceFrame - The source frame.
-     */
+	 * Sets the frame of the render target.
+	 *
+	 * @param {Rectangle} destinationFrame - The destination frame.
+	 * @param {Rectangle} sourceFrame - The source frame.
+	 */
 	function setFrame(destinationFrame:Rectangle, sourceFrame:Rectangle):Void;
 
 	/**
-     * Binds the buffers and initialises the viewport.
-     *
-     */
+	 * Binds the buffers and initialises the viewport.
+	 *
+	 */
 	function activate():Void;
 
 	/**
-     * Updates the projection matrix based on a projection frame (which is a rectangle)
-     *
-     * @param {Rectangle} destinationFrame - The destination frame.
-     * @param {Rectangle} sourceFrame - The source frame.
-     */
+	 * Updates the projection matrix based on a projection frame (which is a rectangle)
+	 *
+	 * @param {Rectangle} destinationFrame - The destination frame.
+	 * @param {Rectangle} sourceFrame - The source frame.
+	 */
 	function calculateProjection(destinationFrame:Rectangle, sourceFrame:Rectangle):Void;
 
 	/**
-     * Resizes the texture to the specified width and height
-     *
-     * @param {Float} width - the new width of the texture
-     * @param {Float} height - the new height of the texture
-     */
+	 * Resizes the texture to the specified width and height
+	 *
+	 * @param {Float} width - the new width of the texture
+	 * @param {Float} height - the new height of the texture
+	 */
 	function resize(width:Float, height:Float):Void;
 
 	/**
-     * Destroys the render target.
-     *
-     */
+	 * Destroys the render target.
+	 *
+	 */
 	function destroy():Void;
 }

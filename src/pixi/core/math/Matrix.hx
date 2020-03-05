@@ -2,7 +2,6 @@ package pixi.core.math;
 
 @:native("PIXI.Matrix")
 extern class Matrix {
-
 	/**
 	 * The Matrix class is now an object, which makes it a lot faster,
 	 * here is a representation of it :
@@ -11,11 +10,11 @@ extern class Matrix {
 	 * | 0 | 0 | 1 |
 	 *
 	 * @param {number} [a=1] - x scale
-     * @param {number} [b=0] - y skew
-     * @param {number} [c=0] - x skew
-     * @param {number} [d=1] - y scale
-     * @param {number} [tx=0] - x translation
-     * @param {number} [ty=0] - y translation
+	 * @param {number} [b=0] - y skew
+	 * @param {number} [c=0] - x skew
+	 * @param {number} [d=1] - y scale
+	 * @param {number} [tx=0] - x translation
+	 * @param {number} [ty=0] - y translation
 	 *
 	 * @class
 	 * @namespace PIXI

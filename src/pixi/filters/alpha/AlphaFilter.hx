@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.AlphaFilter")
 extern class AlphaFilter extends Filter {
-
 	/**
 	 * Simplest filter - applies alpha
 	 *
@@ -22,17 +21,16 @@ extern class AlphaFilter extends Filter {
 	 * @extends PIXI.Filter
 	 * @memberof PIXI.filters
 	 */
-
 	/**
-     * @param {Float} [alpha=1] Amount of alpha from 0 to 1, where 0 is transparent
-     */
+	 * @param {Float} [alpha=1] Amount of alpha from 0 to 1, where 0 is transparent
+	 */
 	function new(?alpha:Float);
 
 	/**
-     * Coefficient for alpha multiplication
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * Coefficient for alpha multiplication
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var alpha:Float;
 }
