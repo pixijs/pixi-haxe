@@ -1,15 +1,15 @@
 {
 	"name": "pixijs",
-	"version": "4.8.4",
-	"description": "Externs of pixi.js v4.x for Haxe - a fast and lightweight 2D rendering library that works across all devices",
+	"version": "v5.2.1",
+	"description": "Externs of pixi.js v5.x for Haxe",
 	"author": "Adi Reddy Mora",
-	"homepage": "http://adireddy.github.io",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/notboring/pixi-haxe"
+		"url": "https://github.com/markknol/pixi-haxe"
 	},
 	"bugs": {
-		"url": "https://github.com/notboring/pixi-haxe/issues"
+		"url": "https://github.com/markknol/pixi-haxe/issues"
 	},
 	"keywords": [
 		"js",
@@ -21,16 +21,8 @@
 		"web",
 		"library"
 	],
-	"dependencies": {},
-	"license": "MIT",
+	"scripts": {
+	},
 	"devDependencies": {
-		"grunt": "latest",
-		"grunt-cli": "latest",
-		"grunt-contrib-copy": "^0.7.0",
-		"grunt-exec": "^0.4.6",
-		"grunt-haxe": "^0.1.12",
-		"grunt-npm-install": "^0.2.0",
-		"grunt-shell": "^1.1.1",
-		"grunt-zip": "^0.16.0"
 	}
 }

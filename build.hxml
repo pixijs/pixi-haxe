@@ -1,15 +1,8 @@
--cmd haxelib newrepo
--cmd haxelib install perf.js || true
--cmd haxelib install nape-haxe4 || true
--cmd haxelib install msignal || true
--cmd haxelib install actuate || true
--cmd haxelib install chxdoc || true
-
---next
 -cp samples/src
 -cp src
 -lib perf.js
 -dce full
+-D analyzer-optimize
 -D stats
 -D source-map-content
 -debug

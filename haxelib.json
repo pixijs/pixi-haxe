@@ -11,10 +11,11 @@
 		"extern",
 		"web"
 	],
-	"description": "Externs of pixi.js v5.x for Haxe - JavaScript 2D webGL renderer with canvas fallback.",
+	"description": "Externs of pixi.js v5.x for Haxe",
 	"contributors": [
 		"pixijs",
-		"adireddy"
+		"adireddy",
+		"markknol",
 	],
 	"releasenote": "updated to latest pixi version",
 	"version": "5.1.2",
