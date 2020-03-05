@@ -12,6 +12,7 @@
 --next
 -main basics.Main
 -js samples/output/basics.js
+--macro include("pixi", true)
 
 --next
 -main spine.Main
