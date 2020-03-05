@@ -6,7 +6,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.TransformObject")
 extern class TransformObject extends BaseObject {
-
 	var name:String;
 	var globalTransformMatrix:Matrix;
 	var global:Transform;

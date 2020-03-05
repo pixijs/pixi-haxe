@@ -4,7 +4,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.DragonBonesData")
 extern class DragonBonesData extends BaseObject {
-
 	var autoSearch:Bool;
 	var frameRate:Float;
 	var version:String;

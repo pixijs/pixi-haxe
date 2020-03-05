@@ -2,7 +2,6 @@ package pixi.plugins.dragonbones.geom;
 
 @:native("dragonBones.Rectangle")
 extern class Rectangle {
-
 	function new(x:Float, y:Float, width:Float, height:Float);
 
 	var x:Float;

@@ -7,7 +7,6 @@ import pixi.plugins.dragonbones.model.DragonBonesData;
 
 @:native("dragonBones.BaseFactory")
 extern class BaseFactory {
-
 	function new();
 
 	var autoSearch:Bool;
@@ -22,7 +21,8 @@ extern class BaseFactory {
 	function removeTextureAtlasData(name:String, ?disposeData:Bool):Void;
 	function clear(?disposeData:Bool):Void;
 	function buildArmature(armatureName:String, ?dragonBonesName:String, ?skinName:String, ?textureAtlasName:String):Armature;
-	function copyAnimationsToArmature(toArmature:Armature, fromArmatreName:String, ?fromSkinName:String, ?fromDragonBonesDataName:String, ?replaceOriginalAnimation:Bool):Bool;
+	function copyAnimationsToArmature(toArmature:Armature, fromArmatreName:String, ?fromSkinName:String, ?fromDragonBonesDataName:String,
+		?replaceOriginalAnimation:Bool):Bool;
 	function replaceSlotDisplay(dragonBonesName:String, armatureName:String, slotName:String, displayName:String, slot:Slot, ?displayIndex:Float):Void;
 	function replaceSlotDisplayList(dragonBonesName:String, armatureName:String, slotName:String, slot:Slot):Void;
 }

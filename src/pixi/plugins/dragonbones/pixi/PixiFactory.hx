@@ -6,7 +6,6 @@ import pixi.core.sprites.Sprite;
 
 @:native("dragonBones.PixiFactory")
 extern class PixiFactory extends BaseFactory {
-
 	static var factory:PixiFactory;
 	static var clock:WorldClock;
 

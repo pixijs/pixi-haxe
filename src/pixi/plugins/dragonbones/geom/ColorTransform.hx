@@ -2,9 +2,8 @@ package pixi.plugins.dragonbones.geom;
 
 @:native("dragonBones.ColorTransform")
 extern class ColorTransform {
-
-	function new(alphaMultiplier:Float, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float,
-	alphaOffset:Float, redOffset:Float, greenOffset:Float, blueOffset:Float);
+	function new(alphaMultiplier:Float, redMultiplier:Float, greenMultiplier:Float, blueMultiplier:Float, alphaOffset:Float, redOffset:Float,
+		greenOffset:Float, blueOffset:Float);
 
 	var alphaMultiplier:Float;
 	var redMultiplier:Float;
