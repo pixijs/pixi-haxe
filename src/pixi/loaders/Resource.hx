@@ -1,6 +1,5 @@
 package pixi.loaders;
 
-import haxe.DynamicAccess;
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 import pixi.loaders.LoaderOptions.LoaderMetadata;
@@ -16,7 +15,7 @@ import pixi.loaders.LoaderOptions.LoaderMetadata;
  * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
  */
-@:native("PIXI.Resource.LOAD_TYPE")
+@:native("PIXI.LoaderResource.LOAD_TYPE")
 extern enum LoadType {
 	XHR;
 	IMAGE;
@@ -24,7 +23,7 @@ extern enum LoadType {
 	VIDEO;
 }
 
-@:native("PIXI.Resource.TYPE")
+@:native("PIXI.LoaderResource.TYPE")
 extern enum ResourceType {
 	UNKNOWN;
 	JSON;
@@ -35,7 +34,7 @@ extern enum ResourceType {
 	TEXT;
 }
 
-@:native("PIXI.Resource")
+@:native("PIXI.LoaderResource")
 extern class Resource {
 	/**
 	 * Manages the state and loading of a single resource represented by
