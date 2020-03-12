@@ -13,7 +13,7 @@ extern class BoneData {
 	var scaleY:Float;
 	var shearX:Float;
 	var shearY:Float;
-	var transformMode:Dynamic;
+	var transformMode:TransformMode;
 	var skinRequired:Bool;
 	var color:Color;
 
