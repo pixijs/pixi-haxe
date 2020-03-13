@@ -2,6 +2,7 @@ package pixi.plugins.spine.core;
 
 import pixi.plugins.spine.core.attachments.PathAttachment;
 
+@:native("PIXI.spine.core.PathConstraint")
 extern class PathConstraint implements Updatable {
 	static var NONE:Float;
 	static var BEFORE:Float;

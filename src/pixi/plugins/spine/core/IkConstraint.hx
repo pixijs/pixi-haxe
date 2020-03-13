@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.IkConstraint")
 extern class IkConstraint implements Updatable {
 	var data:IkConstraintData;
 	var bones:Array<Bone>;

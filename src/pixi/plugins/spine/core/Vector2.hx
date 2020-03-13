@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.Vector2")
 extern class Vector2 {
 	var x:Float;
 	var y:Float;

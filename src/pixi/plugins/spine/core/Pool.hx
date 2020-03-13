@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.Pool")
 extern class Pool<T> {
 	private var items:Array<T>;
 	private var instantiator:Void->T;

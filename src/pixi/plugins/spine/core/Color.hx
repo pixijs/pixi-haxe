@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.Color")
 extern class Color {
 	var r:Float;
 	var g:Float;

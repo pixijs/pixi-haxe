@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.EventQueue")
 extern class EventQueue {
 	var objects:Array<Any>;
 	var drainDisabled:Bool;
