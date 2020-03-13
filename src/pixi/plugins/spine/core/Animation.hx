@@ -1,5 +1,6 @@
 package pixi.plugins.spine.core;
 
+@:native("PIXI.spine.core.Animation")
 extern class Animation {
 	public var name:String;
 	public var timelines:Array<Timeline>;
