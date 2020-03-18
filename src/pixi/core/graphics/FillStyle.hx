@@ -13,48 +13,47 @@ import pixi.core.textures.Texture;
 
 @:native("PIXI.FillStyle")
 extern class FillStyle {
-
 	/**
 	 * Fill style object for Graphics.
 	 */
 	function new();
-	
+
 	/**
 	 * The alpha value used when filling the Graphics object.
 	 */
 	var alpha:Float;
-	
+
 	/**
 	 * If the current fill is visible.
 	 */
 	var visible:Bool;
-	
+
 	/**
 	 * The hex color value used when coloring the Graphics object.
 	 */
 	var color:Int;
-	
+
 	/**
 	 * The transform applied to the texture.
 	 */
 	var matrix:String;
-	
+
 	/**
 	 * The texture to be used for the fill.
 	 */
 	var texture:String;
-	
+
 	/**
 	 * Clones the object
 	 * @return the clone
 	 */
 	function clone():FillStyle;
-	
+
 	/**
 	 * Destroy and don't use after this
 	 */
 	function destroy():Void;
-	
+
 	/**
 	 * Reset
 	 */

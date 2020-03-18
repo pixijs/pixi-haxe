@@ -8,7 +8,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.EventObject")
 extern class EventObject extends BaseObject {
-
 	static var START:String;
 	static var LOOP_COMPLETE:String;
 	static var COMPLETE:String;

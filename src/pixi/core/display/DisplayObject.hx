@@ -1,15 +1,16 @@
 package pixi.core.display;
 
-import pixi.core.renderers.webgl.filters.Filter;
-import pixi.core.math.Matrix;
-import pixi.core.math.shapes.Rectangle;
-import pixi.core.math.Point;
-import pixi.interaction.InteractiveTarget;
 import haxe.extern.EitherType;
+import pixi.core.graphics.Graphics;
+import pixi.core.math.Matrix;
+import pixi.core.math.Point;
+import pixi.core.math.shapes.Rectangle;
+import pixi.core.renderers.webgl.filters.Filter;
+import pixi.core.sprites.Sprite;
+import pixi.interaction.InteractiveTarget;
 
 @:native("PIXI.DisplayObject")
 extern class DisplayObject extends InteractiveTarget {
-
 	/**
 	 * The base class for all objects that are rendered on the screen.
 	 * This is an abstract class and should not be used on its own rather it should be extended.
@@ -59,8 +60,6 @@ extern class DisplayObject extends InteractiveTarget {
 
 	/*
 	 * Updates the object transform for rendering
-	 *
-	 * TODO - Optimization pass!
 	 */
 	function updateTransform():Void;
 	function displayObjectUpdateTransform():Void;
@@ -86,21 +85,22 @@ extern class DisplayObject extends InteractiveTarget {
 	 * @param [pivotY=0] {Float} The Y pivot value
 	 * @return {DisplayObject}
 	 */
-	function setTransform(?x:Float, ?y:Float, ?scaleX:Float, ?scaleY:Float, ?rotation:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):DisplayObject;
+	function setTransform(?x:Float, ?y:Float, ?scaleX:Float, ?scaleY:Float, ?rotation:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float,
+		?pivotY:Float):DisplayObject;
 
 	/**
 	 * Base destroy method for generic display objects
-     * Removes all internal references and listeners as well as removes children from the display list.
-     *
-     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
-     *  have been set to that value
-     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
-     *  method called as well. 'options' will be passed on to those calls.
-     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the texture of the child sprite
-     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the base texture of the child sprite
-     */
+	 * Removes all internal references and listeners as well as removes children from the display list.
+	 *
+	 * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+	 *  have been set to that value
+	 * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+	 *  method called as well. 'options' will be passed on to those calls.
+	 * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+	 *  Should it destroy the texture of the child sprite
+	 * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+	 *  Should it destroy the base texture of the child sprite
+	 */
 	function destroy(?options:EitherType<Bool, DestroyOptions>):Void;
 
 	/**
@@ -126,6 +126,14 @@ extern class DisplayObject extends InteractiveTarget {
 	 * @member {Float}
 	 */
 	var alpha:Float;
+
+	/**
+	 * World transform and local transform of this object. This will become read-only later,
+	 * please do not assign anything there unless you know what are you doing.
+	 *
+	 * @member {Transform}
+	 */
+	var transform:Transform;
 
 	/**
 	 * The visibility of the object. If false the object will not be drawn, and
@@ -194,11 +202,11 @@ extern class DisplayObject extends InteractiveTarget {
 	var worldTransform:Matrix;
 
 	/**
-     * Current transform of the object based on local factors: position, scale, other stuff
-     *
-     * @member {PIXI.Matrix}
-     * @readOnly
-     */
+	 * Current transform of the object based on local factors: position, scale, other stuff
+	 *
+	 * @member {PIXI.Matrix}
+	 * @readOnly
+	 */
 	var localTransform:Matrix;
 
 	/**
@@ -223,10 +231,10 @@ extern class DisplayObject extends InteractiveTarget {
 	var pivot:Point;
 
 	/**
-     * The skew factor for the object in radians.
-     *
-     * @member {Point}
-     */
+	 * The skew factor for the object in radians.
+	 *
+	 * @member {Point}
+	 */
 	var skew:Point;
 
 	/**
@@ -246,16 +254,16 @@ extern class DisplayObject extends InteractiveTarget {
 	var worldVisible:Bool;
 
 	/**
-     * Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
-     * In PIXI a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping.
-     * To remove a mask, set this property to null.
-     *
-     * @todo For the moment, PIXI.CanvasRenderer doesn't support PIXI.Sprite as mask.
-     *
-     * @member {Graphics|Sprite}
-     * @memberof DisplayObject#
-     */
-	var mask:Dynamic;
+	 * Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it.
+	 * In PIXI a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping.
+	 * To remove a mask, set this property to null.
+	 *
+	 * For the moment, PIXI.CanvasRenderer doesn't support PIXI.Sprite as mask.
+	 *
+	 * @member {Graphics|Sprite}
+	 * @memberof DisplayObject#
+	 */
+	var mask:EitherType<Sprite, Graphics>;
 
 	/**
 	 * Sets the filters for the displayObject.
@@ -268,50 +276,47 @@ extern class DisplayObject extends InteractiveTarget {
 	var filters:Array<Filter>;
 
 	/**
-     *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
-     *   shadow div with attributes set
-     *
-     * @member {Bool}
-     */
+	 *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
+	 *   shadow div with attributes set
+	 *
+	 * @member {Bool}
+	 */
 	var accessible:Bool;
 
 	/**
-     * Sets the title attribute of the shadow div
-     * If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
-     *
-     * @member {String}
-     */
+	 * Sets the title attribute of the shadow div
+	 * If accessibleTitle AND accessibleHint has not been this will default to 'displayObject [tabIndex]'
+	 *
+	 * @member {String}
+	 */
 	var accessibleTitle:String;
 
 	/**
-     * Sets the aria-label attribute of the shadow div
-     *
-     * @member {String}
-     */
+	 * Sets the aria-label attribute of the shadow div
+	 *
+	 * @member {String}
+	 */
 	var accessibleHint:String;
 
-	/**
-     * @todo Needs docs.
-     */
 	var tabIndex:Int;
 }
 
 typedef DestroyOptions = {
 	/**
-	* {boolean} [options.children=false] - if set to true, all the children will have their destroy
-	*  method called as well. 'options' will be passed on to those calls.
-	*/
+	 * {boolean} [options.children=false] - if set to true, all the children will have their destroy
+	 *  method called as well. 'options' will be passed on to those calls.
+	 */
 	@:optional var children:Bool;
 
 	/**
-    * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
-    * Should it destroy the texture of the child sprite
-	*/
+	 * {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
+	 * Should it destroy the texture of the child sprite
+	 */
 	@:optional var texture:Bool;
 
 	/**
-    * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
-    * Should it destroy the base texture of the child sprite
-	*/
+	 * {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
+	 * Should it destroy the base texture of the child sprite
+	 */
 	@:optional var baseTexture:Bool;
 }

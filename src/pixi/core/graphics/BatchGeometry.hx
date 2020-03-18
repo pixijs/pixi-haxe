@@ -14,14 +14,13 @@ import pixi.core.textures.Texture;
 
 @:native("PIXI.BatchGeometry")
 extern class BatchGeometry extends Container {
-	
 	function new(?_static:Bool = false);
 
 	/**
 	 * Buffer used for position, color, texture IDs
 	 */
 	private var _buffer:Buffer;
-	
+
 	/**
 	 * Index buffer data
 	 */

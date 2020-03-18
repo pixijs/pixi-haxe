@@ -4,7 +4,6 @@ import pixi.plugins.dragonbones.model.AnimationData;
 
 @:native("dragonBones.AnimationState")
 extern class AnimationState {
-
 	var dragonBones:Bool;
 	var additiveBlending:Bool;
 	var actionEnabled:Bool;

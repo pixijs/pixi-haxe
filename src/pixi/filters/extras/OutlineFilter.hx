@@ -2,7 +2,6 @@ package pixi.filters.extras;
 
 @:native("PIXI.filters.OutlineFilter")
 extern class OutlineFilter {
-
 	/**
 	 * OutlineFilter, originally by mishaa
 	 * http://www.html5gamedevs.com/topic/10640-outline-a-sprite-change-certain-colors/?p=69966

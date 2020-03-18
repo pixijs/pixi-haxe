@@ -2,7 +2,6 @@ package pixi.plugins.dragonbones.model;
 
 @:native("dragonBones.AnimationData")
 extern class AnimationData {
-
 	function new();
 
 	var frameCount:Int;

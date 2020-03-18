@@ -2,7 +2,6 @@ package pixi.core.math.shapes;
 
 @:native("PIXI.Rectangle")
 extern class Rectangle extends Shape {
-
 	/**
 	 * the Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and by its width and its height.
 	 *

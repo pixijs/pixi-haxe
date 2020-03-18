@@ -1,7 +1,5 @@
 package pixi.plugins.spine.core;
 
-
-interface Disposable 
-{
+interface Disposable {
 	function dispose():Void;
 }

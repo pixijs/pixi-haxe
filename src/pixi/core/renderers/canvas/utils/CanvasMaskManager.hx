@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.Renderer;
 
 @:native("PIXI.CanvasMaskManager")
 extern class CanvasMaskManager {
-
 	function new();
 
 	/**
@@ -23,5 +22,4 @@ extern class CanvasMaskManager {
 	 */
 	@:overload(function(renderer:Renderer):Void {})
 	function popMask(renderer:CanvasRenderer):Void;
-
 }

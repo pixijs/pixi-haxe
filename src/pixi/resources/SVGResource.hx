@@ -1,10 +1,11 @@
 package pixi.resources;
+
 import haxe.extern.EitherType;
-import js.RegExp;
+import js.lib.RegExp;
 import pixi.core.Pixi.ISize;
 
 @:native("PIXI.resources.SVGResource")
-extern class SVGResource extends BaseImageResource{
+extern class SVGResource extends BaseImageResource {
 	/**
 	 * Resource type for SVG elements and graphics.
 	 * @param	source Base64 encoded SVG element or URL for SVG file.
@@ -12,7 +13,7 @@ extern class SVGResource extends BaseImageResource{
 	 */
 	function new(source:String, options:SVGResourceOptions);
 
-	static var SVG_SIZE:EitherType<RegExp,String>;
+	static var SVG_SIZE:EitherType<RegExp, String>;
 
 	/**
 	 * A height override for rasterization on load

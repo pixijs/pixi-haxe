@@ -2,7 +2,6 @@ package pixi.core.math;
 
 @:native("PIXI.Point")
 extern class Point {
-
 	/**
 	 * The Point object represents a location in a two-dimensional coordinate system, where x represents
 	 * the horizontal axis and y represents the vertical axis.
@@ -17,19 +16,27 @@ extern class Point {
 	/**
 	 * Copies x and y from the given point
 	 *
-	 * @method copy
-	 * @param {Point} the point to copy
+	 * @param {Point} The point to copy from
+	 * @return {Point} Returns itself.
 	 */
-	function copy(p:Point):Void;
+	function copyFrom(p:Point):Point;
+
+	/**
+	 * Copies x and y into the given point
+	 *
+	 * @param {Point} p - The point to copy.
+	 * @return {Point} Given point with values updated
+	 */
+	function copyTo(p:Point):Point;
 
 	/**
 	 * Returns true if the given point is equal to this point
 	 *
 	 * @method copy
 	 * @param {Point} the point to compare
-	 * @returns {Bool} the result of the comparison
+	 * @return {Bool} the result of the comparison
 	 */
-	function equals(p:Point):Bool;	
+	function equals(p:Point):Bool;
 
 	/**
 	 * Sets the point to a new x and y position.

@@ -2,7 +2,6 @@ package pixi.plugins.spine.core;
 
 @:native("PIXI.spine.core.BoneData")
 extern class BoneData {
-
 	var index:Int;
 	var name:String;
 	var parent:BoneData;
@@ -14,7 +13,9 @@ extern class BoneData {
 	var scaleY:Float;
 	var shearX:Float;
 	var shearY:Float;
-	var transformMode:Dynamic;
+	var transformMode:TransformMode;
+	var skinRequired:Bool;
+	var color:Color;
 
 	function new(index:Int, name:String, parent:BoneData);
 }

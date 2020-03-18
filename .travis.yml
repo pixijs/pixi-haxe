@@ -4,11 +4,10 @@ git:
 language: haxe
 
 haxe:
-  - "3.2.1"
-  - "3.4.7"
-  - "4.0.0-rc.3"
+  - "4.0.5"
   
 hxml:
+  - install.hxml
   - build.hxml
   
 sudo: false

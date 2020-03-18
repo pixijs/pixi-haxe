@@ -2,7 +2,6 @@ package pixi.plugins.dragonbones.geom;
 
 @:native("dragonBones.Point")
 extern class Point {
-
 	function new(x:Float, y:Float);
 
 	var x:Float;

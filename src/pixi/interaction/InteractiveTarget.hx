@@ -5,7 +5,6 @@ import pixi.interaction.EventEmitter;
 
 @:native("PIXI.interaction.interactiveTarget")
 extern class InteractiveTarget extends EventEmitter {
-
 	/**
 	 * Fired when a pointer device button (usually a mouse button) is pressed on the display
 	 * object.
@@ -248,6 +247,7 @@ extern class InteractiveTarget extends EventEmitter {
 	var defaultCursor:String;
 
 	// some internal checks..
+
 	/**
 	 * Internal check to detect if the mouse cursor is hovered over the displayObject
 	 *

@@ -6,7 +6,6 @@ import pixi.core.renderers.AbstractRenderer;
 
 @:native("PIXI.accessibility.AccessibilityManager")
 extern class AccessibilityManager {
-
 	/**
 	 * The Accessibility manager reacreates the ability to tab and and have content read by screen
 	 * readers. This is very important as it can possibly help people with disabilities access pixi
@@ -21,27 +20,27 @@ extern class AccessibilityManager {
 	function new(renderer:AbstractRenderer);
 
 	/**
-   	 * Setting this to true will visually show the divs
-   	 *
-   	 * @type {Bool}
-   	 */
+	 * Setting this to true will visually show the divs
+	 *
+	 * @type {Bool}
+	 */
 	var debug:Bool;
 
 	/**
 	 * A flag
 	 */
 	var isActive(default, null):Bool;
-	
+
 	/**
 	 * A flag
 	 */
 	var isMobileAccessibility(default, null):Bool;
-	
+
 	/**
-     * The renderer this accessibility manager works for.
-     *
-     * @member {AbstractRenderer}
-     */
+	 * The renderer this accessibility manager works for.
+	 *
+	 * @member {AbstractRenderer}
+	 */
 	var renderer:AbstractRenderer;
 
 	/**

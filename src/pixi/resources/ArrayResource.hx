@@ -1,10 +1,10 @@
 package pixi.resources;
+
 import haxe.extern.EitherType;
 import pixi.core.textures.BaseTexture;
 
 @:native("PIXI.resources.ArrayResource")
-extern class ArrayResource extends Resource{
-
+extern class ArrayResource extends Resource {
 	/**
 	 * Base resource class for textures that manages validation and uploading, depending on its type.
 	 * Uploading of a base texture to the GPU is required.
@@ -38,6 +38,6 @@ extern class ArrayResource extends Resource{
 }
 
 typedef ArrayResourceOptions = {
-		?width:Float,
-		?height:Float
+	?width:Float,
+	?height:Float
 }

@@ -1,7 +1,7 @@
 package pixi.resources;
 
 @:native("PIXI.resources.VideoResource")
-extern class VideoResource extends BaseImageResource{
+extern class VideoResource extends BaseImageResource {
 	/**
 	 * Resource type for HTMLVideoElement.
 	 * @param	source Video element to use. Types: HTMLVideoElement | object | string | Array.<(string|object)>

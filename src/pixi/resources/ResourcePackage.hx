@@ -1,9 +1,9 @@
 package pixi.resources;
+
 import haxe.extern.EitherType;
 
 @:native("PIXI.resources")
 extern class ResourcesPackage {
-
 	/**
 	 * Collection of installed resource types, class must extend PIXI.resources.Resource.
 	 */
@@ -21,10 +21,10 @@ extern class ResourcesPackage {
 }
 
 typedef ResourcesPackageOptions = {
-	width: Float,
-	height: Float,
-	autoLoad: Bool,
-	scale: Float,
+	width:Float,
+	height:Float,
+	autoLoad:Bool,
+	scale:Float,
 	createBitmap:Bool,
 	crossorigin:Bool,
 	autoPlay:Bool,

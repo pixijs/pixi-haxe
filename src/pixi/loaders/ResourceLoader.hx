@@ -2,8 +2,8 @@ package pixi.loaders;
 
 import pixi.interaction.EventEmitter;
 
+@:native("PIXI.ResourceLoader")
 extern class ResourceLoader extends EventEmitter {
-
 	/**
 	 * Manages the state and loading of multiple resources to load.
 	 *
@@ -14,31 +14,31 @@ extern class ResourceLoader extends EventEmitter {
 	function new(?baseUrl:String, ?concurrency:Int);
 
 	/**
-     * The base url for all resources loaded by this loader.
-     *
-     * @member {String}
-     */
+	 * The base url for all resources loaded by this loader.
+	 *
+	 * @member {String}
+	 */
 	var baseUrl:String;
 
 	/**
-     * The progress percent of the loader going through the queue.
-     *
-     * @member {Float}
-     */
+	 * The progress percent of the loader going through the queue.
+	 *
+	 * @member {Float}
+	 */
 	var progress:Float;
 
 	/**
-     * Loading state of the loader, true if it is currently loading resources.
-     *
-     * @member {Bool}
-     */
+	 * Loading state of the loader, true if it is currently loading resources.
+	 *
+	 * @member {Bool}
+	 */
 	var loading:Bool;
 
 	/**
-     * All the resources for this loader keyed by name.
-     *
-     * @member {object<string, Resource>}
-     */
+	 * All the resources for this loader keyed by name.
+	 *
+	 * @member {object<string, Resource>}
+	 */
 	var resources:haxe.DynamicAccess<Resource>;
 
 	/**
@@ -95,8 +95,8 @@ extern class ResourceLoader extends EventEmitter {
 	@:overload(function(obj:ResourceObject):ResourceLoader {})
 	@:overload(function(urls:Array<ResourceObject>):ResourceLoader {})
 	@:overload(function(urls:Array<String>):ResourceLoader {})
-	@:overload(function(url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader {})
-	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource -> Void):ResourceLoader;
+	@:overload(function(url:String, ?options:LoaderOptions, ?callback:Resource->Void):ResourceLoader {})
+	function add(name:String, url:String, ?options:LoaderOptions, ?callback:Resource->Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *after* the
@@ -106,7 +106,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function after(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
+	function after(fn:Resource->(Void->Void)->Void):ResourceLoader;
 
 	/**
 	 * Sets up a middleware function that will run *before* the
@@ -116,7 +116,7 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param middleware {function} The middleware function to register.
 	 * @return {Loader}
 	 */
-	function before(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
+	function before(fn:Resource->(Void->Void)->Void):ResourceLoader;
 
 	/**
 	 * Resets the queue of the loader to prepare for a new load.
@@ -130,9 +130,9 @@ extern class ResourceLoader extends EventEmitter {
 	 * @param [callback] {function} Optional callback that will be bound to the `complete` event.
 	 * @return {Loader}
 	 */
-	@:overload(function(?cb:ResourceLoader -> Dynamic -> Void):ResourceLoader {})
-	@:overload(function(?cb:ResourceLoader -> Void):ResourceLoader {})
-	@:overload(function(?cb:Void -> Void):ResourceLoader {})
+	@:overload(function(?cb:ResourceLoader->Dynamic->Void):ResourceLoader {})
+	@:overload(function(?cb:ResourceLoader->Void):ResourceLoader {})
+	@:overload(function(?cb:Void->Void):ResourceLoader {})
 	function load(?cb:Dynamic):ResourceLoader;
 
 	/**
@@ -140,20 +140,20 @@ extern class ResourceLoader extends EventEmitter {
 	 *
 	 * @param {function} function to call
 	 */
-	function use(fn:Resource -> (Void->Void) -> Void):Void;
+	function use(fn:Resource->(Void->Void)->Void):Void;
 
 	/**
 	 * Middleware function
 	 *
 	 * @param {function} function to call
 	 */
-	function pre(fn:Resource -> (Void->Void) -> Void):ResourceLoader;
+	function pre(fn:Resource->(Void->Void)->Void):ResourceLoader;
 }
 
 typedef ResourceObject = {
 	var url:String;
 	@:optional var name:String;
-	@:optional var callback:Resource -> Void;
+	@:optional var callback:Resource->Void;
 	@:optional var crossOrigin:Dynamic;
 	@:optional var loadType:Int;
 	@:optional var xhrType:String;

@@ -2,7 +2,6 @@ package pixi.plugins.spine.core;
 
 @:native("PIXI.spine.core.PathConstraintData")
 extern class PathConstraintData {
-
 	var name:String;
 	var order:Int;
 	var bones:Array<BoneData>;
@@ -20,19 +19,19 @@ extern class PathConstraintData {
 	function new(name:String);
 }
 
-enum PositionMode {
-	Fixed;
-	Percent;
+enum abstract PositionMode(Int) {
+	var Fixed = 0;
+	var Percent;
 }
 
-enum SpacingMode {
-	Length;
-	Fixed;
-	Percent;
+enum abstract SpacingMode(Int) {
+	var Length = 0;
+	var Fixed;
+	var Percent;
 }
 
-enum RotateMode {
-	Tangent;
-	Chain;
-	ChainScale;
+enum abstract RotateMode(Int) {
+	var Tangent = 0;
+	var Chain;
+	var ChainScale;
 }

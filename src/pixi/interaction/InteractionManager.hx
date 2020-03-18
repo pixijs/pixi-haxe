@@ -8,7 +8,6 @@ import pixi.core.renderers.webgl.Renderer;
 
 @:native("PIXI.interaction.InteractionManager")
 extern class InteractionManager extends EventEmitter {
-
 	/**
 	 * The interaction manager deals with mouse, touch and pointer events.
 	 * Any DisplayObject can be interactive if its interactive property is set to true.
@@ -26,118 +25,118 @@ extern class InteractionManager extends EventEmitter {
 	function new(renderer:AbstractRenderer);
 
 	/**
-     * The renderer this interaction manager works for.
-     *
-     * @member {AbstractRenderer}
-     */
+	 * The renderer this interaction manager works for.
+	 *
+	 * @member {AbstractRenderer}
+	 */
 	var renderer:AbstractRenderer;
 
 	/**
-     * Should default browser actions automatically be prevented.
-     *
-     * @member {Bool}
-     * @default true
-     */
+	 * Should default browser actions automatically be prevented.
+	 *
+	 * @member {Bool}
+	 * @default true
+	 */
 	var autoPreventDefault:Bool;
 
 	/**
-     * The current resolution / device pixel ratio.
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * The current resolution / device pixel ratio.
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var resolution:Float;
 
 	/**
-     * As this frequency increases the interaction events will be checked more often.
-     *
-     * @member {Int}
-     * @default 10
-     */
+	 * As this frequency increases the interaction events will be checked more often.
+	 *
+	 * @member {Int}
+	 * @default 10
+	 */
 	var interactionFrequency:Int;
 
 	/**
-     * The mouse data
-     *
-     * @member {InteractionData}
-     */
+	 * The mouse data
+	 *
+	 * @member {InteractionData}
+	 */
 	var mouse:InteractionData;
 
 	/**
-     * An event data object to handle all the event tracking/dispatching
-     *
-     * @member {InteractionEvent}
-     */
+	 * An event data object to handle all the event tracking/dispatching
+	 *
+	 * @member {InteractionEvent}
+	 */
 	var eventData:InteractionEvent;
 
 	/**
-     * Tiny little interactiveData pool !
-     *
-     * @member {Array}
-     */
+	 * Tiny little interactiveData pool !
+	 *
+	 * @member {Array}
+	 */
 	var interactiveDataPool:Array<InteractionData>;
 
 	/**
-     * @member {function}
-     */
-	var onMouseUp:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onMouseUp:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onMouseDown:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onMouseDown:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onMouseMove:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onMouseMove:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onMouseOut:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onMouseOut:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onTouchStart:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onTouchStart:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onTouchEnd:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onTouchEnd:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var onTouchMove:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var onTouchMove:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var tap:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var tap:InteractionEvent->Void;
 
 	/**
-     * @member {function}
-     */
-	var click:InteractionEvent -> Void;
+	 * @member {function}
+	 */
+	var click:InteractionEvent->Void;
 
 	/**
-     * @member {Int}
-     */
+	 * @member {Int}
+	 */
 	var last:Int;
 
 	/**
-     * Every update cursor will be reset to this value, if some element wont override it in its hitTest
-     * @member {String}
-     * @default 'inherit'
-     */
+	 * Every update cursor will be reset to this value, if some element wont override it in its hitTest
+	 * @member {String}
+	 * @default 'inherit'
+	 */
 	var defaultCursorStyle:String;
 
 	/**
-     * The css style of the cursor that is being used
-     * @member {String}
-     */
+	 * The css style of the cursor that is being used
+	 * @member {String}
+	 */
 	var currentCursorStyle:String;
 
 	/**
@@ -160,11 +159,11 @@ extern class InteractionManager extends EventEmitter {
 	 * @param  {Bool} hitTest this indicates if the objects inside should be hit test against the point
 	 * @return {Bool} returns true if the displayObject hit the point
 	 */
-	function processInteractive(point:Point, displayObject:DisplayObject, func:Void -> Void, hitTest:Bool, interactive:Bool):Bool;
-	
+	function processInteractive(point:Point, displayObject:DisplayObject, func:Void->Void, hitTest:Bool, interactive:Bool):Bool;
+
 	/**
 	 * Hit tests a point against the display tree, returning the first interactive object that is hit.
-	 * 
+	 *
 	 * @param	{Point} globalPoint
 	 * @param	{Container} root
 	 * @return {DisplayObject} first interactive object being hit

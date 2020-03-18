@@ -5,7 +5,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.AnimationConfig")
 extern class AnimationConfig extends BaseObject {
-
 	var pauseFadeOut:Bool;
 	var fadeOutMode:AnimationFadeOutMode;
 	var fadeOutTime:Float;

@@ -1,10 +1,6 @@
 package pixi.core.graphics;
 
-#if (haxe_ver >= 4)
 import js.lib.Float32Array;
-#else
-import js.html.Float32Array;
-#end
 import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.ScaleModes;
 import pixi.core.Shader;
@@ -26,16 +22,19 @@ extern class Graphics extends Container {
 		 * @default false
 		 */
 		adaptive:Bool,
+
 		/**
 		 * maximal length of a single segment of the curve (if adaptive = false, ignored)
 		 * @default 10
 		 */
 		maxLength:Int,
+
 		/**
 		 * minimal number of segments in the curve (if adaptive = false, ignored)
 		 * @default 8
 		 */
 		minSegments:Int,
+
 		/**
 		 * maximal number of segments in the curve (if adaptive = false, ignored)
 		 * @default 2048
@@ -59,69 +58,74 @@ extern class Graphics extends Container {
 	 * A collections of batches! These can be drawn by the renderer batch system.
 	 */
 	private var batches:Array<Dynamic>;
-	
+
 	/**
 	 * Update dirty for limiting calculating tints for batches.
 	 */
 	private var batchTint:Float;
-	
+
 	/**
 	 * Current path
 	 */
 	private var currentPath:Polygon;
-	
+
+	/**
+	 * The blend mode to be applied to the graphic shape. Apply a value of PIXI.BLEND_MODES.NORMAL to reset the blend mode.
+	 */
+	var blendMode:BlendModes;
+
 	/**
 	 * The current fill style.
 	 */
 	var fill(default, null):FillStyle;
-	
+
 	/**
 	 * Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU. Can be shared between multiple Mesh or Graphics objects.
 	 */
 	var geometry(default, null):GraphicsGeometry;
-	
+
 	/**
 	 * The current line style.
 	 */
 	var line(default, null):LineStyle;
-	
+
 	/**
 	 * Renderer plugin for batching
 	 */
 	var pluginName:String;
-	
+
 	/**
 	 * Represents the vertex and fragment shaders that processes the geometry and runs on the GPU. Can be shared between multiple Graphics objects.
 	 */
 	var shader:Shader;
-	
+
 	/**
 	 * Represents the WebGL state the Graphics required to render, excludes shader and geometry. E.g., blend mode, culling, depth testing, direction of rendering triangles, backface, etc.
 	 */
 	var state:State;
-	
+
 	/**
 	 * The tint applied to the graphic shape. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
 	 */
 	var tint:Int;
-	
+
 	/**
 	 *  Copy of the object vertex data.
 	 */
 	private var vertexData:Float32Array;
-	
+
 	/**
 	 * Retrieves the bounds of the graphic shape as a rectangle object
 	 */
 	private function _calculateBounds():Void;
-	
+
 	/**
 	 * Initialize the curve
 	 * @param	x
 	 * @param	y
 	 */
 	private function _initCurve(?x:Float, ?y:Float):Void;
-	
+
 	/**
 	 * The arcTo() method creates an arc/curve between two tangents on the canvas.
 	 *
@@ -147,7 +151,7 @@ extern class Graphics extends Container {
 	 * @param anticlockwise {Bool} Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise.
 	 */
 	function arc(cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Graphics;
-	
+
 	/**
 	 * Specifies a simple one-color fill that subsequent calls to other Graphics methods
 	 * (such as lineTo() or drawCircle()) use when drawing.
@@ -157,20 +161,20 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function beginFill(?color:Int, ?alpha:Float):Graphics;
-	
+
 	/**
 	 * Begin adding holes to the last draw shape IMPORTANT: holes must be fully inside a shape to work Also weirdness ensues if holes overlap! Ellipses, Circles, Rectangles and Rounded Rectangles cannot be holes or host for holes in CanvasRenderer, please use moveTo lineTo, quadraticCurveTo if you rely on pixi-legacy bundle.
 	 * @return Returns itself.
 	 */
 	function beginHole():Graphics;
-	
+
 	/**
 	 * Begin the texture fill
 	 * @param	options
 	 * @return This Graphics object. Good for chaining method calls
 	 */
 	function beginTextureFill(options:Dynamic):Graphics;
-	
+
 	/**
 	 * Calculate the points for a bezier curve and then draws it.
 	 *
@@ -183,24 +187,24 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function bezierCurveTo(cpX:Float, cpY:Float, cpX2:Float, cpY2:Float, toX:Float, toY:Float):Graphics;
-	
+
 	/**
 	 * Recalcuate the tint by applying tin to batches using Graphics tint.
 	 */
 	private function calculateTints():Void;
-	
+
 	/**
 	 * If there's a transform update or a change to the shape of the geometry, recaculate the vertices.
 	 */
 	private function calculateVertices():Void;
-	
+
 	/**
 	 * Clears the graphics that were drawn to this Graphics object, and resets fill and line style settings.
 	 *
 	 * @return {Graphics}
 	 */
 	function clear():Graphics;
-	
+
 	/**
 	 * Creates a new Graphics object with the same values as this one.
 	 * Note that the only the properties of the object are cloned, not its transform (position,scale,etc)
@@ -208,15 +212,15 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function clone():Graphics;
-	
+
 	/**
-	* Tests if a point is inside this graphics object
-	*
-	* @param point {Point} the point to test
-	* @return {Bool} the result of the test
-	*/
+	 * Tests if a point is inside this graphics object
+	 *
+	 * @param point {Point} the point to test
+	 * @return {Bool} the result of the test
+	 */
 	function containsPoint(point:Point):Bool;
-	
+
 	/**
 	 * Draws a circle.
 	 *
@@ -226,7 +230,7 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function drawCircle(x:Float, y:Float, radius:Float):Graphics;
-	
+
 	/**
 	 *
 	 * @param x {Float} The X coord of the top-left of the rectangle
@@ -244,7 +248,7 @@ extern class Graphics extends Container {
 	 * @param width {Float} The width of the rectangle
 	 * @param height {Float} The height of the rectangle
 	 * @param radius {Float} Radius of the rectangle corners
- 	*/
+	 */
 	function drawRoundedRect(x:Float, y:Float, width:Float, height:Float, radius:Float):Graphics;
 
 	/**
@@ -276,49 +280,49 @@ extern class Graphics extends Container {
 	@:overload(function(shape:Ellipse):GraphicsData {})
 	@:overload(function(shape:Polygon):GraphicsData {})
 	function drawShape(shape:Circle):GraphicsData;
-	
+
 	/**
-     * Draw a star shape with an abitrary number of points.
-     *
-     * @param {Float} x - Center X position of the star
-     * @param {Float} y - Center Y position of the star
-     * @param {Int} points - The number of points of the star, must be > 1
-     * @param {Float} radius - The outer radius of the star
-     * @param {Float} [innerRadius] - The inner radius between points, default half `radius`
-     * @param {Float} [rotation=0] - The rotation of the star in radians, where 0 is vertical
-     * @return {Graphics} This Graphics object. Good for chaining method calls
-     */
+	 * Draw a star shape with an abitrary number of points.
+	 *
+	 * @param {Float} x - Center X position of the star
+	 * @param {Float} y - Center Y position of the star
+	 * @param {Int} points - The number of points of the star, must be > 1
+	 * @param {Float} radius - The outer radius of the star
+	 * @param {Float} [innerRadius] - The inner radius between points, default half `radius`
+	 * @param {Float} [rotation=0] - The rotation of the star in radians, where 0 is vertical
+	 * @return {Graphics} This Graphics object. Good for chaining method calls
+	 */
 	function drawStar(x:Float, y:Float, points:Int, radius:Float, ?innerRadius:Float, ?rotation:Float = 0):Graphics;
-	
+
 	/**
 	 * Applies a fill to the lines and shapes that were added since the last call to the beginFill() method.
 	 *
 	 * @return {Graphics}
 	 */
 	function endFill():Graphics;
-	
+
 	/**
 	 * Finish the polygon object.
 	 */
 	private function finishPoly():Void;
-	
+
 	/**
-     * Generates a canvas texture.
-     *
-     * @param {ScaleModes} scaleMode - The scale mode of the texture.
-     * @param {Float} resolution - The resolution of the texture.
-     * @return {Texture} The new texture.
-     */
+	 * Generates a canvas texture.
+	 *
+	 * @param {ScaleModes} scaleMode - The scale mode of the texture.
+	 * @param {Float} resolution - The resolution of the texture.
+	 * @return {Texture} The new texture.
+	 */
 	function generateCanvasTexture(scaleMode:ScaleModes, ?resolution:Float):Texture;
-	
+
 	/**
-     * True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and
-     * masked with gl.scissor.
-     *
-     * @returns {Bool} True if only 1 rect.
-     */
+	 * True if graphics consists of one rectangle, and thus, can be drawn like a Sprite and
+	 * masked with gl.scissor.
+	 *
+	 * @return {Bool} True if only 1 rect.
+	 */
 	function isFastRect():Bool;
-	
+
 	/**
 	 * Specifies the line style used for subsequent calls to Graphics methods such as the lineTo() method or the drawCircle() method.
 	 *
@@ -330,14 +334,14 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function lineStyle(?lineWidth:Float, ?color:Int, ?alpha:Float, ?alignment:Float, ?native:Bool):Graphics;
-	
+
 	/**
 	 * Like line style but support texture for line fill.
 	 * @param	options width, texture, color, alpha, matrix, alignment, native
 	 * @return {Graphics}
 	 */
 	function lineTextureStyle(options:Dynamic):Graphics;
-	
+
 	/**
 	 * Moves the current drawing position to x, y.
 	 *
@@ -356,7 +360,7 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function lineTo(x:Float, y:Float):Graphics;
-	
+
 	/**
 	 * Calculate the points for a quadratic bezier curve and then draws it.
 	 * Based on: https://stackoverflow.com/questions/785097/how-do-i-implement-a-bezier-curve-in-c
@@ -368,7 +372,7 @@ extern class Graphics extends Container {
 	 * @return {Graphics}
 	 */
 	function quadraticCurveTo(cpX:Float, cpY:Float, toX:Float, toY:Float):Graphics;
-	
+
 	/**
 	 * Apply a matrix to the positional data.
 	 * @param	matrix Matrix to use for transform current shape.
@@ -377,9 +381,9 @@ extern class Graphics extends Container {
 	function setMatrix(matrix:Matrix):Graphics;
 
 	/**
-     * Closes the current path.
-     *
-     * @return {Graphics} Returns itself.
-     */
+	 * Closes the current path.
+	 *
+	 * @return {Graphics} Returns itself.
+	 */
 	function closePath():Graphics;
 }

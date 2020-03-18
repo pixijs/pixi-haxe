@@ -5,7 +5,6 @@ import pixi.core.renderers.webgl.Renderer;
 import pixi.core.renderers.webgl.managers.WebGLManager;
 
 extern class ObjectRenderer extends WebGLManager {
-
 	/**
 	 * Base for a common object renderer that can be used as a system renderer plugin.
 	 *

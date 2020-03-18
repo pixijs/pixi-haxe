@@ -4,7 +4,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.ArmatureData")
 extern class ArmatureData extends BaseObject {
-
 	var frameRate:Float;
 	var name:String;
 	var bones:Dynamic;

@@ -1,7 +1,5 @@
 package pixi.plugins.spine.core;
 
-
-interface Updatable 
-{
+interface Updatable {
 	function update():Void;
 }

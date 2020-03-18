@@ -7,7 +7,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.Armature")
 extern class Armature extends BaseObject {
-
 	var inheritAnimation:Bool;
 	var userData:Dynamic;
 	var name:String;
@@ -23,11 +22,9 @@ extern class Armature extends BaseObject {
 
 	function advanceTime(passedTime:Float):Void;
 	function invalidUpdate(?boneName:String, ?updateSlotDisplay:Bool):Void;
-	function containsPoint(x:Float, y:Float): Slot;
-	function intersectsSegment(xA:Float, yA:Float, xB:Float, yB:Float,
-								?intersectionPointA: { x:Float, y:Float },
-								?intersectionPointB: { x:Float, y:Float },
-								?normalRadians: { x:Float, y:Float }):Slot;
+	function containsPoint(x:Float, y:Float):Slot;
+	function intersectsSegment(xA:Float, yA:Float, xB:Float, yB:Float, ?intersectionPointA:{x:Float, y:Float}, ?intersectionPointB:{x:Float, y:Float},
+		?normalRadians:{x:Float, y:Float}):Slot;
 	function getBone(name:String):Bone;
 	function getBoneByDisplay(display:Dynamic):Bone;
 

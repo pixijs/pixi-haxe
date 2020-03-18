@@ -1,0 +1,4 @@
+# @install: lix --silent download "haxelib:/chxdoc#1.3.0" into chxdoc/1.3.0/haxelib
+# @run: haxelib run-dir chxdoc ${HAXE_LIBCACHE}/chxdoc/1.3.0/haxelib
+-cp ${HAXE_LIBCACHE}/chxdoc/1.3.0/haxelib/
+-D chxdoc=1.3.0

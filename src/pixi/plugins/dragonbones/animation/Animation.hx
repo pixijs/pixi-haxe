@@ -6,7 +6,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.Animation")
 extern class Animation extends BaseObject {
-
 	var timeScale:Float;
 
 	function reset():Void;
@@ -15,7 +14,8 @@ extern class Animation extends BaseObject {
 
 	function playConfig(animationConfig:AnimationConfig):AnimationState;
 
-	function fadeIn(animationName:String, ?fadeInTime:Float, ?playTimes:Float, ?layer:Float, ?group:String = null, ?fadeOutMode:AnimationFadeOutMode):AnimationState;
+	function fadeIn(animationName:String, ?fadeInTime:Float, ?playTimes:Float, ?layer:Float, ?group:String = null,
+		?fadeOutMode:AnimationFadeOutMode):AnimationState;
 
 	function play(?animationName:String, ?playTimes:Float):AnimationState;
 
