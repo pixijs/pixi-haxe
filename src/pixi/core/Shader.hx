@@ -4,7 +4,6 @@ import haxe.extern.EitherType;
 
 @:native("PIXI.Shader")
 extern class Shader {
-
 	/**
 	 * Wrapper class, webGL Shader for Pixi.
 	 * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
@@ -18,7 +17,8 @@ extern class Shader {
 	 * @param {object} [attributeLocations] - A key value pair showing which location eact attribute should sit. e.g. {position:0, uvs:1}.
 	 * @param {String} [precision] - The float precision of the shader. Options are 'lowp', 'mediump' or 'highp'.
 	 */
-	function new(gl:Dynamic, vertexSrc:EitherType<String, Array<String>>, framentSrc:EitherType<String, Array<String>>, ?attributeLocations:Dynamic, ?precision:String);
+	function new(gl:Dynamic, vertexSrc:EitherType<String, Array<String>>, framentSrc:EitherType<String, Array<String>>, ?attributeLocations:Dynamic,
+		?precision:String);
 
 	/**
 	 *

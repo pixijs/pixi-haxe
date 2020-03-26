@@ -2,7 +2,6 @@ package pixi.plugins.spine.core.utils;
 
 @:native("PIXI.spine.core.Color")
 extern class Color {
-
 	static var WHITE:Color;
 	static var RED:Color;
 	static var GREEN:Color;
@@ -13,7 +12,7 @@ extern class Color {
 
 	function set(r:Int, g:Int, b:Int, a:Int):Color;
 	function setFromColor(c:Color):Color;
-	function setFromString (hex:String):Color;
+	function setFromString(hex:String):Color;
 	function add(r:Int, g:Int, b:Int, a:Int):Color;
 	function clamp():Void;
 }

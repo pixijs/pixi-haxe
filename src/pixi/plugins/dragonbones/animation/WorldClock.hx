@@ -2,7 +2,6 @@ package pixi.plugins.dragonbones.animation;
 
 @:native("dragonBones.WorldClock")
 extern class WorldClock implements IAnimateble {
-
 	function new();
 
 	var time:Float;

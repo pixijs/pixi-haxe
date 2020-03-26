@@ -2,12 +2,12 @@ package pixi.core.renderers.canvas;
 
 import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.ScaleModes;
+import pixi.core.renderers.AbstractRenderer;
 import pixi.core.renderers.canvas.utils.CanvasMaskManager;
 import js.html.CanvasRenderingContext2D;
 
 @:native("PIXI.CanvasRenderer")
-extern class CanvasRenderer extends SystemRenderer {
-
+extern class CanvasRenderer extends AbstractRenderer {
 	/**
 	 * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should be used for browsers that do not support webGL.
 	 * Don't forget to add the CanvasRenderer.view to your DOM or you will not see anything :)
@@ -21,10 +21,10 @@ extern class CanvasRenderer extends SystemRenderer {
 	function new(?options:RenderOptions, ?width:Float, ?height:Float);
 
 	/**
-     * Clear the canvas of renderer.
-     *
-     * @param {String} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
-     */
+	 * Clear the canvas of renderer.
+	 *
+	 * @param {String} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
+	 */
 	function clear(?clearColor:String):Void;
 
 	/**

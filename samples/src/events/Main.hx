@@ -3,7 +3,7 @@ package events;
 import pixi.core.text.DefaultStyle;
 import pixi.interaction.InteractionEvent;
 import pixi.core.text.Text;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 
@@ -13,16 +13,13 @@ class Main extends Application {
 	var _label:Text;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
 		super.start();
-
-		_img = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+		_img = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_img.position.set(400, 300);
 		_img.interactive = true;
 		_img.scale.set(4);
@@ -44,9 +41,13 @@ class Main extends Application {
 		_label.position.set(0, 0);
 		stage.addChild(_label);
 
-		onUpdate = function(t) {
-			_img.rotation += 0.1;
-		}
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+	}
+	
+	function _onUpdate(t:Float):Void{
+		_img.rotation += 0.1;
 	}
 
 	function _onEvent(target:InteractionEvent) {

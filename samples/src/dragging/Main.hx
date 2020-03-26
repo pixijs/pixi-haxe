@@ -1,9 +1,10 @@
 package dragging;
 
+import pixi.core.Application.ApplicationOptions;
 import pixi.interaction.InteractionEvent;
 import pixi.core.math.Point;
 import pixi.core.text.Text;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.textures.Texture;
 import js.Browser;
 
@@ -13,16 +14,17 @@ class Main extends Application {
 	var _label:Text;
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0xFFFFFF
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
 		super.start();
 
-		_texture = Texture.fromImage("assets/basics/bunny.png");
+		_texture = Texture.from("assets/basics/bunny.png");
 		for (i in 0 ... 10) _createBunny(Math.floor(Math.random() * Browser.window.innerWidth), Math.floor(Math.random() * Browser.window.innerHeight));
 	}
 

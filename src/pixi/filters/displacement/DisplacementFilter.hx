@@ -7,7 +7,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.DisplacementFilter")
 extern class DisplacementFilter extends Filter {
-
 	/**
 	 * The DisplacementFilter class uses the pixel values from the specified texture (called the displacement map) to perform a displacement of an object.
 	 * You can use this filter to apply all manor of crazy warping effects
@@ -29,7 +28,7 @@ extern class DisplacementFilter extends Filter {
 	var map:Texture;
 
 	/**
-	* The scale of the displacement.
-	*/
+	 * The scale of the displacement.
+	 */
 	var scale:Point;
 }

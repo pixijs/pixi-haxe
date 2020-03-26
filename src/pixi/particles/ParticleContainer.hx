@@ -4,9 +4,8 @@ import pixi.core.Pixi.BlendModes;
 import pixi.core.textures.BaseTexture;
 import pixi.core.display.Container;
 
-@:native("PIXI.particles.ParticleContainer")
+@:native("PIXI.ParticleContainer")
 extern class ParticleContainer extends Container {
-
 	/**
 	 * The ParticleContainer class is a really fast version of the Container built solely for speed,
 	 * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
@@ -39,7 +38,7 @@ extern class ParticleContainer extends Container {
 	 * @param [properties.alpha=false] {Bool} When true, alpha be uploaded and applied.
 	 * @param [batchSize=15000] {Int} Number of particles per batch.
 	 */
-	@:overload(function (?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int):Void {})
+	@:overload(function(?maxSize:Int, ?properties:Array<Bool>, ?batchSize:Int):Void {})
 	function new(?maxSize:Int, ?properties:ParticleContainerProperties, ?batchSize:Int);
 
 	/**
@@ -47,7 +46,7 @@ extern class ParticleContainer extends Container {
 	 *
 	 * @param properties {object} The properties to be uploaded
 	 */
-	@:overload(function (?properties:Array<Bool>):Void {})
+	@:overload(function(?properties:Array<Bool>):Void {})
 	function setProperties(properties:ParticleContainerProperties):Void;
 
 	/**
@@ -82,7 +81,6 @@ extern class ParticleContainer extends Container {
  * The properties of children that should be uploaded to the gpu and applied.
  */
 typedef ParticleContainerProperties = {
-
 	/**
 	 * When true, scale be uploaded and applied
 	 * @default false

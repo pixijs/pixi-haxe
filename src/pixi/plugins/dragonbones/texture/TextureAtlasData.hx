@@ -4,7 +4,6 @@ import pixi.plugins.dragonbones.core.BaseObject;
 
 @:native("dragonBones.TextureAtlasData")
 extern class TextureAtlasData extends BaseObject {
-
 	function new();
 
 	var autoSearch:Bool;

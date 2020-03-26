@@ -10,7 +10,6 @@ import pixi.interaction.EventEmitter;
 
 @:native("PIXI.Texture")
 extern class Texture extends EventEmitter {
-
 	/**
 	 * A texture stores the information that represents an image or part of an image. It cannot be added
 	 * to the display list directly. Instead use it as the texture for a Sprite. If no frame is provided then the whole image is used.
@@ -50,9 +49,9 @@ extern class Texture extends EventEmitter {
 	var baseTexture:BaseTexture;
 
 	/**
-	 * Anchor point that is used as default if sprite is created with this texture. 
+	 * Anchor point that is used as default if sprite is created with this texture.
 	 * Changing the defaultAnchor at a later point of time will not update Sprite's anchor point.
-	 * 
+	 *
 	 * Default {0,0}
 	 *
 	 * @member {Point}
@@ -146,10 +145,10 @@ extern class Texture extends EventEmitter {
 	function destroy(?destroyBase:Bool):Void;
 
 	/**
-     * Creates a new texture object that acts the same as this one.
-     *
-     * @return {Texture} The new texture
-     */
+	 * Creates a new texture object that acts the same as this one.
+	 *
+	 * @return {Texture} The new texture
+	 */
 	function clone():Texture;
 
 	/**
@@ -197,8 +196,8 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param video {VideoElement|String} The URL or actual element of the video
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
-     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
-     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
+	 * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+	 * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
 	static function fromVideo(video:EitherType<VideoElement, String>, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
@@ -209,20 +208,20 @@ extern class Texture extends EventEmitter {
 	 * @static
 	 * @param videoUrl {String}
 	 * @param scaleMode {ScaleModes} See {{#crossLink "PIXI/scaleModes:property"}}scaleModes{{/crossLink}} for possible values
-     * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
-     * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
+	 * @param {boolean} [crossorigin=(auto)] - Should use anonymous CORS? Defaults to true if the URL is not a data-URI.
+	 * @param {boolean} [autoPlay=true] - Start playing video as soon as it is loaded
 	 * @return {Texture} A Texture
 	 */
 	static function fromVideoUrl(videoUrl:String, ?scaleMode:ScaleModes, ?crossorigin:Bool, ?autoPlay:Bool):Texture;
 
 	/**
-     * Helper function that creates a new Texture based on the source you provide.
-     * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
-     *
-     * @static
-     * @param {String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source - Source to create texture from
-     * @return {Texture} The newly created texture
-     */
+	 * Helper function that creates a new Texture based on the source you provide.
+	 * The soucre can be - frame id, image url, video url, canvae element, video element, base texture
+	 *
+	 * @static
+	 * @param {String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source - Source to create texture from
+	 * @return {Texture} The newly created texture
+	 */
 	@:overload(function(source:String):Texture {})
 	@:overload(function(source:BaseTexture):Texture {})
 	@:overload(function(source:CanvasElement):Texture {})
@@ -230,15 +229,15 @@ extern class Texture extends EventEmitter {
 	static function from(source:Dynamic):Texture;
 
 	/**
-     * Create a texture from a source and add to the cache.
-     *
-     * @static
-     * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
-     * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
-     * @param {String} [name] - Human readible name for the texture cache. If no name is
-     *        specified, only `imageUrl` will be used as the cache ID.
-     * @return {PIXI.Texture} Output texture
-     */
+	 * Create a texture from a source and add to the cache.
+	 *
+	 * @static
+	 * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
+	 * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
+	 * @param {String} [name] - Human readible name for the texture cache. If no name is
+	 *        specified, only `imageUrl` will be used as the cache ID.
+	 * @return {PIXI.Texture} Output texture
+	 */
 	static function fromLoader(source:Dynamic, imageUrl:String, ?name:String):Texture;
 
 	/**
@@ -249,6 +248,7 @@ extern class Texture extends EventEmitter {
 	 * @param id {String} The id that the texture will be stored against.
 	 */
 	static function addToCache(texture:Texture, id:String):Void;
+
 	static function addTextureToCache(texture:Texture, id:String):Void;
 
 	/**
@@ -259,6 +259,7 @@ extern class Texture extends EventEmitter {
 	 * @return {Texture} The texture that was removed
 	 */
 	static function removeFromCache(id:EitherType<String, Texture>):Texture;
+
 	static function removeTextureFromCache(id:EitherType<String, Texture>):Texture;
 
 	/**

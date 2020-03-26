@@ -1,8 +1,7 @@
 package pixi.loaders;
 
-@:native("PIXI.loaders.Loader")
+@:native("PIXI.Loader")
 extern class Loader extends ResourceLoader {
-
 	/**
 	 *
 	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader

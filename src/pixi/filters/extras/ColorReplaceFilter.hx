@@ -1,10 +1,9 @@
 package pixi.filters.extras;
 
-import js.html.Float32Array;
+import js.lib.Float32Array;
 
 @:native("PIXI.filters.ColorReplaceFilter")
 extern class ColorReplaceFilter {
-
 	/**
 	 * ColorReplaceFilter, originally by mishaa, updated by timetocode
 	 * http://www.html5gamedevs.com/topic/10640-outline-a-sprite-change-certain-colors/?p=69966

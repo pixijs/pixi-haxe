@@ -3,7 +3,7 @@ package mask;
 import pixi.core.graphics.Graphics;
 import pixi.core.math.Point;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -18,15 +18,16 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		onUpdate = _onUpdate;
-		super.start(Application.RECOMMENDED);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 
-		_bg = Sprite.fromImage("assets/alphamask/bkg.jpg");
+		_bg = Sprite.from("assets/alphamask/bkg.jpg");
 
 		stage.addChild(_bg);
 
-		_cells = Sprite.fromImage("assets/alphamask/cells.png");
+		_cells = Sprite.from("assets/alphamask/cells.png");
 		_cells.scale.set(1.5);
 
 		_mask = new Graphics();

@@ -4,7 +4,7 @@ import pixi.interaction.InteractionEvent;
 import pixi.plugins.dragonbones.pixi.PixiArmatureDisplay;
 import pixi.plugins.dragonbones.pixi.PixiFactory;
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -17,15 +17,12 @@ class Main extends Application {
 	var _armatureDisplay2:PixiArmatureDisplay;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0x003366});
 		_init();
 	}
 
 	function _init() {
-		position = Application.POSITION_FIXED;
-		backgroundColor = 0x003366;
 		super.start();
-
 		_displayIndex = 0;
 		_replaceDisplays = [
 			"display0002", "display0003", "display0004", "display0005",

@@ -1,0 +1,3 @@
+# @install: lix --silent download "haxelib:/msignal#1.2.5" into msignal/1.2.5/haxelib
+-cp ${HAXE_LIBCACHE}/msignal/1.2.5/haxelib/
+-D msignal=1.2.5

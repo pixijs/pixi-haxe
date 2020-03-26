@@ -1,8 +1,9 @@
 package nape;
 
+import pixi.core.Application.ApplicationOptions;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import haxe.Timer;
 
 import nape.geom.Vec2;
@@ -21,24 +22,27 @@ class Main extends Application {
 	var _pballs:Array<Body>;
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0x6699FF,
+			autoDensity: false,
+			width: 800,
+			height: 600,
+		};
+		super(options);
 		_init();
 
 		_balls = [];
 		_pballs = [];
 		_setUpPhysics();
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		var timer:Timer = new Timer(1000);
 		timer.run = _addBall;
 		_addBall();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x6699FF;
-		autoResize = false;
-		width = 800;
-		height = 600;
 		super.start();
 	}
 
@@ -63,7 +67,7 @@ class Main extends Application {
 	}
 
 	function _addBall() {
-		var ball:Sprite = new Sprite(Texture.fromImage("assets/nape/ball.png"));
+		var ball:Sprite = new Sprite(Texture.from("assets/nape/ball.png"));
 		ball.anchor.set(0.5, 0.5);
 		_balls.push(ball);
 		stage.addChild(ball);

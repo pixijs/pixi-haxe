@@ -1,13 +1,12 @@
 package pixi.core.renderers.webgl.managers;
 
 extern class MaskManager extends WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI
-	 * @param renderer {WebGLRenderer} The renderer this manager works for.
+	 * @param renderer {Renderer} The renderer this manager works for.
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
 	 * Applies the Mask and adds it to the current filter stack.

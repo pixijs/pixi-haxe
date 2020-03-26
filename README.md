@@ -1,10 +1,9 @@
-[![Haxelib Version](https://img.shields.io/github/release/pixijs/pixi-haxe.svg)](http://lib.haxe.org/p/pixijs) [![Build Status](https://travis-ci.org/pixijs/pixi-haxe.svg?branch=dev)](https://travis-ci.org/pixijs/pixi-haxe) [![Support on Patreon](http://www.waudjs.com/images/patreon_btn.png)](https://www.patreon.com/adireddy)
-=========
-![haxe pixi logo](logo.png)
+# Pixi.js 5 / Haxe 4 [![Build Status](https://travis-ci.org/markknol/pixi-haxe.svg?branch=pixi5)](https://travis-ci.org/markknol/pixi-haxe)
 
-Externs of Pixi.js v4.x for Haxe - A fast and lightweight 2D javascript rendering library that works across all devices.
+![image](https://user-images.githubusercontent.com/576184/70228763-38c03100-1755-11ea-9f2a-b1afc30be237.png)
 
-### Installation
+
+-### Installation
 
 ```
 haxelib install pixijs
@@ -16,34 +15,30 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 
 ### Demos
 
-* [Basics](http://adireddy.github.io/demos/pixi-haxe/basics.html)
-* [Graphics](http://adireddy.github.io/demos/pixi-haxe/graphics.html)
-* [Animated Sprite](http://adireddy.github.io/demos/pixi-haxe/animatedsprite.html)
-* [Spritesheet](http://adireddy.github.io/demos/pixi-haxe/spritesheet.html)
-* [Spine](http://adireddy.github.io/demos/pixi-haxe/spine.html)
-* [Rope](http://adireddy.github.io/demos/pixi-haxe/rope.html)
-* [Dragging](http://adireddy.github.io/demos/pixi-haxe/dragging.html)
-* [Texture Swap](http://adireddy.github.io/demos/pixi-haxe/textureswap.html)
-* [Tiling](http://adireddy.github.io/demos/pixi-haxe/tiling.html)
-* [Bitmap Font](http://adireddy.github.io/demos/pixi-haxe/bitmapfont.html)
-* [Alpha Mask](http://adireddy.github.io/demos/pixi-haxe/alphamask.html)
-* [Bunnymark](http://adireddy.github.io/demos/pixi-haxe/bunnymark.html)
-* [Retina](http://adireddy.github.io/demos/pixi-haxe/retina.html)
-* [Events](http://adireddy.github.io/demos/pixi-haxe/events.html)
-* [Loader](http://adireddy.github.io/demos/pixi-haxe/loader.html)
-* [Video](http://adireddy.github.io/demos/pixi-haxe/video.html)
-* [Nape](http://adireddy.github.io/demos/pixi-haxe/nape.html)
-* [Dragon Bones](http://adireddy.github.io/demos/pixi-haxe/dragonbones.html)
+* [Basics](http://notboring.github.io/demos/haxe-pixi/basics.html)
+* [Graphics](http://notboring.github.io/demos/haxe-pixi/graphics.html)
+* [Animated Sprite](http://notboring.github.io/demos/haxe-pixi/animatedsprite.html)
+* [Spritesheet](http://notboring.github.io/demos/haxe-pixi/spritesheet.html)
+* [Spine](http://notboring.github.io/demos/haxe-pixi/spine.html)
+* [Rope](http://notboring.github.io/demos/haxe-pixi/rope.html)
+* [Dragging](http://notboring.github.io/demos/haxe-pixi/dragging.html)
+* [Tiling](http://notboring.github.io/demos/haxe-pixi/tiling.html)
+* [Bitmap Font](http://notboring.github.io/demos/haxe-pixi/bitmapfont.html)
+* [Alpha Mask](http://notboring.github.io/demos/haxe-pixie/alphamask.html)
+* [Bunnymark](http://notboring.github.io/demos/haxe-pixi/bunnymark.html)
+* [Retina](http://notboring.github.io/demos/haxe-pixi/retina.html)
+* [Events](http://notboring.github.io/demos/haxe-pixi/events.html)
+* [Loader](http://notboring.github.io/demos/haxe-pixi/loader.html)
+* [Video](http://notboring.github.io/demos/haxe-pixi/video.html)
+* [Nape](http://notboring.github.io/demos/haxe-pixi/nape.html)
 
 **Filters (WebGL only)**
 
-* [ColorMatrix](http://adireddy.github.io/demos/pixi-haxe/colormatrix.html)
-* [Blur](http://adireddy.github.io/demos/pixi-haxe/blur.html)
+* [ColorMatrix](http://notboring.github.io/demos/haxe-pixi/colormatrix.html)
+* [Blur](http://notboring.github.io/demos/haxe-pixi/blur.html)
 
 **Filters (pixi-extra-filters)**
-* [Glow](http://adireddy.github.io/demos/pixi-haxe/glow.html)
-
-**[COHERE](http://adireddy.github.io/cohere/)** - Sample MVC application using Haxe and Pixi.js
+* [Glow](http://notboring.github.io/demos/haxe-pixi/glow.html)
 
 Look at the `samples` folder for the source code of above examples.
 
@@ -74,7 +69,7 @@ class Main extends Application {
 		onUpdate = _animate;
 		super.start();
 
-		_bunny = new Sprite(Texture.fromImage("assets/basics/bunny.png"));
+		_bunny = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5);
 		_bunny.position.set(400, 300);
 

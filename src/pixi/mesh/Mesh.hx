@@ -1,23 +1,18 @@
 package pixi.mesh;
 
-import pixi.core.Pixi.BlendModes;
-import pixi.core.math.Point;
-#if (haxe_ver >= 4)
-import js.lib.Uint16Array;
+import haxe.extern.EitherType;
 import js.lib.Float32Array;
-import js.lib.Int16Array;
-#else
-import js.html.Uint16Array;
-import js.html.Float32Array;
-import js.html.Int16Array;
-#end
+import js.lib.Uint16Array;
 import pixi.core.Shader;
 import pixi.core.display.Container;
+import pixi.core.math.Point;
+import pixi.core.renderers.webgl.Buffer;
+import pixi.core.renderers.webgl.Renderer;
+import pixi.core.renderers.webgl.State;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.mesh.Mesh")
+@:native("PIXI.Mesh")
 extern class Mesh extends Container {
-
 	/**
 	 * Base mesh class
 	 * @class
@@ -32,110 +27,11 @@ extern class Mesh extends Container {
 	function new(texture:Texture, ?vertices:Float32Array, ?uvs:Float32Array, ?indices:Uint16Array, ?drawMode:Int);
 
 	/**
-     * multiplies uvs only if uploadUvTransform is false
-     * call it after you change uvs manually
-     * make sure that texture is valid
-     */
-	function multiplyUvs():Void;
-
-	/**
-     * Tests if a point is inside this mesh. Works only for TRIANGLE_MESH
-     *
-     * @param {Point} point - the point to test
-     * @return {Bool} the result of the test
-     */
-	function containsPoint(point:Point):Bool;
-
-	/**
-     * Refreshes uvs for generated meshes (rope, plane)
-     * sometimes refreshes vertices too
-     *
-     * @param {Bool} [forceUpdate=false] if true, matrices will be updated any case
-     */
-	function refresh(?forceUpdate:Bool):Void;
-
-	/**
-	 * whether or not upload uvTransform to shader
-	 * if its false, then uvs should be pre-multiplied
-	 * if you change it for generated mesh, please call 'refresh(true)'
-	 * @member {Bool}
-	 * @default false
-	 */
-	var uploadUvTransform:Bool;
-
-	/**
-	 * Plugin that is responsible for rendering this element.
-	 * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
-	 * @member {string}
-	 * @default 'mesh'
-	 */
-	var pluginName:String;
-
-	/**
-	 * Different drawing buffer modes supported
-	 *
-	 * @static
-	 * @constant
-	 * @property {object} DRAW_MODES
-	 * @property {number} DRAW_MODES.TRIANGLE_MESH
-	 * @property {number} DRAW_MODES.TRIANGLES
-	 */
-	static var DRAW_MODES:DrawModes;
-
-	/**
-	 * The texture of the Mesh
-	 *
-	 * @member {Texture}
-	 */
-	var texture:Texture;
-
-	/**
-	 * The Uvs of the Mesh
-	 *
-	 * @member {Float32Array}
-	 */
-	var uvs:Float32Array;
-
-	/**
-	 * An array of vertices
-	 *
-	 * @member {Float32Array}
-	 */
-	var vertices:Float32Array;
-
-	/*
-	 * @member {Int16Array} An array containing the indices of the vertices
-	 */
-	var indices:Int16Array;
-
-	/**
-	 * Whether the Mesh is dirty or not
+	 * The maximum number of vertices to consider batchable. Generally, the complexity of the geometry.
 	 *
 	 * @member {Float}
 	 */
-	var dirty:Float;
-
-	/**
-	 * Version of mesh indices
-	 *
-	 * @member {Float}
-	 */
-	var indexDirty:Float;
-
-	/**
-	 * The blend mode to be applied to the sprite. Set to blendModes.NORMAL to remove any blend mode.
-	 *
-	 * @member {Int}
-	 * @default CONST.BLEND_MODES.NORMAL;
-	 */
-	var blendMode:BlendModes;
-
-	/**
-	 * Triangles in canvas mode are automatically antialiased, use var value to force triangles to overlap a bit with each other.
-	 *
-	 * @member {Float}
-	 */
-	var canvasPadding:Float;
+	static var BATCHABLE_SIZE:Float;
 
 	/**
 	 * The way the Mesh should be drawn, can be any of the Mesh.DRAW_MODES consts
@@ -145,26 +41,107 @@ extern class Mesh extends Container {
 	var drawMode:Int;
 
 	/**
-     * The default shader that is used if a mesh doesn't have a more specific one.
-     *
-     * @member {Shader}
-     */
-	var shader:Shader;
+		Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU. Can be shared between multiple Mesh objects.
+		*
+		* @member {Rectangle}
+	 */
+	var geometry(default, null):Geometry;
 
 	/**
-     * The tint applied to the mesh. This is a [r,g,b] value. A value of [1,1,1] will remove any tint effect.
-     *
-     * @member {Float32Array}
-     * @memberof PIXI.mesh.Mesh#
-     */
-	var tintRgb:Float32Array;
+	 * Alias for PIXI.Mesh#shader.
+	 */
+	var material:EitherType<Shader, MeshMaterial>;
 
 	/**
-	 * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
-	 *
-	 * @member {Int}
+	 * If true PixiJS will Math.floor() x/y values when rendering, stopping pixel interpolation. Advantages can include sharper image quality (like text) and faster rendering on canvas. The main disadvantage is movement of objects may appear less smooth. To set the global default, change PIXI.settings.ROUND_PIXELS
+	 */
+	var roundPixels:Bool;
+
+	/**
+	 * Represents the vertex and fragment shaders that processes the geometry and runs on the GPU. Can be shared between multiple Mesh objects.
+	 */
+	var shader:EitherType<Shader, MeshMaterial>;
+
+	/**
+	 * How much of the geometry to draw, by default 0 renders everything.
+	 */
+	var size:Float;
+
+	/**
+	 * Typically the index of the IndexBuffer where to start drawing.
+	 */
+	var start:Int;
+
+	/**
+	 * Represents the WebGL state the Mesh required to render, excludes shader and geometry. E.g., blend mode, culling, depth testing, direction of rendering triangles, backface, etc.
+	 */
+	var state:State;
+
+	/**
+	 * The texture that the Mesh uses.
+	 */
+	var texture:Texture;
+
+	/**
+	 * The multiply tint applied to the Mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
 	 */
 	var tint:Int;
+
+	/**
+	 * To change mesh uv's, change its uvBuffer data and increment its _updateID.
+	 */
+	var uvBuffer(default, null):Buffer;
+
+	/**
+	 * To change mesh vertices, change its uvBuffer data and increment its _updateID. Incrementing _updateID is optional because most of Mesh objects do it anyway.
+	 */
+	var verticesBuffer(default, null):Buffer;
+
+	/**
+	 * Updates the bounds of the mesh as a rectangle. The bounds calculation takes the worldTransform into account. there must be a aVertexPosition attribute present in the geometry for bounds to be calculated correctly.
+	 */
+	private function _calculateBounds():Void;
+
+	/**
+	 * Standard renderer draw.
+	 * @param	renderer
+	 */
+	private function _render(renderer:Renderer):Void;
+
+	/**
+	 * Standard non-batching way of rendering.
+	 * @param	renderer
+	 */
+	private function _renderDefault(renderer:Renderer):Void;
+
+	/**
+	 * Updates uv field based on from geometry uv's or batchUvs
+	 */
+	function calculateUvs():Void;
+
+	/**
+	 * Updates vertexData field based on transform and vertices
+	 */
+	function calculateVertices():Void;
+
+	/**
+	 * Tests if a point is inside this mesh. Works only for TRIANGLE_MESH
+	 *
+	 * @param {Point} point - the point to test
+	 * @return {Bool} the result of the test
+	 */
+	function containsPoint(point:Point):Bool;
+
+	/**
+	 * Destroys the Mesh object.
+	 */
+	override function destroy(?options:Dynamic):Void;
+
+	/**
+	 * Render the object using the WebGL renderer and advanced features.
+	 * @param	render
+	 */
+	function renderAdvanced(render:Renderer):Void;
 }
 
 typedef DrawModes = {

@@ -1,12 +1,16 @@
 package pixi.core.renderers.webgl.filters;
+
+import pixi.core.Pixi.BlendModes;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.shapes.Rectangle;
-import pixi.core.renderers.webgl.managers.FilterManager;
+import pixi.core.renderers.webgl.Program;
+import pixi.core.renderers.webgl.State;
 import pixi.core.renderers.webgl.utils.RenderTarget;
+import pixi.core.textures.RenderTexture;
+import pixi.core.renderers.systems.FilterSystem;
 
 @:native("PIXI.Filter")
 extern class Filter {
-
 	/**
 	 * The default vertex shader source
 	 *
@@ -33,17 +37,37 @@ extern class Filter {
 	function new(?vertexSrc:String, ?fragmentSrc:String, ?uniforms:Dynamic);
 
 	/**
-     * The vertex shader.
-     *
-     * @member {String}
-     */
+	 * Legacy filters use position and uvs from attributes
+	 */
+	var legacy(default, null):Bool;
+
+	/**
+	 * Sets the blendmode of the filter. Default: PIXI.BLEND_MODES.NORMAL
+	 */
+	var blendMode:BlendModes;
+
+	/**
+	 * Program that the shader uses
+	 */
+	var program:Program;
+
+	/**
+	 * The WebGL state the filter requires to render
+	 */
+	var state:State;
+
+	/**
+	 * The vertex shader.
+	 *
+	 * @member {String}
+	 */
 	var vertexSrc:String;
 
 	/**
-     * The fragment shader.
-     *
-     * @member {String}
-     */
+	 * The fragment shader.
+	 *
+	 * @member {String}
+	 */
 	var fragmentSrc:String;
 
 	/**
@@ -78,7 +102,7 @@ extern class Filter {
 	 * @member {Bool}
 	 */
 	var enabled:Bool;
-	
+
 	/**
 	 * If enabled, PixiJS will fit the filter area into boundaries for better performance. Switch it off if it does not work for specific shader.
 	 * Workaround for http://jsfiddle.net/xbmhh207/1/
@@ -89,19 +113,18 @@ extern class Filter {
 
 	/*
 	 * Applies the filter
-	 * @param filterManager {Dynamic}
-	 * @param input {RenderTarget}
-	 * @param output {RenderTarget}
+	 * @param filterManager {FilterSystem}
+	 * @param input {RenderTexture}
+	 * @param output {RenderTexture}
 	 * @param clear {Bool} Whether or not we want to clear the outputTarget
 	 * @param {object} [currentState] - It's current state of filter.
-     *        There are some useful properties in the currentState :
-     *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
+	 *        There are some useful properties in the currentState :
+	 *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
 	 */
-	function apply(filterManager:FilterManager, input:RenderTarget, output:RenderTarget, ?clear:Bool, ?currentState:CurrentState):Void;
+	function apply(filterManager:FilterSystem, input:RenderTexture, output:RenderTexture, ?clear:Bool, ?currentState:CurrentState):Void;
 }
 
-extern interface CurrentState implements Dynamic
-{
+extern interface CurrentState implements Dynamic {
 	var destinationFrame:Rectangle;
 	var filters:Array<Filter>;
 	var renderTarget:RenderTarget;

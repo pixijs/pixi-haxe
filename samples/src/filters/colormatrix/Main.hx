@@ -6,7 +6,7 @@ import pixi.core.display.Container;
 import pixi.filters.colormatrix.ColorMatrixFilter;
 import pixi.core.text.Text;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -25,7 +25,7 @@ class Main extends Application {
 	var _switchy:Bool;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0x00FF66});
 		_init();
 
 		stage.interactive = true;
@@ -33,7 +33,7 @@ class Main extends Application {
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 		stage.addChild(_container);
 
-		_bg = Sprite.fromImage("assets/filters/BGrotate.jpg");
+		_bg = Sprite.from("assets/filters/BGrotate.jpg");
 		_bg.anchor.set(0.5);
 
 		_colorMatrix = [1, 0, 0, 0,
@@ -43,19 +43,19 @@ class Main extends Application {
 
 		_filter = new ColorMatrixFilter();
 
-		_bgFront = Sprite.fromImage("assets/filters/SceneRotate.jpg");
+		_bgFront = Sprite.from("assets/filters/SceneRotate.jpg");
 		_bgFront.anchor.set(0.5);
 		_container.addChild(_bgFront);
 
-		_light2 = Sprite.fromImage("assets/filters/LightRotate2.png");
+		_light2 = Sprite.from("assets/filters/LightRotate2.png");
 		_light2.anchor.set(0.5);
 		_container.addChild(_light2);
 
-		_light1 = Sprite.fromImage("assets/filters/LightRotate1.png");
+		_light1 = Sprite.from("assets/filters/LightRotate1.png");
 		_light1.anchor.set(0.5);
 		_container.addChild(_light1);
 
-		_panda = Sprite.fromImage("assets/filters/panda.png");
+		_panda = Sprite.from("assets/filters/panda.png");
 		_panda.anchor.set(0.5);
 		_container.addChild(_panda);
 
@@ -72,9 +72,9 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x00FF66;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 	}
 

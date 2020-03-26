@@ -1,15 +1,14 @@
 package pixi.core.renderers.webgl.managers;
 
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.webgl.Renderer;
 
 extern class WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI
-	 * @param renderer {WebGLRenderer} The renderer this manager works for.
+	 * @param renderer {Renderer} The renderer this manager works for.
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
 	 * Generic method called when there is a WebGL context change.

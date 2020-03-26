@@ -7,7 +7,6 @@ import js.html.Event;
 
 @:native("PIXI.interaction.InteractionData")
 extern class InteractionData {
-
 	/**
 	 * Holds all information related to an Interaction event
 	 *
@@ -17,24 +16,24 @@ extern class InteractionData {
 	function new();
 
 	/**
-     * This point stores the global coords of where the touch/mouse event happened
-     *
-     * @member {Point}
-     */
+	 * This point stores the global coords of where the touch/mouse event happened
+	 *
+	 * @member {Point}
+	 */
 	var global:Point;
 
 	/**
-     * The target DisplayObject that was interacted with
-     *
-     * @member {DisplayObject}
-     */
+	 * The target DisplayObject that was interacted with
+	 *
+	 * @member {DisplayObject}
+	 */
 	var target:DisplayObject;
 
 	/**
-     * When passed to an event handler, this will be the original DOM Event that was captured
-     *
-     * @member {Event}
-     */
+	 * When passed to an event handler, this will be the original DOM Event that was captured
+	 *
+	 * @member {Event}
+	 */
 	var originalEvent:Event;
 
 	/**

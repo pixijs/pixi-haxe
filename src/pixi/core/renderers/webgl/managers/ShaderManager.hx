@@ -1,14 +1,13 @@
 package pixi.core.renderers.webgl.managers;
 
 extern class ShaderManager extends WebGLManager {
-
 	/**
 	 * @class
 	 * @memberof PIXI
 	 * @extends WebGLManager
-	 * @param renderer {WebGLRenderer} The renderer this manager works for.
+	 * @param renderer {Renderer} The renderer this manager works for.
 	 */
-	function new(renderer:WebGLRenderer);
+	function new(renderer:Renderer);
 
 	/**
 	 * @member {number}

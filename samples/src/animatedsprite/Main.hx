@@ -2,21 +2,22 @@ package animatedsprite;
 
 import pixi.extras.AnimatedSprite;
 import pixi.loaders.Loader;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.textures.Texture;
 import js.Browser;
 
 class Main extends Application {
 
 	public function new() {
-		super();
+		var options:ApplicationOptions = {
+			backgroundColor: 0xFFFFFF
+		};
+		super(options);
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		super.start(Application.AUTO);
+		super.start();
 
 		var mcloader:Loader = new Loader();
 		mcloader.add("mc", "assets/movieclip/SpriteSheet.json");
@@ -28,7 +29,7 @@ class Main extends Application {
 
 		var texture:Texture;
 		for (i in 0 ... 26) {
-			texture = Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
+			texture = Texture.from("Explosion_Sequence_A " + (i + 1) + ".png");
 			explosionTextures.push(texture);
 		}
 

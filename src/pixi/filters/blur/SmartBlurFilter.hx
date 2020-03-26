@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.SmartBlurFilter")
 extern class SmartBlurFilter extends Filter {
-
 	/**
 	 * A Smart Blur Filter.
 	 *
@@ -13,5 +12,4 @@ extern class SmartBlurFilter extends Filter {
 	 * @memberof PIXI.filters
 	 */
 	function new();
-
 }

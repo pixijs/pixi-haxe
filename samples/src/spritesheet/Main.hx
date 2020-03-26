@@ -5,7 +5,7 @@ import js.html.DivElement;
 import pixi.loaders.Loader;
 import pixi.extras.AnimatedSprite;
 import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -23,9 +23,10 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		onUpdate = _onUpdate;
-		super.start(Application.AUTO);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 
 		_loader = new Loader();
 		_loader.baseUrl = "assets/spritesheet/";
@@ -40,7 +41,7 @@ class Main extends Application {
 		for (i in 0 ... 29) {
 			var frame:String = "" + i;
 			if (i < 10) frame = "0" + frame;
-			_fighterTextures.push(Texture.fromFrame("rollSequence00" + frame + ".png"));
+			_fighterTextures.push(Texture.from("rollSequence00" + frame + ".png"));
 		}
 
 		renderer.view.onmouseup = _onTouchEnd;

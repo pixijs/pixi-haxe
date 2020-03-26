@@ -2,7 +2,6 @@ package pixi.plugins.dragonbones.geom;
 
 @:native("dragonBones.Matrix")
 extern class Matrix {
-
 	function new(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float);
 
 	var a:Float;
@@ -16,5 +15,5 @@ extern class Matrix {
 	function identity():Matrix;
 	function concat(value:Matrix):Matrix;
 	function invert():Matrix;
-	function transformPoint(x:Float, y:Float, result: { x:Float, y:Float }, ?delta:Bool):Void;
+	function transformPoint(x:Float, y:Float, result:{x:Float, y:Float}, ?delta:Bool):Void;
 }

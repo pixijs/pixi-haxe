@@ -1,0 +1,3 @@
+-D build-tool=0.1.0
+-cp ${SCOPE_DIR}/source/library/build-tool/
+${SCOPE_DIR}/source/library/build-tool/extraparams.hxml

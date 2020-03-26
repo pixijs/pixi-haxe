@@ -3,9 +3,8 @@ package rope;
 import pixi.mesh.Rope;
 import pixi.core.display.Container;
 import pixi.core.math.Point;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.core.textures.Texture;
-import pixi.plugins.app.Application;
 
 class Main extends Application {
 
@@ -14,15 +13,15 @@ class Main extends Application {
 	var _length:Float;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		onUpdate = _onUpdate;
-		super.start(Application.AUTO);
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
+		super.start();
 
 		_count = 0;
 		_points = [];
@@ -33,14 +32,14 @@ class Main extends Application {
 			_points.push(new Point(i * _length, 0));
 		};
 
-		var strip = new Rope(Texture.fromImage("assets/rope/snake.png"), _points);
+		var strip = new Rope(Texture.from("assets/snake/snake.png"), _points);
 		strip.x = -918 / 2;
 
 		var snakeContainer:Container = new Container();
-		snakeContainer.position.x = width / 2;
-		snakeContainer.position.y = height / 2;
+		snakeContainer.position.x = screen.width / 2;
+		snakeContainer.position.y = screen.height / 2;
 
-		snakeContainer.scale.x = width / 1100;
+		snakeContainer.scale.x = screen.width / 1100;
 		stage.addChild(snakeContainer);
 
 		snakeContainer.addChild(strip);

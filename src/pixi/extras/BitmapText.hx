@@ -5,10 +5,8 @@ import pixi.core.textures.Texture;
 import js.html.XMLDocument;
 import pixi.core.display.Container;
 
-
-@:native("PIXI.extras.BitmapText")
+@:native("PIXI.BitmapText")
 extern class BitmapText extends Container {
-
 	/**
 	 * A BitmapText object will create a line or multiple lines of text using bitmap font. To
 	 * split a line you can use '\n', '\r' or '\r\n' in your string. You can generate the fnt files using:
@@ -50,11 +48,11 @@ extern class BitmapText extends Container {
 	var anchor:Point;
 
 	/**
-	* The max line height. This is useful when trying to use the total height of the Text,
-	* ie: when trying to vertically align.
-	*
-	* @member {number}
-	*/
+	 * The max line height. This is useful when trying to use the total height of the Text,
+	 * ie: when trying to vertically align.
+	 *
+	 * @member {number}
+	 */
 	var maxLineHeight:Float;
 
 	/**
@@ -108,11 +106,11 @@ extern class BitmapText extends Container {
 	var align:BitmapTextAlign;
 
 	/**
-     * The font descriptor of the BitmapText object
-     *
-     * @member {Dynamic}
-     * @memberof BitmapText#
-     */
+	 * The font descriptor of the BitmapText object
+	 *
+	 * @member {Dynamic}
+	 * @memberof BitmapText#
+	 */
 	var font:Dynamic;
 
 	/**
@@ -132,29 +130,21 @@ extern class BitmapText extends Container {
 	var letterSpacing:Float;
 
 	/**
-     * Register a bitmap font with data and a texture.
-     *
-     * @static
-     * @param {XMLDocument} xml - The XML document data.
-     * @param {PIXI.Texture} texture - Texture with all symbols.
-     * @return {Object} Result font object with font, size, lineHeight and char fields.
-     */
+	 * Register a bitmap font with data and a texture.
+	 *
+	 * @static
+	 * @param {XMLDocument} xml - The XML document data.
+	 * @param {PIXI.Texture} texture - Texture with all symbols.
+	 * @return {Object} Result font object with font, size, lineHeight and char fields.
+	 */
 	static function registerFont(xml:XMLDocument, texture:Texture):FontObj;
 }
 
-#if (haxe_ver >= 3.3)
-@:enum abstract BitmapTextAlign(String) to String {
+enum abstract BitmapTextAlign(String) to String {
 	var LEFT = "left";
 	var RIGHT = "right";
 	var CENTER = "center";
 }
-#else
-extern enum BitmapTextAlign {
-	LEFT;
-	RIGHT;
-	CENTER;
-}
-#end
 
 typedef BitmapTextStyle = {
 	@:optional var font:Dynamic;

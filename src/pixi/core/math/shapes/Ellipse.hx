@@ -2,7 +2,6 @@ package pixi.core.math.shapes;
 
 @:native("PIXI.Ellipse")
 extern class Ellipse extends Shape {
-
 	/**
 	 * The Ellipse object can be used to specify a hit area for displayObjects
 	 *
@@ -12,7 +11,7 @@ extern class Ellipse extends Shape {
 	 * @param y {Float} The Y coordinate of the center of the ellipse
 	 * @param width {Float} The half width of this ellipse
 	 * @param height {Float} The half height of this ellipse
-	*/
+	 */
 	function new(x:Float, y:Float, width:Float, height:Float):Void;
 
 	/**
@@ -20,7 +19,7 @@ extern class Ellipse extends Shape {
 	 *
 	 * @method clone
 	 * @return {Ellipse} a copy of the ellipse
-	*/
+	 */
 	function clone():Ellipse;
 
 	/**
@@ -28,7 +27,7 @@ extern class Ellipse extends Shape {
 	 *
 	 * @method getBounds
 	 * @return {Rectangle} the framing rectangle
-	*/
+	 */
 	function getBounds():Rectangle;
 
 	/**

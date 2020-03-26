@@ -1,0 +1,3 @@
+# @install: lix --silent download "haxelib:/actuate#1.8.9" into actuate/1.8.9/haxelib
+-cp ${HAXE_LIBCACHE}/actuate/1.8.9/haxelib/src
+-D actuate=1.8.9

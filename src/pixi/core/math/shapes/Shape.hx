@@ -1,8 +1,8 @@
 package pixi.core.math.shapes;
+
 import pixi.core.Pixi.Shapes;
 
-extern class Shape 
-{
+extern class Shape {
 	/**
 	 * Defines the type of the shape to avoid instanceof (Std.is) checks
 	 */
@@ -17,5 +17,4 @@ extern class Shape
 	 * @return {Bool} Whether the x/y coords are within this Rectangle
 	 */
 	function contains(x:Float, y:Float):Bool;
-
 }

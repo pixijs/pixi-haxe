@@ -4,7 +4,7 @@ import js.Browser;
 import pixi.core.display.Container;
 import pixi.core.sprites.Sprite;
 import pixi.filters.blur.BlurFilter;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import pixi.filters.extras.GlowFilter;
 
 class Main extends Application {
@@ -18,14 +18,14 @@ class Main extends Application {
 	var _count:Float;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 
 		_container = new Container();
 		stage.addChild(_container);
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
-		_littleRobot = Sprite.fromImage("assets/filters/depth_blur_moby.jpg");
+		_littleRobot = Sprite.from("assets/filters/depth_blur_moby.jpg");
 		_littleRobot.anchor.set(0.5);
 		_container.addChild(_littleRobot);
 
@@ -33,9 +33,9 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 	}
 

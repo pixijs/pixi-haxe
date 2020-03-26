@@ -4,7 +4,7 @@ import js.Browser;
 import pixi.core.display.Container;
 import pixi.filters.blur.BlurFilter;
 import pixi.core.sprites.Sprite;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -19,23 +19,23 @@ class Main extends Application {
 	var _count:Float;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 
 		_container = new Container();
 		stage.addChild(_container);
 		_container.position.set(Browser.window.innerWidth / 2, Browser.window.innerHeight / 2);
 
-		_bg = Sprite.fromImage("assets/filters/depth_blur_BG.jpg");
+		_bg = Sprite.from("assets/filters/depth_blur_BG.jpg");
 		_bg.anchor.set(0.5);
 		_container.addChild(_bg);
 
-		_littleDudes = Sprite.fromImage("assets/filters/depth_blur_dudes.jpg");
+		_littleDudes = Sprite.from("assets/filters/depth_blur_dudes.jpg");
 		_littleDudes.anchor.set(0.5);
 		_littleDudes.y = 100;
 		_container.addChild(_littleDudes);
 
-		_littleRobot = Sprite.fromImage("assets/filters/depth_blur_moby.jpg");
+		_littleRobot = Sprite.from("assets/filters/depth_blur_moby.jpg");
 		_littleRobot.anchor.set(0.5);
 		_littleRobot.x = 120;
 		_container.addChild(_littleRobot);
@@ -50,9 +50,9 @@ class Main extends Application {
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 	}
 

@@ -2,7 +2,7 @@ package text;
 
 import pixi.core.text.DefaultStyle;
 import pixi.core.text.Text;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -11,13 +11,11 @@ class Main extends Application {
 	var _label3:Text;
 
 	public function new() {
-		super();
+		super({backgroundColor: 0xFFFFFF});
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0xFFFFFF;
 		super.start();
 
 		var style1:DefaultStyle = {};

@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.BlurXFilter")
 extern class BlurXFilter extends Filter {
-
 	/**
 	 * The BlurXFilter applies a horizontal Gaussian blur to an object.
 	 *

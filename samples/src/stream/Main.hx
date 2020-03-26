@@ -1,6 +1,7 @@
 package stream;
 
-import pixi.core.renderers.webgl.WebGLRenderer;
+import pixi.core.renderers.AbstractRenderer;
+import pixi.core.renderers.webgl.Renderer;
 import haxe.Json;
 import js.html.XMLHttpRequest;
 import js.html.TextTrackMode;
@@ -14,7 +15,6 @@ import js.html.ImageElement;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
 import js.html.Element;
-import pixi.core.renderers.SystemRenderer;
 import pixi.core.display.Container;
 import pixi.core.RenderOptions;
 
@@ -27,7 +27,7 @@ class Main {
 	var _videoElement:VideoElement;
 	var _videoCover:ImageElement;
 
-	var _renderer:SystemRenderer;
+	var _renderer:AbstractRenderer;
 	var _stage:Container;
 
 	var _playBtn:Sprite;
@@ -54,9 +54,11 @@ class Main {
 		options.backgroundColor = 0x003366;
 		options.resolution = 1;
 		options.transparent = true;
+		options.width = Browser.window.innerWidth;
+		options.height = Browser.window.innerHeight;
 
 		_stage = new Container();
-		_renderer = new WebGLRenderer(Browser.window.innerWidth, Browser.window.innerHeight, options);
+		_renderer = new Renderer(options);
 		_wrapper = Browser.document.createDivElement();
 
 		_videoElement = Browser.document.createVideoElement();
@@ -75,7 +77,7 @@ class Main {
 		_renderer.view.style.position = "absolute";
 		Browser.window.requestAnimationFrame(cast _animate);
 
-		_playBtn = new Sprite(Texture.fromImage("assets/stream/play.png"));
+		_playBtn = new Sprite(Texture.from("assets/stream/play.png"));
 		_playBtn.width = 400;
 		_playBtn.height = 400;
 		_playBtn.interactive = true;
@@ -189,7 +191,7 @@ class Main {
 
 	function _animate() {
 		Browser.window.requestAnimationFrame(cast _animate);
-		_renderer.render(_stage);
+		//_renderer.render(_stage);
 	}
 
 	static function main() {

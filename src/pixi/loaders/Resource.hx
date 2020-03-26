@@ -1,6 +1,5 @@
 package pixi.loaders;
 
-import haxe.DynamicAccess;
 import pixi.core.textures.Spritesheet;
 import pixi.core.textures.Texture;
 import pixi.loaders.LoaderOptions.LoaderMetadata;
@@ -16,45 +15,27 @@ import pixi.loaders.LoaderOptions.LoaderMetadata;
  * @property {number} LOAD_TYPE.AUDIO - Uses an `Audio` object to load the resource.
  * @property {number} LOAD_TYPE.VIDEO - Uses a `Video` object to load the resource.
  */
-@:native("PIXI.loaders.Resource.LOAD_TYPE")
-#if (haxe_ver >= 3.3)
-@:enum extern abstract LoadType(Int) {
-	var XHR; 
-	var IMAGE;
-	var AUDIO; 
-	var VIDEO;
-}
-#else 
+@:native("PIXI.LoaderResource.LOAD_TYPE")
 extern enum LoadType {
-	XHR; 
+	XHR;
 	IMAGE;
-	AUDIO; 
+	AUDIO;
 	VIDEO;
 }
-#end
 
-@:native("PIXI.loaders.Resource.TYPE")
-#if (haxe_ver >= 3.3)
-@:enum extern abstract ResourceType(Int) {
-	var JSON; 
-	var XML; 
-	var IMAGE;
-	var AUDIO; 
-	var VIDEO;
-}
-#else 
+@:native("PIXI.LoaderResource.TYPE")
 extern enum ResourceType {
-	JSON; 
-	XML; 
+	UNKNOWN;
+	JSON;
+	XML;
 	IMAGE;
-	AUDIO; 
+	AUDIO;
 	VIDEO;
+	TEXT;
 }
-#end
 
-@:native("PIXI.loaders.Resource")
+@:native("PIXI.LoaderResource")
 extern class Resource {
-
 	/**
 	 * Manages the state and loading of a single resource represented by
 	 * a single URL.
@@ -81,11 +62,11 @@ extern class Resource {
 	var metadata:LoaderMetadata;
 
 	var type:ResourceType;
-	
+
 	/**
 	 * Since plugins like Spine can add additional fields to Resource
-	 * we need somewhat 'typed' method to retrieve those fields.	 
-	 * 
+	 * we need somewhat 'typed' method to retrieve those fields.
+	 *
 	 * var data:SpineData = resource.get("spineData");
 	 */
 	inline function get<T>(name:String):T {
@@ -96,107 +77,107 @@ extern class Resource {
 	 * Extension of this resource
 	 * @member {string}
 	 */
-
 	var extension:String;
+
 	/**
-     * The name of this resource.
-     *
-     * @member {string}
-     * @readonly
-     */
+	 * The name of this resource.
+	 *
+	 * @member {string}
+	 * @readonly
+	 */
 	var name:String;
 
 	/**
-     * The url used to load this resource.
-     *
-     * @member {string}
-     * @readonly
-     */
+	 * The url used to load this resource.
+	 *
+	 * @member {string}
+	 * @readonly
+	 */
 	var url:String;
 
 	/**
-     * The data that was loaded by the resource.
-     *
-     * @member {any}
-     */
+	 * The data that was loaded by the resource.
+	 *
+	 * @member {any}
+	 */
 	var data:Dynamic;
 
 	/**
-     * The XHR object that was used to load this resource. This is only set
-     * when `loadType` is `Resource.LOAD_TYPE.XHR`.
-     *
-     * @member {XMLHttpRequest}
-     */
+	 * The XHR object that was used to load this resource. This is only set
+	 * when `loadType` is `Resource.LOAD_TYPE.XHR`.
+	 *
+	 * @member {XMLHttpRequest}
+	 */
 	var xhr:Dynamic;
 
 	/**
-     * The type used to load the resource via XHR. If unset, determined automatically.
-     *
-     * @member {String}
-     */
+	 * The type used to load the resource via XHR. If unset, determined automatically.
+	 *
+	 * @member {String}
+	 */
 	var xhrType:String;
 
 	/**
-     * Is this request cross-origin? If unset, determined automatically.
-     *
-     * @member {string}
-     */
+	 * Is this request cross-origin? If unset, determined automatically.
+	 *
+	 * @member {string}
+	 */
 	var crossOrigin:String;
 
 	/**
-     * The method of loading to use for this resource.
-     *
-     * @member {Resource.LOAD_TYPE}
-     */
+	 * The method of loading to use for this resource.
+	 *
+	 * @member {Resource.LOAD_TYPE}
+	 */
 	var loadType:LoadType;
 
 	/**
-     * The error that occurred while loading (if any).
-     *
-     * @member {Error}
-     * @readonly
-     */
+	 * The error that occurred while loading (if any).
+	 *
+	 * @member {Error}
+	 * @readonly
+	 */
 	var error:Dynamic;
 
 	/**
-     * Describes if this resource was loaded as json. Only valid after the resource
-     * has completely loaded.
-     *
-     * @member {Bool}
-     */
+	 * Describes if this resource was loaded as json. Only valid after the resource
+	 * has completely loaded.
+	 *
+	 * @member {Bool}
+	 */
 	var isJson:Bool;
 
 	/**
-     * Describes if this resource was loaded as xml. Only valid after the resource
-     * has completely loaded.
-     *
-     * @member {Bool}
-     */
+	 * Describes if this resource was loaded as xml. Only valid after the resource
+	 * has completely loaded.
+	 *
+	 * @member {Bool}
+	 */
 	var isXml:Bool;
 
 	/**
-     * Describes if this resource was loaded as an image tag. Only valid after the resource
-     * has completely loaded.
-     *
-     * @member {Bool}
-     */
+	 * Describes if this resource was loaded as an image tag. Only valid after the resource
+	 * has completely loaded.
+	 *
+	 * @member {Bool}
+	 */
 	var isImage:Bool;
 
 	/**
-     * Describes if this resource was loaded as an audio tag. Only valid after the resource
-     * has completely loaded.
-     *
-     * @member {Bool}
-     */
+	 * Describes if this resource was loaded as an audio tag. Only valid after the resource
+	 * has completely loaded.
+	 *
+	 * @member {Bool}
+	 */
 	@:deprecated
 	var isAudio:Bool;
 
 	/**
-     * Describes if this resource was loaded as a video tag. Only valid after the resource
-     * has completely loaded.
-     *
-     * @member {Bool}
-     */
+	 * Describes if this resource was loaded as a video tag. Only valid after the resource
+	 * has completely loaded.
+	 *
+	 * @member {Bool}
+	 */
 	var isVideo:Bool;
 }
 

@@ -14,7 +14,6 @@ import pixi.core.textures.Texture;
 
 @:native("PIXI.Sprite")
 extern class Sprite extends Container {
-
 	/**
 	 * The Sprite object is the base for all textured objects that are rendered to the screen
 	 *
@@ -42,10 +41,10 @@ extern class Sprite extends Container {
 	var anchor:ObservablePoint;
 
 	/**
-     * The texture that the sprite is using
-     *
-     * @member {Texture}
-     */
+	 * The texture that the sprite is using
+	 *
+	 * @member {Texture}
+	 */
 	var texture:Texture;
 
 	/**
@@ -73,7 +72,7 @@ extern class Sprite extends Container {
 
 	/**
 	 * Plugin that is responsible for rendering this element.
-	 * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
+	 * Allows to customize the rendering process without overriding '_render' & '_renderCanvas' methods.
 	 *
 	 * @member {String}
 	 * @default 'sprite'
@@ -81,21 +80,21 @@ extern class Sprite extends Container {
 	var pluginName:String;
 
 	/**
-     * Tests if a point is inside this sprite
-     *
-     * @param {Point} point - the point to test
-     * @return {Bool} the result of the test
-     */
+	 * Tests if a point is inside this sprite
+	 *
+	 * @param {Point} point - the point to test
+	 * @return {Bool} the result of the test
+	 */
 	function containsPoint(point:Point):Bool;
 
 	/**
-     * Helper function that creates a new sprite based on the source you provide.
-     * The source can be - frame id, image url, video url, canvas element, video element, base texture
-     *
-     * @static
-     * @param {Int|String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source Source to create texture from
-     * @return {Sprite} The newly created sprite
-     */
+	 * Helper function that creates a new sprite based on the source you provide.
+	 * The source can be - frame id, image url, video url, canvas element, video element, base texture
+	 *
+	 * @static
+	 * @param {Int|String|BaseTexture|HTMLCanvasElement|HTMLVideoElement} source Source to create texture from
+	 * @return {Sprite} The newly created sprite
+	 */
 	@:overload(function(source:Int):Sprite {})
 	@:overload(function(source:String):Sprite {})
 	@:overload(function(source:BaseTexture):Sprite {})

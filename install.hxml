@@ -1,0 +1,6 @@
+-cmd haxelib newrepo
+-cmd haxelib install perf.js || true
+-cmd haxelib install nape-haxe4 || true
+-cmd haxelib install msignal || true
+-cmd haxelib install actuate || true
+-cmd haxelib install chxdoc || true

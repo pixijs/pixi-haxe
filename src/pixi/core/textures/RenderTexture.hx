@@ -5,7 +5,6 @@ import pixi.core.math.shapes.Rectangle;
 
 @:native("PIXI.RenderTexture")
 extern class RenderTexture extends Texture {
-
 	/**
 	 * A RenderTexture is a special texture that allows any Pixi display object to be rendered to it.
 	 *
@@ -43,7 +42,7 @@ extern class RenderTexture extends Texture {
 	 * @extends Texture
 	 * @memberof PIXI
 	 * @param baseRenderTexture {BaseRenderTexture} The renderer used for this RenderTexture
- 	*/
+	 */
 	function new(baseRenderTexture:BaseRenderTexture, frame:Rectangle);
 
 	/**

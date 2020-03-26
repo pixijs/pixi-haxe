@@ -3,9 +3,8 @@ package pixi.extras;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 
-@:native("PIXI.extras.AnimatedSprite")
+@:native("PIXI.AnimatedSprite")
 extern class AnimatedSprite extends Sprite {
-
 	/**
 	 * An AnimatedSprite is a simple way to display an animation depicted by a list of textures.
 	 *
@@ -31,40 +30,40 @@ extern class AnimatedSprite extends Sprite {
 	function new(textures:Array<Texture>, ?autoUpdate:Bool);
 
 	/**
-     * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var animationSpeed:Float;
 
 	/**
-     * Update anchor to Texture's defaultAnchor when frame changes.
-	* 
-     * Useful with sprite sheet animations created with tools.
-	* Changing anchor for each frame allows to pin sprite origin to certain moving feature
-	* of the frame (e.g. left foot).
-	* 
-     * @member {Bool}
-     * @default false
-     */
+	 * Update anchor to Texture's defaultAnchor when frame changes.
+	 *
+	 * Useful with sprite sheet animations created with tools.
+	 * Changing anchor for each frame allows to pin sprite origin to certain moving feature
+	 * of the frame (e.g. left foot).
+	 *
+	 * @member {Bool}
+	 * @default false
+	 */
 	var updateAnchor:Bool;
 
 	/**
-     * Whether or not the animate sprite repeats after playing.
-     *
-     * @member {Bool}
-     * @default true
-     */
+	 * Whether or not the animate sprite repeats after playing.
+	 *
+	 * @member {Bool}
+	 * @default true
+	 */
 	var loop:Bool;
 
 	/**
-     * Function to call when a AnimatedSprite finishes playing
-     *
-     * @method
+	 * Function to call when a AnimatedSprite finishes playing
+	 *
+	 * @method
 	 * @memberof MovieClip#
-     */
-	var onComplete:Void -> Void;
+	 */
+	var onComplete:Void->Void;
 
 	/**
 	 * Function to call when a AnimatedSprite changes which texture is being rendered
@@ -72,15 +71,15 @@ extern class AnimatedSprite extends Sprite {
 	 * @method
 	 * @memberof MovieClip#
 	 */
-	var onFrameChange:Void -> Void;
-	
-	 /**
+	var onFrameChange:Void->Void;
+
+	/**
 	 * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
 	 *
- 	 * @method
+	  	 * @method
 	 * @memberof MovieClip#
 	 */
-	var onLoop:Void -> Void;
+	var onLoop:Void->Void;
 
 	/**
 	 * Indicates if the AnimatedSprite is currently playing
@@ -120,54 +119,54 @@ extern class AnimatedSprite extends Sprite {
 	var textures:Array<Texture>;
 
 	/**
-     * Stops the AnimatedSprite
-     *
-     */
+	 * Stops the AnimatedSprite
+	 *
+	 */
 	function stop():Void;
 
 	/**
-     * Plays the AnimatedSprite
-     *
-     */
+	 * Plays the AnimatedSprite
+	 *
+	 */
 	function play():Void;
 
 	/**
-     * Stops the AnimatedSprite and goes to a specific frame
-     *
-     * @param {Int} frameNumber - frame index to stop at
-     */
+	 * Stops the AnimatedSprite and goes to a specific frame
+	 *
+	 * @param {Int} frameNumber - frame index to stop at
+	 */
 	function gotoAndStop(frameNumber:Int):Void;
 
 	/**
-     * Goes to a specific frame and begins playing the AnimatedSprite
-     *
-     * @param {Int} frameNumber - frame index to start at
-     */
+	 * Goes to a specific frame and begins playing the AnimatedSprite
+	 *
+	 * @param {Int} frameNumber - frame index to start at
+	 */
 	function gotoAndPlay(frameNumber:Int):Void;
 
 	/**
-     * Updates the object transform for rendering.
-     *
-     * @private
-     * @param {Float} deltaTime - Time since last tick.
-     */
+	 * Updates the object transform for rendering.
+	 *
+	 * @private
+	 * @param {Float} deltaTime - Time since last tick.
+	 */
 	function update(deltaTime:Float):Void;
 
 	/**
-     * A short hand way of creating a movieclip from an array of frame ids
-     *
-     * @static
-     * @param {Array<String>} frames - The array of frames ids the movieclip will use as its texture frames
-     * @return {AnimatedSprite} The new animated sprite with the specified frames.
-     */
+	 * A short hand way of creating a movieclip from an array of frame ids
+	 *
+	 * @static
+	 * @param {Array<String>} frames - The array of frames ids the movieclip will use as its texture frames
+	 * @return {AnimatedSprite} The new animated sprite with the specified frames.
+	 */
 	static function fromFrames(frames:Array<String>):AnimatedSprite;
 
 	/**
-     * A short hand way of creating a movieclip from an array of image ids
-     *
-     * @static
-     * @param {Array<String>} images - the array of image urls the movieclip will use as its texture frames
-     * @return {AnimatedSprite} The new animate sprite with the specified images as frames.
-     */
+	 * A short hand way of creating a movieclip from an array of image ids
+	 *
+	 * @static
+	 * @param {Array<String>} images - the array of image urls the movieclip will use as its texture frames
+	 * @return {AnimatedSprite} The new animate sprite with the specified images as frames.
+	 */
 	static function fromImages(images:Array<String>):AnimatedSprite;
 }

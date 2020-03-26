@@ -4,7 +4,6 @@ import pixi.core.renderers.webgl.filters.Filter;
 
 @:native("PIXI.filters.GrayFilter")
 extern class GrayFilter extends Filter {
-
 	/**
 	 * This filter applies a pixelate effect making display objects appear 'blocky'.
 	 *
@@ -15,10 +14,10 @@ extern class GrayFilter extends Filter {
 	function new();
 
 	/**
-     * The strength of the gray. 1 will make the object black and white, 0 will make the object its normal color.
-     *
-     * @member {number}
-     * @memberof GrayFilter#
-     */
+	 * The strength of the gray. 1 will make the object black and white, 0 will make the object its normal color.
+	 *
+	 * @member {number}
+	 * @memberof GrayFilter#
+	 */
 	var gray:Float;
 }

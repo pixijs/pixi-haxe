@@ -1,8 +1,9 @@
 package graphics;
 
+import pixi.core.Application.ApplicationOptions;
 import pixi.interaction.InteractionEvent;
 import pixi.core.graphics.Graphics;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 import js.Browser;
 
 class Main extends Application {
@@ -12,15 +13,18 @@ class Main extends Application {
 	var _count:Float;
 
 	public function new() {
+		var options:ApplicationOptions = {
+			backgroundColor: 0x003366,
+			antialias: true
+		};
 		super();
 		_init();
 	}
 
 	function _init() {
-		position = "fixed";
-		backgroundColor = 0x003366;
-		antialias = true;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 
 		_graphics = new Graphics();

@@ -1,10 +1,11 @@
 package textureswap;
 
 import js.Browser;
+import pixi.core.Application.ApplicationOptions;
 import pixi.core.sprites.Sprite;
 import pixi.core.textures.Texture;
 import pixi.interaction.InteractionEvent;
-import pixi.plugins.app.Application;
+import pixi.core.Application;
 
 class Main extends Application {
 
@@ -15,18 +16,22 @@ class Main extends Application {
 	var _swap:Bool;
 
 	public function new() {
+		var options:ApplicationOptions = {
+			backgroundColor: 0xE0E6F8
+		};
 		super();
 		_init();
 	}
 
 	function _init() {
-		backgroundColor = 0xE0E6F8;
-		onUpdate = _onUpdate;
+		ticker.add(function(delta){
+			_onUpdate(delta);
+		});
 		super.start();
 
 		_swap = false;
-		_texture1 = Texture.fromImage("assets/bunnymark/bunny2.png");
-		_texture2 = Texture.fromImage("assets/bunnymark/bunny4.png");
+		_texture1 = Texture.from("assets/bunnymark/bunny2.png");
+		_texture2 = Texture.from("assets/bunnymark/bunny4.png");
 
 		_bunny = new Sprite(_texture1);
 		_bunny.anchor.set(0.5);

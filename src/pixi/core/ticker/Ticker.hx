@@ -2,10 +2,8 @@ package pixi.core.ticker;
 
 import pixi.interaction.EventEmitter;
 
-@:native("PIXI.ticker.Ticker")
+@:native("PIXI.Ticker")
 extern class Ticker extends EventEmitter {
-
-
 	/**
 	 * The shared ticker instance used by {@link pixi.extras.AnimatedSprite}.
 	 * and by {@link pixi.interaction.InteractionManager}.
@@ -51,7 +49,7 @@ extern class Ticker extends EventEmitter {
 	static var shared(get, never):Ticker;
 
 	@:noCompletion inline static function get_shared():Ticker {
-		return cast untyped __js__("PIXI.ticker.shared");
+		return cast untyped __js__("PIXI.Ticker.shared");
 	}
 
 	/**
@@ -67,100 +65,100 @@ extern class Ticker extends EventEmitter {
 	function new();
 
 	/**
-     * Whether or not this ticker should invoke the method
-     * {@link PIXI.ticker.Ticker#start} automatically
-     * when a listener is added.
-     *
-     * @member {Bool}
-     * @default false
-     */
+	 * Whether or not this ticker should invoke the method
+	 * {@link PIXI.ticker.Ticker#start} automatically
+	 * when a listener is added.
+	 *
+	 * @member {Bool}
+	 * @default false
+	 */
 	var autoStart:Bool;
 
 	/**
-     * Scalar time value from last frame to this frame.
-     * This value is capped by setting {@link PIXI.ticker.Ticker#minFPS}
-     * and is scaled with {@link PIXI.ticker.Ticker#speed}.
-     * **Note:** The cap may be exceeded by scaling.
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * Scalar time value from last frame to this frame.
+	 * This value is capped by setting {@link PIXI.ticker.Ticker#minFPS}
+	 * and is scaled with {@link PIXI.ticker.Ticker#speed}.
+	 * **Note:** The cap may be exceeded by scaling.
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var deltaTime:Float;
 
 	/**
-     * Time elapsed in milliseconds from last frame to this frame.
-     * Opposed to what the scalar {@link PIXI.ticker.Ticker#deltaTime}
-     * is based, this value is neither capped nor scaled.
-     * If the platform supports DOMHighResTimeStamp,
-     * this value will have a precision of 1 µs.
-     *
-     * @member {Float}
-     * @default 1 / TARGET_FPMS
-     */
+	 * Time elapsed in milliseconds from last frame to this frame.
+	 * Opposed to what the scalar {@link PIXI.ticker.Ticker#deltaTime}
+	 * is based, this value is neither capped nor scaled.
+	 * If the platform supports DOMHighResTimeStamp,
+	 * this value will have a precision of 1 µs.
+	 *
+	 * @member {Float}
+	 * @default 1 / TARGET_FPMS
+	 */
 	var elapsedMS:Float;
 
 	/**
-     * The last time {@link PIXI.ticker.Ticker#update} was invoked.
-     * This value is also reset internally outside of invoking
-     * update, but only when a new animation frame is requested.
-     * If the platform supports DOMHighResTimeStamp,
-     * this value will have a precision of 1 µs.
-     *
-     * @member {Float}
-     * @default 0
-     */
+	 * The last time {@link PIXI.ticker.Ticker#update} was invoked.
+	 * This value is also reset internally outside of invoking
+	 * update, but only when a new animation frame is requested.
+	 * If the platform supports DOMHighResTimeStamp,
+	 * this value will have a precision of 1 µs.
+	 *
+	 * @member {Float}
+	 * @default 0
+	 */
 	var lastTime:Float;
 
 	/**
-     * Factor of current {@link PIXI.ticker.Ticker#deltaTime}.
-     * @example
-     *     // Scales ticker.deltaTime to what would be
-     *     // the equivalent of approximately 120 FPS
-     *     ticker.speed = 2;
-     *
-     * @member {Float}
-     * @default 1
-     */
+	 * Factor of current {@link PIXI.ticker.Ticker#deltaTime}.
+	 * @example
+	 *     // Scales ticker.deltaTime to what would be
+	 *     // the equivalent of approximately 120 FPS
+	 *     ticker.speed = 2;
+	 *
+	 * @member {Float}
+	 * @default 1
+	 */
 	var speed:Float;
 
 	/**
-     * Whether or not this ticker has been started.
-     * `true` if {@link PIXI.ticker.Ticker#start} has been called.
-     * `false` if {@link PIXI.ticker.Ticker#stop} has been called.
-     * While `false`, this value may change to `true` in the
-     * event of {@link PIXI.ticker.Ticker#autoStart} being `true`
-     * and a listener is added.
-     *
-     * @member {Bool}
-     * @default false
-     */
+	 * Whether or not this ticker has been started.
+	 * `true` if {@link PIXI.ticker.Ticker#start} has been called.
+	 * `false` if {@link PIXI.ticker.Ticker#stop} has been called.
+	 * While `false`, this value may change to `true` in the
+	 * event of {@link PIXI.ticker.Ticker#autoStart} being `true`
+	 * and a listener is added.
+	 *
+	 * @member {Bool}
+	 * @default false
+	 */
 	var started:Bool;
 
 	/**
-     * The frames per second at which this ticker is running.
-     * The default is approximately 60 in most modern browsers.
-     * **Note:** This does not factor in the value of
-     * {@link PIXI.ticker.Ticker#speed}, which is specific
-     * to scaling {@link PIXI.ticker.Ticker#deltaTime}.
-     *
-     * @member
-     * @memberof PIXI.ticker.Ticker#
-     * @readonly
-     */
+	 * The frames per second at which this ticker is running.
+	 * The default is approximately 60 in most modern browsers.
+	 * **Note:** This does not factor in the value of
+	 * {@link PIXI.ticker.Ticker#speed}, which is specific
+	 * to scaling {@link PIXI.ticker.Ticker#deltaTime}.
+	 *
+	 * @member
+	 * @memberof PIXI.ticker.Ticker#
+	 * @readonly
+	 */
 	var FPS:Int;
 
 	/**
-     * Manages the maximum amount of milliseconds allowed to
-     * elapse between invoking {@link PIXI.ticker.Ticker#update}.
-     * This value is used to cap {@link PIXI.ticker.Ticker#deltaTime},
-     * but does not effect the measured value of {@link PIXI.ticker.Ticker#FPS}.
-     * When setting this property it is clamped to a value between
-     * `0` and `PIXI.TARGET_FPMS * 1000`.
-     *
-     * @member
-     * @memberof PIXI.ticker.Ticker#
-     * @default 10
-     */
+	 * Manages the maximum amount of milliseconds allowed to
+	 * elapse between invoking {@link PIXI.ticker.Ticker#update}.
+	 * This value is used to cap {@link PIXI.ticker.Ticker#deltaTime},
+	 * but does not effect the measured value of {@link PIXI.ticker.Ticker#FPS}.
+	 * When setting this property it is clamped to a value between
+	 * `0` and `PIXI.TARGET_FPMS * 1000`.
+	 *
+	 * @member
+	 * @memberof PIXI.ticker.Ticker#
+	 * @default 10
+	 */
 	var minFPS:Int;
 
 	/**
@@ -170,10 +168,10 @@ extern class Ticker extends EventEmitter {
 	 *
 	 * @param fn {Function} The listener function to be added for updates
 	 * @param [context] {Function} The listener context
-	 * @returns {Ticker} this
+	 * @return {Ticker} this
 	 */
-	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
-	function add(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	@:overload(function(fn:Float->Void, ?context:Void->Void):Ticker {})
+	function add(fn:Void->Void, ?context:Void->Void):Ticker;
 
 	/**
 	 * Calls EventEmitter.once internally for the
@@ -182,10 +180,10 @@ extern class Ticker extends EventEmitter {
 	 *
 	 * @param fn {Function} The listener function to be added for one update
 	 * @param [context] {Function} The listener context
-	 * @returns {Ticker} this
+	 * @return {Ticker} this
 	 */
-	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
-	function addOnce(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	@:overload(function(fn:Float->Void, ?context:Void->Void):Ticker {})
+	function addOnce(fn:Void->Void, ?context:Void->Void):Ticker;
 
 	/**
 	 * Calls EventEmitter.off internally for 'tick' event.
@@ -194,10 +192,10 @@ extern class Ticker extends EventEmitter {
 	 *
 	 * @param [fn] {Function} The listener function to be removed
 	 * @param [context] {Function} The listener context to be removed
-	 * @returns {Ticker} this
+	 * @return {Ticker} this
 	 */
-	@:overload(function (fn:Float -> Void, ?context:Void -> Void):Ticker {})
-	function remove(fn:Void -> Void, ?context:Void -> Void):Ticker;
+	@:overload(function(fn:Float->Void, ?context:Void->Void):Ticker {})
+	function remove(fn:Void->Void, ?context:Void->Void):Ticker;
 
 	/**
 	 * Starts the ticker. If the ticker has listeners
