@@ -16,37 +16,14 @@ Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/i
 ### Demos
 
 * [Basics](http://notboring.github.io/demos/haxe-pixi/basics.html)
-* [Graphics](http://notboring.github.io/demos/haxe-pixi/graphics.html)
-* [Animated Sprite](http://notboring.github.io/demos/haxe-pixi/animatedsprite.html)
-* [Spritesheet](http://notboring.github.io/demos/haxe-pixi/spritesheet.html)
-* [Spine](http://notboring.github.io/demos/haxe-pixi/spine.html)
-* [Rope](http://notboring.github.io/demos/haxe-pixi/rope.html)
-* [Dragging](http://notboring.github.io/demos/haxe-pixi/dragging.html)
-* [Tiling](http://notboring.github.io/demos/haxe-pixi/tiling.html)
-* [Bitmap Font](http://notboring.github.io/demos/haxe-pixi/bitmapfont.html)
-* [Alpha Mask](http://notboring.github.io/demos/haxe-pixie/alphamask.html)
-* [Bunnymark](http://notboring.github.io/demos/haxe-pixi/bunnymark.html)
-* [Retina](http://notboring.github.io/demos/haxe-pixi/retina.html)
-* [Events](http://notboring.github.io/demos/haxe-pixi/events.html)
-* [Loader](http://notboring.github.io/demos/haxe-pixi/loader.html)
-* [Video](http://notboring.github.io/demos/haxe-pixi/video.html)
-* [Nape](http://notboring.github.io/demos/haxe-pixi/nape.html)
-
-**Filters (WebGL only)**
-
-* [ColorMatrix](http://notboring.github.io/demos/haxe-pixi/colormatrix.html)
-* [Blur](http://notboring.github.io/demos/haxe-pixi/blur.html)
-
-**Filters (pixi-extra-filters)**
-* [Glow](http://notboring.github.io/demos/haxe-pixi/glow.html)
-
-Look at the `samples` folder for the source code of above examples.
 
 ### Usage
 
 ```haxe
 
-import pixi.plugins.app.Application;
+package basics;
+
+import pixi.core.Application;
 import pixi.core.graphics.Graphics;
 import pixi.core.textures.Texture;
 import pixi.core.sprites.Sprite;
@@ -58,16 +35,19 @@ class Main extends Application {
 	var _graphic:Graphics;
 
 	public function new() {
-		super();
-
-		position = Application.POSITION_FIXED;
-		width = Browser.window.innerWidth;
-		height = Browser.window.innerHeight;
-		backgroundColor = 0x006666;
-		transparent = true;
-		antialias = false;
-		onUpdate = _animate;
-		super.start();
+		
+		var options:ApplicationOptions = {
+			width: Browser.window.innerWidth,
+			height: Browser.window.innerHeight,
+			backgroundColor: 0x006666,
+			transparent: true,
+			antialias: false,
+		};
+		
+		super(options);
+		ticker.add(function(delta){
+			_animate(delta);
+		});
 
 		_bunny = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5);
@@ -80,6 +60,7 @@ class Main extends Application {
 
 		stage.addChild(_graphic);
 		stage.addChild(_bunny);
+		Browser.document.body.appendChild(view);
 	}
 
 	function _animate(e:Float) {
@@ -100,6 +81,7 @@ class Main extends Application {
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
 [Pixi.js](https://github.com/GoodBoyDigital/pixi.js) is licensed under the [MIT](http://opensource.org/licenses/MIT) License.
+
 
 ### Contributor Code of Conduct
 
