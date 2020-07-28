@@ -25,7 +25,6 @@ class Main extends Application {
 		ticker.add(function(delta){
 			_animate(delta);
 		});
-		super.start();
 
 		_bunny = new Sprite(Texture.from("assets/basics/bunny.png"));
 		_bunny.anchor.set(0.5);
@@ -38,6 +37,7 @@ class Main extends Application {
 
 		stage.addChild(_graphic);
 		stage.addChild(_bunny);
+		Browser.document.body.appendChild(view);
 	}
 
 	function _animate(e:Float) {
