@@ -140,5 +140,5 @@ extern class AbstractRenderer extends EventEmitter {
 	 * @param	screenWidth The new width of the screen.
 	 * @param	screenHeight The new height of the screen.
 	 */
-	private function resize(screenWidth:Float, screenHeight:Float):Void;
+	function resize(screenWidth:Float, screenHeight:Float):Void;
 }
