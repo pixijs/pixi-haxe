@@ -153,8 +153,3 @@ extern class Mesh extends Container {
 	 */
 	function renderAdvanced(render:Renderer):Void;
 }
-
-typedef DrawModes = {
-	var TRIANGLE_MESH:Int;
-	var TRIANGLES:Int;
-}
