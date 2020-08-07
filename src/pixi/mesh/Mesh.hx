@@ -10,6 +10,9 @@ import pixi.core.renderers.webgl.Buffer;
 import pixi.core.renderers.webgl.Renderer;
 import pixi.core.renderers.webgl.State;
 import pixi.core.textures.Texture;
+import pixi.core.Pixi.BlendModes;
+import pixi.core.Pixi.DrawModes;
+
 
 @:native("PIXI.Mesh")
 extern class Mesh extends Container {
@@ -34,11 +37,18 @@ extern class Mesh extends Container {
 	static var BATCHABLE_SIZE:Float;
 
 	/**
-	 * The way the Mesh should be drawn, can be any of the Mesh.DRAW_MODES consts
+	* The blend mode to be applied to the Mesh. Apply a value of PIXI.BLEND_MODES.NORMAL to reset the blend mode.
+	*
+	* @member {BlendModes}
+	*/
+	var blendMode:BlendModes;
+
+	/**
+	 * The way the Mesh should be drawn, can be any of the PIXI.DRAW_MODES consts
 	 *
-	 * @member {Int}
+	 * @member {DrawModes}
 	 */
-	var drawMode:Int;
+	var drawMode:DrawModes;
 
 	/**
 		Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU. Can be shared between multiple Mesh objects.
