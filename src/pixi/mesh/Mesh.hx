@@ -40,7 +40,7 @@ extern class Mesh extends Container {
 	* The blend mode to be applied to the Mesh. Apply a value of PIXI.BLEND_MODES.NORMAL to reset the blend mode.
 	*
 	* @member {BlendModes}
-	*/
+	 */
 	var blendMode:BlendModes;
 
 	/**
