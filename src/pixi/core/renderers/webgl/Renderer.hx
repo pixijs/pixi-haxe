@@ -20,10 +20,8 @@ import pixi.core.renderers.systems.StencilSystem;
 import pixi.core.renderers.systems.TextureGCSystem;
 import pixi.core.renderers.systems.TextureSystem;
 import pixi.core.renderers.webgl.extract.Extract;
-import pixi.core.renderers.webgl.utils.RenderTarget;
 import pixi.core.textures.Texture;
 import pixi.core.textures.RenderTexture;
-import pixi.core.math.Matrix;
 import pixi.core.renderers.webgl.managers.MaskManager;
 import pixi.core.renderers.systems.FilterSystem;
 

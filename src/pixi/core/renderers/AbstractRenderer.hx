@@ -7,7 +7,9 @@ import pixi.core.RenderOptions;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.textures.RenderTexture;
+import pixi.core.renderers.webgl.utils.RenderTarget;
 import pixi.interaction.EventEmitter;
+import pixi.core.math.Matrix;
 
 @:native("PIXI.AbstractRenderer")
 extern class AbstractRenderer extends EventEmitter {
