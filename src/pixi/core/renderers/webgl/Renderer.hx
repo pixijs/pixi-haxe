@@ -148,16 +148,6 @@ extern class Renderer extends AbstractRenderer {
 	function clear():Void;
 
 	/**
-	 * Renders the object to its WebGL view
-	 * @param	displayObject The object to be rendered.
-	 * @param	renderTexture The render texture to render to.
-	 * @param	clear Should the canvas be cleared before the new render.
-	 * @param	transform A transform to apply to the render texture before rendering.
-	 * @param	skipUpdateTransform Should we skip the update transform pass?
-	 */
-	function render(displayObject:DisplayObject, ?renderTexture:RenderTarget, ?clear:Bool = true, ?transform:Matrix, skipUpdateTransform:Bool = false):Void;
-
-	/**
 	 * Resets the WebGL state so you can render things however you fancy!
 	 * @return Returns itself.
 	 */
