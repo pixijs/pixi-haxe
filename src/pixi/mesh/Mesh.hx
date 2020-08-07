@@ -13,7 +13,6 @@ import pixi.core.textures.Texture;
 import pixi.core.Pixi.BlendModes;
 import pixi.core.Pixi.DrawModes;
 
-
 @:native("PIXI.Mesh")
 extern class Mesh extends Container {
 	/**
