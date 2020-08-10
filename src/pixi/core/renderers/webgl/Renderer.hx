@@ -20,10 +20,8 @@ import pixi.core.renderers.systems.StencilSystem;
 import pixi.core.renderers.systems.TextureGCSystem;
 import pixi.core.renderers.systems.TextureSystem;
 import pixi.core.renderers.webgl.extract.Extract;
-import pixi.core.renderers.webgl.utils.RenderTarget;
 import pixi.core.textures.Texture;
 import pixi.core.textures.RenderTexture;
-import pixi.core.math.Matrix;
 import pixi.core.renderers.webgl.managers.MaskManager;
 import pixi.core.renderers.systems.FilterSystem;
 
@@ -146,16 +144,6 @@ extern class Renderer extends AbstractRenderer {
 	 * Clear the frame buffer
 	 */
 	function clear():Void;
-
-	/**
-	 * Renders the object to its WebGL view
-	 * @param	displayObject The object to be rendered.
-	 * @param	renderTexture The render texture to render to.
-	 * @param	clear Should the canvas be cleared before the new render.
-	 * @param	transform A transform to apply to the render texture before rendering.
-	 * @param	skipUpdateTransform Should we skip the update transform pass?
-	 */
-	function render(displayObject:DisplayObject, ?renderTexture:RenderTarget, ?clear:Bool = true, ?transform:Matrix, skipUpdateTransform:Bool = false):Void;
 
 	/**
 	 * Resets the WebGL state so you can render things however you fancy!

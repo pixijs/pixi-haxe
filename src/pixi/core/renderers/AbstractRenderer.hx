@@ -7,7 +7,9 @@ import pixi.core.RenderOptions;
 import pixi.core.display.DisplayObject;
 import pixi.core.math.shapes.Rectangle;
 import pixi.core.textures.RenderTexture;
+import pixi.core.renderers.webgl.utils.RenderTarget;
 import pixi.interaction.EventEmitter;
+import pixi.core.math.Matrix;
 
 @:native("PIXI.AbstractRenderer")
 extern class AbstractRenderer extends EventEmitter {
@@ -141,4 +143,14 @@ extern class AbstractRenderer extends EventEmitter {
 	 * @param	screenHeight The new height of the screen.
 	 */
 	function resize(screenWidth:Float, screenHeight:Float):Void;
+
+	/**
+	 * Renders the object to its WebGL or Canvas view
+	 * @param	displayObject The object to be rendered.
+	 * @param	renderTexture The render texture to render to.
+	 * @param	clear Should the canvas be cleared before the new render.
+	 * @param	transform A transform to apply to the render texture before rendering.
+	 * @param	skipUpdateTransform Should we skip the update transform pass?
+	 */
+	function render(displayObject:DisplayObject, ?renderTexture:RenderTarget, ?clear:Bool = true, ?transform:Matrix, skipUpdateTransform:Bool = false):Void;
 }
