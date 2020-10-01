@@ -49,7 +49,7 @@ extern class Ticker extends EventEmitter {
 	static var shared(get, never):Ticker;
 
 	@:noCompletion inline static function get_shared():Ticker {
-		return cast untyped __js__("PIXI.Ticker.shared");
+		return cast untyped PIXI.Ticker.shared;
 	}
 
 	/**
