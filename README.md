@@ -3,24 +3,57 @@
 ![image](https://user-images.githubusercontent.com/576184/70228763-38c03100-1755-11ea-9f2a-b1afc30be237.png)
 
 
--### Installation
+### Installation
 
 ```
 haxelib install pixijs
+```
+
+### Build from source
+
+```
+git clone git@github.com:pixijs/pixi-haxe.git
+cd pixi-haxe
+lix download
+haxe build.hxml
 ```
 
 ### Issues
 
 Found any bug? Please create a new [issue](https://github.com/pixijs/pixi-haxe/issues/new).
 
-### Demos
+### [Demos](https://github.com/notboring/notboring.github.io/tree/master/demos/haxe-pixi)
 
-* [Basics](http://notboring.github.io/demos/haxe-pixi/basics.html)
+* [Alpha mask](https://notboring.github.io/demos/haxe-pixi/alphamask.html)
+* [Animated sprite](https://notboring.github.io/demos/haxe-pixi/animatedsprite.html)
+* [Basics](https://notboring.github.io/demos/haxe-pixi/basics.html)
+* [Bitmap text](https://notboring.github.io/demos/haxe-pixi/bitmaptext.html)
+* [Blur](https://notboring.github.io/demos/haxe-pixi/blur.html)
+* [Bunnymark](https://notboring.github.io/demos/haxe-pixi/bunnymark.html)
+* [Color matrix](https://notboring.github.io/demos/haxe-pixi/colormatrix.html)
+* [Device detection](https://notboring.github.io/demos/haxe-pixi/devicedetection.html)
+* [Device info](https://notboring.github.io/demos/haxe-pixi/deviceinfo.html)
+* [Dragging](https://notboring.github.io/demos/haxe-pixi/dragging.html)
+* [Events](https://notboring.github.io/demos/haxe-pixi/events.html)
+* [Glow](https://notboring.github.io/demos/haxe-pixi/glow.html)
+* [Graphics](https://notboring.github.io/demos/haxe-pixi/graphics.html)
+* [Loader](https://notboring.github.io/demos/haxe-pixi/loader.html)
+* [Mask](https://notboring.github.io/demos/haxe-pixi/mask.html)
+* [Movie clip](https://notboring.github.io/demos/haxe-pixi/movieclip.html)
+* [Nape](https://notboring.github.io/demos/haxe-pixi/nape.html)
+* [Particles](https://notboring.github.io/demos/haxe-pixi/particles.html)
+* [Pixi dude](https://notboring.github.io/demos/haxe-pixi/pixidude.html)
+* [Render texture](https://notboring.github.io/demos/haxe-pixi/rendertexture.html)
+* [Rope](https://notboring.github.io/demos/haxe-pixi/rope.html)
+* [Spine](https://notboring.github.io/demos/haxe-pixi/spine.html)
+* [Spritesheet](https://notboring.github.io/demos/haxe-pixi/spritesheet.html)
+* [Text](https://notboring.github.io/demos/haxe-pixi/text.html)
+* [Tiling](https://notboring.github.io/demos/haxe-pixi/tiling.html)
+
 
 ### Usage
 
 ```haxe
-
 package basics;
 
 import pixi.core.Application;
@@ -30,12 +63,10 @@ import pixi.core.sprites.Sprite;
 import js.Browser;
 
 class Main extends Application {
-
 	var _bunny:Sprite;
 	var _graphic:Graphics;
 
 	public function new() {
-		
 		var options:ApplicationOptions = {
 			width: Browser.window.innerWidth,
 			height: Browser.window.innerHeight,
